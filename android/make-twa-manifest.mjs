@@ -22,9 +22,9 @@ twa.name = 'ZedPath';
 twa.launcherName = 'ZedPath';
 twa.startUrl = '/?source=android';
 twa.signingKey = { path: path.join(os.homedir(), '.zedpath-signing', 'zedpath-release.jks'), alias: 'zedpath' };
-twa.appVersionName = '1.0.0';
-twa.appVersionCode = 1;
-twa.enableNotifications = false;                     // no push yet; reminders will add it (needs a new APK)
+twa.appVersionName = '1.0.1';
+twa.appVersionCode = 2;                           // must rise with every APK so it installs over the last
+twa.enableNotifications = true;                      // notification delegation: site notifications appear as native ZedPath ones
 twa.fallbackType = 'customtabs';
 twa.orientation = 'portrait';
 

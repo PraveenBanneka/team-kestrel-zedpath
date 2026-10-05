@@ -2,7 +2,7 @@
 // Paths (home) | Courses | Me. Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Award, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { ArrowLeft, Award, BellRing, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   RotateCcw, ScrollText, ShieldCheck, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -13,6 +13,7 @@ import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
+import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { clearEverything, isOnboarded, isPendingSync, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
@@ -444,6 +445,25 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
     </section>);
 }
 
+function TestNotification() {
+  const [state, setState] = useState<'idle' | 'sending' | 'sent' | string>('idle');
+  if (!notificationsSupported()) return null;
+  const send = async () => {
+    if (state === 'sending') return;                     // one tap, one notification
+    setState('sending');
+    const r = await sendTestNotification().catch(() => ({ ok: false as const, reason: 'Could not show the notification. Try again.' }));
+    setState(r.ok ? 'sent' : r.reason);
+  };
+  return (
+    <div className="stack" style={{ gap: 6 }}>
+      <button className="btn tonal" onClick={send} disabled={state === 'sending'}><BellRing size={18} aria-hidden="true" />
+        {state === 'sending' ? 'Sending…' : 'Send a test notification'}</button>
+      {state === 'sent' && <p className="helper" role="status">Sent. Check your notifications.</p>}
+      {!['idle', 'sending', 'sent'].includes(state) && <p className="helper" role="status">{state}</p>}
+    </div>
+  );
+}
+
 function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileInput; meta: Meta | null; extras: Extras; go: (to: string) => void;
   onClear: () => void; account: AccountControls }) {
   const install = useInstallPrompt();
@@ -474,6 +494,7 @@ function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileI
       <p className="section-label">App</p>
       {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>
         : <p className="helper">{install.installed ? 'ZedPath is installed on this phone.' : 'To install: open your browser menu and choose "Add to Home screen" or "Install app".'}</p>}
+      <TestNotification />
       <p className="section-label">Privacy</p>
       <p className="body-m muted" style={{ margin: 0 }}>{account.username
         ? 'Your results, achievements and interests are kept on this phone and in your account, under your username only. Delete your account above to remove them from ZedPath for good.'
