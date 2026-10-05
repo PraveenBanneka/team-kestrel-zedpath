@@ -1,0 +1,15 @@
+node_modules/
+.wrangler/
+.open-next/
+.next/
+dist/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+*.log
+
+# Gate 1 deck: kept local, not in the public repo
+Kestrel_Gate1_Problem-and-Proof.pdf
