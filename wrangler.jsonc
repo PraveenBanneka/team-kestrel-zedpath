@@ -18,6 +18,13 @@
   "d1_databases": [
     { "binding": "DB", "database_name": "zedpath", "database_id": "59e854ed-cf1b-4e32-8682-386b53a1e8ae", "migrations_dir": "migrations" }
   ],
+  // Ask ZedPath. Workers AI (free 10k neurons/day): bge-m3 embeddings, multilingual. Vectorize index `zedpath-ask`
+  // (created at Praveen's GO; until then a deploy fails, so Ask cannot ship half-built). remote: local dev uses the
+  // real index, as Vectorize has no local simulation.
+  "ai": { "binding": "AI" },
+  "vectorize": [
+    { "binding": "ASK_INDEX", "index_name": "zedpath-ask", "remote": true }
+  ],
   // Free Workers Rate Limiting. AUTH_LIMITER: 10/min per IP + username (slows guessing one account's password).
   // IP_LIMITER: 100/min per IP overall (stops floods, yet a school lab or a home Wi-Fi sharing one IP still fits).
   "ratelimits": [

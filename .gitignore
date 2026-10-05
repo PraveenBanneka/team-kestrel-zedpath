@@ -41,3 +41,6 @@ android/*
 *.aab
 *.jks
 *.keystore
+
+# Ask ZedPath corpus: contains handbook text (not redistributed); rebuilt by tools/ask/build-corpus.ts
+data/ask/
