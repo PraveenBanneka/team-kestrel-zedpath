@@ -23,6 +23,9 @@ const SALON_ACCOUNT_SHA256 = 'e817fa57f36e284be3d8310a2969b96c534e05c6737b6348d6
 const sha256 = s => crypto.createHash('sha256').update(s.toLowerCase()).digest('hex');
 const isSalonId = id => sha256(id) === SALON_ACCOUNT_SHA256 ||
   (!!process.env.ZEDPATH_GUARD_EXTRA_BLOCKED_ID && id.toLowerCase() === process.env.ZEDPATH_GUARD_EXTRA_BLOCKED_ID.toLowerCase());
+// The ONLY account ZedPath may deploy to (Stacklineops@gmail.com's Account, confirmed by whoami 2026-10-05).
+// Tests may substitute a fake one via ZEDPATH_GUARD_TEST_ACCOUNT_ID.
+const ZEDPATH_ACCOUNT_ID = (process.env.ZEDPATH_GUARD_TEST_ACCOUNT_ID || 'e6474e41044c5722ad57c3372ab7492e').toLowerCase();
 const SALON_DIR_PATTERN = /new website june 20/i;
 const OUR_REPO = /github\.com[/:]PraveenBanneka\/zedpath(\.git)?\b/i;
 
@@ -92,6 +95,7 @@ function requireGo(input, what) {
   if (!file) block(`${what} needs a wrangler config with account_id pinned to the ZedPath account. None found.`);
   if (!id) block(`${what}: ${file} has no account_id. Pin the ZedPath account id first.`);
   if (isSalonId(id)) block(`${what}: ${file} is pinned to the SALON account. Stop and tell Praveen.`);
+  if (id.toLowerCase() !== ZEDPATH_ACCOUNT_ID) block(`${what}: ${file} is pinned to ${id}, which is not the ZedPath account. Stop and tell Praveen.`);
   const said = lastUserText(input.transcript_path);
   if (!/^\s*GO\b/.test(said)) {
     block(`${what} is outward-facing. Check \`npx wrangler whoami\`, show Praveen the account, and ask for an explicit GO. ` +
@@ -123,7 +127,9 @@ function checkGitHub(cmd, input) {
     const cfg = fs.existsSync(gitCfg) ? fs.readFileSync(gitCfg, 'utf8') : '';
     const remoteUrls = [...cfg.matchAll(/^\s*url\s*=\s*(.+)$/gim)].map(x => x[1].trim());
     if (remoteUrls.some(u => !OUR_REPO.test(u))) block('this repo has a remote that is not PraveenBanneka/zedpath. Stop and tell Praveen (rule 8).');
-    if (/\s(--force|-f|--force-with-lease)\b/i.test(cmd)) requireGoOnly(input, 'force-push rewrites public history');
+    // Only the push segment counts (so `git commit -F msg && git push` is not a force-push); flags are case-sensitive.
+    const pushSegs = cmd.match(/\bgit\s+push\b[^;&|\n]*/g) || [];
+    if (pushSegs.some(s => /\s(--force(-with-lease)?|-f)(\s|=|$)|\s\+\S/.test(s))) requireGoOnly(input, 'force-push rewrites public history');
   }
 }
 

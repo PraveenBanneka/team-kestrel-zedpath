@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zedpath",
+  // LOCKED to the ZedPath Cloudflare account (Stacklineops@gmail.com's Account).
+  // Wrangler has one login for the whole laptop; this pin is what stops a deploy landing on another account.
+  // Any tool that regenerates this file (e.g. a Next.js/OpenNext scaffold) MUST keep this line.
+  "account_id": "e6474e41044c5722ad57c3372ab7492e",
+  "compatibility_date": "2026-09-01"
+}

@@ -25,7 +25,7 @@ cut-offs, private degrees, gazetted job exams, vocational, abroad, retry) → de
 ## Cloudflare: environment map
 | Thing | Value |
 |---|---|
-| ZedPath Cloudflare account | **PENDING**: Praveen logs in by hand; fill name + ID from `npx wrangler whoami` |
+| ZedPath Cloudflare account | **Stacklineops@gmail.com's Account** · `e6474e41044c5722ad57c3372ab7492e` (login stacklineops@gmail.com, confirmed by whoami 2026-10-05). Pinned in `wrangler.jsonc`; the guard allows deploys to THIS id only |
 | Salon account (FORBIDDEN here) | ID starts `c5cbb437...`. Full ID is never written in this repo (it's public); the guard + leak scanner hold only its SHA-256 fingerprint |
 | Staging | none yet (no online target is "safe to break" until a separate one exists) |
 | Production | none yet |
@@ -58,12 +58,17 @@ browser prompt appears, pick the ZedPath account, never the salon one.
 | `wrangler login/logout`, `cf auth` | always blocked |
 | any path/command touching the salon folder | always blocked |
 | salon account id anywhere in a command | always blocked |
-| deploy / publish / versions / secrets / `--remote` data / remote D1 migrations / resource create-delete / `npm run deploy` / Cloudflare MCP non-search tools | blocked unless **(a)** `wrangler.jsonc` pins a non-salon `account_id` **and** **(b)** Praveen's latest message **starts with "GO"** |
+| deploy / publish / versions / secrets / `--remote` data / remote D1 migrations / resource create-delete / `npm run deploy` / Cloudflare MCP non-search tools | blocked unless **(a)** `wrangler.jsonc` pins exactly the ZedPath `account_id` (`e6474e41...`) **and** **(b)** Praveen's latest message **starts with "GO"** |
 | `gh repo create/edit/delete/rename/...`, `gh api` writes, `git remote add/set-url`, `git push` to anything but `PraveenBanneka/zedpath` | always blocked (creating `zedpath` allowed once, before a remote exists) |
 | `git push --force` to zedpath | needs GO |
 | local dev (`wrangler dev`, `--local`), `whoami`, installs, normal `git push` to zedpath | allowed |
 
-Tests: `bash .claude/hooks/test-guard.sh` (36 cases, incl. pinned defaults). Re-run after editing the guard.
+Tests: `bash .claude/hooks/test-guard.sh` (40 cases, incl. pinned defaults). Re-run after editing the guard.
+The guard reads the whole command text, so a command that merely *mentions* a deploy (e.g. a sed on
+the test file) is blocked too. Put such text in a script file and run the file.
+
+**Wipe-bug check:** any scaffold or tool that regenerates `wrangler.jsonc` (OpenNext, C3, templates)
+must keep `"account_id": "e6474e41044c5722ad57c3372ab7492e"`. Diff it after every scaffold step.
 
 ## Public-repo safety: `.githooks/pre-push` → `leak-scan.js`
 Every push is scanned (all new commits, not just the latest files) for API keys (Gemini, Anthropic,

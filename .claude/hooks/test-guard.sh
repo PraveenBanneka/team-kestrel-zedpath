@@ -6,6 +6,8 @@ mkdir -p $S/none $S/salon/.git $S/good/.git $S/other/.git $S/fresh/.git
 G="$(dirname "$0")/zedpath-guard.js"
 SID=deadbeefdeadbeefdeadbeefdeadbeef
 export ZEDPATH_GUARD_EXTRA_BLOCKED_ID=$SID
+export ZEDPATH_GUARD_TEST_ACCOUNT_ID=0123456789abcdef0123456789abcdef
+mkdir -p $S/stranger; echo '{"account_id":"fedcba9876543210fedcba9876543210"}' > $S/stranger/wrangler.jsonc
 echo "{\"name\":\"x\",\"account_id\":\"$SID\"}" > $S/salon/wrangler.jsonc
 printf '{"name":"x", // comment\n "account_id": "0123456789abcdef0123456789abcdef"}\n' > $S/good/wrangler.jsonc
 printf '[remote "origin"]\n\turl = https://github.com/PraveenBanneka/zedpath.git\n' > $S/good/.git/config
@@ -39,6 +41,7 @@ t "deploy, salon pinned (even w/ GO)"    salon go  Bash "npx wrangler deploy" BL
 t "deploy, good pin, no GO"              good ok   Bash "npx wrangler deploy" BLOCK
 t "deploy, GO only mid-sentence"         good nogo Bash "npx wrangler deploy" BLOCK
 t "deploy, good pin + GO"                good go   Bash "npx wrangler deploy" ALLOW
+t "deploy, pinned to 3rd account + GO"   stranger go Bash "npx wrangler deploy" BLOCK
 t "secret put, no GO"                    good ok   Bash "npx wrangler secret put KEY" BLOCK
 t "d1 --remote, no GO"                   good ok   Bash "npx wrangler d1 execute db --remote --command x" BLOCK
 t "d1 migrations apply (remote default)" good ok   Bash "npx wrangler d1 migrations apply db" BLOCK
@@ -61,4 +64,7 @@ t "push with explicit other URL"         good go   Bash "git push https://github
 t "push when origin is another repo"     other go  Bash "git push origin main" BLOCK
 t "force-push, no GO"                    good ok   Bash "git push --force origin main" BLOCK
 t "force-push with GO"                   good go   Bash "git push --force origin main" ALLOW
+t "force-push via -f, no GO"             good ok   Bash "git push -f origin main" BLOCK
+t "force-push via +refspec, no GO"       good ok   Bash "git push origin +main" BLOCK
+t "commit -F then normal push"           good ok   Bash "git commit -F msg.txt && git push -q" ALLOW
 echo "== $pass passed, $fail failed =="
