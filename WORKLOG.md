@@ -3,19 +3,32 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version 8250b923 (design v2, commit 2e1d84f). Previous: c7113216
-  (walking skeleton), the rollback target. No D1/KV/R2/other resources created yet.
+  https://zedpath.teamkestrel.workers.dev = version 8250b923 (design v2) + a newer version created by Praveen's
+  `secret put GEMINI_API_KEY` (id not yet logged; read it with `versions list` at the next GO). Rollback target
+  c7113216. Secrets: GEMINI_API_KEY (live). No D1/KV/R2 resources created yet.
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
-- **Code:** onboarding (welcome, intro, 5 steps incl. beyond grades) -> Paths home (ring + 7 other-path groups,
-  52 routes, open-now) -> courses by band -> degree details (cut-off chart) -> hidden; Me; installable PWA.
-  Design v2 (Outfit + Inter, aurora hero, motion). Client JS 127 KB gzip (NFR-006 budget 200 KB still met).
-- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9. Next: 06 Architecture, 07 UI/UX, 08 Test Plan; SRS v1.1
-  for new stories (beyond grades, other paths, BR-044, student accounts).
-- **Next step:** student accounts (design on paper first, see 2026-10-05 entry)
-  -> full deck feature set (list, journey + reminders, compare, Ask, gazette pipeline, Sinhala/Tamil).
+- **Code:** onboarding -> Paths -> courses -> degree details -> hidden; other paths; Me; installable PWA; design v2.
+  **Student accounts (CR-001) built, tested, committed, NOT live:** username + password (PBKDF2 on the phone),
+  recovery code, sessions, cross-device sync, delete account. Runs locally on a local D1 copy.
+  Schema: 35 tables / 190 columns / 52 FKs. Tests: 54/54. Client JS 131 KB gzip (NFR-006 200 KB met).
+- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised in review for CR-001, 33 pages). Next: 06, 07, 08;
+  SRS v1.1 (beyond grades, other paths, BR-044, CR-001 accounts, NFR-030 wording).
+- **Next step:** Praveen's GO for the accounts go-live batch (below) -> Ask ZedPath (cited answers, never named
+  "Gemini") -> reminders -> narrated guide video (voice: Ava; rules in video/LESSONS.md).
 - **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
-- **Waiting on Praveen:** decision on how students sign in · Gemini key into .dev.vars /
-  `wrangler secret put` (by Praveen, never pasted in chat).
+- **Waiting on Praveen:** ONE GO for the accounts go-live batch. Google sign-in comes later (Praveen 2026-10-05).
+
+### Accounts go-live batch (needs one GO; reversal written first)
+1. `npx wrangler whoami` -> must be e6474e41... (not salon).
+2. `npx wrangler d1 create zedpath` -> copy the printed database_id into wrangler.jsonc (replacing the zeros).
+3. `npx wrangler d1 migrations apply zedpath --remote` -> 0001, 0002, 0003.
+4. `npm run deploy` -> note version id. Accounts answer 503 until step 5 (safe default; rest of the app unchanged).
+5. PEPPER secret, generated and piped so the value is never shown:
+   `node -e "process.stdout.write(require('crypto').randomBytes(32).toString('hex'))" | npx wrangler secret put PEPPER`.
+   PEPPER must never change afterwards (stored salts keep old accounts working even if it did, but do not rely on it).
+6. Verify LIVE: sign-up -> /me -> log in on a second browser -> delete the test account (net-zero) -> health.
+Reversal: `wrangler rollback 8250b923` (accounts code gone, D1 untouched); if needed `wrangler d1 delete zedpath`
+(GO-gated) once no real student has an account. Nothing else (DNS, other Workers) is touched.
 
 ---
 
@@ -108,3 +121,22 @@
   courses -> degree details with cut-off chart -> job exams -> Me. No overflow, no error boundary, /api/health ok,
   live bundle = locally tested bundle (index-dsRHV32u.js).
 - Rollback if needed: `wrangler rollback c7113216` (GO-gated).
+
+## 2026-10-05: Student accounts (CR-001) built while Praveen napped
+- Praveen: "oo accounts" (approved the on-paper design: username + password now, Google sign-in later).
+- Data first: migration 0002 (reference data generated from the rulebook: 6 streams, 25 districts, 59 subjects) and
+  0003 (STUDENT role via account rebuild; password_login, session, recovery_code, student_profile, student_subject,
+  student_achievement, student_interest; cascades, CHECK enums, 4 indexes, 3 role triggers).
+- API (worker/account.ts): salt / signup / login / recover / logout / logout-all, GET-PUT-DELETE /me. Password never
+  reaches the server (PBKDF2-SHA256 600k on the phone; server stores SHA-256 of the key: ~microseconds of CPU).
+  Sessions hashed; HttpOnly+Secure+SameSite=Lax cookie; cross-site writes refused; Workers Rate Limiting.
+  Safe default: no DB/PEPPER -> 503 and the app behaves as before (pinned by a test).
+- App: Create account / Log in / Reset with recovery code / Save your recovery code; Account card on Me; log-in link
+  on Welcome. Sync with a pending-sync guard (wipe-bug check: an offline save is pushed, never overwritten).
+  Me's privacy text now changes with account state (it would otherwise claim "only on this phone" falsely).
+- Tests: 21 new (54/54 total). 4 planted security bugs each caught. Local Workers runtime + local D1: API smoke test
+  and a two-browser E2E (sign-up 1.5 s incl. PBKDF2; log-in on an empty browser restored results + achievements).
+- Found while testing: recovery codes contain O/I/B; typed 0/1/8 now read as those letters (+ test).
+- Debugging drill applied: a "dead" 503 was an orphaned old dev server on :5173 (environment, not code).
+- Docs: ZP-DOC-05 Section 2.5 + mapping + BCNF + security + evidence + Appendix B; generator now draws 1:1 correctly.
+- Not done (needs Praveen): the GO batch above. Also open: SRS v1.1 change record.

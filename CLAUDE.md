@@ -48,7 +48,7 @@ cut-offs, private degrees, gazetted job exams, vocational, abroad, retry) → de
 | ZedPath Cloudflare account | **Stacklineops@gmail.com's Account** · `e6474e41044c5722ad57c3372ab7492e` (login stacklineops@gmail.com, confirmed by whoami 2026-10-05). Pinned in `wrangler.jsonc`; the guard allows deploys to THIS id only |
 | Salon account (FORBIDDEN here) | ID starts `c5cbb437...`. Full ID is never written in this repo (it's public); the guard + leak scanner hold only its SHA-256 fingerprint |
 | Staging | none yet (no online target is "safe to break" until a separate one exists) |
-| Production | none yet |
+| Production | Worker `zedpath` at zedpath.teamkestrel.workers.dev (account above). Secrets: GEMINI_API_KEY; PEPPER (accounts, never change it). D1 `zedpath`: not created yet (placeholder id in wrangler.jsonc blocks an early deploy) |
 | GitHub repo (PUBLIC) | `github.com/PraveenBanneka/zedpath`. The ONLY repo this project may create or push to |
 | Git identity (repo-local) | `PraveenBanneka` / `279389974+PraveenBanneka@users.noreply.github.com` (keeps the real email off public commits) |
 
@@ -121,3 +121,6 @@ Reversal plan: `npx wrangler rollback <previous-version-id>` (also GO-gated), wr
 ## Hygiene
 - Work journal: `WORKLOG.md`. Log meaningful work before ending a session; keep the state block current.
 - Secrets (Gemini key etc.) go in `.dev.vars` locally / `wrangler secret put` remotely (GO-gated). Never commit.
+- D1 migrations: `wrangler d1 migrations apply zedpath --local` for dev (free, no GO); `--remote` is GO-gated and runs
+  BEFORE the deploy that needs it. Schema changes are designed in ZP-DOC-05 first and tested in worker/*.test.ts on the
+  real migrations (worker/testing/d1-sqlite.ts).
