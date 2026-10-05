@@ -32,3 +32,12 @@ student_handbook_*.pdf
 # app build output and local Workers state
 dist/
 .wrangler/
+
+# Android (Trusted Web Activity): only the generator script and README are versioned; the rest is regenerated
+android/*
+!android/make-twa-manifest.mjs
+!android/README.md
+*.apk
+*.aab
+*.jks
+*.keystore

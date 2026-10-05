@@ -20,7 +20,7 @@ const SECRET_PATTERNS = [
   ['Private key block', /-----BEGIN [A-Z ]*PRIVATE KEY-----/],
   ['Slack token', /\bxox[abpr]-[A-Za-z0-9-]{10,}/],
 ];
-const FORBIDDEN_FILES = /(^|\/)(\.dev\.vars(\..*)?|\.env(\.(?!example$).*)?|.*\.pem|id_rsa.*)$/;
+const FORBIDDEN_FILES = /(^|\/)(\.dev\.vars(\..*)?|\.env(\.(?!example$).*)?|.*\.pem|id_rsa.*|.*\.(jks|keystore|p12|pfx|dpapi))$/;
 
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
 

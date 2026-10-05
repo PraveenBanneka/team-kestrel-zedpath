@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.teamkestrel.zedpath",
+      "sha256_cert_fingerprints": [
+        "B6:3E:EC:6E:4F:D7:7D:06:11:4E:44:7F:B4:B7:C7:2F:ED:7A:56:B4:8C:AD:E5:6E:53:66:44:C9:AB:D1:98:A8"
+      ]
+    }
+  }
+]
