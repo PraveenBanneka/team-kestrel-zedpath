@@ -1,26 +1,29 @@
-// ZedPath app shell. First run: Welcome -> Intro -> About you (5 steps). Then a bottom-navigation app:
-// Paths (home) | Courses | Me. Styled after the Gate 1 deck; routing via the URL hash so Back and deep links work.
+// ZedPath app shell, design v2. First run: Welcome -> Intro -> About you (5 steps). Then a floating bottom-navigation app:
+// Paths (home) | Courses | Me. Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
+import { ArrowLeft, Award, Building2, ChevronRight, Download, ExternalLink, GraduationCap, Info, Landmark, Map as MapIcon, Pencil, Plane,
+  RotateCcw, ScrollText, ShieldCheck, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { Band } from '../shared/banding.ts';
 import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
-import { IconBack, IconChevron } from './icons.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { clearEverything, isOnboarded, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
+import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
 
 const BAND_LABEL: Record<Band, string> = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' };
 const TREND_LABEL = { RISING: 'rising', FALLING: 'falling', STEADY: 'steady', JUMPY: 'jumpy', NO_TREND: '' } as const;
-export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: string }[] = [
-  { code: 'PRIVATE_DEGREE', title: 'Private and non-state degrees', sub: 'Approved institutes, the interest-free loan scheme' },
-  { code: 'DIPLOMA', title: 'Higher diplomas and Open University', sub: 'SLIATE HNDs, OUSL, national diplomas' },
-  { code: 'PROFESSIONAL', title: 'Professional qualifications', sub: 'CA, CMA, CIMA, AAT' },
-  { code: 'VOCATIONAL', title: 'Vocational and NVQ courses', sub: 'VTA, DTET, NAITA, University of Vocational Technology' },
-  { code: 'JOB_EXAM', title: 'Government job exams', sub: 'From the Government Gazette' },
-  { code: 'SCHOLARSHIP_ABROAD', title: 'Study abroad scholarships', sub: 'Government-to-government, via the Ministry' },
-  { code: 'RETRY', title: 'Sit the A/L again', sub: 'What it would take' },
+export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: string; icon: LucideIcon; tone: string }[] = [
+  { code: 'PRIVATE_DEGREE', title: 'Private degrees', sub: 'Approved institutes, interest-free loans', icon: Building2, tone: 'var(--violet)' },
+  { code: 'DIPLOMA', title: 'Diplomas and Open University', sub: 'SLIATE HNDs, OUSL', icon: ScrollText, tone: 'var(--brand-500)' },
+  { code: 'PROFESSIONAL', title: 'Professional bodies', sub: 'CA, CMA, CIMA, AAT', icon: Award, tone: 'var(--teal)' },
+  { code: 'VOCATIONAL', title: 'Vocational and NVQ', sub: 'VTA, DTET, NAITA, UoVT', icon: Wrench, tone: 'var(--reach)' },
+  { code: 'JOB_EXAM', title: 'Government job exams', sub: 'From the Gazette', icon: Landmark, tone: 'var(--safe)' },
+  { code: 'SCHOLARSHIP_ABROAD', title: 'Study abroad', sub: 'Government scholarships', icon: Plane, tone: 'var(--likely)' },
+  { code: 'RETRY', title: 'Sit the A/L again', sub: 'What it would take', icon: RotateCcw, tone: 'var(--out)' },
 ];
 
 function useHashRoute(): [string, (to: string) => void] {
@@ -69,36 +72,35 @@ export function App() {
   if (!profile || path === 'about') return (
     <div className="shell">
       <header className="app-bar">
-        {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><IconBack /></button> : <Logo size={32} />}
+        {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">About you</span>
       </header>
       <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
     </div>);
 
   let screen: React.ReactNode, tab: 'paths' | 'courses' | 'me' = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses profile={profile} meta={meta} results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} />; }
+  if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} />; }
   else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} />; }
   else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
-  else if (path === 'routes' && arg) { back = true; title = ROUTE_GROUPS.find(g => g.code === arg)?.title ?? 'Routes'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
+  else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
   else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} />;
 
+  const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['me', 'Me', UserRound, '#/me']];
   return (
     <div className="shell has-nav">
       <header className="app-bar">
-        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><IconBack /></button> : <Logo size={32} />}
+        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
       </header>
-      <main><ErrorBoundary resetKey={route}>{screen}</ErrorBoundary></main>
+      <main><ErrorBoundary resetKey={route}><Page k={route}>{screen}</Page></ErrorBoundary></main>
       <nav className="bottom-nav" aria-label="Main">
-        {([['paths', 'Paths', 'M480-80q-33 0-56.5-23.5T400-160v-160q0-33 23.5-56.5T480-400q33 0 56.5 23.5T560-320v160q0 33-23.5 56.5T480-80ZM240-560q-33 0-56.5-23.5T160-640q0-33 23.5-56.5T240-720q33 0 56.5 23.5T320-640q0 33-23.5 56.5T240-560Zm480 0q-33 0-56.5-23.5T640-640q0-33 23.5-56.5T720-720q33 0 56.5 23.5T800-640q0 33-23.5 56.5T720-560ZM480-640l-160 80v-80l160-80 160 80v80l-160-80Z'],
-          ['courses', 'Courses', 'M480-120 200-272v-240L40-600l440-240 440 240v320h-80v-276l-80 44v240L480-120Zm0-332 274-148-274-148-274 148 274 148Zm0 241 200-108v-151L480-360 280-470v151l200 108Z'],
-          ['me', 'Me', 'M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z']] as const)
-          .map(([key, label, d]) => (
-            <a key={key} href={`#/${key === 'courses' ? 'courses/safe' : key}`} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
-              <i><svg width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d={d} /></svg></i>{label}
-            </a>))}
+        {NAV.map(([key, label, Icon, href]) => (
+          <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
+            {tab === key && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
+            <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span>{label}</span>
+          </a>))}
       </nav>
     </div>
   );
@@ -109,88 +111,98 @@ function YourPaths({ meta, profile, extras, results, routes, error, go }: { meta
   results: ResultsResponse | null; routes: RouteSummary[] | null; error: string | null; go: (to: string) => void }) {
   const hint = specialIntakeHint(extras);
   const install = useInstallPrompt();
+  const c = results?.counts;
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <div>
-        <h1 className="screen-title">Your paths</h1>
-        <p className="subtitle" style={{ margin: 0 }}>{profileLine(profile, meta)}</p>
-      </div>
-      {error && <div className="alert error" role="alert">{error}</div>}
-      {hint.applies && <div className="alert">Your {hint.sport ? 'sports ' : ''}achievements may qualify you for a <b>special intake</b> (up to 0.5% of places
-        per course for national or international achievements, 2023 to 2025, if you are within 0.2000 of the cut-off). UGC handbook 2025/26, Section 6, p.166.</div>}
-      <div className="panel">
-        <button className="row-item" onClick={() => go('/courses/safe')} disabled={!results}>
-          <span className="text">
-            <span className="title">State universities</span>
-            <span className="sub num">{results ? `Safe ${results.counts.SAFE} · Likely ${results.counts.LIKELY} · Reach ${results.counts.REACH}` : 'Checking every course against your results…'}</span>
-          </span>
-          <IconChevron />
-        </button>
-        {ROUTE_GROUPS.map(g => {
+    <>
+      <section className="hero aurora" aria-label="State universities">
+        <div>
+          <span className="eyebrow">State universities · 2025/26 intake</span>
+          <h1>{c ? `${c.SAFE + c.LIKELY + c.REACH} courses within your reach` : 'Checking every course…'}</h1>
+          <span className="meta">{profileLine(profile, meta)}</span>
+        </div>
+        {c ? (
+          <div className="hero-body">
+            <BandRing safe={c.SAFE} likely={c.LIKELY} reach={c.REACH} />
+            <div className="ring-legend num">
+              <span><i className="dot" style={{ background: '#3DDC97' }} /><b>{c.SAFE}</b>Safe</span>
+              <span><i className="dot" style={{ background: '#9DB8FF' }} /><b>{c.LIKELY}</b>Likely</span>
+              <span><i className="dot" style={{ background: '#FFC94A' }} /><b>{c.REACH}</b>Reach</span>
+            </div>
+          </div>) : !error && <div className="skeleton" style={{ height: 116, opacity: .25 }} />}
+        <button className="btn white" onClick={() => go('/courses/safe')} disabled={!results}>See the courses<ChevronRight size={18} aria-hidden="true" /></button>
+      </section>
+      {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
+      {hint.applies && <div className="alert gold"><Trophy size={20} aria-hidden="true" /><span>Your {hint.sport ? 'sports ' : ''}achievements may qualify you for a <b>special intake</b>:
+        up to 0.5% of places per course for national or international achievements (2023 to 2025), if you are within 0.2000 of the cut-off.
+        <span className="source" style={{ display: 'block', marginTop: 4, color: 'inherit', opacity: .75 }}>UGC handbook 2025/26, Section 6, p.166</span></span></div>}
+      {results && results.hidden.length > 0 && (
+        <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden: subject rules not met</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>)}
+      <p className="section-label">Other paths</p>
+      <Stagger className="bento">
+        {ROUTE_GROUPS.map((g, i) => {
           const n = routes?.filter(r => r.group === g.code).length ?? 0;
           const open = routes?.filter(r => r.group === g.code && r.openNow).length ?? 0;
+          const Icon = g.icon;
           return (
-            <button key={g.code} className="row-item" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}>
-              <span className="text"><span className="title">{g.title}</span><span className="sub">{g.sub}</span></span>
-              <span className="row" style={{ flexWrap: 'nowrap' }}>
-                {open > 0 && <span className="pill band-SAFE">{open} open now</span>}
-                {!open && n > 0 && <span className="pill band-NOT_ENOUGH_DATA">{n}</span>}
-                <IconChevron />
-              </span>
-            </button>);
+            <motion.button key={g.code} variants={rise} className="bento-tile" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}
+              style={i === ROUTE_GROUPS.length - 1 ? { gridColumn: '1 / -1', minHeight: 96 } : undefined}>
+              <span className="ic" style={{ background: `color-mix(in srgb, ${g.tone} 14%, transparent)`, color: g.tone }}><Icon size={22} aria-hidden="true" /></span>
+              {open > 0 ? <span className="pill open corner">{open} open</span> : n > 0 && <span className="pill band-NOT_ENOUGH_DATA corner num">{n}</span>}
+              <span className="t">{g.title}</span><span className="s">{g.sub}</span>
+            </motion.button>);
         })}
-      </div>
-      {results && results.hidden.length > 0 && (
-        <button className="hidden-bar" onClick={() => go('/hidden')}>{results.hidden.length} courses hidden: subject rules not met · <u>see why</u></button>
-      )}
-      {install.canInstall && <button className="btn tonal" onClick={install.prompt}>Install ZedPath on this phone</button>}
+      </Stagger>
+      {install.canInstall && <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>}
       <p className="footer-note">Bands compare your Z-score with five years of cut-offs for your district. Past cut-offs describe the past:
         no band is a promise of admission. ZedPath is independent and not affiliated with the University Grants Commission.</p>
-    </div>
+    </>
   );
 }
 
 // ---------------------------------------------------------------- Courses by band
-function Courses({ profile, meta, results, band, go }: { profile: ProfileInput; meta: Meta | null; results: ResultsResponse | null;
-  band: Band; go: (to: string) => void }) {
+function Courses({ results, band, go }: { results: ResultsResponse | null; band: Band; go: (to: string) => void }) {
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
   const list = useMemo(() => (results?.offerings ?? []).filter(o => o.band === band)
     .sort((a, b) => (b.gapToLatestE4 ?? 0) - (a.gapToLatestE4 ?? 0)), [results, band]);
   const total = results ? results.counts.SAFE + results.counts.LIKELY + results.counts.REACH : 0;
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <div>
-        <p className="subtitle" style={{ margin: 0 }}>{profileLine(profile, meta)}</p>
+    <>
+      <div className="stack" style={{ gap: 4 }}>
         <h1 className="screen-title">{results ? `${total} courses within reach` : 'Checking courses…'}</h1>
+        <p className="subtitle">Sorted by how far you are above last year's cut-off for your district.</p>
       </div>
-      <div className="segmented" role="tablist" aria-label="Band">
+      <div className="seg" role="tablist" aria-label="Band">
         {tabs.map(t => (
           <button key={t} role="tab" aria-selected={t === band} onClick={() => go(`/courses/${t.toLowerCase()}`)}>
-            {BAND_LABEL[t]} <span className="num">{results?.counts[t] ?? '–'}</span>
+            {t === band && <motion.span layoutId="seg-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
+            <span>{BAND_LABEL[t]}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
           </button>))}
       </div>
-      <div className="panel" role="tabpanel">
-        {!results && [0, 1, 2].map(i => <div key={i} className="skeleton" style={{ margin: 12 }} />)}
-        {results && list.length === 0 && <p className="row-item muted">No courses in this band for your results.</p>}
-        {list.map(o => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} onOpen={() => go(`/course/${o.uniCode}`)} />)}
-      </div>
-      {results && <button className="hidden-bar" onClick={() => go('/hidden')}>{results.hidden.length} courses hidden · <u>see why</u></button>}
-    </div>
+      {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
+      {results && list.length === 0 && <div className="card"><p className="subtitle">No courses in this band for your results.</p></div>}
+      {list.length > 0 && (
+        <Stagger key={band} className="list-card" role="tabpanel">
+          {list.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)} />)}
+        </Stagger>)}
+      {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>}
+    </>
   );
 }
 
-function CourseRow({ o, onOpen }: { o: OfferingSummary; onOpen: () => void }) {
+function CourseRow({ o, animate, onOpen }: { o: OfferingSummary; animate: boolean; onOpen: () => void }) {
   const gap = o.gapToLatestE4 === null ? '' : `${formatGap(o.gapToLatestE4)} vs last year`;
   const span = o.limitedHistory ? `${o.yearsUsed} yr${o.yearsUsed > 1 ? 's' : ''} of data` : `${o.yearsUsed} yrs${o.trend !== 'NO_TREND' ? ` · ${TREND_LABEL[o.trend]}` : ''}`;
   return (
-    <button className="row-item" onClick={onOpen}>
-      <span className="text">
-        <span className="title">{titleCase(o.course)}{o.groupLabel ? ` (${o.group})` : ''}</span>
-        <span className="sub">{shortInstitution(o.institution)}</span>
-        <span className="gap num">{[gap, span, o.hasAptitudeTest ? 'aptitude test' : '', o.needsOl ? 'check O/L' : ''].filter(Boolean).join(' · ')}</span>
+    <motion.button variants={animate ? rise : undefined} className="item" onClick={onOpen}>
+      <span className={`strip ${o.band}`} aria-hidden="true" />
+      <span className="grow">
+        <span className="t">{titleCase(o.course)}{o.groupLabel ? ` (${o.group})` : ''}</span>
+        <span className="s">{shortInstitution(o.institution)}</span>
+        <span className="m">{[gap, span, o.hasAptitudeTest ? 'aptitude test' : '', o.needsOl ? 'check O/L' : ''].filter(Boolean).join(' · ')}</span>
       </span>
-      <span className={`pill band-${o.band}`}>{BAND_LABEL[o.band]}</span>
-    </button>
+      <span className="sr-only">{BAND_LABEL[o.band]}</span>
+      <ChevronRight size={20} className="chev" aria-hidden="true" />
+    </motion.button>
   );
 }
 
@@ -200,51 +212,59 @@ function DegreeDetails({ uniCode, profile, results }: { uniCode: string; profile
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<OfferingDetail>(`/offerings/${uniCode}?district=${profile.district}`).then(setD).catch(e => setErr(String(e.message))); }, [uniCode, profile.district]);
   const mine = results?.offerings.filter(o => o.uniCode === uniCode) ?? [];
-  if (err) return <div className="alert error" role="alert">{err}</div>;
-  if (!d) return <div className="skeleton" />;
-  const latest = d.groups[0]?.history[0];
+  if (err) return <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{err}</div>;
+  if (!d) return <><div className="skeleton" style={{ height: 220 }} /><div className="skeleton" /></>;
+  const latest = d.groups[0]?.history.find(h => h.zE4 !== null) ?? d.groups[0]?.history[0];
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <div>
-        <h1 className="screen-title">{titleCase(d.course)}</h1>
-        <p className="subtitle" style={{ margin: 0 }}>{shortInstitution(d.institution)}{d.duration ? ` · ${shortDuration(d.duration)}` : ''} · {d.uniCode}</p>
-      </div>
-      <div className="row">
-        {mine.map(o => <span key={o.group} className={`pill band-${o.band}`}>{BAND_LABEL[o.band]}{mine.length > 1 ? ` (${o.group})` : ''}</span>)}
-        <span className={`pill ${d.hasAptitudeTest ? 'band-REACH' : 'band-SAFE'}`}>{d.hasAptitudeTest ? 'Aptitude test' : 'No aptitude test'}</span>
-        {d.selectionBasis === 'MERIT_ONLY' && <span className="pill band-LIKELY">All-island merit</span>}
-      </div>
-      <dl className="panel kv">
-        <dt className="block">Needs</dt>
-        <dd className="block needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
-          <span key={i} className={line.startsWith('  ') ? 'indent' : line.endsWith(':') ? 'group' : ''}>{line.trim()}</span>))}</dd>
-        <dt className="block">You have</dt>
-        <dd className="block needs">{Object.entries(profile.al).map(([s, g]) => <span key={s}>{g} in {nameOf(s)}</span>)}</dd>
-        {latest && <><dt>Cut-off {latest.academicYear.replace(/\/(\d{2})(\d{2})$/, '/$2')}, your district</dt><dd>{latest.zE4 === null ? 'NQC' : formatZ(latest.zE4)}</dd></>}
-        <dt>Your Z-score</dt><dd>{formatZ(profile.zE4)}</dd>
-      </dl>
-      {d.ambiguousWording && <div className="alert">The handbook's wording for this course can be read two ways. ZedPath shows it to you;
-        confirm on the UGC application form, which lists only the courses you are eligible for.</div>}
-      <details className="exact">
-        <summary className="source-link">Exact handbook wording · UGC handbook 2025/26, p.{d.requirementCitation.page}</summary>
-        <p className="body-m">{d.requirementText}</p>
-      </details>
+    <>
+      <section className="detail-hero aurora">
+        <div className="row">
+          {mine.map(o => <span key={o.group} className={`pill band-${o.band}`}>{BAND_LABEL[o.band]}{mine.length > 1 ? ` (${o.group})` : ''}</span>)}
+          <span className="pill">{d.hasAptitudeTest ? 'Aptitude test' : 'No aptitude test'}</span>
+          {d.selectionBasis === 'MERIT_ONLY' && <span className="pill">All-island merit</span>}
+        </div>
+        <h1>{titleCase(d.course)}</h1>
+        <span className="meta">{shortInstitution(d.institution)}{d.duration ? ` · ${shortDuration(d.duration)}` : ''} · {d.uniCode}</span>
+        <div className="compare num">
+          <div><b>{formatZ(profile.zE4)}</b><span>Your Z-score</span></div>
+          <div><b>{latest ? (latest.zE4 === null ? 'NQC' : formatZ(latest.zE4)) : '–'}</b><span>Cut-off {latest ? shortYear(latest.academicYear) : ''}, your district</span></div>
+        </div>
+      </section>
+
+      <section className="card stack" aria-labelledby="needs-h">
+        <h2 id="needs-h" className="title-l">What it needs</h2>
+        <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
+          <span key={i} className={line.endsWith(':') ? 'group' : ''}>{line.trim()}</span>))}</div>
+        <p className="section-label">You have</p>
+        <div className="have">{Object.entries(profile.al).map(([s, g]) => <span key={s}>{g} · {nameOf(s)}</span>)}</div>
+        <details className="exact">
+          <summary className="source-link"><ScrollText size={16} aria-hidden="true" />Exact handbook wording · p.{d.requirementCitation.page}</summary>
+          <p className="body-m">{d.requirementText}</p>
+        </details>
+      </section>
+      {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />The handbook's wording for this course can be read two ways.
+        ZedPath shows it to you; confirm on the UGC application form, which lists only the courses you are eligible for.</div>}
+
       {d.groups.map(g => (
-        <section key={g.code} className="stack">
-          <p className="section-label">Cut-offs for your district{d.groups.length > 1 ? ` · ${g.code}` : ''}</p>
-          <table className="table">
-            <thead><tr><th scope="col">Intake</th><th scope="col">Minimum Z-score</th></tr></thead>
-            <tbody>
-              {g.history.map(h => <tr key={h.academicYear}><td>{h.academicYear}</td><td className="num">{h.zE4 === null ? 'No qualified candidates' : formatZ(h.zE4)}</td></tr>)}
-              <tr className="you"><td>You</td><td className="num">{formatZ(profile.zE4)}</td></tr>
-            </tbody>
-          </table>
+        <section key={g.code} className="card stack">
+          <h2 className="title-l">Cut-offs for your district{d.groups.length > 1 ? ` · ${g.code}` : ''}</h2>
+          <CutoffChart history={g.history} zE4={profile.zE4} />
+          <details className="exact">
+            <summary className="source-link">All years as a table</summary>
+            <table className="table">
+              <thead><tr><th scope="col">Intake</th><th scope="col">Minimum Z-score</th></tr></thead>
+              <tbody>
+                {g.history.map(h => <tr key={h.academicYear}><td>{h.academicYear}</td><td className="num">{h.zE4 === null ? 'No qualified candidates' : formatZ(h.zE4)}</td></tr>)}
+                <tr className="you"><td>You</td><td className="num">{formatZ(profile.zE4)}</td></tr>
+              </tbody>
+            </table>
+          </details>
           <p className="source">Sources: {[...new Set(g.history.map(h => `${h.citation.label} p.${h.citation.page}`))].join(' · ')}</p>
         </section>
       ))}
-      {d.otherRequirements && <div className="alert">{d.otherRequirements}</div>}
+      {d.otherRequirements && <div className="alert info"><Info size={20} aria-hidden="true" />{d.otherRequirements}</div>}
       <p className="footer-note">Some courses are not taught in all three languages, so meeting the cut-off does not guarantee selection (UGC cut-off table note).</p>
-    </div>
+    </>
   );
 }
 
@@ -252,17 +272,20 @@ function DegreeDetails({ uniCode, profile, results }: { uniCode: string; profile
 function Hidden({ results }: { results: ResultsResponse | null }) {
   if (!results) return <div className="skeleton" />;
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <h1 className="screen-title">Why {results.hidden.length} courses are hidden</h1>
-      <p className="subtitle" style={{ margin: 0 }}>Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.</p>
-      <div className="panel">
-        {results.hidden.map(h => (
-          <div className="row-item" key={h.uniCode}>
-            <span className="text"><span className="title">{titleCase(h.course)}</span><span className="sub">{shortInstitution(h.institution)}</span>
-              <span className="sub">{h.reason} <span className="source">(p.{h.page})</span></span></span>
-          </div>))}
+    <>
+      <div className="stack" style={{ gap: 4 }}>
+        <h1 className="screen-title">Why {results.hidden.length} courses are hidden</h1>
+        <p className="subtitle">Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.</p>
       </div>
-    </div>
+      <Stagger className="list-card">
+        {results.hidden.map((h, i) => (
+          <motion.div variants={i < 14 ? rise : undefined} className="item" style={{ cursor: 'default' }} key={h.uniCode}>
+            <span className="strip OUT_OF_RANGE" aria-hidden="true" />
+            <span className="grow"><span className="t">{titleCase(h.course)}</span><span className="s">{shortInstitution(h.institution)}</span>
+              <span className="m">{h.reason} · p.{h.page}</span></span>
+          </motion.div>))}
+      </Stagger>
+    </>
   );
 }
 
@@ -270,39 +293,54 @@ function Hidden({ results }: { results: ResultsResponse | null }) {
 function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes: RouteSummary[] | null; go: (to: string) => void }) {
   const g = ROUTE_GROUPS.find(x => x.code === group);
   const list = (routes ?? []).filter(r => r.group === group).sort((a, b) => Number(b.openNow) - Number(a.openNow));
+  const Icon = g?.icon ?? MapIcon;
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <div><h1 className="screen-title">{g?.title}</h1><p className="subtitle" style={{ margin: 0 }}>{g?.sub}. Checked against official sources on 5 Oct 2026.</p></div>
-      <div className="panel">
-        {list.map(r => (
-          <button key={r.id} className="row-item" onClick={() => go(`/route/${r.id}`)}>
-            <span className="text"><span className="title">{r.name}</span><span className="sub">{r.provider}</span>
-              {r.costText && <span className="gap">{r.costText}</span>}</span>
-            {r.openNow ? <span className="pill band-SAFE">Open now</span> : <IconChevron />}
-          </button>))}
+    <>
+      <div className="row" style={{ flexWrap: 'nowrap', gap: 14 }}>
+        <span className="ic-lg" style={{ background: `color-mix(in srgb, ${g?.tone ?? 'var(--brand)'} 14%, transparent)`, color: g?.tone }}><Icon size={26} aria-hidden="true" /></span>
+        <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{g?.title}</h1><p className="subtitle">{g?.sub}</p></div>
       </div>
-    </div>
+      <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />Checked against official sources on 5 Oct 2026.</p>
+      {!routes ? <div className="skeleton" /> : (
+        <Stagger className="list-card">
+          {list.map(r => (
+            <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
+              <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
+                {r.costText && <span className="m">{r.costText}</span>}</span>
+              {r.openNow && <span className="pill open">Open</span>}
+              <ChevronRight size={20} className="chev" aria-hidden="true" />
+            </motion.button>))}
+        </Stagger>)}
+    </>
   );
 }
 
 function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null }) {
   const r = routes?.find(x => x.id === id);
   if (!routes) return <div className="skeleton" />;
-  if (!r) return <div className="alert error">Route not found.</div>;
+  if (!r) return <div className="alert error"><TriangleAlert size={20} aria-hidden="true" />Route not found.</div>;
+  const g = ROUTE_GROUPS.find(x => x.code === r.group);
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <div><h1 className="screen-title">{r.name}</h1><p className="subtitle" style={{ margin: 0 }}>{r.provider}</p></div>
-      <div className="row">{r.openNow && <span className="pill band-SAFE">Open now</span>}<span className="pill band-LIKELY">{ROUTE_GROUPS.find(g => g.code === r.group)?.title}</span></div>
-      <dl className="panel kv">
-        {r.duration && <><dt>Duration</dt><dd>{r.duration}</dd></>}
-        {r.costText && <><dt>Cost</dt><dd>{r.costText}</dd></>}
-        {r.intakeTiming && <><dt className="block">When</dt><dd className="block needs"><span>{r.intakeTiming}</span></dd></>}
-        <dt className="block">Entry requirements (official wording)</dt><dd className="block needs"><span style={{ fontWeight: 400 }}>{r.requirements}</span></dd>
-      </dl>
-      {r.warning && <div className="alert">{r.warning}</div>}
-      <p className="source">Source: {r.sourceLocator}. <a className="source-link" href={r.sourceUrl} target="_blank" rel="noopener">Open the official source</a> · checked {r.retrievedOn}</p>
-      {r.officialUrl && <a className="btn tonal" href={r.officialUrl} target="_blank" rel="noopener">Go to the official website</a>}
-    </div>
+    <>
+      <div className="stack" style={{ gap: 8 }}>
+        <div className="row">{r.openNow && <span className="pill open">Open now</span>}<span className="pill band-LIKELY">{g?.title}</span></div>
+        <h1 className="screen-title">{r.name}</h1><p className="subtitle">{r.provider}</p>
+      </div>
+      {(r.duration || r.costText) && (
+        <div className="compare plain num">
+          {r.duration && <div><b>{r.duration}</b><span>Duration</span></div>}
+          {r.costText && <div><b>{r.costText}</b><span>Cost</span></div>}
+        </div>)}
+      {r.intakeTiming && <section className="card stack"><h2 className="title-l">When</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
+      <section className="card stack">
+        <h2 className="title-l">Entry requirements</h2>
+        <p className="body-m" style={{ margin: 0 }}>{r.requirements}</p>
+        <p className="source">Official wording. Source: {r.sourceLocator} · checked {r.retrievedOn}</p>
+      </section>
+      {r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
+      {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">Go to the official website<ExternalLink size={18} aria-hidden="true" /></a>}
+      <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>Open the source document</a>
+    </>
   );
 }
 
@@ -310,27 +348,34 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
 function Me({ profile, meta, extras, go, onClear }: { profile: ProfileInput; meta: Meta | null; extras: Extras; go: (to: string) => void; onClear: () => void }) {
   const install = useInstallPrompt();
   return (
-    <div className="stack" style={{ gap: 16 }}>
-      <h1 className="screen-title">Me</h1>
-      <dl className="panel kv">
-        <dt>Results</dt><dd>{profileLine(profile, meta)}</dd>
-        <dt>Subjects</dt><dd>{Object.entries(profile.al).map(([s, g]) => `${nameOf(s)} ${g}`).join(', ')}</dd>
-        <dt>Achievements</dt><dd>{extras.achievements.length || 'None'}</dd>
-        <dt>Interests</dt><dd>{extras.interests.join(', ') || 'None'}</dd>
-      </dl>
-      <button className="btn tonal" onClick={() => go('/about')}>Edit my details</button>
+    <>
+      <section className="hero aurora" style={{ gap: 6 }}>
+        <span className="eyebrow">Your results</span>
+        <h1 className="num">Z {formatZ(profile.zE4)}</h1>
+        <span className="meta">{profileLine(profile, meta).split(' · ').slice(0, 2).join(' · ')}</span>
+        <div className="row" style={{ marginTop: 8 }}>{Object.entries(profile.al).map(([s, g]) => <span key={s} className="pill">{g} · {nameOf(s)}</span>)}</div>
+      </section>
+      <section className="card stack">
+        <h2 className="title-l">Beyond grades</h2>
+        {extras.achievements.length === 0 && extras.interests.length === 0 && <p className="subtitle">Nothing added yet. Achievements can open special intakes.</p>}
+        {extras.achievements.map(a => <span key={a.id} className="row body-m" style={{ flexWrap: 'nowrap' }}><Trophy size={18} aria-hidden="true" style={{ color: 'var(--reach)', flex: 'none' }} />{a.activity} · {a.level.toLowerCase()} · {a.year}</span>)}
+        {extras.interests.length > 0 && <div className="have">{extras.interests.map(t => <span key={t}>{t}</span>)}</div>}
+      </section>
+      <button className="btn tonal" onClick={() => go('/about')}><Pencil size={18} aria-hidden="true" />Edit my details</button>
       <p className="section-label">Language</p>
-      <div className="lang-switch" role="group" aria-label="Language">
-        <button aria-pressed="false" disabled lang="si">සිංහල</button><button aria-pressed="false" disabled lang="ta">தமிழ்</button><button aria-pressed="true" lang="en">English</button>
+      <div className="chips" role="radiogroup" aria-label="Language">
+        <button className="chip" role="radio" aria-checked="false" disabled lang="si">සිංහල</button>
+        <button className="chip" role="radio" aria-checked="false" disabled lang="ta">தமிழ்</button>
+        <button className="chip" role="radio" aria-checked="true" lang="en">English</button>
       </div>
       <p className="helper">Sinhala and Tamil are being translated and checked by native speakers.</p>
       <p className="section-label">App</p>
-      {install.canInstall ? <button className="btn tonal" onClick={install.prompt}>Install ZedPath on this phone</button>
+      {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>
         : <p className="helper">{install.installed ? 'ZedPath is installed on this phone.' : 'To install: open your browser menu and choose "Add to Home screen" or "Install app".'}</p>}
       <p className="section-label">Privacy</p>
-      <p className="body-m muted">Your results, achievements and interests are stored only on this phone. They are sent to ZedPath only to calculate your options and are not kept.</p>
-      <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--md-error)' }} onClick={onClear}>Delete everything on this phone</button>
-    </div>
+      <p className="body-m muted" style={{ margin: 0 }}>Your results, achievements and interests are stored only on this phone. They are sent to ZedPath only to calculate your options and are not kept.</p>
+      <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={onClear}><Trash2 size={18} aria-hidden="true" />Delete everything on this phone</button>
+    </>
   );
 }
 
@@ -340,6 +385,8 @@ function profileLine(p: ProfileInput, meta: Meta | null): string {
   const district = titleCase(meta?.districts.find(d => d.code === p.district)?.name ?? p.district);
   return `${stream} · ${district} · Z ${formatZ(p.zE4)}`;
 }
+/** "2024/2025" -> "24/25" */
+function shortYear(y: string): string { return y.replace(/^\d{2}(\d{2})\/\d{2}(\d{2})$/, '$1/$2'); }
 export function titleCase(s: string): string {
   if (s !== s.toUpperCase()) return s;
   return s.toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Of|And|In|The|For|&)\b/g, w => w.toLowerCase())

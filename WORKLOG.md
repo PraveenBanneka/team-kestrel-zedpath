@@ -2,19 +2,20 @@
 
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05
-- **Cloudflare:** wrangler logged into **Stacklineops@gmail.com's Account** (`e6474e41...`), pinned in
-  `wrangler.jsonc`. Nothing deployed, nothing created. (Salon folder deploys will now fail on its own
-  pin until Praveen logs wrangler back into the salon account there; that is the safety working.)
+- **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
+  https://zedpath.teamkestrel.workers.dev = version c7113216 (walking skeleton). Not yet deployed: app shell
+  (77237b5) and design v2. No D1/KV/R2/other resources created yet.
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
-- **Code:** no app code yet (documentation first, by Praveen's direction). README, rules, guards in place.
-- **Docs:** 00, 01, 02, 04 at v0.9 (in review, awaiting Praveen's approval). 03 SRS drafted, business rules
-  pending the handbook analysis. 05–08 next, in order.
-- **Next step:** finish ZP-DOC-03 business rules from the handbook → ZP-DOC-05 Data Design (EER → relational →
-  normalisation → D1 DDL, using the real 2025/26 cut-off data) → 06 Architecture → 07 UI/UX → 08 Test Plan
-  → then the walking skeleton (US-101 → US-201 → US-203 → US-204).
-- **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video ≤ 4 min).
-- **Open questions for Praveen:** Gate 1 PDF in the repo or not? · licence (none yet = all rights reserved)
-  · Gate 2 (due 3 Oct) submitted?
+- **Code:** onboarding (welcome, intro, 5 steps incl. beyond grades) -> Paths home (ring + 7 other-path groups,
+  52 routes, open-now) -> courses by band -> degree details (cut-off chart) -> hidden; Me; installable PWA.
+  Design v2 (Outfit + Inter, aurora hero, motion). Client JS 127 KB gzip (NFR-006 budget 200 KB still met).
+- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9. Next: 06 Architecture, 07 UI/UX, 08 Test Plan; SRS v1.1
+  for new stories (beyond grades, other paths, BR-044, student accounts).
+- **Next step:** GO to deploy design v2 -> student accounts (design on paper first, see 2026-10-05 entry)
+  -> full deck feature set (list, journey + reminders, compare, Ask, gazette pipeline, Sinhala/Tamil).
+- **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
+- **Waiting on Praveen:** GO for deploy · decision on how students sign in · Gemini key into .dev.vars /
+  `wrangler secret put` (by Praveen, never pasted in chat).
 
 ---
 
@@ -85,3 +86,17 @@
 - Pre-deploy check: whoami = Stacklineops@gmail.com's Account e6474e41... (not salon); generated deploy config keeps the pin.
 - Reversal plan for the first deploy: there is no previous version. If anything is wrong, the Worker is removed with
   the (GO-gated) delete command, or a fixed version is deployed over it. No data or DNS is touched (workers.dev only).
+
+## 2026-10-05: First deploy, app shell, design v2
+- Deployed after GO: version c7113216 at https://zedpath.teamkestrel.workers.dev (subdomain "kestrel" was taken).
+- App shell (77237b5): welcome + intro + one-question-per-screen onboarding, beyond grades (achievements ->
+  special-intake hint, handbook p.166), 7 other-path groups from 52 official-source routes, PWA + logo.
+- Praveen: "make it more stylish, students have 4G". Design v2: Outfit + Inter, aurora hero with Safe/Likely/Reach
+  ring, bento tiles with icons and live "open" pills, list rows with band strips, cut-off line chart on each
+  course, floating bottom nav, motion (respects reduced-motion). Checked at 390 px: no overflow, no errors.
+- Size receipt: client JS 401.9 KB raw / 127.2 KB gzip, CSS 5.4 KB gzip -> NFR-006 (200 KB) still met; no CR needed.
+- Guard note: a shell command that pushes AND contains any other URL (e.g. the live-site URL inside a worklog
+  edit) is blocked by rule 8 (fail closed, by design). Keep the push as its own command; write files with the editor.
+- Praveen asked for student registration (separate profiles for deadline reminders + personal paths). Needs a
+  data design on paper + sign-in decision before any code (fundamentals rule); proposal sent, awaiting answer.
+- Sent docs 00-05 PDFs to Praveen's phone.
