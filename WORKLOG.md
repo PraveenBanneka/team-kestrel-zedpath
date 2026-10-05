@@ -158,3 +158,20 @@
   notification button (exactly one notification, fixed tag), SW v2 with notificationclick, rate-limit fix (9770558).
 - APK 1.0.1 (versionCode 2, notifications on, same key; new permission POST_NOTIFICATIONS only), sha256 1199a954...
   Sent to Praveen's phone. Vectorize binding held back until the Ask index exists.
+
+## 2026-10-05: Ask ZedPath LIVE (Praveen's GO)
+- Praveen: "GO GO GO, don't ask for more goes, make all the AI features". (The guard later blocked once because an
+  automatic "user hasn't heard from you" note counted as the latest message; a fresh "GO" cleared it. Fail-safe kept.)
+- Corpus: 520 handbook passages (193 pages, printed page numbers) + 52 verified routes. Embedded with Workers AI bge-m3
+  via a localhost-only dev route; Vectorize index `zedpath-ask` (1024, cosine) created and loaded (572 vectors).
+- Retrieval calibrated on evidence (tools/ask/calibrate.ts): right page rank 1 for English and Tamil, rank 5 for
+  Sinhala (0.551); off-topic max 0.474 -> MIN_SCORE 0.50.
+- /api/ask: engine facts from the SAME assessOffering as /results (refactor pinned by a byte-exact test); model via AI
+  Gateway `zedpath` (logs OFF to keep the "results not kept" promise; cache ON); never named; 30/day per device, 300
+  per network, stored as daily-salted hashes (migration 0004, applied live).
+- Live test found: gemini-flash-latest 503 "high demand", gemini-2.5-flash retired (404). Fixed with model fallback
+  (flash-latest -> 2.5-flash -> flash-lite-latest -> 2.5-flash-lite on 404/429/5xx) + upstream error logging.
+  After fix 6/6 live questions answered: English, personal (Computer Science chances match the results screen),
+  Sinhala and Tamil answered in those languages citing p.50, off-topic -> honest "not found".
+- Versions: f0d5b4e8 -> 9b93fa91 (logging) -> 5f096264 (fallback) -> 76c2856a (all places listed) -> next (tidy names).
+  Screenshots + test run sent to Praveen's phone.

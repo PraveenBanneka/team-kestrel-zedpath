@@ -35,6 +35,9 @@ const sha256Hex = async (s: string) => [...new Uint8Array(await crypto.subtle.di
 const err = (c: C, status: 400 | 403 | 404 | 429 | 503, error: string) => c.json({ error } satisfies ApiError, status);
 const norm = (s: string) => ` ${s.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim()} `;
 const ip = (c: C) => c.req.header('CF-Connecting-IP') ?? 'local';
+/** "UNIVERSITY OF SRI JAYEWARDENEPURA" -> "University of Sri Jayewardenepura" (the source tables are in capitals). */
+export const tidyName = (s: string) => s.toLowerCase().replace(/\b[a-z]/g, m => m.toUpperCase())
+  .replace(/\b(Of|And|In|The|For)\b/g, w => w.toLowerCase()).replace(/\b(Ucsc|Ict|It|Sp)\b/g, w => w.toUpperCase()).replace(/^./, m => m.toUpperCase());
 
 export const askRoutes = new Hono<AppEnv>();
 
@@ -71,7 +74,7 @@ export function coursesFor(question: string, passages: CorpusPassage[]): string[
 /** Plain-language facts about those courses for THIS student, from the same engine as the results screen. */
 export function engineFacts(codes: string[], p: ProfileInput | null): string[] {
   if (!p) return [];
-  const district = book.districts[districtIndex.get(p.district)!]?.name ?? p.district;
+  const district = tidyName(book.districts[districtIndex.get(p.district)!]?.name ?? p.district);
   const label = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' } as const;
   return codes.map(code => {
     const course = book.courses[code];
@@ -84,7 +87,7 @@ export function engineFacts(codes: string[], p: ProfileInput | null): string[] {
     const places = eligible.flatMap(({ o, a }) => a.groups.filter(g => g.result).map(g => {
       const r = g.result!;
       const cut = r.latestE4 === null ? 'no recent cut-off' : `latest cut-off ${formatZ(r.latestE4)}`;
-      return `${o.institution.replace(/,?\s*Sri Lanka$/i, '')}${o.groups.length > 1 ? ` (${g.group.code})` : ''}: ${label[r.band]} (${cut})`;
+      return `${tidyName(o.institution.replace(/,?\s*Sri Lanka$/i, ''))}${o.groups.length > 1 ? ` (${g.group.code})` : ''}: ${label[r.band]} (${cut})`;
     })).slice(0, 12);                                                     // every place: the widest course has 12 (offering x group)
     return `${name}: the student's subjects meet the A/L entry rules${needsOl ? ', but O/L results must also be checked' : ''}. ` +
       `Chances for ${district} district with Z-score ${formatZ(p.zE4)}: ${places.join('; ')}.`;

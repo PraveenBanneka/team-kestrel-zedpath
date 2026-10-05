@@ -4,7 +4,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { DEVICE_PER_DAY, MIN_SCORE, coursesFor, engineFacts, finish } from './ask.ts';
+import { DEVICE_PER_DAY, MIN_SCORE, coursesFor, engineFacts, finish, tidyName } from './ask.ts';
 import type { AskResponse, CorpusPassage } from '../shared/ask.ts';
 
 const P50: Omit<CorpusPassage, 'id'> = { kind: 'HANDBOOK', source: 'UGC handbook 2025/26', page: 50, url: null,
@@ -102,6 +102,12 @@ describe('Ask ZedPath', () => {
     expect(coursesFor('Can I do computer science?', [])).toContain('012');
     expect(coursesFor('what about this?', [{ id: 'x', ...P50 }])).toEqual(['001']);
     expect(engineFacts(['001'], null)).toEqual([]);                       // no results entered: no personal facts
+  });
+
+  it('turns the source tables\' capitals into readable names in engine facts', () => {
+    expect(tidyName('UNIVERSITY OF SRI JAYEWARDENEPURA')).toBe('University of Sri Jayewardenepura');
+    expect(tidyName('UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING (UCSC)')).toBe('University of Colombo School of Computing (UCSC)');
+    expect(engineFacts(['012'], STUDENT as never)[0]).not.toMatch(/UNIVERSITY|KURUNEGALA/);
   });
 
   it('keeps only citations that exist', () => {
