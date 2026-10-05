@@ -1,0 +1,1292 @@
+year,printed_course,printed_university,uni_code_2025_26,match_method,note,offering_ids
+2024/2025,MEDICINE,University of Colombo,001A,exact,,COP2425-001
+2024/2025,MEDICINE,University of Peradeniya,001B,exact,,COP2425-002
+2024/2025,MEDICINE,University of Sri Jayewardenepura,001C,exact,,COP2425-003
+2024/2025,MEDICINE,University of Kelaniya,001D,exact,,COP2425-004
+2024/2025,MEDICINE,University of Jaffna,001E,exact,,COP2425-005
+2024/2025,MEDICINE,University of Ruhuna,001F,exact,,COP2425-006
+2024/2025,MEDICINE,University of Moratuwa,001G,exact,,COP2425-007
+2024/2025,MEDICINE,"Eastern University, Sri Lanka",001H,exact,,COP2425-008
+2024/2025,MEDICINE,Rajarata University of Sri Lanka,001K,exact,,COP2425-009
+2024/2025,MEDICINE,Sabaragamuwa University of Sri Lanka,001L,exact,,COP2425-010
+2024/2025,MEDICINE,Wayamba University of Sri Lanka,001M,exact,,COP2425-011
+2024/2025,MEDICINE,Uva Wellassa University of Sri Lanka,001U,exact,,COP2425-012
+2024/2025,DENTAL SURGERY,University of Peradeniya,002B,exact,,COP2425-013
+2024/2025,DENTAL SURGERY,University of Sri Jayewardenepura,002C,exact,,COP2425-014
+2024/2025,VETERINARY SCIENCE,University of Peradeniya,003B,exact,,COP2425-015
+2024/2025,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,058A,exact,,COP2425-016
+2024/2025,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,039B,exact,,COP2425-017
+2024/2025,AGRICULTURE,University of Jaffna,004E,exact,,COP2425-018
+2024/2025,AGRICULTURE,"Eastern University, Sri Lanka",004H,exact,,COP2425-019
+2024/2025,AGRICULTURE,Rajarata University of Sri Lanka,004K,exact,,COP2425-020
+2024/2025,AGRICULTURE,Sabaragamuwa University of Sri Lanka,004L,exact,,COP2425-021
+2024/2025,AGRICULTURE,Wayamba University of Sri Lanka,004M,exact,,COP2425-022
+2024/2025,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,005M,exact,,COP2425-023
+2024/2025,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,035B,exact,,COP2425-024
+2024/2025,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,035C,exact,,COP2425-025
+2024/2025,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,035L,exact,,COP2425-026
+2024/2025,BIOLOGICAL SCIENCE,University of Colombo,006A,exact,,COP2425-027
+2024/2025,BIOLOGICAL SCIENCE,University of Peradeniya,006B,exact,,COP2425-028
+2024/2025,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,006C,exact,,COP2425-029
+2024/2025,BIOLOGICAL SCIENCE,University of Kelaniya,006D,exact,,COP2425-030
+2024/2025,BIOLOGICAL SCIENCE,University of Jaffna,006E,exact,,COP2425-031
+2024/2025,BIOLOGICAL SCIENCE,University of Ruhuna,006F,exact,,COP2425-032
+2024/2025,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",006H,exact,,COP2425-033
+2024/2025,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,006J,exact,,COP2425-034
+2024/2025,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,007K,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2425-035
+2024/2025,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,007L,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2425-036
+2024/2025,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",007R,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2425-037
+2024/2025,ENGINEERING,University of Peradeniya,008B,exact,,COP2425-038
+2024/2025,ENGINEERING,University of Sri Jayewardenepura,008C,exact,,COP2425-039
+2024/2025,ENGINEERING,University of Jaffna,008E,exact,,COP2425-040
+2024/2025,ENGINEERING,University of Ruhuna,008F,exact,,COP2425-041
+2024/2025,ENGINEERING,University of Moratuwa,008G,exact,,COP2425-042
+2024/2025,ENGINEERING,South Eastern University of Sri Lanka,008J,exact,,COP2425-043
+2024/2025,ENGINEERING (EM),University of Moratuwa,009G,exact,,COP2425-044
+2024/2025,ENGINEERING (TM),University of Moratuwa,010G,exact,,COP2425-045
+2024/2025,QUANTITY SURVEYING,University of Moratuwa,011G,exact,,COP2425-046
+2024/2025,COMPUTER SCIENCE,University of Colombo School of Computing,012T,exact,,COP2425-047
+2024/2025,COMPUTER SCIENCE,University of Sri Jayewardenepura,012C,exact,,COP2425-048
+2024/2025,COMPUTER SCIENCE,University of Kelaniya,012D,exact,,COP2425-049
+2024/2025,COMPUTER SCIENCE,University of Jaffna,012E,exact,,COP2425-050
+2024/2025,COMPUTER SCIENCE,University of Ruhuna,012F,exact,,COP2425-051
+2024/2025,COMPUTER SCIENCE,"Trincomalee Campus, Eastern University, Sri Lanka",012W,exact,,COP2425-052
+2024/2025,PHYSICAL SCIENCE,University of Colombo,013A,exact,,COP2425-053
+2024/2025,PHYSICAL SCIENCE,University of Peradeniya,013B,exact,,COP2425-054
+2024/2025,PHYSICAL SCIENCE,University of Sri Jayewardenepura,013C,exact,,COP2425-055
+2024/2025,PHYSICAL SCIENCE,University of Kelaniya,013D,exact,,COP2425-056
+2024/2025,PHYSICAL SCIENCE,University of Jaffna,013E,exact,,COP2425-057
+2024/2025,PHYSICAL SCIENCE,University of Ruhuna,013F,exact,,COP2425-058
+2024/2025,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",013H,exact,,COP2425-059
+2024/2025,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,013J,exact,,COP2425-060
+2024/2025,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,014L,exact,,COP2425-061
+2024/2025,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,015K,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2425-062
+2024/2025,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,015L,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2425-063
+2024/2025,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,015M,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2425-064
+2024/2025,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",015R,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2425-065
+2024/2025,APPLIED SCIENCES (PHY.SC),"Trincomalee Campus, Eastern University, Sri Lanka",015W,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2425-066
+2024/2025,MANAGEMENT,University of Colombo,016A,exact,,COP2425-067
+2024/2025,MANAGEMENT,University of Peradeniya,016B,exact,,COP2425-068
+2024/2025,MANAGEMENT,University of Sri Jayewardenepura,016C,exact,,COP2425-069
+2024/2025,MANAGEMENT,University of Kelaniya,016D,exact,,COP2425-070
+2024/2025,MANAGEMENT,University of Jaffna,016E,exact,,COP2425-071
+2024/2025,MANAGEMENT,University of Ruhuna,016F,exact,,COP2425-072
+2024/2025,MANAGEMENT,"Eastern University, Sri Lanka",016H,exact,,COP2425-073
+2024/2025,MANAGEMENT,South Eastern University of Sri Lanka,016J,exact,,COP2425-074
+2024/2025,MANAGEMENT,Rajarata University of Sri Lanka,016K,exact,,COP2425-075
+2024/2025,MANAGEMENT,Sabaragamuwa University of Sri Lanka,016L,exact,,COP2425-076
+2024/2025,MANAGEMENT,Wayamba University of Sri Lanka,016M,exact,,COP2425-077
+2024/2025,REAL ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,017C,normalised,,COP2425-078
+2024/2025,COMMERCE,University of Sri Jayewardenepura,018C,exact,,COP2425-079
+2024/2025,COMMERCE,University of Kelaniya,018D,exact,,COP2425-080
+2024/2025,COMMERCE,University of Jaffna,018E,exact,,COP2425-081
+2024/2025,COMMERCE,"Eastern University, Sri Lanka",018H,exact,,COP2425-082
+2024/2025,COMMERCE,South Eastern University of Sri Lanka,018J,exact,,COP2425-083
+2024/2025,MANAGEMENT AND PUBLIC POLICY,University of Sri Jayewardenepura,028C,exact,,COP2425-084
+2024/2025,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,077C,exact,,COP2425-085
+2024/2025,FINANCIAL ENGINEERING,University of Kelaniya,110D,exact,,COP2425-086
+2024/2025,BANKING & INSURANCE,"University of Vavuniya, Sri Lanka",133R,normalised,,COP2425-087
+2024/2025,SERVICE MANAGEMENT,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-088
+2024/2025,LAW,University of Colombo,025A,exact,,COP2425-089
+2024/2025,LAW,University of Peradeniya,025B,exact,,COP2425-090
+2024/2025,LAW,University of Jaffna,025E,exact,,COP2425-091
+2024/2025,ARTS,University of Colombo,019A,exact,,COP2425-092
+2024/2025,ARTS,University of Peradeniya,019B,exact,,COP2425-093
+2024/2025,ARTS,University of Sri Jayewardenepura,019C,exact,,COP2425-094
+2024/2025,ARTS,University of Kelaniya,019D,exact,,COP2425-095
+2024/2025,ARTS,University of Jaffna,019E,exact,,COP2425-096
+2024/2025,ARTS,University of Ruhuna,019F,exact,,COP2425-097
+2024/2025,ARTS,"Eastern University, Sri Lanka",019H,exact,,COP2425-098
+2024/2025,ARTS,South Eastern University of Sri Lanka,019J,exact,,COP2425-099
+2024/2025,ARTS,Rajarata University of Sri Lanka,019K,exact,,COP2425-100
+2024/2025,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,020S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2425-101
+2024/2025,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,041S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2425-102
+2024/2025,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota A; Arts Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2425-103
+2024/2025,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota B; Commerce Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2425-104
+2024/2025,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,128C,exact,,COP2425-105
+2024/2025,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,129C,exact,,COP2425-106
+2024/2025,URBAN BIORESOURCES,University of Sri Jayewardenepura,130C,normalised,,COP2425-107
+2024/2025,SOCIAL WORK,University of Peradeniya,112B,exact,,COP2425-108
+2024/2025,SOCIAL WORK,University of Jayewardenepura,112C,manual-judgement,"COP header misprint: 'University of Jayewardenepura' without 'Sri' (same misprint in 2025/26 COP, see COP_STRUCTURE.md Section 9)",COP2425-109
+2024/2025,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,114U,exact,,COP2425-110
+2024/2025,PRIMARY EDUCATION,University of Colombo,137A,exact,,COP2425-111
+2024/2025,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2425-112
+2024/2025,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"Trincomalee Campus, Eastern University, Sri Lanka",022W,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2425-113
+2024/2025,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2425-114
+2024/2025,MANAGEMENT STUDIES (TV) - B [Any subject combination],"Trincomalee Campus, Eastern University, Sri Lanka",022W,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2425-115
+2024/2025,COMMUNICATION STUDIES,"Trincomalee Campus, Eastern University, Sri Lanka",029W,exact,,COP2425-116
+2024/2025,FINANCIAL ECONOMICS,University of Sri Jayewardenepura,131C,exact,,COP2425-117
+2024/2025,CREATIVE MUSIC TECHNOLOGY & PRODUCTION,University of Sri Jayewardenepura,134C,normalised,,COP2425-118
+2024/2025,PEACE & CONFLICT RESOLUTION,University of Kelaniya,031D,normalised,,COP2425-119
+2024/2025,ISLAMIC STUDIES,South Eastern University of Sri Lanka,063J,exact,,COP2425-120
+2024/2025,ARABIC LANGUAGE,South Eastern University of Sri Lanka,084J,exact,,COP2425-121
+2024/2025,ARCHITECTURE,University of Moratuwa,023G,exact,,COP2425-122
+2024/2025,DESIGN,University of Moratuwa,024G,exact,,COP2425-123
+2024/2025,LANDSCAPE ARCHITECTURE,University of Moratuwa,097G,exact,,COP2425-124
+2024/2025,URBAN INFORMATICS AND PLANNING,University of Moratuwa,030G,exact,,COP2425-125
+2024/2025,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,034G,exact,,COP2425-126
+2024/2025,ARTIFICIAL INTELLIGENCE,University of Moratuwa,117G,exact,,COP2425-127
+2024/2025,INFORMATION TECHNOLOGY (IT),University of Moratuwa,026G,exact,,COP2425-128
+2024/2025,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,091G,exact,,COP2425-129
+2024/2025,FACILITIES MANAGEMENT,University of Moratuwa,056G,exact,,COP2425-130
+2024/2025,TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE),University of Moratuwa,057G,exact,,COP2425-131
+2024/2025,BUSINESS SCIENCE,University of Moratuwa,109G,exact,,COP2425-132
+2024/2025,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT) (BIO SCIENCE STREAM),University of Kelaniya,027D,normalised,stream/sub-quota variant 'BIO SCIENCE STREAM' of 'MANAGEMENT AND INFORMATION TECHNOLOGY (MIT)'; several historical offerings share this uni-code,COP2425-133
+2024/2025,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT) (OTHER STREAM),University of Kelaniya,027D,normalised,stream/sub-quota variant 'OTHER STREAM' of 'MANAGEMENT AND INFORMATION TECHNOLOGY (MIT)'; several historical offerings share this uni-code,COP2425-134
+2024/2025,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,059A,exact,,COP2425-135
+2024/2025,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,113F,exact,,COP2425-136
+2024/2025,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,060B,exact,,COP2425-137
+2024/2025,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,111B,exact,,COP2425-138
+2024/2025,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,038K,exact,,COP2425-139
+2024/2025,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",038R,exact,,COP2425-140
+2024/2025,INFORMATION SYSTEMS,University of Colombo School of Computing,096T,exact,,COP2425-141
+2024/2025,INFORMATION SYSTEMS,University of Sri Jayewardenepura,096C,exact,,COP2425-142
+2024/2025,INFORMATION SYSTEMS,Sabaragamuwa University of Sri Lanka,096L,exact,,COP2425-143
+2024/2025,SOFTWARE ENGINEERING,University of Sri Jayewardenepura,099C,exact,,COP2425-144
+2024/2025,SOFTWARE ENGINEERING,University of Kelaniya,099D,exact,,COP2425-145
+2024/2025,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,099L,exact,,COP2425-146
+2024/2025,AYURVEDA MEDICINE & SURGERY,University of Colombo,032A,normalised,,COP2425-147
+2024/2025,AYURVEDA MEDICINE & SURGERY,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",032P,normalised,,COP2425-148
+2024/2025,UNANI MEDICINE & SURGERY,University of Colombo,033A,normalised,,COP2425-149
+2024/2025,SIDDHA MEDICINE & SURGERY,University of Jaffna,036E,normalised,,COP2425-150
+2024/2025,SIDDHA MEDICINE & SURGERY,"Trincomalee Campus, Eastern University, Sri Lanka",036W,normalised,,COP2425-151
+2024/2025,INDIGENOUS MEDICINAL RESOURCES,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-152
+2024/2025,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-153
+2024/2025,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-154
+2024/2025,BIOMEDICAL TECHNOLOGY,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-155
+2024/2025,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-156
+2024/2025,YOGA AND PARAPSYCHOLOGY,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-157
+2024/2025,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2425-158
+2024/2025,HEALTH PROMOTION,Rajarata University of Sri Lanka,050K,exact,,COP2425-159
+2024/2025,NURSING,University of Colombo,037A,exact,,COP2425-160
+2024/2025,NURSING,University of Peradeniya,037B,exact,,COP2425-161
+2024/2025,NURSING,University of Sri Jayewardenepura,037C,exact,,COP2425-162
+2024/2025,NURSING,University of Jaffna,037E,exact,,COP2425-163
+2024/2025,NURSING,University of Ruhuna,037F,exact,,COP2425-164
+2024/2025,NURSING,"Eastern University, Sri Lanka",037H,exact,,COP2425-165
+2024/2025,PHARMACY,University of Peradeniya,051B,exact,,COP2425-166
+2024/2025,PHARMACY,University of Sri Jayewardenepura,051C,exact,,COP2425-167
+2024/2025,PHARMACY,University of Jaffna,051E,exact,,COP2425-168
+2024/2025,PHARMACY,University of Ruhuna,051F,exact,,COP2425-169
+2024/2025,MEDICAL LABORATORY SCIENCES,University of Peradeniya,052B,exact,,COP2425-170
+2024/2025,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,052C,exact,,COP2425-171
+2024/2025,MEDICAL LABORATORY SCIENCES,University of Jaffna,052E,exact,,COP2425-172
+2024/2025,MEDICAL LABORATORY SCIENCES,University of Ruhuna,052F,exact,,COP2425-173
+2024/2025,RADIOGRAPHY,University of Peradeniya,053B,exact,,COP2425-174
+2024/2025,MEDICAL IMAGING TECHNOLOGY,University of Colombo,138A,exact,,COP2425-175
+2024/2025,PHYSIOTHERAPY,University of Colombo,054A,exact,,COP2425-176
+2024/2025,PHYSIOTHERAPY,University of Peradeniya,054B,exact,,COP2425-177
+2024/2025,OCCUPATIONAL THERAPY,University of Kelaniya,115D,exact,,COP2425-178
+2024/2025,OPTOMETRY,University of Sri Jayewardenepura,116C,exact,,COP2425-179
+2024/2025,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,055D,exact,,COP2425-180
+2024/2025,APPLIED CHEMISTRY,University of Kelaniya,118D,exact,,COP2425-181
+2024/2025,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,119D,exact,,COP2425-182
+2024/2025,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,127D,exact,,COP2425-183
+2024/2025,FISHERIES & MARINE SCIENCES,University of Ruhuna,062F,exact,,COP2425-184
+2024/2025,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,106F,exact,,COP2425-185
+2024/2025,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,086B,exact,,COP2425-186
+2024/2025,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,087M,exact,,COP2425-187
+2024/2025,FOOD BUSINESS MANAGEMENT [Biological / Physical Science Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Biological / Physical Science Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2425-188
+2024/2025,FOOD BUSINESS MANAGEMENT [Commerce Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Commerce Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2425-189
+2024/2025,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,079J,normalised,,COP2425-190
+2024/2025,DATA SCIENCE,Sabaragamuwa University of Sri Lanka,136L,exact,,COP2425-191
+2024/2025,PHYSICAL EDUCATION,University of Jaffna,081E,exact,,COP2425-192
+2024/2025,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,081L,exact,,COP2425-193
+2024/2025,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,082C,exact,,COP2425-194
+2024/2025,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,,,"082D 'SPORTS SCIENCE & MANAGEMENT' (Kelaniya) has no 2025/26 uni-code; 2025/26 lists a different code 141D 'SPORTS SCIENCE' (Kelaniya). Possible successor, not confirmed, not mapped",COP2425-195
+2024/2025,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,082L,exact,,COP2425-196
+2024/2025,SPEECH AND HEARING SCIENCES,University of Kelaniya,083D,exact,,COP2425-197
+2024/2025,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,092K,exact,,COP2425-198
+2024/2025,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,092L,exact,,COP2425-199
+2024/2025,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,093F,exact,,COP2425-200
+2024/2025,AGRI BUSINESS MANAGEMENT,University of Ruhuna,094F,normalised,,COP2425-201
+2024/2025,GREEN TECHNOLOGY,University of Ruhuna,095F,exact,,COP2425-202
+2024/2025,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,064U,exact,,COP2425-203
+2024/2025,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,065U,exact,,COP2425-204
+2024/2025,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,066U,exact,,COP2425-205
+2024/2025,ANIMAL PRODUCTION AND FOOD TECHNOLOGY,Uva Wellassa University of Sri Lanka,067U,exact,,COP2425-206
+2024/2025,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,073U,exact,,COP2425-207
+2024/2025,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,075U,exact,,COP2425-208
+2024/2025,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,076U,exact,,COP2425-209
+2024/2025,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,088U,exact,,COP2425-210
+2024/2025,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,090U,exact,,COP2425-211
+2024/2025,ENGLISH LANGUAGE & APPLIED LINGUISTICS,Uva Wellassa University of Sri Lanka,132U,exact,,COP2425-212
+2024/2025,PLANTATION MANAGEMENT AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,135U,exact,,COP2425-213
+2024/2025,POLYMER SCIENCE AND INDUSTRIAL MANAGEMENT,University of Sri Jayewardenepura,139C,exact,,COP2425-214
+2024/2025,ENGINEERING TECHNOLOGY (ET),University of Colombo,102A,exact,,COP2425-215
+2024/2025,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,102C,exact,,COP2425-216
+2024/2025,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,102D,exact,,COP2425-217
+2024/2025,ENGINEERING TECHNOLOGY (ET),University of Jaffna,102E,exact,,COP2425-218
+2024/2025,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,102F,exact,,COP2425-219
+2024/2025,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,102K,exact,,COP2425-220
+2024/2025,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,102L,exact,,COP2425-221
+2024/2025,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,102M,exact,,COP2425-222
+2024/2025,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,102U,exact,,COP2425-223
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,103A,exact,,COP2425-224
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,103C,exact,,COP2425-225
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),University of Kelaniya,103D,exact,,COP2425-226
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,103E,exact,,COP2425-227
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,103F,exact,,COP2425-228
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",103H,exact,,COP2425-229
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,103J,exact,,COP2425-230
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,103K,exact,,COP2425-231
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,103L,exact,,COP2425-232
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,103M,exact,,COP2425-233
+2024/2025,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,103U,exact,,COP2425-234
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,104A,exact,,COP2425-235
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,104C,exact,,COP2425-236
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,104D,exact,,COP2425-237
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,104F,exact,,COP2425-238
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,"Eastern University, Sri Lanka",104H,exact,,COP2425-239
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,104J,exact,,COP2425-240
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,104K,exact,,COP2425-241
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",104R,exact,,COP2425-242
+2024/2025,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,104U,exact,,COP2425-243
+2024/2025,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,108C,exact,,COP2425-244
+2024/2025,PHYSICAL SCIENCE -ICT,University of Kelaniya,108D,exact,,COP2425-245
+2024/2025,TRANSLATION STUDIES,University of Kelaniya,098D,exact,,COP2425-246
+2024/2025,TRANSLATION STUDIES,University of Jaffna,098E,exact,,COP2425-247
+2024/2025,TRANSLATION STUDIES,"Eastern University, Sri Lanka",098H,exact,,COP2425-248
+2024/2025,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,098L,exact,,COP2425-249
+2024/2025,FILM & TELEVISION STUDIES,University of Kelaniya,100D,exact,,COP2425-250
+2024/2025,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",101R,exact,,COP2425-251
+2024/2025,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,105C,exact,,COP2425-252
+2024/2025,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,105D,exact,,COP2425-253
+2024/2025,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),Sabaragamuwa University of Sri Lanka,105L,exact,,COP2425-254
+2024/2025,VISUAL ARTS,University of the Visual & Performing Arts,085Z,exact,,COP2425-255
+2024/2025,MUSIC,University of Sri Jayewardenepura,068C,exact,,COP2425-256
+2024/2025,MUSIC,University of the Visual & Performing Arts,068Z,exact,,COP2425-257
+2024/2025,DANCE,University of the Visual & Performing Arts,069Z,exact,,COP2425-258
+2024/2025,DRAMA & THEATRE,University of the Visual & Performing Arts,071Z,exact,,COP2425-259
+2024/2025,ART & DESIGN,University of Jaffna,070E,exact,,COP2425-260
+2024/2025,MUSIC,University of Jaffna,068E,exact,,COP2425-261
+2024/2025,DANCE,University of Jaffna,069E,exact,,COP2425-262
+2024/2025,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,072Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2425-263
+2024/2025,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,068Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2425-264
+2024/2025,DANCE,Swami Vipulananda Institute of Aesthetic Studies,069Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2425-265
+2024/2025,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,071Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2425-266
+2023/2024,MEDICINE,University of Colombo,001A,exact,,COP2324-001
+2023/2024,MEDICINE,University of Peradeniya,001B,exact,,COP2324-002
+2023/2024,MEDICINE,University of Sri Jayewardenepura,001C,exact,,COP2324-003
+2023/2024,MEDICINE,University of Kelaniya,001D,exact,,COP2324-004
+2023/2024,MEDICINE,University of Jaffna,001E,exact,,COP2324-005
+2023/2024,MEDICINE,University of Ruhuna,001F,exact,,COP2324-006
+2023/2024,MEDICINE,University of Moratuwa,001G,exact,,COP2324-007
+2023/2024,MEDICINE,"Eastern University, Sri Lanka",001H,exact,,COP2324-008
+2023/2024,MEDICINE,Rajarata University of Sri Lanka,001K,exact,,COP2324-009
+2023/2024,MEDICINE,Sabaragamuwa University of Sri Lanka,001L,exact,,COP2324-010
+2023/2024,MEDICINE,Wayamba University of Sri Lanka,001M,exact,,COP2324-011
+2023/2024,MEDICINE,Uva Wellassa University of Sri Lanka,001U,exact,,COP2324-012
+2023/2024,DENTAL SURGERY,University of Peradeniya,002B,exact,,COP2324-013
+2023/2024,DENTAL SURGERY,University of Sri Jayewardenepura,002C,exact,,COP2324-014
+2023/2024,VETERINARY SCIENCE,University of Peradeniya,003B,exact,,COP2324-015
+2023/2024,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,058A,exact,,COP2324-016
+2023/2024,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,039B,exact,,COP2324-017
+2023/2024,AGRICULTURE,University of Jaffna,004E,exact,,COP2324-018
+2023/2024,AGRICULTURE,"Eastern University, Sri Lanka",004H,exact,,COP2324-019
+2023/2024,AGRICULTURE,Rajarata University of Sri Lanka,004K,exact,,COP2324-020
+2023/2024,AGRICULTURE,Sabaragamuwa University of Sri Lanka,004L,exact,,COP2324-021
+2023/2024,AGRICULTURE,Wayamba University of Sri Lanka,004M,exact,,COP2324-022
+2023/2024,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,005M,exact,,COP2324-023
+2023/2024,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,035B,exact,,COP2324-024
+2023/2024,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,035C,exact,,COP2324-025
+2023/2024,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,035L,exact,,COP2324-026
+2023/2024,BIOLOGICAL SCIENCE,University of Colombo,006A,exact,,COP2324-027
+2023/2024,BIOLOGICAL SCIENCE,University of Peradeniya,006B,exact,,COP2324-028
+2023/2024,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,006C,exact,,COP2324-029
+2023/2024,BIOLOGICAL SCIENCE,University of Kelaniya,006D,exact,,COP2324-030
+2023/2024,BIOLOGICAL SCIENCE,University of Jaffna,006E,exact,,COP2324-031
+2023/2024,BIOLOGICAL SCIENCE,University of Ruhuna,006F,exact,,COP2324-032
+2023/2024,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",006H,exact,,COP2324-033
+2023/2024,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,006J,exact,,COP2324-034
+2023/2024,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,007K,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2324-035
+2023/2024,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,007L,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2324-036
+2023/2024,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",007R,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2324-037
+2023/2024,ENGINEERING,University of Peradeniya,008B,exact,,COP2324-038
+2023/2024,ENGINEERING,University of Sri Jayewardenepura,008C,exact,,COP2324-039
+2023/2024,ENGINEERING,University of Jaffna,008E,exact,,COP2324-040
+2023/2024,ENGINEERING,University of Ruhuna,008F,exact,,COP2324-041
+2023/2024,ENGINEERING,University of Moratuwa,008G,exact,,COP2324-042
+2023/2024,ENGINEERING,South Eastern University of Sri Lanka,008J,exact,,COP2324-043
+2023/2024,ENGINEERING (EM),University of Moratuwa,009G,exact,,COP2324-044
+2023/2024,ENGINEERING (TM),University of Moratuwa,010G,exact,,COP2324-045
+2023/2024,QUANTITY SURVEYING,University of Moratuwa,011G,exact,,COP2324-046
+2023/2024,COMPUTER SCIENCE,University of Colombo School of Computing,012T,exact,,COP2324-047
+2023/2024,COMPUTER SCIENCE,University of Sri Jayewardenepura,012C,exact,,COP2324-048
+2023/2024,COMPUTER SCIENCE,University of Kelaniya,012D,exact,,COP2324-049
+2023/2024,COMPUTER SCIENCE,University of Jaffna,012E,exact,,COP2324-050
+2023/2024,COMPUTER SCIENCE,University of Ruhuna,012F,exact,,COP2324-051
+2023/2024,COMPUTER SCIENCE,Eastern University - Trincomalee Campus,012W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2324-052
+2023/2024,PHYSICAL SCIENCE,University of Colombo,013A,exact,,COP2324-053
+2023/2024,PHYSICAL SCIENCE,University of Peradeniya,013B,exact,,COP2324-054
+2023/2024,PHYSICAL SCIENCE,University of Sri Jayewardenepura,013C,exact,,COP2324-055
+2023/2024,PHYSICAL SCIENCE,University of Kelaniya,013D,exact,,COP2324-056
+2023/2024,PHYSICAL SCIENCE,University of Jaffna,013E,exact,,COP2324-057
+2023/2024,PHYSICAL SCIENCE,University of Ruhuna,013F,exact,,COP2324-058
+2023/2024,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",013H,exact,,COP2324-059
+2023/2024,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,013J,exact,,COP2324-060
+2023/2024,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,014L,exact,,COP2324-061
+2023/2024,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,015K,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2324-062
+2023/2024,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,015L,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2324-063
+2023/2024,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,015M,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2324-064
+2023/2024,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",015R,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2324-065
+2023/2024,APPLIED SCIENCES (PHY.SC),Eastern University - Trincomalee Campus,015W,manual-judgement,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015)",COP2324-066
+2023/2024,MANAGEMENT,University of Colombo,016A,exact,,COP2324-067
+2023/2024,MANAGEMENT,University of Peradeniya,016B,exact,,COP2324-068
+2023/2024,MANAGEMENT,University of Sri Jayewardenepura,016C,exact,,COP2324-069
+2023/2024,MANAGEMENT,University of Kelaniya,016D,exact,,COP2324-070
+2023/2024,MANAGEMENT,University of Jaffna,016E,exact,,COP2324-071
+2023/2024,MANAGEMENT,University of Ruhuna,016F,exact,,COP2324-072
+2023/2024,MANAGEMENT,"Eastern University, Sri Lanka",016H,exact,,COP2324-073
+2023/2024,MANAGEMENT,South Eastern University of Sri Lanka,016J,exact,,COP2324-074
+2023/2024,MANAGEMENT,Rajarata University of Sri Lanka,016K,exact,,COP2324-075
+2023/2024,MANAGEMENT,Sabaragamuwa University of Sri Lanka,016L,exact,,COP2324-076
+2023/2024,MANAGEMENT,Wayamba University of Sri Lanka,016M,exact,,COP2324-077
+2023/2024,REAL ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,017C,normalised,,COP2324-078
+2023/2024,COMMERCE,University of Sri Jayewardenepura,018C,exact,,COP2324-079
+2023/2024,COMMERCE,University of Kelaniya,018D,exact,,COP2324-080
+2023/2024,COMMERCE,University of Jaffna,018E,exact,,COP2324-081
+2023/2024,COMMERCE,"Eastern University, Sri Lanka",018H,exact,,COP2324-082
+2023/2024,COMMERCE,South Eastern University of Sri Lanka,018J,exact,,COP2324-083
+2023/2024,MANAGEMENT (PUBLIC) HONOURS,University of Sri Jayewardenepura,028C,manual-judgement,renamed: 028C 'MANAGEMENT (PUBLIC) HONOURS' (handbooks 2020/21-2023/24) = 028C 'MANAGEMENT AND PUBLIC POLICY' (2025/26; printed so in 2024/25 COP),COP2324-084
+2023/2024,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,077C,exact,,COP2324-085
+2023/2024,FINANCIAL ENGINEERING,University of Kelaniya,110D,exact,,COP2324-086
+2023/2024,BANKING & INSURANCE,"University of Vavuniya, Sri Lanka",133R,normalised,,COP2324-087
+2023/2024,LAW,University of Colombo,025A,exact,,COP2324-088
+2023/2024,LAW,University of Peradeniya,025B,exact,,COP2324-089
+2023/2024,LAW,University of Jaffna,025E,exact,,COP2324-090
+2023/2024,ARTS,University of Colombo,019A,exact,,COP2324-091
+2023/2024,ARTS,University of Peradeniya,019B,exact,,COP2324-092
+2023/2024,ARTS,University of Sri Jayewardenepura,019C,exact,,COP2324-093
+2023/2024,ARTS,University of Kelaniya,019D,exact,,COP2324-094
+2023/2024,ARTS,University of Jaffna,019E,exact,,COP2324-095
+2023/2024,ARTS,University of Ruhuna,019F,exact,,COP2324-096
+2023/2024,ARTS,"Eastern University, Sri Lanka",019H,exact,,COP2324-097
+2023/2024,ARTS,South Eastern University of Sri Lanka,019J,exact,,COP2324-098
+2023/2024,ARTS,Rajarata University of Sri Lanka,019K,exact,,COP2324-099
+2023/2024,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,020S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2324-100
+2023/2024,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,041S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2324-101
+2023/2024,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota A; Arts Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2324-102
+2023/2024,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota B; Commerce Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2324-103
+2023/2024,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,128C,exact,,COP2324-104
+2023/2024,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,129C,exact,,COP2324-105
+2023/2024,URBAN BIORESOURCES,University of Sri Jayewardenepura,130C,normalised,,COP2324-106
+2023/2024,SOCIAL WORK,University of Peradeniya,112B,exact,,COP2324-107
+2023/2024,SOCIAL WORK,University of Jayewardenepura,112C,manual-judgement,"COP header misprint: 'University of Jayewardenepura' without 'Sri' (same misprint in 2025/26 COP, see COP_STRUCTURE.md Section 9)",COP2324-108
+2023/2024,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,114U,exact,,COP2324-109
+2023/2024,PRIMARY EDUCATION,University of Colombo,137A,exact,,COP2324-110
+2023/2024,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2324-111
+2023/2024,MANAGEMENT STUDIES (TV) - A [Commerce Stream],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2324-112
+2023/2024,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2324-113
+2023/2024,MANAGEMENT STUDIES (TV) - B [Any subject combination],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2324-114
+2023/2024,COMMUNICATION STUDIES,Eastern University -Trincomalee Campus,029W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2324-115
+2023/2024,FINANCIAL ECONOMICS,University of Sri Jayewardenepura,131C,exact,,COP2324-116
+2023/2024,CREATIVE MUSIC TECHNOLOGY & PRODUCTION,University of Sri Jayewardenepura,134C,normalised,,COP2324-117
+2023/2024,PEACE & CONFLICT RESOLUTION,University of Kelaniya,031D,normalised,,COP2324-118
+2023/2024,ISLAMIC STUDIES,South Eastern University of Sri Lanka,063J,exact,,COP2324-119
+2023/2024,ARABIC LANGUAGE,South Eastern University of Sri Lanka,084J,exact,,COP2324-120
+2023/2024,ARCHITECTURE,University of Moratuwa,023G,exact,,COP2324-121
+2023/2024,DESIGN,University of Moratuwa,024G,exact,,COP2324-122
+2023/2024,LANDSCAPE ARCHITECTURE,University of Moratuwa,097G,exact,,COP2324-123
+2023/2024,TOWN & COUNTRY PLANNING,University of Moratuwa,030G,manual-judgement,renamed: 030G 'TOWN & COUNTRY PLANNING' (handbooks 2020/21-2023/24) = 030G 'URBAN INFORMATICS AND PLANNING' (2025/26; printed so in 2024/25 COP),COP2324-124
+2023/2024,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,034G,exact,,COP2324-125
+2023/2024,ARTIFICIAL INTELLIGENCE,University of Moratuwa,117G,exact,,COP2324-126
+2023/2024,INFORMATION TECHNOLOGY (IT),University of Moratuwa,026G,exact,,COP2324-127
+2023/2024,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,091G,exact,,COP2324-128
+2023/2024,FACILITIES MANAGEMENT,University of Moratuwa,056G,exact,,COP2324-129
+2023/2024,TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE),University of Moratuwa,057G,exact,,COP2324-130
+2023/2024,BUSINESS SCIENCE,University of Moratuwa,109G,exact,,COP2324-131
+2023/2024,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT) (OTHER STREAM),University of Kelaniya,027D,normalised,stream/sub-quota variant 'OTHER STREAM' of 'MANAGEMENT AND INFORMATION TECHNOLOGY (MIT)'; several historical offerings share this uni-code,COP2324-132
+2023/2024,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT) (BIO SCIENCE STREAM),University of Kelaniya,027D,normalised,stream/sub-quota variant 'BIO SCIENCE STREAM' of 'MANAGEMENT AND INFORMATION TECHNOLOGY (MIT)'; several historical offerings share this uni-code,COP2324-133
+2023/2024,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,059A,exact,,COP2324-134
+2023/2024,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,113F,exact,,COP2324-135
+2023/2024,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,060B,exact,,COP2324-136
+2023/2024,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,111B,exact,,COP2324-137
+2023/2024,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,038K,exact,,COP2324-138
+2023/2024,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",038R,exact,,COP2324-139
+2023/2024,INFORMATION SYSTEMS,University of Colombo School of Computing,096T,exact,,COP2324-140
+2023/2024,INFORMATION SYSTEMS,University of Sri Jayewardenepura,096C,exact,,COP2324-141
+2023/2024,INFORMATION SYSTEMS,University of Sabaragamuwa,096L,manual-judgement,COP header word-order variant of 'Sabaragamuwa University of Sri Lanka',COP2324-142
+2023/2024,SOFTWARE ENGINEERING,University of Sri Jayewardenepura,099C,exact,,COP2324-143
+2023/2024,SOFTWARE ENGINEERING,University of Kelaniya,099D,exact,,COP2324-144
+2023/2024,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,099L,exact,,COP2324-145
+2023/2024,AYURVEDIC MEDICINE & SURGERY,University of Colombo,032A,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2324-146
+2023/2024,AYURVEDIC MEDICINE & SURGERY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",032P,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2324-147
+2023/2024,UNANI MEDICINE & SURGERY,University of Colombo,033A,normalised,,COP2324-148
+2023/2024,SIDDHA MEDICINE & SURGERY,University of Jaffna,036E,normalised,,COP2324-149
+2023/2024,SIDDHA MEDICINE & SURGERY,Eastern University - Trincomalee Campus,036W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2324-150
+2023/2024,INDIGENOUS MEDICINAL RESOURCES,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-151
+2023/2024,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-152
+2023/2024,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-153
+2023/2024,BIOMEDICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-154
+2023/2024,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-155
+2023/2024,YOGA AND PARAPSYCHOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-156
+2023/2024,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2324-157
+2023/2024,HEALTH PROMOTION,Rajarata University of Sri Lanka,050K,exact,,COP2324-158
+2023/2024,NURSING,University of Colombo,037A,exact,,COP2324-159
+2023/2024,NURSING,University of Peradeniya,037B,exact,,COP2324-160
+2023/2024,NURSING,University of Sri Jayewardenepura,037C,exact,,COP2324-161
+2023/2024,NURSING,University of Jaffna,037E,exact,,COP2324-162
+2023/2024,NURSING,University of Ruhuna,037F,exact,,COP2324-163
+2023/2024,NURSING,"Eastern University, Sri Lanka",037H,exact,,COP2324-164
+2023/2024,PHARMACY,University of Peradeniya,051B,exact,,COP2324-165
+2023/2024,PHARMACY,University of Sri Jayewardenepura,051C,exact,,COP2324-166
+2023/2024,PHARMACY,University of Jaffna,051E,exact,,COP2324-167
+2023/2024,PHARMACY,University of Ruhuna,051F,exact,,COP2324-168
+2023/2024,MEDICAL LABORATORY SCIENCES,University of Peradeniya,052B,exact,,COP2324-169
+2023/2024,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,052C,exact,,COP2324-170
+2023/2024,MEDICAL LABORATORY SCIENCES,University of Jaffna,052E,exact,,COP2324-171
+2023/2024,MEDICAL LABORATORY SCIENCES,University of Ruhuna,052F,exact,,COP2324-172
+2023/2024,RADIOGRAPHY,University of Peradeniya,053B,exact,,COP2324-173
+2023/2024,MEDICAL IMAGING TECHNOLOGY,University of Colombo,138A,exact,,COP2324-174
+2023/2024,PHYSIOTHERAPY,University of Colombo,054A,exact,,COP2324-175
+2023/2024,PHYSIOTHERAPY,University of Peradeniya,054B,exact,,COP2324-176
+2023/2024,OCCUPATIONAL THERAPY,University of Kelaniya,115D,exact,,COP2324-177
+2023/2024,OPTOMETRY,University of Sri Jayewardenepura,116C,exact,,COP2324-178
+2023/2024,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,055D,exact,,COP2324-179
+2023/2024,APPLIED CHEMISTRY,University of Kelaniya,118D,exact,,COP2324-180
+2023/2024,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,119D,exact,,COP2324-181
+2023/2024,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,127D,exact,,COP2324-182
+2023/2024,FISHERIES & MARINE SCIENCES,University of Ruhuna,062F,exact,,COP2324-183
+2023/2024,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,106F,exact,,COP2324-184
+2023/2024,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,086B,exact,,COP2324-185
+2023/2024,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,087M,exact,,COP2324-186
+2023/2024,FOOD BUSINESS MANAGEMENT [Biological / Physical Science Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Biological / Physical Science Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2324-187
+2023/2024,FOOD BUSINESS MANAGEMENT [Commerce Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Commerce Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2324-188
+2023/2024,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,079J,normalised,,COP2324-189
+2023/2024,DATA SCIENCE,Sabaragamuwa University of Sri Lanka,136L,exact,,COP2324-190
+2023/2024,PHYSICAL EDUCATION,University of Jaffna,081E,exact,,COP2324-191
+2023/2024,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,081L,exact,,COP2324-192
+2023/2024,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,082C,exact,,COP2324-193
+2023/2024,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,,,"082D 'SPORTS SCIENCE & MANAGEMENT' (Kelaniya) has no 2025/26 uni-code; 2025/26 lists a different code 141D 'SPORTS SCIENCE' (Kelaniya). Possible successor, not confirmed, not mapped",COP2324-194
+2023/2024,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,082L,exact,,COP2324-195
+2023/2024,SPEECH AND HEARING SCIENCES,University of Kelaniya,083D,exact,,COP2324-196
+2023/2024,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,092K,exact,,COP2324-197
+2023/2024,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,092L,exact,,COP2324-198
+2023/2024,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,093F,exact,,COP2324-199
+2023/2024,AGRI BUSINESS MANAGEMENT,University of Ruhuna,094F,normalised,,COP2324-200
+2023/2024,GREEN TECHNOLOGY,University of Ruhuna,095F,exact,,COP2324-201
+2023/2024,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,064U,exact,,COP2324-202
+2023/2024,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,065U,exact,,COP2324-203
+2023/2024,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,066U,exact,,COP2324-204
+2023/2024,ANIMAL PRODUCTION AND FOOD TECHNOLOGY,Uva Wellassa University of Sri Lanka,067U,exact,,COP2324-205
+2023/2024,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,073U,exact,,COP2324-206
+2023/2024,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,075U,exact,,COP2324-207
+2023/2024,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,076U,exact,,COP2324-208
+2023/2024,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,088U,exact,,COP2324-209
+2023/2024,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,090U,exact,,COP2324-210
+2023/2024,ENGLISH LANGUAGE & APPLIED LINGUISTICS,Uva Wellassa University of Sri Lanka,132U,exact,,COP2324-211
+2023/2024,PLANTATION MANAGEMENT AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,135U,exact,,COP2324-212
+2023/2024,POLYMER SCIENCE AND INDUSTRIAL MANAGEMENT,University of Sri Jayewardenepura,139C,exact,,COP2324-213
+2023/2024,ENGINEERING TECHNOLOGY (ET),University of Colombo,102A,exact,,COP2324-214
+2023/2024,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,102C,exact,,COP2324-215
+2023/2024,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,102D,exact,,COP2324-216
+2023/2024,ENGINEERING TECHNOLOGY (ET),University of Jaffna,102E,exact,,COP2324-217
+2023/2024,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,102F,exact,,COP2324-218
+2023/2024,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,102K,exact,,COP2324-219
+2023/2024,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,102L,exact,,COP2324-220
+2023/2024,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,102M,exact,,COP2324-221
+2023/2024,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,102U,exact,,COP2324-222
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,103A,exact,,COP2324-223
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,103C,exact,,COP2324-224
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,103E,exact,,COP2324-225
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,103F,exact,,COP2324-226
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",103H,exact,,COP2324-227
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,103J,exact,,COP2324-228
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,103K,exact,,COP2324-229
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,103L,exact,,COP2324-230
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,103M,exact,,COP2324-231
+2023/2024,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,103U,exact,,COP2324-232
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,104A,exact,,COP2324-233
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,104C,exact,,COP2324-234
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,104D,exact,,COP2324-235
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,104F,exact,,COP2324-236
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,104J,exact,,COP2324-237
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,104K,exact,,COP2324-238
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",104R,exact,,COP2324-239
+2023/2024,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,104U,exact,,COP2324-240
+2023/2024,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,108C,exact,,COP2324-241
+2023/2024,PHYSICAL SCIENCE -ICT,University of Kelaniya,108D,exact,,COP2324-242
+2023/2024,TRANSLATION STUDIES,University of Kelaniya,098D,exact,,COP2324-243
+2023/2024,TRANSLATION STUDIES,University of Jaffna,098E,exact,,COP2324-244
+2023/2024,TRANSLATION STUDIES,"Eastern University, Sri Lanka",098H,exact,,COP2324-245
+2023/2024,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,098L,exact,,COP2324-246
+2023/2024,FILM & TELEVISION STUDIES,University of Kelaniya,100D,exact,,COP2324-247
+2023/2024,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",101R,exact,,COP2324-248
+2023/2024,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,105C,exact,,COP2324-249
+2023/2024,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,105D,exact,,COP2324-250
+2023/2024,VISUAL ARTS,University of the Visual & Performing Arts,085Z,exact,,COP2324-251
+2023/2024,MUSIC,University of Sri Jayewardenepura,068C,exact,,COP2324-252
+2023/2024,MUSIC,University of the Visual & Performing Arts,068Z,exact,,COP2324-253
+2023/2024,DANCE,University of the Visual & Performing Arts,069Z,exact,,COP2324-254
+2023/2024,DRAMA & THEATRE,University of the Visual & Performing Arts,071Z,exact,,COP2324-255
+2023/2024,ART & DESIGN,University of Jaffna,070E,exact,,COP2324-256
+2023/2024,MUSIC,University of Jaffna,068E,exact,,COP2324-257
+2023/2024,DANCE,University of Jaffna,069E,exact,,COP2324-258
+2023/2024,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,072Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2324-259
+2023/2024,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,068Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2324-260
+2023/2024,DANCE,Swami Vipulananda Institute of Aesthetic Studies,069Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2324-261
+2023/2024,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,071Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2324-262
+2022/2023,MEDICINE,University of Colombo,001A,exact,,COP2223-001
+2022/2023,MEDICINE,University of Peradeniya,001B,exact,,COP2223-002
+2022/2023,MEDICINE,University of Sri Jayewardenepura,001C,exact,,COP2223-003
+2022/2023,MEDICINE,University of Kelaniya,001D,exact,,COP2223-004
+2022/2023,MEDICINE,University of Jaffna,001E,exact,,COP2223-005
+2022/2023,MEDICINE,University of Ruhuna,001F,exact,,COP2223-006
+2022/2023,MEDICINE,University of Moratuwa,001G,exact,,COP2223-007
+2022/2023,MEDICINE,"Eastern University, Sri Lanka",001H,exact,,COP2223-008
+2022/2023,MEDICINE,Rajarata University of Sri Lanka,001K,exact,,COP2223-009
+2022/2023,MEDICINE,Sabaragamuwa University of Sri Lanka,001L,exact,,COP2223-010
+2022/2023,MEDICINE,Wayamba University of Sri Lanka,001M,exact,,COP2223-011
+2022/2023,MEDICINE,Uva Wellassa University of Sri Lanka,001U,exact,,COP2223-012
+2022/2023,DENTAL SURGERY,University of Peradeniya,002B,exact,,COP2223-013
+2022/2023,DENTAL SURGERY,University of Sri Jayewardenepura,002C,exact,,COP2223-014
+2022/2023,VETERINARY SCIENCE,University of Peradeniya,003B,exact,,COP2223-015
+2022/2023,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,058A,exact,,COP2223-016
+2022/2023,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,039B,exact,,COP2223-017
+2022/2023,AGRICULTURE,University of Jaffna,004E,exact,,COP2223-018
+2022/2023,AGRICULTURE,"Eastern University, Sri Lanka",004H,exact,,COP2223-019
+2022/2023,AGRICULTURE,Rajarata University of Sri Lanka,004K,exact,,COP2223-020
+2022/2023,AGRICULTURE,Sabaragamuwa University of Sri Lanka,004L,exact,,COP2223-021
+2022/2023,AGRICULTURE,Wayamba University of Sri Lanka,004M,exact,,COP2223-022
+2022/2023,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,005M,exact,,COP2223-023
+2022/2023,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,035B,exact,,COP2223-024
+2022/2023,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,035C,exact,,COP2223-025
+2022/2023,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,035L,exact,,COP2223-026
+2022/2023,BIOLOGICAL SCIENCE,University of Colombo,006A,exact,,COP2223-027
+2022/2023,BIOLOGICAL SCIENCE,University of Peradeniya,006B,exact,,COP2223-028
+2022/2023,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,006C,exact,,COP2223-029
+2022/2023,BIOLOGICAL SCIENCE,University of Kelaniya,006D,exact,,COP2223-030
+2022/2023,BIOLOGICAL SCIENCE,University of Jaffna,006E,exact,,COP2223-031
+2022/2023,BIOLOGICAL SCIENCE,University of Ruhuna,006F,exact,,COP2223-032
+2022/2023,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",006H,exact,,COP2223-033
+2022/2023,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,006J,exact,,COP2223-034
+2022/2023,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,007K,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2223-035
+2022/2023,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,007L,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2223-036
+2022/2023,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",007R,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2223-037
+2022/2023,ENGINEERING,University of Peradeniya,008B,exact,,COP2223-038
+2022/2023,ENGINEERING,University of Sri Jayewardenepura,008C,exact,,COP2223-039
+2022/2023,ENGINEERING,University of Jaffna,008E,exact,,COP2223-040
+2022/2023,ENGINEERING,University of Ruhuna,008F,exact,,COP2223-041
+2022/2023,ENGINEERING,University of Moratuwa,008G,exact,,COP2223-042
+2022/2023,ENGINEERING,South Eastern University of Sri Lanka,008J,exact,,COP2223-043
+2022/2023,ENGINEERING (EM),University of Moratuwa,009G,exact,,COP2223-044
+2022/2023,ENGINEERING (TM),University of Moratuwa,010G,exact,,COP2223-045
+2022/2023,QUANTITY SURVEYING,University of Moratuwa,011G,exact,,COP2223-046
+2022/2023,COMPUTER SCIENCE,University of Colombo School of Computing,012T,exact,,COP2223-047
+2022/2023,COMPUTER SCIENCE,University of Sri Jayewardenepura,012C,exact,,COP2223-048
+2022/2023,COMPUTER SCIENCE,University of Kelaniya,012D,exact,,COP2223-049
+2022/2023,COMPUTER SCIENCE,University of Jaffna,012E,exact,,COP2223-050
+2022/2023,COMPUTER SCIENCE,University of Ruhuna,012F,exact,,COP2223-051
+2022/2023,COMPUTER SCIENCE,Eastern University - Trincomalee Campus,012W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2223-052
+2022/2023,PHYSICAL SCIENCE,University of Colombo,013A,exact,,COP2223-053
+2022/2023,PHYSICAL SCIENCE,University of Peradeniya,013B,exact,,COP2223-054
+2022/2023,PHYSICAL SCIENCE,University of Sri Jayewardenepura,013C,exact,,COP2223-055
+2022/2023,PHYSICAL SCIENCE,University of Kelaniya,013D,exact,,COP2223-056
+2022/2023,PHYSICAL SCIENCE,University of Jaffna,013E,exact,,COP2223-057
+2022/2023,PHYSICAL SCIENCE,University of Ruhuna,013F,exact,,COP2223-058
+2022/2023,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",013H,exact,,COP2223-059
+2022/2023,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,013J,exact,,COP2223-060
+2022/2023,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,014L,exact,,COP2223-061
+2022/2023,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,015K,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2223-062
+2022/2023,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,015L,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2223-063
+2022/2023,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,015M,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2223-064
+2022/2023,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",015R,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2223-065
+2022/2023,APPLIED SCIENCES (PHY.SC),Eastern University - Trincomalee Campus,015W,manual-judgement,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015)",COP2223-066
+2022/2023,MANAGEMENT,University of Colombo,016A,exact,,COP2223-067
+2022/2023,MANAGEMENT,University of Peradeniya,016B,exact,,COP2223-068
+2022/2023,MANAGEMENT,University of Sri Jayewardenepura,016C,exact,,COP2223-069
+2022/2023,MANAGEMENT,University of Kelaniya,016D,exact,,COP2223-070
+2022/2023,MANAGEMENT,University of Jaffna,016E,exact,,COP2223-071
+2022/2023,MANAGEMENT,University of Ruhuna,016F,exact,,COP2223-072
+2022/2023,MANAGEMENT,"Eastern University, Sri Lanka",016H,exact,,COP2223-073
+2022/2023,MANAGEMENT,South Eastern University of Sri Lanka,016J,exact,,COP2223-074
+2022/2023,MANAGEMENT,Rajarata University of Sri Lanka,016K,exact,,COP2223-075
+2022/2023,MANAGEMENT,Sabaragamuwa University of Sri Lanka,016L,exact,,COP2223-076
+2022/2023,MANAGEMENT,Wayamba University of Sri Lanka,016M,exact,,COP2223-077
+2022/2023,REAL ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,017C,normalised,,COP2223-078
+2022/2023,COMMERCE,University of Sri Jayewardenepura,018C,exact,,COP2223-079
+2022/2023,COMMERCE,University of Kelaniya,018D,exact,,COP2223-080
+2022/2023,COMMERCE,University of Jaffna,018E,exact,,COP2223-081
+2022/2023,COMMERCE,"Eastern University, Sri Lanka",018H,exact,,COP2223-082
+2022/2023,COMMERCE,South Eastern University of Sri Lanka,018J,exact,,COP2223-083
+2022/2023,MANAGEMENT (PUBLIC) HONOURS,University of Sri Jayewardenepura,028C,manual-judgement,renamed: 028C 'MANAGEMENT (PUBLIC) HONOURS' (handbooks 2020/21-2023/24) = 028C 'MANAGEMENT AND PUBLIC POLICY' (2025/26; printed so in 2024/25 COP),COP2223-084
+2022/2023,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,077C,exact,,COP2223-085
+2022/2023,FINANCIAL ENGINEERING,University of Kelaniya,110D,exact,,COP2223-086
+2022/2023,BANKING & INSURANCE,"University of Vavuniya, Sri Lanka",133R,normalised,,COP2223-087
+2022/2023,LAW,University of Colombo,025A,exact,,COP2223-088
+2022/2023,LAW,University of Peradeniya,025B,exact,,COP2223-089
+2022/2023,LAW,University of Jaffna,025E,exact,,COP2223-090
+2022/2023,ARTS,University of Colombo,019A,exact,,COP2223-091
+2022/2023,ARTS,University of Peradeniya,019B,exact,,COP2223-092
+2022/2023,ARTS,University of Sri Jayewardenepura,019C,exact,,COP2223-093
+2022/2023,ARTS,University of Kelaniya,019D,exact,,COP2223-094
+2022/2023,ARTS,University of Jaffna,019E,exact,,COP2223-095
+2022/2023,ARTS,University of Ruhuna,019F,exact,,COP2223-096
+2022/2023,ARTS,"Eastern University, Sri Lanka",019H,exact,,COP2223-097
+2022/2023,ARTS,South Eastern University of Sri Lanka,019J,exact,,COP2223-098
+2022/2023,ARTS,Rajarata University of Sri Lanka,019K,exact,,COP2223-099
+2022/2023,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,020S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2223-100
+2022/2023,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,041S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2223-101
+2022/2023,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota A; Arts Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2223-102
+2022/2023,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota B; Commerce Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2223-103
+2022/2023,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,128C,exact,,COP2223-104
+2022/2023,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,129C,exact,,COP2223-105
+2022/2023,URBAN BIORESOURCES,University of Sri Jayewardenepura,130C,normalised,,COP2223-106
+2022/2023,SOCIAL WORK,University of Peradeniya,112B,exact,,COP2223-107
+2022/2023,SOCIAL WORK,University of Jayewardenepura,112C,manual-judgement,"COP header misprint: 'University of Jayewardenepura' without 'Sri' (same misprint in 2025/26 COP, see COP_STRUCTURE.md Section 9)",COP2223-108
+2022/2023,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,114U,exact,,COP2223-109
+2022/2023,PRIMARY EDUCATION,University of Colombo,137A,exact,,COP2223-110
+2022/2023,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2223-111
+2022/2023,MANAGEMENT STUDIES (TV) - A [Commerce Stream],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2223-112
+2022/2023,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2223-113
+2022/2023,MANAGEMENT STUDIES (TV) - B [Any subject combination],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2223-114
+2022/2023,COMMUNICATION STUDIES,Eastern University -Trincomalee Campus,029W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2223-115
+2022/2023,FINANCIAL ECONOMICS,University of Sri Jayewardenepura,131C,exact,,COP2223-116
+2022/2023,CREATIVE MUSIC TECHNOLOGY & PRODUCTION,University of Sri Jayewardenepura,134C,normalised,,COP2223-117
+2022/2023,PEACE & CONFLICT RESOLUTION,University of Kelaniya,031D,normalised,,COP2223-118
+2022/2023,ISLAMIC STUDIES,South Eastern University of Sri Lanka,063J,exact,,COP2223-119
+2022/2023,ARABIC LANGUAGE,South Eastern University of Sri Lanka,084J,exact,,COP2223-120
+2022/2023,ARCHITECTURE,University of Moratuwa,023G,exact,,COP2223-121
+2022/2023,DESIGN,University of Moratuwa,024G,exact,,COP2223-122
+2022/2023,LANDSCAPE ARCHITECTURE,University of Moratuwa,097G,exact,,COP2223-123
+2022/2023,TOWN & COUNTRY PLANNING,University of Moratuwa,030G,manual-judgement,renamed: 030G 'TOWN & COUNTRY PLANNING' (handbooks 2020/21-2023/24) = 030G 'URBAN INFORMATICS AND PLANNING' (2025/26; printed so in 2024/25 COP),COP2223-124
+2022/2023,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,034G,exact,,COP2223-125
+2022/2023,ARTIFICIAL INTELLIGENCE,University of Moratuwa,117G,exact,,COP2223-126
+2022/2023,INFORMATION TECHNOLOGY (IT),University of Moratuwa,026G,exact,,COP2223-127
+2022/2023,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,091G,exact,,COP2223-128
+2022/2023,FACILITIES MANAGEMENT,University of Moratuwa,056G,exact,,COP2223-129
+2022/2023,TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE),University of Moratuwa,057G,exact,,COP2223-130
+2022/2023,BUSINESS SCIENCE,University of Moratuwa,109G,exact,,COP2223-131
+2022/2023,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT),University of Kelaniya,027D,exact,,COP2223-132
+2022/2023,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,059A,exact,,COP2223-133
+2022/2023,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,113F,exact,,COP2223-134
+2022/2023,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,060B,exact,,COP2223-135
+2022/2023,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,111B,exact,,COP2223-136
+2022/2023,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,038K,exact,,COP2223-137
+2022/2023,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",038R,exact,,COP2223-138
+2022/2023,INFORMATION SYSTEMS,University of Colombo School of Computing,096T,exact,,COP2223-139
+2022/2023,INFORMATION SYSTEMS,University of Sri Jayewardenepura,096C,exact,,COP2223-140
+2022/2023,INFORMATION SYSTEMS,University of Sabaragamuwa,096L,manual-judgement,COP header word-order variant of 'Sabaragamuwa University of Sri Lanka',COP2223-141
+2022/2023,SOFTWARE ENGINEERING,University of Sri Jayewardenepura,099C,exact,,COP2223-142
+2022/2023,SOFTWARE ENGINEERING,University of Kelaniya,099D,exact,,COP2223-143
+2022/2023,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,099L,exact,,COP2223-144
+2022/2023,AYURVEDIC MEDICINE & SURGERY,University of Colombo,032A,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2223-145
+2022/2023,AYURVEDIC MEDICINE & SURGERY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",032P,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2223-146
+2022/2023,UNANI MEDICINE & SURGERY,University of Colombo,033A,normalised,,COP2223-147
+2022/2023,SIDDHA MEDICINE & SURGERY,University of Jaffna,036E,normalised,,COP2223-148
+2022/2023,SIDDHA MEDICINE & SURGERY,Eastern University - Trincomalee Campus,036W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2223-149
+2022/2023,INDIGENOUS MEDICINAL RESOURCES,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-150
+2022/2023,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-151
+2022/2023,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-152
+2022/2023,BIOMEDICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-153
+2022/2023,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-154
+2022/2023,YOGA AND PARAPSYCHOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-155
+2022/2023,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2223-156
+2022/2023,HEALTH PROMOTION,Rajarata University of Sri Lanka,050K,exact,,COP2223-157
+2022/2023,NURSING,University of Colombo,037A,exact,,COP2223-158
+2022/2023,NURSING,University of Peradeniya,037B,exact,,COP2223-159
+2022/2023,NURSING,University of Sri Jayewardenepura,037C,exact,,COP2223-160
+2022/2023,NURSING,University of Jaffna,037E,exact,,COP2223-161
+2022/2023,NURSING,University of Ruhuna,037F,exact,,COP2223-162
+2022/2023,NURSING,"Eastern University, Sri Lanka",037H,exact,,COP2223-163
+2022/2023,PHARMACY,University of Peradeniya,051B,exact,,COP2223-164
+2022/2023,PHARMACY,University of Sri Jayewardenepura,051C,exact,,COP2223-165
+2022/2023,PHARMACY,University of Jaffna,051E,exact,,COP2223-166
+2022/2023,PHARMACY,University of Ruhuna,051F,exact,,COP2223-167
+2022/2023,MEDICAL LABORATORY SCIENCES,University of Peradeniya,052B,exact,,COP2223-168
+2022/2023,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,052C,exact,,COP2223-169
+2022/2023,MEDICAL LABORATORY SCIENCES,University of Jaffna,052E,exact,,COP2223-170
+2022/2023,MEDICAL LABORATORY SCIENCES,University of Ruhuna,052F,exact,,COP2223-171
+2022/2023,RADIOGRAPHY,University of Peradeniya,053B,exact,,COP2223-172
+2022/2023,MEDICAL IMAGING TECHNOLOGY,University of Colombo,138A,exact,,COP2223-173
+2022/2023,PHYSIOTHERAPY,University of Colombo,054A,exact,,COP2223-174
+2022/2023,PHYSIOTHERAPY,University of Peradeniya,054B,exact,,COP2223-175
+2022/2023,OCCUPATIONAL THERAPY,University of Kelaniya,115D,exact,,COP2223-176
+2022/2023,OPTOMETRY,University of Sri Jayewardenepura,116C,exact,,COP2223-177
+2022/2023,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,055D,exact,,COP2223-178
+2022/2023,APPLIED CHEMISTRY,University of Kelaniya,118D,exact,,COP2223-179
+2022/2023,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,119D,exact,,COP2223-180
+2022/2023,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,127D,exact,,COP2223-181
+2022/2023,FISHERIES & MARINE SCIENCES,University of Ruhuna,062F,exact,,COP2223-182
+2022/2023,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,106F,exact,,COP2223-183
+2022/2023,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,086B,exact,,COP2223-184
+2022/2023,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,087M,exact,,COP2223-185
+2022/2023,FOOD BUSINESS MANAGEMENT [Biological / Physical Science Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Biological / Physical Science Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2223-186
+2022/2023,FOOD BUSINESS MANAGEMENT [Commerce Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Commerce Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2223-187
+2022/2023,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,079J,normalised,,COP2223-188
+2022/2023,COMPUTING & INFORMATION SYSTEMS,Sabaragamuwa University of Sri Lanka,,,"080L 'COMPUTING & INFORMATION SYSTEMS' (Sabaragamuwa) has no 2025/26 code; it co-existed with 096L 'INFORMATION SYSTEMS' in handbook 2022/23, so it is a different course",COP2223-189
+2022/2023,DATA SCIENCE,Sabaragamuwa University of Sri Lanka,136L,exact,,COP2223-190
+2022/2023,PHYSICAL EDUCATION,University of Jaffna,081E,exact,,COP2223-191
+2022/2023,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,081L,exact,,COP2223-192
+2022/2023,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,082C,exact,,COP2223-193
+2022/2023,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,,,"082D 'SPORTS SCIENCE & MANAGEMENT' (Kelaniya) has no 2025/26 uni-code; 2025/26 lists a different code 141D 'SPORTS SCIENCE' (Kelaniya). Possible successor, not confirmed, not mapped",COP2223-194
+2022/2023,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,082L,exact,,COP2223-195
+2022/2023,SPEECH AND HEARING SCIENCES,University of Kelaniya,083D,exact,,COP2223-196
+2022/2023,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,092K,exact,,COP2223-197
+2022/2023,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,092L,exact,,COP2223-198
+2022/2023,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,093F,exact,,COP2223-199
+2022/2023,AGRI BUSINESS MANAGEMENT,University of Ruhuna,094F,normalised,,COP2223-200
+2022/2023,GREEN TECHNOLOGY,University of Ruhuna,095F,exact,,COP2223-201
+2022/2023,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,064U,exact,,COP2223-202
+2022/2023,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,065U,exact,,COP2223-203
+2022/2023,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,066U,exact,,COP2223-204
+2022/2023,ANIMAL PRODUCTION AND FOOD TECHNOLOGY,Uva Wellassa University of Sri Lanka,067U,exact,,COP2223-205
+2022/2023,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,073U,exact,,COP2223-206
+2022/2023,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,075U,exact,,COP2223-207
+2022/2023,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,076U,exact,,COP2223-208
+2022/2023,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,088U,exact,,COP2223-209
+2022/2023,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,090U,exact,,COP2223-210
+2022/2023,ENGLISH LANGUAGE & APPLIED LINGUISTICS,Uva Wellassa University of Sri Lanka,132U,exact,,COP2223-211
+2022/2023,PLANTATION MANAGEMENT AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,135U,exact,,COP2223-212
+2022/2023,ENGINEERING TECHNOLOGY (ET),University of Colombo,102A,exact,,COP2223-213
+2022/2023,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,102C,exact,,COP2223-214
+2022/2023,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,102D,exact,,COP2223-215
+2022/2023,ENGINEERING TECHNOLOGY (ET),University of Jaffna,102E,exact,,COP2223-216
+2022/2023,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,102F,exact,,COP2223-217
+2022/2023,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,102K,exact,,COP2223-218
+2022/2023,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,102L,exact,,COP2223-219
+2022/2023,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,102M,exact,,COP2223-220
+2022/2023,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,102U,exact,,COP2223-221
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,103A,exact,,COP2223-222
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,103C,exact,,COP2223-223
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,103E,exact,,COP2223-224
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,103F,exact,,COP2223-225
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",103H,exact,,COP2223-226
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,103J,exact,,COP2223-227
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,103K,exact,,COP2223-228
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,103L,exact,,COP2223-229
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,103M,exact,,COP2223-230
+2022/2023,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,103U,exact,,COP2223-231
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,104A,exact,,COP2223-232
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,104C,exact,,COP2223-233
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,104D,exact,,COP2223-234
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,104F,exact,,COP2223-235
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,104J,exact,,COP2223-236
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,104K,exact,,COP2223-237
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",104R,exact,,COP2223-238
+2022/2023,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,104U,exact,,COP2223-239
+2022/2023,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,108C,exact,,COP2223-240
+2022/2023,PHYSICAL SCIENCE -ICT,University of Kelaniya,108D,exact,,COP2223-241
+2022/2023,TRANSLATION STUDIES,University of Kelaniya,098D,exact,,COP2223-242
+2022/2023,TRANSLATION STUDIES,University of Jaffna,098E,exact,,COP2223-243
+2022/2023,TRANSLATION STUDIES,"Eastern University, Sri Lanka",098H,exact,,COP2223-244
+2022/2023,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,098L,exact,,COP2223-245
+2022/2023,FILM & TELEVISION STUDIES,University of Kelaniya,100D,exact,,COP2223-246
+2022/2023,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",101R,exact,,COP2223-247
+2022/2023,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,105C,exact,,COP2223-248
+2022/2023,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,105D,exact,,COP2223-249
+2022/2023,VISUAL ARTS,University of the Visual & Performing Arts,085Z,exact,,COP2223-250
+2022/2023,MUSIC,University of Sri Jayewardenepura,068C,exact,,COP2223-251
+2022/2023,MUSIC,University of the Visual & Performing Arts,068Z,exact,,COP2223-252
+2022/2023,DANCE,University of the Visual & Performing Arts,069Z,exact,,COP2223-253
+2022/2023,DRAMA & THEATRE,University of the Visual & Performing Arts,071Z,exact,,COP2223-254
+2022/2023,ART & DESIGN,University of Jaffna,070E,exact,,COP2223-255
+2022/2023,MUSIC,University of Jaffna,068E,exact,,COP2223-256
+2022/2023,DANCE,University of Jaffna,069E,exact,,COP2223-257
+2022/2023,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,072Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2223-258
+2022/2023,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,068Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2223-259
+2022/2023,DANCE,Swami Vipulananda Institute of Aesthetic Studies,069Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2223-260
+2022/2023,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,071Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2223-261
+2021/2022,MEDICINE,University of Colombo,001A,exact,,COP2122-001
+2021/2022,MEDICINE,University of Peradeniya,001B,exact,,COP2122-002
+2021/2022,MEDICINE,University of Sri Jayewardenepura,001C,exact,,COP2122-003
+2021/2022,MEDICINE,University of Kelaniya,001D,exact,,COP2122-004
+2021/2022,MEDICINE,University of Jaffna,001E,exact,,COP2122-005
+2021/2022,MEDICINE,University of Ruhuna,001F,exact,,COP2122-006
+2021/2022,MEDICINE,University of Moratuwa,001G,exact,,COP2122-007
+2021/2022,MEDICINE,"Eastern University, Sri Lanka",001H,exact,,COP2122-008
+2021/2022,MEDICINE,Rajarata University of Sri Lanka,001K,exact,,COP2122-009
+2021/2022,MEDICINE,Sabaragamuwa University of Sri Lanka,001L,exact,,COP2122-010
+2021/2022,MEDICINE,Wayamba University of Sri Lanka,001M,exact,,COP2122-011
+2021/2022,DENTAL SURGERY,University of Peradeniya,002B,exact,,COP2122-012
+2021/2022,DENTAL SURGERY,University of Sri Jayewardenepura,002C,exact,,COP2122-013
+2021/2022,VETERINARY SCIENCE,University of Peradeniya,003B,exact,,COP2122-014
+2021/2022,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,058A,exact,,COP2122-015
+2021/2022,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,039B,exact,,COP2122-016
+2021/2022,AGRICULTURE,University of Jaffna,004E,exact,,COP2122-017
+2021/2022,AGRICULTURE,"Eastern University, Sri Lanka",004H,exact,,COP2122-018
+2021/2022,AGRICULTURE,Rajarata University of Sri Lanka,004K,exact,,COP2122-019
+2021/2022,AGRICULTURE,Sabaragamuwa University of Sri Lanka,004L,exact,,COP2122-020
+2021/2022,AGRICULTURE,Wayamba University of Sri Lanka,004M,exact,,COP2122-021
+2021/2022,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,005M,exact,,COP2122-022
+2021/2022,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,035B,exact,,COP2122-023
+2021/2022,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,035C,exact,,COP2122-024
+2021/2022,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,035L,exact,,COP2122-025
+2021/2022,BIOLOGICAL SCIENCE,University of Colombo,006A,exact,,COP2122-026
+2021/2022,BIOLOGICAL SCIENCE,University of Peradeniya,006B,exact,,COP2122-027
+2021/2022,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,006C,exact,,COP2122-028
+2021/2022,BIOLOGICAL SCIENCE,University of Kelaniya,006D,exact,,COP2122-029
+2021/2022,BIOLOGICAL SCIENCE,University of Jaffna,006E,exact,,COP2122-030
+2021/2022,BIOLOGICAL SCIENCE,University of Ruhuna,006F,exact,,COP2122-031
+2021/2022,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",006H,exact,,COP2122-032
+2021/2022,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,006J,exact,,COP2122-033
+2021/2022,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,007K,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2122-034
+2021/2022,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,007L,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2122-035
+2021/2022,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",007R,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R,COP2122-036
+2021/2022,ENGINEERING,University of Peradeniya,008B,exact,,COP2122-037
+2021/2022,ENGINEERING,University of Sri Jayewardenepura,008C,exact,,COP2122-038
+2021/2022,ENGINEERING,University of Jaffna,008E,exact,,COP2122-039
+2021/2022,ENGINEERING,University of Ruhuna,008F,exact,,COP2122-040
+2021/2022,ENGINEERING,University of Moratuwa,008G,exact,,COP2122-041
+2021/2022,ENGINEERING,South Eastern University of Sri Lanka,008J,exact,,COP2122-042
+2021/2022,ENGINEERING (EM),University of Moratuwa,009G,exact,,COP2122-043
+2021/2022,ENGINEERING (TM),University of Moratuwa,010G,exact,,COP2122-044
+2021/2022,QUANTITY SURVEYING,University of Moratuwa,011G,exact,,COP2122-045
+2021/2022,COMPUTER SCIENCE,University of Kelaniya,012D,exact,,COP2122-046
+2021/2022,COMPUTER SCIENCE,University of Jaffna,012E,exact,,COP2122-047
+2021/2022,COMPUTER SCIENCE,University of Ruhuna,012F,exact,,COP2122-048
+2021/2022,COMPUTER SCIENCE,University of Colombo School of Computing,012T,exact,,COP2122-049
+2021/2022,COMPUTER SCIENCE,Eastern University - Trincomalee Campus,012W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2122-050
+2021/2022,COMPUTER SCIENCE,University of Sri Jayewardenepura,012C,exact,,COP2122-051
+2021/2022,PHYSICAL SCIENCE,University of Colombo,013A,exact,,COP2122-052
+2021/2022,PHYSICAL SCIENCE,University of Peradeniya,013B,exact,,COP2122-053
+2021/2022,PHYSICAL SCIENCE,University of Sri Jayewardenepura,013C,exact,,COP2122-054
+2021/2022,PHYSICAL SCIENCE,University of Kelaniya,013D,exact,,COP2122-055
+2021/2022,PHYSICAL SCIENCE,University of Jaffna,013E,exact,,COP2122-056
+2021/2022,PHYSICAL SCIENCE,University of Ruhuna,013F,exact,,COP2122-057
+2021/2022,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",013H,exact,,COP2122-058
+2021/2022,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,013J,exact,,COP2122-059
+2021/2022,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,014L,exact,,COP2122-060
+2021/2022,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,015K,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2122-061
+2021/2022,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,015L,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2122-062
+2021/2022,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,015M,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2122-063
+2021/2022,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",015R,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015),COP2122-064
+2021/2022,APPLIED SCIENCES (PHY.SC),Eastern University - Trincomalee Campus,015W,manual-judgement,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015)",COP2122-065
+2021/2022,MANAGEMENT,University of Colombo,016A,exact,,COP2122-066
+2021/2022,MANAGEMENT,University of Peradeniya,016B,exact,,COP2122-067
+2021/2022,MANAGEMENT,University of Sri Jayewardenepura,016C,exact,,COP2122-068
+2021/2022,MANAGEMENT,University of Kelaniya,016D,exact,,COP2122-069
+2021/2022,MANAGEMENT,University of Jaffna,016E,exact,,COP2122-070
+2021/2022,MANAGEMENT,University of Ruhuna,016F,exact,,COP2122-071
+2021/2022,MANAGEMENT,"Eastern University, Sri Lanka",016H,exact,,COP2122-072
+2021/2022,MANAGEMENT,South Eastern University of Sri Lanka,016J,exact,,COP2122-073
+2021/2022,MANAGEMENT,Rajarata University of Sri Lanka,016K,exact,,COP2122-074
+2021/2022,MANAGEMENT,Sabaragamuwa University of Sri Lanka,016L,exact,,COP2122-075
+2021/2022,MANAGEMENT,Wayamba University of Sri Lanka,016M,exact,,COP2122-076
+2021/2022,ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,017C,manual-judgement,"renamed: 017C 'ESTATE MANAGEMENT & VALUATION' (handbook 2020/21 p147) = 017C 'REAL ESTATE MANAGEMENT AND VALUATION' (handbook 2022/23 p147, 2025/26)",COP2122-077
+2021/2022,COMMERCE,University of Sri Jayewardenepura,018C,exact,,COP2122-078
+2021/2022,COMMERCE,University of Kelaniya,018D,exact,,COP2122-079
+2021/2022,COMMERCE,University of Jaffna,018E,exact,,COP2122-080
+2021/2022,COMMERCE,"Eastern University, Sri Lanka",018H,exact,,COP2122-081
+2021/2022,COMMERCE,South Eastern University of Sri Lanka,018J,exact,,COP2122-082
+2021/2022,MANAGEMENT (PUBLIC) HONOURS,University of Sri Jayewardenepura,028C,manual-judgement,renamed: 028C 'MANAGEMENT (PUBLIC) HONOURS' (handbooks 2020/21-2023/24) = 028C 'MANAGEMENT AND PUBLIC POLICY' (2025/26; printed so in 2024/25 COP),COP2122-083
+2021/2022,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,077C,exact,,COP2122-084
+2021/2022,FINANCIAL ENGINEERING,University of Kelaniya,110D,exact,,COP2122-085
+2021/2022,BANKING & INSURANCE,"University of Vavuniya, Sri Lanka",133R,normalised,,COP2122-086
+2021/2022,LAW,University of Colombo,025A,exact,,COP2122-087
+2021/2022,LAW,University of Peradeniya,025B,exact,,COP2122-088
+2021/2022,LAW,University of Jaffna,025E,exact,,COP2122-089
+2021/2022,ARTS,University of Colombo,019A,exact,,COP2122-090
+2021/2022,ARTS,University of Peradeniya,019B,exact,,COP2122-091
+2021/2022,ARTS,University of Sri Jayewardenepura,019C,exact,,COP2122-092
+2021/2022,ARTS,University of Kelaniya,019D,exact,,COP2122-093
+2021/2022,ARTS,University of Jaffna,019E,exact,,COP2122-094
+2021/2022,ARTS,University of Ruhuna,019F,exact,,COP2122-095
+2021/2022,ARTS,"Eastern University, Sri Lanka",019H,exact,,COP2122-096
+2021/2022,ARTS,South Eastern University of Sri Lanka,019J,exact,,COP2122-097
+2021/2022,ARTS,Rajarata University of Sri Lanka,019K,exact,,COP2122-098
+2021/2022,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,020S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2122-099
+2021/2022,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,041S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'",COP2122-100
+2021/2022,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota A; Arts Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2122-101
+2021/2022,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota B; Commerce Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code,COP2122-102
+2021/2022,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,128C,exact,,COP2122-103
+2021/2022,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,129C,exact,,COP2122-104
+2021/2022,URBAN BIORESOURCES,University of Sri Jayewardenepura,130C,normalised,,COP2122-105
+2021/2022,SOCIAL WORK,University of Peradeniya,112B,exact,,COP2122-106
+2021/2022,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,114U,exact,,COP2122-107
+2021/2022,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2122-108
+2021/2022,MANAGEMENT STUDIES (TV) - A [Commerce Stream],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2122-109
+2021/2022,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code,COP2122-110
+2021/2022,MANAGEMENT STUDIES (TV) - B [Any subject combination],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code",COP2122-111
+2021/2022,COMMUNICATION STUDIES,Eastern University -Trincomalee Campus,029W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2122-112
+2021/2022,FINANCIAL ECONOMICS,University of Sri Jayewardenepura,131C,exact,,COP2122-113
+2021/2022,CREATIVE MUSIC TECHNOLOGY & PRODUCTION,University of Sri Jayewardenepura,134C,normalised,,COP2122-114
+2021/2022,PEACE & CONFLICT RESOLUTION,University of Kelaniya,031D,normalised,,COP2122-115
+2021/2022,ISLAMIC STUDIES,South Eastern University of Sri Lanka,063J,exact,,COP2122-116
+2021/2022,ARABIC LANGUAGE,South Eastern University of Sri Lanka,084J,exact,,COP2122-117
+2021/2022,ARCHITECTURE,University of Moratuwa,023G,exact,,COP2122-118
+2021/2022,DESIGN,University of Moratuwa,024G,exact,,COP2122-119
+2021/2022,LANDSCAPE ARCHITECTURE,University of Moratuwa,097G,exact,,COP2122-120
+2021/2022,TOWN & COUNTRY PLANNING,University of Moratuwa,030G,manual-judgement,renamed: 030G 'TOWN & COUNTRY PLANNING' (handbooks 2020/21-2023/24) = 030G 'URBAN INFORMATICS AND PLANNING' (2025/26; printed so in 2024/25 COP),COP2122-121
+2021/2022,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,034G,exact,,COP2122-122
+2021/2022,ARTIFICIAL INTELLIGENCE,University of Moratuwa,117G,exact,,COP2122-123
+2021/2022,INFORMATION TECHNOLOGY (IT),University of Moratuwa,026G,exact,,COP2122-124
+2021/2022,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,091G,exact,,COP2122-125
+2021/2022,FACILITIES MANAGEMENT,University of Moratuwa,056G,exact,,COP2122-126
+2021/2022,TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE),University of Moratuwa,057G,exact,,COP2122-127
+2021/2022,BUSINESS SCIENCE,University of Moratuwa,109G,exact,,COP2122-128
+2021/2022,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT),University of Kelaniya,027D,exact,,COP2122-129
+2021/2022,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,059A,exact,,COP2122-130
+2021/2022,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,113F,exact,,COP2122-131
+2021/2022,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,060B,exact,,COP2122-132
+2021/2022,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,111B,exact,,COP2122-133
+2021/2022,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,038K,exact,,COP2122-134
+2021/2022,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",038R,exact,,COP2122-135
+2021/2022,INFORMATION SYSTEMS,University of Colombo School of Computing,096T,exact,,COP2122-136
+2021/2022,INFORMATION SYSTEMS,University of Sri Jayewardenepura,096C,exact,,COP2122-137
+2021/2022,SOFTWARE ENGINEERING,University of Kelaniya,099D,exact,,COP2122-138
+2021/2022,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,099L,exact,,COP2122-139
+2021/2022,SOFTWARE ENGINEERING,University of Sri Jayewardenepura,099C,exact,,COP2122-140
+2021/2022,AYURVEDIC MEDICINE & SURGERY,Institute of Indigenous Medicine,032A,manual-judgement,"Institute of Indigenous Medicine = University of Colombo: uni-codes 032N/033N (handbook 2020/21 p148) became 032A/033A 'UNIVERSITY OF COLOMBO' (handbook 2022/23 p148); renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2122-141
+2021/2022,AYURVEDIC MEDICINE & SURGERY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",032P,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150",COP2122-142
+2021/2022,UNANI MEDICINE & SURGERY,Institute of Indigenous Medicine,033A,manual-judgement,Institute of Indigenous Medicine = University of Colombo: uni-codes 032N/033N (handbook 2020/21 p148) became 032A/033A 'UNIVERSITY OF COLOMBO' (handbook 2022/23 p148),COP2122-143
+2021/2022,SIDDHA MEDICINE & SURGERY,University of Jaffna,036E,normalised,,COP2122-144
+2021/2022,SIDDHA MEDICINE & SURGERY,Eastern University - Trincomalee Campus,036W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'",COP2122-145
+2021/2022,INDIGENOUS MEDICINAL RESOURCES,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-146
+2021/2022,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-147
+2021/2022,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-148
+2021/2022,BIOMEDICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-149
+2021/2022,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-150
+2021/2022,YOGA AND PARAPSYCHOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-151
+2021/2022,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md)",COP2122-152
+2021/2022,HEALTH PROMOTION,Rajarata University of Sri Lanka,050K,exact,,COP2122-153
+2021/2022,NURSING,University of Colombo,037A,exact,,COP2122-154
+2021/2022,NURSING,University of Peradeniya,037B,exact,,COP2122-155
+2021/2022,NURSING,University of Sri Jayewardenepura,037C,exact,,COP2122-156
+2021/2022,NURSING,University of Jaffna,037E,exact,,COP2122-157
+2021/2022,NURSING,University of Ruhuna,037F,exact,,COP2122-158
+2021/2022,NURSING,"Eastern University, Sri Lanka",037H,exact,,COP2122-159
+2021/2022,PHARMACY,University of Peradeniya,051B,exact,,COP2122-160
+2021/2022,PHARMACY,University of Sri Jayewardenepura,051C,exact,,COP2122-161
+2021/2022,PHARMACY,University of Jaffna,051E,exact,,COP2122-162
+2021/2022,PHARMACY,University of Ruhuna,051F,exact,,COP2122-163
+2021/2022,MEDICAL LABORATORY SCIENCES,University of Peradeniya,052B,exact,,COP2122-164
+2021/2022,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,052C,exact,,COP2122-165
+2021/2022,MEDICAL LABORATORY SCIENCES,University of Jaffna,052E,exact,,COP2122-166
+2021/2022,MEDICAL LABORATORY SCIENCES,University of Ruhuna,052F,exact,,COP2122-167
+2021/2022,RADIOGRAPHY,University of Peradeniya,053B,exact,,COP2122-168
+2021/2022,PHYSIOTHERAPY,University of Colombo,054A,exact,,COP2122-169
+2021/2022,PHYSIOTHERAPY,University of Peradeniya,054B,exact,,COP2122-170
+2021/2022,OCCUPATIONAL THERAPY,University of Kelaniya,115D,exact,,COP2122-171
+2021/2022,OPTOMETRY,University of Sri Jayewardenepura,116C,exact,,COP2122-172
+2021/2022,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,055D,exact,,COP2122-173
+2021/2022,APPLIED CHEMISTRY,University of Kelaniya,118D,exact,,COP2122-174
+2021/2022,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,119D,exact,,COP2122-175
+2021/2022,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,127D,exact,,COP2122-176
+2021/2022,FISHERIES & MARINE SCIENCES,University of Ruhuna,062F,exact,,COP2122-177
+2021/2022,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,106F,exact,,COP2122-178
+2021/2022,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,086B,exact,,COP2122-179
+2021/2022,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,087M,exact,,COP2122-180
+2021/2022,FOOD BUSINESS MANAGEMENT [Biological / Physical Science Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Biological / Physical Science Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2122-181
+2021/2022,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,079J,normalised,,COP2122-182
+2021/2022,COMPUTING & INFORMATION SYSTEMS,Sabaragamuwa University of Sri Lanka,,,"080L 'COMPUTING & INFORMATION SYSTEMS' (Sabaragamuwa) has no 2025/26 code; it co-existed with 096L 'INFORMATION SYSTEMS' in handbook 2022/23, so it is a different course",COP2122-183
+2021/2022,PHYSICAL EDUCATION,University of Jaffna,081E,exact,,COP2122-184
+2021/2022,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,081L,exact,,COP2122-185
+2021/2022,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,082C,exact,,COP2122-186
+2021/2022,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,,,"082D 'SPORTS SCIENCE & MANAGEMENT' (Kelaniya) has no 2025/26 uni-code; 2025/26 lists a different code 141D 'SPORTS SCIENCE' (Kelaniya). Possible successor, not confirmed, not mapped",COP2122-187
+2021/2022,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,082L,exact,,COP2122-188
+2021/2022,SPEECH AND HEARING SCIENCES,University of Kelaniya,083D,exact,,COP2122-189
+2021/2022,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,092K,exact,,COP2122-190
+2021/2022,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,092L,exact,,COP2122-191
+2021/2022,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,093F,exact,,COP2122-192
+2021/2022,AGRI BUSINESS MANAGEMENT,University of Ruhuna,094F,normalised,,COP2122-193
+2021/2022,GREEN TECHNOLOGY,University of Ruhuna,095F,exact,,COP2122-194
+2021/2022,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,064U,exact,,COP2122-195
+2021/2022,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,065U,exact,,COP2122-196
+2021/2022,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,066U,exact,,COP2122-197
+2021/2022,ANIMAL PRODUCTION AND FOOD TECHNOLOGY,Uva Wellassa University of Sri Lanka,067U,exact,,COP2122-198
+2021/2022,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,073U,exact,,COP2122-199
+2021/2022,TEA TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,,,"074U discontinued (absent from 2022/23 and 2025/26 lists); 135U 'PLANTATION MANAGEMENT AND TECHNOLOGY' appears from 2022/23 but no code continuity, not mapped",COP2122-200
+2021/2022,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,075U,exact,,COP2122-201
+2021/2022,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,076U,exact,,COP2122-202
+2021/2022,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,088U,exact,,COP2122-203
+2021/2022,PALM AND LATEX TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,,,"089U discontinued (absent from 2025/26 list); no code continuity with 135U, not mapped",COP2122-204
+2021/2022,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,090U,exact,,COP2122-205
+2021/2022,ENGLISH LANGUAGE & APPLIED LINGUISTICS,Uva Wellassa University of Sri Lanka,132U,exact,,COP2122-206
+2021/2022,ENGINEERING TECHNOLOGY (ET),University of Colombo,102A,exact,,COP2122-207
+2021/2022,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,102C,exact,,COP2122-208
+2021/2022,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,102D,exact,,COP2122-209
+2021/2022,ENGINEERING TECHNOLOGY (ET),University of Jaffna,102E,exact,,COP2122-210
+2021/2022,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,102F,exact,,COP2122-211
+2021/2022,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,102K,exact,,COP2122-212
+2021/2022,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,102L,exact,,COP2122-213
+2021/2022,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,102M,exact,,COP2122-214
+2021/2022,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,102U,exact,,COP2122-215
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,103A,exact,,COP2122-216
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,103C,exact,,COP2122-217
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,103E,exact,,COP2122-218
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,103F,exact,,COP2122-219
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",103H,exact,,COP2122-220
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,103J,exact,,COP2122-221
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,103K,exact,,COP2122-222
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,103L,exact,,COP2122-223
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,103M,exact,,COP2122-224
+2021/2022,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,103U,exact,,COP2122-225
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,104A,exact,,COP2122-226
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,104C,exact,,COP2122-227
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,104D,exact,,COP2122-228
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,104F,exact,,COP2122-229
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,104J,exact,,COP2122-230
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,104K,exact,,COP2122-231
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",104R,exact,,COP2122-232
+2021/2022,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,104U,exact,,COP2122-233
+2021/2022,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,108C,exact,,COP2122-234
+2021/2022,PHYSICAL SCIENCE -ICT,University of Kelaniya,108D,exact,,COP2122-235
+2021/2022,TRANSLATION STUDIES,University of Kelaniya,098D,exact,,COP2122-236
+2021/2022,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,098L,exact,,COP2122-237
+2021/2022,TRANSLATION STUDIES,University of Jaffna,098E,exact,,COP2122-238
+2021/2022,TRANSLATION STUDIES,"Eastern University, Sri Lanka",098H,exact,,COP2122-239
+2021/2022,FILM & TELEVISION STUDIES,University of Kelaniya,100D,exact,,COP2122-240
+2021/2022,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",101R,exact,,COP2122-241
+2021/2022,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,105C,exact,,COP2122-242
+2021/2022,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,105D,exact,,COP2122-243
+2021/2022,VISUAL ARTS,University of the Visual & Performing Arts,085Z,exact,,COP2122-244
+2021/2022,MUSIC,University of the Visual & Performing Arts,068Z,exact,,COP2122-245
+2021/2022,DANCE,University of the Visual & Performing Arts,069Z,exact,,COP2122-246
+2021/2022,DRAMA & THEATRE,University of the Visual & Performing Arts,071Z,exact,,COP2122-247
+2021/2022,ART & DESIGN,Ramanathan Academy of Fine Arts,070E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149),COP2122-248
+2021/2022,MUSIC,Ramanathan Academy of Fine Arts,068E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149),COP2122-249
+2021/2022,DANCE,Ramanathan Academy of Fine Arts,069E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149),COP2122-250
+2021/2022,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,072Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2122-251
+2021/2022,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,068Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2122-252
+2021/2022,DANCE,Swami Vipulananda Institute of Aesthetic Studies,069Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2122-253
+2021/2022,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,071Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI)",COP2122-254
+2021/2022,FOOD BUSINESS MANAGEMENT [Commerce Stream],Sabaragamuwa University of Sri Lanka,107L,normalised,stream/sub-quota variant 'Commerce Stream' of 'FOOD BUSINESS MANAGEMENT'; several historical offerings share this uni-code,COP2122-255
+2020/2021,MEDICINE,University of Colombo,001A,exact,same offering in new- and old-syllabus tables,COP2021N-001;COP2021O-001
+2020/2021,MEDICINE,University of Peradeniya,001B,exact,same offering in new- and old-syllabus tables,COP2021N-002;COP2021O-002
+2020/2021,MEDICINE,University of Sri Jayewardenepura,001C,exact,same offering in new- and old-syllabus tables,COP2021N-003;COP2021O-003
+2020/2021,MEDICINE,University of Kelaniya,001D,exact,same offering in new- and old-syllabus tables,COP2021N-004;COP2021O-004
+2020/2021,MEDICINE,University of Jaffna,001E,exact,same offering in new- and old-syllabus tables,COP2021N-005;COP2021O-005
+2020/2021,MEDICINE,University of Ruhuna,001F,exact,same offering in new- and old-syllabus tables,COP2021N-006;COP2021O-006
+2020/2021,MEDICINE,University of Moratuwa,001G,exact,same offering in new- and old-syllabus tables,COP2021N-007;COP2021O-007
+2020/2021,MEDICINE,"Eastern University, Sri Lanka",001H,exact,same offering in new- and old-syllabus tables,COP2021N-008;COP2021O-008
+2020/2021,MEDICINE,Rajarata University of Sri Lanka,001K,exact,same offering in new- and old-syllabus tables,COP2021N-009;COP2021O-009
+2020/2021,MEDICINE,Sabaragamuwa University of Sri Lanka,001L,exact,same offering in new- and old-syllabus tables,COP2021N-010;COP2021O-010
+2020/2021,MEDICINE,Wayamba University of Sri Lanka,001M,exact,same offering in new- and old-syllabus tables,COP2021N-011;COP2021O-011
+2020/2021,DENTAL SURGERY,University of Peradeniya,002B,exact,same offering in new- and old-syllabus tables,COP2021N-012;COP2021O-012
+2020/2021,DENTAL SURGERY,University of Sri Jayewardenepura,002C,exact,same offering in new- and old-syllabus tables,COP2021N-013;COP2021O-013
+2020/2021,VETERINARY SCIENCE,University of Peradeniya,003B,exact,same offering in new- and old-syllabus tables,COP2021N-014;COP2021O-014
+2020/2021,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,058A,exact,same offering in new- and old-syllabus tables,COP2021N-015;COP2021O-015
+2020/2021,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,039B,exact,same offering in new- and old-syllabus tables,COP2021N-016;COP2021O-016
+2020/2021,AGRICULTURE,University of Jaffna,004E,exact,same offering in new- and old-syllabus tables,COP2021N-017;COP2021O-017
+2020/2021,AGRICULTURE,"Eastern University, Sri Lanka",004H,exact,same offering in new- and old-syllabus tables,COP2021N-018;COP2021O-018
+2020/2021,AGRICULTURE,Rajarata University of Sri Lanka,004K,exact,same offering in new- and old-syllabus tables,COP2021N-019;COP2021O-019
+2020/2021,AGRICULTURE,Sabaragamuwa University of Sri Lanka,004L,exact,same offering in new- and old-syllabus tables,COP2021N-020;COP2021O-020
+2020/2021,AGRICULTURE,Wayamba University of Sri Lanka,004M,exact,same offering in new- and old-syllabus tables,COP2021N-021;COP2021O-021
+2020/2021,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,005M,exact,same offering in new- and old-syllabus tables,COP2021N-022;COP2021O-022
+2020/2021,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,035B,exact,same offering in new- and old-syllabus tables,COP2021N-023;COP2021O-023
+2020/2021,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,035C,exact,same offering in new- and old-syllabus tables,COP2021N-024;COP2021O-024
+2020/2021,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,035L,exact,same offering in new- and old-syllabus tables,COP2021N-025;COP2021O-025
+2020/2021,BIOLOGICAL SCIENCE,University of Colombo,006A,exact,same offering in new- and old-syllabus tables,COP2021N-026;COP2021O-026
+2020/2021,BIOLOGICAL SCIENCE,University of Peradeniya,006B,exact,same offering in new- and old-syllabus tables,COP2021N-027;COP2021O-027
+2020/2021,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,006C,exact,same offering in new- and old-syllabus tables,COP2021N-028;COP2021O-028
+2020/2021,BIOLOGICAL SCIENCE,University of Kelaniya,006D,exact,same offering in new- and old-syllabus tables,COP2021N-029;COP2021O-029
+2020/2021,BIOLOGICAL SCIENCE,University of Jaffna,006E,exact,same offering in new- and old-syllabus tables,COP2021N-030;COP2021O-030
+2020/2021,BIOLOGICAL SCIENCE,University of Ruhuna,006F,exact,same offering in new- and old-syllabus tables,COP2021N-031;COP2021O-031
+2020/2021,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",006H,exact,same offering in new- and old-syllabus tables,COP2021N-032;COP2021O-032
+2020/2021,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,006J,exact,same offering in new- and old-syllabus tables,COP2021N-033;COP2021O-033
+2020/2021,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,007K,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R; same offering in new- and old-syllabus tables,COP2021N-034;COP2021O-034
+2020/2021,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,007L,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R; same offering in new- and old-syllabus tables,COP2021N-035;COP2021O-035
+2020/2021,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",007R,manual-judgement,abbreviation of 'APPLIED SCIENCES (BIOLOGICAL SC.)' (007); same universities K/L/R; same offering in new- and old-syllabus tables,COP2021N-036;COP2021O-036
+2020/2021,ENGINEERING,University of Peradeniya,008B,exact,same offering in new- and old-syllabus tables,COP2021N-037;COP2021O-037
+2020/2021,ENGINEERING,University of Sri Jayewardenepura,008C,exact,same offering in new- and old-syllabus tables,COP2021N-038;COP2021O-038
+2020/2021,ENGINEERING,University of Jaffna,008E,exact,same offering in new- and old-syllabus tables,COP2021N-039;COP2021O-039
+2020/2021,ENGINEERING,University of Ruhuna,008F,exact,same offering in new- and old-syllabus tables,COP2021N-040;COP2021O-040
+2020/2021,ENGINEERING,University of Moratuwa,008G,exact,same offering in new- and old-syllabus tables,COP2021N-041;COP2021O-041
+2020/2021,ENGINEERING,South Eastern University of Sri Lanka,008J,exact,same offering in new- and old-syllabus tables,COP2021N-042;COP2021O-042
+2020/2021,ENGINEERING (EM),University of Moratuwa,009G,exact,same offering in new- and old-syllabus tables,COP2021N-043;COP2021O-043
+2020/2021,ENGINEERING (TM),University of Moratuwa,010G,exact,same offering in new- and old-syllabus tables,COP2021N-044;COP2021O-044
+2020/2021,QUANTITY SURVEYING,University of Moratuwa,011G,exact,same offering in new- and old-syllabus tables,COP2021N-045;COP2021O-045
+2020/2021,COMPUTER SCIENCE,University of Kelaniya,012D,exact,same offering in new- and old-syllabus tables,COP2021N-046;COP2021O-046
+2020/2021,COMPUTER SCIENCE,University of Jaffna,012E,exact,same offering in new- and old-syllabus tables,COP2021N-047;COP2021O-047
+2020/2021,COMPUTER SCIENCE,University of Ruhuna,012F,exact,same offering in new- and old-syllabus tables,COP2021N-048;COP2021O-048
+2020/2021,COMPUTER SCIENCE,University of Colombo School of Computing,012T,exact,same offering in new- and old-syllabus tables,COP2021N-049;COP2021O-049
+2020/2021,COMPUTER SCIENCE,Eastern University - Trincomalee Campus,012W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; same offering in new- and old-syllabus tables",COP2021N-050;COP2021O-050
+2020/2021,PHYSICAL SCIENCE,University of Colombo,013A,exact,same offering in new- and old-syllabus tables,COP2021N-051;COP2021O-051
+2020/2021,PHYSICAL SCIENCE,University of Peradeniya,013B,exact,same offering in new- and old-syllabus tables,COP2021N-052;COP2021O-052
+2020/2021,PHYSICAL SCIENCE,University of Sri Jayewardenepura,013C,exact,same offering in new- and old-syllabus tables,COP2021N-053;COP2021O-053
+2020/2021,PHYSICAL SCIENCE,University of Kelaniya,013D,exact,same offering in new- and old-syllabus tables,COP2021N-054;COP2021O-054
+2020/2021,PHYSICAL SCIENCE,University of Jaffna,013E,exact,same offering in new- and old-syllabus tables,COP2021N-055;COP2021O-055
+2020/2021,PHYSICAL SCIENCE,University of Ruhuna,013F,exact,same offering in new- and old-syllabus tables,COP2021N-056;COP2021O-056
+2020/2021,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",013H,exact,same offering in new- and old-syllabus tables,COP2021N-057;COP2021O-057
+2020/2021,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,013J,exact,same offering in new- and old-syllabus tables,COP2021N-058;COP2021O-058
+2020/2021,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,014L,exact,same offering in new- and old-syllabus tables,COP2021N-059;COP2021O-059
+2020/2021,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,015K,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015); same offering in new- and old-syllabus tables,COP2021N-060;COP2021O-060
+2020/2021,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,015L,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015); same offering in new- and old-syllabus tables,COP2021N-061;COP2021O-061
+2020/2021,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,015M,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015); same offering in new- and old-syllabus tables,COP2021N-062;COP2021O-062
+2020/2021,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",015R,manual-judgement,abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015); same offering in new- and old-syllabus tables,COP2021N-063;COP2021O-063
+2020/2021,APPLIED SCIENCES (PHY.SC),Eastern University - Trincomalee Campus,015W,manual-judgement,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; abbreviation of 'APPLIED SCIENCES (PHYSICAL SC.)' (015); same offering in new- and old-syllabus tables",COP2021N-064;COP2021O-064
+2020/2021,MANAGEMENT,University of Colombo,016A,exact,same offering in new- and old-syllabus tables,COP2021N-065;COP2021O-065
+2020/2021,MANAGEMENT,University of Peradeniya,016B,exact,same offering in new- and old-syllabus tables,COP2021N-066;COP2021O-066
+2020/2021,MANAGEMENT,University of Sri Jayewardenepura,016C,exact,same offering in new- and old-syllabus tables,COP2021N-067;COP2021O-067
+2020/2021,MANAGEMENT,University of Kelaniya,016D,exact,same offering in new- and old-syllabus tables,COP2021N-068;COP2021O-068
+2020/2021,MANAGEMENT,University of Jaffna,016E,exact,same offering in new- and old-syllabus tables,COP2021N-069;COP2021O-069
+2020/2021,MANAGEMENT,University of Ruhuna,016F,exact,same offering in new- and old-syllabus tables,COP2021N-070;COP2021O-070
+2020/2021,MANAGEMENT,"Eastern University, Sri Lanka",016H,exact,same offering in new- and old-syllabus tables,COP2021N-071;COP2021O-071
+2020/2021,MANAGEMENT,South Eastern University of Sri Lanka,016J,exact,same offering in new- and old-syllabus tables,COP2021N-072;COP2021O-072
+2020/2021,MANAGEMENT,Rajarata University of Sri Lanka,016K,exact,same offering in new- and old-syllabus tables,COP2021N-073;COP2021O-073
+2020/2021,MANAGEMENT,Sabaragamuwa University of Sri Lanka,016L,exact,same offering in new- and old-syllabus tables,COP2021N-074;COP2021O-074
+2020/2021,MANAGEMENT,Wayamba University of Sri Lanka,016M,exact,same offering in new- and old-syllabus tables,COP2021N-075;COP2021O-075
+2020/2021,ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,017C,manual-judgement,"renamed: 017C 'ESTATE MANAGEMENT & VALUATION' (handbook 2020/21 p147) = 017C 'REAL ESTATE MANAGEMENT AND VALUATION' (handbook 2022/23 p147, 2025/26); same offering in new- and old-syllabus tables",COP2021N-076;COP2021O-076
+2020/2021,COMMERCE,University of Sri Jayewardenepura,018C,exact,same offering in new- and old-syllabus tables,COP2021N-077;COP2021O-077
+2020/2021,COMMERCE,University of Kelaniya,018D,exact,same offering in new- and old-syllabus tables,COP2021N-078;COP2021O-078
+2020/2021,COMMERCE,University of Jaffna,018E,exact,same offering in new- and old-syllabus tables,COP2021N-079;COP2021O-079
+2020/2021,COMMERCE,"Eastern University, Sri Lanka",018H,exact,same offering in new- and old-syllabus tables,COP2021N-080;COP2021O-080
+2020/2021,COMMERCE,South Eastern University of Sri Lanka,018J,exact,same offering in new- and old-syllabus tables,COP2021N-081;COP2021O-081
+2020/2021,MANAGEMENT (PUBLIC) HONOURS,University of Sri Jayewardenepura,028C,manual-judgement,renamed: 028C 'MANAGEMENT (PUBLIC) HONOURS' (handbooks 2020/21-2023/24) = 028C 'MANAGEMENT AND PUBLIC POLICY' (2025/26; printed so in 2024/25 COP); same offering in new- and old-syllabus tables,COP2021N-082;COP2021O-082
+2020/2021,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,077C,exact,same offering in new- and old-syllabus tables,COP2021N-083;COP2021O-083
+2020/2021,FINANCIAL ENGINEERING,University of Kelaniya,110D,exact,same offering in new- and old-syllabus tables,COP2021N-084;COP2021O-084
+2020/2021,LAW,University of Colombo,025A,exact,same offering in new- and old-syllabus tables,COP2021N-085;COP2021O-085
+2020/2021,LAW,University of Peradeniya,025B,exact,same offering in new- and old-syllabus tables,COP2021N-086;COP2021O-086
+2020/2021,LAW,University of Jaffna,025E,exact,same offering in new- and old-syllabus tables,COP2021N-087;COP2021O-087
+2020/2021,ARTS,University of Colombo,019A,exact,same offering in new- and old-syllabus tables,COP2021N-088;COP2021O-088
+2020/2021,ARTS,University of Peradeniya,019B,exact,same offering in new- and old-syllabus tables,COP2021N-089;COP2021O-089
+2020/2021,ARTS,University of Sri Jayewardenepura,019C,exact,same offering in new- and old-syllabus tables,COP2021N-090;COP2021O-090
+2020/2021,ARTS,University of Kelaniya,019D,exact,same offering in new- and old-syllabus tables,COP2021N-091;COP2021O-091
+2020/2021,ARTS,University of Jaffna,019E,exact,same offering in new- and old-syllabus tables,COP2021N-092;COP2021O-092
+2020/2021,ARTS,University of Ruhuna,019F,exact,same offering in new- and old-syllabus tables,COP2021N-093;COP2021O-093
+2020/2021,ARTS,"Eastern University, Sri Lanka",019H,exact,same offering in new- and old-syllabus tables,COP2021N-094;COP2021O-094
+2020/2021,ARTS,South Eastern University of Sri Lanka,019J,exact,same offering in new- and old-syllabus tables,COP2021N-095;COP2021O-095
+2020/2021,ARTS,Rajarata University of Sri Lanka,019K,exact,same offering in new- and old-syllabus tables,COP2021N-096;COP2021O-096
+2020/2021,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,020S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'; same offering in new- and old-syllabus tables",COP2021N-097;COP2021O-097
+2020/2021,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,041S,normalised,"printed form of 'SRIPALEE CAMPUS, UNIVERSITY OF COLOMBO'; same offering in new- and old-syllabus tables",COP2021N-098;COP2021O-098
+2020/2021,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota A; Arts Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables,COP2021N-099;COP2021O-099
+2020/2021,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,021L,normalised,stream/sub-quota variant 'sub-quota B; Commerce Stream' of 'ARTS (SAB)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables,COP2021N-100;COP2021O-100
+2020/2021,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,128C,exact,same offering in new- and old-syllabus tables,COP2021N-101;COP2021O-101
+2020/2021,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,129C,exact,same offering in new- and old-syllabus tables,COP2021N-102;COP2021O-102
+2020/2021,URBAN BIORESOURCES,University of Sri Jayewardenepura,130C,normalised,same offering in new- and old-syllabus tables,COP2021N-103;COP2021O-103
+2020/2021,SOCIAL WORK,University of Peradeniya,112B,exact,same offering in new- and old-syllabus tables,COP2021N-104;COP2021O-104
+2020/2021,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,114U,exact,same offering in new- and old-syllabus tables,COP2021N-105;COP2021O-105
+2020/2021,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables,COP2021N-106;COP2021O-106
+2020/2021,MANAGEMENT STUDIES (TV) - A [Commerce Stream],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota A; Commerce Stream' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables",COP2021N-107;COP2021O-107
+2020/2021,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",022R,normalised,stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables,COP2021N-108;COP2021O-108
+2020/2021,MANAGEMENT STUDIES (TV) - B [Any subject combination],Eastern University -Trincomalee Campus,022W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; stream/sub-quota variant 'sub-quota B; Any subject combination' of 'MANAGEMENT STUDIES (TV)'; several historical offerings share this uni-code; same offering in new- and old-syllabus tables",COP2021N-109;COP2021O-109
+2020/2021,COMMUNICATION STUDIES,Eastern University -Trincomalee Campus,029W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; same offering in new- and old-syllabus tables",COP2021N-110;COP2021O-110
+2020/2021,PEACE & CONFLICT RESOLUTION,University of Kelaniya,031D,normalised,same offering in new- and old-syllabus tables,COP2021N-111;COP2021O-111
+2020/2021,ISLAMIC STUDIES,South Eastern University of Sri Lanka,063J,exact,same offering in new- and old-syllabus tables,COP2021N-112;COP2021O-112
+2020/2021,ARABIC LANGUAGE,South Eastern University of Sri Lanka,084J,exact,same offering in new- and old-syllabus tables,COP2021N-113;COP2021O-113
+2020/2021,ARCHITECTURE,University of Moratuwa,023G,exact,same offering in new- and old-syllabus tables,COP2021N-114;COP2021O-114
+2020/2021,DESIGN,University of Moratuwa,024G,exact,same offering in new- and old-syllabus tables,COP2021N-115;COP2021O-115
+2020/2021,LANDSCAPE ARCHITECTURE,University of Moratuwa,097G,exact,same offering in new- and old-syllabus tables,COP2021N-116;COP2021O-116
+2020/2021,TOWN & COUNTRY PLANNING,University of Moratuwa,030G,manual-judgement,renamed: 030G 'TOWN & COUNTRY PLANNING' (handbooks 2020/21-2023/24) = 030G 'URBAN INFORMATICS AND PLANNING' (2025/26; printed so in 2024/25 COP); same offering in new- and old-syllabus tables,COP2021N-117;COP2021O-117
+2020/2021,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,034G,exact,same offering in new- and old-syllabus tables,COP2021N-118;COP2021O-118
+2020/2021,ARTIFICIAL INTELLIGENCE,University of Moratuwa,117G,exact,same offering in new- and old-syllabus tables,COP2021N-119;COP2021O-119
+2020/2021,INFORMATION TECHNOLOGY (IT),University of Moratuwa,026G,exact,same offering in new- and old-syllabus tables,COP2021N-120;COP2021O-120
+2020/2021,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,091G,exact,same offering in new- and old-syllabus tables,COP2021N-121;COP2021O-121
+2020/2021,FACILITIES MANAGEMENT,University of Moratuwa,056G,exact,same offering in new- and old-syllabus tables,COP2021N-122;COP2021O-122
+2020/2021,TRANSPORT & LOGISTICS MANAGEMENT,University of Moratuwa,057G,manual-judgement,"renamed: 057G 'TRANSPORT & LOGISTICS MANAGEMENT' (handbook 2020/21 p149) = 057G 'TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE)' (handbook 2022/23 p149); degree title changed, so treat trend with care; same offering in new- and old-syllabus tables",COP2021N-123;COP2021O-123
+2020/2021,BUSINESS SCIENCE,University of Moratuwa,109G,exact,same offering in new- and old-syllabus tables,COP2021N-124;COP2021O-124
+2020/2021,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT),University of Kelaniya,027D,exact,same offering in new- and old-syllabus tables,COP2021N-125;COP2021O-125
+2020/2021,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,059A,exact,same offering in new- and old-syllabus tables,COP2021N-126;COP2021O-126
+2020/2021,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,113F,exact,same offering in new- and old-syllabus tables,COP2021N-127;COP2021O-127
+2020/2021,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,060B,exact,same offering in new- and old-syllabus tables,COP2021N-128;COP2021O-128
+2020/2021,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,111B,exact,same offering in new- and old-syllabus tables,COP2021N-129;COP2021O-129
+2020/2021,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,038K,exact,same offering in new- and old-syllabus tables,COP2021N-130;COP2021O-130
+2020/2021,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",038R,exact,same offering in new- and old-syllabus tables,COP2021N-131;COP2021O-131
+2020/2021,INFORMATION SYSTEMS,University of Colombo School of Computing,096T,exact,same offering in new- and old-syllabus tables,COP2021N-132;COP2021O-132
+2020/2021,SOFTWARE ENGINEERING,University of Kelaniya,099D,exact,same offering in new- and old-syllabus tables,COP2021N-133;COP2021O-133
+2020/2021,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,099L,exact,same offering in new- and old-syllabus tables,COP2021N-134;COP2021O-134
+2020/2021,AYURVEDIC MEDICINE & SURGERY,Institute of Indigenous Medicine,032A,manual-judgement,"Institute of Indigenous Medicine = University of Colombo: uni-codes 032N/033N (handbook 2020/21 p148) became 032A/033A 'UNIVERSITY OF COLOMBO' (handbook 2022/23 p148); renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150; same offering in new- and old-syllabus tables",COP2021N-135;COP2021O-135
+2020/2021,AYURVEDIC MEDICINE & SURGERY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",032P,manual-judgement,"renamed 'AYURVEDA MEDICINE AND SURGERY'; code 032 listed as 'AYURVEDIC MEDICINE AND SURGERY' in handbooks 2020/21 p148, 2022/23 p148, 2023/24 p150; same offering in new- and old-syllabus tables",COP2021N-136;COP2021O-136
+2020/2021,UNANI MEDICINE & SURGERY,Institute of Indigenous Medicine,033A,manual-judgement,Institute of Indigenous Medicine = University of Colombo: uni-codes 032N/033N (handbook 2020/21 p148) became 032A/033A 'UNIVERSITY OF COLOMBO' (handbook 2022/23 p148); same offering in new- and old-syllabus tables,COP2021N-137;COP2021O-137
+2020/2021,SIDDHA MEDICINE & SURGERY,University of Jaffna,036E,normalised,same offering in new- and old-syllabus tables,COP2021N-138;COP2021O-138
+2020/2021,SIDDHA MEDICINE & SURGERY,Eastern University - Trincomalee Campus,036W,normalised,"printed form of 'TRINCOMALEE CAMPUS, EASTERN UNIVERSITY, SRI LANKA'; same offering in new- and old-syllabus tables",COP2021N-139;COP2021O-139
+2020/2021,INDIGENOUS MEDICINAL RESOURCES,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-140;COP2021O-140
+2020/2021,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-141;COP2021O-141
+2020/2021,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-142;COP2021O-142
+2020/2021,BIOMEDICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-143;COP2021O-143
+2020/2021,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-144;COP2021O-144
+2020/2021,YOGA AND PARAPSYCHOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-145;COP2021O-145
+2020/2021,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",,,"Gampaha Wickramarachchi University course not in the 2025/26 uni-code list: selection suspended for 2025/26 (handbook 2025/26, see ../HANDBOOK_RULES.md); same offering in new- and old-syllabus tables",COP2021N-146;COP2021O-146
+2020/2021,HEALTH PROMOTION,Rajarata University of Sri Lanka,050K,exact,same offering in new- and old-syllabus tables,COP2021N-147;COP2021O-147
+2020/2021,NURSING,University of Colombo,037A,exact,same offering in new- and old-syllabus tables,COP2021N-148;COP2021O-148
+2020/2021,NURSING,University of Peradeniya,037B,exact,same offering in new- and old-syllabus tables,COP2021N-149;COP2021O-149
+2020/2021,NURSING,University of Sri Jayewardenepura,037C,exact,same offering in new- and old-syllabus tables,COP2021N-150;COP2021O-150
+2020/2021,NURSING,University of Jaffna,037E,exact,same offering in new- and old-syllabus tables,COP2021N-151;COP2021O-151
+2020/2021,NURSING,University of Ruhuna,037F,exact,same offering in new- and old-syllabus tables,COP2021N-152;COP2021O-152
+2020/2021,NURSING,"Eastern University, Sri Lanka",037H,exact,same offering in new- and old-syllabus tables,COP2021N-153;COP2021O-153
+2020/2021,PHARMACY,University of Peradeniya,051B,exact,same offering in new- and old-syllabus tables,COP2021N-154;COP2021O-154
+2020/2021,PHARMACY,University of Sri Jayewardenepura,051C,exact,same offering in new- and old-syllabus tables,COP2021N-155;COP2021O-155
+2020/2021,PHARMACY,University of Jaffna,051E,exact,same offering in new- and old-syllabus tables,COP2021N-156;COP2021O-156
+2020/2021,PHARMACY,University of Ruhuna,051F,exact,same offering in new- and old-syllabus tables,COP2021N-157;COP2021O-157
+2020/2021,MEDICAL LABORATORY SCIENCES,University of Peradeniya,052B,exact,same offering in new- and old-syllabus tables,COP2021N-158;COP2021O-158
+2020/2021,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,052C,exact,same offering in new- and old-syllabus tables,COP2021N-159;COP2021O-159
+2020/2021,MEDICAL LABORATORY SCIENCES,University of Jaffna,052E,exact,same offering in new- and old-syllabus tables,COP2021N-160;COP2021O-160
+2020/2021,MEDICAL LABORATORY SCIENCES,University of Ruhuna,052F,exact,same offering in new- and old-syllabus tables,COP2021N-161;COP2021O-161
+2020/2021,RADIOGRAPHY,University of Peradeniya,053B,exact,same offering in new- and old-syllabus tables,COP2021N-162;COP2021O-162
+2020/2021,PHYSIOTHERAPY,University of Colombo,054A,exact,same offering in new- and old-syllabus tables,COP2021N-163;COP2021O-163
+2020/2021,PHYSIOTHERAPY,University of Peradeniya,054B,exact,same offering in new- and old-syllabus tables,COP2021N-164;COP2021O-164
+2020/2021,OCCUPATIONAL THERAPY,University of Kelaniya,115D,exact,same offering in new- and old-syllabus tables,COP2021N-165;COP2021O-165
+2020/2021,OPTOMETRY,University of Sri Jayewardenepura,116C,exact,same offering in new- and old-syllabus tables,COP2021N-166;COP2021O-166
+2020/2021,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,055D,exact,same offering in new- and old-syllabus tables,COP2021N-167;COP2021O-167
+2020/2021,APPLIED CHEMISTRY,University of Kelaniya,118D,exact,same offering in new- and old-syllabus tables,COP2021N-168;COP2021O-168
+2020/2021,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,119D,exact,same offering in new- and old-syllabus tables,COP2021N-169;COP2021O-169
+2020/2021,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,127D,exact,same offering in new- and old-syllabus tables,COP2021N-170;COP2021O-170
+2020/2021,FISHERIES & MARINE SCIENCES,University of Ruhuna,062F,exact,same offering in new- and old-syllabus tables,COP2021N-171;COP2021O-171
+2020/2021,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,106F,exact,same offering in new- and old-syllabus tables,COP2021N-172;COP2021O-172
+2020/2021,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,086B,exact,same offering in new- and old-syllabus tables,COP2021N-173;COP2021O-173
+2020/2021,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,087M,exact,same offering in new- and old-syllabus tables,COP2021N-174;COP2021O-174
+2020/2021,FOOD BUSINESS MANAGEMENT,Sabaragamuwa University of Sri Lanka,107L,exact,same offering in new- and old-syllabus tables,COP2021N-175;COP2021O-175
+2020/2021,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,079J,normalised,same offering in new- and old-syllabus tables,COP2021N-176;COP2021O-176
+2020/2021,COMPUTING & INFORMATION SYSTEMS,Sabaragamuwa University of Sri Lanka,,,"080L 'COMPUTING & INFORMATION SYSTEMS' (Sabaragamuwa) has no 2025/26 code; it co-existed with 096L 'INFORMATION SYSTEMS' in handbook 2022/23, so it is a different course; same offering in new- and old-syllabus tables",COP2021N-177;COP2021O-177
+2020/2021,PHYSICAL EDUCATION,University of Jaffna,081E,exact,same offering in new- and old-syllabus tables,COP2021N-178;COP2021O-178
+2020/2021,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,081L,exact,same offering in new- and old-syllabus tables,COP2021N-179;COP2021O-179
+2020/2021,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,082C,exact,same offering in new- and old-syllabus tables,COP2021N-180;COP2021O-180
+2020/2021,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,,,"082D 'SPORTS SCIENCE & MANAGEMENT' (Kelaniya) has no 2025/26 uni-code; 2025/26 lists a different code 141D 'SPORTS SCIENCE' (Kelaniya). Possible successor, not confirmed, not mapped; same offering in new- and old-syllabus tables",COP2021N-181;COP2021O-181
+2020/2021,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,082L,exact,same offering in new- and old-syllabus tables,COP2021N-182;COP2021O-182
+2020/2021,SPEECH AND HEARING SCIENCES,University of Kelaniya,083D,exact,same offering in new- and old-syllabus tables,COP2021N-183;COP2021O-183
+2020/2021,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,092K,exact,same offering in new- and old-syllabus tables,COP2021N-184;COP2021O-184
+2020/2021,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,092L,exact,same offering in new- and old-syllabus tables,COP2021N-185;COP2021O-185
+2020/2021,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,093F,exact,same offering in new- and old-syllabus tables,COP2021N-186;COP2021O-186
+2020/2021,AGRI BUSINESS MANAGEMENT,University of Ruhuna,094F,normalised,same offering in new- and old-syllabus tables,COP2021N-187;COP2021O-187
+2020/2021,GREEN TECHNOLOGY,University of Ruhuna,095F,exact,same offering in new- and old-syllabus tables,COP2021N-188;COP2021O-188
+2020/2021,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,064U,exact,same offering in new- and old-syllabus tables,COP2021N-189;COP2021O-189
+2020/2021,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,065U,exact,same offering in new- and old-syllabus tables,COP2021N-190;COP2021O-190
+2020/2021,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,066U,exact,same offering in new- and old-syllabus tables,COP2021N-191;COP2021O-191
+2020/2021,ANIMAL SCIENCE,Uva Wellassa University of Sri Lanka,067U,manual-judgement,"renamed: 067U 'ANIMAL SCIENCE' (handbook 2020/21 p149) = 067U 'ANIMAL PRODUCTION AND FOOD TECHNOLOGY' (handbook 2022/23 p149, 2025/26); same offering in new- and old-syllabus tables",COP2021N-192;COP2021O-192
+2020/2021,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,073U,exact,same offering in new- and old-syllabus tables,COP2021N-193;COP2021O-193
+2020/2021,TEA TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,,,"074U discontinued (absent from 2022/23 and 2025/26 lists); 135U 'PLANTATION MANAGEMENT AND TECHNOLOGY' appears from 2022/23 but no code continuity, not mapped; same offering in new- and old-syllabus tables",COP2021N-194;COP2021O-194
+2020/2021,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,075U,exact,same offering in new- and old-syllabus tables,COP2021N-195;COP2021O-195
+2020/2021,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,076U,exact,same offering in new- and old-syllabus tables,COP2021N-196;COP2021O-196
+2020/2021,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,088U,exact,same offering in new- and old-syllabus tables,COP2021N-197;COP2021O-197
+2020/2021,PALM AND LATEX TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,,,"089U discontinued (absent from 2025/26 list); no code continuity with 135U, not mapped; same offering in new- and old-syllabus tables",COP2021N-198;COP2021O-198
+2020/2021,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,090U,exact,same offering in new- and old-syllabus tables,COP2021N-199;COP2021O-199
+2020/2021,ENGINEERING TECHNOLOGY (ET),University of Colombo,102A,exact,same offering in new- and old-syllabus tables,COP2021N-200;COP2021O-200
+2020/2021,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,102C,exact,same offering in new- and old-syllabus tables,COP2021N-201;COP2021O-201
+2020/2021,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,102D,exact,same offering in new- and old-syllabus tables,COP2021N-202;COP2021O-202
+2020/2021,ENGINEERING TECHNOLOGY (ET),University of Jaffna,102E,exact,same offering in new- and old-syllabus tables,COP2021N-203;COP2021O-203
+2020/2021,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,102F,exact,same offering in new- and old-syllabus tables,COP2021N-204;COP2021O-204
+2020/2021,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,102K,exact,same offering in new- and old-syllabus tables,COP2021N-205;COP2021O-205
+2020/2021,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,102L,exact,same offering in new- and old-syllabus tables,COP2021N-206;COP2021O-206
+2020/2021,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,102M,exact,same offering in new- and old-syllabus tables,COP2021N-207;COP2021O-207
+2020/2021,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,102U,exact,same offering in new- and old-syllabus tables,COP2021N-208;COP2021O-208
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,103A,exact,same offering in new- and old-syllabus tables,COP2021N-209;COP2021O-209
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,103C,exact,same offering in new- and old-syllabus tables,COP2021N-210;COP2021O-210
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,103E,exact,same offering in new- and old-syllabus tables,COP2021N-211;COP2021O-211
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,103F,exact,same offering in new- and old-syllabus tables,COP2021N-212;COP2021O-212
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",103H,exact,same offering in new- and old-syllabus tables,COP2021N-213;COP2021O-213
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,103J,exact,same offering in new- and old-syllabus tables,COP2021N-214;COP2021O-214
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,103K,exact,same offering in new- and old-syllabus tables,COP2021N-215;COP2021O-215
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,103L,exact,same offering in new- and old-syllabus tables,COP2021N-216;COP2021O-216
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,103M,exact,same offering in new- and old-syllabus tables,COP2021N-217;COP2021O-217
+2020/2021,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,103U,exact,same offering in new- and old-syllabus tables,COP2021N-218;COP2021O-218
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,104A,exact,same offering in new- and old-syllabus tables,COP2021N-219;COP2021O-219
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,104C,exact,same offering in new- and old-syllabus tables,COP2021N-220;COP2021O-220
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,104D,exact,same offering in new- and old-syllabus tables,COP2021N-221;COP2021O-221
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,104F,exact,same offering in new- and old-syllabus tables,COP2021N-222;COP2021O-222
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,104J,exact,same offering in new- and old-syllabus tables,COP2021N-223;COP2021O-223
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,104K,exact,same offering in new- and old-syllabus tables,COP2021N-224;COP2021O-224
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",104R,exact,same offering in new- and old-syllabus tables,COP2021N-225;COP2021O-225
+2020/2021,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,104U,exact,same offering in new- and old-syllabus tables,COP2021N-226;COP2021O-226
+2020/2021,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,108C,exact,same offering in new- and old-syllabus tables,COP2021N-227;COP2021O-227
+2020/2021,PHYSICAL SCIENCE -ICT,University of Kelaniya,108D,exact,same offering in new- and old-syllabus tables,COP2021N-228;COP2021O-228
+2020/2021,TRANSLATION STUDIES,University of Kelaniya,098D,exact,same offering in new- and old-syllabus tables,COP2021N-229;COP2021O-229
+2020/2021,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,098L,exact,same offering in new- and old-syllabus tables,COP2021N-230;COP2021O-230
+2020/2021,TRANSLATION STUDIES,University of Jaffna,098E,exact,same offering in new- and old-syllabus tables,COP2021N-231;COP2021O-231
+2020/2021,TRANSLATION STUDIES,"Eastern University, Sri Lanka",098H,exact,same offering in new- and old-syllabus tables,COP2021N-232;COP2021O-232
+2020/2021,FILM & TELEVISION STUDIES,University of Kelaniya,100D,exact,same offering in new- and old-syllabus tables,COP2021N-233;COP2021O-233
+2020/2021,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",101R,exact,same offering in new- and old-syllabus tables,COP2021N-234;COP2021O-234
+2020/2021,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,105C,exact,same offering in new- and old-syllabus tables,COP2021N-235;COP2021O-235
+2020/2021,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,105D,exact,same offering in new- and old-syllabus tables,COP2021N-236;COP2021O-236
+2020/2021,VISUAL ARTS,University of the Visual & Performing Arts,085Z,exact,same offering in new- and old-syllabus tables,COP2021N-237;COP2021O-237
+2020/2021,MUSIC,University of the Visual & Performing Arts,068Z,exact,same offering in new- and old-syllabus tables,COP2021N-238;COP2021O-238
+2020/2021,DANCE,University of the Visual & Performing Arts,069Z,exact,same offering in new- and old-syllabus tables,COP2021N-239;COP2021O-239
+2020/2021,DRAMA & THEATRE,University of the Visual & Performing Arts,071Z,exact,same offering in new- and old-syllabus tables,COP2021N-240;COP2021O-240
+2020/2021,ART & DESIGN,Ramanathan Academy of Fine Arts,070E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149); same offering in new- and old-syllabus tables,COP2021N-241;COP2021O-241
+2020/2021,MUSIC,Ramanathan Academy of Fine Arts,068E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149); same offering in new- and old-syllabus tables,COP2021N-242;COP2021O-242
+2020/2021,DANCE,Ramanathan Academy of Fine Arts,069E,manual-judgement,Ramanathan Academy of Fine Arts = University of Jaffna: uni-codes 068X/069X/070X (handbook 2020/21 p149) became 068E/069E/070E 'UNIVERSITY OF JAFFNA' (handbook 2022/23 p149); same offering in new- and old-syllabus tables,COP2021N-243;COP2021O-243
+2020/2021,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,072Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI); same offering in new- and old-syllabus tables",COP2021N-244;COP2021O-244
+2020/2021,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,068Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI); same offering in new- and old-syllabus tables",COP2021N-245;COP2021O-245
+2020/2021,DANCE,Swami Vipulananda Institute of Aesthetic Studies,069Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI); same offering in new- and old-syllabus tables",COP2021N-246;COP2021O-246
+2020/2021,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,071Y,normalised,"printed form of 'SWAMY VIPULANANDA INSTITUTE OF AESTHETIC STUDIES, EASTERN UNIVERSITY, SRI LANKA' (handbooks 2020/21-2022/23 also spell it SWAMI); same offering in new- and old-syllabus tables",COP2021N-247;COP2021O-247

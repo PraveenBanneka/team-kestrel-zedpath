@@ -1,0 +1,256 @@
+offering_id,course_code,course_name,university,all_island_merit_star,aptitude_test_hash,page_number,column_on_page,header_raw,x_center,n_value,n_nqc,distinct_cell_values
+COP2122-001,,MEDICINE,University of Colombo,0,0,1,1,MEDICINE | (University of Colombo),132.9,22,3,22
+COP2122-002,,MEDICINE,University of Peradeniya,0,0,1,2,MEDICINE | (University of Peradeniya),165.2,21,4,22
+COP2122-003,,MEDICINE,University of Sri Jayewardenepura,0,0,1,3,MEDICINE | (University of Sri Jayewardenepura),197.5,20,5,20
+COP2122-004,,MEDICINE,University of Kelaniya,0,0,1,4,MEDICINE | (University of Kelaniya),229.8,20,5,19
+COP2122-005,,MEDICINE,University of Jaffna,0,0,1,5,MEDICINE | (University of Jaffna),262.0,24,1,25
+COP2122-006,,MEDICINE,University of Ruhuna,0,0,1,6,MEDICINE | (University of Ruhuna),294.3,21,4,22
+COP2122-007,,MEDICINE,University of Moratuwa,0,0,1,7,MEDICINE | (University of Moratuwa),326.6,18,7,19
+COP2122-008,,MEDICINE,"Eastern University, Sri Lanka",0,0,1,8,"MEDICINE | (Eastern University, Sri Lanka)",358.9,11,14,12
+COP2122-009,,MEDICINE,Rajarata University of Sri Lanka,0,0,1,9,MEDICINE | (Rajarata University of Sri Lanka),391.2,20,5,21
+COP2122-010,,MEDICINE,Sabaragamuwa University of Sri Lanka,0,0,1,10,MEDICINE | (Sabaragamuwa University of Sri Lanka),423.5,16,9,17
+COP2122-011,,MEDICINE,Wayamba University of Sri Lanka,0,0,1,11,MEDICINE | (Wayamba University of Sri Lanka),455.7,17,8,18
+COP2122-012,,DENTAL SURGERY,University of Peradeniya,0,0,1,12,DENTAL SURGERY | (University of Peradeniya),488.0,22,3,23
+COP2122-013,,DENTAL SURGERY,University of Sri Jayewardenepura,0,0,1,13,DENTAL SURGERY | (University of Sri Jayewardenepura),520.3,10,15,11
+COP2122-014,,VETERINARY SCIENCE,University of Peradeniya,0,0,1,14,VETERINARY SCIENCE | (University of Peradeniya),552.5,25,0,24
+COP2122-015,,BIOCHEMISTRY & MOLECULAR BIOLOGY,University of Colombo,0,0,1,15,BIOCHEMISTRY & MOLECULAR BIOLOGY  | (University of Colombo),584.8,25,0,25
+COP2122-016,,AGRICULTURAL TECHNOLOGY & MANAGEMENT,University of Peradeniya,0,0,1,16,AGRICULTURAL TECHNOLOGY & MANAGEMENT | (University of Peradeniya),617.1,25,0,24
+COP2122-017,,AGRICULTURE,University of Jaffna,0,0,1,17,AGRICULTURE | (University of Jaffna),649.4,25,0,24
+COP2122-018,,AGRICULTURE,"Eastern University, Sri Lanka",0,0,1,18,"AGRICULTURE | (Eastern University, Sri Lanka)",681.7,24,1,25
+COP2122-019,,AGRICULTURE,Rajarata University of Sri Lanka,0,0,1,19,AGRICULTURE | (Rajarata University of Sri Lanka),713.9,22,3,23
+COP2122-020,,AGRICULTURE,Sabaragamuwa University of Sri Lanka,0,0,1,20,AGRICULTURE | (Sabaragamuwa University of Sri Lanka),746.2,19,6,19
+COP2122-021,,AGRICULTURE,Wayamba University of Sri Lanka,0,0,1,21,AGRICULTURE | (Wayamba University of Sri Lanka),778.5,19,6,20
+COP2122-022,,FOOD SCIENCE & NUTRITION,Wayamba University of Sri Lanka,0,0,1,22,FOOD SCIENCE & NUTRITION | (Wayamba University of Sri Lanka),810.8,25,0,25
+COP2122-023,,FOOD SCIENCE & TECHNOLOGY,University of Peradeniya,0,0,1,23,FOOD SCIENCE & TECHNOLOGY | (University of Peradeniya),843.1,12,13,13
+COP2122-024,,FOOD SCIENCE & TECHNOLOGY,University of Sri Jayewardenepura,0,0,1,24,FOOD SCIENCE & TECHNOLOGY | (University of Sri Jayewardenepura),875.4,13,12,13
+COP2122-025,,FOOD SCIENCE & TECHNOLOGY,Sabaragamuwa University of Sri Lanka,0,0,1,25,FOOD SCIENCE & TECHNOLOGY | (Sabaragamuwa University of Sri Lanka),907.6,23,2,24
+COP2122-026,,BIOLOGICAL SCIENCE,University of Colombo,0,0,1,26,BIOLOGICAL SCIENCE | (University of Colombo),939.9,14,11,15
+COP2122-027,,BIOLOGICAL SCIENCE,University of Peradeniya,0,0,1,27,BIOLOGICAL SCIENCE | (University of Peradeniya),972.2,18,7,17
+COP2122-028,,BIOLOGICAL SCIENCE,University of Sri Jayewardenepura,0,0,1,28,BIOLOGICAL SCIENCE | (University of Sri Jayewardenepura),1004.5,20,5,21
+COP2122-029,,BIOLOGICAL SCIENCE,University of Kelaniya,0,0,1,29,BIOLOGICAL SCIENCE | (University of Kelaniya),1036.8,19,6,20
+COP2122-030,,BIOLOGICAL SCIENCE,University of Jaffna,0,0,1,30,BIOLOGICAL SCIENCE | (University of Jaffna),1069.0,20,5,21
+COP2122-031,,BIOLOGICAL SCIENCE,University of Ruhuna,0,0,1,31,BIOLOGICAL SCIENCE | (University of Ruhuna),1101.3,19,6,20
+COP2122-032,,BIOLOGICAL SCIENCE,"Eastern University, Sri Lanka",0,0,1,32,"BIOLOGICAL SCIENCE | (Eastern University, Sri Lanka)",1133.6,19,6,20
+COP2122-033,,BIOLOGICAL SCIENCE,South Eastern University of Sri Lanka,0,0,2,1,BIOLOGICAL SCIENCE | (South Eastern University of Sri Lanka),132.9,18,7,19
+COP2122-034,,APPLIED SCIENCES (BIO.SC),Rajarata University of Sri Lanka,0,0,2,2,APPLIED SCIENCES (BIO.SC) | (Rajarata University of Sri Lanka),165.2,20,5,19
+COP2122-035,,APPLIED SCIENCES (BIO.SC),Sabaragamuwa University of Sri Lanka,0,0,2,3,APPLIED SCIENCES (BIO.SC) | (Sabaragamuwa University of Sri Lanka),197.5,13,12,14
+COP2122-036,,APPLIED SCIENCES (BIO.SC),"University of Vavuniya, Sri Lanka",0,0,2,4,"APPLIED SCIENCES (BIO.SC) | (University of Vavuniya, Sri Lanka)",229.8,20,5,21
+COP2122-037,,ENGINEERING,University of Peradeniya,0,0,2,5,ENGINEERING   | (University of Peradeniya),262.0,25,0,22
+COP2122-038,,ENGINEERING,University of Sri Jayewardenepura,0,0,2,6,ENGINEERING   | (University of Sri Jayewardenepura),294.3,17,8,17
+COP2122-039,,ENGINEERING,University of Jaffna,0,0,2,7,ENGINEERING   | (University of Jaffna),326.6,17,8,18
+COP2122-040,,ENGINEERING,University of Ruhuna,0,0,2,8,ENGINEERING   | (University of Ruhuna),358.9,24,1,25
+COP2122-041,,ENGINEERING,University of Moratuwa,0,0,2,9,ENGINEERING   | (University of Moratuwa),391.1,25,0,24
+COP2122-042,,ENGINEERING,South Eastern University of Sri Lanka,0,0,2,10,ENGINEERING   | (South Eastern University of Sri Lanka),423.5,10,15,11
+COP2122-043,,ENGINEERING (EM),University of Moratuwa,0,0,2,11,ENGINEERING  (EM)   | (University of Moratuwa),455.7,25,0,25
+COP2122-044,,ENGINEERING (TM),University of Moratuwa,0,0,2,12,ENGINEERING  (TM) | (University of Moratuwa),488.0,25,0,25
+COP2122-045,,QUANTITY SURVEYING,University of Moratuwa,0,0,2,13,QUANTITY SURVEYING   | (University of Moratuwa),520.2,25,0,25
+COP2122-046,,COMPUTER SCIENCE,University of Kelaniya,0,0,2,14,COMPUTER SCIENCE   | (University of Kelaniya),552.6,11,14,12
+COP2122-047,,COMPUTER SCIENCE,University of Jaffna,0,0,2,15,COMPUTER SCIENCE   | (University of Jaffna),584.8,16,9,17
+COP2122-048,,COMPUTER SCIENCE,University of Ruhuna,0,0,2,16,COMPUTER SCIENCE   | (University of Ruhuna),617.1,15,10,15
+COP2122-049,,COMPUTER SCIENCE,University of Colombo School of Computing,0,0,2,17,COMPUTER SCIENCE   | (University of Colombo School of Computing),649.4,15,10,16
+COP2122-050,,COMPUTER SCIENCE,Eastern University - Trincomalee Campus,0,0,2,18,COMPUTER SCIENCE   | (Eastern University - Trincomalee Campus),681.7,18,7,19
+COP2122-051,,COMPUTER SCIENCE,University of Sri Jayewardenepura,0,0,2,19,COMPUTER SCIENCE   | (University of Sri Jayewardenepura),714.0,11,14,11
+COP2122-052,,PHYSICAL SCIENCE,University of Colombo,0,0,2,20,PHYSICAL SCIENCE | (University of Colombo),746.2,14,11,15
+COP2122-053,,PHYSICAL SCIENCE,University of Peradeniya,0,0,2,21,PHYSICAL SCIENCE | (University of Peradeniya),778.5,18,7,17
+COP2122-054,,PHYSICAL SCIENCE,University of Sri Jayewardenepura,0,0,2,22,PHYSICAL SCIENCE | (University of Sri Jayewardenepura),810.8,16,9,15
+COP2122-055,,PHYSICAL SCIENCE,University of Kelaniya,0,0,2,23,PHYSICAL SCIENCE | (University of Kelaniya),843.1,19,6,20
+COP2122-056,,PHYSICAL SCIENCE,University of Jaffna,0,0,2,24,PHYSICAL SCIENCE | (University of Jaffna),875.3,22,3,23
+COP2122-057,,PHYSICAL SCIENCE,University of Ruhuna,0,0,2,25,PHYSICAL SCIENCE | (University of Ruhuna),907.6,20,5,18
+COP2122-058,,PHYSICAL SCIENCE,"Eastern University, Sri Lanka",0,0,2,26,"PHYSICAL SCIENCE | (Eastern University, Sri Lanka)",939.9,22,3,23
+COP2122-059,,PHYSICAL SCIENCE,South Eastern University of Sri Lanka,0,0,2,27,PHYSICAL SCIENCE | (South Eastern University of Sri Lanka),972.2,23,2,24
+COP2122-060,,SURVEYING SCIENCE,Sabaragamuwa University of Sri Lanka,0,0,2,28,SURVEYING SCIENCE | (Sabaragamuwa University of Sri Lanka),1004.5,25,0,25
+COP2122-061,,APPLIED SCIENCES (PHY.SC),Rajarata University of Sri Lanka,0,0,2,29,APPLIED SCIENCES  (PHY.SC) | (Rajarata University of Sri Lanka),1036.8,18,7,19
+COP2122-062,,APPLIED SCIENCES (PHY.SC),Sabaragamuwa University of Sri Lanka,0,0,2,30,APPLIED SCIENCES  (PHY.SC) | (Sabaragamuwa University of Sri Lanka),1069.1,13,12,12
+COP2122-063,,APPLIED SCIENCES (PHY.SC),Wayamba University of Sri Lanka,0,0,2,31,APPLIED SCIENCES  (PHY.SC) | (Wayamba University of Sri Lanka),1101.3,17,8,18
+COP2122-064,,APPLIED SCIENCES (PHY.SC),"University of Vavuniya, Sri Lanka",0,0,2,32,"APPLIED SCIENCES  (PHY.SC) | (University of Vavuniya, Sri Lanka)",1133.6,19,6,20
+COP2122-065,,APPLIED SCIENCES (PHY.SC),Eastern University - Trincomalee Campus,0,0,3,1,APPLIED SCIENCES  (PHY.SC) | (Eastern University - Trincomalee Campus),132.9,23,2,24
+COP2122-066,,MANAGEMENT,University of Colombo,0,0,3,2,MANAGEMENT | (University of Colombo),165.2,23,2,23
+COP2122-067,,MANAGEMENT,University of Peradeniya,0,0,3,3,MANAGEMENT | (University of Peradeniya),197.5,23,2,23
+COP2122-068,,MANAGEMENT,University of Sri Jayewardenepura,0,0,3,4,MANAGEMENT | (University of Sri Jayewardenepura),229.8,25,0,23
+COP2122-069,,MANAGEMENT,University of Kelaniya,0,0,3,5,MANAGEMENT | (University of Kelaniya),262.1,20,5,19
+COP2122-070,,MANAGEMENT,University of Jaffna,0,0,3,6,MANAGEMENT | (University of Jaffna),294.3,22,3,23
+COP2122-071,,MANAGEMENT,University of Ruhuna,0,0,3,7,MANAGEMENT | (University of Ruhuna),326.6,21,4,21
+COP2122-072,,MANAGEMENT,"Eastern University, Sri Lanka",0,0,3,8,"MANAGEMENT | (Eastern University, Sri Lanka)",358.9,19,6,20
+COP2122-073,,MANAGEMENT,South Eastern University of Sri Lanka,0,0,3,9,MANAGEMENT | (South Eastern University of Sri Lanka),391.2,16,9,17
+COP2122-074,,MANAGEMENT,Rajarata University of Sri Lanka,0,0,3,10,MANAGEMENT | (Rajarata University of Sri Lanka),423.4,20,5,19
+COP2122-075,,MANAGEMENT,Sabaragamuwa University of Sri Lanka,0,0,3,11,MANAGEMENT | (Sabaragamuwa University of Sri Lanka),455.7,21,4,21
+COP2122-076,,MANAGEMENT,Wayamba University of Sri Lanka,0,0,3,12,MANAGEMENT | (Wayamba University of Sri Lanka),488.0,17,8,17
+COP2122-077,,ESTATE MANAGEMENT & VALUATION,University of Sri Jayewardenepura,0,0,3,13,ESTATE MANAGEMENT & VALUATION | (University of Sri Jayewardenepura),520.3,25,0,25
+COP2122-078,,COMMERCE,University of Sri Jayewardenepura,0,0,3,14,COMMERCE | (University of Sri Jayewardenepura),552.6,18,7,19
+COP2122-079,,COMMERCE,University of Kelaniya,0,0,3,15,COMMERCE | (University of Kelaniya),584.8,19,6,20
+COP2122-080,,COMMERCE,University of Jaffna,0,0,3,16,COMMERCE | (University of Jaffna),617.1,18,7,19
+COP2122-081,,COMMERCE,"Eastern University, Sri Lanka",0,0,3,17,"COMMERCE | (Eastern University, Sri Lanka)",649.4,23,2,24
+COP2122-082,,COMMERCE,South Eastern University of Sri Lanka,0,0,3,18,COMMERCE | (South Eastern University of Sri Lanka),681.7,22,3,23
+COP2122-083,,MANAGEMENT (PUBLIC) HONOURS,University of Sri Jayewardenepura,0,0,3,19,MANAGEMENT (PUBLIC) HONOURS | (University of Sri Jayewardenepura),713.9,25,0,25
+COP2122-084,,BUSINESS INFORMATION SYSTEMS (HONOURS) (BIS),University of Sri Jayewardenepura,0,0,3,20,BUSINESS INFORMATION SYSTEMS  | (HONOURS) (BIS) | (University of Sri Jayewardenepura),746.2,25,0,25
+COP2122-085,,FINANCIAL ENGINEERING,University of Kelaniya,0,1,3,21,FINANCIAL ENGINEERING #  | (University of Kelaniya),778.5,22,3,23
+COP2122-086,,BANKING & INSURANCE,"University of Vavuniya, Sri Lanka",0,0,3,22,"BANKING & INSURANCE  | (University of Vavuniya, Sri Lanka)",810.8,25,0,25
+COP2122-087,,LAW,University of Colombo,0,0,3,23,LAW | (University of Colombo),843.1,22,3,21
+COP2122-088,,LAW,University of Peradeniya,0,0,3,24,LAW | (University of Peradeniya),875.4,20,5,21
+COP2122-089,,LAW,University of Jaffna,0,0,3,25,LAW | (University of Jaffna),907.6,25,0,25
+COP2122-090,,ARTS,University of Colombo,1,0,3,26,ARTS * | (University of Colombo),939.9,25,0,1
+COP2122-091,,ARTS,University of Peradeniya,1,0,3,27,ARTS * | (University of Peradeniya),972.2,25,0,1
+COP2122-092,,ARTS,University of Sri Jayewardenepura,1,0,3,28,ARTS * | (University of Sri Jayewardenepura),1004.5,25,0,1
+COP2122-093,,ARTS,University of Kelaniya,1,0,3,29,ARTS * | (University of Kelaniya),1036.8,25,0,1
+COP2122-094,,ARTS,University of Jaffna,1,0,3,30,ARTS * | (University of Jaffna),1069.0,25,0,1
+COP2122-095,,ARTS,University of Ruhuna,1,0,3,31,ARTS * | (University of Ruhuna),1101.3,25,0,1
+COP2122-096,,ARTS,"Eastern University, Sri Lanka",1,0,3,32,"ARTS * | (Eastern University, Sri Lanka)",1133.6,25,0,1
+COP2122-097,,ARTS,South Eastern University of Sri Lanka,1,0,4,1,ARTS * | (South Eastern University of Sri Lanka),132.9,25,0,1
+COP2122-098,,ARTS,Rajarata University of Sri Lanka,1,0,4,2,ARTS * | (Rajarata University of Sri Lanka),165.2,25,0,1
+COP2122-099,,ARTS (SP) / MASS MEDIA,University of Colombo - Sri Palee Campus,1,1,4,3,ARTS  (SP) / MASS MEDIA* # | (University of Colombo - Sri Palee Campus),197.5,25,0,1
+COP2122-100,,ARTS (SP) / PERFORMING ARTS,University of Colombo - Sri Palee Campus,1,1,4,4,ARTS (SP) / PERFORMING ARTS * # | (University of Colombo - Sri Palee Campus),229.8,25,0,1
+COP2122-101,,ARTS (SAB) - A [Arts Stream],Sabaragamuwa University of Sri Lanka,1,0,4,5,ARTS (SAB) - A * [Arts Stream] | (Sabaragamuwa University of Sri Lanka),262.0,25,0,1
+COP2122-102,,ARTS (SAB) - B [Commerce Stream],Sabaragamuwa University of Sri Lanka,1,0,4,6,ARTS (SAB) - B * [Commerce Stream] | (Sabaragamuwa University of Sri Lanka),294.3,25,0,1
+COP2122-103,,ARTS-INFORMATION TECHNOLOGY,University of Sri Jayewardenepura,1,0,4,7,ARTS-INFORMATION TECHNOLOGY *  | (University of Sri Jayewardenepura),326.6,25,0,1
+COP2122-104,,AQUATIC BIORESOURCES,University of Sri Jayewardenepura,0,0,4,8,AQUATIC BIORESOURCES  | (University of Sri Jayewardenepura),358.9,25,0,25
+COP2122-105,,URBAN BIORESOURCES,University of Sri Jayewardenepura,0,0,4,9,URBAN BIORESOURCES | (University of Sri Jayewardenepura),391.2,25,0,25
+COP2122-106,,SOCIAL WORK,University of Peradeniya,1,0,4,10,SOCIAL WORK * | (University of Peradeniya),423.4,25,0,1
+COP2122-107,,HUMAN RESOURCE DEVELOPMENT,Uva Wellassa University of Sri Lanka,0,0,4,11,HUMAN RESOURCE DEVELOPMENT | (Uva Wellassa University of Sri Lanka),455.7,25,0,24
+COP2122-108,,MANAGEMENT STUDIES (TV) - A [Commerce Stream],"University of Vavuniya, Sri Lanka",0,0,4,12,"MANAGEMENT STUDIES (TV) - A  | [Commerce Stream] | (University of Vavuniya, Sri Lanka)",488.0,16,9,17
+COP2122-109,,MANAGEMENT STUDIES (TV) - A [Commerce Stream],Eastern University -Trincomalee Campus,0,0,4,13,MANAGEMENT STUDIES (TV) - A  | [Commerce Stream] | (Eastern University -Trincomalee Campus),520.3,24,1,25
+COP2122-110,,MANAGEMENT STUDIES (TV) - B [Any subject combination],"University of Vavuniya, Sri Lanka",0,0,4,14,"MANAGEMENT STUDIES (TV) - B  | [Any subject combination] | (University of Vavuniya, Sri Lanka)",552.6,21,4,21
+COP2122-111,,MANAGEMENT STUDIES (TV) - B [Any subject combination],Eastern University -Trincomalee Campus,0,0,4,15,MANAGEMENT STUDIES (TV) - B  | [Any subject combination] | (Eastern University -Trincomalee Campus),584.8,25,0,25
+COP2122-112,,COMMUNICATION STUDIES,Eastern University -Trincomalee Campus,1,0,4,16,COMMUNICATION STUDIES * | (Eastern University -Trincomalee Campus),617.1,25,0,1
+COP2122-113,,FINANCIAL ECONOMICS,University of Sri Jayewardenepura,0,0,4,17,FINANCIAL ECONOMICS | (University of Sri Jayewardenepura),649.4,25,0,24
+COP2122-114,,CREATIVE MUSIC TECHNOLOGY & PRODUCTION,University of Sri Jayewardenepura,0,0,4,18,CREATIVE MUSIC TECHNOLOGY & PRODUCTION | (University of Sri Jayewardenepura),681.7,25,0,25
+COP2122-115,,PEACE & CONFLICT RESOLUTION,University of Kelaniya,1,0,4,19,PEACE & CONFLICT RESOLUTION * | (University of Kelaniya),713.9,25,0,1
+COP2122-116,,ISLAMIC STUDIES,South Eastern University of Sri Lanka,1,0,4,20,ISLAMIC STUDIES  * | (South Eastern University of Sri Lanka),746.2,25,0,1
+COP2122-117,,ARABIC LANGUAGE,South Eastern University of Sri Lanka,1,0,4,21,ARABIC  LANGUAGE * | (South Eastern University of Sri Lanka),778.5,25,0,1
+COP2122-118,,ARCHITECTURE,University of Moratuwa,0,1,4,22,ARCHITECTURE # | (University of Moratuwa),810.8,21,4,22
+COP2122-119,,DESIGN,University of Moratuwa,0,1,4,23,DESIGN # | (University of Moratuwa),843.1,17,8,18
+COP2122-120,,LANDSCAPE ARCHITECTURE,University of Moratuwa,0,1,4,24,LANDSCAPE ARCHITECTURE # | (University of Moratuwa),875.4,20,5,21
+COP2122-121,,TOWN & COUNTRY PLANNING,University of Moratuwa,0,0,4,25,TOWN & COUNTRY PLANNING | (University of Moratuwa),907.6,25,0,25
+COP2122-122,,FASHION DESIGN & PRODUCT DEVELOPMENT,University of Moratuwa,0,1,4,26,FASHION DESIGN & PRODUCT DEVELOPMENT # | (University of Moratuwa),939.9,17,8,18
+COP2122-123,,ARTIFICIAL INTELLIGENCE,University of Moratuwa,0,0,4,27,ARTIFICIAL INTELLIGENCE  | (University of Moratuwa),972.2,25,0,25
+COP2122-124,,INFORMATION TECHNOLOGY (IT),University of Moratuwa,0,0,4,28,INFORMATION TECHNOLOGY (IT)  | (University of Moratuwa),1004.5,25,0,25
+COP2122-125,,INFORMATION TECHNOLOGY & MANAGEMENT,University of Moratuwa,0,1,4,29,INFORMATION TECHNOLOGY & MANAGEMENT #   | (University of Moratuwa),1036.8,22,3,23
+COP2122-126,,FACILITIES MANAGEMENT,University of Moratuwa,0,0,4,30,FACILITIES MANAGEMENT | (University of Moratuwa),1069.0,25,0,25
+COP2122-127,,TRANSPORT MANAGEMENT & LOGISTICS ENGINEERING (TMLE),University of Moratuwa,0,0,4,31,TRANSPORT MANAGEMENT & LOGISTICS  | ENGINEERING (TMLE) | (University of Moratuwa),1101.3,25,0,25
+COP2122-128,,BUSINESS SCIENCE,University of Moratuwa,0,0,4,32,BUSINESS SCIENCE | (University of Moratuwa),1133.6,25,0,25
+COP2122-129,,MANAGEMENT AND INFORMATION TECHNOLOGY (MIT),University of Kelaniya,0,1,5,1,MANAGEMENT AND INFORMATION  | TECHNOLOGY (MIT)   #   | (University of Kelaniya),132.9,23,2,23
+COP2122-130,,INDUSTRIAL STATISTICS & MATHEMATICAL FINANCE,University of Colombo,0,0,5,2,INDUSTRIAL STATISTICS &  | MATHEMATICAL FINANCE | (University of Colombo),165.2,25,0,25
+COP2122-131,,FINANCIAL MATHEMATICS AND INDUSTRIAL STATISTICS,University of Ruhuna,0,0,5,3,FINANCIAL MATHEMATICS AND INDUSTRIAL  | STATISTICS | (University of Ruhuna),197.5,25,0,25
+COP2122-132,,STATISTICS & OPERATIONS RESEARCH,University of Peradeniya,0,0,5,4,STATISTICS & OPERATIONS RESEARCH | (University of Peradeniya),229.8,25,0,24
+COP2122-133,,GEOGRAPHICAL INFORMATION SCIENCE,University of Peradeniya,0,0,5,5,GEOGRAPHICAL INFORMATION SCIENCE | (University of Peradeniya),262.0,25,0,25
+COP2122-134,,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),Rajarata University of Sri Lanka,0,1,5,6,INFORMATION AND COMMUNICATION  | TECHNOLOGY (ICT)  #  | (Rajarata University of Sri Lanka),294.3,19,6,20
+COP2122-135,,INFORMATION AND COMMUNICATION TECHNOLOGY (ICT),"University of Vavuniya, Sri Lanka",0,1,5,7,"INFORMATION AND COMMUNICATION  | TECHNOLOGY (ICT)  #  | (University of Vavuniya, Sri Lanka)",326.6,23,2,24
+COP2122-136,,INFORMATION SYSTEMS,University of Colombo School of Computing,0,1,5,8,INFORMATION SYSTEMS # | (University of Colombo School of Computing),358.9,19,6,20
+COP2122-137,,INFORMATION SYSTEMS,University of Sri Jayewardenepura,0,1,5,9,INFORMATION SYSTEMS # | (University of Sri Jayewardenepura),391.2,19,6,20
+COP2122-138,,SOFTWARE ENGINEERING,University of Kelaniya,0,0,5,10,SOFTWARE ENGINEERING | (University of Kelaniya),423.5,14,11,15
+COP2122-139,,SOFTWARE ENGINEERING,Sabaragamuwa University of Sri Lanka,0,0,5,11,SOFTWARE ENGINEERING | (Sabaragamuwa University of Sri Lanka),455.7,20,5,21
+COP2122-140,,SOFTWARE ENGINEERING,University of Sri Jayewardenepura,0,0,5,12,SOFTWARE ENGINEERING | (University of Sri Jayewardenepura),488.0,12,13,13
+COP2122-141,,AYURVEDIC MEDICINE & SURGERY,Institute of Indigenous Medicine,0,0,5,13,AYURVEDIC MEDICINE & SURGERY  | (Institute of Indigenous  Medicine),520.3,22,3,23
+COP2122-142,,AYURVEDIC MEDICINE & SURGERY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,14,"AYURVEDIC MEDICINE & SURGERY  | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",552.5,25,0,24
+COP2122-143,,UNANI MEDICINE & SURGERY,Institute of Indigenous Medicine,0,0,5,15,UNANI MEDICINE & SURGERY  | (Institute of Indigenous  Medicine),584.8,25,0,25
+COP2122-144,,SIDDHA MEDICINE & SURGERY,University of Jaffna,0,0,5,16,SIDDHA MEDICINE & SURGERY    | (University of Jaffna),617.1,20,5,21
+COP2122-145,,SIDDHA MEDICINE & SURGERY,Eastern University - Trincomalee Campus,0,0,5,17,SIDDHA MEDICINE & SURGERY   | (Eastern University - Trincomalee Campus),649.4,22,3,23
+COP2122-146,,INDIGENOUS MEDICINAL RESOURCES,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,18,"INDIGENOUS MEDICINAL RESOURCES | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",682.5,25,0,24
+COP2122-147,,HEALTH INFORMATION AND COMMUNICATION TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,19,"HEALTH INFORMATION AND COMMUNICATION  | TECHNOLOGY | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",718.9,25,0,25
+COP2122-148,,HEALTH TOURISM AND HOSPITALITY MANAGEMENT,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,20,"HEALTH TOURISM AND HOSPITALITY MANAGEMENT | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",754.3,25,0,25
+COP2122-149,,BIOMEDICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,21,"BIOMEDICAL TECHNOLOGY | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",786.5,25,0,25
+COP2122-150,,INDIGENOUS PHARMACEUTICAL TECHNOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,22,"INDIGENOUS PHARMACEUTICAL TECHNOLOGY | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",818.8,25,0,25
+COP2122-151,,YOGA AND PARAPSYCHOLOGY,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,23,"YOGA AND PARAPSYCHOLOGY | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",851.1,25,0,24
+COP2122-152,,SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE,"The Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",0,0,5,24,"SOCIAL STUDIES IN INDIGENOUS KNOWLEDGE | (The Gampaha Wickramarachchi University of Indigenous  | Medicine, Sri Lanka)",883.9,25,0,25
+COP2122-153,,HEALTH PROMOTION,Rajarata University of Sri Lanka,0,0,5,25,HEALTH PROMOTION | (Rajarata University of Sri Lanka),916.5,25,0,25
+COP2122-154,,NURSING,University of Colombo,0,0,5,26,NURSING | (University of Colombo),948.8,19,6,20
+COP2122-155,,NURSING,University of Peradeniya,0,0,5,27,NURSING | (University of Peradeniya),981.1,18,7,19
+COP2122-156,,NURSING,University of Sri Jayewardenepura,0,0,5,28,NURSING | (University of Sri Jayewardenepura),1013.4,19,6,20
+COP2122-157,,NURSING,University of Jaffna,0,0,5,29,NURSING | (University of Jaffna),1045.7,19,6,20
+COP2122-158,,NURSING,University of Ruhuna,0,0,5,30,NURSING | (University of Ruhuna),1077.9,22,3,23
+COP2122-159,,NURSING,"Eastern University, Sri Lanka",0,0,5,31,"NURSING | (Eastern University, Sri Lanka)",1110.2,12,13,13
+COP2122-160,,PHARMACY,University of Peradeniya,0,0,6,1,PHARMACY | (University of Peradeniya),133.0,13,12,14
+COP2122-161,,PHARMACY,University of Sri Jayewardenepura,0,0,6,2,PHARMACY | (University of Sri Jayewardenepura),165.2,14,11,14
+COP2122-162,,PHARMACY,University of Jaffna,0,0,6,3,PHARMACY | (University of Jaffna),197.5,20,5,21
+COP2122-163,,PHARMACY,University of Ruhuna,0,0,6,4,PHARMACY | (University of Ruhuna),229.8,14,11,15
+COP2122-164,,MEDICAL LABORATORY SCIENCES,University of Peradeniya,0,0,6,5,MEDICAL LABORATORY SCIENCES | (University of Peradeniya),262.1,9,16,9
+COP2122-165,,MEDICAL LABORATORY SCIENCES,University of Sri Jayewardenepura,0,0,6,6,MEDICAL LABORATORY SCIENCES | (University of Sri Jayewardenepura),294.4,13,12,14
+COP2122-166,,MEDICAL LABORATORY SCIENCES,University of Jaffna,0,0,6,7,MEDICAL LABORATORY SCIENCES | (University of Jaffna),326.6,20,5,21
+COP2122-167,,MEDICAL LABORATORY SCIENCES,University of Ruhuna,0,0,6,8,MEDICAL LABORATORY SCIENCES | (University of Ruhuna),358.9,13,12,14
+COP2122-168,,RADIOGRAPHY,University of Peradeniya,0,0,6,9,RADIOGRAPHY | (University of Peradeniya),391.2,25,0,25
+COP2122-169,,PHYSIOTHERAPY,University of Colombo,0,0,6,10,PHYSIOTHERAPY | (University of Colombo),423.5,13,12,14
+COP2122-170,,PHYSIOTHERAPY,University of Peradeniya,0,0,6,11,PHYSIOTHERAPY | (University of Peradeniya),455.7,20,5,21
+COP2122-171,,OCCUPATIONAL THERAPY,University of Kelaniya,0,0,6,12,OCCUPATIONAL THERAPY | (University of Kelaniya),488.0,25,0,25
+COP2122-172,,OPTOMETRY,University of Sri Jayewardenepura,0,0,6,13,OPTOMETRY  | (University of Sri Jayewardenepura),520.3,25,0,25
+COP2122-173,,ENVIRONMENTAL CONSERVATION & MANAGEMENT,University of Kelaniya,0,0,6,14,ENVIRONMENTAL CONSERVATION &  | MANAGEMENT | (University of Kelaniya),552.6,25,0,25
+COP2122-174,,APPLIED CHEMISTRY,University of Kelaniya,0,0,6,15,APPLIED CHEMISTRY | (University of Kelaniya),584.8,25,0,25
+COP2122-175,,ELECTRONICS AND COMPUTER SCIENCE,University of Kelaniya,0,0,6,16,ELECTRONICS AND COMPUTER SCIENCE | (University of Kelaniya),617.1,25,0,25
+COP2122-176,,ACCOUNTING INFORMATION SYSTEMS,University of Kelaniya,0,0,6,17,ACCOUNTING INFORMATION SYSTEMS | (University of Kelaniya),649.4,24,1,25
+COP2122-177,,FISHERIES & MARINE SCIENCES,University of Ruhuna,0,0,6,18,FISHERIES & MARINE SCIENCES | (University of Ruhuna),681.7,25,0,25
+COP2122-178,,MARINE AND FRESHWATER SCIENCES,University of Ruhuna,0,0,6,19,MARINE AND FRESHWATER SCIENCES | (University of Ruhuna),714.0,25,0,25
+COP2122-179,,ANIMAL SCIENCE & FISHERIES,University of Peradeniya,0,0,6,20,ANIMAL SCIENCE & FISHERIES | (University of Peradeniya),746.2,25,0,25
+COP2122-180,,FOOD PRODUCTION & TECHNOLOGY MANAGEMENT,Wayamba University of Sri Lanka,0,0,6,21,FOOD  PRODUCTION  | & TECHNOLOGY MANAGEMENT | (Wayamba University of Sri Lanka),778.5,25,0,25
+COP2122-181,,FOOD BUSINESS MANAGEMENT [Biological / Physical Science Stream],Sabaragamuwa University of Sri Lanka,0,0,6,22,FOOD BUSINESS MANAGEMENT  | [Biological / Physical Science Stream] | (Sabaragamuwa University of Sri Lanka),810.8,25,0,25
+COP2122-182,,MANAGEMENT AND INFORMATION TECHNOLOGY (SEUSL),South Eastern University of Sri Lanka,0,0,6,23,MANAGEMENT AND INFORMATION  | TECHNOLOGY (SEUSL) | (South Eastern University of Sri Lanka),843.1,25,0,25
+COP2122-183,,COMPUTING & INFORMATION SYSTEMS,Sabaragamuwa University of Sri Lanka,0,0,6,24,COMPUTING & INFORMATION SYSTEMS   | (Sabaragamuwa University of Sri Lanka),875.3,25,0,25
+COP2122-184,,PHYSICAL EDUCATION,University of Jaffna,0,1,6,25,PHYSICAL EDUCATION  #  | (University of Jaffna),907.7,16,9,17
+COP2122-185,,PHYSICAL EDUCATION,Sabaragamuwa University of Sri Lanka,0,1,6,26,PHYSICAL EDUCATION  #  | (Sabaragamuwa University of Sri Lanka),939.9,23,2,24
+COP2122-186,,SPORTS SCIENCE & MANAGEMENT,University of Sri Jayewardenepura,0,1,6,27,SPORTS SCIENCE & MANAGEMENT  # | (University of Sri Jayewardenepura),972.2,17,8,17
+COP2122-187,,SPORTS SCIENCE & MANAGEMENT,University of Kelaniya,0,1,6,28,SPORTS SCIENCE & MANAGEMENT  # | (University of Kelaniya),1004.5,14,11,15
+COP2122-188,,SPORTS SCIENCE & MANAGEMENT,Sabaragamuwa University of Sri Lanka,0,1,6,29,SPORTS SCIENCE & MANAGEMENT  # | (Sabaragamuwa University of Sri Lanka),1036.8,24,1,25
+COP2122-189,,SPEECH AND HEARING SCIENCES,University of Kelaniya,0,1,6,30,SPEECH AND HEARING SCIENCES # | (University of Kelaniya),1069.5,23,2,24
+COP2122-190,,TOURISM & HOSPITALITY MANAGEMENT,Rajarata University of Sri Lanka,0,0,6,31,TOURISM & HOSPITALITY MANAGEMENT | (Rajarata University of Sri Lanka),1102.2,22,3,23
+COP2122-191,,TOURISM & HOSPITALITY MANAGEMENT,Sabaragamuwa University of Sri Lanka,0,0,6,32,TOURISM & HOSPITALITY MANAGEMENT | (Sabaragamuwa University of Sri Lanka),1134.4,21,4,22
+COP2122-192,,AGRICULTURAL RESOURCE MANAGEMENT AND TECHNOLOGY,University of Ruhuna,0,0,7,1,AGRICULTURAL RESOURCE MANAGEMENT AND  | TECHNOLOGY | (University of Ruhuna),132.9,25,0,25
+COP2122-193,,AGRI BUSINESS MANAGEMENT,University of Ruhuna,0,0,7,2,AGRI BUSINESS MANAGEMENT | (University of Ruhuna),165.2,25,0,25
+COP2122-194,,GREEN TECHNOLOGY,University of Ruhuna,0,0,7,3,GREEN TECHNOLOGY | (University of Ruhuna),197.5,25,0,25
+COP2122-195,,SCIENCE AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,0,7,4,SCIENCE AND TECHNOLOGY  | (Uva Wellassa University of Sri Lanka),229.8,25,0,24
+COP2122-196,,COMPUTER SCIENCE & TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,1,7,5,COMPUTER SCIENCE & TECHNOLOGY  # | (Uva Wellassa University of Sri Lanka),262.0,25,0,25
+COP2122-197,,ENTREPRENEURSHIP AND MANAGEMENT,Uva Wellassa University of Sri Lanka,0,1,7,6,ENTREPRENEURSHIP AND MANAGEMENT # | (Uva Wellassa University of Sri Lanka),294.3,25,0,25
+COP2122-198,,ANIMAL PRODUCTION AND FOOD TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,0,7,7,ANIMAL PRODUCTION AND FOOD TECHNOLOGY   | (Uva Wellassa University of Sri Lanka),326.6,25,0,25
+COP2122-199,,EXPORT AGRICULTURE,Uva Wellassa University of Sri Lanka,0,0,7,8,EXPORT AGRICULTURE   | (Uva Wellassa University of Sri Lanka),358.9,25,0,25
+COP2122-200,,TEA TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,0,0,7,9,TEA TECHNOLOGY & VALUE ADDITION   | (Uva Wellassa University of Sri Lanka),391.1,25,0,25
+COP2122-201,,INDUSTRIAL INFORMATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,1,7,10,INDUSTRIAL INFORMATION | TECHNOLOGY  # | (Uva Wellassa University of Sri Lanka),423.4,25,0,25
+COP2122-202,,MINERAL RESOURCES AND TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,0,7,11,MINERAL RESOURCES AND  | TECHNOLOGY   | (Uva Wellassa University of Sri Lanka),455.7,25,0,24
+COP2122-203,,AQUATIC RESOURCES TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,0,7,12,AQUATIC RESOURCES TECHNOLOGY   | (Uva Wellassa University of Sri Lanka),488.0,25,0,25
+COP2122-204,,PALM AND LATEX TECHNOLOGY & VALUE ADDITION,Uva Wellassa University of Sri Lanka,0,0,7,13,PALM AND LATEX TECHNOLOGY | & VALUE ADDITION   | (Uva Wellassa University of Sri Lanka),520.3,25,0,25
+COP2122-205,,"HOSPITALITY, TOURISM AND EVENTS MANAGEMENT",Uva Wellassa University of Sri Lanka,0,1,7,14,"HOSPITALITY, TOURISM  | AND EVENTS MANAGEMENT   #  | (Uva Wellassa University of Sri Lanka)",552.5,25,0,25
+COP2122-206,,ENGLISH LANGUAGE & APPLIED LINGUISTICS,Uva Wellassa University of Sri Lanka,0,0,7,15,ENGLISH LANGUAGE & APPLIED LINGUISTICS | (Uva Wellassa University of Sri Lanka),584.8,25,0,25
+COP2122-207,,ENGINEERING TECHNOLOGY (ET),University of Colombo,0,0,7,16,ENGINEERING TECHNOLOGY (ET) | (University of Colombo),617.1,21,4,19
+COP2122-208,,ENGINEERING TECHNOLOGY (ET),University of Sri Jayewardenepura,0,0,7,17,ENGINEERING TECHNOLOGY (ET) | (University of Sri Jayewardenepura),649.4,21,4,20
+COP2122-209,,ENGINEERING TECHNOLOGY (ET),University of Kelaniya,0,0,7,18,ENGINEERING TECHNOLOGY (ET) | (University of Kelaniya),681.7,21,4,22
+COP2122-210,,ENGINEERING TECHNOLOGY (ET),University of Jaffna,0,0,7,19,ENGINEERING TECHNOLOGY (ET) | (University of Jaffna),713.9,25,0,25
+COP2122-211,,ENGINEERING TECHNOLOGY (ET),University of Ruhuna,0,0,7,20,ENGINEERING TECHNOLOGY (ET) | (University of Ruhuna),746.2,19,6,19
+COP2122-212,,ENGINEERING TECHNOLOGY (ET),Rajarata University of Sri Lanka,0,0,7,21,ENGINEERING TECHNOLOGY (ET) | (Rajarata University of Sri Lanka),778.5,21,4,22
+COP2122-213,,ENGINEERING TECHNOLOGY (ET),Sabaragamuwa University of Sri Lanka,0,0,7,22,ENGINEERING TECHNOLOGY (ET) | (Sabaragamuwa University of Sri Lanka),810.8,19,6,19
+COP2122-214,,ENGINEERING TECHNOLOGY (ET),Wayamba University of Sri Lanka,0,0,7,23,ENGINEERING TECHNOLOGY (ET) | (Wayamba University of Sri Lanka),843.1,22,3,21
+COP2122-215,,ENGINEERING TECHNOLOGY (ET),Uva Wellassa University of Sri Lanka,0,0,7,24,ENGINEERING TECHNOLOGY (ET) | (Uva Wellassa University of Sri Lanka),875.4,21,4,22
+COP2122-216,,BIOSYSTEMS TECHNOLOGY (BST),University of Colombo,0,0,7,25,BIOSYSTEMS TECHNOLOGY (BST) | (University of Colombo),907.6,24,1,25
+COP2122-217,,BIOSYSTEMS TECHNOLOGY (BST),University of Sri Jayewardenepura,0,0,7,26,BIOSYSTEMS TECHNOLOGY (BST) | (University of Sri Jayewardenepura),939.9,21,4,21
+COP2122-218,,BIOSYSTEMS TECHNOLOGY (BST),University of Jaffna,0,0,7,27,BIOSYSTEMS TECHNOLOGY (BST) | (University of Jaffna),972.2,23,2,24
+COP2122-219,,BIOSYSTEMS TECHNOLOGY (BST),University of Ruhuna,0,0,7,28,BIOSYSTEMS TECHNOLOGY (BST) | (University of Ruhuna),1004.5,20,5,21
+COP2122-220,,BIOSYSTEMS TECHNOLOGY (BST),"Eastern University, Sri Lanka",0,0,7,29,"BIOSYSTEMS TECHNOLOGY (BST) | (Eastern University, Sri Lanka)",1036.8,21,4,22
+COP2122-221,,BIOSYSTEMS TECHNOLOGY (BST),South Eastern University of Sri Lanka,0,0,7,30,BIOSYSTEMS TECHNOLOGY (BST) | (South Eastern University of Sri Lanka),1069.0,20,5,21
+COP2122-222,,BIOSYSTEMS TECHNOLOGY (BST),Rajarata University of Sri Lanka,0,0,7,31,BIOSYSTEMS TECHNOLOGY (BST) | (Rajarata University of Sri Lanka),1101.3,19,6,20
+COP2122-223,,BIOSYSTEMS TECHNOLOGY (BST),Sabaragamuwa University of Sri Lanka,0,0,7,32,BIOSYSTEMS TECHNOLOGY (BST) | (Sabaragamuwa University of Sri Lanka),1133.6,19,6,20
+COP2122-224,,BIOSYSTEMS TECHNOLOGY (BST),Wayamba University of Sri Lanka,0,0,8,1,BIOSYSTEMS TECHNOLOGY (BST) | (Wayamba University of Sri Lanka),132.9,20,5,21
+COP2122-225,,BIOSYSTEMS TECHNOLOGY (BST),Uva Wellassa University of Sri Lanka,0,0,8,2,BIOSYSTEMS TECHNOLOGY (BST) | (Uva Wellassa University of Sri Lanka),165.2,23,2,24
+COP2122-226,,INFORMATION COMMUNICATION TECHNOLOGY,University of Colombo,0,0,8,3,INFORMATION COMMUNICATION TECHNOLOGY | (University of Colombo),197.5,16,9,17
+COP2122-227,,INFORMATION COMMUNICATION TECHNOLOGY,University of Sri Jayewardenepura,0,0,8,4,INFORMATION COMMUNICATION TECHNOLOGY | (University of Sri Jayewardenepura),229.8,19,6,19
+COP2122-228,,INFORMATION COMMUNICATION TECHNOLOGY,University of Kelaniya,0,0,8,5,INFORMATION COMMUNICATION TECHNOLOGY | (University of Kelaniya),262.1,21,4,21
+COP2122-229,,INFORMATION COMMUNICATION TECHNOLOGY,University of Ruhuna,0,0,8,6,INFORMATION COMMUNICATION TECHNOLOGY | (University of Ruhuna),294.3,20,5,21
+COP2122-230,,INFORMATION COMMUNICATION TECHNOLOGY,South Eastern University of Sri Lanka,0,0,8,7,INFORMATION COMMUNICATION TECHNOLOGY | (South Eastern University of Sri Lanka),326.6,21,4,22
+COP2122-231,,INFORMATION COMMUNICATION TECHNOLOGY,Rajarata University of Sri Lanka,0,0,8,8,INFORMATION COMMUNICATION TECHNOLOGY | (Rajarata University of Sri Lanka),359.3,22,3,23
+COP2122-232,,INFORMATION COMMUNICATION TECHNOLOGY,"University of Vavuniya, Sri Lanka",0,0,8,9,"INFORMATION COMMUNICATION TECHNOLOGY | (University of Vavuniya, Sri Lanka)",392.5,20,5,21
+COP2122-233,,INFORMATION COMMUNICATION TECHNOLOGY,Uva Wellassa University of Sri Lanka,0,0,8,10,INFORMATION COMMUNICATION TECHNOLOGY | (Uva Wellassa University of Sri Lanka),425.6,20,5,21
+COP2122-234,,PHYSICAL SCIENCE -ICT,University of Sri Jayewardenepura,0,0,8,11,PHYSICAL SCIENCE -ICT | (University of Sri Jayewardenepura),458.7,13,12,14
+COP2122-235,,PHYSICAL SCIENCE -ICT,University of Kelaniya,0,0,8,12,PHYSICAL SCIENCE -ICT | (University of Kelaniya),491.8,23,2,24
+COP2122-236,,TRANSLATION STUDIES,University of Kelaniya,0,1,8,13,TRANSLATION STUDIES  # | (University of Kelaniya),524.9,13,12,14
+COP2122-237,,TRANSLATION STUDIES,Sabaragamuwa University of Sri Lanka,0,1,8,14,TRANSLATION STUDIES  # | (Sabaragamuwa University of Sri Lanka),558.0,12,13,13
+COP2122-238,,TRANSLATION STUDIES,University of Jaffna,0,1,8,15,TRANSLATION STUDIES  # | (University of Jaffna),591.2,16,9,17
+COP2122-239,,TRANSLATION STUDIES,"Eastern University, Sri Lanka",0,1,8,16,"TRANSLATION STUDIES  # | (Eastern University, Sri Lanka)",624.3,15,10,16
+COP2122-240,,FILM & TELEVISION STUDIES,University of Kelaniya,0,1,8,17,FILM & TELEVISION STUDIES  # | (University of Kelaniya),657.4,16,9,17
+COP2122-241,,PROJECT MANAGEMENT,"University of Vavuniya, Sri Lanka",0,0,8,18,"PROJECT MANAGEMENT | (University of Vavuniya, Sri Lanka)",690.5,25,0,25
+COP2122-242,,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Sri Jayewardenepura,1,0,8,19,TEACHING ENGLISH AS A SECOND  | LANGUAGE (TESL) * | (University of Sri Jayewardenepura),723.7,25,0,1
+COP2122-243,,TEACHING ENGLISH AS A SECOND LANGUAGE (TESL),University of Kelaniya,1,0,8,20,TEACHING ENGLISH AS A SECOND  | LANGUAGE (TESL) * | (University of Kelaniya),756.8,25,0,1
+COP2122-244,,VISUAL ARTS,University of the Visual & Performing Arts,0,1,8,21,VISUAL ARTS  # | (University of the Visual & Performing Arts),789.9,19,6,20
+COP2122-245,,MUSIC,University of the Visual & Performing Arts,0,1,8,22,MUSIC   #  | (University of the Visual & Performing Arts),823.0,19,6,20
+COP2122-246,,DANCE,University of the Visual & Performing Arts,0,1,8,23,DANCE  # | (University of the Visual & Performing Arts),856.1,21,4,22
+COP2122-247,,DRAMA & THEATRE,University of the Visual & Performing Arts,0,1,8,24,DRAMA & THEATRE  # | (University of the Visual & Performing Arts),889.3,19,6,20
+COP2122-248,,ART & DESIGN,Ramanathan Academy of Fine Arts,0,1,8,25,ART & DESIGN  # | (Ramanathan Academy of Fine Arts),922.4,19,6,20
+COP2122-249,,MUSIC,Ramanathan Academy of Fine Arts,0,1,8,26,MUSIC  #  | (Ramanathan Academy of Fine Arts),955.5,19,6,20
+COP2122-250,,DANCE,Ramanathan Academy of Fine Arts,0,1,8,27,DANCE  # | (Ramanathan Academy of Fine Arts),988.6,13,12,14
+COP2122-251,,VISUAL & TECHNOLOGICAL ARTS,Swami Vipulananda Institute of Aesthetic Studies,0,1,8,28,VISUAL & TECHNOLOGICAL ARTS  # | (Swami Vipulananda Institute of Aesthetic Studies),1021.7,20,5,21
+COP2122-252,,MUSIC,Swami Vipulananda Institute of Aesthetic Studies,0,1,8,29,MUSIC   # | (Swami Vipulananda Institute of Aesthetic Studies),1054.8,20,5,21
+COP2122-253,,DANCE,Swami Vipulananda Institute of Aesthetic Studies,0,1,8,30,DANCE  # | (Swami Vipulananda Institute of Aesthetic Studies),1088.0,15,10,16
+COP2122-254,,DRAMA & THEATRE,Swami Vipulananda Institute of Aesthetic Studies,0,1,8,31,DRAMA & THEATRE  # | (Swami Vipulananda Institute of Aesthetic Studies),1121.1,16,9,17
+COP2122-255,,FOOD BUSINESS MANAGEMENT [Commerce Stream],Sabaragamuwa University of Sri Lanka,0,0,8,32,FOOD BUSINESS MANAGEMENT  | [Commerce Stream] | (Sabaragamuwa University of Sri Lanka),1154.2,25,0,25

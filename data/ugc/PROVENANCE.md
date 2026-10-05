@@ -21,3 +21,19 @@ stores them privately and cites them (ZP-DOC-03 CON-5).
 
 Page numbers in the CSVs are PDF page indexes unless stated; printed page = PDF page − 7 for the handbook.
 Facts are loaded into D1 by `tools/seed/` with a citation to the source document and page for every row.
+
+## Earlier intake years (official UGC cut-off tables)
+
+Downloaded on 5 October 2026 from the UGC's own server (`https://ugc.ac.lk/downloads/admissions/cutoff_YYYY/`);
+full URLs, sizes and SHA-256 fingerprints are in `sources_manifest.csv`.
+
+| Year | Folder | How it was verified |
+|---|---|---|
+| 2023/24 | `2023-2024/` | Word-position parser vs PyMuPDF table extraction: 0 mismatches; 12 visual spot checks |
+| 2022/23 | `2022-2023/` | As above; the UGC's later correction page (Moratuwa IT / IT & Management values swapped) applied to 50 cells |
+| 2021/22 | `2021-2022/` | The after-re-scrutiny table exists only as a scan: three independent OCR passes (6,194 cells identical in all three, 151 in two), 30 cells read by eye, 305 cells reviewed by eye against the image with 0 errors (`ocr_provenance_2021_2022.csv`) |
+| 2024/25 | `2024-2025/` | Taken from the 2025/26 handbook (Section 9) and cross-checked against the official standalone 2024/25 table: all 266 rows identical |
+
+`offering_crosswalk.csv` links each historical column to its 2025/26 Uni-Code (exact name, normalised name, or a
+rename documented by the same Uni-Code appearing under both names in UGC handbooks). Columns of courses that no
+longer exist are left unlinked and are not used.

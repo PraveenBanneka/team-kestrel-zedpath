@@ -23,4 +23,7 @@
 - Cut-off columns matched by token similarity rather than exact name: 0
 - Unmatched cut-off columns: 0
 - Negative tests rejected by constraints: 24 of 24
-- Database size with two intake years: 2.30 MB (D1 free limit: 500 MB per database)
+- 2023/2024 cut-off cells loaded from the official UGC table: 6350 (columns of discontinued courses skipped: 200 cells)
+- 2022/2023 cut-off cells loaded from the official UGC table: 6300 (columns of discontinued courses skipped: 225 cells)
+- 2021/2022 cut-off cells loaded from the official UGC table: 6100 (columns of discontinued courses skipped: 275 cells)
+- Database size with five intake years: 5.28 MB (D1 free limit: 500 MB per database)
