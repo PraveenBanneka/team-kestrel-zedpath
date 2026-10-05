@@ -2,7 +2,8 @@
 import rulebookJson from './generated/rulebook-2025-2026.json';
 import type { Rulebook } from '../shared/rulebook.ts';
 import type { ApiError, ProfileInput } from '../shared/api.ts';
-import type { Grade, StreamCode } from '../shared/rules.ts';
+import { evaluate, type Grade, type StreamCode, type Verdict } from '../shared/rules.ts';
+import { band, type BandResult } from '../shared/banding.ts';
 
 export const book = rulebookJson as unknown as Rulebook;
 export const districtIndex = new Map(book.districts.map((d, i) => [d.code, i]));
@@ -31,4 +32,22 @@ export function parseProfile(body: unknown, strictSubjects = false): ProfileInpu
     return { error: 'Each subject needs a grade of A, B, C or S', field: 'al' };
   if (strictSubjects && !subjects.every(s => AL_SUBJECTS.has(s))) return { error: 'Unknown subject', field: 'al' };
   return { stream: b.stream, district: b.district, zE4: b.zE4!, al, ol: b.ol };
+}
+
+export type RulebookOffering = typeof book.offerings[number];
+export interface GroupAssessment { group: RulebookOffering['groups'][number]; verdict: Verdict; result: BandResult | null }
+
+/** One offering judged for one student: subject rules per selection group, then the band where eligible. The single
+ *  source for /results and Ask ZedPath's engine facts, so the two can never disagree. */
+export function assessOffering(o: RulebookOffering, p: ProfileInput): { groups: GroupAssessment[]; anyEligible: boolean } {
+  const course = book.courses[o.courseCode];
+  const di = districtIndex.get(p.district)!;
+  const student = { stream: p.stream, al: p.al, ol: p.ol };
+  const groups = o.groups.map(g => {
+    const rule = course.groups?.[g.code] ?? { al: course.al, ol: course.ol };
+    const verdict = evaluate(rule.al, rule.ol ?? undefined, student);
+    const result = verdict === 'NOT_ELIGIBLE' ? null : band(p.zE4, g.years.map(y => ({ examYear: y.examYear, zE4: y.zE4[di] })));
+    return { group: g, verdict, result };
+  });
+  return { groups, anyEligible: groups.some(g => g.verdict !== 'NOT_ELIGIBLE') };
 }

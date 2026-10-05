@@ -22,6 +22,7 @@
   },
   "include": [
     "worker/**/*.test.ts",
-    "worker/testing"
+    "worker/testing",
+    "worker/env.d.ts"
   ]
 }

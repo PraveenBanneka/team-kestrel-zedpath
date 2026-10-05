@@ -2,11 +2,11 @@
 // Student requests are answered from the bundled rulebook: no database reads, a few milliseconds of CPU (NFR-005).
 import { Hono } from 'hono';
 import type { Meta, OfferingDetail, ResultsResponse, OfferingSummary, HiddenOffering, ApiError, RouteSummary } from '../shared/api.ts';
-import { evaluate } from '../shared/rules.ts';
-import { band, type Band } from '../shared/banding.ts';
+import type { Band } from '../shared/banding.ts';
 import { describe } from '../shared/describe.ts';
-import { book, districtIndex, parseProfile, SUBJECT_NAMES } from './rulebook.ts';
+import { assessOffering, book, districtIndex, parseProfile, SUBJECT_NAMES } from './rulebook.ts';
 import { accountRoutes } from './account.ts';
+import { askRoutes } from './ask.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
 function groupName(code: string, label: string | null): string {
@@ -42,29 +42,22 @@ app.post('/results', async c => {
   const parsed = parseProfile(await c.req.json().catch(() => null));
   if ('error' in parsed) return c.json(parsed, 400);
   const p = parsed;
-  const di = districtIndex.get(p.district)!;
-  const student = { stream: p.stream, al: p.al, ol: p.ol };
   const offerings: OfferingSummary[] = [];
   const hidden: HiddenOffering[] = [];
   const counts: Record<Band, number> = { SAFE: 0, LIKELY: 0, REACH: 0, OUT_OF_RANGE: 0, NOT_ENOUGH_DATA: 0 };
 
   for (const o of book.offerings) {
-    const course = book.courses[o.courseCode];
-    let anyGroupEligible = false;
-    for (const g of o.groups) {
-      const rule = course.groups?.[g.code] ?? { al: course.al, ol: course.ol };
-      const verdict = evaluate(rule.al, rule.ol ?? undefined, student);
-      if (verdict === 'NOT_ELIGIBLE') continue;
-      anyGroupEligible = true;
-      const r = band(p.zE4, g.years.map(y => ({ examYear: y.examYear, zE4: y.zE4[di] })));
+    const a = assessOffering(o, p);
+    for (const { group: g, verdict, result: r } of a.groups) {
+      if (!r) continue;
       counts[r.band]++;
       offerings.push({ uniCode: o.uniCode, courseCode: o.courseCode, course: o.course, institution: o.institution,
         group: g.code, groupLabel: g.label, band: r.band, limitedHistory: r.limitedHistory, yearsUsed: r.yearsUsed,
         latestE4: r.latestE4, gapToLatestE4: r.gapToLatestE4, trend: r.trend, hasAptitudeTest: o.hasAptitudeTest,
         meritOnly: o.meritOnly, needsOl: verdict === 'NEEDS_OL' });
     }
-    if (!anyGroupEligible) hidden.push({ uniCode: o.uniCode, course: o.course, institution: o.institution,
-      reason: course.quote, page: course.page });
+    if (!a.anyEligible) { const course = book.courses[o.courseCode];
+      hidden.push({ uniCode: o.uniCode, course: o.course, institution: o.institution, reason: course.quote, page: course.page }); }
   }
   const res: ResultsResponse = { academicYear: book.academicYear, counts, offerings, hidden, computedAt: new Date().toISOString() };
   return c.json(res);
@@ -106,6 +99,8 @@ app.get('/routes', c => {
 
 // Student accounts (CR-001): /api/auth/* and /api/me.
 app.route('/', accountRoutes);
+// Ask ZedPath: /api/ask (cited answers) and the localhost-only /api/dev/embed tool.
+app.route('/', askRoutes);
 
 app.notFound(c => c.json({ error: 'Not found' } satisfies ApiError, 404));
 
