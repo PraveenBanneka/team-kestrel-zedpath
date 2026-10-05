@@ -193,3 +193,16 @@
   or linked (tested); its page addresses removed from the public data file (89c841c, + test). Details given to
   Praveen privately; reporting to Sri Lanka CERT|CC is his decision. No copies were saved on disk.
   Praveen: "Do not visit it again" -> rule added to CLAUDE.md.
+
+## 2026-10-05 (night): native Android app (Capacitor) built and sent
+- Praveen: "make the proper native android apk" (option B). native/ = Capacitor 8.5 project, package
+  com.teamkestrel.zedpath 1.1.0 (versionCode 3), API 36, plugins LocalNotifications/App/SplashScreen/StatusBar,
+  loads the live site (web deploys update it), offline page in the APK, icons/splash generated from the logo.
+- Built with JDK 21 (downloaded to %USERPROFILE%\.bubblewrap\jdk21) + Gradle 8.14.3: APK 3.4 MB, AAB 3.2 MB,
+  apksigner verifies (v2), cert b63eec...98a8 (same key as the TWA). Permissions: INTERNET, POST_NOTIFICATIONS,
+  RECEIVE_BOOT_COMPLETED, WAKE_LOCK, SCHEDULE_EXACT_ALARM (from the notifications plugin). Sent to Praveen (b38b9c9).
+- src/notify.ts now posts a real native notification inside the app (7d041dc). NOT LIVE: Praveen's message
+  "here u have the GO" did not start with GO, so the guard blocked deploys; the in-app test button appears after the
+  next deploy (needs a message starting with GO). Praveen uninstalled the TWA + PWA and installs 1.1.0 fresh.
+- Play Store notes for later: $25 account (Praveen), privacy policy + data safety, 12 testers x 14 days for new
+  personal accounts before public release; internal testing link is possible immediately.
