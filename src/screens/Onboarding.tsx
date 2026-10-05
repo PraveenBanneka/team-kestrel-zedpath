@@ -15,7 +15,7 @@ export function Logo({ size = 72 }: { size?: number }) {
 }
 
 // ---------------------------------------------------------------- Welcome
-export function Welcome({ onStart }: { onStart: () => void }) {
+export function Welcome({ onStart, onLogin }: { onStart: () => void; onLogin: () => void }) {
   const reduce = useReducedMotion();
   const rise = (d: number) => ({ initial: reduce ? false : { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: d, ease: [0.2, 0.8, 0.2, 1] as const } });
   return (
@@ -34,7 +34,8 @@ export function Welcome({ onStart }: { onStart: () => void }) {
           <button className="lang-tile" disabled lang="ta"><span className="big">தமிழ்</span><span className="soon">Coming soon</span></button>
           <button className="lang-tile selected" onClick={onStart} lang="en"><span className="big">English</span><span className="soon">Continue</span></button>
         </div>
-        <p className="fineprint">Free. No account needed. Your details stay on this phone. ZedPath is independent and not affiliated with the University Grants Commission.</p>
+        <button className="btn text on-aurora" onClick={onLogin}>Already have an account? Log in</button>
+        <p className="fineprint">Free. No account needed: your details stay on this phone unless you choose to make one. ZedPath is independent and not affiliated with the University Grants Commission.</p>
       </motion.div>
     </div>
   );

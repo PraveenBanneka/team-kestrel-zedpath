@@ -40,7 +40,7 @@ function sameHex(a: string, b: string): boolean {
   return d === 0;
 }
 const B32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-/** 80 random bits as XXXX-XXXX-XXXX-XXXX (base32: no 0/1/8/9, so no O/I/B confusion when typed back). */
+/** 80 random bits as XXXX-XXXX-XXXX-XXXX (RFC 4648 base32: letters A-Z and digits 2-7 only). */
 function newRecoveryCode(): string {
   let bits = 0, val = 0, out = '';
   for (const x of crypto.getRandomValues(new Uint8Array(10))) {
@@ -49,7 +49,10 @@ function newRecoveryCode(): string {
   }
   return out.match(/.{4}/g)!.join('-');
 }
-const normaliseCode = (s: string) => (s.toUpperCase().replace(/[^A-Z0-9]/g, '').match(/.{1,4}/g) ?? []).join('-');
+/** Typed-back codes: case, spaces and dashes do not matter, and the digits 0, 1 and 8 (never in a code) are read as
+ *  the letters they get mistaken for: O, I and B. */
+export const normaliseCode = (s: string) => (s.toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/0/g, 'O').replace(/1/g, 'I')
+  .replace(/8/g, 'B').match(/.{1,4}/g) ?? []).join('-');
 const saltFor = async (pepper: string, username: string) => (await hmacHex(pepper, `salt:${username}`)).slice(0, 32);
 const err = (c: C, status: 400 | 401 | 403 | 404 | 409 | 429 | 503, error: string, field?: string) =>
   c.json({ error, ...(field ? { field } : {}) } satisfies ApiError, status);

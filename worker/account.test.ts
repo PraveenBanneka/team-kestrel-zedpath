@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
+import { normaliseCode } from './account.ts';
 import { INTERESTS, RECOVERY_RE, type Extras, type MeResponse, type SignupResponse } from '../shared/account.ts';
 import type { ProfileInput } from '../shared/api.ts';
 
@@ -191,6 +192,11 @@ describe('accounts API', () => {
     expect((await call('POST', '/auth/login', { username: 'nimal_99', key: key('old-pw') })).status).toBe(401);
     expect((await call('POST', '/auth/login', { username: 'nimal_99', key: key('new-pw') })).status).toBe(200);
     expect((await call('POST', '/auth/recover', { username: 'nimal_99', code: body.recoveryCode, key: key('x') })).status).toBe(401);
+  });
+
+  it('reads a recovery code typed back with 0/1/8 for O/I/B', () => {
+    expect(normaliseCode('v0x6 4d1t 3bqj x8rp')).toBe('VOX6-4DIT-3BQJ-XBRP');
+    expect(normaliseCode('VOX6-4DIT-3BQJ-XBRP')).toMatch(RECOVERY_RE);
   });
 
   it('deletes the account and every row under it, and nothing of anyone else', async () => {

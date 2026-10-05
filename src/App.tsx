@@ -2,15 +2,19 @@
 // Paths (home) | Courses | Me. Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Award, Building2, ChevronRight, Download, ExternalLink, GraduationCap, Info, Landmark, Map as MapIcon, Pencil, Plane,
+import { ArrowLeft, Award, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   RotateCcw, ScrollText, ShieldCheck, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
+import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
 import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
-import { clearEverything, isOnboarded, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, specialIntakeHint, type Extras } from './storage.ts';
+import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
+import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
+import { clearEverything, isOnboarded, isPendingSync, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+  specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
 
@@ -61,13 +65,63 @@ export function App() {
     api<ResultsResponse>('/results', { method: 'POST', body: JSON.stringify(profile) }).then(setResults).catch(e => setError(String(e.message)));
   }, [profile]);
 
+  // Accounts (CR-001): with no account (or no accounts on the server) everything below is skipped and the app behaves
+  // exactly as before. With one, every save also goes to the account, and the account's copy is loaded on start,
+  // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
+  const [me, setMe] = useState<{ username: string } | null>(null);
+  const [recovery, setRecovery] = useState<{ username: string; code: string } | null>(null);
+  const [syncNote, setSyncNote] = useState<string | null>(null);
+  const push = (p: ProfileInput, e: Extras) => saveMe(p, e)
+    .then(() => { setPendingSync(false); setSyncNote(null); })
+    .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
+  const adopt = (m: MeResponse) => {
+    setMe({ username: m.username });
+    const local = loadProfile();
+    if (local && (isPendingSync() || !m.profile)) { void push(local, loadExtras()); return; }
+    if (!m.profile) return;
+    saveProfile(m.profile); saveExtras(m.extras); setProfile(m.profile); setExtras(m.extras);
+    setOnboarded(); setOnb(true);
+  };
+  useEffect(() => { fetchMe().then(m => m && adopt(m)).catch(() => {}); }, []);   // once, on start
+
   const [path, arg] = route.split('/').filter(Boolean);
   const finishIntro = () => { setOnboarded(); setOnb(true); go('/about'); };
-  const onSave = (p: ProfileInput, e: Extras) => { saveProfile(p); saveExtras(e); setProfile(p); setExtras(e); go('/paths'); };
-  const onClear = () => { clearEverything(); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const onSave = (p: ProfileInput, e: Extras) => {
+    saveProfile(p); saveExtras(e); setProfile(p); setExtras(e);
+    if (me) void push(p, e);
+    go('/paths');
+  };
+  const reset = () => { clearEverything(); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
+  const account = {
+    username: me?.username ?? null, syncNote,
+    logOut: async () => { await logOut().catch(() => {}); setMe(null); },
+    logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
+    deleteAccount: async () => { await deleteAccount(); reset(); },
+  };
+
+  // Account screens: a focused flow with Back and no bottom navigation, reachable before and after onboarding.
+  if (['signup', 'login', 'recover', 'saved-code'].includes(path)) {
+    const titles: Record<string, string> = { signup: 'Create account', login: 'Log in', recover: 'Reset password', 'saved-code': 'Recovery code' };
+    const afterAuth = () => go(loadProfile() ? '/me' : '/about');
+    return (
+      <div className="shell">
+        <header className="app-bar">
+          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
+          <span className="brand">{titles[path]}</span>
+        </header>
+        <main><Page k={route}>{path === 'saved-code'
+          ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); afterAuth(); }} />
+            : <div className="card"><p className="subtitle">Your recovery code was shown once and is no longer on screen.</p></div>)
+          : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
+              onSignedUp={(username, code) => { setMe({ username }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
+              onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.profile || loadProfile() ? '/paths' : '/about'); }} />}
+        </Page></main>
+      </div>);
+  }
 
   // First run
-  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} /></main></div>;
+  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} /></main></div>;
   if (!onboarded && path === 'intro') return <div className="shell"><main><Intro onDone={finishIntro} /></main></div>;
   if (!profile || path === 'about') return (
     <div className="shell">
@@ -84,7 +138,7 @@ export function App() {
   else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
-  else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} />; }
+  else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} />;
 
   const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['me', 'Me', UserRound, '#/me']];
@@ -345,7 +399,53 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
 }
 
 // ---------------------------------------------------------------- Me
-function Me({ profile, meta, extras, go, onClear }: { profile: ProfileInput; meta: Meta | null; extras: Extras; go: (to: string) => void; onClear: () => void }) {
+interface AccountControls { username: string | null; syncNote: string | null; logOut: () => Promise<void>;
+  logOutEverywhere: () => Promise<void>; deleteAccount: () => Promise<void> }
+
+function AccountCard({ account, go }: { account: AccountControls; go: (to: string) => void }) {
+  const [confirming, setConfirming] = useState(false);
+  const [failed, setFailed] = useState<string | null>(null);
+  if (!account.username) return (
+    <section className="card stack account-card">
+      <h2 className="title-l">Keep your details in an account</h2>
+      <p className="subtitle">Open ZedPath on any phone or laptop with everything already filled in. Just a username: no email or phone number.</p>
+      <div className="row" style={{ flexWrap: 'nowrap' }}>
+        <button className="btn filled" style={{ flex: 1 }} onClick={() => go('/signup')}>Create account</button>
+        <button className="btn text" onClick={() => go('/login')}>Log in</button>
+      </div>
+    </section>);
+  return (
+    <section className="card stack account-card">
+      <div className="row" style={{ flexWrap: 'nowrap', gap: 12 }}>
+        <span className="avatar" aria-hidden="true">{account.username.charAt(0).toUpperCase()}</span>
+        <span className="stack" style={{ gap: 0, minWidth: 0 }}>
+          <span className="title-l" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.username}</span>
+          <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />Your details are saved to this account</span>
+        </span>
+      </div>
+      {account.syncNote && <div className="alert info"><Info size={20} aria-hidden="true" />{account.syncNote}</div>}
+      <div className="row">
+        <button className="btn tonal" onClick={account.logOut}><LogOut size={18} aria-hidden="true" />Log out</button>
+        <button className="btn text" onClick={account.logOutEverywhere}>Log out on every device</button>
+      </div>
+      {!confirming
+        ? <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={() => setConfirming(true)}><Trash2 size={18} aria-hidden="true" />Delete my account</button>
+        : <div className="alert error" role="alertdialog" aria-label="Confirm account deletion">
+            <TriangleAlert size={20} aria-hidden="true" />
+            <span className="stack" style={{ gap: 8 }}>
+              <span>This deletes your account and everything saved in it, for good. It cannot be undone.</span>
+              <span className="row">
+                <button className="btn filled danger" onClick={() => account.deleteAccount().catch(() => setFailed('Could not delete. Check your connection and try again.'))}>Delete for good</button>
+                <button className="btn text" onClick={() => setConfirming(false)}>Keep my account</button>
+              </span>
+              {failed && <span>{failed}</span>}
+            </span>
+          </div>}
+    </section>);
+}
+
+function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileInput; meta: Meta | null; extras: Extras; go: (to: string) => void;
+  onClear: () => void; account: AccountControls }) {
   const install = useInstallPrompt();
   return (
     <>
@@ -362,6 +462,8 @@ function Me({ profile, meta, extras, go, onClear }: { profile: ProfileInput; met
         {extras.interests.length > 0 && <div className="have">{extras.interests.map(t => <span key={t}>{t}</span>)}</div>}
       </section>
       <button className="btn tonal" onClick={() => go('/about')}><Pencil size={18} aria-hidden="true" />Edit my details</button>
+      <p className="section-label">Account</p>
+      <AccountCard account={account} go={go} />
       <p className="section-label">Language</p>
       <div className="chips" role="radiogroup" aria-label="Language">
         <button className="chip" role="radio" aria-checked="false" disabled lang="si">සිංහල</button>
@@ -373,8 +475,11 @@ function Me({ profile, meta, extras, go, onClear }: { profile: ProfileInput; met
       {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>
         : <p className="helper">{install.installed ? 'ZedPath is installed on this phone.' : 'To install: open your browser menu and choose "Add to Home screen" or "Install app".'}</p>}
       <p className="section-label">Privacy</p>
-      <p className="body-m muted" style={{ margin: 0 }}>Your results, achievements and interests are stored only on this phone. They are sent to ZedPath only to calculate your options and are not kept.</p>
-      <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={onClear}><Trash2 size={18} aria-hidden="true" />Delete everything on this phone</button>
+      <p className="body-m muted" style={{ margin: 0 }}>{account.username
+        ? 'Your results, achievements and interests are kept on this phone and in your account, under your username only. Delete your account above to remove them from ZedPath for good.'
+        : 'Your results, achievements and interests are stored only on this phone. They are sent to ZedPath only to calculate your options and are not kept.'}</p>
+      <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={onClear}><Trash2 size={18} aria-hidden="true" />
+        {account.username ? 'Log out and clear this phone' : 'Delete everything on this phone'}</button>
     </>
   );
 }

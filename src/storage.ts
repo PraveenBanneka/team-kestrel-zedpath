@@ -1,12 +1,11 @@
-// Everything about the student lives only on this device (FR-104, NFR-030). Nothing here is sent for storage.
+// The student's details on this device (FR-104, NFR-030). Without an account nothing here is stored on a server;
+// with an account (CR-001) the same details are also kept in the account so they follow the student between devices.
 import type { ProfileInput } from '../shared/api.ts';
+import type { Extras } from '../shared/account.ts';
+export { INTERESTS, type Achievement, type Extras, type Level, type Place } from '../shared/account.ts';
 
-export type Level = 'SCHOOL' | 'ZONAL' | 'DISTRICT' | 'PROVINCIAL' | 'NATIONAL' | 'INTERNATIONAL';
-export type Place = 'FIRST' | 'SECOND' | 'THIRD' | 'TAKING_PART';
-export interface Achievement { id: string; activity: string; kind: 'SPORT' | 'COMPETITION' | 'CLUB' | 'ARTS' | 'OTHER'; level: Level; place: Place; year: number }
-export interface Extras { achievements: Achievement[]; interests: string[] }
-
-const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1' };
+const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
+  pendingSync: 'zedpath.pendingSync.v1' };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
@@ -18,6 +17,9 @@ export const isOnboarded = () => read<boolean>(KEYS.onboarded) === true;
 export const setOnboarded = () => write(KEYS.onboarded, true);
 export const loadLang = () => read<'si' | 'ta' | 'en'>(KEYS.lang) ?? 'en';
 export const saveLang = (l: 'si' | 'ta' | 'en') => write(KEYS.lang, l);
+/** Set when a save could not reach the account (offline); the phone's copy is then newer and is pushed, not replaced. */
+export const isPendingSync = () => read<boolean>(KEYS.pendingSync) === true;
+export const setPendingSync = (v: boolean) => write(KEYS.pendingSync, v);
 export function clearEverything() {                                                      // FR-106
   try { Object.values(KEYS).forEach(k => localStorage.removeItem(k)); } catch { /* nothing stored */ }
 }
@@ -33,6 +35,3 @@ export function specialIntakeHint(e: Extras): { applies: boolean; sport: boolean
   const qualifying = recent.filter(a => a.level === 'INTERNATIONAL' || (a.level === 'NATIONAL' && a.place !== 'TAKING_PART'));
   return { applies: qualifying.length > 0, sport: qualifying.some(a => a.kind === 'SPORT') };
 }
-
-export const INTERESTS = ['Building apps', 'Maths', 'Science and labs', 'Working with people', 'Business and money', 'Teaching',
-  'Health and caring', 'Art and design', 'Languages', 'Law and society', 'Nature and farming', 'Making and engineering', 'Sport'];
