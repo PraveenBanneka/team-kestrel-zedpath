@@ -18,11 +18,14 @@ const EXTRAS: Extras = {
   interests: ['Maths', 'Building apps'],
 };
 
+/** Counts like Workers Rate Limiting within one period: success while a key has been used <= limit times. */
+const counter = (limit: number) => { const n = new Map<string, number>();
+  return { limit: async ({ key }: { key: string }) => { n.set(key, (n.get(key) ?? 0) + 1); return { success: allow && n.get(key)! <= limit }; } }; };
 let env: Env, raw: ReturnType<typeof createTestD1>['raw'], allow = true;
 beforeEach(() => {
   const t = createTestD1();
   raw = t.raw; allow = true;
-  env = { DB: t.d1, PEPPER: 'test-pepper', AUTH_LIMITER: { limit: async () => ({ success: allow }) } } as unknown as Env;
+  env = { DB: t.d1, PEPPER: 'test-pepper', AUTH_LIMITER: counter(10), IP_LIMITER: counter(100) } as unknown as Env;
 });
 
 async function call(method: string, p: string, body?: unknown, cookie?: string, headers: Record<string, string> = {}) {
@@ -214,6 +217,20 @@ describe('accounts API', () => {
     const r = await call('POST', '/auth/signup', { username: 'evil', key: key('x'), profile: null }, undefined, { Origin: 'https://evil.example' });
     expect(r.status).toBe(403);
     expect(count('account')).toBe(0);
+  });
+
+  it('lets a whole class behind one school IP sign up together', async () => {
+    for (let i = 0; i < 30; i++) {
+      expect((await call('POST', '/auth/salt', { username: `student_${i}` })).status).toBe(200);
+      expect((await signup(`student_${i}`, `pw-${i}`)).r.status).toBe(201);
+    }
+    expect(count('account')).toBe(30);
+  });
+
+  it('blocks the 11th password guess at one account within a minute', async () => {
+    await signup('nimal_99', 'right');
+    for (let i = 0; i < 10; i++) expect((await call('POST', '/auth/login', { username: 'nimal_99', key: key(`guess-${i}`) })).status).toBe(401);
+    expect((await call('POST', '/auth/login', { username: 'nimal_99', key: key('right') })).status).toBe(429);
   });
 
   it('rate-limits sign-up and log-in', async () => {

@@ -73,10 +73,11 @@ const sameOrigin = async (c: C, next: Next) => {
   }
   await next();
 };
-const limited = async (c: C, key: string) => {
-  if (!c.env.AUTH_LIMITER) return false;
-  const { success } = await c.env.AUTH_LIMITER.limit({ key });
-  return !success;
+/** Two limits: 10/min per action + IP + username (guessing one account) and 100/min per IP (floods). Never per IP
+ *  alone at the low limit: a school lab or a home Wi-Fi puts many students behind one IP. */
+const limited = async (c: C, action: string, username: string) => {
+  const checks = [c.env.AUTH_LIMITER?.limit({ key: `${action}:${ip(c)}:${username}` }), c.env.IP_LIMITER?.limit({ key: `ip:${ip(c)}` })];
+  return (await Promise.all(checks)).some(r => r && !r.success);
 };
 const ip = (c: C) => c.req.header('CF-Connecting-IP') ?? 'local';
 
@@ -170,7 +171,7 @@ accountRoutes.post('/auth/salt', async c => {
   const b = await body(c);
   const username = normaliseUsername(String(b?.username ?? ''));
   if (!USERNAME_RE.test(username)) return err(c, 400, 'Usernames are 3 to 24 characters: letters, numbers, dot or underscore', 'username');
-  if (await limited(c, `salt:${ip(c)}`)) return err(c, 429, 'Too many tries. Wait a minute and try again');
+  if (await limited(c, 'salt', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
   const derived = await saltFor(c.env.PEPPER, username);                  // computed every time: same cost either way
   const row = await c.env.DB.prepare('SELECT salt FROM password_login WHERE username = ?').bind(username).first<{ salt: string }>();
   return c.json({ salt: row?.salt ?? derived, kdf: KDF } satisfies SaltResponse);
@@ -186,7 +187,7 @@ accountRoutes.post('/auth/signup', async c => {
   if (profile && 'error' in profile) return c.json(profile, 400);
   const extras = parseExtras(b?.extras);
   if ('error' in extras) return c.json(extras, 400);
-  if (await limited(c, `signup:${ip(c)}`)) return err(c, 429, 'Too many tries. Wait a minute and try again');
+  if (await limited(c, 'signup', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
 
   const db = c.env.DB, now = nowIso(), subject = `local:${randomHex(16)}`;
   const id = { sql: '(SELECT account_id FROM account WHERE auth_subject = ?)', args: [subject] };
@@ -214,7 +215,7 @@ accountRoutes.post('/auth/login', async c => {
   const username = normaliseUsername(String(b?.username ?? ''));
   const key = String(b?.key ?? '');
   if (!USERNAME_RE.test(username) || !KEY_HEX_RE.test(key)) return err(c, 401, 'Wrong username or password');
-  if (await limited(c, `login:${ip(c)}:${username}`)) return err(c, 429, 'Too many tries. Wait a minute and try again');
+  if (await limited(c, 'login', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
   const row = await c.env.DB.prepare('SELECT account_id, verifier FROM password_login WHERE username = ?').bind(username)
     .first<{ account_id: number; verifier: string }>();
   const given = await sha256Hex(fromHex(key));
@@ -236,7 +237,7 @@ accountRoutes.post('/auth/recover', async c => {
   const key = String(b?.key ?? '');
   const wrong = () => err(c, 401, 'That username and recovery code do not match');
   if (!USERNAME_RE.test(username) || !RECOVERY_RE.test(code) || !KEY_HEX_RE.test(key)) return wrong();
-  if (await limited(c, `recover:${ip(c)}:${username}`)) return err(c, 429, 'Too many tries. Wait a minute and try again');
+  if (await limited(c, 'recover', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
   const row = await c.env.DB.prepare(`SELECT p.account_id, r.code_hash FROM password_login p JOIN recovery_code r USING (account_id)
     WHERE p.username = ?`).bind(username).first<{ account_id: number; code_hash: string }>();
   const ok = sameHex(await sha256Hex(enc.encode(code)), row?.code_hash ?? '0'.repeat(64)) && !!row;

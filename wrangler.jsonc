@@ -14,13 +14,14 @@
     "run_worker_first": ["/api/*"]
   },
   "observability": { "enabled": true },
-  // Student accounts (CR-001). database_id is a placeholder until Praveen's GO for `d1 create`: local dev works on a
-  // local copy, and a deploy fails on the placeholder, so accounts cannot go live before the real database exists.
+  // Student accounts (CR-001). D1 database `zedpath`, created 2026-10-05 (APAC) after Praveen's GO.
   "d1_databases": [
-    { "binding": "DB", "database_name": "zedpath", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+    { "binding": "DB", "database_name": "zedpath", "database_id": "59e854ed-cf1b-4e32-8682-386b53a1e8ae", "migrations_dir": "migrations" }
   ],
-  // Free Workers Rate Limiting: slows password guessing (per IP + username) and sign-up floods (per IP).
+  // Free Workers Rate Limiting. AUTH_LIMITER: 10/min per IP + username (slows guessing one account's password).
+  // IP_LIMITER: 100/min per IP overall (stops floods, yet a school lab or a home Wi-Fi sharing one IP still fits).
   "ratelimits": [
-    { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }
+    { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
+    { "name": "IP_LIMITER", "namespace_id": "1002", "simple": { "limit": 100, "period": 60 } }
   ]
 }
