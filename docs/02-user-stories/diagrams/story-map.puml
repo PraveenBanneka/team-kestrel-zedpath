@@ -1,0 +1,44 @@
+@startmindmap
+!pragma layout smetana
+<style>
+mindmapDiagram {
+  node { BackgroundColor #CCE8E2; LineColor #006B5F; FontName Calibri; FontSize 13 }
+  :depth(0) { BackgroundColor #006B5F; FontColor white; FontSize 16 }
+  :depth(1) { BackgroundColor #9EF2E3 }
+}
+</style>
+* ZedPath\nafter-A/L journey
+** EP1 Profile & results
+*** Enter results once
+*** Estimate before results
+*** Read results photo (AI)
+** EP2 State university courses
+*** Eligibility + hidden-why
+*** Safe / Likely / Reach bands
+*** Course page + sources
+*** Dream course, compare
+** EP3 Preference list
+*** Build + order check
+*** Copy uni-codes
+** EP4 Journey & deadlines
+*** Timeline (confirmed/estimated)
+*** Aptitude tests, special intake
+*** Reminders
+left side
+** EP5 Other routes
+*** Route matcher
+*** Job exams from Gazette (AI)
+*** Recognition + loan check
+** EP6 Ask (cited, 3 languages)
+** EP7 People
+*** Verified seniors, groups
+*** Family share card
+*** Teacher view
+** EP8 After selection
+*** Registration, Mahapola
+*** Gap-year planner
+** EP9 Data & trust
+*** Source registry
+*** AI extraction + review
+*** Report a mistake
+@endmindmap

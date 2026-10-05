@@ -22,6 +22,21 @@ cut-offs, private degrees, gazetted job exams, vocational, abroad, retry) → de
 - Trust rules the product promises: every number links to its source; never "you will get in";
   no paid placement; nothing stored without asking. Sample data must be labelled as sample.
 
+## Working agreements (Praveen, 2026-10-05)
+- **Commit + push step by step.** Each meaningful iteration gets its own commit, so judges see the project grow.
+- **Documentation first, in the standard order, company grade.** `docs/` holds ZP-DOC-00..08:
+  00 Documentation Standard → 01 Vision & Scope → 02 User Stories → 03 SRS → 04 Use Cases →
+  05 Data Design (EER → relational → normalisation → D1 DDL) → 06 Architecture → 07 UI/UX → 08 Test Plan.
+  Each as `.md` (source of truth) + generated `.docx` + `.pdf`, built by `node docs/_build/build.ts [NN]`.
+  Rules for format, IDs, versions, approval, styling: ZP-DOC-00. Never hand-edit generated files.
+- **TypeScript everywhere** (app, API, rule engine, tooling).
+- **UI: Material Design 3** via the `ui-ux-pro-max` skill (Material You / Roboto profile), matching the concept preview.
+- **Use the Cloudflare free plan fully, within its limits.** Limits verified from developers.cloudflare.com on
+  2026-10-05 (budget + sources go in ZP-DOC-06). Key facts: 10 ms CPU/request, 100k req/day, static assets free;
+  no outbound email on Free; Queues, Workflows, DO (SQLite), Vectorize, Workers AI (10k neurons/day),
+  AI Gateway (proxies Gemini), Turnstile, Browser Run all available. Next.js SSR risks Error 1102 under 10 ms →
+  recommended stack: Vite + React SPA on static assets + Hono API in one Worker (decision recorded as an ADR in ZP-DOC-06).
+
 ## Cloudflare: environment map
 | Thing | Value |
 |---|---|

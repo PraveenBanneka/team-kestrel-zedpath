@@ -13,3 +13,12 @@ dist/
 
 # Gate 1 deck: kept local, not in the public repo
 Kestrel_Gate1_Problem-and-Proof.pdf
+
+# docs build: PlantUML jar is downloaded, not committed (see docs/_build/README.md)
+docs/_build/plantuml.jar
+# Word lock files
+~$*
+
+# Official UGC source PDFs: kept local, cited by the app from R2, not redistributed in the repo
+COP_*.pdf
+student_handbook_*.pdf

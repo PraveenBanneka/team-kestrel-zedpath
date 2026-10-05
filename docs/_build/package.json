@@ -1,0 +1,12 @@
+{
+  "name": "zedpath-docs-build",
+  "private": true,
+  "type": "module",
+  "description": "Builds docs/*/ZP-DOC-*.md into .docx (docx-js) and .pdf (Microsoft Word); renders PlantUML diagrams. Runs as TypeScript directly on Node 23.6+.",
+  "scripts": {
+    "build": "node build.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": { "docx": "^9", "marked": "^15" },
+  "devDependencies": { "typescript": "^5", "@types/node": "^24" }
+}
