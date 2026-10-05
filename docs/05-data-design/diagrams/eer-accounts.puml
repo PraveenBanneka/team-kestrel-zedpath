@@ -1,0 +1,87 @@
+@startchen
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam backgroundColor white
+
+entity ACCOUNT {
+  AccountID <<key>>
+  AuthSubject
+  Role
+  CreatedAt
+}
+entity STUDENT {
+  ZScore
+  Interest <<multi>>
+}
+ACCOUNT ->- d { STUDENT }
+
+entity PASSWORD_LOGIN <<weak>> {
+  Username
+  Salt
+  Verifier
+  Kdf
+  UpdatedAt
+}
+relationship SIGNS_IN_WITH <<identifying>> {
+}
+ACCOUNT -1- SIGNS_IN_WITH
+SIGNS_IN_WITH =1= PASSWORD_LOGIN
+
+entity RECOVERY_CODE <<weak>> {
+  CodeHash
+  CreatedAt
+}
+relationship RECOVERS_WITH <<identifying>> {
+}
+ACCOUNT -1- RECOVERS_WITH
+RECOVERS_WITH =1= RECOVERY_CODE
+
+entity SESSION {
+  TokenHash <<key>>
+  CreatedAt
+  ExpiresAt
+}
+relationship SIGNED_IN {
+}
+ACCOUNT -1- SIGNED_IN
+SIGNED_IN =N= SESSION
+
+entity STREAM {
+  StreamCode <<key>>
+}
+entity DISTRICT {
+  DistrictCode <<key>>
+}
+entity SUBJECT {
+  SubjectCode <<key>>
+}
+relationship SAT_IN {
+}
+STUDENT -N- SAT_IN
+SAT_IN -1- STREAM
+relationship SAT_FROM {
+}
+STUDENT -N- SAT_FROM
+SAT_FROM -1- DISTRICT
+relationship TOOK {
+  Grade
+  Position
+}
+STUDENT -M- TOOK
+TOOK -N- SUBJECT
+
+entity ACHIEVEMENT <<weak>> {
+  Position <<key>>
+  Activity
+  Kind
+  Level
+  Place
+  Year
+}
+relationship ACHIEVED <<identifying>> {
+}
+STUDENT -1- ACHIEVED
+ACHIEVED =N= ACHIEVEMENT
+@endchen

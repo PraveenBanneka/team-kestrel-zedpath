@@ -1,0 +1,91 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam linetype ortho
+hide circle
+hide methods
+hide stereotypes
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #006B5F
+  HeaderBackgroundColor #E9F4F1
+  ArrowColor #3F4946
+}
+entity password_login {
+  * <b>account_id</b> : INTEGER <<FK>>
+  --
+  * username : TEXT
+  * salt : TEXT
+  * verifier : TEXT
+  * kdf : TEXT
+  * updated_at : TEXT
+}
+entity session {
+  * <b>token_hash</b> : TEXT
+  --
+  * account_id : INTEGER <<FK>>
+  * created_at : TEXT
+  * expires_at : TEXT
+}
+entity recovery_code {
+  * <b>account_id</b> : INTEGER <<FK>>
+  --
+  * code_hash : TEXT
+  * created_at : TEXT
+}
+entity student_profile {
+  * <b>account_id</b> : INTEGER <<FK>>
+  --
+  * stream_code : TEXT <<FK>>
+  * district_code : TEXT <<FK>>
+  * z_e4 : INTEGER
+  * updated_at : TEXT
+}
+entity student_subject {
+  * <b>account_id</b> : INTEGER <<FK>>
+  * <b>position</b> : INTEGER
+  --
+  * subject_code : TEXT <<FK>>
+  * grade : TEXT
+}
+entity student_achievement {
+  * <b>achievement_id</b> : INTEGER
+  --
+  * account_id : INTEGER <<FK>>
+  * position : INTEGER
+  * activity : TEXT
+  * kind : TEXT
+  * level : TEXT
+  * place : TEXT
+  * year : INTEGER
+}
+entity student_interest {
+  * <b>account_id</b> : INTEGER <<FK>>
+  * <b>interest</b> : TEXT
+  --
+}
+entity account #F3F8F6 {
+  (see other diagram)
+}
+entity district #F3F8F6 {
+  (see other diagram)
+}
+entity stream #F3F8F6 {
+  (see other diagram)
+}
+entity subject #F3F8F6 {
+  (see other diagram)
+}
+account ||--o| password_login : account_id
+account ||--o{ session : account_id
+account ||--o| recovery_code : account_id
+district ||--o{ student_profile : district_code
+stream ||--o{ student_profile : stream_code
+account ||--o| student_profile : account_id
+subject ||--o{ student_subject : subject_code
+student_profile ||--o{ student_subject : account_id
+account ||--o{ student_achievement : account_id
+account ||--o{ student_interest : account_id
+@enduml

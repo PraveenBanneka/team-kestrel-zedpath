@@ -179,8 +179,8 @@ account |o--o{ mistake_report : resolved_by
 fact ||--o{ mistake_report : fact_id
 fact ||--o{ route : fact_id
 rule_node |o--o{ route : rule_root_id
-route ||--o{ route_private_degree : route_id
-route ||--o{ route_job_exam : route_id
+route ||--o| route_private_degree : route_id
+route ||--o| route_job_exam : route_id
 fact ||--o{ deadline : fact_id
 route |o--o{ deadline : route_id
 intake_year ||--o{ deadline : academic_year

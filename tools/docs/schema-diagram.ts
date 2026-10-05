@@ -21,6 +21,8 @@ const groups: Record<string, string[]> = {
   'relational-trust-journey': ['fact', 'citation', 'source_document', 'fact_revision', 'account', 'extraction_run', 'candidate_fact',
     'mistake_report', 'route', 'route_private_degree', 'route_job_exam', 'deadline', 'deadline_offering_year', 'push_subscription',
     'push_subscription_deadline'],
+  'relational-accounts': ['password_login', 'session', 'recovery_code', 'student_profile', 'student_subject', 'student_achievement',
+    'student_interest'],
 };
 const all = new Set(Object.values(groups).flat());
 const missing = tables.filter(t => !all.has(t));
@@ -50,9 +52,12 @@ for (const [name, members] of Object.entries(groups)) {
       if (!inGroup.has(target)) refs.add(target);
       const fromCol = cols.find(c => c.name === f.from)!;
       const optional = !fromCol.notnull && !fromCol.pk;
-      // crow's foot: many children to one (or zero-or-one) parent
+      // crow's foot: many children to one (or zero-or-one) parent; when the foreign key IS the whole primary key the
+      // child is a 1:1 extension (subtype table, login, profile), so at most one child per parent: zero-or-one.
+      const pkCols = cols.filter(c => c.pk).map(c => c.name);
+      const oneToOne = pkCols.length === 1 && pkCols[0] === f.from;
       const key = `${t}->${target}:${f.from}`;
-      if (!refs.has(key)) { refs.add(key); rels.push(`${target} ${optional ? '|o' : '||'}--o{ ${t} : ${f.from}`); }
+      if (!refs.has(key)) { refs.add(key); rels.push(`${target} ${optional ? '|o' : '||'}--${oneToOne ? 'o|' : 'o{'} ${t} : ${f.from}`); }
     }
   }
   for (const r of refs) if (!r.includes('->') && !inGroup.has(r)) lines.push(`entity ${r} #F3F8F6 {\n  (see other diagram)\n}`);

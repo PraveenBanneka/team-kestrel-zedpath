@@ -12,6 +12,7 @@ approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Enhanced ER model and mapping algorithm (Elmasri and Navathe, 7th ed.); relational normalisation to BCNF/4NF; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: four EER diagrams, rule grammar, mapping, normalisation, D1 schema validated against the real UGC 2025/26 and 2024/25 data; submitted for approval
+revision: 0.9 | 5 Oct 2026 | Team Kestrel | Revised in review for CR-001 (student accounts, approved by the product owner): Section 2.5 EER model, mapping, normalisation, security conventions, 7 tables (migrations 0002 and 0003), 1:1 cardinality in the generated logical diagrams, evidence
 ---
 
 # Introduction
@@ -25,8 +26,10 @@ migration file the application uses, and it has been proved by loading the real 
 
 ## Scope
 
-All data held on the server for Releases R1 and R2. The student's own profile and preference list are **not**
-stored on the server (NFR-030); they live on the student's device and are outside this model.
+All data held on the server for Releases R1 and R2. By default the student's own profile lives only on their
+device (NFR-030). Change request CR-001 (5 October 2026) adds an **optional** student account: a student who
+chooses to create one keeps the same profile on the server, under a username only, so it follows them between
+devices and can drive reminders. Section 2.5 models it. The preference list stays on the device.
 
 ## Intended audience
 
@@ -42,6 +45,7 @@ Table: Position of this document in the ZedPath document set
 | ZP-DOC-04 Use Case Model | Parent. Nouns in the use cases name the entities |
 | ZP-DOC-06 Software Architecture | Child. Decides how the read path uses this schema within free-plan limits |
 | `migrations/0001_initial_schema.sql` | Implementation. Appendix A reproduces it verbatim |
+| `migrations/0002_reference_data.sql`, `0003_student_accounts.sql` | Implementation of CR-001. 0002 is generated reference data; Appendix B reproduces 0003 verbatim |
 
 ## Notation
 
@@ -84,6 +88,19 @@ of one **union category**, CITED_FACT, so these trust features are designed once
 
 ![EER model of deadlines, push reminders and the specialisation of other routes](diagrams/eer-journey.png)
 
+## Student accounts (CR-001)
+
+A student account is optional. ACCOUNT, already the superclass of the staff roles, gains a fourth subclass,
+STUDENT. Each way of signing in is its own weak entity of ACCOUNT, so a later identity provider (for example
+Google sign-in) adds an entity without touching the others. A password is never stored: PASSWORD_LOGIN holds a
+salt and a *verifier*, a hash of a key the student's device derives from the password. A STUDENT's results are
+the attributes the device already keeps: a Z-score, the stream sat (SAT_IN), the district sat from (SAT_FROM), and
+three subjects with grades (TOOK, whose attributes are Grade and Position). Achievements are a weak entity with
+partial key Position; interests are a multi-valued attribute. No name, email address or telephone number exists
+anywhere in the model.
+
+![EER model of optional student accounts: sign-in, sessions, recovery and the student's results](diagrams/eer-accounts.png)
+
 ## Entity catalogue
 
 Table: Entities, their type, identifier and the requirements that justify them
@@ -104,7 +121,11 @@ Table: Entities, their type, identifier and the requirements that justify them
 | SOURCE_DOCUMENT | Strong | SourceID; Sha256 unique | FR-901, FR-902 |
 | FACT_REVISION | Weak, owner CITED_FACT | partial key Version | FR-911 |
 | EXTRACTION_RUN, CANDIDATE_FACT | Strong | RunID; CandidateID | FR-903 to FR-907 |
-| ACCOUNT | Strong, superclass of CURATOR, SENIOR, TEACHER (disjoint, partial) | AccountID | NFR-032, FR-704, FR-706 |
+| ACCOUNT | Strong, superclass of CURATOR, SENIOR, TEACHER, STUDENT (disjoint, partial) | AccountID | NFR-032, FR-704, FR-706, CR-001 |
+| STUDENT | Subclass of ACCOUNT | AccountID (inherited) | CR-001 |
+| PASSWORD_LOGIN, RECOVERY_CODE | Weak, owner ACCOUNT, 1:1 | AccountID (owner's key); Username unique | CR-001 |
+| SESSION | Strong, N:1 to ACCOUNT | TokenHash | CR-001 |
+| ACHIEVEMENT | Weak, owner STUDENT | partial key Position | CR-001, BR on special intakes (handbook Section 6) |
 | MISTAKE_REPORT | Strong | ReportID | FR-910 |
 | DEADLINE | Strong | DeadlineID | FR-401 to FR-403 |
 | ROUTE | Strong, superclass of six route groups (disjoint, total) | RouteID | FR-501 to FR-507 |
@@ -152,9 +173,25 @@ Table: EER-to-relational mapping steps applied
 | 8 | Specialisation | ROUTE | Option 8A: superclass table plus `route_private_degree` and `route_job_exam` for subclasses with several constrained attributes; single-attribute subclasses keep the attribute on `route` with a guard constraint |
 | 9 | Union category | CITED_FACT | Surrogate key `fact_id` in table `fact`; every member table carries a unique foreign key to it |
 
+The student-account constructs (CR-001) were mapped with the same algorithm:
+
+Table: Mapping of the student-account model
+
+| Step | Construct | Result |
+|---|---|---|
+| 2 | Weak entities PASSWORD_LOGIN, RECOVERY_CODE (1:1 with the owner) | `password_login`, `recovery_code`, primary key = owner's `account_id` (at most one per account). Kept apart from `account` so staff rows carry no password columns and each sign-in method can be added or removed alone |
+| 2 | Weak entity ACHIEVEMENT | `student_achievement` with surrogate `achievement_id`; the partial key becomes UNIQUE (`account_id`, `position`) |
+| 4 | 1:N SIGNED_IN | Foreign key `session.account_id` |
+| 4 | 1:N SAT_IN, SAT_FROM and the Z-score | Moved, with the Z-score, into `student_profile` keyed by `account_id`. A separate relation because participation is partial: an account may exist before results are entered, so no NULL-filled columns on `account` (option for partial 1:1 participation) |
+| 5 | M:N TOOK (Grade, Position) | `student_subject(account_id, position, subject_code, grade)`; at most three per student through CHECK (position 1 to 3), no subject twice through UNIQUE |
+| 6 | Multi-valued Interest | `student_interest(account_id, interest)` |
+| 8 | Specialisation STUDENT | Option 8C as before: the `role` discriminator gains `STUDENT`; triggers refuse student rows for any other role |
+
 ![Logical schema, admission data (generated from the migration file)](diagrams/relational-admission.png)
 
 ![Logical schema, trust, routes and journey data (generated from the migration file)](diagrams/relational-trust-journey.png)
+
+![Logical schema, optional student accounts (generated from the migration files)](diagrams/relational-accounts.png)
 
 # Normalisation
 
@@ -198,6 +235,12 @@ The candidate key of R1 is (UniCode, Year, GroupCode, District, Medium).
 The same analysis applied to the provenance data separates `citation` (fact, source, page) from `fact`, because a
 fact may cite several pages and a page supports many facts.
 
+The student-account relations are in BCNF by construction. In each, the only determinants are the keys:
+`password_login` has two candidate keys, `account_id` and `username`, and every other attribute depends on
+either. `student_subject` has the candidate keys (`account_id`, `position`) and (`account_id`, `subject_code`),
+with Grade depending on both. A student's interests are independent of their achievements (MVD AccountID ↠
+Interest), so they are kept in separate relations (4NF).
+
 ## Deliberate departures
 
 Table: Controlled denormalisations and why they are safe
@@ -220,8 +263,16 @@ Table: Controlled denormalisations and why they are safe
   a number and an NQC cut-off must not; an auto-published candidate must have two-model agreement at 0.90 or more
   (FR-905); an estimated deadline must state its basis (FR-402).
 - **Foreign keys** are enforced by D1 by default (equivalent to `PRAGMA foreign_keys = ON`).
-- **Personal data**: the only student-linked table is `push_subscription`, holding a browser push endpoint and
-  keys that the student opted in to share (NFR-030); no names, contact details or results.
+- **Personal data**: without an account, the only student-linked table is `push_subscription`, holding a browser
+  push endpoint and keys that the student opted in to share (NFR-030). With an optional account (CR-001), the
+  student's results, achievements and interests are kept under a username they choose; there are still no
+  names, contact details or telephone numbers. `DELETE FROM account` cascades to every row of that student.
+- **Secrets are stored only as hashes** (CR-001): `password_login.verifier` = SHA-256 of a key that the
+  device derives with PBKDF2-HMAC-SHA256 at 600,000 rounds (the password never reaches the server);
+  `session.token_hash` = SHA-256 of the random cookie token; `recovery_code.code_hash` = SHA-256 of an 80-bit
+  random code. A copy of the tables therefore cannot be replayed to log in, and a guessed password costs an
+  attacker 600,000 rounds per guess. Verifying a login costs the Worker one SHA-256, well inside the free plan's
+  10 ms CPU limit.
 
 ## Indexes
 
@@ -237,6 +288,9 @@ Table: Secondary indexes and the query each serves
 | `idx_citation_source` | All facts citing a source (re-extraction, audits) |
 | `idx_candidate_queue` (partial, QUEUED only) | Curator review queue |
 | `idx_report_open` (partial, OPEN only) | Open mistake reports |
+| `idx_session_account` | Log out on every device; clearing expired sessions at log-in |
+| `idx_student_profile_stream`, `idx_student_profile_district` | Foreign-key checks when a stream or district row changes; counts for reminders by district |
+| `idx_student_subject_subject` | Foreign-key checks on `subject` |
 
 ## Capacity against the free plan
 
@@ -273,6 +327,22 @@ Table: Schema validation results (5 October 2026)
 | Foreign-key violations | 0 | 0 |
 | Invalid inserts rejected by constraints | 24 of 24 | 24 of 24 |
 
+The student-account tables (CR-001) are validated by `worker/account.test.ts`, which applies all three migrations
+to an in-memory SQLite database with foreign keys on, exactly as D1 enforces them, and drives the real API.
+
+Table: Student-account validation results (5 October 2026)
+
+| Check | Result |
+|---|---|
+| Schema after migrations 0001 to 0003 | 35 tables, 190 columns, 52 foreign keys, 12 indexes, 3 triggers |
+| Reference rows loaded by 0002 (streams / districts / subjects) | 6 / 25 / 59 |
+| Invalid inserts rejected (unknown role, bad username, wrong-length hash, unknown KDF, Z-score out of range, unknown stream, district or subject, fourth subject, duplicate subject, grade D, blank or unknown achievement fields, unknown interest, expiry before creation, student rows on a staff account) | 17 of 17 |
+| Deleting one account removes exactly its rows from all 8 account tables and nothing of another account | Pass |
+| A request can read or change only its own session's account, whatever the request body says | Pass |
+| A save that fails validation changes nothing (atomic batch) | Pass |
+| Bugs planted on purpose (body-supplied account id, missing cascade, missing cross-site check, key not compared) caught by a failing test | 4 of 4 |
+| Same migrations applied to the local D1 runtime (`wrangler d1 migrations apply --local`) | 3 of 3 applied |
+
 Matching the cut-off table to Uni-Codes surfaced spelling differences between the two UGC documents
 ("BIO.SC" and "BIOLOGICAL SC.", "AGRI BUSINESS" and "AGRIBUSINESS", "BIO RESOURCES" and "BIORESOURCES") and one
 misprinted university name. The loader normalises these explicitly; no column is matched by guesswork.
@@ -295,12 +365,20 @@ Table: Requirements and the tables that realise them
 | FR-401 to FR-406 (journey, reminders) | `deadline`, `deadline_offering_year`, `push_subscription`, `push_subscription_deadline` |
 | FR-501 to FR-507 (other routes) | `route`, `route_private_degree`, `route_job_exam` |
 | FR-901 to FR-911 (data and trust) | `source_document`, `extraction_run`, `candidate_fact`, `fact_revision`, `mistake_report`, `account` |
+| CR-001 (optional student account, cross-device profile) | `account` (role STUDENT), `password_login`, `session`, `recovery_code`, `student_profile`, `student_subject`, `student_achievement`, `student_interest` |
 
 # Physical schema (migration 0001) {.appendix}
 
 Reproduced verbatim from `migrations/0001_initial_schema.sql`.
 
 <!-- include: migrations/0001_initial_schema.sql -->
+
+# Student accounts (migration 0003) {.appendix}
+
+Reproduced verbatim from `migrations/0003_student_accounts.sql`. Migration 0002 inserts the reference data (6
+streams, 25 districts, 59 subjects) and is generated by `tools/seed/reference-sql.ts` from the compiled rulebook.
+
+<!-- include: migrations/0003_student_accounts.sql -->
 
 # Glossary {.appendix}
 
