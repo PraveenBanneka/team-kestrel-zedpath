@@ -3,17 +3,17 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version 411b3b72 (accounts) + a PEPPER secret change on top (id to be
-  read at the next GO). Rollback target 16feb5ec (design v2 + GEMINI_API_KEY). Secrets: GEMINI_API_KEY, PEPPER.
+  https://zedpath.teamkestrel.workers.dev = version bd7a6d89 (accounts, rate-limit fix, assetlinks, test notification).
+  Rollback target da60b5ff. Secrets: GEMINI_API_KEY, PEPPER.
   D1 `zedpath` (59e854ed..., APAC): 35 tables, reference data loaded, 0 student accounts after the net-zero test.
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
 - **Code:** onboarding -> Paths -> courses -> degree details -> hidden; other paths; Me; installable PWA; design v2;
-  **student accounts LIVE** (username + password, recovery code, sync, delete). Committed but NOT yet live:
-  9770558 rate-limit fix (a school lab on one IP was capped at 10 sign-ups a minute). Tests 56/56.
+  **student accounts LIVE** (username + password, recovery code, sync, delete) incl. the rate-limit fix (9770558);
+  test-notification button. Tests 56/56.
 - **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised for CR-001, 33 pages). Next: 06, 07, 08; SRS v1.1.
-- **Now:** Android APK (Trusted Web Activity via Bubblewrap; package com.teamkestrel.zedpath). Video dropped by
-  Praveen ("I dont want the video"); video/LESSONS.md kept. Gate 3 still needs a demo video (Praveen to record).
-- **Next:** APK -> GO deploy (rate-limit fix + assetlinks.json) -> Ask ZedPath -> reminders.
+- **Android:** APK 1.0.1 (TWA, com.teamkestrel.zedpath, native notifications) built and sent; see android/README.md.
+  Video dropped by Praveen ("I dont want the video"); video/LESSONS.md kept. Gate 3 still needs a demo video.
+- **Next:** Ask ZedPath (corpus built; needs GEMINI_API_KEY in .dev.vars + a GO for the Vectorize index) -> reminders.
 - **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
 
 ---
@@ -143,3 +143,18 @@
 - Found while re-running the script locally: salt + sign-up limited per IP alone (10/min) would block a school lab
   or home Wi-Fi. Fixed in 9770558 (per IP+username 10/min, per IP 100/min; classroom test; mutation-checked).
   Not live yet: ships with the next GO.
+
+## 2026-10-05: Android APK 1.0.0 -> 1.0.1, deploy bd7a6d89 (Praveen's GO)
+- Praveen asked for an APK. Built a Trusted Web Activity with Bubblewrap (JDK 17 + Android SDK 36 in
+  %USERPROFILE%\.bubblewrap, outside the repo). Signing key in %USERPROFILE%\.zedpath-signing (DPAPI-encrypted
+  password); fingerprint B6:3E:...:98:A8. Fixes on the way: Bubblewrap expects bin/ at the SDK root (junctions added);
+  this session sets NoDefaultCurrentDirectoryInExePath=1, cleared for the build process only.
+- 1.0.0 opened with a Chrome bar (Praveen's screenshot) because assetlinks.json was not yet deployed.
+- Praveen asked "how do I know it is safe / what if it bricks my phone": showed permissions (none), components, the
+  only URL, signer and SHA-256; uninstall removes it; Play Protect / VirusTotal / rebuild-from-repo as checks.
+- GO (2nd message; "here my GO" was refused by the guard because GO must come first). Live before: da60b5ff.
+  Deploy exit 0, 56/56 tests -> version **bd7a6d89-c2c8-4390-abf3-4e4889b694e5**: assetlinks.json (200,
+  application/json, no redirect; Google's Digital Asset Links API returns the statement), monochrome icon, test
+  notification button (exactly one notification, fixed tag), SW v2 with notificationclick, rate-limit fix (9770558).
+- APK 1.0.1 (versionCode 2, notifications on, same key; new permission POST_NOTIFICATIONS only), sha256 1199a954...
+  Sent to Praveen's phone. Vectorize binding held back until the Ask index exists.
