@@ -4,10 +4,13 @@
 - **Date:** 2026-10-05
 - **Cloudflare:** wrangler is still logged into the SALON account (`c5cbb437...`). ZedPath account
   not connected yet. Nothing deployed. Nothing created on any Cloudflare account.
-- **Code:** none yet. Project basics + deploy guard in place.
+- **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
+- **Code:** no app code yet. README, rules, guards in place.
 - **Next step:** Praveen logs in to the NEW Cloudflare account by hand (`npx wrangler login` in his own
-  terminal) → Claude runs `whoami`, reports, pins `account_id` → scaffold the Week 2 core flow.
-- **Deadline:** Tuesday progress review. Working version early matters most.
+  terminal) → Claude runs `whoami`, reports, pins `account_id`. App scaffold can start in parallel (local only).
+- **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video ≤ 4 min).
+- **Open questions for Praveen:** Gate 1 PDF in the repo or not? · licence (none yet = all rights reserved)
+  · Gate 2 (due 3 Oct) submitted?
 
 ---
 
