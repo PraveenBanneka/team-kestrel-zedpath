@@ -1,0 +1,54 @@
+@startchen
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam backgroundColor white
+
+entity STREAM {
+  StreamCode <<key>>
+  Name {
+    NameEn
+    NameSi
+    NameTa
+  }
+}
+entity SUBJECT {
+  SubjectCode <<key>>
+  Name
+  ArtsBasket
+}
+relationship OFFERED_IN {
+}
+STREAM -M- OFFERED_IN
+OFFERED_IN -N- SUBJECT
+
+entity SELECTION_GROUP <<weak>> {
+  GroupCode <<partial>>
+}
+entity ROUTE {
+  RouteID <<key>>
+}
+entity RULE_NODE {
+  NodeID <<key>>
+  Kind
+  Threshold
+  MinGrade
+}
+relationship CHILD_OF {
+}
+RULE_NODE -1- CHILD_OF
+CHILD_OF -N- RULE_NODE
+relationship TESTS {
+}
+RULE_NODE -N- TESTS
+TESTS -1- SUBJECT
+relationship REQUIRES {
+}
+SELECTION_GROUP =N= REQUIRES
+REQUIRES -1- RULE_NODE
+relationship ROUTE_REQUIRES {
+}
+ROUTE -N- ROUTE_REQUIRES
+ROUTE_REQUIRES -1- RULE_NODE
+@endchen

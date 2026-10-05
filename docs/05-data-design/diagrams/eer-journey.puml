@@ -1,0 +1,81 @@
+@startchen
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam backgroundColor white
+
+entity INTAKE_YEAR {
+  AcademicYear <<key>>
+}
+entity OFFERING_YEAR <<weak>> {
+  HasAptitudeTest
+}
+entity DEADLINE {
+  DeadlineID <<key>>
+  Kind
+  DueOn
+  Certainty
+  Basis
+}
+relationship FOR_YEAR {
+}
+DEADLINE =N= FOR_YEAR
+FOR_YEAR -1- INTAKE_YEAR
+relationship CONCERNS {
+}
+DEADLINE -M- CONCERNS
+CONCERNS -N- OFFERING_YEAR
+
+entity PUSH_SUBSCRIPTION {
+  SubscriptionID <<key>>
+  Endpoint
+  Keys {
+    P256dh
+    Auth
+  }
+  CreatedAt
+}
+relationship REMINDS {
+}
+PUSH_SUBSCRIPTION =M= REMINDS
+REMINDS -N- DEADLINE
+
+entity ROUTE {
+  RouteID <<key>>
+  Name
+  Provider
+  Duration
+  Cost {
+    CostMin
+    CostMax
+  }
+  IntakeTiming
+}
+entity PRIVATE_DEGREE {
+  AwardingBody
+  RecognitionStatus
+}
+entity DIPLOMA {
+  Awarder
+}
+entity PROFESSIONAL {
+  Body
+}
+entity VOCATIONAL {
+  NvqLevel
+}
+entity JOB_EXAM {
+  AgeMin
+  AgeMax
+  ClosesOn
+}
+entity SCHOLARSHIP_ABROAD {
+  Country
+}
+ROUTE =>= d { PRIVATE_DEGREE, DIPLOMA, PROFESSIONAL, VOCATIONAL, JOB_EXAM, SCHOLARSHIP_ABROAD }
+relationship ROUTE_DEADLINE {
+}
+ROUTE -1- ROUTE_DEADLINE
+ROUTE_DEADLINE -N- DEADLINE
+@endchen

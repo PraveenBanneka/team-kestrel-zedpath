@@ -1,0 +1,93 @@
+@startchen
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam backgroundColor white
+
+entity DISTRICT {
+  DistrictCode <<key>>
+  Name
+  IsDisadvantaged
+}
+
+entity INSTITUTION {
+  Letter <<key>>
+  Name
+}
+entity UNIVERSITY {
+  Kind
+}
+entity CAMPUS {
+  ParentLetter
+}
+entity HIGHER_ED_INSTITUTE {
+  Kind
+}
+INSTITUTION =>= d { UNIVERSITY, CAMPUS, HIGHER_ED_INSTITUTE }
+relationship PART_OF {
+}
+CAMPUS =N= PART_OF
+PART_OF -1- UNIVERSITY
+
+entity COURSE {
+  CourseCode <<key>>
+  Name
+  Field
+}
+entity OFFERING <<weak>> {
+  UniCode <<derived>>
+}
+relationship OF_COURSE <<identifying>> {
+}
+relationship AT_INSTITUTION <<identifying>> {
+}
+COURSE -1- OF_COURSE
+OF_COURSE =N= OFFERING
+INSTITUTION -1- AT_INSTITUTION
+AT_INSTITUTION =N= OFFERING
+
+entity INTAKE_YEAR {
+  AcademicYear <<key>>
+  ExamYear
+}
+entity OFFERING_YEAR <<weak>> {
+  ProposedIntake
+  Duration
+  Medium <<multi>>
+  IsSuspended
+  HasAptitudeTest
+}
+relationship RUNS <<identifying>> {
+}
+relationship IN_YEAR <<identifying>> {
+}
+OFFERING -1- RUNS
+RUNS =N= OFFERING_YEAR
+INTAKE_YEAR -1- IN_YEAR
+IN_YEAR =N= OFFERING_YEAR
+
+entity SELECTION_GROUP <<weak>> {
+  GroupCode <<partial>>
+  Basis
+  SeatShare
+}
+relationship SPLIT_INTO <<identifying>> {
+}
+OFFERING_YEAR -1- SPLIT_INTO
+SPLIT_INTO =N= SELECTION_GROUP
+
+entity CUTOFF <<weak>> {
+  MinZ
+  Status
+}
+relationship CUT_FOR <<identifying>> {
+}
+relationship FROM_DISTRICT <<identifying>> {
+}
+SELECTION_GROUP -1- CUT_FOR
+CUT_FOR =N= CUTOFF
+DISTRICT -1- FROM_DISTRICT
+FROM_DISTRICT =N= CUTOFF
+
+@endchen

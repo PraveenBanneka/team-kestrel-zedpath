@@ -1,0 +1,125 @@
+@startchen
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam backgroundColor white
+
+entity CITED_FACT {
+  FactID <<key>>
+  Kind
+  State
+  CurrentVersion
+}
+entity CUTOFF <<weak>> {
+  MinZ
+}
+entity OFFERING_YEAR <<weak>> {
+  ProposedIntake
+}
+entity RULE_NODE {
+  NodeID <<key>>
+}
+entity DEADLINE {
+  DeadlineID <<key>>
+}
+entity ROUTE {
+  RouteID <<key>>
+}
+CITED_FACT =>= U { CUTOFF, OFFERING_YEAR, RULE_NODE, DEADLINE, ROUTE }
+
+entity SOURCE_DOCUMENT {
+  SourceID <<key>>
+  Publisher
+  Title
+  Edition
+  IssueDate
+  Language
+  Sha256
+  StorageKey
+}
+relationship CITES {
+  Page
+  Quote
+}
+CITED_FACT =N= CITES
+CITES -M- SOURCE_DOCUMENT
+
+entity FACT_REVISION <<weak>> {
+  Version <<partial>>
+  Snapshot
+  ChangedAt
+  Reason
+}
+relationship HAS_REVISION <<identifying>> {
+}
+CITED_FACT -1- HAS_REVISION
+HAS_REVISION =N= FACT_REVISION
+
+entity EXTRACTION_RUN {
+  RunID <<key>>
+  StartedAt
+  Status
+}
+relationship READS {
+}
+EXTRACTION_RUN =N= READS
+READS -1- SOURCE_DOCUMENT
+
+entity CANDIDATE_FACT {
+  CandidateID <<key>>
+  Payload
+  Page
+  ExtractorConfidence
+  CheckerVerdict
+  CheckerConfidence
+  State
+}
+relationship PRODUCED {
+}
+EXTRACTION_RUN -1- PRODUCED
+PRODUCED =N= CANDIDATE_FACT
+relationship PUBLISHED_AS {
+}
+CANDIDATE_FACT -N- PUBLISHED_AS
+PUBLISHED_AS -1- CITED_FACT
+
+entity ACCOUNT {
+  AccountID <<key>>
+  AuthSubject
+  CreatedAt
+}
+entity CURATOR {
+  Role
+}
+entity SENIOR {
+  VerifiedFor
+}
+entity TEACHER {
+  ClassCode
+}
+ACCOUNT ->- d { CURATOR, SENIOR, TEACHER }
+
+relationship REVIEWS {
+  Decision
+  Note
+  ReviewedAt
+}
+CURATOR -1- REVIEWS
+REVIEWS -N- CANDIDATE_FACT
+
+entity MISTAKE_REPORT {
+  ReportID <<key>>
+  Note
+  CreatedAt
+  State
+}
+relationship ABOUT {
+}
+MISTAKE_REPORT =N= ABOUT
+ABOUT -1- CITED_FACT
+relationship RESOLVES {
+}
+CURATOR -1- RESOLVES
+RESOLVES -N- MISTAKE_REPORT
+@endchen

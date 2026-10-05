@@ -1,0 +1,191 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam linetype ortho
+hide circle
+hide methods
+hide stereotypes
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #006B5F
+  HeaderBackgroundColor #E9F4F1
+  ArrowColor #3F4946
+}
+entity fact {
+  * <b>fact_id</b> : INTEGER
+  --
+  * kind : TEXT
+  * state : TEXT
+  * current_version : INTEGER
+  * updated_at : TEXT
+}
+entity citation {
+  * <b>fact_id</b> : INTEGER <<FK>>
+  * <b>source_id</b> : INTEGER <<FK>>
+  * <b>page</b> : INTEGER
+  --
+  quote : TEXT
+}
+entity source_document {
+  * <b>source_id</b> : INTEGER
+  --
+  * publisher : TEXT
+  * title : TEXT
+  * edition : TEXT
+  issue_date : TEXT
+  * language : TEXT
+  * sha256 : TEXT
+  * storage_key : TEXT
+  url : TEXT
+  * retrieved_at : TEXT
+}
+entity fact_revision {
+  * <b>fact_id</b> : INTEGER <<FK>>
+  * <b>version</b> : INTEGER
+  --
+  * snapshot_json : TEXT
+  * changed_at : TEXT
+  changed_by : INTEGER <<FK>>
+  * reason : TEXT
+}
+entity account {
+  * <b>account_id</b> : INTEGER
+  --
+  * auth_subject : TEXT
+  * role : TEXT
+  verified_for_letter : TEXT <<FK>>
+  class_code : TEXT
+  * created_at : TEXT
+}
+entity extraction_run {
+  * <b>run_id</b> : INTEGER
+  --
+  * source_id : INTEGER <<FK>>
+  * started_at : TEXT
+  finished_at : TEXT
+  * status : TEXT
+  * n_published : INTEGER
+  * n_queued : INTEGER
+  * n_rejected : INTEGER
+}
+entity candidate_fact {
+  * <b>candidate_id</b> : INTEGER
+  --
+  * run_id : INTEGER <<FK>>
+  * kind : TEXT
+  * payload_json : TEXT
+  * page : INTEGER
+  * extractor_confidence : REAL
+  checker_verdict : TEXT
+  checker_confidence : REAL
+  * state : TEXT
+  published_fact_id : INTEGER <<FK>>
+  reviewer_id : INTEGER <<FK>>
+  review_note : TEXT
+  reviewed_at : TEXT
+}
+entity mistake_report {
+  * <b>report_id</b> : INTEGER
+  --
+  * fact_id : INTEGER <<FK>>
+  note : TEXT
+  * created_at : TEXT
+  * state : TEXT
+  resolved_by : INTEGER <<FK>>
+  resolution : TEXT
+}
+entity route {
+  * <b>route_id</b> : INTEGER
+  --
+  * route_group : TEXT
+  * name_en : TEXT
+  * provider : TEXT
+  duration_text : TEXT
+  cost_min_lkr : INTEGER
+  cost_max_lkr : INTEGER
+  intake_timing : TEXT
+  nvq_level : INTEGER
+  country : TEXT
+  rule_root_id : INTEGER <<FK>>
+  * fact_id : INTEGER <<FK>>
+}
+entity route_private_degree {
+  * <b>route_id</b> : INTEGER <<FK>>
+  --
+  * awarding_body : TEXT
+  * recognition_status : TEXT
+}
+entity route_job_exam {
+  * <b>route_id</b> : INTEGER <<FK>>
+  --
+  age_min : INTEGER
+  age_max : INTEGER
+  closes_on : TEXT
+}
+entity deadline {
+  * <b>deadline_id</b> : INTEGER
+  --
+  * academic_year : TEXT <<FK>>
+  * kind : TEXT
+  * title_en : TEXT
+  * due_on : TEXT
+  * certainty : TEXT
+  basis_text : TEXT
+  route_id : INTEGER <<FK>>
+  * fact_id : INTEGER <<FK>>
+}
+entity deadline_offering_year {
+  * <b>deadline_id</b> : INTEGER <<FK>>
+  * <b>offering_year_id</b> : INTEGER <<FK>>
+  --
+}
+entity push_subscription {
+  * <b>subscription_id</b> : TEXT
+  --
+  * endpoint : TEXT
+  * p256dh : TEXT
+  * auth : TEXT
+  * created_at : TEXT
+}
+entity push_subscription_deadline {
+  * <b>subscription_id</b> : TEXT <<FK>>
+  * <b>deadline_id</b> : INTEGER <<FK>>
+  --
+}
+entity institution #F3F8F6 {
+  (see other diagram)
+}
+entity rule_node #F3F8F6 {
+  (see other diagram)
+}
+entity intake_year #F3F8F6 {
+  (see other diagram)
+}
+entity offering_year #F3F8F6 {
+  (see other diagram)
+}
+source_document ||--o{ citation : source_id
+fact ||--o{ citation : fact_id
+account |o--o{ fact_revision : changed_by
+fact ||--o{ fact_revision : fact_id
+institution |o--o{ account : verified_for_letter
+source_document ||--o{ extraction_run : source_id
+account |o--o{ candidate_fact : reviewer_id
+fact |o--o{ candidate_fact : published_fact_id
+extraction_run ||--o{ candidate_fact : run_id
+account |o--o{ mistake_report : resolved_by
+fact ||--o{ mistake_report : fact_id
+fact ||--o{ route : fact_id
+rule_node |o--o{ route : rule_root_id
+route ||--o{ route_private_degree : route_id
+route ||--o{ route_job_exam : route_id
+fact ||--o{ deadline : fact_id
+route |o--o{ deadline : route_id
+intake_year ||--o{ deadline : academic_year
+offering_year ||--o{ deadline_offering_year : offering_year_id
+deadline ||--o{ deadline_offering_year : deadline_id
+deadline ||--o{ push_subscription_deadline : deadline_id
+push_subscription ||--o{ push_subscription_deadline : subscription_id
+@enduml

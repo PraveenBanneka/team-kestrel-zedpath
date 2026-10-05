@@ -1,0 +1,141 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam linetype ortho
+hide circle
+hide methods
+hide stereotypes
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #006B5F
+  HeaderBackgroundColor #E9F4F1
+  ArrowColor #3F4946
+}
+entity stream {
+  * <b>stream_code</b> : TEXT
+  --
+  * name_en : TEXT
+  name_si : TEXT
+  name_ta : TEXT
+}
+entity subject {
+  * <b>subject_code</b> : TEXT
+  --
+  * name_en : TEXT
+  name_si : TEXT
+  name_ta : TEXT
+  arts_basket : INTEGER
+}
+entity stream_subject {
+  * <b>stream_code</b> : TEXT <<FK>>
+  * <b>subject_code</b> : TEXT <<FK>>
+  --
+}
+entity district {
+  * <b>district_code</b> : TEXT
+  --
+  * name_en : TEXT
+  name_si : TEXT
+  name_ta : TEXT
+  * is_disadvantaged : INTEGER
+}
+entity institution {
+  * <b>letter</b> : TEXT
+  --
+  * name_en : TEXT
+  * kind : TEXT
+  parent_letter : TEXT <<FK>>
+}
+entity course {
+  * <b>course_code</b> : TEXT
+  --
+  * name_en : TEXT
+  field : TEXT
+}
+entity offering {
+  * <b>course_code</b> : TEXT <<FK>>
+  * <b>institution_letter</b> : TEXT <<FK>>
+  --
+  uni_code : TEXT <<generated>>
+}
+entity intake_year {
+  * <b>academic_year</b> : TEXT
+  --
+  * exam_year : INTEGER
+}
+entity offering_year {
+  * <b>offering_year_id</b> : INTEGER
+  --
+  * course_code : TEXT <<FK>>
+  * institution_letter : TEXT <<FK>>
+  * academic_year : TEXT <<FK>>
+  proposed_intake : INTEGER
+  duration_text : TEXT
+  * selection_basis : TEXT
+  * has_aptitude_test : INTEGER
+  * is_suspended : INTEGER
+  other_requirements : TEXT
+  * fact_id : INTEGER <<FK>>
+}
+entity offering_year_medium {
+  * <b>offering_year_id</b> : INTEGER <<FK>>
+  * <b>medium</b> : TEXT
+  --
+}
+entity selection_group {
+  * <b>group_id</b> : INTEGER
+  --
+  * offering_year_id : INTEGER <<FK>>
+  * group_code : TEXT
+  label_en : TEXT
+  seat_share_pct : INTEGER
+  al_rule_root_id : INTEGER <<FK>>
+  ol_rule_root_id : INTEGER <<FK>>
+}
+entity cutoff {
+  * <b>group_id</b> : INTEGER <<FK>>
+  * <b>district_code</b> : TEXT <<FK>>
+  --
+  * status : TEXT
+  min_z_e4 : INTEGER
+  * fact_id : INTEGER <<FK>>
+}
+entity rule_node {
+  * <b>node_id</b> : INTEGER
+  --
+  parent_id : INTEGER <<FK>>
+  * position : INTEGER
+  * kind : TEXT
+  threshold : INTEGER
+  subject_code : TEXT <<FK>>
+  min_grade : TEXT
+  stream_code : TEXT <<FK>>
+  predicate_name : TEXT
+  fact_id : INTEGER <<FK>>
+}
+entity fact #F3F8F6 {
+  (see other diagram)
+}
+subject ||--o{ stream_subject : subject_code
+stream ||--o{ stream_subject : stream_code
+institution |o--o{ institution : parent_letter
+institution ||--o{ offering : institution_letter
+course ||--o{ offering : course_code
+offering ||--o{ offering_year : course_code
+offering ||--o{ offering_year : institution_letter
+fact ||--o{ offering_year : fact_id
+intake_year ||--o{ offering_year : academic_year
+offering_year ||--o{ offering_year_medium : offering_year_id
+rule_node |o--o{ selection_group : ol_rule_root_id
+rule_node |o--o{ selection_group : al_rule_root_id
+offering_year ||--o{ selection_group : offering_year_id
+fact ||--o{ cutoff : fact_id
+district ||--o{ cutoff : district_code
+selection_group ||--o{ cutoff : group_id
+fact |o--o{ rule_node : fact_id
+stream |o--o{ rule_node : stream_code
+subject |o--o{ rule_node : subject_code
+rule_node |o--o{ rule_node : parent_id
+@enduml

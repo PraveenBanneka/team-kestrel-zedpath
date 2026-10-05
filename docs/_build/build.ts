@@ -187,6 +187,17 @@ function list(t: Tokens.List, level = 0): d.Paragraph[] {
   return out;
 }
 
+function codeBlock(text: string): d.Paragraph[] {
+  const lines = text.split('\n');
+  const short = lines.length <= 40;               // short blocks stay on one page; long ones may break
+  return lines.map((ln, k) => new d.Paragraph({
+    shading: { type: d.ShadingType.CLEAR, fill: C.code, color: 'auto' }, keepLines: true, keepNext: short && k < lines.length - 1,
+    border: k === 0 ? { top: { style: d.BorderStyle.SINGLE, size: 4, color: C.rule, space: 4 } } : k === lines.length - 1 ? { bottom: { style: d.BorderStyle.SINGLE, size: 4, color: C.rule, space: 4 } } : undefined,
+    spacing: { before: k === 0 ? 120 : 0, after: k === lines.length - 1 ? 160 : 0, line: 240 }, indent: { left: 113, right: 113 },
+    children: [new d.TextRun({ text: ln || ' ', font: MONO, size: 17 })],
+  }));
+}
+
 function makeNumberer() {
   const n = [0, 0, 0, 0]; let appendix = 0, inAppendix = false;
   return (depth: number, text: string): { label: string; text: string } => {
@@ -231,16 +242,7 @@ function blocks(tokens: Token[], dir: string, stats: Stats): Block[] {
       }
       case 'list': out.push(...list(t)); break;
       case 'table': out.push(...table(t, stats, pendingCaption)); pendingCaption = null; break;
-      case 'code': {
-        const lines = t.text.split('\n');
-        lines.forEach((ln: string, k: number) => out.push(new d.Paragraph({
-          shading: { type: d.ShadingType.CLEAR, fill: C.code, color: 'auto' }, keepLines: true, keepNext: k < lines.length - 1,
-          border: k === 0 ? { top: { style: d.BorderStyle.SINGLE, size: 4, color: C.rule, space: 4 } } : k === lines.length - 1 ? { bottom: { style: d.BorderStyle.SINGLE, size: 4, color: C.rule, space: 4 } } : undefined,
-          spacing: { before: k === 0 ? 120 : 0, after: k === lines.length - 1 ? 160 : 0, line: 240 }, indent: { left: 113, right: 113 },
-          children: [new d.TextRun({ text: ln || ' ', font: MONO, size: 17 })],
-        })));
-        break;
-      }
+      case 'code': out.push(...codeBlock(t.text)); break;
       case 'blockquote':
         for (const sub of t.tokens) {
           if (sub.type === 'paragraph') out.push(new d.Paragraph({
@@ -253,7 +255,13 @@ function blocks(tokens: Token[], dir: string, stats: Stats): Block[] {
         }
         break;
       case 'hr': out.push(new d.Paragraph({ spacing: { after: 160 }, border: { bottom: { style: d.BorderStyle.SINGLE, size: 6, color: C.rule, space: 4 } }, children: [] })); break;
-      case 'html': if (/<!--\s*pagebreak\s*-->/.test(t.text)) out.push(new d.Paragraph({ children: [new d.PageBreak()] })); break;
+      case 'html': {
+        if (/<!--\s*pagebreak\s*-->/.test(t.text)) out.push(new d.Paragraph({ children: [new d.PageBreak()] }));
+        // <!-- include: path/from/repo/root --> embeds a source file verbatim, so appendices never go stale
+        const inc = t.text.match(/<!--\s*include:\s*(\S+)\s*-->/);
+        if (inc) out.push(...codeBlock(fs.readFileSync(path.resolve(DOCS, '..', inc[1]), 'utf8').replace(/\r\n/g, '\n').trimEnd()));
+        break;
+      }
       case 'space': break;
       default: if (t.text) out.push(new d.Paragraph({ children: [new d.TextRun(t.text)] }));
     }
