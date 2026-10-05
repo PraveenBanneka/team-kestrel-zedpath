@@ -210,3 +210,14 @@
   Native notification code live: bundle index-CmKGXida.js contains it, served at /?source=android-app. Right after
   the deploy plain "/" briefly came from Cloudflare's edge cache (CF-Cache-Status HIT, old bundle); a cache-busted
   request showed the new one and both URLs served it within a minute.
+
+## 2026-10-05 (late): exact-alarm fix, deploy 99da5707, app 1.1.1
+- Praveen's test on 1.1.0: native notification worked, but Android showed ZedPath under "Alarms and reminders".
+  Cause (plugin source): LocalNotifications defaults isExactNotification=true and opens
+  ACTION_REQUEST_SCHEDULE_EXACT_ALARM when exact alarms are not granted.
+- Fix (d798b6f): web passes isExactNotification:false (+ test); app 1.1.1 (versionCode 4) removes
+  SCHEDULE_EXACT_ALARM / USE_EXACT_ALARM (also avoids Google Play's restricted-permission review).
+- GO: deploy exit 0, 83/83 -> version **99da5707-8d9f-43cc-bd30-3358bc641d68** (live before 8e90be0e). Live bundle
+  index-ByBJtb-u.js contains isExactNotification:!1 at the app's start URL. THEN 1.1.1 sent (apksigner verifies,
+  cert b63eec...98a8; permissions INTERNET, POST_NOTIFICATIONS, WAKE_LOCK, RECEIVE_BOOT_COMPLETED).
+- Praveen: "That's my first native app. Yey!"
