@@ -1097,11 +1097,7 @@
       "duration": null,
       "specialisations": [],
       "years": [],
-      "sourceUrls": [
-        "https://dental.pdn.ac.lk/under_pro.php",
-        "https://dental.pdn.ac.lk/DATS/course.php",
-        "https://dental.pdn.ac.lk/stud_handb.php"
-      ],
+      "sourceUrls": [],
       "notes": "The faculty site returned unexpected, unsafe content on 2026-10-05; nothing was read from it and it is not linked by ZedPath."
     }
   ]

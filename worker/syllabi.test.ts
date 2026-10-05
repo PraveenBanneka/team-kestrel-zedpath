@@ -17,6 +17,9 @@ describe('degree syllabi', () => {
     expect(SYLLABI.has('002B')).toBe(false);
     expect((await (await get('002B')).json() as OfferingDetail).syllabus).toBeNull();
     expect(JSON.stringify([...SYLLABI])).not.toContain('dental.pdn.ac.lk');
+    // the published data file itself carries no addresses on that host either (public repo)
+    const raw = await import('../data/degrees/syllabi-2026-10-05.json');
+    expect(JSON.stringify(raw)).not.toContain('dental.pdn.ac.lk');
   });
 
   it('returns null for courses not yet researched', async () => {
