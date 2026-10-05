@@ -2,7 +2,7 @@
 // Pre-push leak scanner. This repo is PUBLIC, so every pushed commit is scanned for secrets,
 // secret files and the salon account id (matched by SHA-256 fingerprint only).
 // Usage: called by .githooks/pre-push with git's stdin (<local ref> <local sha> <remote ref> <remote sha>),
-// or run by hand: `node .githooks/leak-scan.js --all` to scan the whole history.
+// or run by hand: `node .githooks/leak-scan.cjs --all` to scan the whole history.
 
 const { execFileSync } = require('child_process');
 const crypto = require('crypto');

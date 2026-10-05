@@ -3,7 +3,7 @@
 # ZEDPATH_GUARD_EXTRA_BLOCKED_ID, which exercises the same isSalonId() path as the real fingerprint.
 S=$(cygpath -m "$(mktemp -d)" 2>/dev/null || mktemp -d)
 mkdir -p $S/none $S/salon/.git $S/good/.git $S/other/.git $S/fresh/.git
-G="$(dirname "$0")/zedpath-guard.js"
+G="$(dirname "$0")/zedpath-guard.cjs"
 SID=deadbeefdeadbeefdeadbeefdeadbeef
 export ZEDPATH_GUARD_EXTRA_BLOCKED_ID=$SID
 export ZEDPATH_GUARD_TEST_ACCOUNT_ID=0123456789abcdef0123456789abcdef

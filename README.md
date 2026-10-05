@@ -170,7 +170,7 @@ This repo is public. Two automatic guards protect it:
 
 - `.githooks/pre-push`: scans every pushed commit for API keys, tokens, private keys and `.env`/`.dev.vars`
   files, and blocks the push on a hit. Enable it once per clone: `git config core.hooksPath .githooks`
-- `.claude/hooks/zedpath-guard.js`: an AI-assistant guard. It blocks deploys and other live changes
+- `.claude/hooks/zedpath-guard.cjs`: an AI-assistant guard. It blocks deploys and other live changes
   without the owner's explicit go-ahead and the correct, pinned Cloudflare account.
   Tests: `bash .claude/hooks/test-guard.sh`
 

@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/zedpath-guard.js\""
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/zedpath-guard.cjs\" || exit 2"
           }
         ]
       }

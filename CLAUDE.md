@@ -72,7 +72,7 @@ browser prompt appears, pick the ZedPath account, never the salon one.
    Never push to, change, or make public any other repo (the salon ones are private). (Guard-enforced.)
 9. **Never copy code, files or .env secrets from the salon folder.** (Guard blocks any access to it.)
 
-## The guard: `.claude/hooks/zedpath-guard.js` (PreToolUse, wired in `.claude/settings.json`)
+## The guard: `.claude/hooks/zedpath-guard.cjs` (PreToolUse, wired in `.claude/settings.json`)
 | Action | Result |
 |---|---|
 | `wrangler login/logout`, `cf auth` | always blocked |
@@ -84,17 +84,20 @@ browser prompt appears, pick the ZedPath account, never the salon one.
 | local dev (`wrangler dev`, `--local`), `whoami`, installs, normal `git push` to zedpath | allowed |
 
 Tests: `bash .claude/hooks/test-guard.sh` (40 cases, incl. pinned defaults). Re-run after editing the guard.
+The guard is `.cjs` (always CommonJS, whatever package.json says) and the hook runs `node guard || exit 2`, so a
+crashed guard BLOCKS every tool call (fail closed) instead of silently allowing it. Lesson of 2026-10-05: adding
+`"type": "module"` to package.json broke the old `.js` guard for about an hour with no visible error.
 The guard reads the whole command text, so a command that merely *mentions* a deploy (e.g. a sed on
 the test file) is blocked too. Put such text in a script file and run the file.
 
 **Wipe-bug check:** any scaffold or tool that regenerates `wrangler.jsonc` (OpenNext, C3, templates)
 must keep `"account_id": "e6474e41044c5722ad57c3372ab7492e"`. Diff it after every scaffold step.
 
-## Public-repo safety: `.githooks/pre-push` → `leak-scan.js`
+## Public-repo safety: `.githooks/pre-push` → `leak-scan.cjs`
 Every push is scanned (all new commits, not just the latest files) for API keys (Gemini, Anthropic,
 GitHub, Cloudflare...), private keys, `.env`/`.dev.vars` files and the salon account ID. Any hit
 blocks the push. Enabled per clone with `git config core.hooksPath .githooks`. Full-history scan:
-`node .githooks/leak-scan.js --all`. If a real secret ever lands in a commit: rotate it first.
+`node .githooks/leak-scan.cjs --all`. If a real secret ever lands in a commit: rotate it first.
 
 ## Deploy sequence (runbook, follow every time)
 1. `npm run build` (or the framework build) is green; tests pass.
