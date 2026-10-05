@@ -1,0 +1,24 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+  ArrowColor #006B5F
+}
+hide empty description
+
+[*] --> Draft : author creates\nv0.1
+Draft --> InReview : author submits\nv0.9
+InReview --> Draft : reviewer requests\nchanges
+InReview --> Approved : approver signs\nv1.0
+Approved --> Revision : change request\nraised
+Revision --> InReview : revised draft\nv1.1-rc
+Approved --> Superseded : replaced by\nnew document
+Superseded --> [*]
+
+state "In review" as InReview
+state "Under revision" as Revision
+@enduml

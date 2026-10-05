@@ -1,0 +1,30 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam rectangle {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+  RoundCorner 8
+}
+skinparam ArrowColor #006B5F
+left to right direction
+
+rectangle "Evidence\nE1–E6, T1" as EV
+rectangle "User story\nUS-enn\n+ AC-enn.k" as US
+rectangle "Requirement\nFR-nnn / NFR-nnn\nBR-nnn" as FR
+rectangle "Use case\nUC-nn" as UC
+rectangle "Entity / table\nENT-name" as EN
+rectangle "Design decision\nADR-nnn" as AD
+rectangle "Test case\nTC-nnn" as TC
+
+EV --> US
+US --> FR
+FR --> UC
+UC --> EN
+FR --> AD
+AD --> TC
+US --> TC : AC → TC
+FR --> TC
+@enduml

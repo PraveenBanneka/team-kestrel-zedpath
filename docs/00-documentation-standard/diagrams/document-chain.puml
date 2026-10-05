@@ -1,0 +1,35 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam rectangle {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+  RoundCorner 8
+}
+skinparam ArrowColor #006B5F
+top to bottom direction
+
+rectangle "ZP-DOC-00  Documentation Standard\n(governs every document)" as D00 #FFFFFF
+rectangle "ZP-DOC-01  Vision and Scope" as D01
+rectangle "ZP-DOC-02  User Stories" as D02
+rectangle "ZP-DOC-03  Software Requirements\nSpecification" as D03
+rectangle "ZP-DOC-04  Use Case Model" as D04
+rectangle "ZP-DOC-05  Data Design\nEER → relational → D1" as D05
+rectangle "ZP-DOC-06  Software Architecture" as D06
+rectangle "ZP-DOC-07  UI/UX Specification" as D07
+rectangle "ZP-DOC-08  Test Plan" as D08
+
+D00 -[dashed]-> D01
+D01 --> D02 : refines
+D02 --> D03 : derives
+D03 --> D04 : groups into goals
+D03 --> D05 : constrains
+D04 --> D05 : names entities
+D05 --> D06 : persisted by
+D04 --> D07 : flows
+D06 --> D07 : platform
+D07 --> D08 : screens to test
+D02 ..> D08 : acceptance criteria
+@enduml

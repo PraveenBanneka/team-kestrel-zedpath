@@ -133,7 +133,11 @@ function table(t: Tokens.Table, stats: Stats, captionText: string | null): Block
   const weights = t.header.map((h, i) => Math.max(headerless ? 5 : len(h), ...t.rows.map(r => len(r[i] || { text: '' }))));
   if (headerless && cols === 2) { weights[0] = Math.min(weights[0], 18); }
   const total = weights.reduce((a, b) => a + b, 0);
-  let widths = weights.map(w => Math.max(1000, Math.round(CONTENT_W * w / total)));
+  // Never break a word: each column is at least as wide as its longest unbreakable word (about 105 DXA per
+  // character at 9.5 pt, plus cell padding), capped so one column cannot take more than 45% of the table.
+  const longestWord = (c: { text?: string }): number => Math.max(0, ...(c.text || '').split(/\s+/).map(w => w.replace(/[*`]/g, '').length));
+  const minW = t.header.map((h, i) => Math.min(CONTENT_W * 0.45, 260 + 105 * Math.max(longestWord(h), ...t.rows.map(r => longestWord(r[i] || { text: '' })))));
+  let widths = weights.map((w, i) => Math.max(minW[i], Math.round(CONTENT_W * w / total)));
   const sum = widths.reduce((a, b) => a + b, 0);
   widths = widths.map(w => Math.round(w * CONTENT_W / sum));
   widths[cols - 1] += CONTENT_W - widths.reduce((a, b) => a + b, 0);
