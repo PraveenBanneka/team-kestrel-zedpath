@@ -1,20 +1,27 @@
 # ZedPath — work log
 
 ## Current state (update at end of every session)
-- **Date:** 2026-10-05
+- **Date:** 2026-10-05 (end of session; Praveen pausing ZedPath to start another project on the same Cloudflare account)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version bd7a6d89 (accounts, rate-limit fix, assetlinks, test notification).
-  Rollback target da60b5ff. Secrets: GEMINI_API_KEY, PEPPER.
-  D1 `zedpath` (59e854ed..., APAC): 35 tables, reference data loaded, 0 student accounts after the net-zero test.
+  https://zedpath.teamkestrel.workers.dev = version **c221ddfc** (My list, Compare, syllabi). Rollback target bd923072.
+  ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
+  Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
+  namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain `teamkestrel` (shared by the account).
+  Free-plan limits are per ACCOUNT, shared with any other project there (100k Worker requests/day, Workers AI 10k
+  neurons/day, D1 5M reads/day...).
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
-- **Code:** onboarding -> Paths -> courses -> degree details -> hidden; other paths; Me; installable PWA; design v2;
-  **student accounts LIVE** (username + password, recovery code, sync, delete) incl. the rate-limit fix (9770558);
-  test-notification button. Tests 56/56.
-- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised for CR-001, 33 pages). Next: 06, 07, 08; SRS v1.1.
-- **Android:** APK 1.0.1 (TWA, com.teamkestrel.zedpath, native notifications) built and sent; see android/README.md.
-  Video dropped by Praveen ("I dont want the video"); video/LESSONS.md kept. Gate 3 still needs a demo video.
-- **Next:** Ask ZedPath (corpus built; needs GEMINI_API_KEY in .dev.vars + a GO for the Vectorize index) -> reminders.
-- **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
+- **Live features:** onboarding + beyond grades; results Safe/Likely/Reach; course pages with cut-off chart, syllabus
+  (12 programmes) and "Explain this course"; hidden courses; 52 other paths; student accounts; Ask ZedPath (EN/SI/TA,
+  cited, personal facts, model fallback); My list (order warnings, fix-the-order, copy Uni-Codes); Compare (3);
+  PWA + Android APK 1.0.1 (TWA, native notification test). Tests 79/79.
+- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised for CR-001). Not yet: 06, 07, 08; SRS v1.1 (new stories:
+  beyond grades, other paths, accounts, Ask, list, compare, syllabi, BR-044, NFR-030 wording).
+- **Next (when ZedPath resumes):** deadlines/journey + calendar (.ics) reminders; Sinhala/Tamil UI text; weekly Gazette
+  job-exam updates; application-steps guide (FR-307); Engineering syllabus (008G) + more programmes within the research
+  safety protocol; Capacitor native app (option B) if wanted; docs 06-08 + SRS v1.1; Gate 3 demo video (Praveen).
+- **Open with Praveen:** report the unsafe source host to Sri Lanka CERT|CC (his call); optional history rewrite to
+  drop old addresses from commit e3dc863 (force push = GO).
+- **Deadlines:** Gate 3 final submission 11 Oct (demo video <= 4 min).
 
 ---
 
