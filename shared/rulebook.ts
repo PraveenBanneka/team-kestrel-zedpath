@@ -1,5 +1,6 @@
 // Shape of the compiled read model the Worker serves from (built by tools/rulebook/build-rulebook.ts).
 import type { Rule, StreamCode } from './rules.ts';
+import type { RouteSummary } from './api.ts';
 
 export interface Rulebook {
   academicYear: string;
@@ -16,6 +17,8 @@ export interface Rulebook {
     other: string | null; page: number; quote: string;
     reconciliation?: { decision: string; reading: 'LITERAL' | 'INCLUSIVE'; note: string };
   }>;
+  /** Other routes (FE-5), from official sources; openNow is computed at request time from closesOn. */
+  routes: (Omit<RouteSummary, 'openNow'> & { closesOn: string | null; openAtRetrieval: boolean })[];
   offerings: {
     uniCode: string; courseCode: string; course: string; institution: string;
     proposedIntake: number | null; duration: string | null; meritOnly: boolean; hasAptitudeTest: boolean;

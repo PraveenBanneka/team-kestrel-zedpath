@@ -70,3 +70,11 @@ export interface OfferingDetail {
 }
 
 export interface ApiError { error: string; field?: string }
+
+export interface RouteSummary {
+  id: string;
+  group: 'PRIVATE_DEGREE' | 'DIPLOMA' | 'PROFESSIONAL' | 'VOCATIONAL' | 'JOB_EXAM' | 'SCHOLARSHIP_ABROAD' | 'RETRY';
+  name: string; provider: string; duration: string | null; costText: string | null; intakeTiming: string | null;
+  requirements: string; officialUrl: string | null; sourceUrl: string; sourceLocator: string; retrievedOn: string;
+  openNow: boolean; warning: string | null;
+}

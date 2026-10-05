@@ -52,7 +52,29 @@ for (const h of history) {
   y.zE4[dIndex.get(h.district_code)!] = h.min_z_e4;
 }
 
+// Other routes: verbatim official requirements, timing and costs (data/routes/, researched 2026-10-05).
+const ROUTES_FILE = path.join(ROOT, 'data', 'routes', 'routes-2026-10-05.json');
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+function latestDate(text: string): string | null {                       // "12 October 2026" or "12.10.2026" -> ISO
+  const ds: string[] = [];
+  for (const m of text.matchAll(/(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/gi))
+    ds.push(`${m[3]}-${String(MONTHS.indexOf(m[2].toLowerCase()) + 1).padStart(2, '0')}-${m[1].padStart(2, '0')}`);
+  for (const m of text.matchAll(/\b(\d{2})\.(\d{2})\.(\d{4})\b/g)) ds.push(`${m[3]}-${m[2]}-${m[1]}`);
+  return ds.sort().at(-1) ?? null;
+}
+const rawRoutes: any[] = fs.existsSync(ROUTES_FILE) ? JSON.parse(fs.readFileSync(ROUTES_FILE, 'utf8')).routes : [];
+const lkr = (n: unknown) => `Rs ${Number(n).toLocaleString('en-LK')}`;
+const routes: Rulebook['routes'] = rawRoutes.map(r => ({
+  id: r.id, group: r.route_group, name: r.name, provider: r.provider,
+  duration: r.duration && r.duration !== 'None' ? String(r.duration) : null,
+  costText: r.cost_min_lkr != null ? (r.cost_max_lkr != null && r.cost_max_lkr !== r.cost_min_lkr ? `${lkr(r.cost_min_lkr)} to ${lkr(r.cost_max_lkr)}` : lkr(r.cost_min_lkr)) : null,
+  intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text, officialUrl: r.official_url ?? null,
+  sourceUrl: r.source_url, sourceLocator: r.source_locator, retrievedOn: r.retrieved_on, warning: r.notes ?? null,
+  closesOn: r.intake_timing ? latestDate(String(r.intake_timing)) : null, openAtRetrieval: /\bOPEN\b/.test(String(r.intake_timing ?? '')),
+}));
+
 const book: Rulebook = {
+  routes,
   academicYear: YEAR,
   generatedAt: new Date().toISOString(),
   rulesStatus: rules ? 'RECONCILED' : 'MISSING',

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <title>ZedPath</title>
-  <rect width="512" height="512" rx="112" fill="#2A4A7F"/>
+  <rect width="512" height="512" fill="#2A4A7F"/>
   <path d="M160 170 H352 L160 342 H352" fill="none" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="160" cy="170" r="17" fill="#2A4A7F"/>
   <circle cx="352" cy="342" r="38" fill="#FFC94A" stroke="#2A4A7F" stroke-width="10"/>

@@ -3,7 +3,7 @@
 import { Hono } from 'hono';
 import rulebookJson from './generated/rulebook-2025-2026.json';
 import type { Rulebook } from '../shared/rulebook.ts';
-import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, HiddenOffering, ApiError } from '../shared/api.ts';
+import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, HiddenOffering, ApiError, RouteSummary } from '../shared/api.ts';
 import { evaluate, type Grade, type StreamCode } from '../shared/rules.ts';
 import { band, type Band } from '../shared/banding.ts';
 import { describe } from '../shared/describe.ts';
@@ -115,6 +115,14 @@ app.get('/offerings/:uniCode', c => {
   };
   if (cacheable(c)) return c.body(null, 304);
   return c.json(detail);
+});
+
+/** Other routes (FE-5). "Open now" = open when checked AND the latest date in the official timing is not past. */
+app.get('/routes', c => {
+  const today = new Date().toISOString().slice(0, 10);
+  const out: RouteSummary[] = book.routes.map(({ closesOn, openAtRetrieval, ...r }) => ({ ...r, openNow: openAtRetrieval && !!closesOn && closesOn >= today }));
+  c.header('Cache-Control', 'public, max-age=300');
+  return c.json(out);
 });
 
 app.notFound(c => c.json({ error: 'Not found' } satisfies ApiError, 404));
