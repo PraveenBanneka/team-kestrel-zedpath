@@ -57,3 +57,13 @@ music, pacing) to Praveen. Ask with options when unsure; never guess on taste.
 ## Round log
 - 2026-10-05, voice samples: Ava, Emma and Jenny read "A/L" as "A slash L"; Sonia and Neerja say "A-L".
   Kurunegala transcribed four different ways (lead only; Praveen to judge by ear).
+- 2026-10-05, Praveen's decisions:
+  - Voice: **1, Ava** (`en-US-AvaMultilingualNeural`).
+  - **Never narrate "A slash L".** The voice says "A-Level" (it is the Advanced Level exam). Script text never
+    contains "A/L" in a voice line; the Whisper check must not return "slash".
+  - **Never read typed values aloud** (no "one point four eight two one"). Typing is shown with typing sounds only.
+  - **Voice always on top:** typing sounds and background music must never drown the voice. Music is ducked under
+    every sentence (sidechain), SFX sit well below the voice, and the QA report measures it (voice-vs-bed gap per
+    sentence, in LU).
+  - The assistant is called **"Ask ZedPath"**; never "Gemini" anywhere.
+  - Results-sheet photo reading is out of scope (skipped).

@@ -13,5 +13,14 @@
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
   },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Student accounts (CR-001). database_id is a placeholder until Praveen's GO for `d1 create`: local dev works on a
+  // local copy, and a deploy fails on the placeholder, so accounts cannot go live before the real database exists.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "zedpath", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+  ],
+  // Free Workers Rate Limiting: slows password guessing (per IP + username) and sign-up floods (per IP).
+  "ratelimits": [
+    { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }
+  ]
 }

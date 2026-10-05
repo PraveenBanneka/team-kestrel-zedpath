@@ -1,18 +1,12 @@
 // ZedPath API Worker (Hono). Only /api/* reaches this Worker; all pages are free static assets (NFR-012).
 // Student requests are answered from the bundled rulebook: no database reads, a few milliseconds of CPU (NFR-005).
 import { Hono } from 'hono';
-import rulebookJson from './generated/rulebook-2025-2026.json';
-import type { Rulebook } from '../shared/rulebook.ts';
-import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, HiddenOffering, ApiError, RouteSummary } from '../shared/api.ts';
-import { evaluate, type Grade, type StreamCode } from '../shared/rules.ts';
+import type { Meta, OfferingDetail, ResultsResponse, OfferingSummary, HiddenOffering, ApiError, RouteSummary } from '../shared/api.ts';
+import { evaluate } from '../shared/rules.ts';
 import { band, type Band } from '../shared/banding.ts';
 import { describe } from '../shared/describe.ts';
-
-const book = rulebookJson as unknown as Rulebook;
-const districtIndex = new Map(book.districts.map((d, i) => [d.code, i]));
-const STREAMS = new Set<StreamCode>(book.streams.map(s => s.code));
-const SUBJECT_NAMES = Object.fromEntries(book.subjects.map(s => [s.code, s.name]));
-const GRADES = new Set<Grade>(['A', 'B', 'C', 'S']);
+import { book, districtIndex, parseProfile, SUBJECT_NAMES } from './rulebook.ts';
+import { accountRoutes } from './account.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
 function groupName(code: string, label: string | null): string {
@@ -42,21 +36,6 @@ app.get('/meta', c => {
   if (cacheable(c)) return c.body(null, 304);
   return c.json(meta);
 });
-
-/** Server-side validation of the profile (FR-102, FR-203, NFR-035). */
-function parseProfile(body: unknown): ProfileInput | ApiError {
-  const b = body as Partial<ProfileInput> | null;
-  if (!b || typeof b !== 'object') return { error: 'A JSON profile is required' };
-  if (!b.stream || !STREAMS.has(b.stream)) return { error: 'Unknown stream', field: 'stream' };
-  if (!b.district || !districtIndex.has(b.district)) return { error: 'Unknown district', field: 'district' };
-  if (!Number.isInteger(b.zE4) || b.zE4! < -40000 || b.zE4! > 40000) return { error: 'Z-score must be between −4.0000 and +4.0000', field: 'zE4' };
-  const al = b.al ?? {};
-  const subjects = Object.keys(al);
-  if (subjects.length !== 3) return { error: 'Enter exactly three A/L subjects', field: 'al' };
-  if (!subjects.every(s => /^[A-Z0-9_]{2,12}$/.test(s)) || !Object.values(al).every(g => GRADES.has(g as Grade)))
-    return { error: 'Each subject needs a grade of A, B, C or S', field: 'al' };
-  return { stream: b.stream, district: b.district, zE4: b.zE4!, al, ol: b.ol };
-}
 
 app.post('/results', async c => {
   if (book.rulesStatus !== 'RECONCILED') return c.json({ error: 'Course rules are being verified; try again shortly' } satisfies ApiError, 503);
@@ -124,6 +103,9 @@ app.get('/routes', c => {
   c.header('Cache-Control', 'public, max-age=300');
   return c.json(out);
 });
+
+// Student accounts (CR-001): /api/auth/* and /api/me.
+app.route('/', accountRoutes);
 
 app.notFound(c => c.json({ error: 'Not found' } satisfies ApiError, 404));
 
