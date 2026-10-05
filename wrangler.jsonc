@@ -3,7 +3,15 @@
   "name": "zedpath",
   // LOCKED to the ZedPath Cloudflare account (Stacklineops@gmail.com's Account).
   // Wrangler has one login for the whole laptop; this pin is what stops a deploy landing on another account.
-  // Any tool that regenerates this file (e.g. a Next.js/OpenNext scaffold) MUST keep this line.
+  // Any tool that regenerates this file (e.g. a scaffold) MUST keep this line. The guard also checks it.
   "account_id": "e6474e41044c5722ad57c3372ab7492e",
-  "compatibility_date": "2026-09-01"
+  "compatibility_date": "2026-09-01",
+  // Hono API Worker. Only /api/* runs the Worker; every other path is a static asset (free, unlimited)
+  // and unknown paths fall back to the React SPA's index.html (ZP-DOC-06, ADR-001; NFR-012).
+  "main": "./worker/index.ts",
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
 }

@@ -29,3 +29,6 @@ student_handbook_*.pdf
 /*.srt
 /*.vtt
 /*transcript*
+# app build output and local Workers state
+dist/
+.wrangler/

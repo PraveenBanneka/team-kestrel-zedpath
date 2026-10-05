@@ -1,0 +1,72 @@
+// The contract between the React app and the Hono API Worker. Both sides import these types.
+import type { Band, Trend } from './banding.ts';
+import type { Grade, StreamCode } from './rules.ts';
+
+export interface ProfileInput {
+  stream: StreamCode;
+  district: string;                 // district code, e.g. 'KUR'
+  zE4: number;                      // Z-score in ten-thousandths
+  al: Record<string, Grade>;        // exactly three subjects
+  ol?: Record<string, Grade | 'F'>;
+}
+
+export interface Meta {
+  academicYear: string;
+  districts: { code: string; name: string; disadvantaged: boolean }[];
+  streams: { code: StreamCode; name: string }[];
+  subjects: { code: string; name: string; streams: StreamCode[] }[];
+  sources: { id: string; title: string; edition: string; sha256: string }[];
+}
+
+export interface OfferingSummary {
+  uniCode: string;
+  courseCode: string;
+  course: string;
+  institution: string;
+  group: string;                    // 'ALL' or a selection-group code
+  groupLabel: string | null;
+  band: Band;
+  limitedHistory: boolean;
+  yearsUsed: number;
+  latestE4: number | null;
+  gapToLatestE4: number | null;
+  trend: Trend;
+  hasAptitudeTest: boolean;
+  meritOnly: boolean;
+  needsOl: boolean;
+}
+
+export interface HiddenOffering { uniCode: string; course: string; institution: string; reason: string; page: number }
+
+export interface ResultsResponse {
+  academicYear: string;
+  counts: Record<Band, number>;
+  offerings: OfferingSummary[];
+  hidden: HiddenOffering[];
+  computedAt: string;
+}
+
+export interface Citation { sourceId: string; page: number; label: string }
+
+export interface OfferingDetail {
+  uniCode: string;
+  course: string;
+  institution: string;
+  proposedIntake: number | null;
+  duration: string | null;
+  selectionBasis: 'QUOTA' | 'MERIT_ONLY';
+  hasAptitudeTest: boolean;
+  requirementText: string;                 // exact handbook wording (shown on request)
+  needs: string[];                         // plain-language lines generated from the rule tree
+  olNeeds: string[];
+  ambiguousWording: boolean;               // BR-044: inclusive reading used; confirm on the UGC form
+  requirementCitation: Citation;
+  otherRequirements: string | null;
+  groups: {
+    code: string;
+    label: string | null;
+    history: { academicYear: string; zE4: number | null; citation: Citation }[];
+  }[];
+}
+
+export interface ApiError { error: string; field?: string }
