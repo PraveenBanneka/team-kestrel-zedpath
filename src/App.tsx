@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Award, BellRing, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
-  RotateCcw, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  ListOrdered, RotateCcw, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -15,7 +15,9 @@ import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
 import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
-import { clearEverything, isOnboarded, isPendingSync, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+import { MyListScreen } from './screens/MyList.tsx';
+import { addToList, type ListEntry } from '../shared/list.ts';
+import { clearEverything, isOnboarded, isPendingSync, loadList, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
@@ -73,6 +75,8 @@ export function App() {
   const [me, setMe] = useState<{ username: string } | null>(null);
   const [recovery, setRecovery] = useState<{ username: string; code: string } | null>(null);
   const [syncNote, setSyncNote] = useState<string | null>(null);
+  const [list, setListRaw] = useState<ListEntry[]>(() => loadList());
+  const setList = (l: ListEntry[]) => { saveList(l); setListRaw(l); };
   const [askTurns, setAskTurnsRaw] = useState<AskTurn[]>(() => { try { return JSON.parse(sessionStorage.getItem('zedpath.ask.v1') ?? '[]'); } catch { return []; } });
   const setAskTurns = (f: (t: AskTurn[]) => AskTurn[]) => setAskTurnsRaw(t => { const n = f(t); try { sessionStorage.setItem('zedpath.ask.v1', JSON.stringify(n.filter(x => x.reply || x.error))); } catch { /* private mode */ } return n; });
   const push = (p: ProfileInput, e: Extras) => saveMe(p, e)
@@ -95,7 +99,7 @@ export function App() {
     if (me) void push(p, e);
     go('/paths');
   };
-  const reset = () => { clearEverything(); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const reset = () => { clearEverything(); setListRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
     username: me?.username ?? null, syncNote,
@@ -137,15 +141,16 @@ export function App() {
     </div>);
 
   let screen: React.ReactNode, tab: 'paths' | 'courses' | 'ask' | 'me' = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} />; }
-  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} />; }
+  if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
+  else if (path === 'list') { tab = 'courses'; title = 'My list'; screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
+  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} />; }
   else if (path === 'ask') { tab = 'ask'; title = 'Ask ZedPath'; screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')} />; }
   else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
   else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
-  else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} />;
+  else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
   const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['ask', 'Ask', Sparkles, '#/ask'], ['me', 'Me', UserRound, '#/me']];
   return (
@@ -167,7 +172,7 @@ export function App() {
 }
 
 // ---------------------------------------------------------------- Paths (home)
-function YourPaths({ meta, profile, extras, results, routes, error, go }: { meta: Meta | null; profile: ProfileInput; extras: Extras;
+function YourPaths({ meta, profile, extras, results, routes, error, go, listCount }: { listCount: number; meta: Meta | null; profile: ProfileInput; extras: Extras;
   results: ResultsResponse | null; routes: RouteSummary[] | null; error: string | null; go: (to: string) => void }) {
   const hint = specialIntakeHint(extras);
   const install = useInstallPrompt();
@@ -197,6 +202,11 @@ function YourPaths({ meta, profile, extras, results, routes, error, go }: { meta
         <span className="source" style={{ display: 'block', marginTop: 4, color: 'inherit', opacity: .75 }}>UGC handbook 2025/26, Section 6, p.166</span></span></div>}
       {results && results.hidden.length > 0 && (
         <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden: subject rules not met</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>)}
+      <button className="card list-entry" onClick={() => go('/list')}>
+        <span className="ic" style={{ background: 'var(--likely-bg)', color: 'var(--likely)' }}><ListOrdered size={22} aria-hidden="true" /></span>
+        <span className="grow"><span className="t">My list</span><span className="s">{listCount ? `${listCount} course${listCount > 1 ? 's' : ''} in your order, checked for mistakes` : 'Build your UGC preference list'}</span></span>
+        <ChevronRight size={20} className="chev" aria-hidden="true" />
+      </button>
       <p className="section-label">Other paths</p>
       <Stagger className="bento">
         {ROUTE_GROUPS.map((g, i) => {
@@ -220,7 +230,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go }: { meta
 }
 
 // ---------------------------------------------------------------- Courses by band
-function Courses({ results, band, go }: { results: ResultsResponse | null; band: Band; go: (to: string) => void }) {
+function Courses({ results, band, go, listCount }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; listCount: number }) {
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
   const list = useMemo(() => (results?.offerings ?? []).filter(o => o.band === band)
     .sort((a, b) => (b.gapToLatestE4 ?? 0) - (a.gapToLatestE4 ?? 0)), [results, band]);
@@ -230,6 +240,7 @@ function Courses({ results, band, go }: { results: ResultsResponse | null; band:
       <div className="stack" style={{ gap: 4 }}>
         <h1 className="screen-title">{results ? `${total} courses within reach` : 'Checking courses…'}</h1>
         <p className="subtitle">Sorted by how far you are above last year's cut-off for your district.</p>
+        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />My list{listCount ? ` (${listCount})` : ''}</button>
       </div>
       <div className="seg" role="tablist" aria-label="Band">
         {tabs.map(t => (
@@ -267,7 +278,30 @@ function CourseRow({ o, animate, onOpen }: { o: OfferingSummary; animate: boolea
 }
 
 // ---------------------------------------------------------------- Degree details
-function DegreeDetails({ uniCode, profile, results, go }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null; go: (to: string) => void }) {
+function AddToList({ d, mine, list, setList, go }: { d: OfferingDetail; mine: OfferingSummary[]; list: ListEntry[];
+  setList: (l: ListEntry[]) => void; go: (to: string) => void }) {
+  const [note, setNote] = useState<string | null>(null);
+  const onList = list.some(e => e.uniCode === d.uniCode);
+  if (onList) return (
+    <div className="row" style={{ flexWrap: 'nowrap' }}>
+      <button className="btn tonal" style={{ flex: 1 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />On my list: #{list.findIndex(e => e.uniCode === d.uniCode) + 1}</button>
+      <button className="btn text" onClick={() => setList(list.filter(e => e.uniCode !== d.uniCode))}>Remove</button>
+    </div>);
+  const best = mine[0];                                     // FR-302: only offerings the results screen lists as eligible
+  const add = () => {
+    const r = addToList(list, { uniCode: d.uniCode, group: best?.group ?? 'ALL', course: titleCase(d.course), institution: shortInstitution(d.institution), band: best?.band ?? 'NOT_ENOUGH_DATA' }, !!best);
+    if (r.ok) { setList(r.list); setNote(null); }
+    else setNote({ NOT_ELIGIBLE: 'Your subjects do not meet this course\'s rules, so it cannot go on your list.', DUPLICATE: 'Already on your list.', FULL: 'Your list is full (125 courses).' }[r.reason]);
+  };
+  return (
+    <div className="stack" style={{ gap: 6 }}>
+      <button className="btn filled" onClick={add} disabled={!best}><ListOrdered size={18} aria-hidden="true" />{best ? 'Add to my list' : 'Not eligible: cannot add to my list'}</button>
+      {note && <p className="helper" role="status">{note}</p>}
+    </div>);
+}
+
+function DegreeDetails({ uniCode, profile, results, go, list, setList }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null;
+  go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void }) {
   const [d, setD] = useState<OfferingDetail | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<OfferingDetail>(`/offerings/${uniCode}?district=${profile.district}`).then(setD).catch(e => setErr(String(e.message))); }, [uniCode, profile.district]);
@@ -293,6 +327,7 @@ function DegreeDetails({ uniCode, profile, results, go }: { uniCode: string; pro
 
       <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(`Explain ${titleCase(d.course)} at ${shortInstitution(d.institution)}: what it needs and what my chances are.`)}`)}>
         <Sparkles size={18} aria-hidden="true" />Explain this course with Ask ZedPath</button>
+      <AddToList d={d} mine={mine} list={list} setList={setList} go={go} />
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">What it needs</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
