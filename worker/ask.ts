@@ -13,8 +13,9 @@ type AppEnv = { Bindings: Env };
 type C = Context<AppEnv>;
 
 const GATEWAY_ID = 'zedpath';
-/** Tried in order; the first that exists answers. `-latest` follows Google's newest Flash model. */
-export const MODELS = ['gemini-flash-latest', 'gemini-2.5-flash'];
+/** Tried in order. A model that is missing (404), busy (5xx, e.g. "high demand") or out of free quota (429: quotas are
+ *  per model on the free tier) hands over to the next. `-latest` follows Google's newest model of that size. */
+export const MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
 const TOP_K = 6;
 export const MIN_SCORE = 0.50;  // calibrated 2026-10-05 (tools/ask/calibrate.ts): weakest right page 0.551 (Sinhala), strongest off-topic 0.474
 export const DEVICE_PER_DAY = 30, IP_PER_DAY = 300;
@@ -84,7 +85,7 @@ export function engineFacts(codes: string[], p: ProfileInput | null): string[] {
       const r = g.result!;
       const cut = r.latestE4 === null ? 'no recent cut-off' : `latest cut-off ${formatZ(r.latestE4)}`;
       return `${o.institution.replace(/,?\s*Sri Lanka$/i, '')}${o.groups.length > 1 ? ` (${g.group.code})` : ''}: ${label[r.band]} (${cut})`;
-    })).slice(0, 5);
+    })).slice(0, 12);                                                     // every place: the widest course has 12 (offering x group)
     return `${name}: the student's subjects meet the A/L entry rules${needsOl ? ', but O/L results must also be checked' : ''}. ` +
       `Chances for ${district} district with Z-score ${formatZ(p.zE4)}: ${places.join('; ')}.`;
   });
@@ -97,15 +98,22 @@ async function generate(env: Env, userText: string): Promise<{ text: string } | 
     generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
   };
   const gw = env.AI.gateway(GATEWAY_ID);
+  let last = 404;
   for (const model of MODELS) {
     const r = await gw.run({ provider: 'google-ai-studio', endpoint: `v1beta/models/${model}:generateContent`,
       headers: { 'x-goog-api-key': env.GEMINI_API_KEY!, 'content-type': 'application/json' }, query: body });
-    if (r.status === 404) continue;
-    if (!r.ok) return { status: r.status };
-    const j = await r.json() as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
-    return { text: (j.candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? '').join('').trim() };
+    if (r.ok) {
+      const j = await r.json() as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
+      const text = (j.candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? '').join('').trim();
+      if (text) return { text };
+      last = 503;                                                       // empty reply: treat as busy, try the next
+      continue;
+    }
+    console.error(`ask: model ${model} -> ${r.status} ${(await r.text()).slice(0, 300)}`);   // no key in this text
+    last = r.status;
+    if (r.status !== 404 && r.status !== 429 && r.status < 500) return { status: r.status };   // a real request error: stop
   }
-  return { status: 404 };
+  return { status: last };
 }
 
 /** Keeps the assistant's identity and the citations honest. */

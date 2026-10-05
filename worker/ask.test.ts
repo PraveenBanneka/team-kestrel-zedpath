@@ -119,11 +119,23 @@ describe('Ask ZedPath', () => {
     expect(JSON.stringify(rows)).not.toContain('00000000-0000-4000');
   });
 
-  it('turns model errors into friendly messages', async () => {
-    modelReply = { status: 429 };
-    expect((await ask({ question: 'Medicine?' })).status).toBe(429);
-    modelReply = { status: 500 };
+  it('moves on to the next model when one is busy or out of quota, and says so kindly only if all are', async () => {
+    let calls = 0;
+    env.AI.gateway = (() => ({ run: async (req: { endpoint: string }) => {
+      calls++;
+      sentToModel.push({ endpoint: req.endpoint, body: {} as never });
+      if (calls === 1) return new Response('{"error":{"status":"UNAVAILABLE"}}', { status: 503 });   // "high demand"
+      if (calls === 2) return new Response('{}', { status: 429 });                                  // free quota used up
+      return Response.json({ candidates: [{ content: { parts: [{ text: 'Answer [1].' }] } }] });
+    } })) as never;
+    const ok = await ask({ question: 'Medicine?' });
+    expect(ok.status).toBe(200);
+    expect(sentToModel.map(s => s.endpoint.split('/')[2].split(':')[0])).toEqual(['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-flash-lite-latest']);
+    calls = -100;                                                        // every model busy
+    env.AI.gateway = (() => ({ run: async () => new Response('{}', { status: 503 }) })) as never;
     expect((await ask({ question: 'Medicine?' })).status).toBe(503);
+    env.AI.gateway = (() => ({ run: async () => new Response('{}', { status: 429 }) })) as never;
+    expect((await ask({ question: 'Medicine?' })).status).toBe(429);
   });
 
   it('keeps the developer tools off unless DEV_TOOLS=1 and the request is to localhost', async () => {
