@@ -70,6 +70,10 @@ export function CompareScreen({ codes, setCodes, profile, results, list, go }: {
               {row('Duration', (_c, d) => d.duration ? shortDuration(d.duration) : '—')}
               {row('Places', (_c, d) => d.proposedIntake ? <span className="num">{d.proposedIntake.toLocaleString('en')}</span> : '—')}
               {row('Selection', (_c, d) => d.selectionBasis === 'MERIT_ONLY' ? 'All-island merit' : 'District quotas')}
+              {row('Syllabus', (c, d) => d.syllabus
+                ? <button type="button" className="source-link" style={{ border: 0, background: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }} onClick={() => go(`/course/${c.u}`)}>
+                    {d.syllabus.years.reduce((a, y) => a + y.modules.length, 0)} modules, {d.syllabus.years.length} {d.syllabus.years.length === 1 ? 'year' : 'years/levels'}</button>
+                : <span className="helper">Not added yet</span>)}
               {row('Source', (_c, d) => <span className="helper">UGC handbook 2025/26, p.{d.requirementCitation.page}</span>)}
             </tbody>
           </table>

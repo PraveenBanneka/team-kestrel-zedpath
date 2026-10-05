@@ -62,6 +62,8 @@ export interface OfferingDetail {
   ambiguousWording: boolean;               // BR-044: inclusive reading used; confirm on the UGC form
   requirementCitation: Citation;
   otherRequirements: string | null;
+  /** What the degree teaches, from the university's own published curriculum (null when not yet researched). */
+  syllabus: Syllabus | null;
   groups: {
     code: string;
     label: string | null;
@@ -77,4 +79,16 @@ export interface RouteSummary {
   name: string; provider: string; duration: string | null; costText: string | null; intakeTiming: string | null;
   requirements: string; officialUrl: string | null; sourceUrl: string; sourceLocator: string; retrievedOn: string;
   openNow: boolean; warning: string | null;
+}
+
+/** A degree's curriculum as published by the university (data/degrees/, researched 2026-10-05). Module titles are
+ *  copied from the official source; `sourceUrls` are the pages read; `notes` says when a list is partial or dated. */
+export interface Syllabus {
+  degree: string;
+  duration: string | null;
+  specialisations: string[];
+  years: { label: string; modules: string[] }[];
+  sourceUrls: string[];
+  retrievedOn: string;
+  notes: string | null;
 }

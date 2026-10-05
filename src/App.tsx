@@ -17,6 +17,7 @@ import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
+import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addToList, type ListEntry } from '../shared/list.ts';
 import { clearEverything, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
@@ -349,6 +350,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
           <p className="body-m">{d.requirementText}</p>
         </details>
       </section>
+      {d.syllabus && <SyllabusCard s={d.syllabus} />}
       {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />The handbook's wording for this course can be read two ways.
         ZedPath shows it to you; confirm on the UGC application form, which lists only the courses you are eligible for.</div>}
 

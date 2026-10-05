@@ -1,0 +1,1108 @@
+{
+  "retrievedOn": "2026-10-05",
+  "programmes": [
+    {
+      "uniCode": "001A",
+      "degree": "Bachelor of Medicine and Bachelor of Surgery [MBBS]",
+      "university": "UNIVERSITY OF COLOMBO",
+      "status": "FOUND",
+      "duration": "5 years (17 academic terms, each of 8-12 weeks duration)",
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Basic Sciences Stream (Terms 1-5)",
+          "modules": [
+            "Fundamentals of basic sciences",
+            "Locomotor system, upper limbs and lower limbs",
+            "Blood and lymphoreticular system",
+            "Cardiovascular & respiratory systems and the thorax",
+            "Gastrointestinal system and the abdomen",
+            "Genitourinary, reproductive systems and the pelvis",
+            "Endocrine system and metabolism",
+            "Neurosciences and the head and neck"
+          ]
+        },
+        {
+          "label": "Applied Sciences Stream (Terms 6-9)",
+          "modules": [
+            "Foundation 1",
+            "Foundation 2",
+            "Cardiovascular System",
+            "Respiratory System",
+            "Gastrointestinal System",
+            "Nutrition",
+            "Nephrourology",
+            "Blood and Lymphoreticular System",
+            "Infectious and Parasitic Diseases",
+            "Neurology",
+            "Musculoskeletal",
+            "Reproductive Health",
+            "Endocrine and Metabolism"
+          ]
+        },
+        {
+          "label": "Community Stream (Terms 2-13)",
+          "modules": [
+            "Concept of Health, Determinants and Promotion of Health in the Community",
+            "Demography, Statistics and Epidemiology",
+            "Health Research",
+            "Family-based Health Care",
+            "Applied Community Medicine"
+          ]
+        },
+        {
+          "label": "Humanities, Society & Professionalism Stream (Terms 1-13)",
+          "modules": [
+            "Personal Development Module (PDM)",
+            "Health and Society Module (HSM)",
+            "Cognitive and Communication Skills Module (CCSM)",
+            "Medical Ethics and Medical Professionalism Module (MEPM)",
+            "Humaneness Theme"
+          ]
+        },
+        {
+          "label": "Clinical Sciences Stream (all five years; clinical modules Terms 10-13)",
+          "modules": [
+            "Cardiology",
+            "Respiratory",
+            "Neurology",
+            "Infectious diseases",
+            "Gastrointestinal",
+            "Nephrourology",
+            "Musculo-skeletal",
+            "Haematology",
+            "Endocrine and metabolism",
+            "Critical care",
+            "Emergency medicine",
+            "Geriatrics",
+            "Palliative care and rehabilitation medicine",
+            "Clinical immunology",
+            "Trauma",
+            "Special senses",
+            "Clinical oncology",
+            "Clinical toxicology and toxinology",
+            "Reproductive health",
+            "Growth and Development",
+            "Nutrition",
+            "Mental health",
+            "Family medicine",
+            "Medico-legal module"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://med.cmb.ac.lk/mbbs/",
+        "https://drive.google.com/file/d/1jjxBTL93gbCDidOcT2efh54f4rfBG84g/view?usp=sharing"
+      ],
+      "notes": "Source: Faculty of Medicine 'Undergraduate Degree Programme 2026 (AL 2025)' handbook, the 'Download Student Handbook' link on the official MBBS page (file hosted on Google Drive by the faculty). Curriculum is organised by five streams across 17 terms, not by year; labels follow the source. Handbook says the curriculum 'is currently undergoing a major revision'. Professorial clerkships (Medicine, Surgery, Paediatrics, Gynaecology and Obstetrics, Psychiatry) follow term 14."
+    },
+    {
+      "uniCode": "012T",
+      "degree": "Bachelor of Science in Computer Science (BSc. in CS)",
+      "university": "UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING",
+      "status": "FOUND",
+      "duration": "3 years (BSc in CS) or 4 years (BSc (Hons) in CS / BSc (Hons) in SE), selected on performance in the first two years",
+      "specialisations": [
+        "Bachelor of Science Honours in Computer Science",
+        "Bachelor of Science Honours in Software Engineering"
+      ],
+      "years": [
+        {
+          "label": "Year 1",
+          "modules": [
+            "Data Structures and Program Design in C",
+            "Discrete Mathematics",
+            "Introduction to Software Engineering",
+            "Problem Solving Strategies and Computation Approaches",
+            "Computer Systems",
+            "Linear Algebra",
+            "Probability and Statistics",
+            "Application Laboratory",
+            "Communication Skills",
+            "Foundations of Algorithms",
+            "Database Management Systems",
+            "Object Oriented Modelling and Programming",
+            "Internet and Web Technologies",
+            "Operating System Concepts",
+            "Aesthetic Studies"
+          ]
+        },
+        {
+          "label": "Year 2",
+          "modules": [
+            "Group Project",
+            "Calculus",
+            "Software Architectures",
+            "Advanced Algorithms",
+            "Computer Networks",
+            "Information Technology Project Management",
+            "Numerical Methods",
+            "Statistical Inference",
+            "Digital Signal Processing",
+            "Cryptography and Information Security",
+            "Computational Models and Programming Language Concepts",
+            "Computer System Architecture",
+            "Middleware Architecture",
+            "Electronics and Physical Computing",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "label": "Year 3 (mandatory/optional varies by 3-year vs Honours CS/SE)",
+          "modules": [
+            "Industry Project",
+            "Computer Graphics and Image Processing",
+            "Compiler Theory and Construction",
+            "Intelligent Systems",
+            "Robotics and Cognitive Systems",
+            "Digital Forensics",
+            "Data Warehousing and Mining",
+            "Machine Learning",
+            "Human-Computer Interaction",
+            "System and Network Administration",
+            "Mobile Application Designing and Development",
+            "Research Methods",
+            "Applied Machine Learning",
+            "Database Programming",
+            "Literature Review",
+            "Software Quality Assurance",
+            "Professional Practice and Behavior",
+            "Industry Placement",
+            "Business communication and Soft Skills"
+          ]
+        },
+        {
+          "label": "Year 4 (Honours only; mandatory/optional varies by CS/SE)",
+          "modules": [
+            "Advanced Operating Systems",
+            "Advanced Computer Networks",
+            "Computer Vision and Deep Learning",
+            "Natural Language Processing",
+            "Research Seminar",
+            "Formal Methods and Software Verification",
+            "Computational Biology",
+            "Distributed Systems",
+            "Final Year Project in Software Engineering",
+            "Final Year Project in Computer Science",
+            "Philosophy of Science",
+            "Advanced Database Systems",
+            "Advanced Software Engineering",
+            "Software Quality and Security Assurance",
+            "Embedded Systems",
+            "Analog, Quantum, and Alternative Computing Models",
+            "Game Theory",
+            "Advanced Computer Graphics",
+            "Enterprise Architectures",
+            "Secure Software Engineering",
+            "Network Security",
+            "Parallel Computing",
+            "Natural Algorithms"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://ucsc.cmb.ac.lk/ug-computer-science/",
+        "https://ucsc.cmb.ac.lk/downloads/hb_2026.pdf"
+      ],
+      "notes": "UCSC Student Handbook 2026, 'Computer Science Degree Stream' tables. Years 1-2 all compulsory. Year 3-4 tables mark each module mandatory/optional per programme (3-year, 4-year CS, 4-year SE); those marks were garbled in text extraction so are not recorded here. The older UCSC 'course descriptions' web page lists a superseded curriculum (SCS1101... codes) and was not used."
+    },
+    {
+      "uniCode": "026G",
+      "degree": "Honors Degree of Bachelor of Science in Information Technology (B.Sc. (Hons) in IT)",
+      "university": "UNIVERSITY OF MORATUWA",
+      "status": "FOUND",
+      "duration": null,
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Level 01",
+          "modules": [
+            "Fundamentals of Mathematics & Statistics",
+            "Programming Fundamentals",
+            "Digital Systems and Computer Hardware",
+            "Computer Organization",
+            "Fundamentals of Databases and Database Design",
+            "Data Communication",
+            "Multimedia Technologies",
+            "Web Technologies",
+            "ICT Project",
+            "Principles of Economics",
+            "Principles of Management",
+            "Financial Accounting",
+            "English (Non GPA)",
+            "Sri Lankan Studies (Non GPA)"
+          ]
+        },
+        {
+          "label": "Level 02",
+          "modules": [
+            "Calculus & Statistical Distributions",
+            "Object Oriented Programming",
+            "Data Structures and Algorithms",
+            "Software Engineering Methods",
+            "Object Oriented Analysis and Design",
+            "Operating Systems",
+            "Computer Architecture",
+            "Database Management Systems",
+            "Computer Networks",
+            "Computer Graphics and Animation",
+            "Industry Based Project",
+            "Scientific Communication",
+            "Management Accounting",
+            "Essentials of Law",
+            "Principles of Marketing"
+          ]
+        },
+        {
+          "label": "Level 03 & 04 (compulsory)",
+          "modules": [
+            "Artificial Intelligence",
+            "Logic Programming & Artificial Cognitive Systems",
+            "Independent Study",
+            "Comprehensive Group Project",
+            "Social Aspects of IT",
+            "Management Information Systems",
+            "Software Management",
+            "IT Project Management",
+            "IT Quality Assurance",
+            "Professional Practice",
+            "Communication Skills (Non GPA)",
+            "Industrial Training (Non GPA)"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://uom.lk/sites/default/files/Faculty/IT/ugs/files/BSc(IT)Hons_curriculum2020Feb_0.pdf"
+      ],
+      "notes": "Curriculum and Syllabi document 'Recommended by the Curriculum and Evaluation Committee held on 22nd January 2020'. Duration not stated in the document (four Levels). Levels 03 & 04 also list about 60 electives (e.g. Machine Learning and Pattern Recognition, Big Data Analytics, Computer & Network Security) not recorded here. A newer curriculum may exist; not checked."
+    },
+    {
+      "uniCode": "016C",
+      "degree": "BSc Honours in Business Administration Degree",
+      "university": "UNIVERSITY OF SRI JAYEWARDENEPURA",
+      "status": "FOUND",
+      "duration": null,
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Year I - Semester I",
+          "modules": [
+            "Principles of Management",
+            "Business Mathematics",
+            "Information Technology for Business",
+            "Socio – Political Environment",
+            "Legal Environment",
+            "Business Communication I"
+          ]
+        },
+        {
+          "label": "Year I - Semester II",
+          "modules": [
+            "Human Resource Management",
+            "Business Statistics",
+            "Microeconomics",
+            "Financial Accounting and Reporting",
+            "Business Communication II"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://mgt.sjp.ac.lk/bus/degree-programs/b-sc-business-administration-special-degree/common-programme-structure/"
+      ],
+      "notes": "PARTIAL: Year I only, from the 'Common Programme Structure' page of the Department of Business Administration (Faculty of Management Studies and Commerce). Uni-Code 016C admits to the faculty's management degrees; Business Administration is used here as the flagship. Years II-IV are in curriculum PDFs (2021/22, 2022/23, 2023/24) linked from .../department-programme-structure/ that were not read because the task scope was cut. Duration not stated on the pages read."
+    },
+    {
+      "uniCode": "025A",
+      "degree": "Degree of Bachelor of Laws (LL.B.)",
+      "university": "UNIVERSITY OF COLOMBO",
+      "status": "FOUND",
+      "duration": "4 years",
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Year I (all compulsory)",
+          "modules": [
+            "Constitutional Law I",
+            "Criminal Law",
+            "Legal Method",
+            "Legal System",
+            "Roman Law",
+            "English Level 1"
+          ]
+        },
+        {
+          "label": "Year II (all compulsory)",
+          "modules": [
+            "Constitutional Law II",
+            "Family Law",
+            "Land Law",
+            "Law of Contract",
+            "Law of Equity & Trusts",
+            "English (For those who are placed in Level II English)"
+          ]
+        },
+        {
+          "label": "Year III",
+          "modules": [
+            "Administrative Law",
+            "Public International Law",
+            "Law of Delict",
+            "English (for those who are placed in English Level III)",
+            "Evidence & Procedure",
+            "Interpretation of Statutes and Documents",
+            "Business Law",
+            "Conflict of Laws",
+            "Humanitarian Law",
+            "International Investment Law",
+            "International Organizations",
+            "Law of the Sea"
+          ]
+        },
+        {
+          "label": "Year IV",
+          "modules": [
+            "Jurisprudence",
+            "Human Rights Law",
+            "Environmental Law",
+            "Company Law",
+            "Tax Law",
+            "Labour Law",
+            "Intellectual Property Law",
+            "Law and Medicine"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://law.cmb.ac.lk/academic/ll-b-degree/subjects-offered/"
+      ],
+      "notes": "Official 'Subjects Offered' page; no intake year stated. English levels apply only to students placed in that level. Year III: Administrative Law, Public International Law, Law of Delict compulsory; choose one of Evidence & Procedure / Interpretation of Statutes and Documents; one elective from the rest. Year IV: Jurisprudence compulsory; choose Human Rights Law or Environmental Law; electives from the rest. Read through WebFetch's summariser; titles look verbatim but were not cross-checked against the 2025 handbook. Two English module titles corrected to the page wording on 2026-10-05 (the page prints \"Level 111\" for Level III)."
+    },
+    {
+      "uniCode": "013A",
+      "degree": "BSc Degree Programme (Physical Science stream)",
+      "university": "UNIVERSITY OF COLOMBO",
+      "status": "FOUND",
+      "duration": "3 years (BSc); 4 years (BSc Honours, research or industry oriented)",
+      "specialisations": [
+        "P1 Physics, Chemistry, Applied Maths, Computer Science or Nuclear Science",
+        "P2 Physics, Applied Maths, Statistics, Computer Science or Nuclear Science",
+        "P3 Physics, Applied Maths, Pure Maths, Computer Science or Nuclear Science",
+        "P4 Chemistry, Applied Maths, Statistics, Computer Science or Nuclear Science",
+        "P5 Chemistry, Applied Maths, Pure Maths, Computer Science or Nuclear Science",
+        "P6 Applied Maths, Statistics, Pure Maths, Computer Science"
+      ],
+      "years": [
+        {
+          "label": "Level I",
+          "modules": [
+            "Modern Physics and Special Relativity",
+            "Astronomy I",
+            "Physics Laboratory I",
+            "Mechanics and Thermodynamics",
+            "Physics Laboratory II",
+            "General & Physical Chemistry",
+            "Calculations in Chemistry",
+            "Practical Chemistry Level 1",
+            "Organic Chemistry",
+            "Impact of Chemistry on Society",
+            "Fundamental Applied Mathematics",
+            "Vector Calculus",
+            "Differential Equations I",
+            "Applied Linear Algebra",
+            "Computational Mathematics I",
+            "Introduction to Probability & Statistics",
+            "Probability & Distributions",
+            "Exploratory Data Analysis",
+            "Statistical Theory",
+            "Introduction to Surveys",
+            "Basic Statistical Computing",
+            "Foundations of Mathematics",
+            "Introduction to Number Theory",
+            "Basic Analysis I",
+            "Introduction to Computing",
+            "Fundamentals of Computational Science and Programming",
+            "Introduction to Nuclear Science",
+            "Atomic and Radiation Physics",
+            "Computational Methods in Nuclear Science"
+          ]
+        },
+        {
+          "label": "Level II",
+          "modules": [
+            "Waves & Vibrations, Optics and Circuit Theory",
+            "Nanoscience and Nanotechnology",
+            "Analogue and Digital Electronic Principles Laboratory",
+            "Electromagnetic Theory",
+            "Electronics and Computing Laboratory",
+            "Practical Chemistry Level II",
+            "Intermediate Physical Chemistry",
+            "Inorganic and Analytical Chemistry",
+            "Introduction to Biochemistry",
+            "Differential Equations II",
+            "Linear Programming",
+            "Numerical Analysis",
+            "Optimization",
+            "Computational Mathematics II",
+            "Basic Statistical Inference",
+            "Applications in Statistical Inference",
+            "Statistical Methods in Quality Control",
+            "Analysis of Variance and Design of Experiments",
+            "Applied Non-Parametric Methods",
+            "Introduction to Statistical Modeling",
+            "Basic Analysis II",
+            "Introduction to Abstract Algebra",
+            "Basic Analysis III",
+            "Internet Technologies",
+            "Fundamentals of Software Engineering",
+            "Radiochemistry",
+            "Radiation and Living Systems",
+            "Basic Imaging Science",
+            "Nuclear Techniques"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://science.cmb.ac.lk/wp-content/uploads/2026/04/Handbook-2025_2026-1.pdf"
+      ],
+      "notes": "Faculty of Science Handbook 2025/2026, Annexes 1-2 (Physical Science Level I and II). Lists are every course offered to the stream (core and elective); a student takes core courses of the three or four subjects in their combination. Level III/IV (subject-specific, many Honours programmes) not captured."
+    },
+    {
+      "uniCode": "006B",
+      "degree": "B.Sc. Study Programme (Biological Science stream)",
+      "university": "UNIVERSITY OF PERADENIYA",
+      "status": "FOUND",
+      "duration": "3 academic years (B.Sc.); 4 academic years (B.Sc. Honours)",
+      "specialisations": [
+        "1 - BBC: Biology, Chemistry",
+        "2 - BCS: Biology, Chemistry, Statistics",
+        "3 - BCC: Biology, Chemistry, Computer Science",
+        "4 - BCP: Biology, Chemistry, Physics",
+        "8 - BCG: Biology, Chemistry, Geology",
+        "Honours (Special) degrees available to these combinations include Botany, Chemistry, Environmental Sc., Mol. Biol. & Biotech., Zoology, Microbiology, Biomedical Sc., Statistics, Computer Sc., Physics, Geology"
+      ],
+      "years": [
+        {
+          "label": "1000 Level - Biology",
+          "modules": [
+            "Cell Biology and Genetics",
+            "Plant and Animal Form and Function",
+            "Basic Ecology",
+            "Introductory Microbiology",
+            "Biomolecules and their Applications",
+            "Introductory Environmental Biology",
+            "Introductory Evolutionary Biology",
+            "Tropical Ecosystems",
+            "Introduction to Biotechnology and its Application"
+          ]
+        },
+        {
+          "label": "1000 Level - Chemistry",
+          "modules": [
+            "Principles of Chemistry I",
+            "Principles of Chemistry II",
+            "Elementary Chemistry Laboratory I",
+            "Elementary Chemistry Laboratory II"
+          ]
+        },
+        {
+          "label": "1000 Level - third subject (by combination)",
+          "modules": [
+            "Introduction to Statistics",
+            "Introduction to Probability Theory",
+            "Statistics Applications I",
+            "Statistics Applications II",
+            "Introduction to Computer Science and Programming",
+            "Object-oriented Programming",
+            "Programming Laboratory I",
+            "Programming Laboratory II",
+            "General Physics I",
+            "General Physics II",
+            "Elementary Physics Laboratory I",
+            "Elementary Physics Laboratory II",
+            "Earth Processes",
+            "Earth Processes Laboratory",
+            "Earth Materials",
+            "Earth Materials Laboratory"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://sci.pdn.ac.lk/docs/Student-Handbook-2024-2025_v1.0.pdf"
+      ],
+      "notes": "Faculty of Science Student Handbook 2024/2025. First year: three subjects from the chosen combination; combination BBC takes all eight compulsory Biology courses, other Bio combinations take four Biology courses (Biology*) plus the third subject. From 2000 level, modules depend on the subjects and Honours area chosen; not captured."
+    },
+    {
+      "uniCode": "023G",
+      "degree": "Bachelor of Architecture Honours Degree Program (BArch)",
+      "university": "UNIVERSITY OF MORATUWA",
+      "status": "FOUND",
+      "duration": "nine academic semesters, each 20 weeks in duration, and in-plant training of a minimum of 44 weeks duration",
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Level 01 - Semester I",
+          "modules": [
+            "History of Art and Architecture - Sri Lankan I",
+            "Design Fundamentals",
+            "Research and Communication",
+            "Sri Lankan Studies"
+          ]
+        },
+        {
+          "label": "Level 01 - Semester II",
+          "modules": [
+            "Climate and Comfort",
+            "Social Studies I",
+            "Structure -I",
+            "Construction Technology - I",
+            "Perspectives & Sciography",
+            "History of Art and Architecture - World",
+            "Colour",
+            "Design Projects",
+            "Nature Studies",
+            "Structure Project",
+            "Experiencing Architecture & Documentation",
+            "Freehand Drawing",
+            "English"
+          ]
+        },
+        {
+          "label": "Level 02 - Semester I",
+          "modules": [
+            "Principles of Acoustical Design",
+            "Building Services, I",
+            "Spatial Planning and Design",
+            "History of Architecture-Sri Lankan II",
+            "Social Studies II",
+            "Design Theory I"
+          ]
+        },
+        {
+          "label": "Level 02 - Semester II",
+          "modules": [
+            "Introduction to Building Economics",
+            "Solar Geometry and Heat Transfer in Buildings",
+            "Principles of Lighting Design",
+            "Structures II",
+            "Construction Technology II",
+            "Computer-aided Drafting",
+            "Design Projects (4-5 nos.)",
+            "Working Drawings",
+            "Experiencing Architecture"
+          ]
+        },
+        {
+          "label": "Level 03 - Semester I",
+          "modules": [
+            "Professional Studies",
+            "Structures III",
+            "Building Materials",
+            "Essay Architectural Design and Social Studies",
+            "Advanced Computer Applications",
+            "Principles of Tropical Design",
+            "Building Services, II",
+            "Major Design Project (MDP)"
+          ]
+        },
+        {
+          "label": "Level 03 - Semester II",
+          "modules": [
+            "In-Plant Training I- (Design and Technology)",
+            "In-Plant Training II- (Management)"
+          ]
+        },
+        {
+          "label": "Level 04 - Semester I",
+          "modules": [
+            "Law",
+            "Introduction to Green Architecture",
+            "Urban Design and Environment",
+            "Materials-Usage and Technology",
+            "Social Implications of Architecture",
+            "Design Theory"
+          ]
+        },
+        {
+          "label": "Level 04 - Semester II",
+          "modules": [
+            "Professional Studies II",
+            "Construction Management",
+            "Project Management",
+            "Advanced Climate-Sensitive Design",
+            "Low Energy Architecture",
+            "Introduction to Landscape Design & Planning",
+            "Introduction to Architectural Conservation",
+            "Advanced Lighting Design",
+            "Building Environmental Assessment",
+            "Advanced Building Services",
+            "Building Facilities Management",
+            "Construction Design",
+            "Society and Human Settlements",
+            "Landscape and Place",
+            "Orientation Design Project",
+            "Urban Design Project",
+            "Demonstration Design Project"
+          ]
+        },
+        {
+          "label": "Level 05",
+          "modules": [
+            "Office Management",
+            "Dissertation",
+            "Comprehensive Design Project"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://uom.lk/archi/undergraduate-programmes",
+        "https://uom.lk/sites/default/files/archi/files/B.Arch%20Student%20Handbook%202022_1.pdf"
+      ],
+      "notes": "B.Arch Student Handbook 2022 (April 2022, for the 2022/23 intake) - the latest handbook linked from the department page. Level 04 Semester II includes electives (e.g. Advanced Climate-Sensitive Design, Advanced Building Services). Titles were reconstructed from a two-column layout; the handbook also prints 'History of Architecture-Sri Lankan II' a second time under code AD 2020 in Level 02 Semester II (duplicate not repeated here)."
+    },
+    {
+      "uniCode": "136L",
+      "degree": "BSc. Honours Degree in Data Science",
+      "university": "SABARAGAMUWA UNIVERSITY OF SRI LANKA",
+      "status": "FOUND",
+      "duration": null,
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Semester I",
+          "modules": [
+            "Introduction to Data Science",
+            "Programming Fundamentals",
+            "Calculus",
+            "Introduction to Statistics",
+            "Database Management Systems",
+            "Computer System Organization",
+            "Data and Society",
+            "Web Programming I",
+            "Communication Skills I",
+            "Academic Integrity",
+            "General English I"
+          ]
+        },
+        {
+          "label": "Semester II",
+          "modules": [
+            "Operating Systems",
+            "Data Structures",
+            "Linear Algebra",
+            "Object Oriented Programing",
+            "Capstone Project in Data Science I",
+            "Analysis of Algorithms",
+            "System Analysis and Design",
+            "Data Pre-Processing",
+            "Communication Skills II",
+            "General English II"
+          ]
+        },
+        {
+          "label": "Semester III",
+          "modules": [
+            "Probability Theory",
+            "Regression Analysis",
+            "Multivariate Calculus",
+            "Real World Analytics",
+            "Computer Networking",
+            "Data Warehousing",
+            "Web Programming II",
+            "Academic English I"
+          ]
+        },
+        {
+          "label": "Semester IV",
+          "modules": [
+            "Advanced Database Management Systems",
+            "Scientific Writing & Documentation",
+            "Software Engineering",
+            "Data Visualization",
+            "Capstone Project in Data Science II",
+            "Applied Data Mining",
+            "Social and Professional Issues in Computing",
+            "Business Intelligence",
+            "Discrete Mathematics",
+            "Artificial Intelligence",
+            "Academic English II"
+          ]
+        },
+        {
+          "label": "Semester V (compulsory)",
+          "modules": [
+            "Semantic Web",
+            "Time Series Analysis and Forecasting",
+            "Information Security",
+            "Machine Learning",
+            "Linear Programming",
+            "Graph Theory",
+            "Business English"
+          ]
+        },
+        {
+          "label": "Semester VI (compulsory)",
+          "modules": [
+            "Introduction to Deep Learning",
+            "Bayesian Learning and Graphical Models",
+            "Mathematical Optimization",
+            "Industrial Training"
+          ]
+        },
+        {
+          "label": "Semester VII (compulsory)",
+          "modules": [
+            "Research Method",
+            "Advanced Deep Learning",
+            "Emerging Trends in Data Science",
+            "Numerical Methods",
+            "Natural Language Processing"
+          ]
+        },
+        {
+          "label": "Semester VIII (compulsory)",
+          "modules": [
+            "Research Project in Data Science",
+            "Information Retrieval and Web Analytics",
+            "Reinforcement Learning",
+            "Computational Intelligence",
+            "Business Analytics and Applications"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://www.sab.ac.lk/computing/undergraduate/bsc-ds-curriculum"
+      ],
+      "notes": "Faculty of Computing curriculum page; no intake year stated; eight semesters listed. Semesters V-VIII also list electives (e.g. Image Processing, Cloud Computing, Internet of Things, Robotics) not recorded. 'Object Oriented Programing' spelled as on the page. Read through WebFetch's summariser; titles look verbatim."
+    },
+    {
+      "uniCode": "099L",
+      "degree": "BSc. Honours Degree in Software Engineering",
+      "university": "SABARAGAMUWA UNIVERSITY OF SRI LANKA",
+      "status": "FOUND",
+      "duration": null,
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Semester I",
+          "modules": [
+            "Computer Organization",
+            "Programming Fundamentals",
+            "Requirements Fundamentals",
+            "Software Process Concepts",
+            "Social and Professional Issues",
+            "Fundamentals of Mathematics",
+            "Fundamentals of Statistics",
+            "Communication Skills I",
+            "Academic Integrity",
+            "General English I"
+          ]
+        },
+        {
+          "label": "Semester II",
+          "modules": [
+            "Algorithms, Data structures, and Complexity",
+            "Database Management Systems",
+            "Operating Systems Basics",
+            "Object Oriented Programming",
+            "Requirement Specification and Documentation",
+            "Software Process Implementation",
+            "Analysis Fundamentals",
+            "Advanced Mathematics",
+            "Communication Skills II",
+            "General English II"
+          ]
+        },
+        {
+          "label": "Semester III",
+          "modules": [
+            "Network Protocols",
+            "Formal Methods",
+            "Object Oriented Analysis and Design",
+            "Requirements Validation",
+            "Software Design Concepts",
+            "Web Systems and Technologies",
+            "Software Engineering Foundations",
+            "Academic English I"
+          ]
+        },
+        {
+          "label": "Semester IV",
+          "modules": [
+            "Security Fundamentals",
+            "Software Verification and Validation",
+            "Software Configuration Management",
+            "Software Project Management",
+            "Human Computer Interaction Design",
+            "Projects in Web Systems and Technologies",
+            "Industrial Inspection",
+            "Risk Management",
+            "Communication Skills",
+            "Management Information Systems",
+            "Academic English II"
+          ]
+        },
+        {
+          "label": "Semester V (core)",
+          "modules": [
+            "Computer and Network Security",
+            "Software Testing",
+            "Product Assurance",
+            "Mini Project",
+            "Evolution processes and activities",
+            "Business English"
+          ]
+        },
+        {
+          "label": "Semester VI (core)",
+          "modules": [
+            "Community Project",
+            "Cloud Computing",
+            "Parallel and Distributed Systems",
+            "Advanced Database Management Systems",
+            "Software Architecture",
+            "Software Design Patterns",
+            "Software Design Evaluation",
+            "Current Topics in Software Engineering"
+          ]
+        },
+        {
+          "label": "Semester VII",
+          "modules": [
+            "Industrial Training"
+          ]
+        },
+        {
+          "label": "Semester VIII (core)",
+          "modules": [
+            "Research Project",
+            "Research Methods",
+            "Service Oriented Architecture",
+            "Problem Analysis and Reporting",
+            "Machine Learning",
+            "Mobile Computing",
+            "Refactoring"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://www.sab.ac.lk/computing/undergraduate/bsc-se-curriculum"
+      ],
+      "notes": "Faculty of Computing curriculum page; no intake year stated; eight semesters listed. Semesters V, VI and VIII also list electives (e.g. IT Auditing, Semantic Web, Data Mining, Artificial Intelligence) not recorded. Read through WebFetch's summariser; titles look verbatim."
+    },
+    {
+      "uniCode": "003B",
+      "degree": "Bachelor of Veterinary Science (BVSc)",
+      "university": "UNIVERSITY OF PERADENIYA",
+      "status": "FOUND",
+      "duration": "10 semesters (five calendar years); 58 courses worth 157 credits",
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Pre-veterinary",
+          "modules": [
+            "Intensive Course in English",
+            "Information and Communication Technology",
+            "Introduction to University and Professional Life",
+            "Veterinary Exposure and Leadership Experience"
+          ]
+        },
+        {
+          "label": "Year 1",
+          "modules": [
+            "Veterinary Anatomy I",
+            "Biochemistry I",
+            "Professional Studies I",
+            "Animal Restraining and Handling",
+            "English I",
+            "Integrated Veterinary Sciences I",
+            "Veterinary Physiology I",
+            "Veterinary Anatomy II",
+            "Biochemistry II",
+            "Professional Studies II",
+            "Animal Behavior and Welfare",
+            "English II",
+            "Integrated Veterinary Sciences II",
+            "Veterinary Physiology II"
+          ]
+        },
+        {
+          "label": "Year 2",
+          "modules": [
+            "General Pathology",
+            "Veterinary Bacteriology and Mycology",
+            "Immunology",
+            "Veterinary Parasitology I",
+            "Animal Nutrition",
+            "Integrated Veterinary Sciences III",
+            "Monogastric Production",
+            "English III",
+            "Systemic Pathology",
+            "Veterinary Parasitology II",
+            "Introduction to Veterinary Clinical Practice",
+            "Veterinary Virology",
+            "Ruminant Production",
+            "English IV",
+            "Integrated Veterinary Sciences IV"
+          ]
+        },
+        {
+          "label": "Year 3",
+          "modules": [
+            "Clinical Pathology and Diagnostics",
+            "Veterinary Pharmacology and Toxicology I",
+            "Biostatistics",
+            "Aquaculture and Aquatic Animal Health",
+            "Economics for Veterinarians",
+            "Integrated Veterinary Sciences V",
+            "Principles of Business Management",
+            "Research Methodology",
+            "Companion Animal Medicine and Surgery I",
+            "Veterinary Pharmacology and Toxicology II",
+            "Epidemiology",
+            "Farm Animal Medicine and Surgery I",
+            "Genetics and Breeding",
+            "Equine Health and Management",
+            "Integrated Veterinary Sciences VI"
+          ]
+        },
+        {
+          "label": "Year 4",
+          "modules": [
+            "Veterinary Public Health I",
+            "Veterinary Extension",
+            "Farm Animal Medicine and Surgery II",
+            "Companion Animal Medicine and Surgery II",
+            "Theriogenology",
+            "Integrated Veterinary Sciences VII",
+            "Veterinary Public Health II",
+            "Poultry Pathology and Health",
+            "Companion Animal Medicine and Surgery III",
+            "Wild Animal Health and Management",
+            "Research Project",
+            "Integrated Veterinary Sciences VIII"
+          ]
+        },
+        {
+          "label": "Year 5 (clinical, lecture-free)",
+          "modules": [
+            "Farm Animal Clinics I",
+            "Companion and Wild Animal Clinics I",
+            "Farm Animal Clinics II",
+            "Companion and Wild Animal Clinics II",
+            "Externships"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://vet.pdn.ac.lk/five-year-curriculum.php",
+        "https://vet.pdn.ac.lk/Download/Student%20Handbook_Batch%202024_25_web2_opt.pdf"
+      ],
+      "notes": "FVMAS Student Handbook, Batch 2024/25 (five-year curriculum). The faculty site also shows an older 4-year curriculum page, not used. Year grouping follows course codes (VS1xxx = Year 1 ... VS5xxx = Year 5); PREVET courses have no year code."
+    },
+    {
+      "uniCode": "011G",
+      "degree": "Bachelor of Science Honours in Quantity Surveying",
+      "university": "UNIVERSITY OF MORATUWA",
+      "status": "FOUND",
+      "duration": "four-year full time honours degree programme (eight semesters)",
+      "specialisations": [],
+      "years": [
+        {
+          "label": "Level 1",
+          "modules": [
+            "Introduction to Construction Industry",
+            "Building Structures and Design Appreciation",
+            "Building Design and Construction I",
+            "Fundamentals of Management",
+            "Professional Communication Skills",
+            "ICT for Quantity Surveying",
+            "Building Measurement",
+            "Building Design and Construction II",
+            "Services I",
+            "Building Materials",
+            "Principles of Economics",
+            "Financial Accounting",
+            "Project Study I",
+            "Land surveying"
+          ]
+        },
+        {
+          "label": "Level 2",
+          "modules": [
+            "Services II",
+            "Law of Contract and Delicts",
+            "Advanced Building Measurement",
+            "Tendering",
+            "Procurement Systems",
+            "Construction Economics",
+            "Project Study II",
+            "Services III",
+            "Law of Property",
+            "Building Information Modelling",
+            "Project Planning and Management",
+            "Construction Costing",
+            "Organisational Management",
+            "Civil Engineering Construction I",
+            "Project Study III",
+            "Business Statistics and Operational Research",
+            "Human Resource Management",
+            "Building Surveying"
+          ]
+        },
+        {
+          "label": "Level 3",
+          "modules": [
+            "Industrial Training",
+            "Pricing and Bidding",
+            "Civil Engineering Construction II",
+            "Civil Engineering Measurement",
+            "Introduction to Research",
+            "Sustainable Development",
+            "Commercial Management",
+            "Project Study IV",
+            "Specification writing",
+            "Entrepreneurship for Quantity Surveyors",
+            "Business and Industrial Law"
+          ]
+        },
+        {
+          "label": "Level 4",
+          "modules": [
+            "Automation in Construction",
+            "Services Measurement",
+            "Contract Interpretation",
+            "Development Economics",
+            "Dissertation",
+            "Research Methodology",
+            "Financial Management",
+            "Project Study V",
+            "Project Economics",
+            "Building Information Modelling and Management",
+            "Professional Practice",
+            "Management of Claims and Disputes",
+            "Project Study VI"
+          ]
+        }
+      ],
+      "sourceUrls": [
+        "https://uom.lk/becon/programmes/undergraduate/quantity-surveying"
+      ],
+      "notes": "Department of Building Economics page, 'MODULE OUTLINE (From 2022 Intake)'. Some modules are electives (module type column); compulsory/elective split not recorded. 32-week industrial placement starts in Level 3 Semester I."
+    },
+    {
+      "uniCode": "002B",
+      "degree": "Bachelor of Dental Surgery (BDS)",
+      "university": "UNIVERSITY OF PERADENIYA",
+      "status": "UNREADABLE",
+      "duration": null,
+      "specialisations": [],
+      "years": [],
+      "sourceUrls": [
+        "https://dental.pdn.ac.lk/under_pro.php",
+        "https://dental.pdn.ac.lk/DATS/course.php",
+        "https://dental.pdn.ac.lk/stud_handb.php"
+      ],
+      "notes": "The faculty site returned unexpected, unsafe content on 2026-10-05; nothing was read from it and it is not linked by ZedPath."
+    }
+  ]
+}

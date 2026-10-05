@@ -373,3 +373,11 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .col-x { position: absolute; top: 6px; right: 4px; width: 28px; height: 28px; border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink-3); display: grid; place-items: center; cursor: pointer; }
 .cell-list { display: flex; flex-direction: column; gap: 4px; }
 .skeleton-line { display: block; height: 14px; width: 80%; border-radius: 6px; background: var(--surface-3); }
+
+/* ---------- Syllabus */
+.syl-years { display: flex; flex-direction: column; border-radius: var(--r-m); border: 1px solid var(--line); overflow: hidden; }
+.syl-year + .syl-year { border-top: 1px solid var(--line); }
+.syl-head { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 10px 14px; border: 0; background: var(--surface-2);
+  font: 600 14px/18px var(--font-body); color: var(--ink); cursor: pointer; text-align: left; }
+.syl-head .grow { flex: 1; }
+.syl-list { margin: 0; padding: 10px 14px 12px 32px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px; }

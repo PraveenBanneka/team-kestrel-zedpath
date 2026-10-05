@@ -7,6 +7,7 @@ import { describe } from '../shared/describe.ts';
 import { assessOffering, book, districtIndex, parseProfile, SUBJECT_NAMES } from './rulebook.ts';
 import { accountRoutes } from './account.ts';
 import { askRoutes } from './ask.ts';
+import { SYLLABI, SYLLABI_VERSION } from './syllabi.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
 function groupName(code: string, label: string | null): string {
@@ -21,7 +22,7 @@ const app = new Hono<{ Bindings: Env }>().basePath('/api');
 
 // Cached answers must change the moment the data or the API changes: the ETag is the rulebook build, and clients
 // revalidate every time (304 when unchanged), so a deploy can never leave a phone holding an old response shape.
-const ETAG = `"rb-${book.generatedAt}"`;
+const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}"`;     // changes with the rulebook OR the syllabus data
 const cacheable = (c: { req: { header: (n: string) => string | undefined }; header: (n: string, v: string) => void }) => {
   c.header('Cache-Control', 'public, no-cache');
   c.header('ETag', ETAG);
@@ -81,6 +82,7 @@ app.get('/offerings/:uniCode', c => {
     ambiguousWording: course?.reconciliation?.reading === 'INCLUSIVE',
     requirementCitation: { sourceId: '1', page: course?.page ?? o.page, label: 'UGC handbook 2025/26' },
     otherRequirements: o.other,
+    syllabus: SYLLABI.get(o.uniCode) ?? null,
     groups: o.groups.map(g => ({ code: g.code, label: g.label, history: g.years.map(y => ({
       academicYear: y.academicYear, zE4: di === undefined ? null : y.zE4[di],
       citation: { sourceId: y.source, page: y.page, label: y.sourceLabel } })) })),
