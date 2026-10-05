@@ -118,6 +118,11 @@ Reversal plan: `npx wrangler rollback <previous-version-id>` (also GO-gated), wr
   If installed later, its instruction line goes HERE, not in the global file:
   "When interacting with Cloudflare, use the cf CLI unless the project has a Wrangler configuration file."
 
+## Off-limits web hosts (Praveen, 2026-10-05)
+Never fetch, open, search, scrape or link any host listed in `BLOCKED_HOSTS` in `worker/syllabi.ts` (it returned unsafe content during
+research). Not with WebFetch, curl, Firecrawl, a browser or a subagent. Subagent prompts that research university sites must
+repeat this rule.
+
 ## Hygiene
 - Work journal: `WORKLOG.md`. Log meaningful work before ending a session; keep the state block current.
 - Secrets (Gemini key etc.) go in `.dev.vars` locally / `wrangler secret put` remotely (GO-gated). Never commit.

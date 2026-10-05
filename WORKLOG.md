@@ -175,3 +175,14 @@
   Sinhala and Tamil answered in those languages citing p.50, off-topic -> honest "not found".
 - Versions: f0d5b4e8 -> 9b93fa91 (logging) -> 5f096264 (fallback) -> 76c2856a (all places listed) -> next (tidy names).
   Screenshots + test run sent to Praveen's phone.
+
+## 2026-10-05: My list, Compare, degree syllabi LIVE (Praveen's GO) + an unsafe source host
+- Live before: bd923072. Deploy exit 0, 79/79 tests -> version **c221ddfc-e98d-4c4f-89b5-513b4868789a**.
+- My list (US-301..303: order warnings BR-041/042, fix-the-order with confirm, copy Uni-Codes, drag handle on the
+  right per Praveen, keyboard reorder on the handle), Compare (up to 3 courses), syllabi for 12 programmes from
+  official university sources (0 Firecrawl credits; Law spot-check 30/32 verbatim, 2 paraphrases fixed).
+  Live check: 026G 41 modules (uom.lk), 001A 55 (med.cmb.ac.lk); ETag now carries a syllabus-data fingerprint.
+- One source host (see BLOCKED_HOSTS in worker/syllabi.ts) returned unsafe content during research. Never served
+  or linked (tested); its page addresses removed from the public data file (89c841c, + test). Details given to
+  Praveen privately; reporting to Sri Lanka CERT|CC is his decision. No copies were saved on disk.
+  Praveen: "Do not visit it again" -> rule added to CLAUDE.md.
