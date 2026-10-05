@@ -3,32 +3,18 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version 8250b923 (design v2) + a newer version created by Praveen's
-  `secret put GEMINI_API_KEY` (id not yet logged; read it with `versions list` at the next GO). Rollback target
-  c7113216. Secrets: GEMINI_API_KEY (live). No D1/KV/R2 resources created yet.
+  https://zedpath.teamkestrel.workers.dev = version 411b3b72 (accounts) + a PEPPER secret change on top (id to be
+  read at the next GO). Rollback target 16feb5ec (design v2 + GEMINI_API_KEY). Secrets: GEMINI_API_KEY, PEPPER.
+  D1 `zedpath` (59e854ed..., APAC): 35 tables, reference data loaded, 0 student accounts after the net-zero test.
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
-- **Code:** onboarding -> Paths -> courses -> degree details -> hidden; other paths; Me; installable PWA; design v2.
-  **Student accounts (CR-001) built, tested, committed, NOT live:** username + password (PBKDF2 on the phone),
-  recovery code, sessions, cross-device sync, delete account. Runs locally on a local D1 copy.
-  Schema: 35 tables / 190 columns / 52 FKs. Tests: 54/54. Client JS 131 KB gzip (NFR-006 200 KB met).
-- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised in review for CR-001, 33 pages). Next: 06, 07, 08;
-  SRS v1.1 (beyond grades, other paths, BR-044, CR-001 accounts, NFR-030 wording).
-- **Next step:** Praveen's GO for the accounts go-live batch (below) -> Ask ZedPath (cited answers, never named
-  "Gemini") -> reminders -> narrated guide video (voice: Ava; rules in video/LESSONS.md).
+- **Code:** onboarding -> Paths -> courses -> degree details -> hidden; other paths; Me; installable PWA; design v2;
+  **student accounts LIVE** (username + password, recovery code, sync, delete). Committed but NOT yet live:
+  9770558 rate-limit fix (a school lab on one IP was capped at 10 sign-ups a minute). Tests 56/56.
+- **Docs:** 00-04 approved v1.0; 05 Data Design v0.9 (revised for CR-001, 33 pages). Next: 06, 07, 08; SRS v1.1.
+- **Now:** Android APK (Trusted Web Activity via Bubblewrap; package com.teamkestrel.zedpath). Video dropped by
+  Praveen ("I dont want the video"); video/LESSONS.md kept. Gate 3 still needs a demo video (Praveen to record).
+- **Next:** APK -> GO deploy (rate-limit fix + assetlinks.json) -> Ask ZedPath -> reminders.
 - **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
-- **Waiting on Praveen:** ONE GO for the accounts go-live batch. Google sign-in comes later (Praveen 2026-10-05).
-
-### Accounts go-live batch (needs one GO; reversal written first)
-1. `npx wrangler whoami` -> must be e6474e41... (not salon).
-2. `npx wrangler d1 create zedpath` -> copy the printed database_id into wrangler.jsonc (replacing the zeros).
-3. `npx wrangler d1 migrations apply zedpath --remote` -> 0001, 0002, 0003.
-4. `npm run deploy` -> note version id. Accounts answer 503 until step 5 (safe default; rest of the app unchanged).
-5. PEPPER secret, generated and piped so the value is never shown:
-   `node -e "process.stdout.write(require('crypto').randomBytes(32).toString('hex'))" | npx wrangler secret put PEPPER`.
-   PEPPER must never change afterwards (stored salts keep old accounts working even if it did, but do not rely on it).
-6. Verify LIVE: sign-up -> /me -> log in on a second browser -> delete the test account (net-zero) -> health.
-Reversal: `wrangler rollback 8250b923` (accounts code gone, D1 untouched); if needed `wrangler d1 delete zedpath`
-(GO-gated) once no real student has an account. Nothing else (DNS, other Workers) is touched.
 
 ---
 
@@ -140,3 +126,20 @@ Reversal: `wrangler rollback 8250b923` (accounts code gone, D1 untouched); if ne
 - Debugging drill applied: a "dead" 503 was an orphaned old dev server on :5173 (environment, not code).
 - Docs: ZP-DOC-05 Section 2.5 + mapping + BCNF + security + evidence + Appendix B; generator now draws 1:1 correctly.
 - Not done (needs Praveen): the GO batch above. Also open: SRS v1.1 change record.
+
+## 2026-10-05: Accounts LIVE (Praveen's GO)
+- whoami = Stacklineops@gmail.com's Account e6474e41... Live before: 16feb5ec (Praveen's GEMINI_API_KEY secret
+  change on top of 8250b923), which became the rollback target.
+- `d1 create zedpath` -> 59e854ed-cf1b-4e32-8682-386b53a1e8ae (APAC). Wrangler offered to edit the config with a
+  different binding name; declined (non-interactive) and the id was added by hand; account pin unchanged.
+- `d1 migrations apply zedpath --remote`: 0001-0003 applied. Live check: 35 tables, 6/25/59 reference rows, 3 triggers.
+- Deploy: exit 0, 54/54 tests, version **411b3b72-bdcc-46d6-98a2-a6ef5fd2451e**. Before the key existed the live
+  safe default held: account routes 503, results unchanged (38/6/9).
+- PEPPER generated with node crypto and piped into `secret put` (value never shown or stored elsewhere).
+- Live E2E at 390 px, two browsers: sign-up 1.65 s (incl. PBKDF2), log-in on an empty browser 1.59 s with results and
+  achievements restored, recovery issued a new code, no overflow. The scripted delete step did not run as intended
+  (script steps, not the app); delete then done and screenshotted by hand on live: back to Welcome, phone cleared,
+  /api/me 401, and all 8 account tables = 0 rows (net-zero).
+- Found while re-running the script locally: salt + sign-up limited per IP alone (10/min) would block a school lab
+  or home Wi-Fi. Fixed in 9770558 (per IP+username 10/min, per IP 100/min; classroom test; mutation-checked).
+  Not live yet: ships with the next GO.
