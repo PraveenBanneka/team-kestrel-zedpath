@@ -2,16 +2,19 @@
 id: ZP-DOC-01
 title: Vision and Scope
 subtitle: Business requirements, product vision, scope boundaries and business context
-version: 0.9
+version: 1.0
 date: 5 October 2026
-status: In review
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
+approved: 5 Oct 2026
+signature: Approved in writing (project channel)
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Vision and scope document template (K. Wiegers and J. Beatty, Software Requirements, 3rd ed.); ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue, derived from the Gate 1 Problem and Proof deck; submitted for approval
+revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 ---
 
 # Introduction

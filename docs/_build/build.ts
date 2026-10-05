@@ -26,6 +26,7 @@ import * as d from 'docx';
 interface Meta {
   id?: string; title?: string; subtitle?: string; version?: string; date?: string; status?: string;
   classification?: string; owner?: string; author?: string; approver?: string; standard?: string; source?: string;
+  approved?: string; signature?: string;
   revision: string[]; reviewer: string[];
   [key: string]: string | string[] | undefined;
 }
@@ -316,7 +317,7 @@ function frontSections(meta: Meta, stats: Stats): { cover: Block[]; rest: Block[
     frontH2('Review and approval'),
     P('This document takes effect when the approver signs below. Until then its status is as shown on the cover.', { run: { size: 19, color: C.muted } }),
     gridTable(['Role', 'Name', 'Signature', 'Date'],
-      [...meta.reviewer.map(r => ['Reviewer', r, '', '']), ['Approver', meta.approver || '', '', '']], [22, 38, 22, 18]),
+      [...meta.reviewer.map(r => ['Reviewer', r, '', '']), ['Approver', meta.approver || '', meta.signature || '', meta.approved || '']], [22, 38, 22, 18]),
   ];
   const lists: Block[] = [
     new d.Paragraph({ children: [new d.PageBreak()] }),

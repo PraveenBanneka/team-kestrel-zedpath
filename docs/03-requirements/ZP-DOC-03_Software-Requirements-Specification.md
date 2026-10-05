@@ -2,16 +2,19 @@
 id: ZP-DOC-03
 title: Software Requirements Specification
 subtitle: Functional, non-functional and business-rule requirements for ZedPath Release 1 and 2
-version: 0.9
+version: 1.0
 date: 5 October 2026
-status: In review
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
+approved: 5 Oct 2026
+signature: Approved in writing (project channel)
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: ISO/IEC/IEEE 29148:2018, software requirements specification content; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: functional requirements derived from ZP-DOC-02; NFRs; business rules from the UGC handbook and cut-off table 2025/26; submitted for approval
+revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 ---
 
 # Introduction

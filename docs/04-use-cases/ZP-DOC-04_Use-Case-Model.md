@@ -2,17 +2,20 @@
 id: ZP-DOC-04
 title: Use Case Model
 subtitle: Actors, use case diagrams, fully dressed use cases and activity flows
-version: 0.9
+version: 1.0
 date: 5 October 2026
-status: In review
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
+approved: 5 Oct 2026
+signature: Approved in writing (project channel)
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: UML 2.5.1 use case and activity diagrams; A. Cockburn fully dressed use case template; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: 18 use cases (7 fully dressed), two use case diagrams, two activity diagrams; submitted for approval
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Review update: catalogue extended for FR-113 (O/L requirements) and FR-308 (list limit) added to ZP-DOC-03
+revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 ---
 
 # Introduction

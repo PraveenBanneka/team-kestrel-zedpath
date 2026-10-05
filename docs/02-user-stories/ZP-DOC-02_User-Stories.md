@@ -2,18 +2,21 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 0.9
+version: 1.0
 date: 5 October 2026
-status: In review
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
+approved: 5 Oct 2026
+signature: Approved in writing (project channel)
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Agile user stories (Cohn), INVEST, Gherkin-style acceptance criteria; MoSCoW (DSDM); ZP-DOC-00
 revision: 0.1 | 5 Oct 2026 | Team Kestrel | First draft from Gate 1 evidence (6 interviews, tool test, concept screens)
 revision: 0.2 | 5 Oct 2026 | Team Kestrel | Story totals verified by script; corrected 3 summary figures
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Restructured to ZP-DOC-00; numbered acceptance criteria; reminders and senior verification changed to fit the Cloudflare free plan (no outbound email); submitted for approval
+revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 ---
 
 # Introduction
