@@ -206,3 +206,7 @@
   next deploy (needs a message starting with GO). Praveen uninstalled the TWA + PWA and installs 1.1.0 fresh.
 - Play Store notes for later: $25 account (Praveen), privacy policy + data safety, 12 testers x 14 days for new
   personal accounts before public release; internal testing link is possible immediately.
+- GO (Praveen): deploy exit 0, 83/83 tests -> version **8e90be0e-c9e4-49d3-871d-3c6051b31532** (live before c221ddfc).
+  Native notification code live: bundle index-CmKGXida.js contains it, served at /?source=android-app. Right after
+  the deploy plain "/" briefly came from Cloudflare's edge cache (CF-Cache-Status HIT, old bundle); a cache-busted
+  request showed the new one and both URLs served it within a minute.
