@@ -1,0 +1,5333 @@
+{
+ "academicYear": "2025/2026",
+ "source": "UGC handbook 2025/26, Section 2.2",
+ "subjects": {
+  "BIO": "Biology",
+  "CHEM": "Chemistry",
+  "PHY": "Physics",
+  "CMATH": "Combined Mathematics",
+  "HMATH": "Higher Mathematics",
+  "MATH": "Mathematics",
+  "AGRI": "Agricultural Science",
+  "ICT": "Information & Communication Technology",
+  "ECON": "Economics",
+  "ACC": "Accounting",
+  "BSTUD": "Business Studies",
+  "BSTAT": "Business Statistics",
+  "GEOG": "Geography",
+  "HIST": "History",
+  "POLSCI": "Political Science",
+  "LOGIC": "Logic & Scientific Method",
+  "ENG": "English",
+  "SIN": "Sinhala",
+  "TAM": "Tamil",
+  "GER": "German",
+  "FRE": "French",
+  "KOR": "Korean",
+  "ET": "Engineering Technology (ET)",
+  "SFT": "Science for Technology (SFT)",
+  "BST": "Biosystems Technology (BST)",
+  "ART": "Art",
+  "MUSIC": "Music",
+  "DANCE": "Dancing",
+  "DRAMA": "Drama & Theatre",
+  "ISLAM": "Islam",
+  "ISLCIV": "Islamic Civilization",
+  "ARABIC": "Arabic",
+  "HOMEEC": "Home Economics",
+  "CMS": "Communication & Media Studies",
+  "BUDDHISM": "Buddhism",
+  "HINDUISM": "Hinduism",
+  "CHRISTIANITY": "Christianity",
+  "BUDCIV": "Buddhist Civilization",
+  "HINDUCIV": "Hindu Civilization",
+  "CHRCIV": "Christian Civilization",
+  "GRCIV": "Greek & Roman Civilization",
+  "PALI": "Pali",
+  "SANSKRIT": "Sanskrit",
+  "CHINESE": "Chinese",
+  "JAPANESE": "Japanese",
+  "HINDI": "Hindi",
+  "RUSSIAN": "Russian",
+  "MALAY": "Malay",
+  "CIVTECH": "Civil Technology",
+  "EEIT": "Electrical, Electronic and Information Technology",
+  "AGROTECH": "Agro Technology",
+  "MECHTECH": "Mechanical Technology",
+  "FOODTECH": "Food Technology",
+  "BIORESTECH": "Bio-Resource Technology",
+  "ENG_OL": "English (G.C.E. O/L)",
+  "MATH_OL": "Mathematics (G.C.E. O/L)",
+  "SCI_OL": "Science (G.C.E. O/L)",
+  "SIN_OL": "Sinhala Language & Lit. (G.C.E. O/L)",
+  "TAM_OL": "Tamil Language & Lit. (G.C.E. O/L)"
+ },
+ "courses": {
+  "100": {
+   "name": "Film & Television Studies",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the University of Kelaniya",
+   "page": 101,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "101": {
+   "name": "Project Management",
+   "al": {
+    "gradeCount": 2,
+    "min": "C",
+    "of": [
+     "ACC",
+     "MATH",
+     "CMATH",
+     "BSTUD",
+     "BIO",
+     "BSTAT",
+     "AGRI",
+     "ECON",
+     "ET",
+     "GEOG",
+     "BST",
+     "ICT"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 101,
+   "quote": "The candidates should have passed the three subjects with at least 'C' grades in two of the following subjects at the G.C.E. (Advanced Level) Examination; Accounting; Mathematics/Combined Mathematics; Business Studies; Biology; Business Statistics; Agricultural Science; Economics; Engineering Technology; Geography; Biosystems Technology; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "102": {
+   "name": "Engineering Technology (ET)",
+   "al": {
+    "all": [
+     {
+      "subject": "ET",
+      "min": "S"
+     },
+     {
+      "subject": "SFT",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ECON",
+       "GEOG",
+       "HOMEEC",
+       "ENG",
+       "CMS",
+       "ICT",
+       "ART",
+       "BSTUD",
+       "AGRI",
+       "ACC",
+       "MATH"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 77,
+   "quote": "At least 'S' grades for Engineering Technology (ET), Science for Technology (SFT) and for third subject from among; Economics; Geography; Home Economics; English; Communication and Media Studies; Information & Communication Technology; Art; Business Studies; Agricultural Science; Accountancy; Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "103": {
+   "name": "Biosystems Technology (BST)",
+   "al": {
+    "all": [
+     {
+      "subject": "BST",
+      "min": "S"
+     },
+     {
+      "subject": "SFT",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ECON",
+       "GEOG",
+       "HOMEEC",
+       "ENG",
+       "CMS",
+       "ICT",
+       "ART",
+       "BSTUD",
+       "AGRI",
+       "ACC",
+       "MATH"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 79,
+   "quote": "At least 'S' grades for Biosystems Technology (BST), Science for Technology (SFT) and for third subject from among; Economics; Geography; Home Economics; English; Communication and Media Studies; Information & Communication Technology; Art; Business Studies; Agricultural Science; Accountancy; Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "104": {
+   "name": "Information Communication Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "ICT",
+      "min": "S"
+     },
+     {
+      "subject": "SFT",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ET",
+       "BST"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 81,
+   "quote": "At least 'S' grades for Information & Communication Technology (ICT), Science for Technology (SFT) and Engineering Technology (ET) or Biosystems Technology (BST).",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "105": {
+   "name": "Teaching English as a Second Language (TESL)",
+   "al": {
+    "subject": "ENG",
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 37,
+   "quote": "In order to be eligible for this course of study, candidates should have obtained a minimum grade of 'S' or above for English and passes in any other two subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "106": {
+   "name": "Marine and Freshwater Sciences",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "CMATH",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 104,
+   "quote": "At least 'S' grades for the three subjects in one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; (i) Chemistry, Physics and Biology or (ii) Chemistry, Physics and Combined Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "107": {
+   "name": "Food Business Management",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "streamIs": [
+         "BIO",
+         "PHYS"
+        ]
+       },
+       {
+        "anySubjects": 3,
+        "min": "S",
+        "from": [
+         "CHEM",
+         "BIO",
+         "PHY",
+         "CMATH",
+         "AGRI"
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "streamIs": [
+         "COMMERCE"
+        ]
+       },
+       {
+        "subject": "BSTUD",
+        "min": "S"
+       },
+       {
+        "subject": "ECON",
+        "min": "S"
+       },
+       {
+        "subject": "ACC",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": {
+    "BIO_PHYS": {
+     "al": {
+      "all": [
+       {
+        "streamIs": [
+         "BIO",
+         "PHYS"
+        ]
+       },
+       {
+        "anySubjects": 3,
+        "min": "S",
+        "from": [
+         "CHEM",
+         "BIO",
+         "PHY",
+         "CMATH",
+         "AGRI"
+        ]
+       }
+      ]
+     },
+     "ol": {
+      "all": [
+       {
+        "olSubject": "ENG_OL",
+        "min": "C"
+       },
+       {
+        "olSubject": "MATH_OL",
+        "min": "C"
+       },
+       {
+        "olSubject": "SCI_OL",
+        "min": "C"
+       }
+      ]
+     }
+    },
+    "COMMERCE": {
+     "al": {
+      "all": [
+       {
+        "streamIs": [
+         "COMMERCE"
+        ]
+       },
+       {
+        "subject": "BSTUD",
+        "min": "S"
+       },
+       {
+        "subject": "ECON",
+        "min": "S"
+       },
+       {
+        "subject": "ACC",
+        "min": "S"
+       }
+      ]
+     },
+     "ol": {
+      "all": [
+       {
+        "olSubject": "ENG_OL",
+        "min": "C"
+       },
+       {
+        "olSubject": "MATH_OL",
+        "min": "C"
+       },
+       {
+        "olSubject": "SCI_OL",
+        "min": "C"
+       }
+      ]
+     }
+    }
+   },
+   "other": null,
+   "page": 103,
+   "quote": "Category (A) Should have sat for the G.C.E. (Advanced Level) Examination from Biological Science Stream or Physical Science Stream and obtained at least 'S' grades for any three subjects from Chemistry, Biology, Physics, Combined Mathematics or Agriculture. Category (B) Should have sat for the G.C.E. (Advanced Level) Examination from Commerce Stream and obtained at least 'S' grades for Business Studies, Economics and Accounting. 50% of the total number of students admitted for this programme will be selected from Category (A) where as remaining 50% will be selected from category (B). In addition to that, candidates should have obtained at least Credit Passes (C) in English, Mathematics and Science at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "108": {
+   "name": "Physical Science - ICT",
+   "al": {
+    "all": [
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "subject": "ICT",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 73,
+   "quote": "At least 'S' grades in Combined Mathematics, Physics and Information & Communication Technology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "109": {
+   "name": "Business Science",
+   "al": {
+    "any": [
+     {
+      "streamIs": [
+       "PHYS",
+       "COMMERCE"
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "ICT",
+        "min": "S"
+       },
+       {
+        "anySubjects": 2,
+        "min": "S",
+        "from": [
+         "CMATH",
+         "HMATH",
+         "PHY",
+         "CHEM",
+         "BSTUD",
+         "ECON",
+         "ACC",
+         "BSTAT"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "MATH_OL",
+    "min": "C"
+   },
+   "groups": null,
+   "other": null,
+   "page": 104,
+   "quote": "At least ‘S’ grades in the three subjects in Physical Science Stream or Commerce Stream / at the G.C.E. (Advanced Level) Examination / or / At least ‘S’ grades in the two subjects in Physical Science Stream or Commerce Stream / and at least ‘S’ grade in Information & Communication Technology as the third subject / at the G.C.E. (Advanced Level) Examination. / In addition to the above, candidates should have obtained at least a Credit Pass (C) in / Mathematics at the G.C.E. (Ordinary Level) Examination. || O/L: In addition to the above, candidates should have obtained at least a Credit Pass (C) in Mathematics at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "EXTRACTOR_A",
+    "reading": "INCLUSIVE",
+    "note": "Handbook p.104: \"two subjects in Physical Science Stream or Commerce Stream and ICT\". No stream subject sets in the handbook; inclusive reading (BR-044)."
+   }
+  },
+  "110": {
+   "name": "Financial Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "ECON",
+      "min": "S"
+     },
+     {
+      "subject": "ACC",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ICT",
+       "BSTAT",
+       "AGRI",
+       "GEOG",
+       "CMATH",
+       "HIST",
+       "POLSCI",
+       "PHY",
+       "LOGIC"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 105,
+   "quote": "At least 'S' grades in Economics, Accounting and one of the following subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Information & Communication Technology; Business Statistics; Agricultural Science; Geography; Combined Mathematics; History; Political Science; Physics; Logic & Scientific Method. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "111": {
+   "name": "Geographical Information Science",
+   "al": {
+    "any": [
+     {
+      "predicate": "ARTS_BASKETS"
+     },
+     {
+      "streamIs": [
+       "BIO",
+       "PHYS"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 105,
+   "quote": "At least 'S' grades in any three subjects in the Arts Stream selected according to the conditions specified in the Section 2.2.1.1 of this handbook, Biological Science Stream or Physical Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "112": {
+   "name": "Social Work",
+   "al": {
+    "predicate": "ARTS_BASKETS"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 40,
+   "quote": "In order to be eligible for this course of study, candidates should have obtained at least Ordinary Passes (S) in any three subjects of the Arts Stream at the G.C.E. (Advanced Level) Examination, selected according to the conditions specified in the Section 2.2.1.1 of this handbook.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "113": {
+   "name": "Financial Mathematics and Industrial Statistics",
+   "al": {
+    "subject": "CMATH",
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 106,
+   "quote": "At least 'S' grades for Combined Mathematics and any other two subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "114": {
+   "name": "Human Resource Development",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 106,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "115": {
+   "name": "Occupational Therapy",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 63,
+   "quote": "At least three 'S' grades in Physics, Biology and Chemistry at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "116": {
+   "name": "Optometry",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 64,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "117": {
+   "name": "Artificial Intelligence",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "C",
+      "from": [
+       "CMATH",
+       "PHY",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH",
+       "MATH",
+       "PHY",
+       "CHEM",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 74,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Higher Mathematics; and At least 'S' grades in two other subjects listed below at the G.C.E. (Advanced Level) Examination; Combined Mathematics; Higher Mathematics; Mathematics; Physics; Chemistry; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "118": {
+   "name": "Applied Chemistry",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BIO",
+       "CMATH",
+       "MATH",
+       "HMATH",
+       "AGRI"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 64,
+   "quote": "At least three 'S' grades in Chemistry, Physics and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination. Biology; Combined Mathematics; Mathematics; Higher Mathematics; Agricultural Science",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "119": {
+   "name": "Electronics and Computer Science",
+   "al": {
+    "all": [
+     {
+      "gradeCount": 1,
+      "min": "C",
+      "of": [
+       "CMATH",
+       "PHY",
+       "HMATH"
+      ]
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CHEM",
+       "CMATH",
+       "HMATH",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 74,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Higher Mathematics and; Should have passed the three subjects at the G.C.E. (Advanced Level) Examination including Physics and Combined Mathematics or Higher Mathematics and the third subject from the list given below, Chemistry; Combined Mathematics; Higher Mathematics; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "127": {
+   "name": "Accounting Information Systems",
+   "al": {
+    "all": [
+     {
+      "subject": "ACC",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ECON",
+       "BSTUD"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTAT",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 47,
+   "quote": "At least a 'S' grade in Accounting and at least 'S' grades for two subjects from the following subjects combinations at the G.C.E. (Advanced Level) Examination; Economics or Business Studies and Business Statistics or Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "128": {
+   "name": "Arts - Information Technology",
+   "al": {
+    "predicate": "ARTS_BASKETS"
+   },
+   "ol": {
+    "olSubject": "MATH_OL",
+    "min": "C"
+   },
+   "groups": null,
+   "other": null,
+   "page": 41,
+   "quote": "candidates should have obtained at least Ordinary Passes (S) in any three subjects of the Arts Stream at the G.C.E. (Advanced Level) Examination, selected according to the conditions specified in the Section 2.2.1.1 of this handbook. In addition candidates should have obtained a Credit Pass (C) in Mathematics at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "129": {
+   "name": "Aquatic Bioresources",
+   "al": {
+    "streamIs": [
+     "BIO"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 64,
+   "quote": "At least three 'S' grades in Biological Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "130": {
+   "name": "Urban Bioresources",
+   "al": {
+    "streamIs": [
+     "BIO"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 65,
+   "quote": "At least three 'S' grades in Biological Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "131": {
+   "name": "Financial Economics",
+   "al": {
+    "all": [
+     {
+      "subject": "ECON",
+      "min": "B"
+     },
+     {
+      "streamIs": [
+       "ARTS",
+       "COMMERCE"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 106,
+   "quote": "At least a 'B' grade in Economics and at least 'S' grades for any other two subjects in Art Stream or Commerce Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "132": {
+   "name": "English Language & Applied Linguistics",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 107,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination. In addition to that, candidates must fulfill the following requirements at the G.C.E. (Ordinary Level) Examination. (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "133": {
+   "name": "Banking and Insurance",
+   "al": {
+    "all": [
+     {
+      "subject": "ACC",
+      "min": "S"
+     },
+     {
+      "subject": "ECON",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "AGRI",
+       "GEOG",
+       "BSTAT",
+       "GER",
+       "CMATH",
+       "MATH",
+       "HIST",
+       "POLSCI",
+       "ENG",
+       "LOGIC",
+       "FRE",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 48,
+   "quote": "At least 'S' grades in Accounting and Economics and the third subject from any other subjects within the Commerce Stream at the G.C.E. (Advanced Level) Examination;",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "134": {
+   "name": "Creative Music Technology and Production",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 107,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "135": {
+   "name": "Plantation Management and Technology",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "PHY",
+         "AGRI"
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "CMATH",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 108,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; (1). Biology, Chemistry, Physics or Agricultural Science (2). Combined Mathematics, Chemistry, Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "136": {
+   "name": "Data Science",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "C",
+      "from": [
+       "CMATH",
+       "PHY",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "PHY",
+       "HMATH",
+       "CHEM",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "C"
+   },
+   "groups": null,
+   "other": null,
+   "page": 75,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Higher Mathematics; and At least 'S' grades for two of the following subjects at the G.C.E. (Advanced Level) Examination; Combined Mathematics; Physics; Higher Mathematics; Chemistry; Information & Communication Technology. In addition to that, the candidates should have obtained at least a Credit Pass (C) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "137": {
+   "name": "Primary Education",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "SIN_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "ENG_OL",
+      "min": "S"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 108,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination. In addition to that, candidates must fulfill the following requirements at the G.C.E. (Ordinary Level) Examination. (i) At least a Credit Pass (C) in Sinhala Language & Lit. (ii) At least a Credit Pass (C) in Mathematics (iii) At least a Credit Pass (C) in Science (iv) At least an Ordinary Pass (S) in English",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "138": {
+   "name": "Medical Imaging Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 65,
+   "quote": "At least three 'S' grades in Physics, Biology and Chemistry at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "139": {
+   "name": "Polymer Science and Industrial Management",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "CMATH",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 109,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; (1). Biology, Physics, Chemistry (2). Combined Mathematics, Physics, Chemistry",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "141": {
+   "name": "Sports Science",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical Test conducted in common for Physical Education, Sports Science & Management and Sports Science",
+   "page": 97,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "142": {
+   "name": "Geographical Information Systems",
+   "al": {
+    "any": [
+     {
+      "predicate": "ARTS_BASKETS"
+     },
+     {
+      "streamIs": [
+       "BIO",
+       "PHYS"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 109,
+   "quote": "At least 'S' grades in any three subjects in the Arts Stream selected according to the conditions specified in the Section 2.2.1.1 of this handbook, Biological Science Stream or Physical Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "143": {
+   "name": "Electronic and Intelligent Systems Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 75,
+   "quote": "At least three 'S' grades in Combined Mathematics, Physics and Chemistry at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "001": {
+   "name": "Medicine",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "gradeCount": 2,
+      "min": "C",
+      "of": [
+       "BIO",
+       "CHEM",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 50,
+   "quote": "At least two 'C' grades and a 'S' grade in Biology, Chemistry and Physics at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "002": {
+   "name": "Dental Surgery",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 51,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "003": {
+   "name": "Veterinary Science",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 51,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "004": {
+   "name": "Agriculture",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "PHY",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "subject": "BIO",
+          "min": "S"
+         },
+         {
+          "subject": "AGRI",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "AGRI",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 52,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (i) Chemistry; Physics; and Biology (ii) Chemistry; Physics or Mathematics; Biology or Agricultural Science (iii) Chemistry; Biology; Agricultural Science or Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "005": {
+   "name": "Food Science & Nutrition",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "PHY",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "subject": "BIO",
+          "min": "S"
+         },
+         {
+          "subject": "AGRI",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "AGRI",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 53,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (i) Chemistry; Physics; and Biology (ii) Chemistry; Physics or Mathematics; Biology or Agricultural Science (iii) Chemistry; Biology; Agricultural Science or Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "006": {
+   "name": "Biological Science",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 55,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "007": {
+   "name": "Applied Sciences (Biological Science)",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 56,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "008": {
+   "name": "Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 68,
+   "quote": "At least three 'S' grades in Chemistry, Combined Mathematics and Physics at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "009": {
+   "name": "Engineering (EM) - Earth Resources Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 69,
+   "quote": "At least three 'S' grades in Chemistry, Combined Mathematics and Physics at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "010": {
+   "name": "Engineering (TM) - Textile & Apparel Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 69,
+   "quote": "At least three 'S' grades in Chemistry, Combined Mathematics and Physics at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "011": {
+   "name": "Quantity Surveying",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH",
+       "ACC",
+       "ECON",
+       "BSTAT",
+       "BSTUD",
+       "PHY",
+       "CHEM",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "S"
+     },
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 84,
+   "quote": "Should have obtained a minimum of 'S' grade in at least one of the following subjects at the G.C.E.(Advanced Level) Examination; Combined Mathematics; Higher Mathematics and other subject/subjects from the following list; Accounting; Economics; Business Statistics; Business Studies; Physics; Chemistry; Information & Communication Technology. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (a) At least a Credit Pass (C) in Mathematics (b) At least an Ordinary Pass (S) in Science (c) At least a Credit Pass (C) in English Language",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "012": {
+   "name": "Computer Science",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "C",
+      "from": [
+       "CMATH",
+       "PHY",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH",
+       "MATH",
+       "PHY",
+       "CHEM",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 70,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Higher Mathematics; and At least 'S' grades in two other subjects listed below at the G.C.E. (Advanced Level) Examination; Combined Mathematics; Higher Mathematics; Mathematics; Physics; Chemistry; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "013": {
+   "name": "Physical Science",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CHEM",
+       "PHY"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "CMATH",
+       "BIO",
+       "HMATH",
+       "CHEM",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 70,
+   "quote": "At least 'S' grades in following three subjects at the G.C.E. (Advanced Level) Examination and the three subjects must include; 1. Combined Mathematics or Higher Mathematics and 2. Chemistry or Physics and 3. The third subject from the list given below; Agricultural Science; Combined Mathematics; Biology; Higher Mathematics; Chemistry; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "014": {
+   "name": "Surveying Science",
+   "al": {
+    "all": [
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 85,
+   "quote": "At least 'S' grades in Physics, Combined Mathematics and in any other subject available at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "015": {
+   "name": "Applied Sciences (Physical Science)",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "HMATH"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CHEM",
+       "PHY"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "CMATH",
+       "BIO",
+       "HMATH",
+       "CHEM",
+       "PHY",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 71,
+   "quote": "At least 'S' grades in following three subjects at the G.C.E. (Advanced Level) Examination and the three subjects must include; 1. Combined Mathematics or Higher Mathematics and 2. Chemistry or Physics and 3. The third subject from the list given below; Agricultural Science; Combined Mathematics; Biology; Higher Mathematics; Chemistry; Physics; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "016": {
+   "name": "Management",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC",
+       "AGRI",
+       "GEOG",
+       "BSTAT",
+       "GER",
+       "CMATH",
+       "MATH",
+       "HIST",
+       "POLSCI",
+       "ENG",
+       "LOGIC",
+       "FRE",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 43,
+   "quote": "a student should have obtained at least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Economics; Accounting or At least two subjects given above and the third subject from the subjects given below; Agricultural Science; Geography; Business Statistics; German; Combined Mathematics or Mathematics; History; Political Science; English; Logic & Scientific Method; French; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "017": {
+   "name": "Real Estate Management and Valuation",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC",
+       "AGRI",
+       "GEOG",
+       "BSTAT",
+       "GER",
+       "CMATH",
+       "MATH",
+       "HIST",
+       "POLSCI",
+       "ENG",
+       "LOGIC",
+       "FRE",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 43,
+   "quote": "a student should have obtained at least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Economics; Accounting or At least two subjects given above and the third subject from the subjects given below; Agricultural Science; Geography; Business Statistics; German; Combined Mathematics or Mathematics; History; Political Science; English; Logic & Scientific Method; French; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "018": {
+   "name": "Commerce",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC",
+       "AGRI",
+       "GEOG",
+       "BSTAT",
+       "GER",
+       "CMATH",
+       "MATH",
+       "HIST",
+       "POLSCI",
+       "ENG",
+       "LOGIC",
+       "FRE",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 43,
+   "quote": "a student should have obtained at least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Economics; Accounting or At least two subjects given above and the third subject from the subjects given below; Agricultural Science; Geography; Business Statistics; German; Combined Mathematics or Mathematics; History; Political Science; English; Logic & Scientific Method; French; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "019": {
+   "name": "Arts",
+   "al": {
+    "predicate": "ARTS_BASKETS"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 31,
+   "quote": "To be eligible for admission to a course of study in Arts, candidates must have obtained at least 'S' grades for three subjects considered. ... Students should have obtained passes in three subjects at the G.C.E. (Advanced Level) Examination from the following baskets.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "020": {
+   "name": "Arts (SP) - Mass Media",
+   "al": {
+    "all": [
+     {
+      "predicate": "ARTS_BASKETS"
+     },
+     {
+      "gradeCount": 1,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the Sripalee Campus of the University of Colombo",
+   "page": 35,
+   "quote": "Three subjects should have offered at the G.C.E. (Advanced Level) Examination from Arts Stream, subject to the following conditions. 1. Not more than two Languages 2. Not more than one subject from Religions and Civilizations basket 3. Not more than one Technological subject 4. Not more than one of the following subjects: Accounting; Business Statistics; Economics. Moreover, there are two special requirements to be fulfilled. These are; 1. To have a minimum of an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination. 2. To have a pass in the Aptitude Test conducted by the Sripalee Campus of the University of Colombo.",
+   "reconciliation": {
+    "decision": "CHECKER_B",
+    "reading": "LITERAL",
+    "note": "Handbook p.35: \"three subjects from subject baskets in the Arts Stream\" subject to four caps: the Arts basket rules apply (A omitted them and accepted e.g. Art, Dance, Music: three Basket 03 subjects)."
+   }
+  },
+  "021": {
+   "name": "Arts (SAB)",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "streamIs": [
+         "ARTS"
+        ]
+       },
+       {
+        "predicate": "ARTS_BASKETS"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "streamIs": [
+         "COMMERCE"
+        ]
+       },
+       {
+        "all": [
+         {
+          "anySubjects": 2,
+          "min": "S",
+          "from": [
+           "BSTUD",
+           "ECON",
+           "ACC"
+          ]
+         },
+         {
+          "anySubjects": 1,
+          "min": "S",
+          "from": [
+           "BSTUD",
+           "ECON",
+           "ACC",
+           "AGRI",
+           "GEOG",
+           "BSTAT",
+           "GER",
+           "CMATH",
+           "MATH",
+           "HIST",
+           "POLSCI",
+           "ENG",
+           "LOGIC",
+           "FRE",
+           "ICT"
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": {
+    "A": {
+     "al": {
+      "all": [
+       {
+        "streamIs": [
+         "ARTS"
+        ]
+       },
+       {
+        "predicate": "ARTS_BASKETS"
+       }
+      ]
+     },
+     "ol": null
+    },
+    "B": {
+     "al": {
+      "all": [
+       {
+        "streamIs": [
+         "COMMERCE"
+        ]
+       },
+       {
+        "all": [
+         {
+          "anySubjects": 2,
+          "min": "S",
+          "from": [
+           "BSTUD",
+           "ECON",
+           "ACC"
+          ]
+         },
+         {
+          "anySubjects": 1,
+          "min": "S",
+          "from": [
+           "BSTUD",
+           "ECON",
+           "ACC",
+           "AGRI",
+           "GEOG",
+           "BSTAT",
+           "GER",
+           "CMATH",
+           "MATH",
+           "HIST",
+           "POLSCI",
+           "ENG",
+           "LOGIC",
+           "FRE",
+           "ICT"
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     "ol": null
+    }
+   },
+   "other": null,
+   "page": 36,
+   "quote": "Students who have satisfied the minimum requirements for admission in Arts Stream or Commerce Stream are eligible to seek admission for this programme. ... of the total number of seats available (350), 55% is allocated from the Arts Stream and balance is allocated from the Commerce Stream.",
+   "reconciliation": {
+    "decision": "CHECKER_B",
+    "reading": "LITERAL",
+    "note": "Handbook p.36: \"satisfied the minimum requirements for admission in Arts Stream or Commerce Stream\": group A needs the Arts basket rules, group B the Commerce combination (A checked the stream label only)."
+   }
+  },
+  "022": {
+   "name": "Management Studies (TV)",
+   "al": {
+    "any": [
+     {
+      "streamIs": [
+       "COMMERCE"
+      ]
+     },
+     {
+      "anySubjects": 3,
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": {
+    "A": {
+     "al": {
+      "streamIs": [
+       "COMMERCE"
+      ]
+     },
+     "ol": null
+    },
+    "B": {
+     "al": {
+      "anySubjects": 3,
+      "min": "S"
+     },
+     "ol": null
+    }
+   },
+   "other": null,
+   "page": 46,
+   "quote": "Candidates who have satisfied the minimum requirements for admission having offered any three subjects at the G.C.E. (Advanced Level) Examination are eligible ... However, when selecting students, it will be ensured that at least 60% of the intake to the University of Vavuniya, Sri Lanka and at least 40% of the intake to the Trincomalee Campus of the Eastern University, Sri Lanka will be from the students in the Commerce Stream.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "023": {
+   "name": "Architecture",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ART",
+       "HMATH",
+       "CMATH",
+       "GEOG",
+       "CHEM",
+       "BIO",
+       "PHY"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "ART",
+       "HMATH",
+       "CMATH",
+       "GEOG",
+       "CHEM",
+       "BIO",
+       "PHY",
+       "ACC",
+       "HINDUCIV",
+       "BSTAT",
+       "ISLCIV",
+       "GRCIV",
+       "POLSCI",
+       "ENG",
+       "SIN",
+       "CMS",
+       "CHRCIV",
+       "HINDI",
+       "BUDCIV",
+       "HOMEEC",
+       "CHINESE",
+       "LOGIC",
+       "MATH",
+       "SANSKRIT",
+       "GER",
+       "ICT",
+       "ARABIC",
+       "HIST",
+       "BSTUD",
+       "JAPANESE",
+       "ECON",
+       "PALI",
+       "FRE",
+       "TAM",
+       "AGRI",
+       "KOR"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "S"
+     },
+     {
+      "any": [
+       {
+        "olSubject": "MATH_OL",
+        "min": "C"
+       },
+       {
+        "subject": "MATH",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test held by the University of Moratuwa",
+   "page": 86,
+   "quote": "A candidate should have obtained at least 'S' passes at the G.C.E. (Advanced Level) Examination in; (i) At least one of the following subjects; Art; Higher Mathematics; Combined Mathematics; Geography; Chemistry; Biology; Physics and (ii) The other subject/ subjects from the following list; Accounting; Hindu Civilization; Business Statistics; Islamic Civilization; Greek & Roman Civilization; Political Science; English; Sinhala; Communication & Media Studies; Christian Civilization; Hindi; Buddhist Civilization; Home Economics; Chinese; Logic & Scientific Method; Mathematics; Sanskrit; German; Information & Communication Technology; Arabic; History; Business Studies; Japanese; Economics; Pali; French; Tamil; Agricultural Science; Korean. In addition, candidates must fulfill the following requirements; (a) At least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination (b) At least a Credit Pass (C) in Mathematics at the G.C.E. (Ordinary Level) Examination or an Ordinary Pass (S) in Mathematics at the G.C.E. (Advanced Level) Examination (c) Passed the Aptitude Test, which will be held by the University of Moratuwa",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "024": {
+   "name": "Design",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "S"
+     },
+     {
+      "any": [
+       {
+        "olSubject": "MATH_OL",
+        "min": "C"
+       },
+       {
+        "subject": "MATH",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the University of Moratuwa",
+   "page": 89,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination. In addition to that, candidates must fulfill the following requirements; (a) At least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination (b) At least a Credit Pass (C) in Mathematics at the G.C.E. (Ordinary Level) Examination or an Ordinary Pass (S) in Mathematics at the G.C.E. (Advanced Level) Examination (c) At least a Credit Pass (C) in Science at the G.C.E. (Ordinary Level) Examination (d) Passed the Aptitude Test, which will be conducted by the University of Moratuwa",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "025": {
+   "name": "Law",
+   "al": {
+    "all": [
+     {
+      "gradeCount": 2,
+      "min": "C",
+      "of": [
+       "ACC",
+       "AGRI",
+       "BIO",
+       "BSTAT",
+       "BSTUD",
+       "CHEM",
+       "PHY",
+       "CMS",
+       "POLSCI",
+       "GEOG",
+       "HMATH",
+       "HIST",
+       "LOGIC",
+       "ECON",
+       "MATH",
+       "CMATH",
+       "ICT",
+       "BUDDHISM",
+       "BUDCIV",
+       "CHRISTIANITY",
+       "CHRCIV",
+       "GRCIV",
+       "JAPANESE",
+       "PALI",
+       "SANSKRIT",
+       "SIN",
+       "TAM",
+       "HINDUISM",
+       "HINDUCIV",
+       "ISLAM",
+       "ISLCIV",
+       "CHINESE",
+       "ENG",
+       "FRE",
+       "GER",
+       "ARABIC",
+       "HINDI",
+       "RUSSIAN",
+       "KOR"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ACC",
+       "AGRI",
+       "BIO",
+       "BSTAT",
+       "BSTUD",
+       "CHEM",
+       "PHY",
+       "CMS",
+       "POLSCI",
+       "GEOG",
+       "HMATH",
+       "HIST",
+       "LOGIC",
+       "ECON",
+       "MATH",
+       "CMATH",
+       "ICT"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "ACC",
+       "AGRI",
+       "BIO",
+       "BSTAT",
+       "BSTUD",
+       "CHEM",
+       "PHY",
+       "CMS",
+       "POLSCI",
+       "GEOG",
+       "HMATH",
+       "HIST",
+       "LOGIC",
+       "ECON",
+       "MATH",
+       "CMATH",
+       "ICT",
+       "BUDDHISM",
+       "BUDCIV",
+       "CHRISTIANITY",
+       "CHRCIV",
+       "GRCIV",
+       "JAPANESE",
+       "PALI",
+       "SANSKRIT",
+       "SIN",
+       "TAM",
+       "HINDUISM",
+       "HINDUCIV",
+       "ISLAM",
+       "ISLCIV",
+       "CHINESE",
+       "ENG",
+       "FRE",
+       "GER",
+       "ARABIC",
+       "HINDI",
+       "RUSSIAN",
+       "KOR"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "any": [
+       {
+        "olSubject": "SIN_OL",
+        "min": "C"
+       },
+       {
+        "olSubject": "TAM_OL",
+        "min": "C"
+       }
+      ]
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 90,
+   "quote": "At least two 'C' grades and one 'S' grade in three subjects selected as follows at the G.C.E. (Advanced Level) Examination; (a) Three subjects from the following list; Accounting; Agricultural Science; Biology; Business Statistics; Business Studies; Chemistry; Physics; Communication & Media Studies; Political Science; Geography; Higher Mathematics; History; Logic & Scientific Method; Economics; Mathematics/Combined Mathematics; Information & Communication Technology or (b) One or two subjects from the above list and the other subject/ subjects from the following list; Buddhism/ Buddhist Civilization; Christianity/ Christian Civilization; Greek & Roman Civilization; Japanese; Pali; Sanskrit; Sinhala; Tamil; Hinduism/ Hindu Civilization; Islam/ Islamic Civilization; Chinese; English; French; German; Arabic; Hindi; Russian; Korean. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Sinhala or Tamil",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "026": {
+   "name": "Information Technology (IT)",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "HMATH",
+     "CMATH",
+     "MATH",
+     "PHY"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 83,
+   "quote": "Three passes including at least a 'C' grade in one of the following subjects at the G.C.E. (Advanced Level) Examination; Higher Mathematics; Combined Mathematics; Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "027": {
+   "name": "Management and Information Technology (MIT)",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "gradeCount": 1,
+        "min": "C",
+        "of": [
+         "HMATH",
+         "CMATH",
+         "MATH",
+         "PHY"
+        ]
+       },
+       {
+        "streamIs": [
+         "BIO"
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "gradeCount": 1,
+        "min": "C",
+        "of": [
+         "HMATH",
+         "CMATH",
+         "MATH",
+         "PHY"
+        ]
+       },
+       {
+        "streamIs": [
+         "PHYS",
+         "COMMERCE",
+         "ARTS",
+         "ET",
+         "BST"
+        ]
+       },
+       {
+        "any": [
+         {
+          "streamIs": [
+           "PHYS"
+          ]
+         },
+         {
+          "all": [
+           {
+            "subject": "ICT",
+            "min": "S"
+           },
+           {
+            "anySubjects": 2,
+            "min": "S",
+            "from": [
+             "BIO",
+             "CHEM",
+             "PHY",
+             "AGRI",
+             "CMATH",
+             "HMATH"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "MATH_OL",
+      "min": "B"
+     },
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": {
+    "BIO": {
+     "al": {
+      "all": [
+       {
+        "gradeCount": 1,
+        "min": "C",
+        "of": [
+         "HMATH",
+         "CMATH",
+         "MATH",
+         "PHY"
+        ]
+       },
+       {
+        "streamIs": [
+         "BIO"
+        ]
+       }
+      ]
+     },
+     "ol": {
+      "all": [
+       {
+        "olSubject": "MATH_OL",
+        "min": "B"
+       },
+       {
+        "olSubject": "ENG_OL",
+        "min": "C"
+       }
+      ]
+     }
+    },
+    "OTHER": {
+     "al": {
+      "all": [
+       {
+        "gradeCount": 1,
+        "min": "C",
+        "of": [
+         "HMATH",
+         "CMATH",
+         "MATH",
+         "PHY"
+        ]
+       },
+       {
+        "streamIs": [
+         "PHYS",
+         "COMMERCE",
+         "ARTS",
+         "ET",
+         "BST"
+        ]
+       },
+       {
+        "any": [
+         {
+          "streamIs": [
+           "PHYS"
+          ]
+         },
+         {
+          "all": [
+           {
+            "subject": "ICT",
+            "min": "S"
+           },
+           {
+            "anySubjects": 2,
+            "min": "S",
+            "from": [
+             "BIO",
+             "CHEM",
+             "PHY",
+             "AGRI",
+             "CMATH",
+             "HMATH"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     "ol": {
+      "all": [
+       {
+        "olSubject": "MATH_OL",
+        "min": "B"
+       },
+       {
+        "olSubject": "ENG_OL",
+        "min": "C"
+       }
+      ]
+     }
+    }
+   },
+   "other": null,
+   "page": 83,
+   "quote": "Having obtained at least a 'C' grade in one of the subjects; Higher Mathematics, Combined Mathematics, Mathematics or Physics (i). Three subjects at the G.C.E. (Advanced Level) Examination in Biological Science Stream or Physical Science Stream; or (ii). Two subjects from the Biological Science Stream or Physical Science Stream and Information & Communication Technology as the third subject. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (a) At least a Very Good Pass (B) in Mathematics (b) At least a Credit Pass (C) in English. 40% from the proposed intake of this course of study will be selected from the Biological Science Stream and the remaining will be selected from other relevant subject combinations.",
+   "reconciliation": {
+    "decision": "MERGED",
+    "reading": "INCLUSIVE",
+    "note": "Handbook p.83: \"two subjects from the Biological Science Stream or Physical Science Stream and ICT\". The handbook lists no stream subject sets; ZedPath uses the inclusive reading (subjects from either stream may be combined, BR-044) but excludes Mathematics, which the handbook lists as an Arts basket subject (p.31). Group split by stream as in B."
+   }
+  },
+  "028": {
+   "name": "Management and Public Policy",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC",
+       "AGRI",
+       "GEOG",
+       "BSTAT",
+       "GER",
+       "CMATH",
+       "MATH",
+       "HIST",
+       "POLSCI",
+       "ENG",
+       "LOGIC",
+       "FRE",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 43,
+   "quote": "a student should have obtained at least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Economics; Accounting or At least two subjects given above and the third subject from the subjects given below; Agricultural Science; Geography; Business Statistics; German; Combined Mathematics or Mathematics; History; Political Science; English; Logic & Scientific Method; French; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "029": {
+   "name": "Communication Studies",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "SIN",
+     "TAM",
+     "ENG"
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "C"
+   },
+   "groups": null,
+   "other": null,
+   "page": 36,
+   "quote": "any student who have satisfied the minimum requirements for university admission ... are eligible but, one of the three subjects must have a Credit Pass (C) in Sinhala, Tamil or English. However, because the medium of instructions of this course of study is English, to be eligible, the student also must have obtained at least a Credit Pass (C) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "030": {
+   "name": "Urban Informatics and Planning",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "CHEM",
+       "PHY",
+       "BIO"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "CMATH",
+       "CHEM",
+       "PHY",
+       "BIO",
+       "ACC",
+       "AGRI",
+       "BSTUD",
+       "BSTAT",
+       "ICT",
+       "ECON",
+       "POLSCI",
+       "GEOG",
+       "HMATH",
+       "LOGIC",
+       "MATH",
+       "BST",
+       "SFT",
+       "ET"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "B"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 85,
+   "quote": "I At least Ordinary Passes (S) in three subjects from the following subjects at the G.C.E. (Advanced Level) Examination. Combined Mathematics; Chemistry; Physics; Biology or II One or two subject/s from the above and the other subject/ subjects from the following subjects. Accounting; Agricultural Science; Business Studies; Business Statistics; Information & Communication Technology; Economics; Political Science; Geography; Higher Mathematics; Logic & Scientific Methods; Mathematics; Biosystems Technology; Science for Technology; Engineering Technology. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (a) At least a Very Good Pass (B) in English (b) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "031": {
+   "name": "Peace and Conflict Resolution",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 37,
+   "quote": "Candidates who have satisfied the minimum requirements for university admission [minimum of Ordinary Passes (S) in three subjects and 30% or more for the Common General Paper] having offered any three subjects available at the G.C.E. (Advanced Level) Examination are eligible to seek admission to this programme.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "032": {
+   "name": "Ayurveda Medicine and Surgery",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 54,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "033": {
+   "name": "Unani Medicine and Surgery",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 54,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "034": {
+   "name": "Fashion Design & Product Development",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the University of Moratuwa",
+   "page": 87,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination. In addition to that, candidates must fulfill the following requirements; (a) At least a Credit Pass (C) in English, Mathematics, and Science at the G.C.E. (Ordinary Level) Examination. (b) Pass the Aptitude Test which will be conducted by the University of Moratuwa.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "035": {
+   "name": "Food Science & Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 54,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "036": {
+   "name": "Siddha Medicine and Surgery",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 55,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "037": {
+   "name": "Nursing",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": "Minimum height 4'10\" and no kind of deformity (Nursing Council mandatory requirement)",
+   "page": 57,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination. In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "038": {
+   "name": "Information and Communication Technology (ICT)",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "CMATH",
+     "PHY",
+     "ICT"
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 102,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Information & Communication Technology at the G.C.E. (Advanced Level) Examination; and 'S' grades for any other two subjects available at the G.C.E. (Advanced Level) Examination. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "039": {
+   "name": "Agricultural Technology & Management",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "PHY",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "subject": "BIO",
+          "min": "S"
+         },
+         {
+          "subject": "AGRI",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "AGRI",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 51,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (i) Chemistry; Physics; and Biology (ii) Chemistry; Physics or Mathematics; Biology or Agricultural Science (iii) Chemistry; Biology; Agricultural Science or Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "041": {
+   "name": "Arts (SP) - Performing Arts",
+   "al": {
+    "all": [
+     {
+      "predicate": "ARTS_BASKETS"
+     },
+     {
+      "gradeCount": 1,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "ECON",
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "ACC",
+       "BSTAT",
+       "POLSCI",
+       "LOGIC",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     },
+     {
+      "gradeCount": 2,
+      "min": "S",
+      "of": [
+       "GEOG",
+       "HIST",
+       "HOMEEC",
+       "AGRI",
+       "MATH",
+       "CMATH",
+       "CMS",
+       "ICT",
+       "POLSCI",
+       "LOGIC",
+       "CIVTECH",
+       "EEIT",
+       "AGROTECH",
+       "MECHTECH",
+       "FOODTECH",
+       "BIORESTECH",
+       "BUDDHISM",
+       "HINDUISM",
+       "CHRISTIANITY",
+       "ISLAM",
+       "BUDCIV",
+       "HINDUCIV",
+       "CHRCIV",
+       "ISLCIV",
+       "GRCIV",
+       "ART",
+       "DANCE",
+       "MUSIC",
+       "DRAMA",
+       "SIN",
+       "TAM",
+       "ENG",
+       "ARABIC",
+       "PALI",
+       "SANSKRIT",
+       "CHINESE",
+       "FRE",
+       "GER",
+       "HINDI",
+       "JAPANESE",
+       "MALAY",
+       "RUSSIAN",
+       "KOR"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the Sripalee Campus of the University of Colombo",
+   "page": 35,
+   "quote": "Three subjects should have offered at the G.C.E. (Advanced Level) Examination from Arts Stream, subject to the following conditions. 1. Not more than two Languages 2. Not more than one subject from Religions and Civilizations basket 3. Not more than one Technological subject 4. Not more than one of the following subjects: Accounting; Business Statistics; Economics. Moreover, there are two special requirements to be fulfilled. These are; 1. To have a minimum of an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination. 2. To have a pass in the Aptitude Test conducted by the Sripalee Campus of the University of Colombo.",
+   "reconciliation": {
+    "decision": "CHECKER_B",
+    "reading": "LITERAL",
+    "note": "As 020 (same section, p.35)."
+   }
+  },
+  "050": {
+   "name": "Health Promotion",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 57,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "051": {
+   "name": "Pharmacy",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "C"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "subject": "BIO",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": null,
+   "page": 58,
+   "quote": "At least a 'C' grade in Chemistry and 'S' grades in Physics and Biology at the G.C.E. (Advanced Level) Examination. In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "052": {
+   "name": "Medical Laboratory Sciences",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": null,
+   "page": 58,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination. In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "053": {
+   "name": "Radiography",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": null,
+   "page": 59,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination. In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "054": {
+   "name": "Physiotherapy",
+   "al": {
+    "all": [
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BIO",
+       "MATH",
+       "HMATH",
+       "CMATH"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": null,
+   "page": 59,
+   "quote": "At least 'S' grades in Physics, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Biology; Mathematics; Higher Mathematics; Combined Mathematics In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "055": {
+   "name": "Environmental Conservation & Management",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "PHY",
+       "CMATH",
+       "MATH",
+       "AGRI"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 60,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Physics; Combined Mathematics; Mathematics; Agricultural Science",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "056": {
+   "name": "Facilities Management",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "CMATH",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "BSTUD",
+        "min": "S"
+       },
+       {
+        "subject": "ECON",
+        "min": "S"
+       },
+       {
+        "subject": "ACC",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "ACC",
+        "min": "S"
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "BSTUD",
+         "ECON"
+        ]
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "AGRI",
+         "GEOG",
+         "GER",
+         "CMATH",
+         "HIST",
+         "POLSCI",
+         "ENG",
+         "LOGIC",
+         "FRE",
+         "PHY",
+         "ICT",
+         "KOR"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "SCI_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 91,
+   "quote": "Category (A) Should have obtained at least 'S' grades in Chemistry, Combined Mathematics and Physics at the G.C.E. (Advanced Level) Examination. Category (B) Should have obtained at least 'S' grades in Business Studies, Economics and Accounting at the G.C.E. (Advanced Level) Examination; or Should have obtained at least 'S' grades for two subjects including Accounting from the above Category (B) and the other subject from the following subjects. Agricultural Science; Geography; German; Combined Mathematics; History; Political Science; English; Logic & Scientific Methods; French; Physics; Information & Communication Technology; Korean. In addition to fulfilling the minimum requirements under one of the above two categories, the candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (a) At least a Credit Pass (C) in English (b) At least a Credit Pass (C) in Mathematics (c) At least a Credit Pass (C) in Science",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "057": {
+   "name": "Transport Management & Logistics Engineering (TMLE)",
+   "al": {
+    "all": [
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 69,
+   "quote": "At least three 'S' grades in Chemistry, Combined Mathematics and Physics at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "058": {
+   "name": "Biochemistry & Molecular Biology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 60,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "059": {
+   "name": "Industrial Statistics & Mathematical Finance",
+   "al": {
+    "all": [
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "HMATH",
+       "PHY",
+       "CHEM",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 72,
+   "quote": "At least 'S' grades in Combined Mathematics and any two subjects given below at the G.C.E. (Advanced Level) Examination; Higher Mathematics; Physics; Chemistry; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "060": {
+   "name": "Statistics & Operations Research",
+   "al": {
+    "all": [
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BIO",
+       "CHEM",
+       "PHY",
+       "AGRI",
+       "MATH",
+       "HMATH",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 73,
+   "quote": "At least 'S' grades in Combined Mathematics and two of the following subjects at the G.C.E. (Advanced Level) Examination; Biology; Chemistry; Physics; Agricultural Science; Mathematics; Higher Mathematics; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "062": {
+   "name": "Fisheries & Marine Sciences",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 60,
+   "quote": "At least three 'S' grades in Chemistry, Physics and Biology at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "063": {
+   "name": "Islamic Studies",
+   "al": {
+    "anySubjects": 1,
+    "min": "S",
+    "from": [
+     "ISLAM",
+     "ISLCIV"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 37,
+   "quote": "Candidates with at least Ordinary Passes (S) in any three subjects at the G.C.E. (Advanced Level) Examination are eligible. However, one must include a subject of Islam or Islamic Civilization.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "064": {
+   "name": "Science and Technology",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "AGRI",
+         "HMATH",
+         "MATH",
+         "CMATH",
+         "PHY"
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "CMATH",
+         "HMATH"
+        ]
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "CHEM",
+         "PHY"
+        ]
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "AGRI",
+         "CMATH",
+         "BIO",
+         "HMATH",
+         "CHEM",
+         "PHY"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 92,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics or At least 'S' grades in following three subjects at the G.C.E. (Advanced Level) Examination and the three subjects must include; 1. Combined Mathematics or Higher Mathematics and 2. Chemistry or Physics and 3. The third subject from the list given below; Agricultural Science; Combined Mathematics; Biology; Higher Mathematics; Chemistry; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "065": {
+   "name": "Computer Science & Technology",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "HMATH",
+         "MATH",
+         "CMATH",
+         "PHY"
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "CMATH",
+         "HMATH"
+        ]
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "CHEM",
+         "PHY"
+        ]
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "CMATH",
+         "BIO",
+         "HMATH",
+         "CHEM",
+         "PHY",
+         "ICT"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 93,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Higher Mathematics; Mathematics; Combined Mathematics; Physics or At least 'S' grades in following three subjects at the G.C.E. (Advanced Level) Examination and the three subjects must include; 1. Combined Mathematics or Higher Mathematics and 2. Chemistry or Physics and 3. The third subject from the list given below; Combined Mathematics; Biology; Higher Mathematics; Chemistry; Physics; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "066": {
+   "name": "Entrepreneurship and Management",
+   "al": {
+    "streamIs": [
+     "COMMERCE",
+     "BIO",
+     "PHYS"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 94,
+   "quote": "At least 'S' grades in any three subjects in the Commerce Stream or Biological Science Stream or Physical Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "067": {
+   "name": "Animal Production and Food Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 62,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "068": {
+   "name": "Music",
+   "al": {
+    "subject": "MUSIC",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 38,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory. For example, a student wishing to follow Music must have a Credit Pass (C) or more in Music at the G.C.E. (Advanced Level) Examination. [SJP, p.40: ... at least a Credit Pass (C) in Music.]",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "069": {
+   "name": "Dance",
+   "al": {
+    "subject": "DANCE",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 38,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "070": {
+   "name": "Art & Design",
+   "al": {
+    "subject": "ART",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 39,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory. Similarly, a student wishing to follow a course of study in Arts & Design must have obtained a Credit Pass (C) or more for Art at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "071": {
+   "name": "Drama & Theatre",
+   "al": {
+    "subject": "DRAMA",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 38,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "072": {
+   "name": "Visual & Technological Arts",
+   "al": {
+    "subject": "ART",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 39,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory. Similarly, a student wishing to follow a course of study in Visual & Technological Arts must have obtained a Credit Pass (C) or more for Art at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "073": {
+   "name": "Export Agriculture",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 62,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "075": {
+   "name": "Industrial Information Technology",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "CMATH",
+     "PHY",
+     "ICT"
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 94,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Information & Communication Technology at the G.C.E. (Advanced Level) Examination; and 'S' grades for any other two subjects available at the G.C.E. (Advanced Level) Examination. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "076": {
+   "name": "Mineral Resources and Technology",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "CMATH",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 95,
+   "quote": "At least 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (1). Biology, Chemistry, Physics (2). Combined Mathematics, Chemistry, Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "077": {
+   "name": "Business Information Systems (Honours) (BIS)",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC"
+      ]
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "BSTUD",
+       "ECON",
+       "ACC",
+       "ICT",
+       "CMATH",
+       "LOGIC",
+       "BSTAT",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 47,
+   "quote": "At least 'S' grades for following three subjects at the G.C.E. (Advanced Level) Examination; Business Studies; Economics; Accounting or At least 'S' grades for two subjects given above and the third subject from the subjects given below; Information & Communication Technology; Combined Mathematics; Logic & Scientific Method; Business Statistics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "079": {
+   "name": "Management and Information Technology (SEUSL)",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 92,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "081": {
+   "name": "Physical Education",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical Test conducted in common for Physical Education, Sports Science & Management and Sports Science",
+   "page": 96,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "082": {
+   "name": "Sports Science & Management",
+   "al": {
+    "anySubjects": 3,
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical Test conducted in common for Physical Education, Sports Science & Management and Sports Science",
+   "page": 97,
+   "quote": "At least 'S' grades in any three subjects at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "083": {
+   "name": "Speech and Hearing Sciences",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "S"
+   },
+   "groups": null,
+   "other": null,
+   "page": 66,
+   "quote": "At least three 'S' grades in Biology, Physics and Chemistry at the G.C.E. (Advanced Level) Examination. In addition to that, at least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "084": {
+   "name": "Arabic Language",
+   "al": {
+    "subject": "ARABIC",
+    "min": "S"
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 37,
+   "quote": "Candidates with at least Ordinary Passes (S) in any three subjects at the G.C.E. (Advanced Level) Examination are eligible. However one must include a subject of Arabic language.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "085": {
+   "name": "Visual Arts",
+   "al": {
+    "subject": "ART",
+    "min": "C"
+   },
+   "ol": null,
+   "groups": null,
+   "other": "Pass the Practical/Aptitude Test conducted by the university",
+   "page": 38,
+   "quote": "In the three subjects at the G.C.E. (Advanced Level) Examination, students must obtain at least two Ordinary Passes (S) in any two subjects and at least a Credit Pass (C) for the subject the student wishes to follow. This requirement is mandatory. Similarly, a student wishing to follow a course of study in Visual Arts must have obtained a Credit Pass (C) or more for Art at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "086": {
+   "name": "Animal Science & Fisheries",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "AGRI",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 61,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; (i) Chemistry, Biology and Physics (ii) Chemistry, Biology and Agricultural Science",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "087": {
+   "name": "Food Production & Technology Management",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "PHY",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "subject": "BIO",
+          "min": "S"
+         },
+         {
+          "subject": "AGRI",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "AGRI",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 61,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (i) Chemistry; Physics; and Biology (ii) Chemistry; Physics or Mathematics; Biology or Agricultural Science (iii) Chemistry; Biology; Agricultural Science or Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "088": {
+   "name": "Aquatic Resources Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "AGRI",
+       "HMATH",
+       "MATH",
+       "CMATH",
+       "PHY"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 63,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Agricultural Science; Higher Mathematics; Mathematics; Combined Mathematics; Physics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "090": {
+   "name": "Hospitality, Tourism and Events Management",
+   "al": {
+    "streamIs": [
+     "COMMERCE",
+     "BIO",
+     "PHYS"
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 96,
+   "quote": "At least 'S' grades in any three subjects in the Commerce Stream or Biological Science Stream or Physical Science Stream at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "091": {
+   "name": "Information Technology & Management",
+   "al": {
+    "gradeCount": 2,
+    "min": "C",
+    "of": [
+     "HMATH",
+     "CHEM",
+     "CMATH",
+     "ACC",
+     "MATH",
+     "BSTAT",
+     "PHY",
+     "ICT"
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 98,
+   "quote": "The candidates should have passed the three subjects with at least 'C' grades in two of the following subjects at the G.C.E. (Advanced Level) Examination. Higher Mathematics; Chemistry; Combined Mathematics; Accounting; Mathematics; Business Statistics; Physics; Information & Communication Technology. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination. (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "092": {
+   "name": "Tourism & Hospitality Management",
+   "al": {
+    "any": [
+     {
+      "streamIs": [
+       "COMMERCE",
+       "BIO",
+       "PHYS"
+      ]
+     },
+     {
+      "all": [
+       {
+        "predicate": "ARTS_BASKETS"
+       },
+       {
+        "anySubjects": 1,
+        "min": "S",
+        "from": [
+         "ECON",
+         "GEOG",
+         "BSTAT"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 99,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination; (i) Any three subjects in the Commerce, Biological Science and Physical Science Streams (ii) At least one of the following subjects and any other two subjects in the Arts Stream selected according to the conditions specified in the Section 2.2.1.1 of this handbook. Economics; Geography; Business Statistics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "093": {
+   "name": "Agricultural Resource Management and Technology",
+   "al": {
+    "any": [
+     {
+      "all": [
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "PHY",
+        "min": "S"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "PHY",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "subject": "BIO",
+          "min": "S"
+         },
+         {
+          "subject": "AGRI",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "subject": "CHEM",
+        "min": "S"
+       },
+       {
+        "subject": "BIO",
+        "min": "S"
+       },
+       {
+        "any": [
+         {
+          "subject": "AGRI",
+          "min": "S"
+         },
+         {
+          "subject": "MATH",
+          "min": "S"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 52,
+   "quote": "At least three 'S' grades for one of the following combinations of subjects at the G.C.E. (Advanced Level) Examination. (i) Chemistry; Physics; and Biology (ii) Chemistry; Physics or Mathematics; Biology or Agricultural Science (iii) Chemistry; Biology; Agricultural Science or Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "094": {
+   "name": "Agribusiness Management",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "PHY",
+       "AGRI",
+       "FOODTECH",
+       "BIORESTECH",
+       "AGROTECH"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 52,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Physics; Agricultural Science; Food Technology/ Bio - Resource Technology/ Agro Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "095": {
+   "name": "Green Technology",
+   "al": {
+    "all": [
+     {
+      "subject": "BIO",
+      "min": "S"
+     },
+     {
+      "subject": "CHEM",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "PHY",
+       "AGRI",
+       "FOODTECH",
+       "BIORESTECH",
+       "AGROTECH"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "olSubject": "ENG_OL",
+    "min": "C"
+   },
+   "groups": null,
+   "other": null,
+   "page": 53,
+   "quote": "At least 'S' grades in Biology, Chemistry and the third subject from the following subjects at the G.C.E. (Advanced Level) Examination; Physics; Agricultural Science; Food Technology/ Bio - Resource Technology/ Agro Technology In addition to that, at least a Credit Pass (C) in English at the G.C.E. (Ordinary Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "096": {
+   "name": "Information Systems",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "CMATH",
+     "PHY",
+     "ICT"
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "C"
+     },
+     {
+      "olSubject": "MATH_OL",
+      "min": "C"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 99,
+   "quote": "At least a 'C' grade in Combined Mathematics or Physics or Information & Communication Technology at the G.C.E. (Advanced Level) Examination; and 'S' grades for any other two subjects available at the G.C.E. (Advanced Level) Examination. In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination; (i) At least a Credit Pass (C) in English (ii) At least a Credit Pass (C) in Mathematics",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "097": {
+   "name": "Landscape Architecture",
+   "al": {
+    "all": [
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "ART",
+       "BIO",
+       "CHEM",
+       "CMATH",
+       "GEOG",
+       "HMATH",
+       "PHY",
+       "AGRI"
+      ]
+     },
+     {
+      "anySubjects": 2,
+      "min": "S",
+      "from": [
+       "ART",
+       "BIO",
+       "CHEM",
+       "CMATH",
+       "GEOG",
+       "HMATH",
+       "PHY",
+       "AGRI",
+       "ACC",
+       "ARABIC",
+       "BUDCIV",
+       "BSTAT",
+       "BSTUD",
+       "CHINESE",
+       "GRCIV",
+       "ECON",
+       "MATH",
+       "ENG",
+       "FRE",
+       "GER",
+       "TAM",
+       "CHRCIV",
+       "HINDI",
+       "HINDUCIV",
+       "HIST",
+       "HOMEEC",
+       "ISLCIV",
+       "JAPANESE",
+       "LOGIC",
+       "POLSCI",
+       "PALI",
+       "SANSKRIT",
+       "SIN",
+       "CMS",
+       "ICT",
+       "KOR"
+      ]
+     }
+    ]
+   },
+   "ol": {
+    "all": [
+     {
+      "olSubject": "ENG_OL",
+      "min": "S"
+     },
+     {
+      "any": [
+       {
+        "olSubject": "MATH_OL",
+        "min": "C"
+       },
+       {
+        "subject": "MATH",
+        "min": "S"
+       }
+      ]
+     }
+    ]
+   },
+   "groups": null,
+   "other": "Pass the Aptitude Test conducted by the University of Moratuwa",
+   "page": 88,
+   "quote": "A candidate should have obtained at least 'S' passes at the G.C.E. (Advanced Level) Examination in; (i) At least one of the following subjects; Art; Biology; Chemistry; Combined Mathematics; Geography; Higher Mathematics; Physics; Agricultural Science and (ii) The other subject/ subjects from the following list; Accounting; Arabic; Buddhist Civilization; Business Statistics; Business Studies; Chinese; Greek & Roman Civilization; Economics; Mathematics; English; French; German; Tamil; Christian Civilization; Hindi; Hindu Civilization; History; Home Economics; Islamic Civilization; Japanese; Logic & Scientific Method; Political Science; Pali; Sanskrit; Sinhala; Communication & Media Studies; Information & Communication Technology; Korean. In addition, candidates must fulfill the following requirements; (a) At least an Ordinary Pass (S) in English at the G.C.E. (Ordinary Level) Examination (b) At least a Credit Pass (C) in Mathematics at the G.C.E. (Ordinary Level) Examination or an Ordinary Pass (S) in Mathematics at the G.C.E. (Advanced Level) Examination (c) Passed the Aptitude Test, which will be conducted by the University of Moratuwa",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "098": {
+   "name": "Translation Studies",
+   "al": {
+    "anySubjects": 1,
+    "min": "C",
+    "from": [
+     "SIN",
+     "TAM"
+    ]
+   },
+   "ol": {
+    "any": [
+     {
+      "all": [
+       {
+        "olSubject": "SIN_OL",
+        "min": "B"
+       },
+       {
+        "olSubject": "ENG_OL",
+        "min": "B"
+       }
+      ]
+     },
+     {
+      "all": [
+       {
+        "olSubject": "TAM_OL",
+        "min": "B"
+       },
+       {
+        "olSubject": "ENG_OL",
+        "min": "B"
+       }
+      ]
+     },
+     {
+      "subject": "ENG",
+      "min": "S"
+     }
+    ]
+   },
+   "groups": null,
+   "other": null,
+   "page": 100,
+   "quote": "Should have passed three subjects with at least a 'C' grade for Sinhala or Tamil at the G.C.E. (Advanced Level) Examination; In addition, candidates must fulfill the following requirments; (i). At least 'B' grades for one of the following subject combinations at the G.C.E. (Ordinary Level) Examination; (a) Sinhala Language & Lit. and English (b) Tamil Language & Lit. and English or (ii). At least a 'S' grade for English Language at the G.C.E. (Advanced Level) Examination.",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  },
+  "099": {
+   "name": "Software Engineering",
+   "al": {
+    "all": [
+     {
+      "subject": "CMATH",
+      "min": "S"
+     },
+     {
+      "subject": "PHY",
+      "min": "S"
+     },
+     {
+      "anySubjects": 1,
+      "min": "S",
+      "from": [
+       "CHEM",
+       "HMATH",
+       "ICT"
+      ]
+     }
+    ]
+   },
+   "ol": null,
+   "groups": null,
+   "other": null,
+   "page": 103,
+   "quote": "A candidate should have obtained at least 'S' grades in Combined Mathematics, Physics and third subject from the following list at the G.C.E. (Advanced Level) Examination; Chemistry; Higher Mathematics; Information & Communication Technology",
+   "reconciliation": {
+    "decision": "AGREED",
+    "reading": "LITERAL",
+    "note": "Both encodings behave identically on every tested case."
+   }
+  }
+ }
+}
