@@ -12,7 +12,8 @@
     "typecheck": "tsc -b",
     "rulebook": "node tools/rulebook/build-rulebook.ts",
     "validate:schema": "node tools/seed/validate-schema.ts",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "hono": "^4.13.13",
