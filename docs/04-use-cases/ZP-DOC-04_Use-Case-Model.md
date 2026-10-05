@@ -12,6 +12,7 @@ approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: UML 2.5.1 use case and activity diagrams; A. Cockburn fully dressed use case template; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: 18 use cases (7 fully dressed), two use case diagrams, two activity diagrams; submitted for approval
+revision: 0.9 | 5 Oct 2026 | Team Kestrel | Review update: catalogue extended for FR-113 (O/L requirements) and FR-308 (list limit) added to ZP-DOC-03
 ---
 
 # Introduction
@@ -79,10 +80,10 @@ Table: Use case catalogue with level, release and realised requirements
 
 | ID | Use case | Primary actor | Level | Release | Requirements |
 |---|---|---|---|---|---|
-| UC-01 | Set up profile | Student | User goal | R1 | FR-101 to FR-112 |
+| UC-01 | Set up profile | Student | User goal | R1 | FR-101 to FR-113 |
 | UC-02 | Explore eligible courses | Student | User goal | R1 | FR-201 to FR-207, FR-210 to FR-213 |
 | UC-03 | View offering details | Student | User goal | R1 | FR-208, FR-209, FR-214 |
-| UC-04 | Build and check preference list | Student | User goal | R1 | FR-301 to FR-307 |
+| UC-04 | Build and check preference list | Student | User goal | R1 | FR-301 to FR-308 |
 | UC-05 | Follow journey and reminders | Student | User goal | R1 | FR-401 to FR-408 |
 | UC-06 | Explore other routes | Student | User goal | R1 | FR-501 to FR-508 |
 | UC-07 | Ask a question | Student | User goal | R1 | FR-601 to FR-606, FR-913 |
@@ -342,7 +343,7 @@ Table: Brief use cases
 # Traceability: requirements to use cases {.appendix}
 
 Every functional requirement in ZP-DOC-03 is realised by at least one use case, as listed in the use case
-catalogue above (column *Requirements*); this was checked by script against all 78 requirements.
+catalogue above (column *Requirements*); this was checked by script against all 80 requirements.
 
 # Glossary {.appendix}
 

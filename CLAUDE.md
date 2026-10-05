@@ -35,7 +35,12 @@ cut-offs, private degrees, gazetted job exams, vocational, abroad, retry) → de
   2026-10-05 (budget + sources go in ZP-DOC-06). Key facts: 10 ms CPU/request, 100k req/day, static assets free;
   no outbound email on Free; Queues, Workflows, DO (SQLite), Vectorize, Workers AI (10k neurons/day),
   AI Gateway (proxies Gemini), Turnstile, Browser Run all available. Next.js SSR risks Error 1102 under 10 ms →
-  recommended stack: Vite + React SPA on static assets + Hono API in one Worker (decision recorded as an ADR in ZP-DOC-06).
+  **stack APPROVED by Praveen 2026-10-05: Vite + React SPA on static assets + Hono API in one Worker** (ADR in ZP-DOC-06).
+- **Implementation runs in parallel with docs 06–08** (Praveen 2026-10-05: "we should show something working").
+  Order: ZP-DOC-05 data design → walking skeleton (US-101 → 201 → 203 → 204, real 2025/26 data) → docs 06–08 alongside.
+- **Sources:** the UGC handbook + COP PDFs are enough; video transcripts are skipped for now. Every published fact
+  cites the official UGC source; competitor content (e.g. ThuSh LK) is never republished.
+- **Docs approval:** Praveen approves each doc ("approve 02") → set v1.0, fill the approval table, tag `ZP-DOC-NN-v1.0`.
 
 ## Cloudflare: environment map
 | Thing | Value |
