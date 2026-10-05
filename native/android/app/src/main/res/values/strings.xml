@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ZedPath</string>
+    <string name="title_activity_main">ZedPath</string>
+    <string name="package_name">com.teamkestrel.zedpath</string>
+    <string name="custom_url_scheme">com.teamkestrel.zedpath</string>
+</resources>

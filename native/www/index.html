@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZedPath: offline</title>
+<style>
+  :root { --brand: #24478C; --amber: #FFC94A; --bg: #F4F6FB; --ink: #0E1525; --ink-2: #4A5468; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0A0F1C; --ink: #EAF0FF; --ink-2: #B4BED6; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--bg); color: var(--ink);
+    font: 16px/24px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; text-align: center; }
+  .mark { width: 84px; height: 84px; margin: 0 auto 20px; }
+  h1 { font-size: 26px; line-height: 32px; margin: 0 0 8px; }
+  p { margin: 0 auto 24px; max-width: 30ch; color: var(--ink-2); }
+  button { min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--brand); color: #fff; font: 600 16px system-ui, sans-serif; }
+</style>
+</head>
+<body>
+  <main>
+    <svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#2A4A7F"/>
+      <path d="M160 170 H352 L160 342 H352" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="352" cy="342" r="38" fill="#FFC94A" stroke="#2A4A7F" stroke-width="10"/></svg>
+    <h1>You're offline</h1>
+    <p>ZedPath needs the internet the first time it opens. Check your connection and try again.</p>
+    <button type="button" onclick="location.href='https://zedpath.teamkestrel.workers.dev/?source=android-app'">Try again</button>
+  </main>
+</body>
+</html>
