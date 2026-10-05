@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Award, BellRing, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
-  RotateCcw, ScrollText, ShieldCheck, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  RotateCcw, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -14,6 +14,7 @@ import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
 import { notificationsSupported, sendTestNotification } from './notify.ts';
+import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { clearEverything, isOnboarded, isPendingSync, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
@@ -72,6 +73,8 @@ export function App() {
   const [me, setMe] = useState<{ username: string } | null>(null);
   const [recovery, setRecovery] = useState<{ username: string; code: string } | null>(null);
   const [syncNote, setSyncNote] = useState<string | null>(null);
+  const [askTurns, setAskTurnsRaw] = useState<AskTurn[]>(() => { try { return JSON.parse(sessionStorage.getItem('zedpath.ask.v1') ?? '[]'); } catch { return []; } });
+  const setAskTurns = (f: (t: AskTurn[]) => AskTurn[]) => setAskTurnsRaw(t => { const n = f(t); try { sessionStorage.setItem('zedpath.ask.v1', JSON.stringify(n.filter(x => x.reply || x.error))); } catch { /* private mode */ } return n; });
   const push = (p: ProfileInput, e: Extras) => saveMe(p, e)
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
@@ -133,16 +136,18 @@ export function App() {
       <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
     </div>);
 
-  let screen: React.ReactNode, tab: 'paths' | 'courses' | 'me' = 'paths', title = 'ZedPath', back = false;
+  let screen: React.ReactNode, tab: 'paths' | 'courses' | 'ask' | 'me' = 'paths', title = 'ZedPath', back = false;
   if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} />; }
-  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} />; }
+  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} />; }
+  else if (path === 'ask') { tab = 'ask'; title = 'Ask ZedPath'; screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
+    initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')} />; }
   else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
   else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} />;
 
-  const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['me', 'Me', UserRound, '#/me']];
+  const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['ask', 'Ask', Sparkles, '#/ask'], ['me', 'Me', UserRound, '#/me']];
   return (
     <div className="shell has-nav">
       <header className="app-bar">
@@ -262,7 +267,7 @@ function CourseRow({ o, animate, onOpen }: { o: OfferingSummary; animate: boolea
 }
 
 // ---------------------------------------------------------------- Degree details
-function DegreeDetails({ uniCode, profile, results }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null }) {
+function DegreeDetails({ uniCode, profile, results, go }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null; go: (to: string) => void }) {
   const [d, setD] = useState<OfferingDetail | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<OfferingDetail>(`/offerings/${uniCode}?district=${profile.district}`).then(setD).catch(e => setErr(String(e.message))); }, [uniCode, profile.district]);
@@ -286,6 +291,8 @@ function DegreeDetails({ uniCode, profile, results }: { uniCode: string; profile
         </div>
       </section>
 
+      <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(`Explain ${titleCase(d.course)} at ${shortInstitution(d.institution)}: what it needs and what my chances are.`)}`)}>
+        <Sparkles size={18} aria-hidden="true" />Explain this course with Ask ZedPath</button>
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">What it needs</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
