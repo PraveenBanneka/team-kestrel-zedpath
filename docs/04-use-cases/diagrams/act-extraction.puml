@@ -1,0 +1,39 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #006B5F
+}
+skinparam ArrowColor #3F4946
+
+|Curator or Scheduler|
+start
+:Source registered\n(UC-10, fingerprinted);
+|ZedPath pipeline|
+:Split source into sections\nwith page numbers;
+repeat
+  :AI extractor proposes a\nstructured fact + confidence + page;
+  :AI checker re-reads the page\nand agrees or disagrees;
+  if (both agree and both\nconfidences >= 0.90?) then (yes)
+    :Publish fact as new version;
+  else (no)
+    :Put fact in review queue;
+    |Curator|
+    :Compare fact with source page;
+    if (decision?) then (approve or correct)
+      :Publish fact as new version\n(reviewer, time, change recorded);
+    else (reject)
+      :Discard candidate,\nkeep audit record;
+    endif
+    |ZedPath pipeline|
+  endif
+repeat while (more sections?) is (yes)
+->no;
+:Log run: counts of published,\nqueued and rejected facts;
+stop
+@enduml

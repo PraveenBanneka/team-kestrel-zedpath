@@ -1,0 +1,61 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+}
+skinparam rectangle {
+  BorderColor #006B5F
+}
+skinparam ArrowColor #3F4946
+left to right direction
+
+actor "Student" as S
+actor "Family member" as F
+actor "Gemini\n(via AI Gateway)" as G <<system>>
+actor "Push service" as P <<system>>
+
+rectangle "ZedPath: student services" {
+  usecase "UC-01 Set up profile" as UC01
+  usecase "Estimate Z-score" as EST
+  usecase "Read results photo" as OCR
+  usecase "UC-02 Explore eligible\ncourses" as UC02
+  usecase "Check eligibility" as ELIG
+  usecase "Compute band" as BAND
+  usecase "UC-03 View offering\ndetails" as UC03
+  usecase "UC-04 Build and check\npreference list" as UC04
+  usecase "Check list order" as ORDER
+  usecase "UC-05 Follow journey\nand reminders" as UC05
+  usecase "UC-06 Explore other\nroutes" as UC06
+  usecase "UC-07 Ask a question" as UC07
+  usecase "UC-08 Share summary" as UC08
+  usecase "UC-09 Report a mistake" as UC09
+  usecase "UC-18 Prepare for\nuniversity (R2)" as UC18
+}
+
+S --> UC01
+S --> UC02
+S --> UC03
+S --> UC04
+S --> UC05
+S --> UC06
+S --> UC07
+S --> UC08
+S --> UC09
+S --> UC18
+UC08 --> F
+UC07 --> G
+OCR --> G
+UC05 --> P
+
+UC01 <.. EST : <<extend>>
+UC01 <.. OCR : <<extend>>
+UC02 ..> ELIG : <<include>>
+UC02 ..> BAND : <<include>>
+UC04 ..> ORDER : <<include>>
+UC06 ..> ELIG : <<include>>
+@enduml

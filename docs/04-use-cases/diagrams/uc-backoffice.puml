@@ -1,0 +1,48 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+}
+skinparam rectangle {
+  BorderColor #006B5F
+}
+skinparam ArrowColor #3F4946
+left to right direction
+
+actor "Curator" as C
+actor "Scheduler\n(time)" as T
+actor "Teacher" as TE
+actor "Verified senior" as SE
+actor "AI extractor\n(Gemini)" as X <<system>>
+actor "AI checker\n(second model)" as K <<system>>
+
+rectangle "ZedPath: data, trust and community services" {
+  usecase "UC-10 Register source\ndocument" as UC10
+  usecase "UC-11 Extract facts\nfrom a source" as UC11
+  usecase "Two-model check" as TWO
+  usecase "UC-12 Review queued\nfacts and reports" as UC12
+  usecase "UC-13 Scan Gazette" as UC13
+  usecase "UC-14 Send due\nreminders" as UC14
+  usecase "UC-15 Verify as senior\n(R2)" as UC15
+  usecase "UC-16 Answer as senior\n(R2)" as UC16
+  usecase "UC-17 View class\nprogress (R2)" as UC17
+}
+
+C --> UC10
+C --> UC11
+C --> UC12
+T --> UC13
+T --> UC14
+SE --> UC15
+SE --> UC16
+TE --> UC17
+UC11 ..> TWO : <<include>>
+UC13 ..> UC11 : <<include>>
+TWO --> X
+TWO --> K
+@enduml

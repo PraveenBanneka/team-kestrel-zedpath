@@ -1,0 +1,45 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor #E9F4F1
+  BorderColor #006B5F
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #006B5F
+}
+skinparam ArrowColor #3F4946
+
+|Student|
+start
+:Add or reorder an offering;
+|ZedPath|
+if (student eligible for offering?) then (no)
+  :Refuse and show the rule failed;
+  stop
+else (yes)
+endif
+:Recompute bands for every list item;
+if (a Safe item sits above a\nLikely or Reach item?) then (yes)
+  :Warn: items below the Safe one\ncan never be offered (BR-041);
+else (no)
+endif
+if (list has no Safe item?) then (yes)
+  :Warn: you may not be\nplaced anywhere (BR-042);
+else (no)
+endif
+|Student|
+if (tap "Fix order for me"?) then (yes)
+  |ZedPath|
+  :Propose order: most-wanted first,\nSafe items last;
+  |Student|
+  if (confirm?) then (yes)
+    :Apply proposed order;
+  else (no)
+  endif
+else (no)
+endif
+:Copy uni-codes in order;
+stop
+@enduml
