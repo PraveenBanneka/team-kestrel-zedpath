@@ -3,18 +3,18 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version c7113216 (walking skeleton). Not yet deployed: app shell
-  (77237b5) and design v2. No D1/KV/R2/other resources created yet.
+  https://zedpath.teamkestrel.workers.dev = version 8250b923 (design v2, commit 2e1d84f). Previous: c7113216
+  (walking skeleton), the rollback target. No D1/KV/R2/other resources created yet.
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
 - **Code:** onboarding (welcome, intro, 5 steps incl. beyond grades) -> Paths home (ring + 7 other-path groups,
   52 routes, open-now) -> courses by band -> degree details (cut-off chart) -> hidden; Me; installable PWA.
   Design v2 (Outfit + Inter, aurora hero, motion). Client JS 127 KB gzip (NFR-006 budget 200 KB still met).
 - **Docs:** 00-04 approved v1.0; 05 Data Design v0.9. Next: 06 Architecture, 07 UI/UX, 08 Test Plan; SRS v1.1
   for new stories (beyond grades, other paths, BR-044, student accounts).
-- **Next step:** GO to deploy design v2 -> student accounts (design on paper first, see 2026-10-05 entry)
+- **Next step:** student accounts (design on paper first, see 2026-10-05 entry)
   -> full deck feature set (list, journey + reminders, compare, Ask, gazette pipeline, Sinhala/Tamil).
 - **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video <= 4 min).
-- **Waiting on Praveen:** GO for deploy · decision on how students sign in · Gemini key into .dev.vars /
+- **Waiting on Praveen:** decision on how students sign in · Gemini key into .dev.vars /
   `wrangler secret put` (by Praveen, never pasted in chat).
 
 ---
@@ -100,3 +100,11 @@
 - Praveen asked for student registration (separate profiles for deadline reminders + personal paths). Needs a
   data design on paper + sign-in decision before any code (fundamentals rule); proposal sent, awaiting answer.
 - Sent docs 00-05 PDFs to Praveen's phone.
+
+## 2026-10-05: Deploy 2 - design v2 live
+- Praveen: "GO". whoami = Stacklineops@gmail.com's Account e6474e41... (not salon); pin matches; tree clean; 32/32 tests.
+- `npm run deploy` -> version **8250b923-e56a-4193-b1c2-55b3ad31ee64** (upload 1131.6 KiB / 141.2 KiB gzip, startup 3 ms).
+- Verified LIVE at 390 px with a fresh browser session: full onboarding -> Paths (53 within reach: 38/6/9) ->
+  courses -> degree details with cut-off chart -> job exams -> Me. No overflow, no error boundary, /api/health ok,
+  live bundle = locally tested bundle (index-dsRHV32u.js).
+- Rollback if needed: `wrangler rollback c7113216` (GO-gated).
