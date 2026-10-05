@@ -3,7 +3,7 @@
 // after the student confirms; "Copy Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { ArrowDown, ArrowUp, Check, ClipboardCopy, GripVertical, ListOrdered, TriangleAlert, X } from 'lucide-react';
+import { Check, ClipboardCopy, GripVertical, ListOrdered, TriangleAlert, X } from 'lucide-react';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
 import { LIST_MAX, listWarnings, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
@@ -19,12 +19,13 @@ export function withCurrentBands(list: ListEntry[], results: ResultsResponse | n
   });
 }
 
+/** One row: drag handle on the right (Praveen, 2026-10-05: no arrow buttons). The handle is also a keyboard control
+ *  (focus it, then Arrow Up / Arrow Down), so reordering still works without a touch screen (FR-301). */
 function Row({ e, i, n, onMove, onRemove, open }: { e: ListEntry & { stale: boolean }; i: number; n: number;
   onMove: (to: number) => void; onRemove: () => void; open: () => void }) {
   const controls = useDragControls();
   return (
     <Reorder.Item value={e} dragListener={false} dragControls={controls} className="list-row" as="div">
-      <span className="grip" onPointerDown={ev => controls.start(ev)} aria-hidden="true"><GripVertical size={20} /></span>
       <span className="pos num">{i + 1}</span>
       <button type="button" className="grow list-main" onClick={open}>
         <span className="t">{e.course}</span>
@@ -32,11 +33,12 @@ function Row({ e, i, n, onMove, onRemove, open }: { e: ListEntry & { stale: bool
         {e.stale ? <span className="pill band-OUT_OF_RANGE">No longer eligible with your results</span>
           : <span className={`pill band-${e.band}`}>{BAND_LABEL[e.band]}</span>}
       </button>
-      <span className="row-actions">
-        <button type="button" className="icon-btn" aria-label={`Move ${e.course} up`} disabled={i === 0} onClick={() => onMove(i - 1)}><ArrowUp size={18} /></button>
-        <button type="button" className="icon-btn" aria-label={`Move ${e.course} down`} disabled={i === n - 1} onClick={() => onMove(i + 1)}><ArrowDown size={18} /></button>
-        <button type="button" className="icon-btn" aria-label={`Remove ${e.course}`} onClick={onRemove}><X size={18} /></button>
-      </span>
+      <button type="button" className="icon-btn remove" aria-label={`Remove ${e.course}`} onClick={onRemove}><X size={18} /></button>
+      <button type="button" className="grip" onPointerDown={ev => controls.start(ev)} aria-label={`Reorder ${e.course}: drag, or use the arrow keys`}
+        onKeyDown={ev => {
+          if (ev.key === 'ArrowUp' && i > 0) { ev.preventDefault(); onMove(i - 1); }
+          if (ev.key === 'ArrowDown' && i < n - 1) { ev.preventDefault(); onMove(i + 1); }
+        }}><GripVertical size={22} aria-hidden="true" /></button>
     </Reorder.Item>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Award, BellRing, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
-  ListOrdered, RotateCcw, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  ListOrdered, RotateCcw, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -16,10 +16,12 @@ import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './acco
 import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
+import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { addToList, type ListEntry } from '../shared/list.ts';
-import { clearEverything, isOnboarded, isPendingSync, loadList, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+import { clearEverything, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
+import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
 
 const BAND_LABEL: Record<Band, string> = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' };
@@ -77,6 +79,8 @@ export function App() {
   const [syncNote, setSyncNote] = useState<string | null>(null);
   const [list, setListRaw] = useState<ListEntry[]>(() => loadList());
   const setList = (l: ListEntry[]) => { saveList(l); setListRaw(l); };
+  const [compare, setCompareRaw] = useState<string[]>(() => loadCompare());
+  const setCompare = (c: string[]) => { saveCompare(c); setCompareRaw(c); };
   const [askTurns, setAskTurnsRaw] = useState<AskTurn[]>(() => { try { return JSON.parse(sessionStorage.getItem('zedpath.ask.v1') ?? '[]'); } catch { return []; } });
   const setAskTurns = (f: (t: AskTurn[]) => AskTurn[]) => setAskTurnsRaw(t => { const n = f(t); try { sessionStorage.setItem('zedpath.ask.v1', JSON.stringify(n.filter(x => x.reply || x.error))); } catch { /* private mode */ } return n; });
   const push = (p: ProfileInput, e: Extras) => saveMe(p, e)
@@ -99,7 +103,7 @@ export function App() {
     if (me) void push(p, e);
     go('/paths');
   };
-  const reset = () => { clearEverything(); setListRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
     username: me?.username ?? null, syncNote,
@@ -142,8 +146,9 @@ export function App() {
 
   let screen: React.ReactNode, tab: 'paths' | 'courses' | 'ask' | 'me' = 'paths', title = 'ZedPath', back = false;
   if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
+  else if (path === 'compare') { tab = 'courses'; back = true; title = 'Compare'; screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
   else if (path === 'list') { tab = 'courses'; title = 'My list'; screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
-  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} />; }
+  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
   else if (path === 'ask') { tab = 'ask'; title = 'Ask ZedPath'; screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')} />; }
   else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
@@ -241,6 +246,7 @@ function Courses({ results, band, go, listCount }: { results: ResultsResponse | 
         <h1 className="screen-title">{results ? `${total} courses within reach` : 'Checking courses…'}</h1>
         <p className="subtitle">Sorted by how far you are above last year's cut-off for your district.</p>
         <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />My list{listCount ? ` (${listCount})` : ''}</button>
+        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare courses</button>
       </div>
       <div className="seg" role="tablist" aria-label="Band">
         {tabs.map(t => (
@@ -300,8 +306,8 @@ function AddToList({ d, mine, list, setList, go }: { d: OfferingDetail; mine: Of
     </div>);
 }
 
-function DegreeDetails({ uniCode, profile, results, go, list, setList }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null;
-  go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void }) {
+function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, setCompare }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null;
+  go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void; compare: string[]; setCompare: (c: string[]) => void }) {
   const [d, setD] = useState<OfferingDetail | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<OfferingDetail>(`/offerings/${uniCode}?district=${profile.district}`).then(setD).catch(e => setErr(String(e.message))); }, [uniCode, profile.district]);
@@ -328,6 +334,10 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList }: { uniCo
       <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(`Explain ${titleCase(d.course)} at ${shortInstitution(d.institution)}: what it needs and what my chances are.`)}`)}>
         <Sparkles size={18} aria-hidden="true" />Explain this course with Ask ZedPath</button>
       <AddToList d={d} mine={mine} list={list} setList={setList} go={go} />
+      {compare.includes(d.uniCode)
+        ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare now ({compare.length})</button>
+        : <button className="btn tonal" disabled={compare.length >= COMPARE_MAX} onClick={() => { setCompare([...compare, d.uniCode]); if (compare.length >= 1) go('/compare'); }}>
+            <Scale size={18} aria-hidden="true" />{compare.length >= COMPARE_MAX ? `Compare is full (${COMPARE_MAX})` : compare.length ? `Compare with ${compare.length === 1 ? 'the other course' : `${compare.length} others`}` : 'Compare'}</button>}
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">What it needs</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
@@ -553,18 +563,4 @@ function profileLine(p: ProfileInput, meta: Meta | null): string {
   const district = titleCase(meta?.districts.find(d => d.code === p.district)?.name ?? p.district);
   return `${stream} · ${district} · Z ${formatZ(p.zE4)}`;
 }
-/** "2024/2025" -> "24/25" */
-function shortYear(y: string): string { return y.replace(/^\d{2}(\d{2})\/\d{2}(\d{2})$/, '$1/$2'); }
-export function titleCase(s: string): string {
-  if (s !== s.toUpperCase()) return s;
-  return s.toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Of|And|In|The|For|&)\b/g, w => w.toLowerCase())
-    .replace(/\b(Ict|It|Mit|Tesl|Sp|Sab|Tv|Bis|Ucsc)\b/gi, w => w.toUpperCase()).replace(/^./, c => c.toUpperCase());
-}
-function shortInstitution(s: string): string {
-  return titleCase(s).replace(/,?\s*Sri Lanka$/i, '').replace(/^University of /, '').replace(/ University$/, '');
-}
-/** "03 years; 04-year Honours at UCSC, ... (p70)" -> "3 years (honours option)" */
-function shortDuration(s: string): string {
-  const first = s.replace(/\s*\(p\d+\)/g, '').split(/[;(]/)[0].trim().replace(/^0(\d)/, '$1').replace(/Years?/i, 'years');
-  return /honours/i.test(s) && !/honours/i.test(first) ? `${first} (honours option)` : first;
-}
+export { titleCase } from './format.ts';

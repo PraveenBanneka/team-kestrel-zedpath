@@ -344,9 +344,11 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .list-entry .grow { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .list-entry .t { font: 600 16px/21px var(--font-head); }
 .list-entry .s { font-size: 13px; color: var(--ink-2); }
-.list-row { display: flex; align-items: center; gap: 6px; padding: 10px 8px 10px 6px; border-top: 1px solid var(--line); background: var(--surface); }
+.list-row { display: flex; align-items: center; gap: 6px; padding: 10px 4px 10px 14px; border-top: 1px solid var(--line); background: var(--surface); }
 .list-row:first-child { border-top: 0; }
-.list-row .grip { display: grid; place-items: center; width: 32px; height: 44px; color: var(--ink-3); cursor: grab; touch-action: none; flex: none; }
+.list-row .grip { display: grid; place-items: center; width: 44px; height: 52px; border: 0; background: none; border-radius: 12px; color: var(--ink-3); cursor: grab; touch-action: none; flex: none; }
+.list-row .grip:active { cursor: grabbing; background: var(--surface-2); }
+.list-row .remove { color: var(--ink-3); flex: none; }
 .list-row .pos { font: 700 15px/1 var(--font-head); color: var(--brand-500); width: 22px; text-align: center; flex: none; }
 .list-main { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; border: 0; background: none; text-align: left; cursor: pointer; color: inherit; padding: 0; }
 .list-main .t { font: 600 15px/20px var(--font-head); }
@@ -355,3 +357,19 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .row-actions .icon-btn { width: 36px; height: 30px; }
 .row-actions .icon-btn:disabled { opacity: .25; }
 .preview-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+
+/* ---------- Compare */
+.compare-wrap { overflow-x: auto; border-radius: var(--r-l); background: var(--surface); box-shadow: var(--shadow-1); -webkit-overflow-scrolling: touch; }
+.compare-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; line-height: 18px; }
+.compare-table th, .compare-table td { padding: 10px; vertical-align: top; border-top: 1px solid var(--line); text-align: left; }
+.compare-table thead th { border-top: 0; position: relative; min-width: 128px; }
+.compare-table tbody th { position: sticky; left: 0; z-index: 1; background: var(--surface); color: var(--ink-3); font: 600 11px/15px var(--font-body);
+  text-transform: uppercase; letter-spacing: .05em; min-width: 82px; max-width: 92px; }
+.compare-table thead th:first-child { position: sticky; left: 0; z-index: 2; background: var(--surface); min-width: 82px; }
+.compare-table td { min-width: 128px; }
+.col-head { display: flex; flex-direction: column; gap: 2px; border: 0; background: none; padding: 0 22px 0 0; text-align: left; cursor: pointer; color: inherit; }
+.col-head .t { font: 600 14px/18px var(--font-head); }
+.col-head .s { font-size: 11px; color: var(--ink-3); }
+.col-x { position: absolute; top: 6px; right: 4px; width: 28px; height: 28px; border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink-3); display: grid; place-items: center; cursor: pointer; }
+.cell-list { display: flex; flex-direction: column; gap: 4px; }
+.skeleton-line { display: block; height: 14px; width: 80%; border-radius: 6px; background: var(--surface-3); }
