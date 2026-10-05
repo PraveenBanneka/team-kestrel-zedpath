@@ -6,9 +6,12 @@
   `wrangler.jsonc`. Nothing deployed, nothing created. (Salon folder deploys will now fail on its own
   pin until Praveen logs wrangler back into the salon account there; that is the safety working.)
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
-- **Code:** no app code yet. README, rules, guards in place.
-- **Next step:** scaffold the app (Next.js + TS on Workers) locally, keeping the `account_id` pin, then
-  build the core flow: results in → Safe/Likely/Reach + other routes out.
+- **Code:** no app code yet (documentation first, by Praveen's direction). README, rules, guards in place.
+- **Docs:** 00, 01, 02, 04 at v0.9 (in review, awaiting Praveen's approval). 03 SRS drafted, business rules
+  pending the handbook analysis. 05–08 next, in order.
+- **Next step:** finish ZP-DOC-03 business rules from the handbook → ZP-DOC-05 Data Design (EER → relational →
+  normalisation → D1 DDL, using the real 2025/26 cut-off data) → 06 Architecture → 07 UI/UX → 08 Test Plan
+  → then the walking skeleton (US-101 → US-201 → US-203 → US-204).
 - **Deadlines:** Tuesday 6 Oct progress review · Gate 3 final submission 11 Oct (demo video ≤ 4 min).
 - **Open questions for Praveen:** Gate 1 PDF in the repo or not? · licence (none yet = all rights reserved)
   · Gate 2 (due 3 Oct) submitted?
@@ -52,3 +55,21 @@
   to "exactly this account": 40/40 tests (new: 3rd-account pin + GO → blocked).
 - Verified: live deploy attempt blocked for missing GO only; `wrangler d1 list` (read-only) ran against
   the pinned account without error (no databases yet).
+
+## 2026-10-05: Documentation-first, company grade (Praveen's direction)
+- Praveen: document first in the standard SE order (user stories → ... → EER/schemas), every doc as .docx and
+  .pdf, highest professional standard; commit step by step; TypeScript everywhere; Material Design UI via
+  ui-ux-pro-max; use the CF free plan fully within limits ("surprise the AWS guys").
+- Researched CF free-plan limits from developers.cloudflare.com (subagent, 44 sources). Key: 10 ms CPU per
+  request (SSR typically 10–20 ms → Next.js risks Error 1102), 100k req/day, static assets free, no outbound
+  email on Free, Queues free since 2026-02-04. Recommendation: Vite + React SPA + Hono in one Worker (ADR in ZP-DOC-06).
+- Built docs toolchain `docs/_build/build.ts` (TypeScript on Node 25): Markdown → DOCX (docx-js) → PDF (Word);
+  PlantUML diagrams (Chen EER, UML, C4) with no Graphviz. Company layout: cover, document control, revision
+  history, approval table, numbered sections/appendices, captions + lists of figures/tables.
+- Written + committed (each its own commit): ZP-DOC-02 User Stories (50 stories, 176 pts, 74 ACs; totals
+  verified by script), ZP-DOC-00 Documentation Standard, ZP-DOC-01 Vision and Scope, ZP-DOC-04 Use Case Model
+  (18 UCs; coverage of all 78 FRs verified by script). ZP-DOC-03 SRS drafted (78 FR, 32 NFR); business-rules
+  section waits for the handbook analysis.
+- Praveen added the official UGC handbook 2025/26 (210 pp) and cut-off table 2025/26 (10 pp) at project root;
+  gitignored (not redistributed). Cut-off table parsed: 260 offerings × 25 districts = 6,500 cells, verified by
+  two extraction methods (0 mismatches) + 14 visual spot checks. No uni-codes in the COP (come from handbook).

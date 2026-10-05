@@ -131,6 +131,27 @@ project costs nothing until it grows.
 | **AI and depth** | Handbook → rules, results photo → grades, weekly Gazette scan with alerts, Ask with source links | Next |
 | **People and money** | Verified seniors, family share card, teacher view, costs by campus, scholarships abroad | Later |
 
+## Engineering documentation
+
+ZedPath is documented the way a software company would document it: one controlled set, written in
+dependency order, each document following a named international standard, with document control, revision
+history, approval, numbered requirements and full traceability from interview evidence to test case.
+Each document is available as Markdown (source), Word and PDF.
+
+| ID | Document | Standard | Status |
+|---|---|---|---|
+| [ZP-DOC-00](docs/00-documentation-standard/) | Documentation Standard | ISO/IEC/IEEE 15289:2019 | v0.9 in review |
+| [ZP-DOC-01](docs/01-vision-and-scope/) | Vision and Scope | Wiegers and Beatty template | v0.9 in review |
+| [ZP-DOC-02](docs/02-user-stories/) | User Stories (50 stories, 74 acceptance criteria) | Cohn, INVEST, MoSCoW | v0.9 in review |
+| [ZP-DOC-03](docs/03-requirements/) | Software Requirements Specification | ISO/IEC/IEEE 29148:2018 | in progress |
+| [ZP-DOC-04](docs/04-use-cases/) | Use Case Model (18 use cases) | UML 2.5.1, Cockburn | v0.9 in review |
+| ZP-DOC-05 | Data Design (EER → relational → normalisation → D1) | Elmasri and Navathe EER | planned |
+| ZP-DOC-06 | Software Architecture | ISO/IEC/IEEE 42010, C4, ADRs | planned |
+| ZP-DOC-07 | UI/UX Specification | Material Design 3, WCAG 2.2 AA | planned |
+| ZP-DOC-08 | Test Plan | ISO/IEC/IEEE 29119-3 | planned |
+
+The documents are built from Markdown by a small TypeScript tool ([docs/_build](docs/_build/)).
+
 ## Trust rules (built into the product)
 
 - **Official numbers only.** Every cut-off comes from the UGC's published tables and links to its source.
