@@ -1,0 +1,36 @@
+@startuml
+!include <C4/C4_Context>
+!pragma layout smetana
+skinparam defaultFontName Calibri
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+UpdateElementStyle("person", $bgColor="#00504A", $borderColor="#00504A")
+UpdateElementStyle("system", $bgColor="#006B5F", $borderColor="#006B5F")
+UpdateElementStyle("external_system", $bgColor="#7A8784", $borderColor="#7A8784")
+
+Person(student, "Student", "Between A/L results and the next step (P1, P2)")
+Person(family, "Parent / family", "Receives a summary card (P3)")
+Person(teacher, "Teacher / counsellor", "Sees class progress (P4)")
+Person(senior, "Verified senior", "Answers course questions (P5)")
+Person(curator, "Curator", "Loads sources, reviews AI-extracted facts (P6)")
+
+System(zedpath, "ZedPath", "Mobile web app: eligibility, Safe/Likely/Reach bands, preference-list checks, journey and deadlines, other routes, cited answers in Sinhala, Tamil and English")
+
+System_Ext(ugc, "UGC publications", "Admission handbook and cut-off tables (PDF, yearly)")
+System_Ext(gazette, "Government Gazette", "Weekly notices of government job examinations")
+System_Ext(institutions, "Institution websites", "Private degrees, diplomas, professional bodies, scholarships")
+System_Ext(gemini, "Google Gemini API", "Reads documents and photos; writes in three languages")
+System_Ext(phone, "Phone services", "Calendar, web push, share sheet (WhatsApp)")
+
+Rel(student, zedpath, "Enters results, explores paths, asks questions")
+Rel(teacher, zedpath, "Views shared class progress")
+Rel(senior, zedpath, "Answers questions")
+Rel(curator, zedpath, "Uploads sources, approves facts")
+Rel(zedpath, family, "Summary card via share sheet")
+Rel(zedpath, ugc, "Reads rules and cut-offs from")
+Rel(zedpath, gazette, "Scans weekly")
+Rel(zedpath, institutions, "Reads route details from")
+Rel(zedpath, gemini, "Extracts facts, answers questions via")
+Rel(zedpath, phone, "Calendar files, push reminders, sharing")
+@enduml
