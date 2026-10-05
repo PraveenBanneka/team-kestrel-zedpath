@@ -22,6 +22,8 @@ describe('test notification', () => {
     expect(notificationsSupported()).toBe(true);
     expect(await sendTestNotification()).toEqual({ ok: true });
     expect(scheduled).toEqual([expect.objectContaining({ id: 1, title: 'ZedPath', smallIcon: 'ic_stat_zedpath' })]);
+    // never an exact alarm: otherwise the plugin opens Android's "Alarms and reminders" settings
+    expect(scheduled).toEqual([expect.objectContaining({ isExactNotification: false })]);
   });
 
   it('uses the same id every time, so a second tap replaces rather than adds', async () => {

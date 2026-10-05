@@ -14,7 +14,8 @@ const OFF = 'Notifications are turned off for ZedPath. Turn them on in your phon
 interface LocalNotificationsPlugin {
   checkPermissions(): Promise<{ display: string }>;
   requestPermissions(): Promise<{ display: string }>;
-  schedule(o: { notifications: { id: number; title: string; body: string; smallIcon?: string; iconColor?: string; extra?: unknown }[] }): Promise<unknown>;
+  schedule(o: { notifications: { id: number; title: string; body: string; smallIcon?: string; iconColor?: string; extra?: unknown;
+    isExactNotification?: boolean }[] }): Promise<unknown>;
 }
 interface CapacitorGlobal { isNativePlatform(): boolean; Plugins: { LocalNotifications?: LocalNotificationsPlugin } }
 
@@ -34,7 +35,10 @@ export async function sendTestNotification(): Promise<TestResult> {
     let { display } = await native.checkPermissions();
     if (display !== 'granted') ({ display } = await native.requestPermissions());
     if (display !== 'granted') return { ok: false, reason: OFF };
-    await native.schedule({ notifications: [{ id: TEST_ID, title: TITLE, body: BODY, smallIcon: 'ic_stat_zedpath', iconColor: '#24478C', extra: { url: '/#/me' } }] });
+    // isExactNotification: false - the plugin otherwise treats every notification as an exact alarm and opens Android's
+    // "Alarms and reminders" settings to ask for that access (Praveen hit this on 1.1.0). ZedPath never needs exact alarms.
+    await native.schedule({ notifications: [{ id: TEST_ID, title: TITLE, body: BODY, smallIcon: 'ic_stat_zedpath', iconColor: '#24478C',
+      extra: { url: '/#/me' }, isExactNotification: false }] });
     return { ok: true };
   }
   if (!notificationsSupported()) return { ok: false, reason: 'This browser cannot show notifications.' };
