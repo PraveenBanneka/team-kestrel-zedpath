@@ -1,7 +1,7 @@
 # ZedPath for Android (Trusted Web Activity)
 
 The Android app is a **Trusted Web Activity (TWA)**: a small signed shell that opens
-`https://zedpath.teamkestrel.workers.dev` full screen inside the phone's Chrome. It is built with Google's
+the live ZedPath site full screen inside the phone's Chrome. It is built with Google's
 [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap).
 
 ## How updates work

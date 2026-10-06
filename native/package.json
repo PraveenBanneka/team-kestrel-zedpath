@@ -5,7 +5,7 @@
   "description": "ZedPath Android app (Capacitor): a native shell that loads the live ZedPath site and adds native notifications.",
   "type": "module",
   "scripts": {
-    "sync": "cap sync android",
+    "sync": "node write-app-url.mjs && cap sync android",
     "open": "cap open android"
   },
   "dependencies": {

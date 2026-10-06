@@ -3,10 +3,10 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-05 (end of session; Praveen pausing ZedPath to start another project on the same Cloudflare account)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  https://zedpath.teamkestrel.workers.dev = version **c221ddfc** (My list, Compare, syllabi). Rollback target bd923072.
+  Live (workers.dev) = version **c221ddfc** (My list, Compare, syllabi). Rollback target bd923072.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
-  namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain `teamkestrel` (shared by the account).
+  namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
   Free-plan limits are per ACCOUNT, shared with any other project there (100k Worker requests/day, Workers AI 10k
   neurons/day, D1 5M reads/day...).
 - **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
@@ -94,7 +94,7 @@
   the (GO-gated) delete command, or a fixed version is deployed over it. No data or DNS is touched (workers.dev only).
 
 ## 2026-10-05: First deploy, app shell, design v2
-- Deployed after GO: version c7113216 at https://zedpath.teamkestrel.workers.dev (subdomain "kestrel" was taken).
+- Deployed after GO: version c7113216 on workers.dev.
 - App shell (77237b5): welcome + intro + one-question-per-screen onboarding, beyond grades (achievements ->
   special-intake hint, handbook p.166), 7 other-path groups from 52 official-source routes, PWA + logo.
 - Praveen: "make it more stylish, students have 4G". Design v2: Outfit + Inter, aurora hero with Safe/Likely/Reach

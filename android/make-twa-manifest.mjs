@@ -1,6 +1,6 @@
 // Generates android/twa-manifest.json from the LIVE web app manifest using Bubblewrap's own library, then applies
 // ZedPath's fixed choices. Run from the repo root:  node android/make-twa-manifest.mjs
-// The Android app is a Trusted Web Activity: a thin, signed shell that opens https://zedpath.teamkestrel.workers.dev
+// The Android app is a Trusted Web Activity: a thin, signed shell that opens the live site
 // full screen in the phone's Chrome. Content updates ship with every web deploy; the APK changes only for the shell
 // (name, icon, package, permissions).
 import { createRequire } from 'node:module';
@@ -12,7 +12,8 @@ const require = createRequire(import.meta.url);
 const globalRoot = execSync('npm root -g', { encoding: 'utf8' }).trim();
 const { TwaManifest } = require(path.join(globalRoot, '@bubblewrap', 'cli', 'node_modules', '@bubblewrap', 'core'));
 
-const HOST = 'zedpath.teamkestrel.workers.dev';
+const HOST = process.env.ZEDPATH_HOST;               // the live site's host name, kept out of the repo
+if (!HOST) throw new Error('Set ZEDPATH_HOST to the live site host name');
 const manifestUrl = new URL(`https://${HOST}/manifest.webmanifest`);
 const webManifest = await (await fetch(manifestUrl)).json();
 const twa = TwaManifest.fromWebManifestJson(manifestUrl, webManifest);

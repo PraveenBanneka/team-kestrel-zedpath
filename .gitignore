@@ -44,3 +44,6 @@ android/*
 
 # Ask ZedPath corpus: contains handbook text (not redistributed); rebuilt by tools/ask/build-corpus.ts
 data/ask/
+
+# generated at app build time from ZEDPATH_APP_URL (live address kept out of the repo)
+native/www/app-url.js

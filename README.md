@@ -9,7 +9,7 @@ and with answers that link back to the official page they came from.
 
 Free, mobile-first, in Sinhala, Tamil and English.
 
-> **Live:** **https://zedpath.teamkestrel.workers.dev** (works on any phone; installable) · Android app built with
+> Web app (works on any phone; installable) and an Android app built with
 > Capacitor (`native/`). Built for the IntelliCon '26 Buildathon (Team Kestrel, Education domain). Gate 1 (Problem &
 > Proof) submitted; Gate 3 final due 11 Oct 2026. See [Roadmap](#roadmap).
 

@@ -3,12 +3,16 @@
 // every web deploy updates the app without a new APK. Same package and signing key as the TWA, so it installs over it.
 import type { CapacitorConfig } from '@capacitor/cli';
 
+// The live site's address comes from the environment, not the repo: set ZEDPATH_APP_URL (https://...) for the build.
+const appUrl = process.env.ZEDPATH_APP_URL;
+if (!appUrl || !/^https:\/\/[^/\s]+\/?$/.test(appUrl)) throw new Error('Set ZEDPATH_APP_URL to the live site (https://host) before cap sync');
+
 const config: CapacitorConfig = {
   appId: 'com.teamkestrel.zedpath',
   appName: 'ZedPath',
   webDir: 'www',                                   // only the offline page and a fallback start page live in the APK
   server: {
-    url: 'https://zedpath.teamkestrel.workers.dev/?source=android-app',
+    url: `${appUrl.replace(/\/$/, '')}/?source=android-app`,
     errorPath: 'offline.html',                     // shown when the phone is offline on first open
   },
   android: {

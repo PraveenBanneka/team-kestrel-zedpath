@@ -2,7 +2,7 @@
 
 Replaces the earlier Trusted Web Activity (`android/`). The app has its **own window** (no "Running in Chrome" notice,
 no address bar) and posts **native notifications** itself, while still loading the **live site**
-(`https://zedpath.teamkestrel.workers.dev/?source=android-app`), so every web deploy updates the app without a new APK.
+(address from `ZEDPATH_APP_URL` at build time, not stored in the repo), so every web deploy updates the app without a new APK.
 
 | | |
 |---|---|
@@ -25,7 +25,8 @@ variables `ZP_KS_FILE` / `ZP_KS_PASS`, set for the build process only.
 ```
 cd native
 npm install
-npx cap sync android
+# ZEDPATH_APP_URL = the live site, e.g. https://<worker>.<subdomain>.workers.dev
+npm run sync
 # then, with JAVA_HOME = JDK 21, ANDROID_HOME = the SDK, ZP_KS_FILE / ZP_KS_PASS set:
 cd android && gradlew.bat assembleRelease bundleRelease
 ```
