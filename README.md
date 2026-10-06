@@ -77,10 +77,12 @@ questions in all three languages.
 
 ## Architecture
 
-As deployed (C4 container view, checked against `wrangler.jsonc` and `worker/*.ts`;
-source: [docs/architecture/zedpath-architecture.puml](docs/architecture/zedpath-architecture.puml)):
+As deployed, checked against `wrangler.jsonc` and `worker/*.ts`
+([interactive page](docs/architecture/zedpath-architecture.html) ·
+[C4 container view](docs/architecture/zedpath-architecture.png) from
+[PlantUML source](docs/architecture/zedpath-architecture.puml)):
 
-![ZedPath architecture as deployed](docs/architecture/zedpath-architecture.png)
+![ZedPath architecture as deployed](docs/architecture/zedpath-architecture-designed.png)
 
 In short:
 
