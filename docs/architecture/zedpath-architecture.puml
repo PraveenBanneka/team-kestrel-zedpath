@@ -1,0 +1,59 @@
+@startuml zedpath-architecture
+' ZedPath architecture as deployed (verified against wrangler.jsonc and worker/*.ts, 2026-10-06).
+' C4 container view. Render: java -jar docs/_build/plantuml.jar -tpng docs/architecture/zedpath-architecture.puml
+!pragma layout smetana
+!include <C4/C4_Container>
+skinparam defaultFontName Calibri
+skinparam wrapWidth 240
+LAYOUT_LEFT_RIGHT()
+
+title ZedPath: architecture as deployed (version 99da5707, 6 Oct 2026)
+
+Person(student, "Student", "Sri Lankan A/L student; asks in English, Sinhala or Tamil")
+
+System_Boundary(phone, "Student's phone") {
+  Container(pwa, "ZedPath web app / PWA", "React 19 + TypeScript, Vite", "Screens: onboarding, results, courses, compare, My list, Ask. Keeps profile, list and compare on the phone (localStorage). Service worker: offline shell")
+  Container(android, "ZedPath Android app 1.1.1", "Capacitor 8 (Java), WebView", "Loads the live site in its own window; native notifications (LocalNotifications). Web deploys update it")
+}
+
+System_Boundary(cf, "Cloudflare, free plan (account e6474e41...)") {
+  Container(assets, "Static assets", "Workers Static Assets", "index.html, JS/CSS, icons, manifest, sw.js, assetlinks.json. SPA fallback; free")
+  Container(api, "API Worker 'zedpath'", "Hono 4 + TypeScript on Workers", "/results /offerings /routes /meta: read model, no DB reads. /auth/* /me: accounts. /ask: cited answers")
+  ContainerDb(rulebook, "Read model (bundled)", "JSON inside the Worker", "255 Uni-Codes, 121 course rules, 5 years of cut-offs x 25 districts, 52 routes, 12 syllabi")
+  ContainerDb(d1, "D1 'zedpath'", "SQLite (36 tables)", "Runtime: accounts (8 tables, hashed secrets) + Ask daily allowance (salted hashes). Plus the designed system-of-record schema")
+  Container(rl, "Rate limiting", "Workers Rate Limiting", "AUTH 10/min per IP+user; IP 100/min")
+  Container(wai, "Workers AI", "@cf/baai/bge-m3", "Multilingual embeddings: Sinhala/Tamil questions find English pages")
+  ContainerDb(vec, "Vectorize 'zedpath-ask'", "1024-dim, cosine", "572 passages: UGC handbook 2025/26 (printed pages) + official routes")
+  Container(gw, "AI Gateway 'zedpath'", "Cloudflare AI Gateway", "Cache on, payload logs off (results are not kept); usage analytics")
+}
+
+System_Ext(gemini, "Google AI Studio", "Flash models, fallback chain: flash-latest -> 2.5-flash -> flash-lite-latest -> 2.5-flash-lite")
+
+System_Boundary(build, "Developer laptop (TypeScript tools)") {
+  Container(ship, "Release", "npm run deploy + guard hook", "Tests, build, then upload to Cloudflare. Blocked unless the account pin matches and Praveen's message starts with GO")
+  Container(pipeline, "Data pipeline", "tools/seed, tools/rules, tools/rulebook", "UGC PDFs -> verified CSVs (two extraction methods) -> two-model rule reconciliation -> validated in SQLite -> rulebook JSON")
+  Container(corpus, "Ask corpus builder", "tools/ask (pdfjs-dist)", "Handbook -> 520 page-tagged passages + 52 routes -> embeddings -> vectorize insert")
+  Container(syl, "Syllabus research", "data/degrees", "Official university sites only (research safety protocol)")
+}
+
+System_Ext(github, "GitHub: PraveenBanneka/zedpath", "Public source repo; every push is scanned for secrets first (pre-push hook)")
+
+Rel(student, pwa, "Uses", "HTTPS")
+Rel(student, android, "Uses")
+Rel(android, assets, "Loads live site", "HTTPS")
+Rel(pwa, assets, "Loads", "HTTPS")
+Rel(pwa, api, "JSON API", "fetch /api/*")
+Rel(api, rulebook, "Eligibility + bands")
+Rel(api, d1, "Accounts, allowance", "D1 binding")
+Rel(api, rl, "Checks")
+Rel(api, wai, "Embed question")
+Rel(api, vec, "Top-6 passages")
+Rel(api, gw, "Generate answer", "binding (authenticated)")
+Rel(gw, gemini, "generateContent", "HTTPS")
+Rel(pipeline, rulebook, "Builds")
+Rel(corpus, vec, "Loads 572 vectors")
+Rel(syl, rulebook, "Bundled with")
+Rel(ship, api, "Uploads Worker (after GO)")
+Rel(ship, assets, "Uploads built app (after GO)")
+Rel(ship, github, "git push (leak-scanned)")
+@enduml

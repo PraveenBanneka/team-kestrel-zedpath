@@ -9,8 +9,9 @@ and with answers that link back to the official page they came from.
 
 Free, mobile-first, in Sinhala, Tamil and English.
 
-> **Status: in active build** for the IntelliCon '26 Buildathon (Team Kestrel, Education domain).
-> Gate 1 (Problem & Proof) is submitted. The app code is landing in this repo now. See [Roadmap](#roadmap).
+> **Live:** **https://zedpath.teamkestrel.workers.dev** (works on any phone; installable) · Android app built with
+> Capacitor (`native/`). Built for the IntelliCon '26 Buildathon (Team Kestrel, Education domain). Gate 1 (Problem &
+> Proof) submitted; Gate 3 final due 11 Oct 2026. See [Roadmap](#roadmap).
 
 ---
 
@@ -44,92 +45,84 @@ preference order or deadlines, and none covers routes outside the UGC.**
 
 ## What ZedPath does
 
-| | Feature | What it means for the student |
-|---|---|---|
-| 1 | **Results in, paths out** | Stream, district, Z-score and grades. That's all it needs. No account. |
-| 2 | **Safe / Likely / Reach** | Each course is banded against **five years** of district cut-offs, not one, with a trend. |
-| 3 | **Fine-print check** | Subject and minimum-grade rules from the handbook. Hidden courses always say *why*. |
-| 4 | **Preference list checker** | Flags orders that would lock you out of a course you wanted more, and gives uni-codes ready to copy. |
-| 5 | **Every other route** | Private degrees, HNDs, professional bodies, teaching colleges, job exams and scholarships, matched to your results. |
-| 6 | **Journey and deadlines** | Results through registration, including the aptitude tests universities run on their own dates. Each date is marked *confirmed* or *estimated*. |
-| 7 | **Gazette watch** | Weekly scan of Government Gazette notices, with an alert when an exam you qualify for opens. |
-| 8 | **Ask, with sources** | Questions in Sinhala, Tamil or English, answered from *your* results, with every answer citing its page. |
-| 9 | **People around you** | Verified seniors, a one-card family summary for WhatsApp, and a class view for teachers. |
+| | Feature | What it means for the student | Status |
+|---|---|---|---|
+| 1 | **Results in, paths out** | Stream, district, Z-score and grades, plus sports and achievements ("beyond grades"). No account needed. | ✅ Live |
+| 2 | **Safe / Likely / Reach** | All 255 Uni-Codes banded against **five years** of official district cut-offs, with a trend and a cut-off chart. | ✅ Live |
+| 3 | **Fine-print check** | Subject and minimum-grade rules for all 121 courses from the handbook. Hidden courses always say *why*, with the page. | ✅ Live |
+| 4 | **My list (preference checker)** | Warns when a Safe course sits above a Likely/Reach one or when there is no Safe course; proposes a fixed order; copies Uni-Codes. | ✅ Live |
+| 5 | **Compare and syllabi** | Up to 3 courses side by side; "What you'll study" from the university's own curriculum (12 programmes so far). | ✅ Live |
+| 6 | **Every other route** | 52 official routes: private degrees, HNDs, professional bodies, vocational, job exams, scholarships abroad, with "open now". | ✅ Live |
+| 7 | **Ask ZedPath, with sources** | Questions in English, Sinhala or Tamil, answered only from the UGC handbook and official routes, citing the page, using *your* results. | ✅ Live |
+| 8 | **Accounts** | Optional username + password (no email or phone), recovery code, same details on any device. | ✅ Live |
+| 9 | **Journey and reminders** | Deadlines marked *confirmed* or *estimated*, calendar file, native reminders. | Next |
+| 10 | **Gazette watch** | Weekly scan of Government Gazette job-exam notices with alerts. | Planned |
+| 11 | **People around you** | Verified seniors, a family summary card, a class view for teachers. | Later |
 
 Concept screens (33 screens, one student's whole journey):
 **[ZedPath mobile preview](https://claude.ai/artifact/N8wGu87fiY8ksUbb82yU8f)**. These are illustrative, with sample data.
 
 ## Why it needs AI
 
-| Job | Without AI | With AI |
-|---|---|---|
-| Read a results sheet | The student types 6+ fields; one typo breaks every check | A vision model reads grades, Z-score and district from a phone photo. The photo is deleted right after. |
-| Turn the handbook into rules | 255 course codes re-coded by hand every year, in three languages | An LLM turns each entry clause into a rule **with the page it came from** |
-| Watch the Gazette | Someone reads every notice every week, and still misses some | Weekly scan classifies notices and extracts exam, eligibility and closing date |
-| Answer "can I, with my grades?" | A fixed FAQ can't | Search the rule set, answer from the student's own results, cite the page |
+| Job | Without AI | With AI | Status |
+|---|---|---|---|
+| Turn the handbook into rules | 121 courses re-coded by hand every year | Each entry clause encoded as a rule **with its page**, by two independent encodings compared over 40.4 million student cases; the 5 disagreements resolved against the handbook (`data/rules/RECONCILIATION.md`) | ✅ Done for 2025/26 |
+| Answer "can I, with my grades?" | A fixed FAQ can't | **Ask ZedPath**: multilingual search (Workers AI bge-m3 + Vectorize) finds the handbook pages, ZedPath's own rule engine checks the student's results, a language model writes the answer citing the pages | ✅ Live |
+| Watch the Gazette | Someone reads every notice every week, and still misses some | Weekly scan classifies notices and extracts exam, eligibility and closing date | Planned |
 
-**How it stays honest:** every rule stores its source page. A second model double-checks every
-extracted rule. Low-confidence extractions are reviewed by a person before going live. The rule
-engine is tested against cases verified by hand.
+**How it stays honest:** every rule and answer cites its source page. Eligibility and chances always come from
+the tested rule engine, never from the language model's guess. Ask answers only from the handbook and official
+routes, says "not found" otherwise, and never promises admission. Retrieval was calibrated on hand-checked
+questions in all three languages.
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    S["Student's phone<br/>(Sinhala · Tamil · English)"] -->|HTTPS| APP
+As deployed (C4 container view, checked against `wrangler.jsonc` and `worker/*.ts`;
+source: [docs/architecture/zedpath-architecture.puml](docs/architecture/zedpath-architecture.puml)):
 
-    subgraph CF["Cloudflare (edge, free tier)"]
-        APP["Next.js + TypeScript app<br/>on Workers<br/>(UI + API)"]
-        RULES["Rule engine<br/>eligibility · bands · list-order checks"]
-        D1[("D1<br/>courses · cut-offs · rules<br/>routes · deadlines")]
-        R2[("R2<br/>source PDFs<br/>(handbook, Gazettes)")]
-        VEC[("Vectorize<br/>rule + source chunks")]
-        Q["Queues<br/>photo uploads"]
-        CRON["Cron<br/>every Monday"]
-    end
+![ZedPath architecture as deployed](docs/architecture/zedpath-architecture.png)
 
-    subgraph AI["AI models"]
-        GEM["Gemini<br/>vision · long PDFs · Sinhala/Tamil"]
-        CL["Claude<br/>second-opinion rule checker"]
-    end
+In short:
 
-    REV["Human review<br/>low-confidence rules"]
-
-    APP --> RULES --> D1
-    APP -->|"Ask: retrieve + cite"| VEC
-    APP -->|answer with sources| GEM
-    APP -->|results photo| Q --> GEM
-    CRON -->|fetch Gazette + notices| R2
-    R2 -->|extract rules + dates| GEM
-    GEM -->|candidate rules| CL
-    CL -->|agree| D1
-    CL -->|disagree / unsure| REV --> D1
-    D1 -.->|embed| VEC
-```
+- **One Cloudflare Worker** (`zedpath`, Hono + TypeScript) serves the API; the React app is free static assets.
+- **Results need no database reads:** cut-offs, rules, routes and syllabi are compiled into a read model bundled
+  inside the Worker, so a full eligibility check costs a few milliseconds of CPU on the free plan.
+- **D1** holds only what must persist: optional student accounts (secrets stored as hashes) and Ask's daily
+  allowance (salted hashes, no IPs).
+- **Ask ZedPath:** Workers AI (bge-m3) embeds the question → Vectorize returns the closest of 572 handbook/route
+  passages → the rule engine adds the student's own facts → the model answers through **AI Gateway** (cache on,
+  payload logs off) with a fallback chain across four Flash models.
+- **Clients:** the PWA, and a native Android app (Capacitor) that loads the live site in its own window and posts
+  native notifications, so every web deploy also updates the app.
+- **Delivery:** deploys come from the developer laptop only, blocked by a guard unless the Cloudflare account pin
+  matches and the owner has given an explicit GO; every push to this public repo is scanned for secrets.
 
 ## Tech stack
 
 | Layer | Choice | Why |
 |---|---|---|
-| App + API | Next.js + TypeScript on Cloudflare Workers | One codebase; types catch rule mistakes before students see them; runs close to users in Sri Lanka |
-| Data | Cloudflare D1 (SQLite) | Rules, cut-offs, routes and dates, each linked to its source |
-| Files | Cloudflare R2 | Source PDFs (handbook, Gazettes) kept for citation |
-| Search | Cloudflare Vectorize | Retrieval for cited answers |
-| Jobs | Cron Triggers + Queues | Weekly Gazette scan; photo processing |
-| AI | Gemini; Claude | Reading photos/PDFs and writing in three languages; independent rule checking |
+| App | React 19 + TypeScript, Vite, motion, PWA | Mobile-first, installable, small (141 KB JS gzip, within the 200 KB budget NFR-006); TypeScript everywhere |
+| API | Hono 4 on Cloudflare Workers (+ Static Assets) | One Worker, free static hosting; Next.js SSR risked the free plan's 10 ms CPU limit (ADR in ZP-DOC-06) |
+| Read model | Rulebook JSON compiled from the validated SQLite schema | Zero database reads per student request |
+| Data | Cloudflare D1 (36-table schema; accounts + allowance at runtime) | Foreign keys, CHECK constraints, cascade delete |
+| Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
+| Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
+| Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
+| Tests | Vitest (83 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
 
-Everything runs on Cloudflare's free tier, so a student on mobile data gets answers quickly and the
-project costs nothing until it grows.
+Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
+costs nothing until it grows.
 
 ## Roadmap
 
 | Stage | Scope | Status |
 |---|---|---|
 | **Gate 1: Problem & Proof** | Six interviews, tool test, market sizing, first rules and dates collected by hand | ✅ Submitted |
-| **Core flow** | Enter results once → state courses banded Safe/Likely/Reach from district cut-offs → other routes alongside → course pages with sources → on a public link | 🔨 Building |
-| **Applying** | Preference-list builder with order checks, aptitude-test tracker, Journey timeline with confirmed/estimated dates | 🔨 Building |
-| **AI and depth** | Handbook → rules, results photo → grades, weekly Gazette scan with alerts, Ask with source links | Next |
-| **People and money** | Verified seniors, family share card, teacher view, costs by campus, scholarships abroad | Later |
+| **Core flow** | Results once → 255 Uni-Codes banded from five years of official cut-offs → 52 other routes → course pages with sources, cut-off charts and syllabi → public link | ✅ Live |
+| **Applying** | My list with order checks ✅ · Compare ✅ · accounts ✅ · Journey with confirmed/estimated dates and reminders | 🔨 Building |
+| **AI and depth** | Handbook → rules (two-model reconciled) ✅ · Ask ZedPath with cited pages in three languages ✅ · weekly Gazette scan | 🔨 Building |
+| **Apps** | Installable PWA ✅ · native Android app (Capacitor) ✅ · Google Play (internal testing first) | 🔨 Building |
+| **People and money** | Verified seniors, family share card, teacher view, costs by campus, Sinhala/Tamil interface | Later |
 
 ## Engineering documentation
 
@@ -145,7 +138,7 @@ Each document is available as Markdown (source), Word and PDF.
 | [ZP-DOC-02](docs/02-user-stories/) | User Stories (50 stories, 74 acceptance criteria) | Cohn, INVEST, MoSCoW | v1.0 approved |
 | [ZP-DOC-03](docs/03-requirements/) | Software Requirements Specification (80 FR, 32 NFR, 38 business rules) | ISO/IEC/IEEE 29148:2018 | v1.0 approved |
 | [ZP-DOC-04](docs/04-use-cases/) | Use Case Model (18 use cases) | UML 2.5.1, Cockburn | v1.0 approved |
-| ZP-DOC-05 | Data Design (EER → relational → normalisation → D1) | Elmasri and Navathe EER | in progress |
+| [ZP-DOC-05](docs/05-data-design/) | Data Design (EER → relational → normalisation → D1), incl. student accounts | Elmasri and Navathe EER | v0.9 in review |
 | ZP-DOC-06 | Software Architecture | ISO/IEC/IEEE 42010, C4, ADRs | planned |
 | ZP-DOC-07 | UI/UX Specification | Material Design 3, WCAG 2.2 AA | planned |
 | ZP-DOC-08 | Test Plan | ISO/IEC/IEEE 29119-3 | planned |
@@ -161,8 +154,16 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 
 ## Running locally
 
-The app scaffold lands in the next commits. Setup instructions (`npm install`, local D1, `npm run dev`)
-will be here as soon as there is something to run.
+```
+npm install
+npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
+npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
+npm test                                            # 83 tests
+```
+
+Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs
+`GEMINI_API_KEY` and uses the real Workers AI and Vectorize from local dev. The Android app: see
+[native/README.md](native/README.md).
 
 ### Repo safety (for contributors)
 
@@ -183,9 +184,9 @@ Secrets live in `.dev.vars` locally (gitignored) and in Cloudflare secrets in pr
 ## Disclaimer
 
 ZedPath is an independent project. It is not affiliated with the University Grants Commission, the
-Department of Examinations, or any university or institute. Until the data pipeline is verified,
-figures shown in the app are sample data and must not be used for a real application. Final
-selection is always decided by the UGC.
+Department of Examinations, or any university or institute. Cut-offs and rules come from the UGC's official
+2021/22 to 2025/26 tables and the 2025/26 handbook, verified and cited, but ZedPath can still be wrong: always
+confirm on the UGC application. Past cut-offs describe the past, and final selection is always decided by the UGC.
 
 ---
 
