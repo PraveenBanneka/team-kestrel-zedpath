@@ -310,7 +310,7 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .btn.text.on-aurora { color: #fff; align-self: center; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Ask ZedPath */
-.bottom-nav { grid-template-columns: repeat(4, 1fr); }
+.bottom-nav { grid-template-columns: repeat(5, 1fr); }
 .ic-lg.aurora { color: #fff; }
 .bubble-q { align-self: flex-end; max-width: 85%; padding: 12px 16px; border-radius: 20px 20px 6px 20px; background: linear-gradient(135deg, var(--brand-500), var(--brand));
   color: #fff; font-size: 15px; line-height: 21px; box-shadow: var(--shadow-brand); }
@@ -381,3 +381,27 @@ details.exact p { margin: 0; color: var(--ink-2); }
   font: 600 14px/18px var(--font-body); color: var(--ink); cursor: pointer; text-align: left; }
 .syl-head .grow { flex: 1; }
 .syl-list { margin: 0; padding: 10px 14px 12px 32px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px; }
+
+/* ---------- CR-002: top-bar bell and avatar, Journey timeline, Alerts, Groups */
+.bar-bell { position: relative; color: var(--ink-2); text-decoration: none; }
+.bar-bell .badge { position: absolute; top: 6px; right: 5px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--danger);
+  color: #fff; font: 700 11px/18px var(--font-body); text-align: center; box-shadow: 0 0 0 2px var(--surface); }
+.avatar.small { width: 36px; height: 36px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--aurora); color: #fff;
+  font: 700 15px/1 var(--font-head); text-decoration: none; margin-left: 2px; }
+.bottom-nav a .nav-count { position: absolute; top: 4px; left: calc(50% + 8px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px;
+  background: var(--brand); color: #fff; font: 700 10px/17px var(--font-body); text-align: center; }
+.bottom-nav a { font-size: 10.5px; }
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline-step { position: relative; display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding-bottom: 18px; }
+.timeline-step::before { content: ''; position: absolute; left: 15px; top: 34px; bottom: 2px; width: 2px; background: var(--line); }
+.timeline-step:last-child::before { display: none; }
+.timeline-dot { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--likely-bg); color: var(--brand);
+  font: 700 14px/1 var(--font-body); }
+.title-m { font: 600 16px/22px var(--font-head); }
+.title-s { font: 600 14px/20px var(--font-body); }
+.chat .msg { gap: 6px; padding: 12px 14px; border-radius: 18px 18px 18px 6px; max-width: 92%; }
+.chat .msg.mine { align-self: flex-end; border-radius: 18px 18px 6px 18px; background: var(--likely-bg); }
+.btn.text.danger-text { color: var(--danger); }
+.answer-text .answer-lead { font-weight: 600; font-size: 16px; line-height: 24px; margin-bottom: 10px; }
+.answer-text ul { display: flex; flex-direction: column; gap: 6px; }
+.answer-text li::marker { color: var(--brand-500); }

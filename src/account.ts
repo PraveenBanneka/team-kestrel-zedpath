@@ -35,9 +35,9 @@ export async function fetchMe(): Promise<MeResponse | null> {
   }
 }
 
-export async function signUp(username: string, password: string, profile: ProfileInput | null, extras: Extras): Promise<SignupResponse> {
+export async function signUp(username: string, password: string, profile: ProfileInput | null, extras: Extras, inviteCode?: string): Promise<SignupResponse> {
   const u = normaliseUsername(username);
-  return call<SignupResponse>('POST', '/auth/signup', { username: u, key: await keyFor(u, password), profile, extras });
+  return call<SignupResponse>('POST', '/auth/signup', { username: u, key: await keyFor(u, password), profile, extras, ...(inviteCode ? { inviteCode } : {}) });
 }
 
 export async function logIn(username: string, password: string): Promise<MeResponse> {

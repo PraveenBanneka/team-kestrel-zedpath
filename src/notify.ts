@@ -1,4 +1,4 @@
-// Notifications (test only for now; deadline reminders will use the same path).
+// Notifications: the test notification and Journey reminders (CR-002, FR-405).
 // - Inside the native Android app (Capacitor), the app posts a real native notification through its
 //   LocalNotifications plugin: ZedPath's own name and icon, no website line.
 // - In a browser or the installed PWA, it is shown through the service worker.
@@ -15,7 +15,8 @@ interface LocalNotificationsPlugin {
   checkPermissions(): Promise<{ display: string }>;
   requestPermissions(): Promise<{ display: string }>;
   schedule(o: { notifications: { id: number; title: string; body: string; smallIcon?: string; iconColor?: string; extra?: unknown;
-    isExactNotification?: boolean }[] }): Promise<unknown>;
+    isExactNotification?: boolean; schedule?: { at: Date } }[] }): Promise<unknown>;
+  cancel(o: { notifications: { id: number }[] }): Promise<unknown>;
 }
 interface CapacitorGlobal { isNativePlatform(): boolean; Plugins: { LocalNotifications?: LocalNotificationsPlugin } }
 
@@ -27,6 +28,27 @@ function nativeNotifications(): LocalNotificationsPlugin | null {
 
 export const notificationsSupported = () => nativeNotifications() !== null
   || (typeof window !== 'undefined' && 'Notification' in window && 'serviceWorker' in navigator);
+
+/** Phone reminders are only possible inside the native app; a browser gets the calendar file instead (FR-404). */
+export const canScheduleReminders = () => nativeNotifications() !== null;
+
+export interface Reminder { id: number; title: string; body: string; at: Date }
+/** Replaces every Journey reminder on this phone with `reminders` (old ids cancelled first, so a change never doubles
+ *  a reminder). Returns the ids now scheduled, or the reason it could not. */
+export async function replaceReminders(previous: number[], reminders: Reminder[]): Promise<{ ok: true; ids: number[] } | { ok: false; reason: string }> {
+  const native = nativeNotifications();
+  if (!native) return { ok: false, reason: 'Reminders work in the ZedPath Android app. Here, add the dates to your calendar instead.' };
+  if (reminders.length) {
+    let { display } = await native.checkPermissions();
+    if (display !== 'granted') ({ display } = await native.requestPermissions());
+    if (display !== 'granted') return { ok: false, reason: OFF };
+  }
+  if (previous.length) await native.cancel({ notifications: previous.map(id => ({ id })) });
+  if (reminders.length) await native.schedule({ notifications: reminders.map(r => ({ id: r.id, title: r.title, body: r.body,
+    smallIcon: 'ic_stat_zedpath', iconColor: '#24478C', extra: { url: '/#/journey' }, isExactNotification: false,
+    schedule: { at: r.at } })) });              // inexact: a reminder a few minutes late is fine, and needs no alarm permission
+  return { ok: true, ids: reminders.map(r => r.id) };
+}
 
 /** Asks permission if needed, then shows exactly one notification. */
 export async function sendTestNotification(): Promise<TestResult> {

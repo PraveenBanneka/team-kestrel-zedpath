@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LIST_MAX, addToList, listWarnings, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
+import { LIST_MAX, addToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
 import type { Band } from './banding.ts';
 
 const e = (uniCode: string, band: Band): ListEntry => ({ uniCode, group: 'ALL', course: `Course ${uniCode}`, institution: 'Uni', band });
@@ -37,5 +37,14 @@ describe('My list (US-301..303)', () => {
     expect(uniCodesText([e('012F', 'SAFE'), e('001A', 'REACH')])).toBe('012F\n001A');
     expect(move([e('A', 'SAFE'), e('B', 'SAFE'), e('C', 'SAFE')], 2, 0).map(x => x.uniCode)).toEqual(['C', 'A', 'B']);
     expect(move([e('A', 'SAFE')], 0, 5).map(x => x.uniCode)).toEqual(['A']);
+  });
+});
+
+describe('missingEligible', () => {
+  it('counts reachable courses not on the list, once per Uni-Code, ignoring out-of-range ones', () => {
+    const offerings = [{ uniCode: 'A', band: 'SAFE' as Band }, { uniCode: 'B', band: 'LIKELY' as Band }, { uniCode: 'B', band: 'REACH' as Band },
+      { uniCode: 'C', band: 'REACH' as Band }, { uniCode: 'D', band: 'OUT_OF_RANGE' as Band }, { uniCode: 'E', band: 'SAFE' as Band }];
+    expect(missingEligible([e('A', 'SAFE')], offerings)).toEqual({ SAFE: 1, LIKELY: 1, REACH: 1 });
+    expect(missingEligible([], [])).toEqual({ SAFE: 0, LIKELY: 0, REACH: 0 });
   });
 });

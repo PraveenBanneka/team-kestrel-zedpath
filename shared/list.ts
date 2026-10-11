@@ -38,6 +38,20 @@ export function proposeOrder(list: ListEntry[]): ListEntry[] {
   return [...list.filter(e => e.band !== 'SAFE'), ...list.filter(e => e.band === 'SAFE')];
 }
 
+/** Courses the student can reach (Safe, Likely or Reach) that are not on the list yet, counted per band. The handbook
+ *  advises applying for as many eligible courses as possible (p.10); this tells the student how many they are leaving out. */
+export function missingEligible(list: ListEntry[], offerings: { uniCode: string; band: Band }[]): Record<'SAFE' | 'LIKELY' | 'REACH', number> {
+  const listed = new Set(list.map(e => e.uniCode));
+  const out = { SAFE: 0, LIKELY: 0, REACH: 0 };
+  const seen = new Set<string>();
+  for (const o of offerings) {
+    if (listed.has(o.uniCode) || seen.has(o.uniCode) || !(o.band === 'SAFE' || o.band === 'LIKELY' || o.band === 'REACH')) continue;
+    seen.add(o.uniCode);                                       // a Uni-Code split into two selection groups counts once
+    out[o.band]++;
+  }
+  return out;
+}
+
 /** FR-306: Uni-Codes one per line, in list order (for pasting into the UGC application). */
 export const uniCodesText = (list: ListEntry[]) => list.map(e => e.uniCode).join('\n');
 

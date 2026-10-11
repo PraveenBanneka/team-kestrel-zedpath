@@ -3,10 +3,10 @@
 // after the student confirms; "Copy Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { Check, ClipboardCopy, GripVertical, ListOrdered, TriangleAlert, X } from 'lucide-react';
+import { Check, ChevronRight, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Scale, TriangleAlert, X } from 'lucide-react';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
-import { LIST_MAX, listWarnings, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
+import { LIST_MAX, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
 
 const BAND_LABEL: Record<Band, string> = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' };
 
@@ -49,6 +49,16 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
   const [copied, setCopied] = useState(false);
   const shown = withCurrentBands(list, results);
   const warn = listWarnings(shown);
+  const missing = results ? missingEligible(list, results.offerings) : null;
+  const missingTotal = missing ? missing.SAFE + missing.LIKELY + missing.REACH : 0;
+  // The handbook advises listing as many eligible courses as possible (p.10): show how many are still left out.
+  const more = missing && missingTotal > 0 && (
+    <button className="card list-entry" onClick={() => go(`/courses/${missing.SAFE ? 'safe' : missing.LIKELY ? 'likely' : 'reach'}`)}>
+      <span className="ic" style={{ background: 'var(--safe-bg)', color: 'var(--safe)' }}><ListPlus size={22} aria-hidden="true" /></span>
+      <span className="grow"><span className="t">{missingTotal} more course{missingTotal > 1 ? 's' : ''} you can reach</span>
+        <span className="s num">{missing.SAFE} Safe · {missing.LIKELY} Likely · {missing.REACH} Reach, not on your list yet. Adding more raises your chance of a place.</span></span>
+      <ChevronRight size={20} className="chev" aria-hidden="true" />
+    </button>);
 
   const copy = async () => { try { await navigator.clipboard.writeText(uniCodesText(list)); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch { /* blocked */ } };
   if (list.length === 0) return (
@@ -59,6 +69,7 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
         <p className="subtitle">Build your UGC preference list here. Open any course and tap <b>Add to my list</b>, then put them in the order you want them most.</p>
         <button className="btn filled" onClick={() => go('/courses/safe')}>Browse my courses</button>
       </div>
+      {more}
     </>);
 
   return (
@@ -93,6 +104,8 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
           onMove={to => setList(move(list, i, to))} onRemove={() => setList(list.filter(x => x.uniCode !== e.uniCode))} />)}
       </Reorder.Group>
 
+      {more}
+      <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare courses</button>
       <button className="btn tonal" onClick={copy}>{copied ? <><Check size={18} aria-hidden="true" />Copied {list.length} Uni-Codes</> : <><ClipboardCopy size={18} aria-hidden="true" />Copy Uni-Codes in this order</>}</button>
       <p className="helper">Paste them into the UGC online application in the same order. Your list is saved on this phone.</p>
     </>

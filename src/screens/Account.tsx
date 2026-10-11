@@ -33,6 +33,7 @@ export function AuthScreen({ mode, profile, extras, go, onSignedUp, onLoggedIn }
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [code, setCode] = useState('');
+  const [invite, setInvite] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tried, setTried] = useState(false);
@@ -51,7 +52,7 @@ export function AuthScreen({ mode, profile, extras, go, onSignedUp, onLoggedIn }
     if (problem || busy) return;
     setBusy(true);
     try {
-      if (mode === 'signup') { const r = await signUp(u, password, profile, extras); onSignedUp(r.username, r.recoveryCode); }
+      if (mode === 'signup') { const r = await signUp(u, password, profile, extras, invite.trim() || undefined); onSignedUp(r.username, r.recoveryCode); }
       else if (mode === 'login') onLoggedIn(await logIn(u, password));
       else { const r = await recover(u, code, password); onSignedUp(r.username, r.recoveryCode); }
     } catch (x) {
@@ -88,6 +89,17 @@ export function AuthScreen({ mode, profile, extras, go, onSignedUp, onLoggedIn }
           autoComplete={mode === 'login' ? 'current-password' : 'new-password'} invalid={tried && !!problem && password.length < PASSWORD_MIN} />
         {mode !== 'login' && <PasswordField label="Type it again" value={confirm} onChange={setConfirm} autoComplete="new-password"
           invalid={tried && password !== confirm} />}
+        {mode === 'signup' && (
+          <details className="exact">
+            <summary className="source-link"><KeyRound size={14} aria-hidden="true" />I am a university senior with an invite code</summary>
+            <label className="field">
+              <span>Senior invite code</span>
+              <input className="input" value={invite} onChange={e => setInvite(e.target.value)} autoCapitalize="characters" autoCorrect="off"
+                spellCheck={false} maxLength={24} placeholder="XXXX-XXXX-XXXX-XXXX" />
+              <span className="helper">From the ZedPath team after they check your university. It makes this a verified senior account,
+                shown with a badge in groups. Senior accounts do not keep A/L results.</span>
+            </label>
+          </details>)}
       </div>
       {tried && problem && <p className="error-text" role="alert">{problem}</p>}
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}

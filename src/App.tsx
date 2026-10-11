@@ -1,8 +1,9 @@
 // ZedPath app shell, design v2. First run: Welcome -> Intro -> About you (5 steps). Then a floating bottom-navigation app:
-// Paths (home) | Courses | Me. Routing via the URL hash so Back and deep links work.
+// Paths (home) | My list | Journey | Groups | Ask, with Alerts (bell) and Me (avatar) in the top bar (CR-002).
+// Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Award, BellRing, Building2, ChevronRight, CloudCheck, Download, ExternalLink, GraduationCap, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { ArrowLeft, Award, Bell, BellRing, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   ListOrdered, RotateCcw, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -16,10 +17,14 @@ import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './acco
 import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
+import { JourneyScreen, today } from './screens/Journey.tsx';
+import { AlertsScreen } from './screens/Alerts.tsx';
+import { GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
+import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addToList, type ListEntry } from '../shared/list.ts';
-import { clearEverything, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+import { clearEverything, loadAlertsSeen, loadDob, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
 import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
@@ -66,6 +71,10 @@ export function App() {
 
   useEffect(() => { api<Meta>('/meta').then(setMeta).catch(e => setError(String(e.message))); }, []);
   useEffect(() => { api<RouteSummary[]>('/routes').then(setRoutes).catch(() => setRoutes([])); }, []);
+  const [journey, setJourney] = useState<JourneyResponse | null>(null);
+  useEffect(() => { api<JourneyResponse>('/journey').then(setJourney).catch(() => {}); }, []);
+  const [saved, setSavedRaw] = useState<string[]>(() => loadJourney());
+  const setSaved = (ids: string[]) => { saveJourney(ids); setSavedRaw(ids); };
   useEffect(() => {                                                    // FR-105: recalculate whenever the profile changes
     if (!profile) { setResults(null); return; }
     setResults(null); setError(null);
@@ -75,7 +84,7 @@ export function App() {
   // Accounts (CR-001): with no account (or no accounts on the server) everything below is skipped and the app behaves
   // exactly as before. With one, every save also goes to the account, and the account's copy is loaded on start,
   // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
-  const [me, setMe] = useState<{ username: string } | null>(null);
+  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior'] } | null>(null);
   const [recovery, setRecovery] = useState<{ username: string; code: string } | null>(null);
   const [syncNote, setSyncNote] = useState<string | null>(null);
   const [list, setListRaw] = useState<ListEntry[]>(() => loadList());
@@ -88,7 +97,8 @@ export function App() {
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
   const adopt = (m: MeResponse) => {
-    setMe({ username: m.username });
+    setMe({ username: m.username, role: m.role, senior: m.senior });
+    if (m.role !== 'STUDENT') { setOnboarded(); setOnb(true); return; }       // a senior's results (if any) stay on this phone
     const local = loadProfile();
     if (local && (isPendingSync() || !m.profile)) { void push(local, loadExtras()); return; }
     if (!m.profile) return;
@@ -101,13 +111,13 @@ export function App() {
   const finishIntro = () => { setOnboarded(); setOnb(true); go('/about'); };
   const onSave = (p: ProfileInput, e: Extras) => {
     saveProfile(p); saveExtras(e); setProfile(p); setExtras(e);
-    if (me) void push(p, e);
+    if (me?.role === 'STUDENT') void push(p, e);
     go('/paths');
   };
-  const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setSavedRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
-    username: me?.username ?? null, syncNote,
+    username: me?.username ?? null, senior: me?.senior ?? null, syncNote,
     logOut: async () => { await logOut().catch(() => {}); setMe(null); },
     logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
     deleteAccount: async () => { await deleteAccount(); reset(); },
@@ -116,7 +126,7 @@ export function App() {
   // Account screens: a focused flow with Back and no bottom navigation, reachable before and after onboarding.
   if (['signup', 'login', 'recover', 'saved-code'].includes(path)) {
     const titles: Record<string, string> = { signup: 'Create account', login: 'Log in', recover: 'Reset password', 'saved-code': 'Recovery code' };
-    const afterAuth = () => go(loadProfile() ? '/me' : '/about');
+    const afterAuth = () => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : loadProfile() ? '/me' : '/about'); }).catch(() => go('/about'));
     return (
       <div className="shell">
         <header className="app-bar">
@@ -127,8 +137,8 @@ export function App() {
           ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); afterAuth(); }} />
             : <div className="card"><p className="subtitle">Your recovery code was shown once and is no longer on screen.</p></div>)
           : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
-              onSignedUp={(username, code) => { setMe({ username }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
-              onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.profile || loadProfile() ? '/paths' : '/about'); }} />}
+              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
+              onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.role === 'SENIOR' ? '/groups' : m.profile || loadProfile() ? '/paths' : '/about'); }} />}
         </Page></main>
       </div>);
   }
@@ -136,7 +146,9 @@ export function App() {
   // First run
   if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} /></main></div>;
   if (!onboarded && path === 'intro') return <div className="shell"><main><Intro onDone={finishIntro} /></main></div>;
-  if (!profile || path === 'about') return (
+  const SENIOR_OK = ['groups', 'group', 'ask', 'me', 'journey', 'alerts'];
+  if (!profile && me?.role === 'SENIOR' && !SENIOR_OK.includes(path)) { go('/groups'); return null; }
+  if ((!profile && me?.role !== 'SENIOR') || path === 'about') return (
     <div className="shell">
       <header className="app-bar">
         {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
@@ -145,25 +157,37 @@ export function App() {
       <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
     </div>);
 
-  let screen: React.ReactNode, tab: 'paths' | 'courses' | 'ask' | 'me' = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses') { tab = 'courses'; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
-  else if (path === 'compare') { tab = 'courses'; back = true; title = 'Compare'; screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
-  else if (path === 'list') { tab = 'courses'; title = 'My list'; screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
-  else if (path === 'course' && arg) { tab = 'courses'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
+  let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
+  if (path === 'courses' && profile) { back = true; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
+  else if (path === 'compare' && profile) { tab = 'list'; back = true; title = 'Compare'; screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
+  else if (path === 'list') { tab = 'list'; title = 'My list'; screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
+  else if (path === 'journey') { tab = 'journey'; title = 'Journey'; screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
+  else if (path === 'alerts') { tab = null; back = true; title = 'Alerts'; screen = <AlertsScreen data={journey} profile={profile} saved={saved} setSaved={setSaved} go={go} />; }
+  else if (path === 'groups') { tab = 'groups'; title = 'Groups'; screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
+  else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = 'Group'; screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
+  else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
   else if (path === 'ask') { tab = 'ask'; title = 'Ask ZedPath'; screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')} />; }
-  else if (path === 'hidden') { tab = 'courses'; back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
+  else if (path === 'hidden') { back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
-  else if (path === 'me') { tab = 'me'; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
+  else if (path === 'me') { tab = null; back = true; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
+  else if (!profile) { tab = 'groups'; title = 'Groups'; screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
-  const NAV: [typeof tab, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['courses', 'Courses', GraduationCap, '#/courses/safe'], ['ask', 'Ask', Sparkles, '#/ask'], ['me', 'Me', UserRound, '#/me']];
+  const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['list', 'My list', ListOrdered, '#/list'],
+    ['journey', 'Journey', CalendarDays, '#/journey'], ['groups', 'Groups', Users, '#/groups'], ['ask', 'Ask', Sparkles, '#/ask']];
+  // The bell counts open notices the student has not opened yet and is not ruled out for (checked on this phone).
+  const seen = loadAlertsSeen(), dob = loadDob(), day = today();
+  const unread = (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   return (
     <div className="shell has-nav">
       <header className="app-bar">
         {back ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
+        <a className="icon-btn bar-bell" href="#/alerts" aria-label={unread ? `Alerts, ${unread} new` : 'Alerts'}><Bell size={22} aria-hidden="true" />
+          {unread > 0 && <span className="badge num" aria-hidden="true">{unread}</span>}</a>
+        <a className="avatar small" href="#/me" aria-label="Me: your details and account">{me ? me.username.charAt(0).toUpperCase() : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       <main><ErrorBoundary resetKey={route}><Page k={route}>{screen}</Page></ErrorBoundary></main>
       <nav className="bottom-nav" aria-label="Main">
@@ -171,6 +195,7 @@ export function App() {
           <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
             {tab === key && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
             <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span>{label}</span>
+            {key === 'list' && list.length > 0 && <span className="nav-count num" aria-label={`${list.length} courses`}>{list.length}</span>}
           </a>))}
       </nav>
     </div>
@@ -454,7 +479,7 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
 }
 
 // ---------------------------------------------------------------- Me
-interface AccountControls { username: string | null; syncNote: string | null; logOut: () => Promise<void>;
+interface AccountControls { username: string | null; senior: MeResponse['senior']; syncNote: string | null; logOut: () => Promise<void>;
   logOutEverywhere: () => Promise<void>; deleteAccount: () => Promise<void> }
 
 function AccountCard({ account, go }: { account: AccountControls; go: (to: string) => void }) {
@@ -478,6 +503,7 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
           <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />Your details are saved to this account</span>
         </span>
       </div>
+      {account.senior && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><ShieldCheck size={13} aria-hidden="true" />Verified senior · {titleCase(account.senior.course)}, {shortInstitution(account.senior.institution)}, year {account.senior.year}</span>}
       {account.syncNote && <div className="alert info"><Info size={20} aria-hidden="true" />{account.syncNote}</div>}
       <div className="row">
         <button className="btn tonal" onClick={account.logOut}><LogOut size={18} aria-hidden="true" />Log out</button>
@@ -518,17 +544,17 @@ function TestNotification() {
   );
 }
 
-function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileInput; meta: Meta | null; extras: Extras; go: (to: string) => void;
+function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
   onClear: () => void; account: AccountControls }) {
   const install = useInstallPrompt();
   return (
     <>
-      <section className="hero aurora" style={{ gap: 6 }}>
+      {profile && <section className="hero aurora" style={{ gap: 6 }}>
         <span className="eyebrow">Your results</span>
         <h1 className="num">Z {formatZ(profile.zE4)}</h1>
         <span className="meta">{profileLine(profile, meta).split(' · ').slice(0, 2).join(' · ')}</span>
         <div className="row" style={{ marginTop: 8 }}>{Object.entries(profile.al).map(([s, g]) => <span key={s} className="pill">{g} · {nameOf(s)}</span>)}</div>
-      </section>
+      </section>}
       <section className="card stack">
         <h2 className="title-l">Beyond grades</h2>
         {extras.achievements.length === 0 && extras.interests.length === 0 && <p className="subtitle">Nothing added yet. Achievements can open special intakes.</p>}
