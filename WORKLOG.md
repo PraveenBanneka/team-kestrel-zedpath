@@ -3,8 +3,8 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **e5e2d55b** (search, Sinhala/Tamil, compulsory accounts, Ask answer card). Rollback target 3784f9c3
-  (code only: migrations 0007/0008 only ADD tables).
+  Live (workers.dev) = version **52b0e1af** (video-2 fixes, CR-005 group rules, WhatsApp-style groups, Compare +, Journey checklist,
+  notification settings). Rollback target e5e2d55b (code only: migration 0009 only ADDS a nullable column).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -299,3 +299,10 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
   course chart, ask). Ask was NOT called against Gemini (quota rule).
 - To go live (needs Praveen's GO): D1 backup, then migration 0009 on the live database (it only ADDS a nullable column),
   then the new version. Reversal: roll back to e5e2d55b (the old code ignores the new column).
+
+## 2026-10-11 (afternoon): 52b0e1af LIVE (Praveen's GO)
+- whoami: Stacklineops@gmail.com's Account (e6474e41...). D1 backup C:/Users/prave/zedpath-backups/zedpath-before-0009-20261011.sql
+  (257 rows) -> migration 0009 applied remotely -> deploy, version **52b0e1af-cd75-4944-9139-55b54001f1ee**.
+- Live checks (throwaway account, deleted after): sign-up 201; popular groups listed; join without rules 400, with rules
+  200 + rulesAccepted; bundle has the rules sheet, Compare "+", Journey checklist, notification settings.
+- Gate 3 documents committed (df714c2): business case v2 (9 pages), AI Usage Report (2 pages), demo script.
