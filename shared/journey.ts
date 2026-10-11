@@ -91,10 +91,21 @@ export const noticeItem = (n: Notice): DatedItem => ({ id: `notice:${n.routeId}`
 export const REMINDER_DAYS = [7, 1] as const;                // FR-404/405: 7 days and 1 day before
 export const REMINDER_HOUR = 8;                              // 08:00 on the phone's clock
 
-/** When to remind about a dated item: 7 days and 1 day before, at 08:00 local time; only times still in the future. */
-export function reminderTimes(due: string, now: Date): { daysBefore: number; at: Date }[] {
+/** The student's notification settings (on this phone). The default is exactly the behaviour before settings existed. */
+export interface NotifyPrefs { week: boolean; day: boolean; hour: 8 | 18; badge: boolean }
+export const DEFAULT_PREFS: NotifyPrefs = { week: true, day: true, hour: REMINDER_HOUR, badge: true };
+/** Settings read from storage: anything unknown falls back to the default, field by field. */
+export function readPrefs(x: unknown): NotifyPrefs {
+  const p = (x && typeof x === 'object' ? x : {}) as Partial<Record<keyof NotifyPrefs, unknown>>;
+  return { week: typeof p.week === 'boolean' ? p.week : DEFAULT_PREFS.week, day: typeof p.day === 'boolean' ? p.day : DEFAULT_PREFS.day,
+    hour: p.hour === 18 ? 18 : p.hour === 8 ? 8 : DEFAULT_PREFS.hour, badge: typeof p.badge === 'boolean' ? p.badge : DEFAULT_PREFS.badge };
+}
+const daysFor = (p: NotifyPrefs) => REMINDER_DAYS.filter(d => (d === 7 ? p.week : p.day));
+
+/** When to remind about a dated item: by default 7 days and 1 day before, at 08:00 local time; only future times. */
+export function reminderTimes(due: string, now: Date, prefs: NotifyPrefs = DEFAULT_PREFS): { daysBefore: number; at: Date }[] {
   const [y, m, d] = due.split('-').map(Number);
-  return REMINDER_DAYS.map(daysBefore => ({ daysBefore, at: new Date(y, m - 1, d - daysBefore, REMINDER_HOUR, 0, 0) }))
+  return daysFor(prefs).map(daysBefore => ({ daysBefore, at: new Date(y, m - 1, d - daysBefore, prefs.hour, 0, 0) }))
     .filter(r => r.at.getTime() > now.getTime());
 }
 
@@ -107,7 +118,7 @@ export function reminderId(itemId: string, daysBefore: number): number {
 
 const icsText = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 /** FR-404: an iCalendar file of the dated items, each an all-day event with alarms 7 days and 1 day before. */
-export function toIcs(items: DatedItem[], now: Date): string {
+export function toIcs(items: DatedItem[], now: Date, prefs: NotifyPrefs = DEFAULT_PREFS): string {
   const stamp = now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Team Kestrel//ZedPath//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
   for (const it of items) {
@@ -115,7 +126,9 @@ export function toIcs(items: DatedItem[], now: Date): string {
     lines.push('BEGIN:VEVENT', `UID:${it.id.replace(/[^A-Za-z0-9:.-]/g, '-')}@zedpath`, `DTSTAMP:${stamp}`,
       `DTSTART;VALUE=DATE:${start}`, `DTEND;VALUE=DATE:${end}`, `SUMMARY:${icsText(it.title)}`,
       `DESCRIPTION:${icsText(`${it.detail}\nSource: ${it.source}`)}`);
-    for (const d of REMINDER_DAYS) lines.push('BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsText(it.title)}`, `TRIGGER:-P${d}D`, 'END:VALARM');
+    // all-day event: by default the alarm is at the start of that day (as before settings); "evening" moves it to 18:00
+    for (const d of daysFor(prefs)) lines.push('BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsText(it.title)}`,
+      prefs.hour === 18 ? `TRIGGER:-P${d - 1}DT6H` : `TRIGGER:-P${d}D`, 'END:VALARM');
     lines.push('END:VEVENT');
   }
   lines.push('END:VCALENDAR');

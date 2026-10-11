@@ -96,7 +96,7 @@ export function CompareScreen({ codes, setCodes, profile, results, list, go }: {
               return <th scope="col" key={c.u}>
                 <button type="button" className="col-x" aria-label={t('cmp.removeAria', { c: d ? titleCase(d.course) : c.u })} onClick={() => setCodes(codes.filter(x => x !== c.u))}><X size={16} /></button>
                 <button type="button" className="col-head" onClick={() => go(`/course/${c.u}`)}>
-                  <span className="t">{d ? titleCase(d.course) : <span className="skeleton-line" />}</span>
+                  <span className="t">{d ? titleCase(d.course) : c.d === 'error' ? t('cmp.noData') : <span className="skeleton-line" />}</span>
                   <span className="s">{d ? `${shortInstitution(d.institution)} · ${c.u}` : c.u}</span>
                 </button></th>; })}
               {canAdd && <th scope="col" className="add-col">

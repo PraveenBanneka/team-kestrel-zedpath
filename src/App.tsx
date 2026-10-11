@@ -25,6 +25,8 @@ import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addToList, type ListEntry } from '../shared/list.ts';
+import { loadNotifyPrefs, saveNotifyPrefs } from './storage.ts';
+import type { NotifyPrefs } from '../shared/journey.ts';
 import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
@@ -79,6 +81,8 @@ export function App() {
   useEffect(() => { api<JourneyResponse>('/journey').then(setJourney).catch(() => {}); }, []);
   const [saved, setSavedRaw] = useState<string[]>(() => loadJourney());
   const setSaved = (ids: string[]) => { saveJourney(ids); setSavedRaw(ids); };
+  const [prefs, setPrefsRaw] = useState<NotifyPrefs>(() => loadNotifyPrefs());
+  const setPrefs = (p: NotifyPrefs) => { saveNotifyPrefs(p); setPrefsRaw(p); };
   useEffect(() => {                                                    // FR-105: recalculate whenever the profile changes
     if (!profile) { setResults(null); return; }
     setResults(null); setError(null);
@@ -186,7 +190,7 @@ export function App() {
   if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
   else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
-  else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
+  else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} compare={compare} profile={profile} results={results} prefs={prefs} go={go} />; }
   else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} dob={me?.contact?.birthDate ?? null} saved={saved} setSaved={setSaved} go={go} />; }
   else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
   else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
@@ -197,7 +201,7 @@ export function App() {
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} />; }
-  else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} />; }
+  else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs} />; }
   else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
@@ -205,7 +209,7 @@ export function App() {
     ['journey', t('nav.journey'), CalendarDays, '#/journey'], ['groups', t('nav.groups'), Users, '#/groups'], ['ask', t('nav.ask'), Sparkles, '#/ask']];
   // The bell counts open notices the student has not opened yet and is not ruled out for (checked on this phone).
   const seen = loadAlertsSeen(), dob = me?.contact?.birthDate ?? null, day = today();
-  const unread = (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
+  const unread = !prefs.badge ? 0 : (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   return (
     <div className="shell has-nav">
       <header className="app-bar">
@@ -579,8 +583,34 @@ function TestNotification() {
   );
 }
 
-function Me({ profile, meta, extras, go, onClear, account, lang, setLang }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
-  onClear: () => void; account: AccountControls; lang: Lang; setLang: (l: Lang) => void }) {
+/** Notification settings (video 2): which reminders, at what time, and the new-alert count on the bell. On this phone. */
+function NotificationSettings({ prefs, setPrefs }: { prefs: NotifyPrefs; setPrefs: (p: NotifyPrefs) => void }) {
+  const Toggle = ({ k, label, sub }: { k: 'week' | 'day' | 'badge'; label: string; sub?: string }) => (
+    <label className="setting">
+      <span className="grow"><span className="t">{label}</span>{sub && <span className="s">{sub}</span>}</span>
+      <input type="checkbox" role="switch" className="switch" checked={prefs[k]} onChange={e => setPrefs({ ...prefs, [k]: e.target.checked })} />
+    </label>);
+  return (
+    <section className="card stack" style={{ gap: 4 }} aria-labelledby="notif-h">
+      <h2 id="notif-h" className="title-l">{t('ns.h')}</h2>
+      <p className="helper">{t('ns.sub')}</p>
+      <Toggle k="week" label={t('ns.week')} />
+      <Toggle k="day" label={t('ns.day')} />
+      <div className="setting">
+        <span className="grow"><span className="t">{t('ns.time')}</span></span>
+        <div className="seg small" role="radiogroup" aria-label={t('ns.time')}>
+          {([8, 18] as const).map(h => <button key={h} role="radio" aria-checked={prefs.hour === h} className={prefs.hour === h ? 'on' : ''} onClick={() => setPrefs({ ...prefs, hour: h })}>
+            {h === 8 ? t('ns.morning') : t('ns.evening')}</button>)}
+        </div>
+      </div>
+      <Toggle k="badge" label={t('ns.badge')} sub={t('ns.badgeSub')} />
+      {!prefs.week && !prefs.day && <p className="helper" role="status">{t('ns.noneOn')}</p>}
+      <TestNotification />
+    </section>);
+}
+
+function Me({ profile, meta, extras, go, onClear, account, lang, setLang, prefs, setPrefs }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
+  onClear: () => void; account: AccountControls; lang: Lang; setLang: (l: Lang) => void; prefs: NotifyPrefs; setPrefs: (p: NotifyPrefs) => void }) {
   const install = useInstallPrompt();
   return (
     <>
@@ -607,7 +637,8 @@ function Me({ profile, meta, extras, go, onClear, account, lang, setLang }: { pr
       <p className="section-label">{t('me.app')}</p>
       {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />{t('paths.install')}</button>
         : <p className="helper">{install.installed ? t('me.installed') : t('me.howInstall')}</p>}
-      <TestNotification />
+      <p className="section-label">{t('ns.label')}</p>
+      <NotificationSettings prefs={prefs} setPrefs={setPrefs} />
       <p className="section-label">{t('me.privacy')}</p>
       <p className="body-m muted" style={{ margin: 0 }}>{account.username ? t('me.privAccount') : t('me.privLocal')}</p>
       <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={onClear}><Trash2 size={18} aria-hidden="true" />

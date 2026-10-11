@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import journey from '../worker/generated/journey-2025-2026.json' with { type: 'json' };
 import type { ProfileInput } from './api.ts';
+import { DEFAULT_PREFS, readPrefs } from './journey.ts';
 import { ageOn, buildJourney, checkNotice, daysUntil, noticeItem, reminderId, reminderTimes, sortNotices, toIcs, type JourneyResponse, type Notice } from './journey.ts';
 
 const J = journey as unknown as JourneyResponse;
@@ -87,5 +88,21 @@ describe('reminders (FR-404, FR-405)', () => {
     expect(ics.match(/BEGIN:VALARM/g)).toHaveLength(2);
     expect(ics).toContain('TRIGGER:-P7D');
     expect(ics).toContain('SUMMARY:Inspector of Customs\\, Grade II: open competitive exam');   // commas escaped
+  });
+});
+
+describe('notification settings (video 2)', () => {
+  it('defaults to the behaviour before settings existed: 7 days and 1 day before, 08:00, bell count on', () => {
+    expect(DEFAULT_PREFS).toEqual({ week: true, day: true, hour: 8, badge: true });
+    expect(readPrefs(null)).toEqual(DEFAULT_PREFS);
+    expect(readPrefs({ week: 'yes', hour: 7, badge: false })).toEqual({ ...DEFAULT_PREFS, badge: false });   // field by field
+  });
+  it('follows the chosen days and hour, in reminders and in the calendar file', () => {
+    const now = new Date(2026, 9, 1, 9, 0);
+    expect(reminderTimes('2026-10-19', now, { ...DEFAULT_PREFS, week: false, hour: 18 }).map(r => [r.daysBefore, r.at.getHours()])).toEqual([[1, 18]]);
+    expect(reminderTimes('2026-10-19', now, { ...DEFAULT_PREFS, week: false, day: false })).toEqual([]);
+    const item = { id: 'notice:R1', title: 'X', detail: 'd', due: '2026-10-19', source: 's' };
+    expect(toIcs([item], now).match(/TRIGGER:[^\r]+/g)).toEqual(['TRIGGER:-P7D', 'TRIGGER:-P1D']);   // unchanged default
+    expect(toIcs([item], now, { ...DEFAULT_PREFS, week: false, hour: 18 }).match(/TRIGGER:[^\r]+/g)).toEqual(['TRIGGER:-P0DT6H']);   // 18:00 the day before
   });
 });

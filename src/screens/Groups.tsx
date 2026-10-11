@@ -47,7 +47,7 @@ export function RulesCard({ onAccept, onClose, busy }: { onAccept?: () => void; 
     <motion.section className="card stack wa-rules" role="dialog" aria-labelledby="rules-h" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
       <div className="row" style={{ flexWrap: 'nowrap' }}>
         <ShieldCheck size={22} aria-hidden="true" style={{ color: 'var(--wa-green)', flex: 'none' }} />
-        <h2 id="rules-h" className="title-l grow" style={{ margin: 0 }}>{t('gr.rulesH')}</h2>
+        <h2 id="rules-h" className="title-l" style={{ margin: 0, flex: 1 }}>{t('gr.rulesH')}</h2>
         <button className="icon-btn" onClick={onClose} aria-label={t('gr.close')}><X size={20} /></button>
       </div>
       <ol className="wa-rule-list">{Array.from({ length: GROUP_RULE_COUNT }, (_, i) => <li key={i}>{t(`gr.rule.${i + 1}` as Key)}</li>)}</ol>
@@ -229,8 +229,8 @@ export function GroupRoomScreen({ id, username, go }: { id: number; username: st
                 {!mine && !sameAuthor && <span className="wa-author" style={{ color: tone(m.author) }}>{m.author}</span>}
                 {m.badge && !sameAuthor && <span className={`wa-badge ${m.sample ? 'sample' : ''}`}>{!m.sample && <BadgeCheck size={12} aria-hidden="true" />}{m.badge}</span>}
                 <span className="wa-body">{m.body}
-                  <span className="wa-meta num">{m.sample && <span className="wa-sample">{t('gr.sample')}</span>}{new Date(m.at).toLocaleTimeString(locale(), { hour: '2-digit', minute: '2-digit' })}</span></span>
-                {!mine && !m.sample && <button className="wa-more" aria-label={t('gr.reportAria', { u: m.author })} aria-expanded={menu === m.id} onClick={() => setMenu(menu === m.id ? null : m.id)}><Flag size={13} /></button>}
+                  <span className="wa-meta num">{m.sample && <span className="wa-sample">{t('gr.sample')}</span>}{new Date(m.at).toLocaleTimeString(locale(), { hour: '2-digit', minute: '2-digit' })}
+                    {!mine && !m.sample && <button className="wa-more" aria-label={t('gr.reportAria', { u: m.author })} aria-expanded={menu === m.id} onClick={() => setMenu(menu === m.id ? null : m.id)}><Flag size={12} /></button>}</span></span>
                 {menu === m.id && (
                   <div className="stack" style={{ gap: 6, marginTop: 6 }}>
                     <span className="helper">{t('gr.reportAs')}</span>

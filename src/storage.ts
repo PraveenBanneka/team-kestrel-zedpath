@@ -3,11 +3,13 @@
 import type { ProfileInput } from '../shared/api.ts';
 import type { Extras } from '../shared/account.ts';
 import type { ListEntry } from '../shared/list.ts';
+import { readPrefs, type NotifyPrefs } from '../shared/journey.ts';
 export { INTERESTS, specialIntakeHint, type Achievement, type Extras, type Level, type Place } from '../shared/account.ts';
 
 const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
   pendingSync: 'zedpath.pendingSync.v1', list: 'zedpath.list.v1', compare: 'zedpath.compare.v1',
-  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1' };
+  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1',
+  notify: 'zedpath.notify.v1' };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
@@ -34,6 +36,9 @@ export const saveAlertsSeen = (ids: string[]) => write(KEYS.alertsSeen, ids);
 /** Reminder ids currently scheduled on this phone (so a change cancels the old ones first). */
 export const loadReminderIds = (): number[] => read<number[]>(KEYS.reminders) ?? [];
 export const saveReminderIds = (ids: number[]) => write(KEYS.reminders, ids);
+/** Notification settings (video 2): on this phone only, like the reminders they control. */
+export const loadNotifyPrefs = (): NotifyPrefs => readPrefs(read<unknown>(KEYS.notify));
+export const saveNotifyPrefs = (p: NotifyPrefs) => write(KEYS.notify, p);
 /** Set when a save could not reach the account (offline); the phone's copy is then newer and is pushed, not replaced. */
 export const isPendingSync = () => read<boolean>(KEYS.pendingSync) === true;
 export const setPendingSync = (v: boolean) => write(KEYS.pendingSync, v);
