@@ -231,7 +231,7 @@ export const en = {
   'rc.copy': 'Copy', 'rc.copied': 'Copied', 'rc.warn': 'Write it down or keep it in your notes. You will not see this code again.', 'rc.saved': 'I have saved my recovery code',
   'auth.inviteHelp': 'From the ZedPath team after they check your university. It makes this a verified senior account, shown with a badge in groups. Senior accounts do not keep A/L results.',
   // CR-003: compulsory account details
-  'ct.name': 'Full name',
+  'ct.name': 'Name',
   'ct.email': 'Email',
   'ct.mobile': 'Mobile number',
   'ct.mobileHelp': 'A Sri Lankan mobile number, for example 071 234 5678.',
@@ -239,7 +239,7 @@ export const en = {
   'ct.notVerified': 'We do not send a code to check your email or mobile yet.',
   'ct.purpose': 'Why we ask: your name, email and mobile identify your account and let us contact you about your deadlines and groups. Your date of birth checks the age limits of exams and intakes. They are never sold, never shown to other students, and are deleted with your account.',
   'ct.consent': 'I agree that ZedPath keeps these details for the purposes above. If I am under 18, my parent or guardian agrees too.',
-  'ct.err.fullName': 'Enter your full name.',
+  'ct.err.fullName': 'Enter your name.',
   'ct.err.email': 'Enter a valid email address.',
   'ct.err.mobile': 'Enter a Sri Lankan mobile number, for example 071 234 5678.',
   'ct.err.birthDate': 'Check your date of birth.',

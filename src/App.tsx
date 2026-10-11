@@ -4,7 +4,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { Search, ArrowLeft, Award, Bell, BellRing, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
-  ListOrdered, RotateCcw, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  ListOrdered, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -42,7 +42,6 @@ export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: st
   { code: 'VOCATIONAL', title: 'Vocational and NVQ', sub: 'VTA, DTET, NAITA, UoVT', icon: Wrench, tone: 'var(--reach)' },
   { code: 'JOB_EXAM', title: 'Government job exams', sub: 'From the Gazette', icon: Landmark, tone: 'var(--safe)' },
   { code: 'SCHOLARSHIP_ABROAD', title: 'Study abroad', sub: 'Government scholarships', icon: Plane, tone: 'var(--likely)' },
-  { code: 'RETRY', title: 'Sit the A/L again', sub: 'What it would take', icon: RotateCcw, tone: 'var(--out)' },
 ];
 
 function useHashRoute(): [string, (to: string) => void] {
@@ -134,8 +133,9 @@ export function App() {
 
   // Account screens: a focused flow with Back and no bottom navigation, reachable before and after onboarding.
   if (['signup', 'login', 'recover', 'saved-code'].includes(path)) {
+    const [, , freshFlag] = route.split('/');                      // /saved-code/new: just signed up (not a reset)
     const titles: Record<string, string> = { signup: t('title.signup'), login: t('title.login'), recover: t('title.recover'), 'saved-code': t('title.savedCode') };
-    const afterAuth = () => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : loadProfile() ? '/paths' : '/about'); }).catch(() => go('/about'));
+    const afterAuth = (fresh = false) => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : !fresh && loadProfile() ? '/paths' : '/about'); }).catch(() => go('/about'));
     return (
       <div className="shell">
         <header className="app-bar">
@@ -143,10 +143,10 @@ export function App() {
           <span className="brand">{titles[path]}</span>
         </header>
         <main><Page k={route}>{path === 'saved-code'
-          ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); afterAuth(); }} />
+          ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); void afterAuth(freshFlag === 'new'); }} />
             : <div className="card"><p className="subtitle">{t('auth.codeGone')}</p></div>)
           : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
-              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null, contact: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
+              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null, contact: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go(path === 'signup' ? '/saved-code/new' : '/saved-code'); }}
               onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.role === 'SENIOR' ? '/groups' : m.profile || loadProfile() ? '/paths' : '/about'); }} />}
         </Page></main>
       </div>);
@@ -265,13 +265,12 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
       </button>
       <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
-        {ROUTE_GROUPS.map((g, i) => {
+        {ROUTE_GROUPS.map(g => {
           const n = routes?.filter(r => r.group === g.code).length ?? 0;
           const open = routes?.filter(r => r.group === g.code && r.openNow).length ?? 0;
           const Icon = g.icon;
           return (
-            <motion.button key={g.code} variants={rise} className="bento-tile" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}
-              style={i === ROUTE_GROUPS.length - 1 ? { gridColumn: '1 / -1', minHeight: 96 } : undefined}>
+            <motion.button key={g.code} variants={rise} className="bento-tile" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}>
               <span className="ic" style={{ background: `color-mix(in srgb, ${g.tone} 14%, transparent)`, color: g.tone }}><Icon size={22} aria-hidden="true" /></span>
               {open > 0 ? <span className="pill open corner">{t('paths.open', { n: open })}</span> : n > 0 && <span className="pill band-NOT_ENOUGH_DATA corner num">{n}</span>}
               <span className="t">{t(`rg.${g.code}` as Key)}</span><span className="s">{t(`rg.${g.code}.sub` as Key)}</span>

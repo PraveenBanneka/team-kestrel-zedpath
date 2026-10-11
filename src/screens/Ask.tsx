@@ -177,7 +177,7 @@ export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsume
   const suggestions = profile ? [t('ask.q.medicine'), t('ask.q.cs'), ...general().slice(0, 3)] : general();
   const submit = (e: FormEvent) => { e.preventDefault(); void send(q); };
   return (
-    <>
+    <div className="ask-screen">
       <div className="row" style={{ flexWrap: 'nowrap', gap: 14 }}>
         <span className="ic-lg aurora" aria-hidden="true"><Sparkles size={26} /></span>
         <div className="stack" style={{ gap: 2 }}>
@@ -205,12 +205,14 @@ export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsume
         <div ref={endRef} />
       </div>
 
-      <form className="composer" onSubmit={submit}>
-        <input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder={t('ask.placeholder')} maxLength={QUESTION_MAX}
-          aria-label={t('ask.aria')} enterKeyHint="send" />
-        <button className="send" type="submit" disabled={busy || !q.trim()} aria-label={t('ask.send')}><ArrowUp size={22} /></button>
-      </form>
-      <p className="fineprint" style={{ textAlign: 'center' }}>{t('ask.fine')}</p>
-    </>
+      <div className="ask-bottom">
+        <form className="composer" onSubmit={submit}>
+          <input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder={t('ask.placeholder')} maxLength={QUESTION_MAX}
+            aria-label={t('ask.aria')} enterKeyHint="send" />
+          <button className="send" type="submit" disabled={busy || !q.trim()} aria-label={t('ask.send')}><ArrowUp size={22} /></button>
+        </form>
+        <p className="fineprint" style={{ textAlign: 'center' }}>{t('ask.fine')}</p>
+      </div>
+    </div>
   );
 }

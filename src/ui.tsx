@@ -56,7 +56,7 @@ export function BandRing({ safe, likely, reach }: { safe: number; likely: number
 export function CutoffChart({ history, zE4 }: { history: { academicYear: string; zE4: number | null }[]; zE4: number }) {
   const pts = [...history].reverse().filter(h => h.zE4 !== null) as { academicYear: string; zE4: number }[];
   if (pts.length === 0) return null;
-  const W = 340, H = 170, PL = 8, PR = 8, PT = 18, PB = 28;
+  const W = 340, H = 190, PL = 26, PR = 26, PT = 30, PB = 28;
   const vals = [...pts.map(p => p.zE4), zE4];
   const min = Math.min(...vals) - 400, max = Math.max(...vals) + 400;
   const x = (i: number) => PL + (pts.length === 1 ? (W - PL - PR) / 2 : (i * (W - PL - PR)) / (pts.length - 1));
@@ -73,11 +73,14 @@ export function CutoffChart({ history, zE4 }: { history: { academicYear: string;
         <motion.path d={area} fill="url(#cfill)" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }} />
         <motion.path d={line} fill="none" stroke="#3461C9" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }} />
-        <line x1={PL} x2={W - PR} y1={yz} y2={yz} stroke="#E8920C" strokeWidth="2" strokeDasharray="6 5" />
-        <text x={W - PR} y={yz - 6} textAnchor="end" fontFamily="Inter" fontWeight="600" fontSize="11" fill="#B86E00">You {formatZ(zE4)}</text>
+        <line x1={4} x2={W - 4} y1={yz} y2={yz} stroke="#E8920C" strokeWidth="2" strokeDasharray="6 5" />
+        <text x={W - 4} y={yz - 6} textAnchor="end" fontFamily="Inter" fontWeight="600" fontSize="11" fill="#B86E00">You {formatZ(zE4)}</text>
         {pts.map((p, i) => (
           <g key={p.academicYear}>
             <circle cx={x(i)} cy={y(p.zE4)} r="4.5" fill="#fff" stroke="#3461C9" strokeWidth="2.5" />
+            {/* the value above the point; below it when the "You" line or the top edge would cover it */}
+            <text x={x(i)} y={Math.abs(y(p.zE4) - 10 - yz) < 12 || y(p.zE4) < PT + 6 ? y(p.zE4) + 18 : y(p.zE4) - 10} textAnchor="middle"
+              fontFamily="Inter" fontWeight="600" fontSize="11" fill="#24478C" className="num">{formatZ(p.zE4)}</text>
             <text x={x(i)} y={H - 8} textAnchor="middle" fontFamily="Inter" fontSize="10.5" fill="#7A8396">{p.academicYear.slice(2, 4)}/{p.academicYear.slice(7, 9)}</text>
           </g>))}
       </svg>

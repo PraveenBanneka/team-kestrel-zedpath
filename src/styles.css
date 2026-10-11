@@ -420,3 +420,8 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .ask-action .t { font-weight: 600; font-size: 14px; line-height: 19px; }
 .ask-action .s { font-size: 12px; color: var(--ink-2); }
 .ask-feedback .btn { color: var(--ink-3); }
+
+/* ---------- Video-2 fixes (2026-10-11): Ask question box at the bottom of the screen */
+.ask-screen { display: flex; flex-direction: column; gap: 16px; min-height: calc(100dvh - 60px - 12px - 110px); }
+.ask-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; position: sticky; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 3; }
+.ask-bottom .composer { position: static; }
