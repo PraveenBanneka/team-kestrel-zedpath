@@ -184,8 +184,8 @@ dependent on the key, so the table stays in BCNF. A CHECK lists the versions tha
 of the rules adds a value and asks members again. NULL means joined before the rules existed. Server enforcement: the
 Worker refuses a join without the current version and keeps the live room closed for a member whose row is not on it
 (`worker/groups.ts`). Rule 3 (no phone numbers or email addresses) is checked on every message by the group's room.
-*Superseded by CR-006:* acceptance moved from the membership to the account; `group_member.rules_version` was carried
-over and dropped by migration 0010.
+*Superseded by CR-006:* acceptance moved from the membership to the account; migration 0010 carries
+`group_member.rules_version` over and leaves the column unused until a later migration drops it.
 
 Sample conversations, which show a new student how a group works, are **not stored**. Like the Journey steps they are
 curated read-model data in code (`shared/group-samples.ts`), added by the room in front of the real messages. Every
@@ -233,8 +233,9 @@ notice can be set only once the notice has opened. The Worker checks both agains
 date (UTC+05:30), before writing (`worker/my-journey.ts`); the phone shows the same rule.
 
 **Data migration and safe defaults.** Rules accepted under 0009 are carried into `group_rules_acceptance` with the time
-of the account's first join, then `group_member.rules_version` is dropped (tested on a copy of the database as it was
-before 0010). No avatar means initials, as before. A new account's Journey is empty: nothing is ticked for the student.
+of the account's first join (tested on a copy of the database as it was before 0010). `group_member.rules_version` is
+no longer read or written but is kept for now (expand, then contract): the previous release still writes it, so a
+rollback stays safe; a later migration drops it once this release is stable. No avatar means initials, as before. A new account's Journey is empty: nothing is ticked for the student.
 Journey items kept on a phone before CR-006 are copied to the account by the app on first use.
 
 **Privacy.** The members list of a group (members only) returns usernames, avatars and senior badges, never the name,

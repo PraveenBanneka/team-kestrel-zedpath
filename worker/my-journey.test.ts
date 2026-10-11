@@ -45,7 +45,7 @@ describe('migration 0010', () => {
     for (const s of JOURNEY_STEP_IDS) raw.exec(`INSERT INTO journey_step VALUES (1, '${s}', 't')`);
     expect(n('SELECT count(*) AS n FROM journey_step')).toBe(JOURNEY_STEP_IDS.length);
   });
-  it('carries over rules accepted under 0009 and drops the per-membership column', () => {
+  it('carries over rules accepted under 0009, keeping the old column until the release is stable (safe rollback)', () => {
     const dir = path.resolve(import.meta.dirname, '..', 'migrations'), all = fs.readdirSync(dir).filter(f => f.endsWith('.sql')).sort();
     const t = createTestD1(all.filter(f => f < '0010'));                          // the database as it was before 0010
     t.raw.exec(`INSERT INTO account (auth_subject, role, created_at) VALUES ('local:a', 'STUDENT', 't')`);
@@ -54,7 +54,7 @@ describe('migration 0010', () => {
     t.raw.exec(`INSERT INTO group_member VALUES (1, 1, '2026-10-11T08:00:00Z', '2026-10-11'), (2, 1, '2026-10-11T09:00:00Z', '2026-10-11')`);
     t.raw.exec(fs.readFileSync(path.join(dir, '0010_journey_avatars_rules.sql'), 'utf8'));
     expect(t.raw.prepare('SELECT * FROM group_rules_acceptance').all()).toEqual([{ account_id: 1, rules_version: '2026-10-11', accepted_at: '2026-10-11T08:00:00Z' }]);
-    expect(t.raw.prepare('PRAGMA table_info(group_member)').all().map(c => (c as { name: string }).name)).not.toContain('rules_version');
+    expect(t.raw.prepare('PRAGMA table_info(group_member)').all().map(c => (c as { name: string }).name)).toContain('rules_version');   // contract later
     expect(t.raw.prepare('SELECT count(*) AS n FROM group_member').get()).toEqual({ n: 2 });          // memberships kept
   });
 });

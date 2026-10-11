@@ -33,10 +33,11 @@ CREATE TABLE group_rules_acceptance (
   accepted_at    TEXT    NOT NULL,
   PRIMARY KEY (account_id, rules_version)
 ) STRICT, WITHOUT ROWID;
--- Carry over what members already accepted under 0009, at the time they first joined, then drop the per-membership copy.
+-- Carry over what members already accepted under 0009, at the time they first joined. group_member.rules_version is no
+-- longer read or written (expand, then contract): it stays until this release is stable, so a rollback to the previous
+-- version still works, and a later migration drops it.
 INSERT OR IGNORE INTO group_rules_acceptance (account_id, rules_version, accepted_at)
   SELECT account_id, rules_version, min(joined_at) FROM group_member WHERE rules_version IS NOT NULL GROUP BY account_id, rules_version;
-ALTER TABLE group_member DROP COLUMN rules_version;
 
 -- 3. Avatar: one preset picture per account (no photo upload). NULL = initials, the behaviour before CR-006.
 ALTER TABLE account ADD COLUMN avatar TEXT CHECK (avatar IS NULL OR avatar IN (${list(AVATARS)}));
