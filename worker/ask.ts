@@ -105,11 +105,18 @@ export function engineFacts(codes: string[], p: ProfileInput | null): string[] {
   });
 }
 
+/** A reply that talks about its own instructions (a model "thinking aloud", seen live 2026-10-11) is never shown:
+ *  the next model is asked instead. A normal answer never mentions VERDICT after its first line or the rules it was given. */
+export function usableReply(raw: string): boolean {
+  const rest = raw.replace(/^\s*\**\s*VERDICT\s*:[^\n]*\n?/i, '');
+  return !/VERDICT\s*:|\brule\s*\d\b|the very first line|system instruction|my instructions/i.test(rest);
+}
+
 async function generate(env: Env, userText: string): Promise<{ text: string } | { status: number }> {
   const body = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
     contents: [{ role: 'user', parts: [{ text: userText }] }],
-    generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
+    generationConfig: { temperature: 0.2, maxOutputTokens: 4096 },      // newer models spend part of this on thinking
   };
   const gw = env.AI.gateway(GATEWAY_ID);
   let last = 404;
@@ -117,10 +124,12 @@ async function generate(env: Env, userText: string): Promise<{ text: string } | 
     const r = await gw.run({ provider: 'google-ai-studio', endpoint: `v1beta/models/${model}:generateContent`,
       headers: { 'x-goog-api-key': env.GEMINI_API_KEY!, 'content-type': 'application/json' }, query: body });
     if (r.ok) {
-      const j = await r.json() as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
-      const text = (j.candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? '').join('').trim();
-      if (text) return { text };
-      last = 503;                                                       // empty reply: treat as busy, try the next
+      const j = await r.json() as { candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
+      // Only the answer: parts marked as the model's reasoning ("thought") are never shown.
+      const text = (j.candidates?.[0]?.content?.parts ?? []).filter(p => !p.thought).map(p => p.text ?? '').join('').trim();
+      if (text && usableReply(text)) return { text };
+      if (text) console.error(`ask: model ${model} replied with its reasoning; trying the next`);
+      last = 503;                                                       // empty or unusable reply: try the next model
       continue;
     }
     console.error(`ask: model ${model} -> ${r.status} ${(await r.text()).slice(0, 300)}`);   // no key in this text

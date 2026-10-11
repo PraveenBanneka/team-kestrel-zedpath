@@ -4,7 +4,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { DEVICE_PER_DAY, MIN_SCORE, askActions, coursesFor, engineFacts, extrasFacts, finish, safeUrl, tidyName } from './ask.ts';
+import { DEVICE_PER_DAY, MIN_SCORE, usableReply, askActions, coursesFor, engineFacts, extrasFacts, finish, safeUrl, tidyName } from './ask.ts';
 import { HANDBOOK_URL, takeVerdict } from '../shared/ask.ts';
 import type { AskResponse, CorpusPassage } from '../shared/ask.ts';
 
@@ -228,5 +228,29 @@ describe('answer layout, actions and feedback (CR-004)', () => {
     expect(rows).toHaveLength(1);
     expect(Object.keys(rows[0]).sort()).toEqual(['answer', 'created_at', 'feedback_id', 'lang', 'note', 'pages', 'question', 'rating', 'state']);
     expect(rows[0]).toMatchObject({ rating: 'WRONG', pages: '[50]', lang: 'si', state: 'OPEN' });
+  });
+});
+
+describe('a model thinking aloud is never shown (2026-10-11)', () => {
+  it('rejects replies that talk about their own instructions, accepts normal answers', () => {
+    expect(usableReply('VERDICT: NO\nNo, you cannot get in.\n- But wait, rule 5: "the very first line is exactly VERDICT: YES"')).toBe(false);
+    expect(usableReply('No, you cannot...\n- However, the question did not ask. Wait, VERDICT: NO')).toBe(false);
+    expect(usableReply('VERDICT: YES\nYes. Medicine needs Biology, Chemistry and Physics [1].\n- At least a C in two of them [1].')).toBe(true);
+    expect(usableReply('VERDICT: NONE\nIt is a government loan for approved private degrees [1].')).toBe(true);
+  });
+  it('drops "thought" parts and asks the next model when a reply is unusable', async () => {
+    let calls = 0;
+    const ai = {
+      run: async () => ({ data: [new Array(1024).fill(0.01)] }),
+      gateway: () => ({ run: async () => { calls++;
+        const parts = calls === 1 ? [{ text: 'VERDICT: NO\nNo.\n- wait, rule 5 says...' }]
+          : [{ text: 'Let me think about the rules...', thought: true }, { text: 'VERDICT: YES\nYes. Medicine needs Biology [1].' }];
+        return Response.json({ candidates: [{ content: { parts } }] }); } }),
+    };
+    env = { ...env, AI: ai } as unknown as Env;
+    const b = await (await ask({ question: 'What do I need for Medicine?' })).json() as AskResponse;
+    expect(calls).toBe(2);
+    expect(b.answer).toBe('Yes. Medicine needs Biology [1].');
+    expect(b.answer).not.toMatch(/think|rule 5/i);
   });
 });
