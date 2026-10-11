@@ -188,7 +188,7 @@ export function App() {
   else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
   else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
   else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} dob={me?.contact?.birthDate ?? null} saved={saved} setSaved={setSaved} go={go} />; }
-  else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
+  else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
   else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
   else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
   else if (path === 'ask') { tab = 'ask'; title = t('title.ask'); screen = <AskScreen profile={profile} extras={extras} turns={askTurns} setTurns={setAskTurns}
@@ -198,7 +198,7 @@ export function App() {
   else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
   else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} />; }
   else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} />; }
-  else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
+  else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
   const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', t('nav.paths'), MapIcon, '#/paths'], ['list', t('nav.list'), ListOrdered, '#/list'],

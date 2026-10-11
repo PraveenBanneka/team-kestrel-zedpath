@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { SAMPLE_KEYS, sampleKey, samplesFor } from './group-samples.ts';
 import { MESSAGE_MAX, POST_GAP_MS, POST_WINDOW_MAX, canPost, cleanMessage, moderationSays, seniorBadge, visibleTo } from './groups.ts';
 
 describe('cleanMessage', () => {
@@ -47,3 +48,31 @@ it('hides hidden messages and blocked authors only', () => {
 });
 
 it('words the senior badge', () => expect(seniorBadge('Computer Science', 2)).toBe('Verified senior · Computer Science, year 2'));
+
+describe('group rule 3: no contact details (CR-005)', () => {
+  it('refuses phone numbers in any spacing and email addresses', () => {
+    for (const bad of ['call me 0712345678', 'my no +94 71 234 5678', 'whatsapp 94-71-234-5678', 'mail nimal.p@gmail.com'])
+      expect(cleanMessage(bad).ok, bad).toBe(false);
+  });
+  it('keeps ordinary numbers: Z-scores, years, course codes', () => {
+    for (const ok of ['My Z is 1.4518', 'cut-offs from 2021 to 2025', 'course 012 at Colombo', 'rank 120 of 3000'])
+      expect(cleanMessage(ok).ok, ok).toBe(true);
+  });
+});
+
+describe('sample conversations are labelled as sample (trust rule)', () => {
+  it('every sample is marked, named "Sample", never "verified", and cannot be reported', () => {
+    for (const key of SAMPLE_KEYS) for (const m of samplesFor(key)) {
+      expect(m.sample).toBe(true);
+      expect(m.author.startsWith('Sample')).toBe(true);
+      expect(`${m.badge ?? ''} ${m.body}`).not.toMatch(/verified/i);
+      expect(m.id).not.toMatch(/^[0-9a-f]{32}$/);                          // the report API only takes real message ids
+      expect(cleanMessage(m.body)).toEqual({ ok: true, body: m.body });     // and they follow the same rules as members
+    }
+  });
+  it('picks a course thread when there is one, else the general one', () => {
+    expect(sampleKey('COURSE', '001')).toBe('COURSE:001');
+    expect(sampleKey('COURSE', '777')).toBe('COURSE');
+    expect(sampleKey('BATCH', null)).toBe('BATCH');
+  });
+});

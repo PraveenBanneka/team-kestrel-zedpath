@@ -12,6 +12,12 @@ export const INVITE_RE = /^[A-Z2-7]{4}(-[A-Z2-7]{4}){3}$/;   // same shape as a 
 export const INVITE_DAYS = 14;
 export const REPORT_REASONS = ['HARMFUL', 'WRONG_INFO', 'SPAM', 'OTHER'] as const;
 export type ReportReason = typeof REPORT_REASONS[number];
+/** CR-005: the group rules a member accepts before taking part (mirrored by the CHECK in migration 0009). The wording
+ *  is on the phone (gr.rule.1 to gr.rule.6 in every language); a new version means a new value here and in the CHECK. */
+export const GROUP_RULES_VERSION = '2026-10-11';
+export const GROUP_RULE_COUNT = 6;
+/** Course groups everyone sees under "Popular" (Medicine, Engineering, Computer Science, Management, Commerce, Law). */
+export const POPULAR_COURSES = ['001', '008', '012', '016', '018', '025'];
 
 export interface GroupSummary {
   id: number | null;                             // null until someone joins (groups are created on first join)
@@ -23,15 +29,20 @@ export interface GroupSummary {
   universities: number;                          // COURSE: how many universities offer it
   members: number;
   joined: boolean;
+  rulesAccepted: boolean;                        // CR-005: this member accepted the current group rules
 }
-export interface GroupsResponse { groups: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER' }
-export interface ChatMessage { id: string; author: string; badge: string | null; body: string; at: string }
+export interface GroupsResponse { groups: GroupSummary[]; popular: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER' }
+/** sample: a labelled sample message (shared/group-samples.ts), never a real member's. */
+export interface ChatMessage { id: string; author: string; badge: string | null; body: string; at: string; sample?: true }
 export type ServerFrame =
   | { type: 'history'; messages: ChatMessage[] }
   | { type: 'message'; message: ChatMessage }
   | { type: 'hidden'; id: string }
   | { type: 'error'; error: string };
 export type ClientFrame = { type: 'post'; body: string };
+
+/** Group rule 3, enforced by the room: no phone numbers (Sri Lankan, any spacing) and no email addresses. */
+const CONTACT_RE = /(?:\+\s?94|\b94|\b0)(?:[\s-]?\d){9}\b|[^\s@]+@[^\s@]+\.[a-z]{2,}/i;
 
 /** Trims and checks a message: text only, 1 to 500 characters, no control characters except new lines. */
 export function cleanMessage(raw: unknown): { ok: true; body: string } | { ok: false; error: string } {
@@ -40,6 +51,7 @@ export function cleanMessage(raw: unknown): { ok: true; body: string } | { ok: f
   if (!body) return { ok: false, error: 'Write a message first' };
   if (body.length > MESSAGE_MAX) return { ok: false, error: `Keep it under ${MESSAGE_MAX} characters` };
   if (/[\u0000-\u0008\u000B-\u001F\u007F]/.test(body)) return { ok: false, error: 'That message has characters ZedPath cannot show' };
+  if (CONTACT_RE.test(body)) return { ok: false, error: 'For your safety, phone numbers and email addresses cannot be shared in groups' };
   return { ok: true, body };
 }
 

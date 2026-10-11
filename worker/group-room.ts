@@ -3,6 +3,7 @@
 // room (there is no public URL for it), and the Worker has already checked the session and the membership, so the
 // identity headers below are trusted. Rules shared with the phone live in shared/groups.ts.
 import { DurableObject } from 'cloudflare:workers';
+import { samplesFor } from '../shared/group-samples.ts';
 import { HISTORY_LIMIT, canPost, cleanMessage, moderationSays, visibleTo, type ChatMessage, type ServerFrame } from '../shared/groups.ts';
 
 interface Member { accountId: number; author: string; badge: string | null; blocked: number[] }
@@ -42,7 +43,8 @@ export class GroupRoom extends DurableObject<Env> {
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
       pair[1].serializeAttachment(member);
-      this.send(pair[1], { type: 'history', messages: this.history(member.blocked) });
+      const samples = /^(BATCH|COURSE(:\d{3})?)$/.test(req.headers.get('X-ZP-Sample') ?? '') ? samplesFor(req.headers.get('X-ZP-Sample')!) : [];
+      this.send(pair[1], { type: 'history', messages: [...samples, ...this.history(member.blocked)] });
       return new Response(null, { status: 101, webSocket: pair[0] });
     }
     if (url.pathname === '/hide' && req.method === 'POST') {                 // enough members reported it

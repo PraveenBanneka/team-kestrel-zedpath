@@ -283,6 +283,23 @@ export const en = {
   'ask.openHandbook': 'Open the UGC handbook',
   'ask.q.chances': 'Which courses am I most likely to get into?',
   'ask.q.beyond': 'Do my achievements help me get into university?',
+  // Video 2 / CR-005: group rules, WhatsApp-style rooms, samples
+  'gr.rulesH': 'Group rules',
+  'gr.close': 'Close',
+  'gr.rulesShow': 'Group rules',
+  'gr.rule.1': 'Be kind and respectful. No bullying, hate or threats.',
+  'gr.rule.2': 'Stay on topic: courses, universities, applications and student life.',
+  'gr.rule.3': 'Never share phone numbers, email or home addresses, or passwords. ZedPath blocks phone numbers and emails.',
+  'gr.rule.4': 'No selling, paid tuition adverts or exam leaks.',
+  'gr.rule.5': 'Members give opinions. Check rules and dates on the official sources ZedPath cites.',
+  'gr.rule.6': 'Report anything wrong. A message that 3 members report is hidden automatically.',
+  'gr.rulesAgree': 'I have read the group rules and I will follow them.',
+  'gr.rulesJoin': 'Agree and join',
+  'gr.popular': 'Popular groups',
+  'gr.yesterday': 'Yesterday',
+  'gr.online': 'live',
+  'gr.sampleNote': 'Messages tagged Sample show how a group works. They are examples, not real members.',
+  'gr.sample': 'Sample',
 } as const;
 
 export type Key = keyof typeof en;
