@@ -1,0 +1,339 @@
+{
+ "date": "2026-10-12",
+ "server": "local (wrangler dev)",
+ "url": "http://127.0.0.1:8899 (same server as localhost:8899; Chrome's 'localhost' resolved to ::1 and was refused)",
+ "viewport": "390x844 (reflow cases 320x844)",
+ "method": "agent-browser + in-page JS (no axe-core): getComputedStyle WCAG ratios, text over gradients sampled from screenshot pixels; getBoundingClientRect targets; Tab key for focus",
+ "account": "one local test account a11y_1791745866 created, deleted at end (DELETE /api/me -> 204, then GET /api/me -> 401)",
+ "summary": {
+  "total": 36,
+  "passed": 22,
+  "failed": 14
+ },
+ "cases": [
+  {
+   "id": "A11Y-001",
+   "screen": "Welcome",
+   "check": "Images have alt text",
+   "wcag": "1.1.1",
+   "expected": "Every img has alt; decorative ones alt=\"\" + aria-hidden",
+   "actual": "1 img (logo) alt=\"\" aria-hidden=true; 0 imgs without alt; 0 unhidden SVGs",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-002",
+   "screen": "Welcome",
+   "check": "Buttons/links have an accessible name",
+   "wcag": "4.1.2",
+   "expected": "0 unnamed controls",
+   "actual": "4 controls, 0 unnamed (lang tiles named by visible text)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-003",
+   "screen": "Welcome",
+   "check": "Exactly one h1",
+   "wcag": "1.3.1",
+   "expected": "1 h1",
+   "actual": "1 h1 'ZedPath', no level skips",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-004",
+   "screen": "Welcome",
+   "check": "html lang follows the chosen language",
+   "wcag": "3.1.1",
+   "expected": "lang=en by default, si after Sinhala tile, ta after Tamil tile",
+   "actual": "en -> si (Sinhala tile) -> ta (Tamil tile) -> en (English tile); each tile also carries its own lang attribute (3.1.2)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-005",
+   "screen": "Welcome",
+   "check": "Touch targets >= 44x44",
+   "wcag": "2.5.5 / 2.5.8",
+   "expected": "Lang tiles and Log in >= 44x44",
+   "actual": "Lang tiles 109x84 (104x84 in ta), Log in 259x44 (331x60 in ta)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-006",
+   "screen": "Welcome",
+   "check": "Text contrast on aurora gradient (pixel-sampled from screenshot)",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5 normal, >= 3 large",
+   "actual": "h1 6.7, lead 6.8, body 6.3, tiles 6.8-8.7, Log in 6.4, team line 5.1; fineprint (12px, white 72%) 3.66 en / 4.01 si / 3.85 ta over the teal glow (bottom-right)",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-007",
+   "screen": "Welcome (si)",
+   "check": "Sinhala: no English left in headings/buttons; no {placeholder}",
+   "wcag": "3.1.2",
+   "expected": "All UI chrome translated",
+   "actual": "Label, 3 tiles ('Continue' -> 'ඉදිරියට'), Log in, fineprint all Sinhala; 0 placeholders, 0 raw keys",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-008",
+   "screen": "Welcome (ta)",
+   "check": "Tamil: no English left in headings/buttons; no {placeholder}",
+   "wcag": "3.1.2",
+   "expected": "All UI chrome translated",
+   "actual": "All Tamil ('தொடர்க'); 0 placeholders, 0 raw keys",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-009",
+   "screen": "Intro (en/si/ta)",
+   "check": "Page-dot buttons touch target",
+   "wcag": "2.5.8",
+   "expected": ">= 24x24 (AA); >= 44 project target",
+   "actual": "3 dot buttons (role=tab, named 'Page 1..3') are 28x9 / 9x9 px",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-010",
+   "screen": "Intro (en/si/ta)",
+   "check": "Step counter contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "'1 of 3' section label: muted text token rgb(122,131,150) on rgb(244,246,251) = 3.52",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-011",
+   "screen": "Create account",
+   "check": "Form inputs have labels",
+   "wcag": "1.3.1 / 3.3.2",
+   "expected": "Every input labelled",
+   "actual": "9 inputs (username, 2 passwords, name, email, mobile, date, consent checkbox), 0 unlabeled; helpers linked into accessible names",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-012",
+   "screen": "Create account",
+   "check": "Accessible names + targets for actions",
+   "wcag": "4.1.2 / 2.5.5",
+   "expected": "Named, >= 44x44",
+   "actual": "Back 44x44, 2x 'Show password' 44x44, Create account 343x56, Log in 259x44; 0 unnamed",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-013",
+   "screen": "Create account",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Labels/inputs pass; helper text (muted text token rgb(122,131,150)) 3.81 on white and 3.52 on page bg (5 helpers)",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-014",
+   "screen": "Recovery code",
+   "check": "Structure, names, targets",
+   "wcag": "1.3.1 / 4.1.2 / 2.5.5",
+   "expected": "1 h1, labelled checkbox, actions >= 44",
+   "actual": "h1 'Save your recovery code', checkbox labelled, Copy 108x48, Continue 358x56 (disabled until ticked; exempt from contrast)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-015",
+   "screen": "About you (steps 1-5)",
+   "check": "One h1 per step, labelled inputs, named radios",
+   "wcag": "1.3.1 / 4.1.2",
+   "expected": "1 h1 each, 0 unlabeled",
+   "actual": "Each step 1 h1; streams/district/grades exposed as radios; step 5 inputs/selects labelled (Activity, Level, Result, Year); 0 unnamed. Note: choice chips are 40px high (meet 2.5.8, below 44)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-016",
+   "screen": "Bottom nav (all tab screens)",
+   "check": "Nav touch targets",
+   "wcag": "2.5.5",
+   "expected": ">= 44x44",
+   "actual": "5 items 67x52 on Paths, Courses, Journey, Groups, Me (en/si/ta)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-017",
+   "screen": "App bar (all tab screens)",
+   "check": "App-bar touch targets",
+   "wcag": "2.5.5",
+   "expected": ">= 44x44",
+   "actual": "Back 44x44 OK; 'Me' avatar link 40x40 on every tab screen",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-018",
+   "screen": "Bottom nav (all tab screens)",
+   "check": "Nav label contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5 (10.5px text)",
+   "actual": "Selected label rgb(36,71,140) on pill rgb(227,235,255) = 7.47; unselected labels rgb(122,131,150) on 86% white = 3.77-3.81",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-019",
+   "screen": "Paths",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Main text passes; muted text token rgb(122,131,150) 3.81/3.52 (tile subtitles, section label, footer); '1 open' pill rgb(15,157,99) on rgb(221,247,234) = 3.08",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-020",
+   "screen": "Courses",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Course names pass; every meta line ('+1.43 vs last year · 5 yrs') muted text token rgb(122,131,150) on white = 3.81; tip text 3.52",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-021",
+   "screen": "Courses / Journey",
+   "check": "Segmented control touch targets",
+   "wcag": "2.5.5",
+   "expected": ">= 44x44 for main actions",
+   "actual": "Band tabs Safe/Likely/Reach 109x42; Journey tabs 'My steps'/'Open now' 166x42 (2px short)",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-022",
+   "screen": "Journey",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Step titles pass; step helpers muted text token rgb(122,131,150) 3.81; '0 of 8 done' pill 3.08",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-023",
+   "screen": "Groups",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Group names pass; 'Join' pill rgb(0,168,132) on white = 3.03; member counts muted text token rgb(122,131,150) 3.81",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-024",
+   "screen": "Me",
+   "check": "Text contrast",
+   "wcag": "1.4.3",
+   "expected": ">= 4.5",
+   "actual": "Main text passes; section labels and helpers muted text token rgb(122,131,150) 3.52/3.81",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-025",
+   "screen": "Me",
+   "check": "Avatar images and picker",
+   "wcag": "1.1.1 / 4.1.2",
+   "expected": "Decorative imgs alt=\"\" + aria-hidden; buttons named",
+   "actual": "12 avatar imgs alt=\"\" aria-hidden inside radio buttons named 'Picture 1..12' / 'Use my initials'",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-026",
+   "screen": "Paths, Courses, Journey, Groups, Me, Create account",
+   "check": "One h1 per screen, no heading-level skips",
+   "wcag": "1.3.1 / 2.4.6",
+   "expected": "1 h1, no skips",
+   "actual": "All 1 h1, no skips (Me: h1 then 3x h2). Note: Me's h1 is the Z-score 'Z 1.4200', not a page title",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-027",
+   "screen": "Paths, Courses, Journey, Groups, Me",
+   "check": "Every button/link has an accessible name",
+   "wcag": "4.1.2",
+   "expected": "0 unnamed",
+   "actual": "16/55/17/16/32 controls, 0 unnamed; icons aria-hidden; 0 imgs without alt",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-028",
+   "screen": "Paths (keyboard)",
+   "check": "Focus visible",
+   "wcag": "2.4.7 / 1.4.11",
+   "expected": "Visible ring on Tab focus, >= 3:1",
+   "actual": ":focus-visible = 3px solid rgb(76,125,255), offset 2px on Tab (See the courses, cards); ring vs page bg 3.42, vs Welcome base 3.18",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-029",
+   "screen": "Global CSS",
+   "check": "prefers-reduced-motion respected",
+   "wcag": "2.3.3",
+   "expected": "Media query disables motion",
+   "actual": "src/styles.css line 30: @media (prefers-reduced-motion: reduce) sets transition/animation none; Welcome also uses useReducedMotion()",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-030",
+   "screen": "Me -> si (Me, Paths, Courses, Journey, Groups)",
+   "check": "Sinhala after switching on Me: lang + no English UI chrome",
+   "wcag": "3.1.1 / 3.1.2",
+   "expected": "html lang=si; headings/buttons/nav translated",
+   "actual": "lang=si; Me and Journey 0 English; Paths/Courses/Groups only proper nouns from data (course and university names, CA/CMA/CIMA/AAT, SLIATE, NVQ/VTA)",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-031",
+   "screen": "Me -> ta (Me, Paths, Courses, Journey, Groups)",
+   "check": "Tamil after switching on Me: lang + no English UI chrome",
+   "wcag": "3.1.1 / 3.1.2",
+   "expected": "html lang=ta; headings/buttons/nav translated",
+   "actual": "lang=ta; same as Sinhala, only proper nouns from data remain in English",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-032",
+   "screen": "All screens, en/si/ta",
+   "check": "No '{placeholder}' or raw i18n keys visible",
+   "wcag": "3.3.2 (content)",
+   "expected": "0",
+   "actual": "0 '{name}' patterns and 0 raw keys on 26 screen/language combinations",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-033",
+   "screen": "en at 320px (Welcome, Create account, Paths, Courses safe/reach, Journey, Groups, Me, List, Ask)",
+   "check": "Reflow without horizontal scroll",
+   "wcag": "1.4.10",
+   "expected": "scrollWidth <= 320",
+   "actual": "All <= 320",
+   "result": "pass"
+  },
+  {
+   "id": "A11Y-034",
+   "screen": "si at 320px",
+   "check": "Reflow without horizontal scroll",
+   "wcag": "1.4.10",
+   "expected": "scrollWidth <= 320",
+   "actual": "Courses (safe and reach): band tabs overflow, scrollWidth 336 ('උත්සාහ කළ හැකි 16' tab ends at 336px); other 8 screens OK",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-035",
+   "screen": "ta at 390px and 320px",
+   "check": "Reflow without horizontal scroll",
+   "wcag": "1.4.10",
+   "expected": "scrollWidth <= viewport",
+   "actual": "Courses: band tabs overflow to 516px even at the 390px test viewport (Reach tab 'முயற்சிக்கலாம் 16' cut off, page scrolls sideways); Paths at 320: 'See why' row ends at 388px; other 7 screens OK",
+   "result": "fail"
+  },
+  {
+   "id": "A11Y-036",
+   "screen": "Welcome at 320px (en/si/ta)",
+   "check": "Reflow without horizontal scroll",
+   "wcag": "1.4.10",
+   "expected": "scrollWidth <= 320",
+   "actual": "320 / 320 / 305",
+   "result": "pass"
+  }
+ ]
+}
