@@ -30,9 +30,11 @@ import { clearEverything, loadAlertsSeen, loadDob, loadJourney, saveJourney, isO
 import { useInstallPrompt } from './pwa.ts';
 import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
+import { LANGS, setLang as applyLang, t, type Key, type Lang } from './i18n/index.ts';
+import { loadLang, saveLang } from './storage.ts';
 
-const BAND_LABEL: Record<Band, string> = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' };
-const TREND_LABEL = { RISING: 'rising', FALLING: 'falling', STEADY: 'steady', JUMPY: 'jumpy', NO_TREND: '' } as const;
+const bandLabel = (b: Band) => t(`band.${b}`);
+const trendLabel = (tr: OfferingSummary['trend']) => tr === 'NO_TREND' ? '' : t(`trend.${tr}`);
 export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: string; icon: LucideIcon; tone: string }[] = [
   { code: 'PRIVATE_DEGREE', title: 'Private degrees', sub: 'Approved institutes, interest-free loans', icon: Building2, tone: 'var(--violet)' },
   { code: 'DIPLOMA', title: 'Diplomas and Open University', sub: 'SLIATE HNDs, OUSL', icon: ScrollText, tone: 'var(--brand-500)' },
@@ -62,6 +64,8 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
 
 export function App() {
   const [route, go] = useHashRoute();
+  const [lang, setLangState] = useState<Lang>(() => { const l = loadLang(); applyLang(l); return l; });
+  const changeLang = (l: Lang) => { applyLang(l); saveLang(l); setLangState(l); };
   const [meta, setMeta] = useState<Meta | null>(null);
   const [profile, setProfile] = useState<ProfileInput | null>(() => loadProfile());
   const [extras, setExtras] = useState<Extras>(() => loadExtras());
@@ -126,17 +130,17 @@ export function App() {
 
   // Account screens: a focused flow with Back and no bottom navigation, reachable before and after onboarding.
   if (['signup', 'login', 'recover', 'saved-code'].includes(path)) {
-    const titles: Record<string, string> = { signup: 'Create account', login: 'Log in', recover: 'Reset password', 'saved-code': 'Recovery code' };
+    const titles: Record<string, string> = { signup: t('title.signup'), login: t('title.login'), recover: t('title.recover'), 'saved-code': t('title.savedCode') };
     const afterAuth = () => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : loadProfile() ? '/me' : '/about'); }).catch(() => go('/about'));
     return (
       <div className="shell">
         <header className="app-bar">
-          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
+          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
           <span className="brand">{titles[path]}</span>
         </header>
         <main><Page k={route}>{path === 'saved-code'
           ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); afterAuth(); }} />
-            : <div className="card"><p className="subtitle">Your recovery code was shown once and is no longer on screen.</p></div>)
+            : <div className="card"><p className="subtitle">{t('auth.codeGone')}</p></div>)
           : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
               onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
               onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.role === 'SENIOR' ? '/groups' : m.profile || loadProfile() ? '/paths' : '/about'); }} />}
@@ -145,58 +149,58 @@ export function App() {
   }
 
   // First run
-  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} /></main></div>;
+  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang} /></main></div>;
   if (!onboarded && path === 'intro') return <div className="shell"><main><Intro onDone={finishIntro} /></main></div>;
   const SENIOR_OK = ['groups', 'group', 'ask', 'me', 'journey', 'alerts'];
   if (!profile && me?.role === 'SENIOR' && !SENIOR_OK.includes(path)) { go('/groups'); return null; }
   if ((!profile && me?.role !== 'SENIOR') || path === 'about') return (
     <div className="shell">
       <header className="app-bar">
-        {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
-        <span className="brand">About you</span>
+        {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
+        <span className="brand">{t('title.about')}</span>
       </header>
       <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
     </div>);
 
   let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses' && profile) { back = true; title = 'Courses'; screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
-  else if (path === 'compare' && profile) { tab = 'list'; back = true; title = 'Compare'; screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
-  else if (path === 'list') { tab = 'list'; title = 'My list'; screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
-  else if (path === 'journey') { tab = 'journey'; title = 'Journey'; screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
-  else if (path === 'alerts') { tab = null; back = true; title = 'Alerts'; screen = <AlertsScreen data={journey} profile={profile} saved={saved} setSaved={setSaved} go={go} />; }
-  else if (path === 'groups') { tab = 'groups'; title = 'Groups'; screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
-  else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = 'Group'; screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
-  else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = 'Degree details'; screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
-  else if (path === 'ask') { tab = 'ask'; title = 'Ask ZedPath'; screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
+  if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
+  else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
+  else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
+  else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
+  else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} saved={saved} setSaved={setSaved} go={go} />; }
+  else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
+  else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
+  else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
+  else if (path === 'ask') { tab = 'ask'; title = t('title.ask'); screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')} />; }
-  else if (path === 'hidden') { back = true; title = 'Hidden courses'; screen = <Hidden results={results} />; }
-  else if (path === 'routes' && arg) { back = true; title = 'Other paths'; screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
-  else if (path === 'route' && arg) { back = true; title = 'Route details'; screen = <RouteDetail id={arg} routes={routes} />; }
-  else if (path === 'me') { tab = null; back = true; title = 'Me'; screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} />; }
-  else if (!profile) { tab = 'groups'; title = 'Groups'; screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
+  else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
+  else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
+  else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} />; }
+  else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} />; }
+  else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
-  const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', 'Paths', MapIcon, '#/paths'], ['list', 'My list', ListOrdered, '#/list'],
-    ['journey', 'Journey', CalendarDays, '#/journey'], ['groups', 'Groups', Users, '#/groups'], ['ask', 'Ask', Sparkles, '#/ask']];
+  const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', t('nav.paths'), MapIcon, '#/paths'], ['list', t('nav.list'), ListOrdered, '#/list'],
+    ['journey', t('nav.journey'), CalendarDays, '#/journey'], ['groups', t('nav.groups'), Users, '#/groups'], ['ask', t('nav.ask'), Sparkles, '#/ask']];
   // The bell counts open notices the student has not opened yet and is not ruled out for (checked on this phone).
   const seen = loadAlertsSeen(), dob = loadDob(), day = today();
   const unread = (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   return (
     <div className="shell has-nav">
       <header className="app-bar">
-        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label="Back"><ArrowLeft size={22} /></button> : <Logo size={32} />}
+        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
-        <a className="icon-btn bar-bell" href="#/alerts" aria-label={unread ? `Alerts, ${unread} new` : 'Alerts'}><Bell size={22} aria-hidden="true" />
+        <a className="icon-btn bar-bell" href="#/alerts" aria-label={unread ? t('nav.alertsNew', { n: unread }) : t('nav.alerts')}><Bell size={22} aria-hidden="true" />
           {unread > 0 && <span className="badge num" aria-hidden="true">{unread}</span>}</a>
-        <a className="avatar small" href="#/me" aria-label="Me: your details and account">{me ? me.username.charAt(0).toUpperCase() : <UserRound size={20} aria-hidden="true" />}</a>
+        <a className="avatar small" href="#/me" aria-label={t('nav.me')}>{me ? me.username.charAt(0).toUpperCase() : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       <main><ErrorBoundary resetKey={route}><Page k={route}>{screen}</Page></ErrorBoundary></main>
-      <nav className="bottom-nav" aria-label="Main">
+      <nav className="bottom-nav" aria-label={t('nav.main')}>
         {NAV.map(([key, label, Icon, href]) => (
           <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
             {tab === key && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
             <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span>{label}</span>
-            {key === 'list' && list.length > 0 && <span className="nav-count num" aria-label={`${list.length} courses`}>{list.length}</span>}
+            {key === 'list' && list.length > 0 && <span className="nav-count num" aria-label={t('nav.listCount', { n: list.length })}>{list.length}</span>}
           </a>))}
       </nav>
     </div>
@@ -213,33 +217,32 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
     <>
       <section className="hero aurora" aria-label="State universities">
         <div>
-          <span className="eyebrow">State universities · 2025/26 intake</span>
-          <h1>{c ? `${c.SAFE + c.LIKELY + c.REACH} courses within your reach` : 'Checking every course…'}</h1>
+          <span className="eyebrow">{t('paths.eyebrow')}</span>
+          <h1>{c ? t('paths.reach', { n: c.SAFE + c.LIKELY + c.REACH }) : t('paths.checking')}</h1>
           <span className="meta">{profileLine(profile, meta)}</span>
         </div>
         {c ? (
           <div className="hero-body">
             <BandRing safe={c.SAFE} likely={c.LIKELY} reach={c.REACH} />
             <div className="ring-legend num">
-              <span><i className="dot" style={{ background: '#3DDC97' }} /><b>{c.SAFE}</b>Safe</span>
-              <span><i className="dot" style={{ background: '#9DB8FF' }} /><b>{c.LIKELY}</b>Likely</span>
-              <span><i className="dot" style={{ background: '#FFC94A' }} /><b>{c.REACH}</b>Reach</span>
+              <span><i className="dot" style={{ background: '#3DDC97' }} /><b>{c.SAFE}</b>{t('band.SAFE')}</span>
+              <span><i className="dot" style={{ background: '#9DB8FF' }} /><b>{c.LIKELY}</b>{t('band.LIKELY')}</span>
+              <span><i className="dot" style={{ background: '#FFC94A' }} /><b>{c.REACH}</b>{t('band.REACH')}</span>
             </div>
           </div>) : !error && <div className="skeleton" style={{ height: 116, opacity: .25 }} />}
-        <button className="btn white" onClick={() => go('/courses/safe')} disabled={!results}>See the courses<ChevronRight size={18} aria-hidden="true" /></button>
+        <button className="btn white" onClick={() => go('/courses/safe')} disabled={!results}>{t('paths.see')}<ChevronRight size={18} aria-hidden="true" /></button>
       </section>
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
-      {hint.applies && <div className="alert gold"><Trophy size={20} aria-hidden="true" /><span>Your {hint.sport ? 'sports ' : ''}achievements may qualify you for a <b>special intake</b>:
-        up to 0.5% of places per course for national or international achievements (2023 to 2025), if you are within 0.2000 of the cut-off.
+      {hint.applies && <div className="alert gold"><Trophy size={20} aria-hidden="true" /><span>{t('paths.special', { sport: hint.sport ? t('paths.sport') : '' })}
         <span className="source" style={{ display: 'block', marginTop: 4, color: 'inherit', opacity: .75 }}>UGC handbook 2025/26, Section 6, p.166</span></span></div>}
       {results && results.hidden.length > 0 && (
-        <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden: subject rules not met</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>)}
+        <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('paths.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>)}
       <button className="card list-entry" onClick={() => go('/list')}>
         <span className="ic" style={{ background: 'var(--likely-bg)', color: 'var(--likely)' }}><ListOrdered size={22} aria-hidden="true" /></span>
-        <span className="grow"><span className="t">My list</span><span className="s">{listCount ? `${listCount} course${listCount > 1 ? 's' : ''} in your order, checked for mistakes` : 'Build your UGC preference list'}</span></span>
+        <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
       </button>
-      <p className="section-label">Other paths</p>
+      <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
         {ROUTE_GROUPS.map((g, i) => {
           const n = routes?.filter(r => r.group === g.code).length ?? 0;
@@ -249,14 +252,13 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
             <motion.button key={g.code} variants={rise} className="bento-tile" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}
               style={i === ROUTE_GROUPS.length - 1 ? { gridColumn: '1 / -1', minHeight: 96 } : undefined}>
               <span className="ic" style={{ background: `color-mix(in srgb, ${g.tone} 14%, transparent)`, color: g.tone }}><Icon size={22} aria-hidden="true" /></span>
-              {open > 0 ? <span className="pill open corner">{open} open</span> : n > 0 && <span className="pill band-NOT_ENOUGH_DATA corner num">{n}</span>}
-              <span className="t">{g.title}</span><span className="s">{g.sub}</span>
+              {open > 0 ? <span className="pill open corner">{t('paths.open', { n: open })}</span> : n > 0 && <span className="pill band-NOT_ENOUGH_DATA corner num">{n}</span>}
+              <span className="t">{t(`rg.${g.code}` as Key)}</span><span className="s">{t(`rg.${g.code}.sub` as Key)}</span>
             </motion.button>);
         })}
       </Stagger>
-      {install.canInstall && <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>}
-      <p className="footer-note">Bands compare your Z-score with five years of cut-offs for your district. Past cut-offs describe the past:
-        no band is a promise of admission. ZedPath is independent and not affiliated with the University Grants Commission.</p>
+      {install.canInstall && <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />{t('paths.install')}</button>}
+      <p className="footer-note">{t('paths.footer')}</p>
     </>
   );
 }
@@ -273,44 +275,45 @@ function Courses({ results, band, go, listCount }: { results: ResultsResponse | 
   return (
     <>
       <div className="stack" style={{ gap: 4 }}>
-        <h1 className="screen-title">{results ? `${total} courses within reach` : 'Checking courses…'}</h1>
-        <p className="subtitle">Sorted by how far you are above last year's cut-off for your district.</p>
-        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />My list{listCount ? ` (${listCount})` : ''}</button>
-        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare courses</button>
+        <h1 className="screen-title">{results ? t('courses.reach', { n: total }) : t('courses.checking')}</h1>
+        <p className="subtitle">{t('courses.sorted')}</p>
+        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />{t('nav.list')}{listCount ? ` (${listCount})` : ''}</button>
+        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('courses.compare')}</button>
       </div>
-      <label className="search"><Search size={20} aria-hidden="true" /><input placeholder="Search courses, universities or Uni-Codes" value={query}
-        onChange={e => setQuery(e.target.value)} aria-label="Search courses" enterKeyHint="search" /></label>
-      {!searching && <div className="seg" role="tablist" aria-label="Band">
+      <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('courses.search')} value={query}
+        onChange={e => setQuery(e.target.value)} aria-label={t('courses.searchAria')} enterKeyHint="search" /></label>
+      {!searching && <div className="seg" role="tablist" aria-label={t('courses.band')}>
         {tabs.map(t => (
           <button key={t} role="tab" aria-selected={t === band} onClick={() => go(`/courses/${t.toLowerCase()}`)}>
             {t === band && <motion.span layoutId="seg-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
-            <span>{BAND_LABEL[t]}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
+            <span>{bandLabel(t)}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
           </button>))}
       </div>}
-      {searching && results && <p className="helper" role="status">{list.length} course{list.length === 1 ? '' : 's'} within reach match "{query.trim()}" (Safe, Likely and Reach).</p>}
+      {searching && results && <p className="helper" role="status">{t('courses.matches', { n: list.length, q: query.trim() })}</p>}
       {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
-      {results && list.length === 0 && <div className="card"><p className="subtitle">{searching ? 'No course within your reach matches that. Courses you are not eligible for are under "courses hidden".' : 'No courses in this band for your results.'}</p></div>}
+      {results && list.length === 0 && <div className="card"><p className="subtitle">{searching ? t('courses.noSearch') : t('courses.noBand')}</p></div>}
       {list.length > 0 && (
         <Stagger key={searching ? 'search' : band} className="list-card" role="tabpanel">
           {list.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)} />)}
         </Stagger>)}
-      {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>}
+      {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('courses.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
     </>
   );
 }
 
 function CourseRow({ o, animate, onOpen }: { o: OfferingSummary; animate: boolean; onOpen: () => void }) {
-  const gap = o.gapToLatestE4 === null ? '' : `${formatGap(o.gapToLatestE4)} vs last year`;
-  const span = o.limitedHistory ? `${o.yearsUsed} yr${o.yearsUsed > 1 ? 's' : ''} of data` : `${o.yearsUsed} yrs${o.trend !== 'NO_TREND' ? ` · ${TREND_LABEL[o.trend]}` : ''}`;
+  const gap = o.gapToLatestE4 === null ? '' : t('row.vsLast', { gap: formatGap(o.gapToLatestE4) });
+  const span = o.limitedHistory ? (o.yearsUsed === 1 ? t('row.yrData') : t('row.yrsData', { n: o.yearsUsed }))
+    : `${t('row.yrs', { n: o.yearsUsed })}${o.trend !== 'NO_TREND' ? ` · ${trendLabel(o.trend)}` : ''}`;
   return (
     <motion.button variants={animate ? rise : undefined} className="item" onClick={onOpen}>
       <span className={`strip ${o.band}`} aria-hidden="true" />
       <span className="grow">
         <span className="t">{titleCase(o.course)}{o.groupLabel ? ` (${o.group})` : ''}</span>
         <span className="s">{shortInstitution(o.institution)}</span>
-        <span className="m">{[gap, span, o.hasAptitudeTest ? 'aptitude test' : '', o.needsOl ? 'check O/L' : ''].filter(Boolean).join(' · ')}</span>
+        <span className="m">{[gap, span, o.hasAptitudeTest ? t('row.aptitude') : '', o.needsOl ? t('row.checkOl') : ''].filter(Boolean).join(' · ')}</span>
       </span>
-      <span className="sr-only">{BAND_LABEL[o.band]}</span>
+      <span className="sr-only">{bandLabel(o.band)}</span>
       <ChevronRight size={20} className="chev" aria-hidden="true" />
     </motion.button>
   );
@@ -323,18 +326,18 @@ function AddToList({ d, mine, list, setList, go }: { d: OfferingDetail; mine: Of
   const onList = list.some(e => e.uniCode === d.uniCode);
   if (onList) return (
     <div className="row" style={{ flexWrap: 'nowrap' }}>
-      <button className="btn tonal" style={{ flex: 1 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />On my list: #{list.findIndex(e => e.uniCode === d.uniCode) + 1}</button>
-      <button className="btn text" onClick={() => setList(list.filter(e => e.uniCode !== d.uniCode))}>Remove</button>
+      <button className="btn tonal" style={{ flex: 1 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />{t('detail.onList', { n: list.findIndex(e => e.uniCode === d.uniCode) + 1 })}</button>
+      <button className="btn text" onClick={() => setList(list.filter(e => e.uniCode !== d.uniCode))}>{t('detail.remove')}</button>
     </div>);
   const best = mine[0];                                     // FR-302: only offerings the results screen lists as eligible
   const add = () => {
     const r = addToList(list, { uniCode: d.uniCode, group: best?.group ?? 'ALL', course: titleCase(d.course), institution: shortInstitution(d.institution), band: best?.band ?? 'NOT_ENOUGH_DATA' }, !!best);
     if (r.ok) { setList(r.list); setNote(null); }
-    else setNote({ NOT_ELIGIBLE: 'Your subjects do not meet this course\'s rules, so it cannot go on your list.', DUPLICATE: 'Already on your list.', FULL: 'Your list is full (125 courses).' }[r.reason]);
+    else setNote(t(`detail.err.${r.reason}`));
   };
   return (
     <div className="stack" style={{ gap: 6 }}>
-      <button className="btn filled" onClick={add} disabled={!best}><ListOrdered size={18} aria-hidden="true" />{best ? 'Add to my list' : 'Not eligible: cannot add to my list'}</button>
+      <button className="btn filled" onClick={add} disabled={!best}><ListOrdered size={18} aria-hidden="true" />{best ? t('detail.add') : t('detail.notEligible')}</button>
       {note && <p className="helper" role="status">{note}</p>}
     </div>);
 }
@@ -352,59 +355,58 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
     <>
       <section className="detail-hero aurora">
         <div className="row">
-          {mine.map(o => <span key={o.group} className={`pill band-${o.band}`}>{BAND_LABEL[o.band]}{mine.length > 1 ? ` (${o.group})` : ''}</span>)}
-          <span className="pill">{d.hasAptitudeTest ? 'Aptitude test' : 'No aptitude test'}</span>
-          {d.selectionBasis === 'MERIT_ONLY' && <span className="pill">All-island merit</span>}
+          {mine.map(o => <span key={o.group} className={`pill band-${o.band}`}>{bandLabel(o.band)}{mine.length > 1 ? ` (${o.group})` : ''}</span>)}
+          <span className="pill">{d.hasAptitudeTest ? t('detail.aptitude') : t('detail.noAptitude')}</span>
+          {d.selectionBasis === 'MERIT_ONLY' && <span className="pill">{t('detail.merit')}</span>}
         </div>
         <h1>{titleCase(d.course)}</h1>
         <span className="meta">{shortInstitution(d.institution)}{d.duration ? ` · ${shortDuration(d.duration)}` : ''} · {d.uniCode}</span>
         <div className="compare num">
-          <div><b>{formatZ(profile.zE4)}</b><span>Your Z-score</span></div>
-          <div><b>{latest ? (latest.zE4 === null ? 'NQC' : formatZ(latest.zE4)) : '–'}</b><span>Cut-off {latest ? shortYear(latest.academicYear) : ''}, your district</span></div>
+          <div><b>{formatZ(profile.zE4)}</b><span>{t('detail.yourZ')}</span></div>
+          <div><b>{latest ? (latest.zE4 === null ? 'NQC' : formatZ(latest.zE4)) : '–'}</b><span>{t('detail.cutoff', { y: latest ? shortYear(latest.academicYear) : '' })}</span></div>
         </div>
       </section>
 
-      <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(`Explain ${titleCase(d.course)} at ${shortInstitution(d.institution)}: what it needs and what my chances are.`)}`)}>
-        <Sparkles size={18} aria-hidden="true" />Explain this course with Ask ZedPath</button>
+      <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(t('detail.explainQ', { course: titleCase(d.course), inst: shortInstitution(d.institution) }))}`)}>
+        <Sparkles size={18} aria-hidden="true" />{t('detail.explain')}</button>
       <AddToList d={d} mine={mine} list={list} setList={setList} go={go} />
       {compare.includes(d.uniCode)
-        ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare now ({compare.length})</button>
+        ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('detail.compareNow', { n: compare.length })}</button>
         : <button className="btn tonal" disabled={compare.length >= COMPARE_MAX} onClick={() => { setCompare([...compare, d.uniCode]); if (compare.length >= 1) go('/compare'); }}>
-            <Scale size={18} aria-hidden="true" />{compare.length >= COMPARE_MAX ? `Compare is full (${COMPARE_MAX})` : compare.length ? `Compare with ${compare.length === 1 ? 'the other course' : `${compare.length} others`}` : 'Compare'}</button>}
+            <Scale size={18} aria-hidden="true" />{compare.length >= COMPARE_MAX ? t('detail.compareFull', { n: COMPARE_MAX }) : compare.length ? (compare.length === 1 ? t('detail.compareOther') : t('detail.compareOthers', { n: compare.length })) : t('detail.compare')}</button>}
       <section className="card stack" aria-labelledby="needs-h">
-        <h2 id="needs-h" className="title-l">What it needs</h2>
+        <h2 id="needs-h" className="title-l">{t('detail.needs')}</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
           <span key={i} className={line.endsWith(':') ? 'group' : ''}>{line.trim()}</span>))}</div>
-        <p className="section-label">You have</p>
+        <p className="section-label">{t('detail.have')}</p>
         <div className="have">{Object.entries(profile.al).map(([s, g]) => <span key={s}>{g} · {nameOf(s)}</span>)}</div>
         <details className="exact">
-          <summary className="source-link"><ScrollText size={16} aria-hidden="true" />Exact handbook wording · p.{d.requirementCitation.page}</summary>
+          <summary className="source-link"><ScrollText size={16} aria-hidden="true" />{t('detail.wording', { p: d.requirementCitation.page })}</summary>
           <p className="body-m">{d.requirementText}</p>
         </details>
       </section>
       {d.syllabus && <SyllabusCard s={d.syllabus} />}
-      {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />The handbook's wording for this course can be read two ways.
-        ZedPath shows it to you; confirm on the UGC application form, which lists only the courses you are eligible for.</div>}
+      {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />{t('detail.ambiguous')}</div>}
 
       {d.groups.map(g => (
         <section key={g.code} className="card stack">
-          <h2 className="title-l">Cut-offs for your district{d.groups.length > 1 ? ` · ${g.code}` : ''}</h2>
+          <h2 className="title-l">{t('detail.cutoffs')}{d.groups.length > 1 ? ` · ${g.code}` : ''}</h2>
           <CutoffChart history={g.history} zE4={profile.zE4} />
           <details className="exact">
-            <summary className="source-link">All years as a table</summary>
+            <summary className="source-link">{t('detail.table')}</summary>
             <table className="table">
-              <thead><tr><th scope="col">Intake</th><th scope="col">Minimum Z-score</th></tr></thead>
+              <thead><tr><th scope="col">{t('detail.intake')}</th><th scope="col">{t('detail.minZ')}</th></tr></thead>
               <tbody>
-                {g.history.map(h => <tr key={h.academicYear}><td>{h.academicYear}</td><td className="num">{h.zE4 === null ? 'No qualified candidates' : formatZ(h.zE4)}</td></tr>)}
-                <tr className="you"><td>You</td><td className="num">{formatZ(profile.zE4)}</td></tr>
+                {g.history.map(h => <tr key={h.academicYear}><td>{h.academicYear}</td><td className="num">{h.zE4 === null ? t('detail.nqc') : formatZ(h.zE4)}</td></tr>)}
+                <tr className="you"><td>{t('detail.you')}</td><td className="num">{formatZ(profile.zE4)}</td></tr>
               </tbody>
             </table>
           </details>
-          <p className="source">Sources: {[...new Set(g.history.map(h => `${h.citation.label} p.${h.citation.page}`))].join(' · ')}</p>
+          <p className="source">{t('detail.sources', { s: [...new Set(g.history.map(h => `${h.citation.label} p.${h.citation.page}`))].join(' · ') })}</p>
         </section>
       ))}
       {d.otherRequirements && <div className="alert info"><Info size={20} aria-hidden="true" />{d.otherRequirements}</div>}
-      <p className="footer-note">Some courses are not taught in all three languages, so meeting the cut-off does not guarantee selection (UGC cut-off table note).</p>
+      <p className="footer-note">{t('detail.footer')}</p>
     </>
   );
 }
@@ -415,8 +417,8 @@ function Hidden({ results }: { results: ResultsResponse | null }) {
   return (
     <>
       <div className="stack" style={{ gap: 4 }}>
-        <h1 className="screen-title">Why {results.hidden.length} courses are hidden</h1>
-        <p className="subtitle">Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.</p>
+        <h1 className="screen-title">{t('hidden.h', { n: results.hidden.length })}</h1>
+        <p className="subtitle">{t('hidden.sub')}</p>
       </div>
       <Stagger className="list-card">
         {results.hidden.map((h, i) => (
@@ -439,16 +441,16 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
     <>
       <div className="row" style={{ flexWrap: 'nowrap', gap: 14 }}>
         <span className="ic-lg" style={{ background: `color-mix(in srgb, ${g?.tone ?? 'var(--brand)'} 14%, transparent)`, color: g?.tone }}><Icon size={26} aria-hidden="true" /></span>
-        <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{g?.title}</h1><p className="subtitle">{g?.sub}</p></div>
+        <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{t(`rg.${group}` as Key)}</h1><p className="subtitle">{t(`rg.${group}.sub` as Key)}</p></div>
       </div>
-      <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />Checked against official sources on 5 Oct 2026.</p>
+      <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked')}</p>
       {!routes ? <div className="skeleton" /> : (
         <Stagger className="list-card">
           {list.map(r => (
             <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
               <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
                 {r.costText && <span className="m">{r.costText}</span>}</span>
-              {r.openNow && <span className="pill open">Open</span>}
+              {r.openNow && <span className="pill open">{t('routes.open')}</span>}
               <ChevronRight size={20} className="chev" aria-hidden="true" />
             </motion.button>))}
         </Stagger>)}
@@ -459,28 +461,28 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
 function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null }) {
   const r = routes?.find(x => x.id === id);
   if (!routes) return <div className="skeleton" />;
-  if (!r) return <div className="alert error"><TriangleAlert size={20} aria-hidden="true" />Route not found.</div>;
+  if (!r) return <div className="alert error"><TriangleAlert size={20} aria-hidden="true" />{t('routes.notFound')}</div>;
   const g = ROUTE_GROUPS.find(x => x.code === r.group);
   return (
     <>
       <div className="stack" style={{ gap: 8 }}>
-        <div className="row">{r.openNow && <span className="pill open">Open now</span>}<span className="pill band-LIKELY">{g?.title}</span></div>
+        <div className="row">{r.openNow && <span className="pill open">{t('routes.openNow')}</span>}<span className="pill band-LIKELY">{g ? t(`rg.${g.code}` as Key) : ''}</span></div>
         <h1 className="screen-title">{r.name}</h1><p className="subtitle">{r.provider}</p>
       </div>
       {(r.duration || r.costText) && (
         <div className="compare plain num">
-          {r.duration && <div><b>{r.duration}</b><span>Duration</span></div>}
-          {r.costText && <div><b>{r.costText}</b><span>Cost</span></div>}
+          {r.duration && <div><b>{r.duration}</b><span>{t('routes.duration')}</span></div>}
+          {r.costText && <div><b>{r.costText}</b><span>{t('routes.cost')}</span></div>}
         </div>)}
-      {r.intakeTiming && <section className="card stack"><h2 className="title-l">When</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
+      {r.intakeTiming && <section className="card stack"><h2 className="title-l">{t('routes.when')}</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
       <section className="card stack">
-        <h2 className="title-l">Entry requirements</h2>
+        <h2 className="title-l">{t('routes.req')}</h2>
         <p className="body-m" style={{ margin: 0 }}>{r.requirements}</p>
-        <p className="source">Official wording. Source: {r.sourceLocator} · checked {r.retrievedOn}</p>
+        <p className="source">{t('routes.official', { s: r.sourceLocator, d: r.retrievedOn })}</p>
       </section>
       {r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
-      {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">Go to the official website<ExternalLink size={18} aria-hidden="true" /></a>}
-      <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>Open the source document</a>
+      {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">{t('routes.site')}<ExternalLink size={18} aria-hidden="true" /></a>}
+      <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>{t('routes.doc')}</a>
     </>
   );
 }
@@ -494,11 +496,11 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
   const [failed, setFailed] = useState<string | null>(null);
   if (!account.username) return (
     <section className="card stack account-card">
-      <h2 className="title-l">Keep your details in an account</h2>
-      <p className="subtitle">Open ZedPath on any phone or laptop with everything already filled in. Just a username: no email or phone number.</p>
+      <h2 className="title-l">{t('acc.keep')}</h2>
+      <p className="subtitle">{t('acc.keepSub')}</p>
       <div className="row" style={{ flexWrap: 'nowrap' }}>
-        <button className="btn filled" style={{ flex: 1 }} onClick={() => go('/signup')}>Create account</button>
-        <button className="btn text" onClick={() => go('/login')}>Log in</button>
+        <button className="btn filled" style={{ flex: 1 }} onClick={() => go('/signup')}>{t('acc.create')}</button>
+        <button className="btn text" onClick={() => go('/login')}>{t('acc.login')}</button>
       </div>
     </section>);
   return (
@@ -507,24 +509,24 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
         <span className="avatar" aria-hidden="true">{account.username.charAt(0).toUpperCase()}</span>
         <span className="stack" style={{ gap: 0, minWidth: 0 }}>
           <span className="title-l" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.username}</span>
-          <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />Your details are saved to this account</span>
+          <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('acc.saved')}</span>
         </span>
       </div>
-      {account.senior && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><ShieldCheck size={13} aria-hidden="true" />Verified senior · {titleCase(account.senior.course)}, {shortInstitution(account.senior.institution)}, year {account.senior.year}</span>}
+      {account.senior && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><ShieldCheck size={13} aria-hidden="true" />{t('acc.senior', { course: titleCase(account.senior.course), inst: shortInstitution(account.senior.institution), y: account.senior.year })}</span>}
       {account.syncNote && <div className="alert info"><Info size={20} aria-hidden="true" />{account.syncNote}</div>}
       <div className="row">
-        <button className="btn tonal" onClick={account.logOut}><LogOut size={18} aria-hidden="true" />Log out</button>
-        <button className="btn text" onClick={account.logOutEverywhere}>Log out on every device</button>
+        <button className="btn tonal" onClick={account.logOut}><LogOut size={18} aria-hidden="true" />{t('acc.logout')}</button>
+        <button className="btn text" onClick={account.logOutEverywhere}>{t('acc.logoutAll')}</button>
       </div>
       {!confirming
-        ? <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={() => setConfirming(true)}><Trash2 size={18} aria-hidden="true" />Delete my account</button>
-        : <div className="alert error" role="alertdialog" aria-label="Confirm account deletion">
+        ? <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={() => setConfirming(true)}><Trash2 size={18} aria-hidden="true" />{t('acc.delete')}</button>
+        : <div className="alert error" role="alertdialog" aria-label={t('acc.confirmAria')}>
             <TriangleAlert size={20} aria-hidden="true" />
             <span className="stack" style={{ gap: 8 }}>
-              <span>This deletes your account and everything saved in it, for good. It cannot be undone.</span>
+              <span>{t('acc.deleteWarn')}</span>
               <span className="row">
-                <button className="btn filled danger" onClick={() => account.deleteAccount().catch(() => setFailed('Could not delete. Check your connection and try again.'))}>Delete for good</button>
-                <button className="btn text" onClick={() => setConfirming(false)}>Keep my account</button>
+                <button className="btn filled danger" onClick={() => account.deleteAccount().catch(() => setFailed(t('acc.deleteFail')))}>{t('acc.deleteYes')}</button>
+                <button className="btn text" onClick={() => setConfirming(false)}>{t('acc.deleteNo')}</button>
               </span>
               {failed && <span>{failed}</span>}
             </span>
@@ -544,57 +546,53 @@ function TestNotification() {
   return (
     <div className="stack" style={{ gap: 6 }}>
       <button className="btn tonal" onClick={send} disabled={state === 'sending'}><BellRing size={18} aria-hidden="true" />
-        {state === 'sending' ? 'Sending…' : 'Send a test notification'}</button>
-      {state === 'sent' && <p className="helper" role="status">Sent. Check your notifications.</p>}
+        {state === 'sending' ? t('me.sending') : t('me.test')}</button>
+      {state === 'sent' && <p className="helper" role="status">{t('me.sent')}</p>}
       {!['idle', 'sending', 'sent'].includes(state) && <p className="helper" role="status">{state}</p>}
     </div>
   );
 }
 
-function Me({ profile, meta, extras, go, onClear, account }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
-  onClear: () => void; account: AccountControls }) {
+function Me({ profile, meta, extras, go, onClear, account, lang, setLang }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
+  onClear: () => void; account: AccountControls; lang: Lang; setLang: (l: Lang) => void }) {
   const install = useInstallPrompt();
   return (
     <>
       {profile && <section className="hero aurora" style={{ gap: 6 }}>
-        <span className="eyebrow">Your results</span>
+        <span className="eyebrow">{t('me.results')}</span>
         <h1 className="num">Z {formatZ(profile.zE4)}</h1>
         <span className="meta">{profileLine(profile, meta).split(' · ').slice(0, 2).join(' · ')}</span>
         <div className="row" style={{ marginTop: 8 }}>{Object.entries(profile.al).map(([s, g]) => <span key={s} className="pill">{g} · {nameOf(s)}</span>)}</div>
       </section>}
       <section className="card stack">
-        <h2 className="title-l">Beyond grades</h2>
-        {extras.achievements.length === 0 && extras.interests.length === 0 && <p className="subtitle">Nothing added yet. Achievements can open special intakes.</p>}
-        {extras.achievements.map(a => <span key={a.id} className="row body-m" style={{ flexWrap: 'nowrap' }}><Trophy size={18} aria-hidden="true" style={{ color: 'var(--reach)', flex: 'none' }} />{a.activity} · {a.level.toLowerCase()} · {a.year}</span>)}
-        {extras.interests.length > 0 && <div className="have">{extras.interests.map(t => <span key={t}>{t}</span>)}</div>}
+        <h2 className="title-l">{t('me.beyond')}</h2>
+        {extras.achievements.length === 0 && extras.interests.length === 0 && <p className="subtitle">{t('me.nothing')}</p>}
+        {extras.achievements.map(a => <span key={a.id} className="row body-m" style={{ flexWrap: 'nowrap' }}><Trophy size={18} aria-hidden="true" style={{ color: 'var(--reach)', flex: 'none' }} />{a.activity} · {t(`level.${a.level}`)} · {a.year}</span>)}
+        {extras.interests.length > 0 && <div className="have">{extras.interests.map(i => <span key={i}>{t(`interest.${i}` as Key)}</span>)}</div>}
       </section>
-      <button className="btn tonal" onClick={() => go('/about')}><Pencil size={18} aria-hidden="true" />Edit my details</button>
-      <p className="section-label">Account</p>
+      <button className="btn tonal" onClick={() => go('/about')}><Pencil size={18} aria-hidden="true" />{t('me.edit')}</button>
+      <p className="section-label">{t('me.account')}</p>
       <AccountCard account={account} go={go} />
-      <p className="section-label">Language</p>
-      <div className="chips" role="radiogroup" aria-label="Language">
-        <button className="chip" role="radio" aria-checked="false" disabled lang="si">සිංහල</button>
-        <button className="chip" role="radio" aria-checked="false" disabled lang="ta">தமிழ்</button>
-        <button className="chip" role="radio" aria-checked="true" lang="en">English</button>
+      <p className="section-label">{t('me.language')}</p>
+      <div className="chips" role="radiogroup" aria-label={t('me.language')}>
+        {LANGS.map(l => <button key={l.code} className="chip" role="radio" aria-checked={lang === l.code} lang={l.code} onClick={() => setLang(l.code)}>{l.name}</button>)}
       </div>
-      <p className="helper">Sinhala and Tamil are being translated and checked by native speakers.</p>
-      <p className="section-label">App</p>
-      {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />Install ZedPath on this phone</button>
-        : <p className="helper">{install.installed ? 'ZedPath is installed on this phone.' : 'To install: open your browser menu and choose "Add to Home screen" or "Install app".'}</p>}
+      <p className="helper">{t('lang.note')}</p>
+      <p className="section-label">{t('me.app')}</p>
+      {install.canInstall ? <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />{t('paths.install')}</button>
+        : <p className="helper">{install.installed ? t('me.installed') : t('me.howInstall')}</p>}
       <TestNotification />
-      <p className="section-label">Privacy</p>
-      <p className="body-m muted" style={{ margin: 0 }}>{account.username
-        ? 'Your results, achievements and interests are kept on this phone and in your account, under your username only. Delete your account above to remove them from ZedPath for good.'
-        : 'Your results, achievements and interests are stored only on this phone. They are sent to ZedPath only to calculate your options and are not kept.'}</p>
+      <p className="section-label">{t('me.privacy')}</p>
+      <p className="body-m muted" style={{ margin: 0 }}>{account.username ? t('me.privAccount') : t('me.privLocal')}</p>
       <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={onClear}><Trash2 size={18} aria-hidden="true" />
-        {account.username ? 'Log out and clear this phone' : 'Delete everything on this phone'}</button>
+        {account.username ? t('me.clearAccount') : t('me.clearLocal')}</button>
     </>
   );
 }
 
 // ---------------------------------------------------------------- helpers
 function profileLine(p: ProfileInput, meta: Meta | null): string {
-  const stream = meta?.streams.find(s => s.code === p.stream)?.name ?? p.stream;
+  const stream = meta?.streams.some(s => s.code === p.stream) ? t(`stream.${p.stream}` as Key) : p.stream;
   const district = titleCase(meta?.districts.find(d => d.code === p.district)?.name ?? p.district);
   return `${stream} · ${district} · Z ${formatZ(p.zE4)}`;
 }

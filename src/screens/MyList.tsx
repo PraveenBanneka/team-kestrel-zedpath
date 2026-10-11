@@ -7,8 +7,10 @@ import { Check, ChevronRight, ClipboardCopy, GripVertical, ListOrdered, ListPlus
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
 import { LIST_MAX, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
+import { t } from '../i18n/index.ts';
+import { Rich } from '../i18n/Rich.tsx';
 
-const BAND_LABEL: Record<Band, string> = { SAFE: 'Safe', LIKELY: 'Likely', REACH: 'Reach', OUT_OF_RANGE: 'Out of range', NOT_ENOUGH_DATA: 'Not enough data' };
+const bandLabel = (b: Band) => t(`band.${b}`);
 
 /** The list with each entry's band taken from the latest results (the profile may have changed since it was added). */
 export function withCurrentBands(list: ListEntry[], results: ResultsResponse | null): (ListEntry & { stale: boolean })[] {
@@ -30,11 +32,11 @@ function Row({ e, i, n, onMove, onRemove, open }: { e: ListEntry & { stale: bool
       <button type="button" className="grow list-main" onClick={open}>
         <span className="t">{e.course}</span>
         <span className="s">{e.institution} · {e.uniCode}</span>
-        {e.stale ? <span className="pill band-OUT_OF_RANGE">No longer eligible with your results</span>
-          : <span className={`pill band-${e.band}`}>{BAND_LABEL[e.band]}</span>}
+        {e.stale ? <span className="pill band-OUT_OF_RANGE">{t('list.stale')}</span>
+          : <span className={`pill band-${e.band}`}>{bandLabel(e.band)}</span>}
       </button>
-      <button type="button" className="icon-btn remove" aria-label={`Remove ${e.course}`} onClick={onRemove}><X size={18} /></button>
-      <button type="button" className="grip" onPointerDown={ev => controls.start(ev)} aria-label={`Reorder ${e.course}: drag, or use the arrow keys`}
+      <button type="button" className="icon-btn remove" aria-label={t('list.removeAria', { c: e.course })} onClick={onRemove}><X size={18} /></button>
+      <button type="button" className="grip" onPointerDown={ev => controls.start(ev)} aria-label={t('list.reorderAria', { c: e.course })}
         onKeyDown={ev => {
           if (ev.key === 'ArrowUp' && i > 0) { ev.preventDefault(); onMove(i - 1); }
           if (ev.key === 'ArrowDown' && i < n - 1) { ev.preventDefault(); onMove(i + 1); }
@@ -55,19 +57,19 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
   const more = missing && missingTotal > 0 && (
     <button className="card list-entry" onClick={() => go(`/courses/${missing.SAFE ? 'safe' : missing.LIKELY ? 'likely' : 'reach'}`)}>
       <span className="ic" style={{ background: 'var(--safe-bg)', color: 'var(--safe)' }}><ListPlus size={22} aria-hidden="true" /></span>
-      <span className="grow"><span className="t">{missingTotal} more course{missingTotal > 1 ? 's' : ''} you can reach</span>
-        <span className="s num">{missing.SAFE} Safe · {missing.LIKELY} Likely · {missing.REACH} Reach, not on your list yet. Adding more raises your chance of a place.</span></span>
+      <span className="grow"><span className="t">{missingTotal === 1 ? t('list.moreOne') : t('list.more', { n: missingTotal })}</span>
+        <span className="s num">{t('list.moreSub', { s: missing.SAFE, l: missing.LIKELY, r: missing.REACH })}</span></span>
       <ChevronRight size={20} className="chev" aria-hidden="true" />
     </button>);
 
   const copy = async () => { try { await navigator.clipboard.writeText(uniCodesText(list)); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch { /* blocked */ } };
   if (list.length === 0) return (
     <>
-      <h1 className="screen-title">My list</h1>
+      <h1 className="screen-title">{t('list.h')}</h1>
       <div className="card stack">
         <ListOrdered size={28} aria-hidden="true" style={{ color: 'var(--brand-500)' }} />
-        <p className="subtitle">Build your UGC preference list here. Open any course and tap <b>Add to my list</b>, then put them in the order you want them most.</p>
-        <button className="btn filled" onClick={() => go('/courses/safe')}>Browse my courses</button>
+        <p className="subtitle"><Rich text={t('list.emptySub')} /></p>
+        <button className="btn filled" onClick={() => go('/courses/safe')}>{t('list.browse')}</button>
       </div>
       {more}
     </>);
@@ -75,27 +77,27 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
   return (
     <>
       <div className="stack" style={{ gap: 4 }}>
-        <h1 className="screen-title">My list</h1>
-        <p className="subtitle"><span className="num">{list.length}</span> of {LIST_MAX}. Most-wanted first: the UGC places you in the highest course on your list that you qualify for.</p>
+        <h1 className="screen-title">{t('list.h')}</h1>
+        <p className="subtitle">{t('list.count', { n: list.length, max: LIST_MAX })}</p>
       </div>
 
       {warn.safeAbove.length > 0 && !preview && (
         <div className="alert warn" role="status"><TriangleAlert size={20} aria-hidden="true" />
           <span className="stack" style={{ gap: 8 }}>
-            <span><b>{warn.safeAbove[0].course}</b>{warn.safeAbove.length > 1 ? ` and ${warn.safeAbove.length - 1} more` : ''} {warn.safeAbove.length > 1 ? 'are' : 'is'} Safe, so the Likely and Reach courses listed below {warn.safeAbove.length > 1 ? 'them' : 'it'} are unlikely to be reached.</span>
-            <button className="btn tonal" style={{ alignSelf: 'flex-start' }} onClick={() => setPreview(proposeOrder(shown))}>Fix the order</button>
+            <span>{warn.safeAbove.length > 1 ? t('list.safeAboveMany', { course: warn.safeAbove[0].course, n: warn.safeAbove.length - 1 }) : t('list.safeAbove', { course: warn.safeAbove[0].course })}</span>
+            <button className="btn tonal" style={{ alignSelf: 'flex-start' }} onClick={() => setPreview(proposeOrder(shown))}>{t('list.fix')}</button>
           </span>
         </div>)}
-      {warn.noSafe && <div className="alert error" role="status"><TriangleAlert size={20} aria-hidden="true" />No Safe course on your list yet. Without one you may not be placed anywhere: add at least one Safe course.</div>}
+      {warn.noSafe && <div className="alert error" role="status"><TriangleAlert size={20} aria-hidden="true" />{t('list.noSafe')}</div>}
 
       {preview && (
         <div className="card stack">
-          <h2 className="title-l">Suggested order</h2>
-          <p className="subtitle">Your Likely and Reach courses first, in your order; then your Safe courses, in your order.</p>
-          <ol className="preview-list">{preview.map(e => <li key={e.uniCode}>{e.course} <span className="helper">· {e.uniCode} · {BAND_LABEL[e.band]}</span></li>)}</ol>
+          <h2 className="title-l">{t('list.suggested')}</h2>
+          <p className="subtitle">{t('list.suggestedSub')}</p>
+          <ol className="preview-list">{preview.map(e => <li key={e.uniCode}>{e.course} <span className="helper">· {e.uniCode} · {bandLabel(e.band)}</span></li>)}</ol>
           <div className="row">
-            <button className="btn filled" onClick={() => { setList(preview.map(({ ...e }) => e)); setPreview(null); }}><Check size={18} aria-hidden="true" />Use this order</button>
-            <button className="btn text" onClick={() => setPreview(null)}>Keep mine</button>
+            <button className="btn filled" onClick={() => { setList(preview.map(({ ...e }) => e)); setPreview(null); }}><Check size={18} aria-hidden="true" />{t('list.use')}</button>
+            <button className="btn text" onClick={() => setPreview(null)}>{t('list.keep')}</button>
           </div>
         </div>)}
 
@@ -105,9 +107,9 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
       </Reorder.Group>
 
       {more}
-      <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare courses</button>
-      <button className="btn tonal" onClick={copy}>{copied ? <><Check size={18} aria-hidden="true" />Copied {list.length} Uni-Codes</> : <><ClipboardCopy size={18} aria-hidden="true" />Copy Uni-Codes in this order</>}</button>
-      <p className="helper">Paste them into the UGC online application in the same order. Your list is saved on this phone.</p>
+      <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('list.compare')}</button>
+      <button className="btn tonal" onClick={copy}>{copied ? <><Check size={18} aria-hidden="true" />{t('list.copied', { n: list.length })}</> : <><ClipboardCopy size={18} aria-hidden="true" />{t('list.copy')}</>}</button>
+      <p className="helper">{t('list.paste')}</p>
     </>
   );
 }

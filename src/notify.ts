@@ -4,12 +4,14 @@
 // - In a browser or the installed PWA, it is shown through the service worker.
 // Either way, exactly one: a fixed id/tag means a second tap replaces the notification instead of adding one.
 
+import { t } from './i18n/index.ts';
+
 export type TestResult = { ok: true } | { ok: false; reason: string };
 const TEST_TAG = 'zedpath-test';
 const TEST_ID = 1;
 const TITLE = 'ZedPath';
 const BODY = 'Test notification: deadline reminders will look like this.';
-const OFF = 'Notifications are turned off for ZedPath. Turn them on in your phone settings, then try again.';
+const off = () => t('jr.notifOff');
 
 interface LocalNotificationsPlugin {
   checkPermissions(): Promise<{ display: string }>;
@@ -37,11 +39,11 @@ export interface Reminder { id: number; title: string; body: string; at: Date }
  *  a reminder). Returns the ids now scheduled, or the reason it could not. */
 export async function replaceReminders(previous: number[], reminders: Reminder[]): Promise<{ ok: true; ids: number[] } | { ok: false; reason: string }> {
   const native = nativeNotifications();
-  if (!native) return { ok: false, reason: 'Reminders work in the ZedPath Android app. Here, add the dates to your calendar instead.' };
+  if (!native) return { ok: false, reason: t('jr.noNative') };
   if (reminders.length) {
     let { display } = await native.checkPermissions();
     if (display !== 'granted') ({ display } = await native.requestPermissions());
-    if (display !== 'granted') return { ok: false, reason: OFF };
+    if (display !== 'granted') return { ok: false, reason: off() };
   }
   if (previous.length) await native.cancel({ notifications: previous.map(id => ({ id })) });
   if (reminders.length) await native.schedule({ notifications: reminders.map(r => ({ id: r.id, title: r.title, body: r.body,
@@ -56,7 +58,7 @@ export async function sendTestNotification(): Promise<TestResult> {
   if (native) {
     let { display } = await native.checkPermissions();
     if (display !== 'granted') ({ display } = await native.requestPermissions());
-    if (display !== 'granted') return { ok: false, reason: OFF };
+    if (display !== 'granted') return { ok: false, reason: off() };
     // isExactNotification: false - the plugin otherwise treats every notification as an exact alarm and opens Android's
     // "Alarms and reminders" settings to ask for that access (Praveen hit this on 1.1.0). ZedPath never needs exact alarms.
     await native.schedule({ notifications: [{ id: TEST_ID, title: TITLE, body: BODY, smallIcon: 'ic_stat_zedpath', iconColor: '#24478C',
@@ -66,7 +68,7 @@ export async function sendTestNotification(): Promise<TestResult> {
   if (!notificationsSupported()) return { ok: false, reason: 'This browser cannot show notifications.' };
   let permission = Notification.permission;
   if (permission === 'default') permission = await Notification.requestPermission();
-  if (permission !== 'granted') return { ok: false, reason: OFF };
+  if (permission !== 'granted') return { ok: false, reason: off() };
   const reg = await Promise.race([
     navigator.serviceWorker.ready,
     new Promise<null>(r => setTimeout(() => r(null), 4000)),

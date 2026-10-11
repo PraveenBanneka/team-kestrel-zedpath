@@ -7,11 +7,12 @@ import type { ProfileInput } from '../../shared/api.ts';
 import { QUESTION_MAX, type AskResponse } from '../../shared/ask.ts';
 import { askZedPath } from '../ask.ts';
 import { layoutAnswer } from '../../shared/answer.ts';
+import { t } from '../i18n/index.ts';
 
 export interface AskTurn { question: string; reply: AskResponse | null; error: string | null }
 
-const GENERAL = ['When do UGC applications usually open?', 'What is the interest-free student loan?',
-  'Which government job exams accept A/L results?', 'What does Z-score mean for university entry?'];
+// Suggestions are asked in the interface language: Ask ZedPath answers in the language of the question.
+const general = () => [t('ask.q.ugc'), t('ask.q.loan'), t('ask.q.jobs'), t('ask.q.z')];
 
 /** Renders an answer as one lead line and short bullets (shared/answer.ts makes that layout even from one long
  *  paragraph), with **bold** and [n] as tappable citation chips. */
@@ -20,7 +21,7 @@ function AnswerText({ text, onCite }: { text: string; onCite: (n: number) => voi
     if (/^\*\*[^*]+\*\*$/.test(part)) return <b key={`${key}-${i}`}>{part.slice(2, -2)}</b>;
     const cite = part.match(/^\[(\d+(?:\s*,\s*\d+)*)\]$/);
     if (cite) return cite[1].split(',').map(n => Number(n.trim())).map(n =>
-      <button key={`${key}-${i}-${n}`} type="button" className="cite" onClick={() => onCite(n)} aria-label={`Source ${n}`}>{n}</button>);
+      <button key={`${key}-${i}-${n}`} type="button" className="cite" onClick={() => onCite(n)} aria-label={t('ask.source', { n })}>{n}</button>);
     return <span key={`${key}-${i}`}>{part}</span>;
   });
   const { lead, bullets, rest } = layoutAnswer(text);
@@ -39,7 +40,7 @@ function Reply({ reply }: { reply: AskResponse }) {
       <AnswerText text={reply.answer} onCite={n => setOpen(open === n ? null : n)} />
       {reply.engineFacts.length > 0 && (
         <div className="facts">
-          <span className="facts-h"><ShieldCheck size={16} aria-hidden="true" />Checked against your results by ZedPath</span>
+          <span className="facts-h"><ShieldCheck size={16} aria-hidden="true" />{t('ask.checked')}</span>
           {reply.engineFacts.map((f, i) => <span key={i} className="body-m">{f}</span>)}
         </div>)}
       {reply.citations.length > 0 && (
@@ -54,7 +55,7 @@ function Reply({ reply }: { reply: AskResponse }) {
               {open === c.n && (
                 <div className="source-quote">
                   <p>“{c.quote}…”</p>
-                  {c.url && <a className="source-link" href={c.url} target="_blank" rel="noopener">Open the official source <ExternalLink size={13} aria-hidden="true" /></a>}
+                  {c.url && <a className="source-link" href={c.url} target="_blank" rel="noopener">{t('ask.openSource')} <ExternalLink size={13} aria-hidden="true" /></a>}
                 </div>)}
             </div>))}
         </div>)}
@@ -85,42 +86,42 @@ export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsume
   useEffect(() => { if (initialQuestion) { onConsumedInitial(); void send(initialQuestion); } }, [initialQuestion]);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, [turns]);
 
-  const suggestions = profile ? ['What do I need for Medicine?', 'Can I do Computer Science?', ...GENERAL.slice(0, 3)] : GENERAL;
+  const suggestions = profile ? [t('ask.q.medicine'), t('ask.q.cs'), ...general().slice(0, 3)] : general();
   const submit = (e: FormEvent) => { e.preventDefault(); void send(q); };
   return (
     <>
       <div className="row" style={{ flexWrap: 'nowrap', gap: 14 }}>
         <span className="ic-lg aurora" aria-hidden="true"><Sparkles size={26} /></span>
         <div className="stack" style={{ gap: 2 }}>
-          <h1 className="screen-title">Ask ZedPath</h1>
-          <p className="subtitle">Answers from the UGC handbook 2025/26 and official sources, with the page they came from. Ask in English, සිංහල or தமிழ்.</p>
+          <h1 className="screen-title">{t('title.ask')}</h1>
+          <p className="subtitle">{t('ask.sub')}</p>
         </div>
       </div>
 
       {turns.length === 0 && (
         <div className="stack" style={{ gap: 10 }}>
-          <p className="section-label">Try asking</p>
+          <p className="section-label">{t('ask.try')}</p>
           <div className="chips">{suggestions.map(s => <button key={s} type="button" className="chip" onClick={() => void send(s)}>{s}</button>)}</div>
-          {!profile && <p className="helper">Enter your results in Me to get answers about your own chances.</p>}
+          {!profile && <p className="helper">{t('ask.noProfile')}</p>}
         </div>)}
 
       <div className="stack" style={{ gap: 14 }}>
-        {turns.map((t, i) => (
+        {turns.map((turn, i) => (
           <div key={i} className="stack" style={{ gap: 10 }}>
-            <motion.div className="bubble-q" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>{t.question}</motion.div>
-            {!t.reply && !t.error && <div className="card bubble-a"><div className="thinking"><Sparkles size={16} aria-hidden="true" />Reading the handbook…</div></div>}
-            {t.error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{t.error}</div>}
-            {t.reply && <motion.div className="card bubble-a" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><Reply reply={t.reply} /></motion.div>}
+            <motion.div className="bubble-q" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>{turn.question}</motion.div>
+            {!turn.reply && !turn.error && <div className="card bubble-a"><div className="thinking"><Sparkles size={16} aria-hidden="true" />{t('ask.thinking')}</div></div>}
+            {turn.error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{turn.error}</div>}
+            {turn.reply && <motion.div className="card bubble-a" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><Reply reply={turn.reply} /></motion.div>}
           </div>))}
         <div ref={endRef} />
       </div>
 
       <form className="composer" onSubmit={submit}>
-        <input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder="Ask about courses, rules or dates" maxLength={QUESTION_MAX}
-          aria-label="Your question" enterKeyHint="send" />
-        <button className="send" type="submit" disabled={busy || !q.trim()} aria-label="Send"><ArrowUp size={22} /></button>
+        <input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder={t('ask.placeholder')} maxLength={QUESTION_MAX}
+          aria-label={t('ask.aria')} enterKeyHint="send" />
+        <button className="send" type="submit" disabled={busy || !q.trim()} aria-label={t('ask.send')}><ArrowUp size={22} /></button>
       </form>
-      <p className="fineprint" style={{ textAlign: 'center' }}>Ask ZedPath can make mistakes. Tap a number to check the page it used.</p>
+      <p className="fineprint" style={{ textAlign: 'center' }}>{t('ask.fine')}</p>
     </>
   );
 }

@@ -17,8 +17,10 @@ export interface GroupSummary {
   id: number | null;                             // null until someone joins (groups are created on first join)
   kind: 'COURSE' | 'BATCH';
   courseCode: string | null;
-  title: string;
+  title: string;                                 // English, for logs and tests; the phone words its own from name
   subtitle: string;
+  name: string;                                  // the course name, or "stream · district" for a batch
+  universities: number;                          // COURSE: how many universities offer it
   members: number;
   joined: boolean;
 }

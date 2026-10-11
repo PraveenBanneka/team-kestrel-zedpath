@@ -8,6 +8,8 @@ import { MESSAGE_MAX, REPORT_REASONS, type ChatMessage, type GroupSummary, type 
 import type { ListEntry } from '../../shared/list.ts';
 import { ApiFailure } from '../account.ts';
 import { Stagger, rise } from '../ui.tsx';
+import { locale, t } from '../i18n/index.ts';
+import { Rich } from '../i18n/Rich.tsx';
 
 async function call<T>(method: string, path: string, body?: unknown): Promise<T> {
   let r: Response;
@@ -19,7 +21,11 @@ async function call<T>(method: string, path: string, body?: unknown): Promise<T>
   return data as T;
 }
 
-const REASON_LABEL: Record<ReportReason, string> = { HARMFUL: 'Harmful or unkind', WRONG_INFO: 'Wrong information', SPAM: 'Spam or advertising', OTHER: 'Something else' };
+const reasonLabel = (r: ReportReason) => t(`reason.${r}`);
+const title = (g: GroupSummary) => g.kind === 'COURSE' ? t('gr.waiting', { course: g.name }) : g.name;
+const subtitle = (g: GroupSummary) => g.kind === 'BATCH' ? t('gr.batchSub')
+  : g.universities === 1 ? t('gr.courseSubOne', { code: g.courseCode ?? '' }) : t('gr.courseSub', { code: g.courseCode ?? '', n: g.universities });
+const members = (n: number) => n === 1 ? t('gr.member') : t('gr.members', { n });
 
 export function GroupsScreen({ loggedIn, list, go }: { loggedIn: boolean; list: ListEntry[]; go: (to: string) => void }) {
   const [data, setData] = useState<GroupsResponse | null>(null);
@@ -35,11 +41,11 @@ export function GroupsScreen({ loggedIn, list, go }: { loggedIn: boolean; list: 
     <>
       <Intro />
       <section className="card stack">
-        <h2 className="title-l">Groups need an account</h2>
-        <p className="subtitle">So every member is a real person who can be reported or blocked. Just a username: no email or phone number.</p>
+        <h2 className="title-l">{t('gr.needAcc')}</h2>
+        <p className="subtitle">{t('gr.needAccSub')}</p>
         <div className="row" style={{ flexWrap: 'nowrap' }}>
-          <button className="btn filled" style={{ flex: 1 }} onClick={() => go('/signup')}>Create account</button>
-          <button className="btn text" onClick={() => go('/login')}>Log in</button>
+          <button className="btn filled" style={{ flex: 1 }} onClick={() => go('/signup')}>{t('acc.create')}</button>
+          <button className="btn text" onClick={() => go('/login')}>{t('acc.login')}</button>
         </div>
       </section>
     </>);
@@ -59,27 +65,27 @@ export function GroupsScreen({ loggedIn, list, go }: { loggedIn: boolean; list: 
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
       {!data && !error && <><div className="skeleton" /><div className="skeleton" /></>}
       {joined.length > 0 && (<>
-        <p className="section-label">Your groups</p>
+        <p className="section-label">{t('gr.yours')}</p>
         <Stagger className="list-card">{joined.map(g => (
           <motion.button key={g.id} variants={rise} className="item" onClick={() => go(`/group/${g.id}`)}>
             <span className="ic" style={{ background: 'var(--likely-bg)', color: 'var(--likely)' }}><Users size={20} aria-hidden="true" /></span>
-            <span className="grow"><span className="t">{g.title}</span><span className="s">{g.subtitle}</span><span className="m num">{g.members} member{g.members === 1 ? '' : 's'}</span></span>
+            <span className="grow"><span className="t">{title(g)}</span><span className="s">{subtitle(g)}</span><span className="m num">{members(g.members)}</span></span>
             <ChevronRight size={20} className="chev" aria-hidden="true" />
           </motion.button>))}</Stagger>
       </>)}
       {data && (<>
-        <p className="section-label">{joined.length ? 'More groups for you' : 'Groups for you'}</p>
-        {suggested.length === 0 && <div className="card"><p className="subtitle">Add courses to My list to see a group for each of them.</p></div>}
+        <p className="section-label">{joined.length ? t('gr.more') : t('gr.for')}</p>
+        {suggested.length === 0 && <div className="card"><p className="subtitle">{t('gr.addCourses')}</p></div>}
         <Stagger className="list-card">{suggested.map(g => (
           <motion.div key={`${g.kind}:${g.courseCode}`} variants={rise} className="item" style={{ cursor: 'default' }}>
             <span className="ic" style={{ background: 'var(--safe-bg)', color: 'var(--safe)' }}><Users size={20} aria-hidden="true" /></span>
-            <span className="grow"><span className="t">{g.title}</span><span className="s">{g.subtitle}</span><span className="m num">{g.members ? `${g.members} member${g.members === 1 ? '' : 's'}` : 'Be the first to join'}</span></span>
-            <button className="btn tonal" onClick={() => void join(g)} disabled={busy !== null}>{busy === `${g.kind}:${g.courseCode ?? ''}` ? 'Joining…' : 'Join'}</button>
+            <span className="grow"><span className="t">{title(g)}</span><span className="s">{subtitle(g)}</span><span className="m num">{g.members ? members(g.members) : t('gr.first')}</span></span>
+            <button className="btn tonal" onClick={() => void join(g)} disabled={busy !== null}>{busy === `${g.kind}:${g.courseCode ?? ''}` ? t('gr.joining') : t('gr.join')}</button>
           </motion.div>))}</Stagger>
-        {data.role === 'STUDENT' && !data.groups.some(g => g.kind === 'BATCH') && <p className="helper">Your A/L batch group appears once your results are saved to your account.</p>}
+        {data.role === 'STUDENT' && !data.groups.some(g => g.kind === 'BATCH') && <p className="helper">{t('gr.batchLater')}</p>}
       </>)}
       <p className="footer-note"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />
-        Seniors with the <b>verified</b> badge were checked by the ZedPath team. Messages are screened automatically; report anything wrong.</p>
+        <Rich text={t('gr.footer')} /></p>
     </>
   );
 }
@@ -87,8 +93,8 @@ export function GroupsScreen({ loggedIn, list, go }: { loggedIn: boolean; list: 
 function Intro() {
   return (
     <div className="stack" style={{ gap: 4 }}>
-      <h1 className="screen-title">Don't decide alone</h1>
-      <p className="subtitle">Talk to students aiming for the same course, your A/L batch, and verified seniors already studying it.</p>
+      <h1 className="screen-title">{t('gr.introH')}</h1>
+      <p className="subtitle">{t('gr.introSub')}</p>
     </div>);
 }
 
@@ -108,7 +114,7 @@ export function GroupRoomScreen({ id, username, go }: { id: number; username: st
     const sock = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/groups/${id}/live`);
     ws.current = sock; setState('connecting');
     sock.onopen = () => { setState('open'); setError(null); };
-    sock.onclose = ev => { setState('closed'); if (ev.code === 1008) setError('Your account was deleted.'); };
+    sock.onclose = ev => { setState('closed'); if (ev.code === 1008) setError(t('gr.deleted')); };
     sock.onmessage = ev => {
       const f = JSON.parse(String(ev.data)) as ServerFrame;
       if (f.type === 'history') setMsgs(f.messages);
@@ -130,12 +136,12 @@ export function GroupRoomScreen({ id, username, go }: { id: number; username: st
   };
   const report = async (m: ChatMessage, reason: ReportReason) => {
     setMenu(null);
-    try { await call('POST', `/groups/${id}/report`, { messageId: m.id, reason }); setNote('Reported. Thank you: messages reported by several members are hidden.'); }
+    try { await call('POST', `/groups/${id}/report`, { messageId: m.id, reason }); setNote(t('gr.reported')); }
     catch (x) { setNote((x as Error).message); }
   };
   const block = async (m: ChatMessage) => {
     setMenu(null);
-    try { await call('POST', '/blocks', { username: m.author }); setHiddenAuthors(a => [...a, m.author]); setNote(`Blocked ${m.author}. You will not see their messages.`); }
+    try { await call('POST', '/blocks', { username: m.author }); setHiddenAuthors(a => [...a, m.author]); setNote(t('gr.blocked', { u: m.author })); }
     catch (x) { setNote((x as Error).message); }
   };
   const leave = async () => { try { await call('POST', `/groups/${id}/leave`); go('/groups'); } catch (x) { setNote((x as Error).message); } };
@@ -143,27 +149,27 @@ export function GroupRoomScreen({ id, username, go }: { id: number; username: st
   const shown = msgs.filter(m => !hiddenAuthors.includes(m.author));
   return (
     <>
-      <div className="alert info" role="note"><ShieldCheck size={20} aria-hidden="true" /><span>Be kind and stay on topic. Never share your phone number, address or passwords. Report anything wrong.</span></div>
-      {state === 'closed' && !error && <div className="alert warn" role="status"><TriangleAlert size={20} aria-hidden="true" /><span className="stack" style={{ gap: 6 }}>Disconnected.<button className="btn tonal" style={{ alignSelf: 'flex-start' }} onClick={() => setAttempt(a => a + 1)}>Reconnect</button></span></div>}
+      <div className="alert info" role="note"><ShieldCheck size={20} aria-hidden="true" /><span>{t('gr.rules')}</span></div>
+      {state === 'closed' && !error && <div className="alert warn" role="status"><TriangleAlert size={20} aria-hidden="true" /><span className="stack" style={{ gap: 6 }}>{t('gr.disconnected')}<button className="btn tonal" style={{ alignSelf: 'flex-start' }} onClick={() => setAttempt(a => a + 1)}>{t('gr.reconnect')}</button></span></div>}
       {state === 'connecting' && <div className="skeleton" style={{ height: 80 }} />}
-      {state !== 'connecting' && shown.length === 0 && <div className="card"><p className="subtitle">No messages yet. Say hello and ask what you want to know.</p></div>}
+      {state !== 'connecting' && shown.length === 0 && <div className="card"><p className="subtitle">{t('gr.empty')}</p></div>}
       <div className="stack chat" style={{ gap: 10 }}>
         {shown.map(m => {
           const mine = m.author === username;
           return (
             <motion.div key={m.id} className={`card stack msg ${mine ? 'mine' : ''}`} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
               <div className="row" style={{ flexWrap: 'nowrap', gap: 6, alignItems: 'center' }}>
-                <span className="title-s grow" style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}>{mine ? 'You' : m.author}</span>
-                <span className="helper num">{new Date(m.at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</span>
-                {!mine && <button className="icon-btn" aria-label={`Report or block ${m.author}`} aria-expanded={menu === m.id} onClick={() => setMenu(menu === m.id ? null : m.id)}><Flag size={16} /></button>}
+                <span className="title-s grow" style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}>{mine ? t('gr.you') : m.author}</span>
+                <span className="helper num">{new Date(m.at).toLocaleTimeString(locale(), { hour: '2-digit', minute: '2-digit' })}</span>
+                {!mine && <button className="icon-btn" aria-label={t('gr.reportAria', { u: m.author })} aria-expanded={menu === m.id} onClick={() => setMenu(menu === m.id ? null : m.id)}><Flag size={16} /></button>}
               </div>
               {m.badge && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><BadgeCheck size={13} aria-hidden="true" />{m.badge}</span>}
               <p className="body-m" style={{ margin: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{m.body}</p>
               {menu === m.id && (
                 <div className="stack" style={{ gap: 6 }}>
-                  <span className="helper">Report this message as:</span>
-                  <div className="chips">{REPORT_REASONS.map(r => <button key={r} className="chip" onClick={() => void report(m, r)}>{REASON_LABEL[r]}</button>)}</div>
-                  <button className="btn text danger-text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => void block(m)}><Ban size={16} aria-hidden="true" />Block {m.author}</button>
+                  <span className="helper">{t('gr.reportAs')}</span>
+                  <div className="chips">{REPORT_REASONS.map(r => <button key={r} className="chip" onClick={() => void report(m, r)}>{reasonLabel(r)}</button>)}</div>
+                  <button className="btn text danger-text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => void block(m)}><Ban size={16} aria-hidden="true" />{t('gr.block', { u: m.author })}</button>
                 </div>)}
             </motion.div>);
         })}
@@ -172,11 +178,11 @@ export function GroupRoomScreen({ id, username, go }: { id: number; username: st
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
       {note && <p className="helper" role="status">{note}</p>}
       <form className="composer" onSubmit={send}>
-        <input className="input" value={text} onChange={e => setText(e.target.value)} placeholder={state === 'open' ? 'Write a message' : 'Connecting…'} maxLength={MESSAGE_MAX}
-          aria-label="Your message" enterKeyHint="send" disabled={state !== 'open'} />
-        <button className="send" type="submit" disabled={state !== 'open' || !text.trim()} aria-label="Send"><ArrowUp size={22} /></button>
+        <input className="input" value={text} onChange={e => setText(e.target.value)} placeholder={state === 'open' ? t('gr.write') : t('gr.connecting')} maxLength={MESSAGE_MAX}
+          aria-label={t('gr.msgAria')} enterKeyHint="send" disabled={state !== 'open'} />
+        <button className="send" type="submit" disabled={state !== 'open' || !text.trim()} aria-label={t('gr.send')}><ArrowUp size={22} /></button>
       </form>
-      <button className="btn text" style={{ alignSelf: 'center' }} onClick={() => void leave()}><LogOut size={18} aria-hidden="true" />Leave this group</button>
+      <button className="btn text" style={{ alignSelf: 'center' }} onClick={() => void leave()}><LogOut size={18} aria-hidden="true" />{t('gr.leave')}</button>
     </>
   );
 }

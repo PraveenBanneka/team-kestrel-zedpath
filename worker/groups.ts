@@ -29,10 +29,12 @@ interface GroupRow { group_id: number; kind: 'COURSE' | 'BATCH'; course_code: st
 function summary(r: Pick<GroupRow, 'kind' | 'course_code' | 'stream_code' | 'district_code'> & { group_id: number | null; members: number; joined: number }): GroupSummary {
   if (r.kind === 'COURSE') {
     const n = book.offerings.filter(o => o.courseCode === r.course_code).length;
-    return { id: r.group_id, kind: 'COURSE', courseCode: r.course_code, title: `Waiting for ${titleCaseName(book.courses[r.course_code!]?.name ?? r.course_code!)}`,
+    const name = titleCaseName(book.courses[r.course_code!]?.name ?? r.course_code!);
+    return { id: r.group_id, kind: 'COURSE', courseCode: r.course_code, title: `Waiting for ${name}`, name, universities: n,
       subtitle: `Course ${r.course_code} · ${n} universit${n === 1 ? 'y' : 'ies'}`, members: r.members, joined: r.joined === 1 };
   }
-  return { id: r.group_id, kind: 'BATCH', courseCode: null, title: `${streamName(r.stream_code!)} · ${districtName(r.district_code!)}`,
+  const name = `${streamName(r.stream_code!)} · ${districtName(r.district_code!)}`;
+  return { id: r.group_id, kind: 'BATCH', courseCode: null, title: name, name, universities: 0,
     subtitle: 'Your A/L batch: same stream, same district', members: r.members, joined: r.joined === 1 };
 }
 

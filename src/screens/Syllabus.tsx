@@ -2,17 +2,18 @@
 import { useState } from 'react';
 import { BookOpen, ChevronRight, ExternalLink } from 'lucide-react';
 import type { Syllabus } from '../../shared/api.ts';
+import { locale, t } from '../i18n/index.ts';
 
 const host = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
-const dateLabel = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const dateLabel = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(locale(), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
 export function SyllabusCard({ s }: { s: Syllabus }) {
   const [open, setOpen] = useState(0);
   const total = s.years.reduce((a, y) => a + y.modules.length, 0);
   return (
     <section className="card stack" aria-labelledby="syl-h">
-      <h2 id="syl-h" className="title-l"><BookOpen size={20} aria-hidden="true" style={{ verticalAlign: '-3px', marginRight: 8, color: 'var(--brand-500)' }} />What you'll study</h2>
-      <p className="subtitle" style={{ margin: 0 }}>{s.degree}{s.duration ? ` · ${s.duration}` : ''} · <span className="num">{total}</span> modules listed by the university</p>
+      <h2 id="syl-h" className="title-l"><BookOpen size={20} aria-hidden="true" style={{ verticalAlign: '-3px', marginRight: 8, color: 'var(--brand-500)' }} />{t('syl.h')}</h2>
+      <p className="subtitle" style={{ margin: 0 }}>{s.degree}{s.duration ? ` · ${s.duration}` : ''} · <span className="num">{t('syl.modules', { n: total })}</span></p>
       {s.specialisations.length > 0 && <div className="have">{s.specialisations.slice(0, 8).map(x => <span key={x}>{x}</span>)}</div>}
       <div className="syl-years">
         {s.years.map((y, i) => (
@@ -25,9 +26,9 @@ export function SyllabusCard({ s }: { s: Syllabus }) {
           </div>))}
       </div>
       {s.notes && <p className="helper" style={{ margin: 0 }}>{s.notes}</p>}
-      <p className="source">Source: {s.sourceUrls.map((u, i) => (
+      <p className="source">{t('syl.source')} {s.sourceUrls.map((u, i) => (
         <a key={u} className="source-link" href={u} target="_blank" rel="noopener">{i ? ', ' : ''}{host(u)} <ExternalLink size={12} aria-hidden="true" /></a>))}
-        {' '}· checked {dateLabel(s.retrievedOn)}. Universities update their curricula; confirm with the faculty.</p>
+        {' '}· {t('syl.checked', { d: dateLabel(s.retrievedOn) })}</p>
     </section>
   );
 }
