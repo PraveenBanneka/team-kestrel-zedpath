@@ -1,10 +1,10 @@
 // ZedPath app shell, design v2. First run: Welcome -> Intro -> About you (5 steps). Then a floating bottom-navigation app:
 // Paths (home) | My list | Journey | Groups | Ask, with Alerts (bell) and Me (avatar) in the top bar (CR-002).
 // Routing via the URL hash so Back and deep links work.
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Search, ArrowLeft, Award, Bell, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
-  ListOrdered, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  ListOrdered, Scale, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -23,7 +23,7 @@ import { GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
-import { addToList, type ListEntry } from '../shared/list.ts';
+import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
 import { loadNotifyPrefs, saveNotifyPrefs } from './storage.ts';
 import type { NotifyPrefs } from '../shared/journey.ts';
 import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
@@ -186,7 +186,7 @@ export function App() {
     </div>);
 
   let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} listCount={list.length} />; }
+  if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} list={list} setList={setList} />; }
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
   else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
   else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} compare={compare} profile={profile} results={results} prefs={prefs} go={go} />; }
@@ -287,12 +287,22 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
 }
 
 // ---------------------------------------------------------------- Courses by band
-function Courses({ results, band, go, listCount }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; listCount: number }) {
+function Courses({ results, band, go, list, setList }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void }) {
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
   const [query, setQuery] = useState('');
+  const [picked, setPicked] = useState<string[] | null>(null);          // null = not selecting; else the Uni-Codes picked
+  const [note, setNote] = useState<string | null>(null);
+  const onList = (u: string) => list.some(e => e.uniCode === u);
+  const toggle = (u: string) => setPicked(p => p === null ? [u] : p.includes(u) ? p.filter(x => x !== u) : [...p, u]);
+  const addPicked = () => {
+    const chosen = (picked ?? []).map(u => results?.offerings.find(o => o.uniCode === u)).filter(Boolean) as OfferingSummary[];
+    const r = addManyToList(list, chosen.map(o => ({ uniCode: o.uniCode, group: o.group, course: titleCase(o.course), institution: shortInstitution(o.institution), band: o.band })));
+    setList(r.list); setPicked(null);
+    setNote([r.added === 1 ? t('sel.addedOne') : t('sel.added', { n: r.added }), r.already ? t('sel.already', { n: r.already }) : '', r.full ? t('detail.err.FULL') : ''].filter(Boolean).join(' '));
+  };
   const searching = query.trim() !== '';
   // While searching, all three bands are searched at once (the band shows on each row's colour strip).
-  const list = useMemo(() => (results?.offerings ?? []).filter(o => searching ? tabs.includes(o.band) && matches(query, o.course, o.institution, o.uniCode)
+  const shown = useMemo(() => (results?.offerings ?? []).filter(o => searching ? tabs.includes(o.band) && matches(query, o.course, o.institution, o.uniCode)
     : o.band === band).sort((a, b) => (b.gapToLatestE4 ?? 0) - (a.gapToLatestE4 ?? 0)), [results, band, query]);   // eslint-disable-line react-hooks/exhaustive-deps
   const total = results ? results.counts.SAFE + results.counts.LIKELY + results.counts.REACH : 0;
   return (
@@ -300,8 +310,12 @@ function Courses({ results, band, go, listCount }: { results: ResultsResponse | 
       <div className="stack" style={{ gap: 4 }}>
         <h1 className="screen-title">{results ? t('courses.reach', { n: total }) : t('courses.checking')}</h1>
         <p className="subtitle">{t('courses.sorted')}</p>
-        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />{t('nav.list')}{listCount ? ` (${listCount})` : ''}</button>
-        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('courses.compare')}</button>
+        <div className="row" style={{ gap: 4 }}>
+          <button className="btn text" style={{ paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('courses.compare')}</button>
+          <button className="btn text" onClick={() => { setNote(null); setPicked(p => p === null ? [] : null); }} aria-pressed={picked !== null}>
+            <CheckCircle2 size={18} aria-hidden="true" />{picked === null ? t('sel.select') : t('sel.cancel')}</button>
+        </div>
+        {picked === null && results && <p className="helper">{t('sel.tip')}</p>}
       </div>
       <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('courses.search')} value={query}
         onChange={e => setQuery(e.target.value)} aria-label={t('courses.searchAria')} enterKeyHint="search" /></label>
@@ -312,29 +326,51 @@ function Courses({ results, band, go, listCount }: { results: ResultsResponse | 
             <span>{bandLabel(t)}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
           </button>))}
       </div>}
-      {searching && results && <p className="helper" role="status">{t('courses.matches', { n: list.length, q: query.trim() })}</p>}
+      {searching && results && <p className="helper" role="status">{t('courses.matches', { n: shown.length, q: query.trim() })}</p>}
+      {note && <p className="helper" role="status">{note} <button className="btn text small" onClick={() => go('/list')}>{t('sel.openList')}</button></p>}
       {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
-      {results && list.length === 0 && <div className="card"><p className="subtitle">{searching ? t('courses.noSearch') : t('courses.noBand')}</p></div>}
-      {list.length > 0 && (
+      {results && shown.length === 0 && <div className="card"><p className="subtitle">{searching ? t('courses.noSearch') : t('courses.noBand')}</p></div>}
+      {shown.length > 0 && (
         <Stagger key={searching ? 'search' : band} className="list-card" role="tabpanel">
-          {list.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)} />)}
+          {shown.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)}
+            selecting={picked !== null} selected={!!picked?.includes(o.uniCode)} listed={onList(o.uniCode)} onPick={() => { setNote(null); toggle(o.uniCode); }} />)}
         </Stagger>)}
+      {picked !== null && (
+        <div className="select-bar" role="region" aria-label={t('sel.bar')}>
+          <span className="grow num">{t('sel.count', { n: picked.length })}</span>
+          <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
+          <button className="btn filled small" disabled={picked.length === 0} onClick={addPicked}><ListOrdered size={16} aria-hidden="true" />{t('sel.add')}</button>
+        </div>)}
       {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('courses.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
     </>
   );
 }
 
-function CourseRow({ o, animate, onOpen }: { o: OfferingSummary; animate: boolean; onOpen: () => void }) {
+/** A course in the list. Tap opens it; press and hold (or "Select") starts choosing several; while choosing, tap ticks. */
+function CourseRow({ o, animate, onOpen, selecting = false, selected = false, listed = false, onPick }: { o: OfferingSummary; animate: boolean; onOpen: () => void;
+  selecting?: boolean; selected?: boolean; listed?: boolean; onPick?: () => void }) {
+  const hold = useRef<{ timer: number; x: number; y: number; fired: boolean } | null>(null);
+  const start = (e: React.PointerEvent) => {
+    if (!onPick) return;
+    const h = { timer: 0, x: e.clientX, y: e.clientY, fired: false };
+    h.timer = window.setTimeout(() => { h.fired = true; onPick(); navigator.vibrate?.(15); }, 450);
+    hold.current = h;
+  };
+  const moved = (e: React.PointerEvent) => { const h = hold.current; if (h && Math.hypot(e.clientX - h.x, e.clientY - h.y) > 10) { clearTimeout(h.timer); hold.current = null; } };
+  const end = () => { if (hold.current && !hold.current.fired) clearTimeout(hold.current.timer); };
+  const click = () => { if (hold.current?.fired) { hold.current = null; return; } hold.current = null; if (selecting && onPick) onPick(); else onOpen(); };
   const gap = o.gapToLatestE4 === null ? '' : t('row.vsLast', { gap: formatGap(o.gapToLatestE4) });
   const span = o.limitedHistory ? (o.yearsUsed === 1 ? t('row.yrData') : t('row.yrsData', { n: o.yearsUsed }))
     : `${t('row.yrs', { n: o.yearsUsed })}${o.trend !== 'NO_TREND' ? ` · ${trendLabel(o.trend)}` : ''}`;
   return (
-    <motion.button variants={animate ? rise : undefined} className="item" onClick={onOpen}>
+    <motion.button variants={animate ? rise : undefined} className={`item ${selected ? 'picked' : ''}`} onClick={click} onPointerDown={start} onPointerMove={moved}
+      onPointerUp={end} onPointerCancel={end} onContextMenu={e => { if (onPick) e.preventDefault(); }} aria-pressed={selecting ? selected : undefined}>
       <span className={`strip ${o.band}`} aria-hidden="true" />
+      {selecting && (selected ? <CheckCircle2 size={22} className="pick-ic on" aria-hidden="true" /> : <Circle size={22} className="pick-ic" aria-hidden="true" />)}
       <span className="grow">
         <span className="t">{titleCase(o.course)}{o.groupLabel ? ` (${o.group})` : ''}</span>
         <span className="s">{shortInstitution(o.institution)}</span>
-        <span className="m">{[gap, span, o.hasAptitudeTest ? t('row.aptitude') : '', o.needsOl ? t('row.checkOl') : ''].filter(Boolean).join(' · ')}</span>
+        <span className="m">{[listed ? t('sel.onList') : '', gap, span, o.hasAptitudeTest ? t('row.aptitude') : '', o.needsOl ? t('row.checkOl') : ''].filter(Boolean).join(' · ')}</span>
       </span>
       <span className="sr-only">{bandLabel(o.band)}</span>
       <ChevronRight size={20} className="chev" aria-hidden="true" />

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LIST_MAX, addToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
+import { LIST_MAX, addManyToList, addToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
 import type { Band } from './banding.ts';
 
 const e = (uniCode: string, band: Band): ListEntry => ({ uniCode, group: 'ALL', course: `Course ${uniCode}`, institution: 'Uni', band });
@@ -46,5 +46,17 @@ describe('missingEligible', () => {
       { uniCode: 'C', band: 'REACH' as Band }, { uniCode: 'D', band: 'OUT_OF_RANGE' as Band }, { uniCode: 'E', band: 'SAFE' as Band }];
     expect(missingEligible([e('A', 'SAFE')], offerings)).toEqual({ SAFE: 1, LIKELY: 1, REACH: 1 });
     expect(missingEligible([], [])).toEqual({ SAFE: 0, LIKELY: 0, REACH: 0 });
+  });
+});
+
+describe('addManyToList (select several on Courses)', () => {
+  const e = (u: string): ListEntry => ({ uniCode: u, group: 'ALL', course: 'C ' + u, institution: 'I', band: 'SAFE' });
+  it('adds in order, skips ones already on the list, and stops at 125', () => {
+    const r = addManyToList([e('001A')], [e('002A'), e('001A'), e('003A')]);
+    expect(r.list.map(x => x.uniCode)).toEqual(['001A', '002A', '003A']);
+    expect([r.added, r.already, r.full]).toEqual([2, 1, 0]);
+    const nearlyFull = Array.from({ length: LIST_MAX - 1 }, (_, i) => e(`X${i}`));
+    const f = addManyToList(nearlyFull, [e('100A'), e('101A')]);
+    expect([f.added, f.full, f.list.length]).toEqual([1, 1, LIST_MAX]);
   });
 });

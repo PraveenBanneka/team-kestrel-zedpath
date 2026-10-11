@@ -17,6 +17,17 @@ export function addToList(list: ListEntry[], entry: ListEntry, eligible: boolean
   return { ok: true, list: [...list, entry] };
 }
 
+/** Several courses at once (press-and-hold selection on Courses): each goes through addToList, in the order given, so the
+ *  same rules hold (eligible only, never twice, never beyond 125). Reports how many were added and why others were not. */
+export function addManyToList(list: ListEntry[], entries: ListEntry[]): { list: ListEntry[]; added: number; already: number; full: number } {
+  let out = list, added = 0, already = 0, full = 0;
+  for (const e of entries) {
+    const r = addToList(out, e, true);
+    if (r.ok) { out = r.list; added++; } else if (r.reason === 'DUPLICATE') already++; else full++;
+  }
+  return { list: out, added, already, full };
+}
+
 export interface ListWarnings {
   /** BR-041: Safe entries listed above at least one Likely or Reach entry (those below are unlikely to be reached). */
   safeAbove: ListEntry[];

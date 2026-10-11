@@ -340,6 +340,18 @@ export const en = {
   'ns.badge': 'New alerts on the bell',
   'ns.badgeSub': 'Show a count when an exam or intake you can apply for is added.',
   'ns.noneOn': 'Both reminders are off, so ZedPath will not remind you about deadlines.',
+  // Courses: select several and add them to My list
+  'sel.select': 'Select',
+  'sel.cancel': 'Cancel',
+  'sel.tip': 'Tip: press and hold a course to select several and add them to My list at once.',
+  'sel.count': '{n} selected',
+  'sel.add': 'Add to my list',
+  'sel.bar': 'Selected courses',
+  'sel.added': 'Added {n} courses to My list.',
+  'sel.addedOne': 'Added 1 course to My list.',
+  'sel.already': '{n} were already on it.',
+  'sel.openList': 'Open My list',
+  'sel.onList': 'On my list',
 } as const;
 
 export type Key = keyof typeof en;
