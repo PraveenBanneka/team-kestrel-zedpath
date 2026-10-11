@@ -1,15 +1,15 @@
 # ZedPath — work log
 
 ## Current state (update at end of every session)
-- **Date:** 2026-10-05 (end of session; Praveen pausing ZedPath to start another project on the same Cloudflare account)
+- **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **c221ddfc** (My list, Compare, syllabi). Rollback target bd923072.
+  Live (workers.dev) = version **e2501c73** (2026-10-11 pipeline test). Rollback target 99da5707.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
   Free-plan limits are per ACCOUNT, shared with any other project there (100k Worker requests/day, Workers AI 10k
   neurons/day, D1 5M reads/day...).
-- **GitHub:** https://github.com/PraveenBanneka/zedpath (PUBLIC, branch `main`). Leak scanner on every push.
+- **GitHub:** https://github.com/PraveenBanneka/team-kestrel-zedpath (renamed from `zedpath` 2026-10-06; PUBLIC, branch `main`). Leak scanner on every push.
 - **Live features:** onboarding + beyond grades; results Safe/Likely/Reach; course pages with cut-off chart, syllabus
   (12 programmes) and "Explain this course"; hidden courses; 52 other paths; student accounts; Ask ZedPath (EN/SI/TA,
   cited, personal facts, model fallback); My list (order warnings, fix-the-order, copy Uni-Codes); Compare (3);
@@ -221,3 +221,14 @@
   index-ByBJtb-u.js contains isExactNotification:!1 at the app's start URL. THEN 1.1.1 sent (apksigner verifies,
   cert b63eec...98a8; permissions INTERNET, POST_NOTIFICATIONS, WAKE_LOCK, RECEIVE_BOOT_COMPLETED).
 - Praveen: "That's my first native app. Yey!"
+
+## 2026-10-11: pipeline test deploy e2501c73 (Praveen's GO)
+- Change: welcome-screen heading "ZedPath" -> "ZedPath." (src/screens/Onboarding.tsx), a visible marker to prove the
+  build -> deploy -> live path still works after six days.
+- Runbook: 83/83 tests, build green, marker found in the bundle; whoami = Stacklineops@gmail.com's Account
+  (e6474e41...); GO; deployed version e2501c73-d7d6-450e-aa0e-76674175840a (previous 99da5707).
+- Verified LIVE with a cache-busted fetch: the live page serves bundle index-CtopB9aI.js containing "ZedPath.";
+  /api/health and /api/meta return 200.
+- Rollback (needs GO): npx wrangler rollback 99da5707-8d9f-43cc-bd30-3358bc641d68
+- Open: guard update for the repo rename is half-done and uncommitted (the permission system blocked my edits on
+  2026-10-06). Pushes work; test-guard.sh still expects the old repo name.

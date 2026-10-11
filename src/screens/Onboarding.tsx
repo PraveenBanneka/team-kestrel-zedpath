@@ -22,7 +22,7 @@ export function Welcome({ onStart, onLogin }: { onStart: () => void; onLogin: ()
     <div className="welcome aurora">
       <div className="logo-wrap">
         <motion.div {...rise(0)}><Logo size={84} /></motion.div>
-        <motion.h1 className="display" {...rise(0.08)}>ZedPath</motion.h1>
+        <motion.h1 className="display" {...rise(0.08)}>ZedPath.</motion.h1>
         <motion.p className="lead" {...rise(0.16)}>Everything after A/Ls, in one place.</motion.p>
         <motion.p className="subtitle" {...rise(0.24)}>Every path your results can reach: state universities, private degrees, diplomas,
           job exams and more. With the real deadlines, and a source for every fact.</motion.p>
