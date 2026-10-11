@@ -272,4 +272,10 @@ export const si: Record<Key, string> = {
   'ask.next': 'ඊළඟ පියවර',
   'ask.fu.chances': '{course} සඳහා මගේ අවස්ථා මොනවාද?',
   'ask.fu.study': '{course} හි මා ඉගෙන ගන්නේ මොනවාද?',
+  // Video 2: Compare with a "+" column
+  'cmp.add': 'පාඨමාලාවක් එක් කරන්න',
+  'cmp.pickH': 'සසඳන්න පාඨමාලාවක් එක් කරන්න',
+  'cmp.search': 'ඔබේ පාඨමාලා සොයන්න',
+  'cmp.noMatch': 'ගැළපෙන පාඨමාලාවක් නැත.',
+  'cmp.swipe': 'සියලු පාඨමාලා බැලීමට පැත්තට ස්වයිප් කරන්න',
 };

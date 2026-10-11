@@ -390,10 +390,10 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
       <button className="btn tonal" onClick={() => go(`/ask/${encodeURIComponent(t('detail.explainQ', { course: titleCase(d.course), inst: shortInstitution(d.institution) }))}`)}>
         <Sparkles size={18} aria-hidden="true" />{t('detail.explain')}</button>
       <AddToList d={d} mine={mine} list={list} setList={setList} go={go} />
-      {compare.includes(d.uniCode)
-        ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('detail.compareNow', { n: compare.length })}</button>
-        : <button className="btn tonal" disabled={compare.length >= COMPARE_MAX} onClick={() => { setCompare([...compare, d.uniCode]); if (compare.length >= 1) go('/compare'); }}>
-            <Scale size={18} aria-hidden="true" />{compare.length >= COMPARE_MAX ? t('detail.compareFull', { n: COMPARE_MAX }) : compare.length ? (compare.length === 1 ? t('detail.compareOther') : t('detail.compareOthers', { n: compare.length })) : t('detail.compare')}</button>}
+      {compare.includes(d.uniCode) || compare.length >= COMPARE_MAX
+        ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{compare.includes(d.uniCode) ? t('detail.compareNow', { n: compare.length }) : t('detail.compareFull', { n: COMPARE_MAX })}</button>
+        : <button className="btn tonal" onClick={() => { setCompare([...compare, d.uniCode]); go('/compare'); }}>
+            <Scale size={18} aria-hidden="true" />{compare.length ? (compare.length === 1 ? t('detail.compareOther') : t('detail.compareOthers', { n: compare.length })) : t('detail.compare')}</button>}
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">{t('detail.needs')}</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (

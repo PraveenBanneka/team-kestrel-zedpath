@@ -425,3 +425,13 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .ask-screen { display: flex; flex-direction: column; gap: 16px; min-height: calc(100dvh - 60px - 12px - 110px); }
 .ask-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; position: sticky; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 3; }
 .ask-bottom .composer { position: static; }
+
+/* ---------- Video 2: Compare columns swipe sideways (snap per course), "+" column on the right */
+.compare-wrap.swipe { scroll-snap-type: x mandatory; scroll-padding-left: 96px; overscroll-behavior-x: contain; }
+.compare-wrap.swipe thead th:first-child, .compare-wrap.swipe tbody th { width: 96px; min-width: 96px; }
+.compare-wrap.swipe thead th:not(:first-child), .compare-wrap.swipe td { min-width: 158px; width: 158px; scroll-snap-align: start; }
+.compare-table .add-col { min-width: 132px; width: 132px; background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
+.add-slot { width: 100%; min-height: 72px; border: 2px dashed color-mix(in srgb, var(--brand-500) 45%, transparent); border-radius: var(--r-m); background: none;
+  color: var(--brand-500); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font: 600 13px/16px var(--font-body); cursor: pointer; }
+.add-slot.on, .add-slot:hover { background: var(--likely-bg); }
+.list-card.flat { box-shadow: none; background: transparent; }

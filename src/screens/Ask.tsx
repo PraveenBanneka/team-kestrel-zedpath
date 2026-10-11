@@ -79,7 +79,7 @@ function ActionRow({ a, ctx }: { a: AskAction; ctx: AskContext }) {
       <div className="row" style={{ gap: 4, flexWrap: 'nowrap' }}>
         {onList ? <span className="icon-btn" aria-label={t('ask.onList')} title={t('ask.onList')}><Check size={18} /></span>
           : eligible && <button className="icon-btn" onClick={add} aria-label={t('detail.add')} title={t('detail.add')}><ListPlus size={18} /></button>}
-        {!inCompare && ctx.compare.length < 3 && <button className="icon-btn" onClick={() => ctx.setCompare([...ctx.compare, a.uniCode])}
+        {!inCompare && ctx.compare.length < 3 && <button className="icon-btn" onClick={() => { ctx.setCompare([...ctx.compare, a.uniCode]); ctx.go('/compare'); }}
           aria-label={t('detail.compare')} title={t('detail.compare')}><Scale size={18} /></button>}
       </div>
     </div>);

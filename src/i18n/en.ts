@@ -271,6 +271,12 @@ export const en = {
   'ask.next': 'Next steps',
   'ask.fu.chances': 'What are my chances for {course}?',
   'ask.fu.study': 'What will I study in {course}?',
+  // Video 2: Compare with a "+" column
+  'cmp.add': 'Add a course',
+  'cmp.pickH': 'Add a course to compare',
+  'cmp.search': 'Search your courses',
+  'cmp.noMatch': 'No course matches.',
+  'cmp.swipe': 'Swipe sideways to see every course',
 } as const;
 
 export type Key = keyof typeof en;

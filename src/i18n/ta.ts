@@ -272,4 +272,10 @@ export const ta: Record<Key, string> = {
   'ask.next': 'அடுத்த படிகள்',
   'ask.fu.chances': '{course} க்கான எனது வாய்ப்புகள் என்ன?',
   'ask.fu.study': '{course} இல் நான் என்ன படிப்பேன்?',
+  // Video 2: Compare with a "+" column
+  'cmp.add': 'பாடநெறியைச் சேர்',
+  'cmp.pickH': 'ஒப்பிட ஒரு பாடநெறியைச் சேர்க்கவும்',
+  'cmp.search': 'உங்கள் பாடநெறிகளைத் தேடுங்கள்',
+  'cmp.noMatch': 'பொருந்தும் பாடநெறி இல்லை.',
+  'cmp.swipe': 'எல்லாப் பாடநெறிகளையும் பார்க்கப் பக்கவாட்டில் தள்ளுங்கள்',
 };
