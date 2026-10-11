@@ -6,13 +6,15 @@ import { ArrowUp, BookOpenCheck, ExternalLink, ShieldCheck, Sparkles, TriangleAl
 import type { ProfileInput } from '../../shared/api.ts';
 import { QUESTION_MAX, type AskResponse } from '../../shared/ask.ts';
 import { askZedPath } from '../ask.ts';
+import { layoutAnswer } from '../../shared/answer.ts';
 
 export interface AskTurn { question: string; reply: AskResponse | null; error: string | null }
 
 const GENERAL = ['When do UGC applications usually open?', 'What is the interest-free student loan?',
   'Which government job exams accept A/L results?', 'What does Z-score mean for university entry?'];
 
-/** Renders the model's plain text: paragraphs, "-"/"*" bullets, **bold**, and [n] as tappable citation chips. */
+/** Renders an answer as one lead line and short bullets (shared/answer.ts makes that layout even from one long
+ *  paragraph), with **bold** and [n] as tappable citation chips. */
 function AnswerText({ text, onCite }: { text: string; onCite: (n: number) => void }) {
   const inline = (s: string, key: string): ReactNode[] => s.split(/(\*\*[^*]+\*\*|\[\d+(?:\s*,\s*\d+)*\])/g).filter(Boolean).map((part, i) => {
     if (/^\*\*[^*]+\*\*$/.test(part)) return <b key={`${key}-${i}`}>{part.slice(2, -2)}</b>;
@@ -21,17 +23,13 @@ function AnswerText({ text, onCite }: { text: string; onCite: (n: number) => voi
       <button key={`${key}-${i}-${n}`} type="button" className="cite" onClick={() => onCite(n)} aria-label={`Source ${n}`}>{n}</button>);
     return <span key={`${key}-${i}`}>{part}</span>;
   });
-  const blocks: ReactNode[] = [];
-  let list: string[] = [];
-  const flush = () => { if (list.length) blocks.push(<ul key={`ul-${blocks.length}`}>{list.map((l, i) => <li key={i}>{inline(l, `li${blocks.length}-${i}`)}</li>)}</ul>); list = []; };
-  text.split('\n').forEach((line, i) => {
-    const t = line.trim();
-    if (/^([-*•]|\d+\.)\s+/.test(t)) { list.push(t.replace(/^([-*•]|\d+\.)\s+/, '')); return; }
-    flush();
-    if (t) blocks.push(<p key={`p-${i}`}>{inline(t, `p${i}`)}</p>);
-  });
-  flush();
-  return <div className="answer-text">{blocks}</div>;
+  const { lead, bullets, rest } = layoutAnswer(text);
+  return (
+    <div className="answer-text">
+      {lead && <p className="answer-lead">{inline(lead, 'lead')}</p>}
+      {bullets.length > 0 && <ul>{bullets.map((b, i) => <li key={i}>{inline(b, `li${i}`)}</li>)}</ul>}
+      {rest.map((r, i) => <p key={`r${i}`}>{inline(r, `r${i}`)}</p>)}
+    </div>);
 }
 
 function Reply({ reply }: { reply: AskResponse }) {
