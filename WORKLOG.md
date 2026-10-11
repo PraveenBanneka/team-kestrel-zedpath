@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **40628ac5** (f589f1a8 + Welcome Back fix and team line). Rollback target f589f1a8 (code only).
+  Live (workers.dev) = version **ef419fb6** (40628ac5 + Back works on phones with the old onboarded flag). Rollback target 40628ac5 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -325,3 +325,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Tests 179/179, tsc -b clean. Docs 01-04 at 2.0 (draft) awaiting approval; ZP-DOC-05 updated for 0010.
 
 ## 2026-10-11 (evening): 40628ac5 LIVE (Praveen's GO): Back from Create account returns to Welcome (onboarded set only after sign-up/log-in); Welcome team line "Team Kestrel · Undergraduate bracket · IntelliCon '26" (en/si/ta). 179/179. Live check in a fresh browser: team line shown; English > Skip > signup > Back lands on Welcome.
+
+## 2026-10-11 (evening): ef419fb6 LIVE (Praveen's GO): Back on Create account / Log in while logged out clears the onboarded flag and opens Welcome. 40628ac5 missed phones that still had the old flag (my live check used a fresh browser; lesson: test the user's actual state). Live check with the old flag set: signup > Back lands on Welcome.
