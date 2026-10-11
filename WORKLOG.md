@@ -3,8 +3,8 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **3784f9c3** (CR-002: Journey, Alerts, Groups, new nav, Ask layout). Rollback target e2501c73
-  (code only: the D1 migrations 0005/0006 only ADD tables and rows, so the old code runs fine on the new schema).
+  Live (workers.dev) = version **e5e2d55b** (search, Sinhala/Tamil, compulsory accounts, Ask answer card). Rollback target 3784f9c3
+  (code only: migrations 0007/0008 only ADD tables).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -256,3 +256,21 @@
 - Not done: Gemini not called (Praveen's instruction; Ask layout checked with a fixed sample answer). No senior invite
   created in production: Praveen chooses the senior (node tools/groups/make-invite.ts <Uni-Code> <year>, then the
   printed --remote command with GO). UGC site timed out twice, so no UGC dates: steps show the official rule instead.
+
+## 2026-10-11 (later): search, Sinhala/Tamil, compulsory accounts (CR-003), Ask answer card (CR-004) live as e5e2d55b
+- Search: subjects (About you) and courses (all bands), one tested matcher with short forms and Uni-Codes.
+- Sinhala and Tamil: ~480 interface strings, dictionaries forced complete by TypeScript; test checks placeholders,
+  bold tags and script. Translated by two parallel AI agents; marked in-app as AI translation pending native review.
+  Official names and quotes stay in English as published.
+- CR-003 (Praveen's decision): account required at start with full name, email, Sri Lankan mobile, birthday and
+  consent; student_contact (0007) in its own table, not unique, not verified yet. README, business case, app privacy
+  text, ZP-DOC-05 updated. Existing accounts complete their details on next open. Offline is never treated as no account.
+- CR-004: Ask answer card (verdict, show more, source chips, ZedPath-built actions, follow-ups, feedback to
+  answer_feedback 0008 with nothing identifying the student, app language sent with the question).
+- Business case exported as ZedPath_Business_Case.docx (project folder, not committed; Downloads).
+- Deploy: whoami ZedPath; D1 backup zedpath-before-0007-20261011.sql (241 rows); migrations 0007+0008 --remote;
+  version e5e2d55b-2f5b-4e97-a073-adc29eea8111. Verified LIVE: sign-up without contact 400 (fullName), with contact 201,
+  /me returns normalised contact, feedback validation 400, throwaway deleted 204, live bundle index-DHoca4ZP.js has
+  Sinhala, Tamil and the Ask card. 152 tests.
+- Open: guard repo-rename edit still uncommitted (needs Praveen's permission); Ask not exercised live (no Gemini calls,
+  as asked); translations need a native-speaker check.
