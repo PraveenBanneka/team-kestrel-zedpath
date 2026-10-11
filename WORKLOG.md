@@ -3,8 +3,8 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **52b0e1af** (video-2 fixes, CR-005 group rules, WhatsApp-style groups, Compare +, Journey checklist,
-  notification settings). Rollback target e5e2d55b (code only: migration 0009 only ADDS a nullable column).
+  Live (workers.dev) = version **6cbd4cbe** (52b0e1af + Physical Science sample group thread for the demo). Rollback target 52b0e1af
+  (code only, no migration).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -306,3 +306,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live checks (throwaway account, deleted after): sign-up 201; popular groups listed; join without rules 400, with rules
   200 + rulesAccepted; bundle has the rules sheet, Compare "+", Journey checklist, notification settings.
 - Gate 3 documents committed (df714c2): business case v2 (9 pages), AI Usage Report (2 pages), demo script.
+
+## 2026-10-11 (midday): 6cbd4cbe LIVE (Praveen's GO) + Gate 3 documents
+- whoami ZedPath account; no migrations pending; 164/164 tests; deploy -> version **6cbd4cbe-7a69-4183-8e81-cff9599e4274**.
+- Live check (throwaway account, deleted): Physical Science group (013) history = 5 labelled sample messages incl. the hostel Q&A.
+- Gate 3 files committed: Kestrel_Business_Case_Document (final, Praveen's edits + layout fixes), ZedPath_Presentation.pdf,
+  Kestrel_AI_Usage_Report.pdf, Kestrel_Declaration (sign before upload), ZedPath_Demo_Script.md (Kurunegala PhysSci student).
