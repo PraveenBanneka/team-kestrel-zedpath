@@ -32,11 +32,13 @@ export interface AskResponse {
 }
 export interface AskFeedback { question: string; answer: string; pages: number[]; rating: 'HELPFUL' | 'WRONG'; note?: string; lang: 'en' | 'si' | 'ta' }
 
-/** Reads and removes the model's first line "VERDICT: YES|NO|DEPENDS|NOT_FOUND". Anything else: no verdict. */
+/** Reads and removes the model's first line "VERDICT: YES|NO|DEPENDS|NOT_FOUND|NONE". NONE (not a yes/no question,
+ *  e.g. "What is...?") and anything unreadable: no verdict chip (Praveen 2026-10-11). */
 export function takeVerdict(raw: string): { verdict: Verdict | null; text: string } {
-  const m = raw.match(/^\s*\**\s*VERDICT\s*:\s*\**\s*(YES|NO|DEPENDS|NOT_FOUND)\b\**[ \t]*\r?\n?/i);
+  const m = raw.match(/^\s*\**\s*VERDICT\s*:\s*\**\s*(YES|NO|DEPENDS|NOT_FOUND|NONE)\b\**[ \t]*\r?\n?/i);
   if (!m) return { verdict: null, text: raw.trim() };
-  return { verdict: m[1].toUpperCase() as Verdict, text: raw.slice(m[0].length).trim() };
+  const v = m[1].toUpperCase();
+  return { verdict: v === 'NONE' ? null : v as Verdict, text: raw.slice(m[0].length).trim() };
 }
 
 export const QUESTION_MAX = 500;

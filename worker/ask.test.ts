@@ -190,6 +190,7 @@ describe('answer layout, actions and feedback (CR-004)', () => {
   it('reads the verdict line and removes it from the text; no line means no verdict', () => {
     expect(takeVerdict('VERDICT: YES\nYes. It needs a C [1].')).toEqual({ verdict: 'YES', text: 'Yes. It needs a C [1].' });
     expect(takeVerdict('**VERDICT: depends**\n- In Colombo... [2]')).toEqual({ verdict: 'DEPENDS', text: '- In Colombo... [2]' });
+    expect(takeVerdict('VERDICT: NONE\nIt is a government loan [1].')).toEqual({ verdict: null, text: 'It is a government loan [1].' });   // "what is": no chip
     expect(takeVerdict('Yes, you can [1].')).toEqual({ verdict: null, text: 'Yes, you can [1].' });
     expect(takeVerdict('VERDICT: MAYBE\nHmm').verdict).toBeNull();
   });
