@@ -405,3 +405,18 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .answer-text .answer-lead { font-weight: 600; font-size: 16px; line-height: 24px; margin-bottom: 10px; }
 .answer-text ul { display: flex; flex-direction: column; gap: 6px; }
 .answer-text li::marker { color: var(--brand-500); }
+
+/* ---------- CR-004: Ask answer card */
+.pill.verdict { align-self: flex-start; font-size: 13px; padding: 6px 12px; }
+.chip.small, .btn.small { min-height: 34px; padding: 4px 12px; font-size: 13px; }
+.chip.on { background: var(--likely-bg); border-color: var(--brand-500); }
+.source-chips { gap: 6px; }
+.card-inset { padding: 10px 12px; border-radius: var(--r-m); background: var(--surface-2); }
+.card-inset p { margin: 4px 0 6px; font-size: 13px; line-height: 19px; color: var(--ink-2); font-style: italic; }
+.ask-action { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid color-mix(in srgb, var(--safe) 18%, transparent); }
+.ask-action:first-of-type { border-top: 0; }
+.ask-action .grow, .ask-action-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; text-align: left;
+  background: none; border: 0; padding: 0; cursor: pointer; color: inherit; font: inherit; }
+.ask-action .t { font-weight: 600; font-size: 14px; line-height: 19px; }
+.ask-action .s { font-size: 12px; color: var(--ink-2); }
+.ask-feedback .btn { color: var(--ink-3); }

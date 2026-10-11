@@ -4,7 +4,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { DEVICE_PER_DAY, MIN_SCORE, coursesFor, engineFacts, finish, tidyName } from './ask.ts';
+import { DEVICE_PER_DAY, MIN_SCORE, askActions, coursesFor, engineFacts, finish, tidyName } from './ask.ts';
+import { takeVerdict } from '../shared/ask.ts';
 import type { AskResponse, CorpusPassage } from '../shared/ask.ts';
 
 const P50: Omit<CorpusPassage, 'id'> = { kind: 'HANDBOOK', source: 'UGC handbook 2025/26', page: 50, url: null,
@@ -148,5 +149,49 @@ describe('Ask ZedPath', () => {
     const r = await app.request('https://zedpath.example/api/dev/embed', { method: 'POST', body: '{"texts":["x"]}' }, { ...env, DEV_TOOLS: '1' } as Env);
     expect(r.status).toBe(404);
     expect((await app.request('/api/dev/search', { method: 'POST', body: '{"q":"x"}' }, env)).status).toBe(404);
+  });
+});
+
+describe('answer layout, actions and feedback (CR-004)', () => {
+  it('reads the verdict line and removes it from the text; no line means no verdict', () => {
+    expect(takeVerdict('VERDICT: YES\nYes. It needs a C [1].')).toEqual({ verdict: 'YES', text: 'Yes. It needs a C [1].' });
+    expect(takeVerdict('**VERDICT: depends**\n- In Colombo... [2]')).toEqual({ verdict: 'DEPENDS', text: '- In Colombo... [2]' });
+    expect(takeVerdict('Yes, you can [1].')).toEqual({ verdict: null, text: 'Yes, you can [1].' });
+    expect(takeVerdict('VERDICT: MAYBE\nHmm').verdict).toBeNull();
+  });
+  it('returns the verdict and never shows the verdict line', async () => {
+    modelReply = { status: 200, text: 'VERDICT: YES\nYes. Medicine needs Biology, Chemistry and Physics [1].' };
+    const b = await (await ask({ question: 'Can I do Medicine?' })).json() as AskResponse;
+    expect(b.verdict).toBe('YES');
+    expect(b.answer.startsWith('Yes.')).toBe(true);
+    expect(b.answer).not.toContain('VERDICT');
+  });
+  it('marks the off-topic "not found" reply as NOT_FOUND', async () => {
+    matches = [];
+    const b = await (await ask({ question: 'Who won the cricket match yesterday?' })).json() as AskResponse;
+    expect([b.verdict, b.actions]).toEqual(['NOT_FOUND', []]);
+  });
+  it('builds actions from its own matches: best chance first, at most 3 places, and named Gazette notices', () => {
+    const a = askActions('Can I do Physical Science?', ['013'], STUDENT as never);
+    expect(a.length).toBeGreaterThan(0);
+    expect(a.length).toBeLessThanOrEqual(3);
+    const order = ['SAFE', 'LIKELY', 'REACH', 'NOT_ENOUGH_DATA', 'OUT_OF_RANGE'];
+    const ranks = a.map(x => x.kind === 'COURSE' && x.band ? order.indexOf(x.band) : 9);
+    expect(ranks).toEqual([...ranks].sort((x, y) => x - y));
+    expect(askActions('How do I apply for the Customs inspector exam?', [], null)).toEqual([expect.objectContaining({ kind: 'NOTICE', routeId: 'R043' })]);
+    expect(askActions('What is a Z-score?', [], null)).toEqual([]);
+  });
+  it('stores feedback without anything that identifies the student, and validates it', async () => {
+    const fb = (body: unknown, headers: Record<string, string> = {}) => app.request('/api/ask/feedback', { method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(body) }, env);
+    const ok = { question: 'Can I do Medicine?', answer: 'Yes. It needs a C [1].', pages: [50], rating: 'WRONG', note: 'Wrong page', lang: 'si' };
+    expect((await fb(ok)).status).toBe(204);
+    expect((await fb({ ...ok, rating: 'MEH' })).status).toBe(400);
+    expect((await fb({ ...ok, question: '' })).status).toBe(400);
+    expect((await fb(ok, { Origin: 'https://evil.example' })).status).toBe(403);
+    const rows = raw.prepare('SELECT * FROM answer_feedback').all() as Record<string, unknown>[];
+    expect(rows).toHaveLength(1);
+    expect(Object.keys(rows[0]).sort()).toEqual(['answer', 'created_at', 'feedback_id', 'lang', 'note', 'pages', 'question', 'rating', 'state']);
+    expect(rows[0]).toMatchObject({ rating: 'WRONG', pages: '[50]', lang: 'si', state: 'OPEN' });
   });
 });

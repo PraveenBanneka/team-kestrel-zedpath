@@ -6,7 +6,8 @@
 import { Hono, type Context } from 'hono';
 import type { ApiError, ProfileInput } from '../shared/api.ts';
 import { formatZ } from '../shared/banding.ts';
-import { EMBED_MODEL, QUESTION_MAX, type AskCitation, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
+import { EMBED_MODEL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
+import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import { assessOffering, book, districtIndex, parseProfile } from './rulebook.ts';
 
 type AppEnv = { Bindings: Env };
@@ -27,7 +28,9 @@ Rules you must always follow:
 2. Cite every factual claim with the source number in square brackets, like [2]. Engine facts need no citation.
 3. If the sources and facts do not answer the question, say plainly that you could not find it in the UGC handbook or ZedPath's official sources, and suggest checking ugc.ac.lk or the institution. Never guess.
 4. Never promise admission. Chances come only from the engine facts: Safe, Likely or Reach describe past cut-offs, not a guarantee.
-5. Reply in the same language as the question (English, Sinhala or Tamil). Plain words, no jargon. Layout, always:
+5. Reply in the same language as the question (English, Sinhala or Tamil); if that is unclear, use the app language given. Plain words, no jargon. Layout, always:
+   the very first line is exactly "VERDICT: YES", "VERDICT: NO", "VERDICT: DEPENDS" or "VERDICT: NOT_FOUND" (in English, whatever the reply language);
+   NOT_FOUND when the sources and facts do not answer it, DEPENDS when the answer differs by case;
    first ONE short sentence that answers the question directly (for example "Yes." plus the key point);
    then 2 to 4 bullet lines starting with "- ", one fact per bullet, each ending with its citation like [2];
    **bold** only course names, dates and key numbers. No headings, no paragraphs after the bullets, under 90 words.
@@ -142,7 +145,7 @@ askRoutes.post('/ask', async c => {
   if (!c.env.AI || !c.env.ASK_INDEX || !c.env.GEMINI_API_KEY || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
   const origin = c.req.header('Origin');
   if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
-  const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown } | null;
+  const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown } | null;
   const question = typeof b?.question === 'string' ? b.question.trim() : '';
   if (question.length < 2 || question.length > QUESTION_MAX) return err(c, 400, `Ask a question of up to ${QUESTION_MAX} characters`);
   let profile: ProfileInput | null = null;
@@ -163,24 +166,66 @@ askRoutes.post('/ask', async c => {
   const passages = found.matches.filter(m => m.score >= MIN_SCORE && m.metadata)
     .map(m => ({ id: m.id, ...(m.metadata as unknown as Omit<CorpusPassage, 'id'>) }));
 
-  // 2. Facts about the courses involved, for this student, from ZedPath's own engine.
-  const facts = engineFacts(coursesFor(question, passages), profile);
+  // 2. Facts about the courses involved, for this student, from ZedPath's own engine; and the next steps (CR-004).
+  const codes = coursesFor(question, passages);
+  const facts = engineFacts(codes, profile);
+  const actions = askActions(question, codes, profile);
 
   const localScript = SINHALA.test(question) || TAMIL.test(question);
   if (passages.length === 0 && facts.length === 0 && !localScript) {
-    return c.json({ answer: NOT_FOUND, citations: [], engineFacts: [], answeredAt: new Date().toISOString() } satisfies AskResponse);
+    return c.json({ answer: NOT_FOUND, citations: [], engineFacts: [], verdict: 'NOT_FOUND', actions: [], answeredAt: new Date().toISOString() } satisfies AskResponse);
   }
 
   // 3. The language model writes the answer from those passages and facts only.
   const sources = passages.map((p, i) => `[${i + 1}] ${p.kind === 'HANDBOOK' ? `UGC handbook 2025/26, page ${p.page}` : p.source}\n${p.text}`).join('\n\n');
-  const userText = `Student's question: ${question}\n\nZedPath engine facts (computed from this student's own results; trust them over general statements):\n` +
+  const lang = ({ si: 'Sinhala', ta: 'Tamil' } as Record<string, string>)[String(b?.lang)] ?? 'English';
+  const userText = `App language: ${lang}\nStudent's question: ${question}\n\nZedPath engine facts (computed from this student's own results; trust them over general statements):\n` +
     `${facts.length ? facts.map(f => `- ${f}`).join('\n') : '- none (the student has not entered results, or no course is involved)'}\n\n` +
     `Sources:\n${sources || '(no relevant sources found)'}`;
   const out = await generate(c.env, userText);
   if ('status' in out) return err(c, out.status === 429 ? 429 : 503, out.status === 429
     ? 'Ask ZedPath is very busy right now. Try again in a minute' : 'Ask ZedPath is busy. Try again in a minute');
-  const { answer, citations } = finish(out.text || NOT_FOUND, passages);
-  return c.json({ answer, citations, engineFacts: facts, answeredAt: new Date().toISOString() } satisfies AskResponse);
+  const { verdict, text } = takeVerdict(out.text || '');
+  const { answer, citations } = finish(text || NOT_FOUND, passages);
+  return c.json({ answer, citations, engineFacts: facts, verdict: text ? verdict : 'NOT_FOUND', actions, answeredAt: new Date().toISOString() } satisfies AskResponse);
+});
+
+/**
+ * CR-004 actions: the courses the question is about (best chance first, at most 3 places) and Gazette/intake notices
+ * whose distinctive title words appear in the question. Built from ZedPath's own data, never from the model's text.
+ */
+const NOTICE_STOP = new Set(['examination', 'competitive', 'service', 'services', 'officers', 'officer', 'grade', 'national', 'diploma',
+  'technology', 'apprenticeship', 'university', 'department', 'recruitment', 'technician', 'special', 'moratuwa']);
+export function askActions(question: string, codes: string[], p: ProfileInput | null): AskAction[] {
+  const rank = { SAFE: 0, LIKELY: 1, REACH: 2, NOT_ENOUGH_DATA: 3, OUT_OF_RANGE: 4 } as const;
+  const places = codes.flatMap(code => book.offerings.filter(o => o.courseCode === code).map(o => {
+    const a = p ? assessOffering(o, p) : null;
+    const bands = a?.groups.map(g => g.result?.band).filter(Boolean) as (keyof typeof rank)[] | undefined;
+    const band = !p ? null : !a?.anyEligible ? null : bands?.length ? bands.sort((x, y) => rank[x] - rank[y])[0] : 'NOT_ENOUGH_DATA';
+    return { kind: 'COURSE' as const, uniCode: o.uniCode, course: tidyName(o.course), institution: tidyName(o.institution.replace(/,?\s*Sri Lanka$/i, '')), band };
+  })).sort((x, y) => (x.band === null ? 9 : rank[x.band]) - (y.band === null ? 9 : rank[y.band])).slice(0, 3);
+  const q = norm(question);
+  const notices = journey.notices.filter(n => norm(n.title).split(' ').filter(w => w.length >= 6 && !NOTICE_STOP.has(w)).some(w => q.includes(` ${w.slice(0, 6)}`)))
+    .slice(0, 2).map(n => ({ kind: 'NOTICE' as const, routeId: n.routeId, title: n.title, closesOn: n.closesOn }));
+  return [...places, ...notices];
+}
+
+/** CR-004: "Helpful" / "Report a wrong answer". Stores the question, the answer and its pages; nothing that identifies
+ *  the student. Rate-limited per IP; same-origin only. */
+askRoutes.post('/ask/feedback', async c => {
+  if (!c.env.DB) return err(c, 503, 'Feedback is not available yet');
+  const origin = c.req.header('Origin');
+  if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
+  if (c.env.IP_LIMITER && !(await c.env.IP_LIMITER.limit({ key: `fb:${ip(c)}` })).success) return err(c, 429, 'Too many reports. Wait a minute');
+  const b = await c.req.json().catch(() => null) as Partial<AskFeedback> | null;
+  const question = String(b?.question ?? '').trim(), answer = String(b?.answer ?? '').trim(), note = b?.note ? String(b.note).trim().slice(0, 500) : null;
+  const pages = Array.isArray(b?.pages) ? b!.pages.filter(n => Number.isInteger(n) && n > 0 && n < 1000).slice(0, 20) : [];
+  if (question.length < 2 || question.length > QUESTION_MAX || !answer || answer.length > 4000) return err(c, 400, 'Nothing to report');
+  if (b?.rating !== 'HELPFUL' && b?.rating !== 'WRONG') return err(c, 400, 'Choose helpful or wrong');
+  const lang = b?.lang === 'si' || b?.lang === 'ta' ? b.lang : 'en';
+  await c.env.DB.prepare(`INSERT INTO answer_feedback (rating, question, answer, pages, note, lang, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)`)
+    .bind(b.rating, question, answer, JSON.stringify(pages), note || null, lang, new Date().toISOString()).run();
+  return c.body(null, 204);
 });
 
 // Local developer tool: embeds corpus passages for tools/ask/embed-corpus.ts. Off unless DEV_TOOLS=1 (set only in

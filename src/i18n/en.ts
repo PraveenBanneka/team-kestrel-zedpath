@@ -252,6 +252,25 @@ export const en = {
   'ct.edit': 'Edit my details',
   'app.offline': 'No connection. ZedPath needs the internet to check your account.',
   'app.retry': 'Try again',
+  // CR-004: Ask answer card
+  'ask.more': 'Show more',
+  'ask.toJourney': 'Add to Journey',
+  'ask.onList': 'On my list',
+  'ask.thanks': 'Thank you. The ZedPath team will check it.',
+  'ask.wrongWhat': 'What was wrong? (optional)',
+  'ask.wrongPlaceholder': 'e.g. the cut-off is different',
+  'ask.sentNote': 'Your question and this answer are sent to the ZedPath team to check. Nothing else is sent.',
+  'ask.sendReport': 'Send report',
+  'ask.helpful': 'Helpful',
+  'ask.wrong': 'Report a wrong answer',
+  'ask.v.YES': 'Yes',
+  'ask.v.NO': 'No',
+  'ask.v.DEPENDS': 'It depends',
+  'ask.v.NOT_FOUND': 'Not in official sources',
+  'ask.sources': 'Sources',
+  'ask.next': 'Next steps',
+  'ask.fu.chances': 'What are my chances for {course}?',
+  'ask.fu.study': 'What will I study in {course}?',
 } as const;
 
 export type Key = keyof typeof en;

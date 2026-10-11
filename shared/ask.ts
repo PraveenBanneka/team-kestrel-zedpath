@@ -13,11 +13,27 @@ export interface CorpusPassage {
 
 export interface AskRequest { question: string; lang?: 'en' | 'si' | 'ta' }
 export interface AskCitation { n: number; source: string; page: number | null; url: string | null; quote: string }
+/** CR-004: the one-word answer shown as a chip above the text. null when the model gave none (no chip, never a guess). */
+export type Verdict = 'YES' | 'NO' | 'DEPENDS' | 'NOT_FOUND';
+/** CR-004: next steps under an answer, built by ZedPath from its own matches (never written by the model). */
+export type AskAction =
+  | { kind: 'COURSE'; uniCode: string; course: string; institution: string; band: 'SAFE' | 'LIKELY' | 'REACH' | 'OUT_OF_RANGE' | 'NOT_ENOUGH_DATA' | null }
+  | { kind: 'NOTICE'; routeId: string; title: string; closesOn: string };
 export interface AskResponse {
   answer: string;                  // plain text; [1], [2] refer to citations
   citations: AskCitation[];
   engineFacts: string[];           // eligibility facts computed by ZedPath's own rule engine for this student
+  verdict: Verdict | null;
+  actions: AskAction[];
   answeredAt: string;
+}
+export interface AskFeedback { question: string; answer: string; pages: number[]; rating: 'HELPFUL' | 'WRONG'; note?: string; lang: 'en' | 'si' | 'ta' }
+
+/** Reads and removes the model's first line "VERDICT: YES|NO|DEPENDS|NOT_FOUND". Anything else: no verdict. */
+export function takeVerdict(raw: string): { verdict: Verdict | null; text: string } {
+  const m = raw.match(/^\s*\**\s*VERDICT\s*:\s*\**\s*(YES|NO|DEPENDS|NOT_FOUND)\b\**[ \t]*\r?\n?/i);
+  if (!m) return { verdict: null, text: raw.trim() };
+  return { verdict: m[1].toUpperCase() as Verdict, text: raw.slice(m[0].length).trim() };
 }
 
 export const QUESTION_MAX = 500;
