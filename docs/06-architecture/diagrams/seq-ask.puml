@@ -1,0 +1,41 @@
+@startuml seq-ask
+!pragma layout smetana
+skinparam defaultFontName Calibri
+skinparam monochrome true
+skinparam shadowing false
+hide footbox
+
+actor Student
+participant "PWA" as P
+participant "API Worker\n(/api/ask)" as W
+database "D1" as D
+participant "Workers AI\n(bge-m3)" as E
+database "Vectorize" as V
+participant "AI Gateway" as G
+participant "Gemini models\n(fallback chain)" as M
+
+Student -> P : question (EN / SI / TA)
+P -> W : POST /api/ask {question, profile summary}
+W -> W : rate limit per IP + device
+W -> D : count today's use (salted hashes of device and IP)
+alt over limit or daily allowance
+  W --> P : 429
+end
+W -> E : embed question
+E --> W : 1024-dim vector
+W -> V : query top 6
+V --> W : passages with source and page
+W -> W : keep passages scoring >= 0.50; add engine facts\nfrom the bundled rulebook for this student
+alt no passages and no facts
+  W --> P : NOT_FOUND answer (no model call)
+end
+loop each model until a usable reply
+  W -> G : generateContent (system rules + passages)
+  G -> M : request
+  M --> G : reply
+  G --> W : reply
+  W -> W : drop "thought" parts; usableReply() check
+end
+W --> P : answer + citations (source, page)
+P --> Student : answer with links to each source
+@enduml

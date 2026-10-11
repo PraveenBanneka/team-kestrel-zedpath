@@ -1,0 +1,47 @@
+@startuml container-view
+' ZedPath C4 container view as deployed (verified against wrangler.jsonc and worker/*.ts, 11 Oct 2026).
+' Derived from docs/architecture/zedpath-architecture.puml; account identifiers deliberately omitted (public repo).
+!pragma layout smetana
+!include <C4/C4_Container>
+skinparam defaultFontName Calibri
+skinparam wrapWidth 220
+LAYOUT_LEFT_RIGHT()
+
+Person(student, "Student", "Sri Lankan A/L student; English, Sinhala or Tamil")
+
+System_Boundary(phone, "Student's phone") {
+  Container(pwa, "ZedPath web app / PWA", "React 19 + TypeScript, Vite", "Screens: onboarding, results, compare, My list, Journey, Alerts, Ask, Groups, Account. Hash routing; service worker (offline shell); PBKDF2 key derivation")
+  Container(android, "ZedPath Android app", "Capacitor, WebView", "Loads the live site; native reminders")
+}
+
+System_Boundary(cf, "Cloudflare, free plan (single Worker 'zedpath')") {
+  Container(assets, "Static assets", "Workers Static Assets", "SPA bundle, icons, 12 preset avatars, manifest, sw.js. SPA fallback; no Worker invocation")
+  Container(api, "API Worker", "Hono 4 + TypeScript", "Runs only for /api/*: results, offerings, routes, journey, auth, me, ask, groups, blocks")
+  ContainerDb(rulebook, "Read model (bundled)", "JSON compiled into the Worker", "Rulebook 2025/26 (courses, rules, cut-offs, routes, syllabi) + Journey dates and notices")
+  ContainerDb(d1, "D1 'zedpath'", "SQLite, migrations 0001-0010", "Accounts, sessions, profile, contact, Journey, groups, rules acceptance, Ask allowance, feedback")
+  Container(room, "GroupRoom Durable Objects", "SQLite-backed DO, WebSocket hibernation", "One per group: messages, live sockets, ping/pong auto-response")
+  Container(rl, "Rate limiting", "Workers Rate Limiting", "AUTH 10/min per IP+user; IP 100/min")
+  Container(wai, "Workers AI", "bge-m3, llama-guard-3-8b", "Multilingual embeddings; message moderation (fail closed)")
+  ContainerDb(vec, "Vectorize 'zedpath-ask'", "1024-dim, cosine", "Page-tagged passages: UGC handbook + official routes")
+  Container(gw, "AI Gateway", "Cloudflare AI Gateway", "Proxies Gemini; cache on, payload logs off")
+}
+
+System_Ext(gemini, "Google AI Studio (Gemini)", "Flash models with a fallback chain")
+System_Ext(github, "GitHub (public repo)", "Every push leak-scanned by a pre-push hook")
+
+Rel(student, pwa, "Uses", "HTTPS")
+Rel(student, android, "Uses")
+Rel(android, assets, "Loads", "HTTPS")
+Rel(pwa, assets, "Loads", "HTTPS")
+Rel(pwa, api, "JSON API", "fetch /api/*")
+Rel(pwa, room, "Group chat", "WebSocket via /api/groups/:id/live")
+Rel(api, rulebook, "Eligibility, bands, dates")
+Rel(api, d1, "Reads/writes", "D1 binding")
+Rel(api, room, "Forwards upgrade", "DO stub")
+Rel(api, rl, "Checks")
+Rel(api, wai, "Embed question")
+Rel(room, wai, "Moderate message")
+Rel(api, vec, "Top-6 passages")
+Rel(api, gw, "Generate answer", "AI binding")
+Rel(gw, gemini, "generateContent", "HTTPS")
+@enduml
