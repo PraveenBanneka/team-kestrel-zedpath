@@ -3,7 +3,7 @@
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, ArrowLeft, Award, Bell, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   ListOrdered, Scale, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -14,12 +14,14 @@ import { matches } from '../shared/search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
-import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
+import { deleteAccount, fetchJourney, fetchMe, followCourse as apiFollowCourse, followNotice as apiFollowNotice, logOut, logOutEverywhere, markApplied, markStep,
+  saveAvatar, saveMe } from './account.ts';
+import { AVATAR_CODES, PersonAvatar } from './avatars.tsx';
+import type { JourneyStepId, MyJourney } from '../shared/journey.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
-import { JourneyScreen, today } from './screens/Journey.tsx';
-import { AlertsScreen } from './screens/Alerts.tsx';
-import { GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
+import { JourneyScreen, today, type JourneyOps } from './screens/Journey.tsx';
+import { GroupInfoScreen, GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
@@ -78,8 +80,8 @@ export function App() {
   useEffect(() => { api<RouteSummary[]>('/routes').then(setRoutes).catch(() => setRoutes([])); }, []);
   const [journey, setJourney] = useState<JourneyResponse | null>(null);
   useEffect(() => { api<JourneyResponse>('/journey').then(setJourney).catch(() => {}); }, []);
-  const [saved, setSavedRaw] = useState<string[]>(() => loadJourney());
-  const setSaved = (ids: string[]) => { saveJourney(ids); setSavedRaw(ids); };
+  const [my, setMy] = useState<MyJourney | null>(null);
+  const [jNote, setJNote] = useState<string | null>(null);
   const [prefs, setPrefsRaw] = useState<NotifyPrefs>(() => loadNotifyPrefs());
   const setPrefs = (p: NotifyPrefs) => { saveNotifyPrefs(p); setPrefsRaw(p); };
   useEffect(() => {                                                    // FR-105: recalculate whenever the profile changes
@@ -91,7 +93,7 @@ export function App() {
   // Accounts (CR-001): with no account (or no accounts on the server) everything below is skipped and the app behaves
   // exactly as before. With one, every save also goes to the account, and the account's copy is loaded on start,
   // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
-  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact'] } | null>(null);
+  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact']; avatar: MeResponse['avatar'] } | null>(null);
   const [checked, setChecked] = useState(false);              // CR-003: the account check has finished (no anonymous use)
   const [offline, setOffline] = useState(false);              // the check failed for lack of a connection, not for lack of an account
   const checkAccount = () => { setOffline(false); setChecked(false);
@@ -108,7 +110,7 @@ export function App() {
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
   const adopt = (m: MeResponse) => {
-    setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact });
+    setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact, avatar: m.avatar });
     if (m.role !== 'STUDENT') { setOnboarded(); setOnb(true); return; }       // a senior's results (if any) stay on this phone
     const local = loadProfile();
     if (local && (isPendingSync() || !m.profile)) { void push(local, loadExtras()); return; }
@@ -118,17 +120,53 @@ export function App() {
   };
   useEffect(checkAccount, []);   // once, on start   // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [path, arg] = route.split('/').filter(Boolean);
+  const [path, arg, sub] = route.split('/').filter(Boolean);
+
+  // CR-006: the Journey is saved on the account. On first load, notices followed on this phone before CR-006 are copied
+  // to the account once, then the phone's copy is cleared. Each change is shown at once and undone if saving fails.
+  useEffect(() => {
+    if (!me) { setMy(null); return; }
+    let live = true;
+    fetchJourney().then(async j => {
+      const local = loadJourney(), add = local.filter(r => !j.notices.some(n => n.routeId === r));
+      for (const r of add) await apiFollowNotice(r, true).catch(() => {});
+      if (local.length) saveJourney([]);
+      const fresh = add.length ? await fetchJourney() : j;
+      if (live) setMy(fresh);
+    }).catch(() => { if (live) setMy({ courses: [], notices: [], steps: [] }); });
+    return () => { live = false; };
+  }, [me?.username]);   // eslint-disable-line react-hooks/exhaustive-deps
+  const mutate = (change: (j: MyJourney) => MyJourney, save: () => Promise<unknown>) => {
+    if (!my) return;
+    const before = my; setMy(change(before)); setJNote(null);
+    save().catch(e => { setMy(before); setJNote((e as Error).message); });
+  };
+  const now = () => new Date().toISOString();
+  const ops: JourneyOps = {
+    my, note: jNote,
+    setStep: (id: JourneyStepId, done: boolean) => mutate(j => ({ ...j, steps: done ? [...j.steps.filter(s => s.stepId !== id), { stepId: id, doneAt: now() }]
+      : j.steps.filter(s => s.stepId !== id) }), () => markStep(id, done)),
+    setApplied: (r, applied) => mutate(j => ({ ...j, notices: j.notices.map(n => n.routeId === r ? { ...n, appliedAt: applied ? now() : null } : n) }), () => markApplied(r, applied)),
+    followNotice: (r, on) => mutate(j => ({ ...j, notices: on ? (j.notices.some(n => n.routeId === r) ? j.notices : [...j.notices, { routeId: r, followedAt: now(), appliedAt: null }])
+      : j.notices.filter(n => n.routeId !== r) }), () => apiFollowNotice(r, on)),
+    followCourse: (u, on) => mutate(j => ({ ...j, courses: on ? (j.courses.some(c => c.uniCode === u) ? j.courses : [...j.courses, { uniCode: u, followedAt: now() }])
+      : j.courses.filter(c => c.uniCode !== u) }), () => apiFollowCourse(u, on)),
+  };
+  const saved = my?.notices.map(n => n.routeId) ?? [];
+  const setSaved = (ids: string[]) => {
+    for (const r of ids.filter(x => !saved.includes(x))) ops.followNotice(r, true);
+    for (const r of saved.filter(x => !ids.includes(x))) ops.followNotice(r, false);
+  };
   const finishIntro = () => { setOnboarded(); setOnb(true); go('/signup'); };       // CR-003: an account comes first
   const onSave = (p: ProfileInput, e: Extras) => {
     saveProfile(p); saveExtras(e); setProfile(p); setExtras(e);
     if (me?.role === 'STUDENT') void push(p, e);
     go('/paths');
   };
-  const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setSavedRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
+  const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setMy(null); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
-    username: me?.username ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
+    username: me?.username ?? null, avatar: me?.avatar ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
     logOut: async () => { await logOut().catch(() => {}); setMe(null); },
     logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
     deleteAccount: async () => { await deleteAccount(); reset(); },
@@ -149,7 +187,7 @@ export function App() {
           ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); void afterAuth(freshFlag === 'new'); }} />
             : <div className="card"><p className="subtitle">{t('auth.codeGone')}</p></div>)
           : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
-              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null, contact: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go(path === 'signup' ? '/saved-code/new' : '/saved-code'); }}
+              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null, contact: null, avatar: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go(path === 'signup' ? '/saved-code/new' : '/saved-code'); }}
               onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.role === 'SENIOR' ? '/groups' : m.profile || loadProfile() ? '/paths' : '/about'); }} />}
         </Page></main>
       </div>);
@@ -185,38 +223,40 @@ export function App() {
       <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
     </div>);
 
+  // The Journey tab counts open notices the student has not seen yet and is not ruled out for (checked on this phone).
+  const seen = loadAlertsSeen(), dob = me?.contact?.birthDate ?? null, day = today();
+  const unread = !prefs.badge ? 0 : (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
-  if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} list={list} setList={setList} />; }
+  if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} list={list} setList={setList} setCompare={setCompare} />; }
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
-  else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
-  else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} compare={compare} profile={profile} results={results} prefs={prefs} go={go} />; }
-  else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} dob={me?.contact?.birthDate ?? null} saved={saved} setSaved={setSaved} go={go} />; }
+  else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} setCompare={setCompare} />; }
+  else if (path === 'journey' || path === 'alerts') { tab = 'journey'; title = t('title.journey');
+    screen = <JourneyScreen tab={path === 'alerts' || arg === 'open' ? 'open' : 'steps'} data={journey} ops={ops} list={list} compare={compare} profile={profile}
+      results={results} prefs={prefs} dob={me?.contact?.birthDate ?? null} unread={unread} go={go} />; }
   else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
+  else if (path === 'group' && arg && sub === 'info' && me) { tab = 'groups'; back = true; title = t('gi.info'); screen = <GroupInfoScreen id={Number(arg)} username={me.username} go={go} />; }
   else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
-  else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
+  else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare}
+    following={!!my?.courses.some(c => c.uniCode === arg)} onFollow={me ? on => ops.followCourse(arg, on) : null} />; }
   else if (path === 'ask') { tab = 'ask'; title = t('title.ask'); screen = <AskScreen profile={profile} extras={extras} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')}
     ctx={{ results, list, setList, compare, setCompare, saved, setSaved, go }} />; }
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
   else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
-  else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} />; }
-  else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs} />; }
+  else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} following={saved.includes(arg)} onFollow={me ? on => ops.followNotice(arg, on) : null} />; }
+  else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs}
+    avatar={me?.avatar ?? null} setAvatar={me ? a => saveAvatar(a).then(adopt) : null} />; }
   else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
   else screen = <YourPaths meta={meta} profile={profile} extras={extras} results={results} routes={routes} error={error} go={go} listCount={list.length} />;
 
   const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', t('nav.paths'), MapIcon, '#/paths'], ['list', t('nav.list'), ListOrdered, '#/list'],
     ['journey', t('nav.journey'), CalendarDays, '#/journey'], ['groups', t('nav.groups'), Users, '#/groups'], ['ask', t('nav.ask'), Sparkles, '#/ask']];
-  // The bell counts open notices the student has not opened yet and is not ruled out for (checked on this phone).
-  const seen = loadAlertsSeen(), dob = me?.contact?.birthDate ?? null, day = today();
-  const unread = !prefs.badge ? 0 : (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   return (
     <div className="shell has-nav">
       <header className="app-bar">
         {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
-        <a className="icon-btn bar-bell" href="#/alerts" aria-label={unread ? t('nav.alertsNew', { n: unread }) : t('nav.alerts')}><Bell size={22} aria-hidden="true" />
-          {unread > 0 && <span className="badge num" aria-hidden="true">{unread}</span>}</a>
-        <a className="avatar small" href="#/me" aria-label={t('nav.me')}>{me ? me.username.charAt(0).toUpperCase() : <UserRound size={20} aria-hidden="true" />}</a>
+        <a className="avatar small plain" href="#/me" aria-label={t('nav.me')}>{me ? <PersonAvatar avatar={me.avatar} name={me.username} size={36} /> : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       <main><ErrorBoundary resetKey={route}><Page k={route}>{screen}</Page></ErrorBoundary></main>
       <nav className="bottom-nav" aria-label={t('nav.main')}>
@@ -225,6 +265,7 @@ export function App() {
             {tab === key && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
             <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span>{label}</span>
             {key === 'list' && list.length > 0 && <span className="nav-count num" aria-label={t('nav.listCount', { n: list.length })}>{list.length}</span>}
+            {key === 'journey' && unread > 0 && <span className="nav-count num" aria-label={t('nav.alertsNew', { n: unread })}>{unread}</span>}
           </a>))}
       </nav>
     </div>
@@ -287,7 +328,8 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
 }
 
 // ---------------------------------------------------------------- Courses by band
-function Courses({ results, band, go, list, setList }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void }) {
+function Courses({ results, band, go, list, setList, setCompare }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; list: ListEntry[];
+  setList: (l: ListEntry[]) => void; setCompare: (c: string[]) => void }) {
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
   const [query, setQuery] = useState('');
   const [picked, setPicked] = useState<string[] | null>(null);          // null = not selecting; else the Uni-Codes picked
@@ -339,6 +381,8 @@ function Courses({ results, band, go, list, setList }: { results: ResultsRespons
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
           <span className="grow num">{t('sel.count', { n: picked.length })}</span>
           <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
+          <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setCompare(picked.slice(0, COMPARE_MAX)); go('/compare'); }}>
+            <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>
           <button className="btn filled small" disabled={picked.length === 0} onClick={addPicked}><ListOrdered size={16} aria-hidden="true" />{t('sel.add')}</button>
         </div>)}
       {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('courses.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
@@ -401,8 +445,9 @@ function AddToList({ d, mine, list, setList, go }: { d: OfferingDetail; mine: Of
     </div>);
 }
 
-function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, setCompare }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null;
-  go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void; compare: string[]; setCompare: (c: string[]) => void }) {
+function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, setCompare, following, onFollow }: { uniCode: string; profile: ProfileInput; results: ResultsResponse | null;
+  go: (to: string) => void; list: ListEntry[]; setList: (l: ListEntry[]) => void; compare: string[]; setCompare: (c: string[]) => void;
+  following: boolean; onFollow: ((on: boolean) => void) | null }) {
   const [d, setD] = useState<OfferingDetail | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<OfferingDetail>(`/offerings/${uniCode}?district=${profile.district}`).then(setD).catch(e => setErr(String(e.message))); }, [uniCode, profile.district]);
@@ -433,6 +478,8 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
         ? <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{compare.includes(d.uniCode) ? t('detail.compareNow', { n: compare.length }) : t('detail.compareFull', { n: COMPARE_MAX })}</button>
         : <button className="btn tonal" onClick={() => { setCompare([...compare, d.uniCode]); go('/compare'); }}>
             <Scale size={18} aria-hidden="true" />{compare.length ? (compare.length === 1 ? t('detail.compareOther') : t('detail.compareOthers', { n: compare.length })) : t('detail.compare')}</button>}
+      {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
+        {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.followingCourse')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.followCourse')}</>}</button>}
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">{t('detail.needs')}</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
@@ -517,7 +564,7 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
   );
 }
 
-function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null }) {
+function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: RouteSummary[] | null; following: boolean; onFollow: ((on: boolean) => void) | null }) {
   const r = routes?.find(x => x.id === id);
   if (!routes) return <div className="skeleton" />;
   if (!r) return <div className="alert error"><TriangleAlert size={20} aria-hidden="true" />{t('routes.notFound')}</div>;
@@ -540,6 +587,8 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
         <p className="source">{t('routes.official', { s: r.sourceLocator, d: r.retrievedOn })}</p>
       </section>
       {r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
+      {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
+        {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.following1')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.follow')}</>}</button>}
       {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">{t('routes.site')}<ExternalLink size={18} aria-hidden="true" /></a>}
       <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>{t('routes.doc')}</a>
     </>
@@ -547,7 +596,7 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
 }
 
 // ---------------------------------------------------------------- Me
-interface AccountControls { username: string | null; senior: MeResponse['senior']; contact: MeResponse['contact']; syncNote: string | null; logOut: () => Promise<void>;
+interface AccountControls { username: string | null; avatar: string | null; senior: MeResponse['senior']; contact: MeResponse['contact']; syncNote: string | null; logOut: () => Promise<void>;
   logOutEverywhere: () => Promise<void>; deleteAccount: () => Promise<void> }
 
 function AccountCard({ account, go }: { account: AccountControls; go: (to: string) => void }) {
@@ -565,7 +614,7 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
   return (
     <section className="card stack account-card">
       <div className="row" style={{ flexWrap: 'nowrap', gap: 12 }}>
-        <span className="avatar" aria-hidden="true">{account.username.charAt(0).toUpperCase()}</span>
+        <PersonAvatar avatar={account.avatar} name={account.username} size={46} />
         <span className="stack" style={{ gap: 0, minWidth: 0 }}>
           <span className="title-l" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.username}</span>
           <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('acc.saved')}</span>
@@ -624,8 +673,29 @@ function NotificationSettings({ prefs, setPrefs }: { prefs: NotifyPrefs; setPref
     </section>);
 }
 
-function Me({ profile, meta, extras, go, onClear, account, lang, setLang, prefs, setPrefs }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
-  onClear: () => void; account: AccountControls; lang: Lang; setLang: (l: Lang) => void; prefs: NotifyPrefs; setPrefs: (p: NotifyPrefs) => void }) {
+/** CR-006: choose a preset profile picture (no photo upload). */
+function AvatarPicker({ avatar, name, setAvatar }: { avatar: string | null; name: string; setAvatar: (a: string | null) => Promise<unknown> }) {
+  const [busy, setBusy] = useState(false), [err, setErr] = useState<string | null>(null);
+  const pick = async (a: string | null) => { setBusy(true); setErr(null); try { await setAvatar(a); } catch (e) { setErr((e as Error).message); } finally { setBusy(false); } };
+  return (
+    <section className="card stack" aria-labelledby="av-h">
+      <div className="row" style={{ flexWrap: 'nowrap', gap: 12 }}>
+        <PersonAvatar avatar={avatar} name={name} size={56} />
+        <span className="stack" style={{ gap: 2 }}><h2 id="av-h" className="title-l" style={{ margin: 0 }}>{t('av.h')}</h2><span className="helper">{t('av.sub')}</span></span>
+      </div>
+      <div className="avatar-grid" role="radiogroup" aria-label={t('av.h')}>
+        <button type="button" role="radio" aria-checked={avatar === null} disabled={busy} onClick={() => void pick(null)} aria-label={t('av.initials')}>
+          <PersonAvatar avatar={null} name={name} size={44} /></button>
+        {AVATAR_CODES.map(a => <button key={a} type="button" role="radio" aria-checked={avatar === a} disabled={busy} onClick={() => void pick(a)}
+          aria-label={t('av.one', { n: Number(a.slice(1)) })}><PersonAvatar avatar={a} name={name} size={44} /></button>)}
+      </div>
+      {err && <p className="helper" role="status">{err}</p>}
+    </section>);
+}
+
+function Me({ profile, meta, extras, go, onClear, account, lang, setLang, prefs, setPrefs, avatar, setAvatar }: { profile: ProfileInput | null; meta: Meta | null; extras: Extras; go: (to: string) => void;
+  onClear: () => void; account: AccountControls; lang: Lang; setLang: (l: Lang) => void; prefs: NotifyPrefs; setPrefs: (p: NotifyPrefs) => void;
+  avatar: string | null; setAvatar: ((a: string | null) => Promise<unknown>) | null }) {
   const install = useInstallPrompt();
   return (
     <>
@@ -643,6 +713,7 @@ function Me({ profile, meta, extras, go, onClear, account, lang, setLang, prefs,
       </section>
       <button className="btn tonal" onClick={() => go('/about')}><Pencil size={18} aria-hidden="true" />{t('me.edit')}</button>
       <p className="section-label">{t('me.account')}</p>
+      {setAvatar && account.username && <AvatarPicker avatar={avatar} name={account.username} setAvatar={setAvatar} />}
       <AccountCard account={account} go={go} />
       <p className="section-label">{t('me.language')}</p>
       <div className="chips" role="radiogroup" aria-label={t('me.language')}>

@@ -21,8 +21,8 @@ function Line({ c, text }: { c: Check; text: string }) {
   return <span className="row body-m" style={{ flexWrap: 'nowrap', gap: 8, alignItems: 'flex-start' }}><Icon size={18} aria-hidden="true" style={{ color: tone, flex: 'none', marginTop: 2 }} /><span>{text}</span></span>;
 }
 
-export function AlertsScreen({ data, profile, dob, saved, setSaved, go }: { data: JourneyResponse | null; profile: ProfileInput | null;
-  dob: string | null; saved: string[]; setSaved: (ids: string[]) => void; go: (to: string) => void }) {
+export function AlertsScreen({ data, profile, dob, saved, setSaved, embedded = false }: { data: JourneyResponse | null; profile: ProfileInput | null;
+  dob: string | null; saved: string[]; setSaved: (ids: string[]) => void; go: (to: string) => void; embedded?: boolean }) {
   useEffect(() => { if (data) saveAlertsSeen(data.notices.map(n => n.routeId)); }, [data]);       // opening Alerts clears the bell
   if (!data) return <><div className="skeleton" /><div className="skeleton" /></>;
   const day = today();
@@ -31,7 +31,7 @@ export function AlertsScreen({ data, profile, dob, saved, setSaved, go }: { data
   return (
     <>
       <div className="stack" style={{ gap: 4 }}>
-        <h1 className="screen-title">{t('al.h')}</h1>
+        {!embedded && <h1 className="screen-title">{t('al.h')}</h1>}
         <p className="subtitle">{t('al.sub')}</p>
         {getLang() !== 'en' && <p className="helper">{t('al.official')}</p>}
       </div>
@@ -61,8 +61,8 @@ export function AlertsScreen({ data, profile, dob, saved, setSaved, go }: { data
               </div>
               <a className="source-link" href={n.sourceUrl} target="_blank" rel="noopener" lang="en"><ScrollText size={14} aria-hidden="true" />{n.sourceLocator}<ExternalLink size={12} aria-hidden="true" /></a>
               {c.status !== 'CLOSED' && (added
-                ? <button className="btn tonal" onClick={() => go('/journey')}><CalendarCheck size={18} aria-hidden="true" />{t('al.inJourney')}</button>
-                : <button className="btn filled" onClick={() => setSaved([...saved, n.routeId])}><CalendarPlus size={18} aria-hidden="true" />{t('al.add')}</button>)}
+                ? <button className="btn tonal" onClick={() => setSaved(saved.filter(x => x !== n.routeId))}><CalendarCheck size={18} aria-hidden="true" />{t('jt.following1')}</button>
+                : <button className="btn filled" onClick={() => setSaved([...saved, n.routeId])}><CalendarPlus size={18} aria-hidden="true" />{t('jt.follow')}</button>)}
               {n.officialUrl && c.status !== 'CLOSED' && <a className="btn text" href={n.officialUrl} target="_blank" rel="noopener" style={{ alignSelf: 'flex-start' }}>{t('al.site')}<ExternalLink size={16} aria-hidden="true" /></a>}
             </motion.section>);
         })}

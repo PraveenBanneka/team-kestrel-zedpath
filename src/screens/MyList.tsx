@@ -1,9 +1,12 @@
 // My list (US-301..303): the student's ordered preference list for the UGC application. Drag (handle) or the arrow
 // buttons reorder it; warnings follow BR-041/BR-042; "Fix the order" previews FR-305's order and applies it only
 // after the student confirms; "Copy Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
+// CR-006: press and hold a course (or "Select") to choose several; Compare opens them in the order chosen (at most 3),
+// Remove takes them off the list.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { Check, ChevronRight, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Scale, TriangleAlert, X } from 'lucide-react';
+import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
+import { useHold } from '../hold.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
 import { LIST_MAX, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
@@ -23,13 +26,16 @@ export function withCurrentBands(list: ListEntry[], results: ResultsResponse | n
 
 /** One row: drag handle on the right (Praveen, 2026-10-05: no arrow buttons). The handle is also a keyboard control
  *  (focus it, then Arrow Up / Arrow Down), so reordering still works without a touch screen (FR-301). */
-function Row({ e, i, n, onMove, onRemove, open }: { e: ListEntry & { stale: boolean }; i: number; n: number;
-  onMove: (to: number) => void; onRemove: () => void; open: () => void }) {
+function Row({ e, i, n, onMove, onRemove, open, selecting, selected, onPick }: { e: ListEntry & { stale: boolean }; i: number; n: number;
+  onMove: (to: number) => void; onRemove: () => void; open: () => void; selecting: boolean; selected: boolean; onPick: () => void }) {
   const controls = useDragControls();
+  const hold = useHold(onPick);
   return (
-    <Reorder.Item value={e} dragListener={false} dragControls={controls} className="list-row" as="div">
-      <span className="pos num">{i + 1}</span>
-      <button type="button" className="grow list-main" onClick={open}>
+    <Reorder.Item value={e} dragListener={false} dragControls={controls} className={`list-row ${selected ? 'picked' : ''}`} as="div">
+      {selecting ? (selected ? <CheckCircle2 size={22} className="pick-ic on" aria-hidden="true" /> : <Circle size={22} className="pick-ic" aria-hidden="true" />)
+        : <span className="pos num">{i + 1}</span>}
+      <button type="button" className="grow list-main" {...hold.handlers} aria-pressed={selecting ? selected : undefined}
+        onClick={() => { if (hold.consumed()) return; if (selecting) onPick(); else open(); }}>
         <span className="t">{e.course}</span>
         <span className="s">{e.institution} · {e.uniCode}</span>
         {e.stale ? <span className="pill band-OUT_OF_RANGE">{t('list.stale')}</span>
@@ -45,9 +51,11 @@ function Row({ e, i, n, onMove, onRemove, open }: { e: ListEntry & { stale: bool
   );
 }
 
-export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]; setList: (l: ListEntry[]) => void;
-  results: ResultsResponse | null; go: (to: string) => void }) {
+export function MyListScreen({ list, setList, results, go, setCompare }: { list: ListEntry[]; setList: (l: ListEntry[]) => void;
+  results: ResultsResponse | null; go: (to: string) => void; setCompare: (c: string[]) => void }) {
   const [preview, setPreview] = useState<ListEntry[] | null>(null);
+  const [picked, setPicked] = useState<string[] | null>(null);              // null = not choosing; else Uni-Codes in the order chosen
+  const toggle = (u: string) => setPicked(p => p === null ? [u] : p.includes(u) ? p.filter(x => x !== u) : [...p, u]);
   const [copied, setCopied] = useState(false);
   const shown = withCurrentBands(list, results);
   const warn = listWarnings(shown);
@@ -79,6 +87,9 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
       <div className="stack" style={{ gap: 4 }}>
         <h1 className="screen-title">{t('list.h')}</h1>
         <p className="subtitle">{t('list.count', { n: list.length, max: LIST_MAX })}</p>
+        <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => setPicked(p => p === null ? [] : null)} aria-pressed={picked !== null}>
+          <CheckCircle2 size={18} aria-hidden="true" />{picked === null ? t('sel.select') : t('sel.cancel')}</button>
+        {picked === null && <p className="helper">{t('sel.tipList')}</p>}
       </div>
 
       {warn.safeAbove.length > 0 && !preview && (
@@ -103,8 +114,18 @@ export function MyListScreen({ list, setList, results, go }: { list: ListEntry[]
 
       <Reorder.Group axis="y" values={shown} onReorder={next => setList(next.map(({ stale: _s, ...e }) => e))} className="list-card" as="div">
         {shown.map((e, i) => <Row key={e.uniCode} e={e} i={i} n={shown.length} open={() => go(`/course/${e.uniCode}`)}
-          onMove={to => setList(move(list, i, to))} onRemove={() => setList(list.filter(x => x.uniCode !== e.uniCode))} />)}
+          onMove={to => setList(move(list, i, to))} onRemove={() => setList(list.filter(x => x.uniCode !== e.uniCode))}
+          selecting={picked !== null} selected={!!picked?.includes(e.uniCode)} onPick={() => toggle(e.uniCode)} />)}
       </Reorder.Group>
+      {picked !== null && (
+        <div className="select-bar" role="region" aria-label={t('sel.bar')}>
+          <span className="grow num">{t('sel.count', { n: picked.length })}</span>
+          <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
+          <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setList(list.filter(x => !picked.includes(x.uniCode))); setPicked(null); }}>
+            <Trash2 size={16} aria-hidden="true" />{t('sel.remove')}</button>
+          <button className="btn filled small" disabled={picked.length === 0} onClick={() => { setCompare(picked.slice(0, 3)); go('/compare'); }}>
+            <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>
+        </div>)}
 
       {more}
       <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('list.compare')}</button>

@@ -5,6 +5,7 @@ import type { Extras, MeResponse, SaltResponse, SignupResponse } from '../shared
 import { normaliseUsername } from '../shared/account.ts';
 import { CONSENT_VERSION, type Contact } from '../shared/contact.ts';
 import { deriveKey } from '../shared/kdf.ts';
+import type { MyJourney } from '../shared/journey.ts';
 
 export class ApiFailure extends Error {
   constructor(readonly status: number, message: string, readonly field?: string) { super(message); }
@@ -58,3 +59,13 @@ export const saveContact = (contact: Contact) => call<MeResponse>('PUT', '/me/co
 export const logOut = () => call<void>('POST', '/auth/logout');
 export const logOutEverywhere = () => call<void>('POST', '/auth/logout-all');
 export const deleteAccount = () => call<void>('DELETE', '/me');
+
+// ---- CR-006
+/** Choose a preset avatar (or null for initials). */
+export const saveAvatar = (avatar: string | null) => call<MeResponse>('PUT', '/me/avatar', { avatar });
+/** The Journey saved on the account. */
+export const fetchJourney = () => call<MyJourney>('GET', '/me/journey');
+export const followCourse = (uniCode: string, on: boolean) => call<void>(on ? 'PUT' : 'DELETE', `/me/journey/courses/${encodeURIComponent(uniCode)}`);
+export const followNotice = (routeId: string, on: boolean) => call<void>(on ? 'PUT' : 'DELETE', `/me/journey/notices/${encodeURIComponent(routeId)}`);
+export const markApplied = (routeId: string, applied: boolean) => call<void>('PUT', `/me/journey/notices/${encodeURIComponent(routeId)}/applied`, { applied });
+export const markStep = (stepId: string, done: boolean) => call<void>('PUT', `/me/journey/steps/${encodeURIComponent(stepId)}`, { done });

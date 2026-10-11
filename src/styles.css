@@ -477,7 +477,8 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .wa-sample { padding: 0 6px; border-radius: 6px; background: color-mix(in srgb, var(--wa-meta) 16%, transparent); font-weight: 600; }
 .wa-more { width: 32px; height: 32px; margin: -9px -8px -9px -4px; border: 0; border-radius: 50%; background: none; color: var(--wa-meta); display: grid; place-items: center; cursor: pointer; }
 .wa-day::first-letter { text-transform: uppercase; }
-.wa-composer { position: sticky; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 3; display: flex; gap: 8px; align-items: center; padding: 0 10px; }
+.wa-composer { position: sticky; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 3; display: flex; gap: 8px; align-items: center; padding: 10px 10px 8px;
+  background: var(--bg); box-shadow: 0 -12px 16px -4px var(--bg); }  /* solid, like Ask (2026-10-11) */
 .wa-composer .input { flex: 1; border: 0; border-radius: 999px; background: var(--wa-bubble); min-height: 48px; box-shadow: 0 1px 2px rgba(11,20,26,.18); }
 .wa-composer .send { width: 48px; height: 48px; flex: none; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer; color: #fff; background: var(--wa-green); }
 .wa-composer .send:disabled { opacity: .45; cursor: not-allowed; }
@@ -512,3 +513,29 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .pick-ic.on { color: var(--brand-500); }
 .select-bar { position: sticky; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 4; display: flex; align-items: center; gap: 8px;
   padding: 8px 8px 8px 18px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow-2); font-weight: 600; }
+
+/* ---------- CR-006: avatars, group info, Journey ticks, My list selection */
+.person-avatar { flex: none; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font-weight: 600; letter-spacing: .02em; }
+.avatar.small.plain { background: none; padding: 0; width: 40px; height: 40px; }
+.avatar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 10px; }
+.avatar-grid button { border: 2px solid transparent; border-radius: 50%; background: none; padding: 2px; cursor: pointer; display: grid; place-items: center; min-height: 52px; }
+.avatar-grid button[aria-checked="true"] { border-color: var(--brand-500); }
+.avatar-grid button:focus-visible { outline: 3px solid color-mix(in srgb, var(--brand-500) 45%, transparent); }
+button.wa-head { width: 100%; border: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; }
+.wa-line { display: flex; align-items: flex-end; gap: 6px; }
+.wa-line.mine { justify-content: flex-end; }
+.wa-line .wa-msg { max-width: calc(100% - 40px); }
+.wa-avatar-gap { width: 30px; flex: none; }
+.wa-author { color: var(--brand-500); }
+.ck-box { flex: none; width: 44px; height: 44px; margin: -10px 0 -10px -10px; border: 0; border-radius: 50%; background: none; display: grid; place-items: center;
+  cursor: pointer; color: var(--ink-3); }
+.ck-box[aria-checked="true"] { color: var(--safe); }
+.ck-box:disabled { cursor: not-allowed; color: var(--ink-3); opacity: .7; }
+.applied { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 13.5px; font-weight: 500; color: var(--ink-2); cursor: pointer; }
+.applied input { width: 20px; height: 20px; accent-color: var(--safe); }
+.applied.locked { color: var(--ink-3); cursor: not-allowed; }
+.exit-group { align-self: stretch; justify-content: center; border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent); }
+.list-row.picked { background: var(--likely-bg); }
+.list-row .pick-ic { margin: 0 4px; }
+
+.select-bar .grow { white-space: nowrap; }
