@@ -1,0 +1,906 @@
+{
+  "server": "live (production)",
+  "runAt": "2026-10-11T18:54:00.254Z",
+  "mode": "read-only",
+  "total": 86,
+  "passed": 85,
+  "failed": 1,
+  "performance": {
+    "GET /api/meta": {
+      "p50": 58,
+      "p95": 59,
+      "max": 59
+    },
+    "POST /api/results": {
+      "p50": 73,
+      "p95": 145,
+      "max": 145
+    },
+    "GET /api/offerings/:uni": {
+      "p50": 57,
+      "p95": 153,
+      "max": 153
+    },
+    "GET /api/routes": {
+      "p50": 78,
+      "p95": 213,
+      "max": 213
+    },
+    "GET /api/journey": {
+      "p50": 59,
+      "p95": 352,
+      "max": 352
+    }
+  },
+  "observations": [
+    "HTML (/): missing strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy",
+    "API (/api/meta): missing strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy",
+    "API error (/api/me 401): missing strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy"
+  ],
+  "cases": [
+    {
+      "id": "E2E-LIVE-001",
+      "area": "meta",
+      "title": "GET /api/health is up and rules reconciled",
+      "trace": "NFR-040",
+      "expected": "200 JSON {ok:true, rules:RECONCILED}",
+      "actual": "200 ok=true rules=RECONCILED year=2025/2026",
+      "result": "PASS",
+      "ms": 1417
+    },
+    {
+      "id": "E2E-LIVE-002",
+      "area": "meta",
+      "title": "GET /api/meta shape (year, 25 districts, 6 streams, subjects, sources)",
+      "trace": "FR-101; NFR-050",
+      "expected": "200 JSON; 25 districts with code/name/disadvantaged; 6 streams; >=40 subjects; sources with id/title",
+      "actual": "200 year=2025/2026 districts=25 streams=6 subjects=59 sources=5",
+      "result": "PASS",
+      "ms": 62
+    },
+    {
+      "id": "E2E-LIVE-003",
+      "area": "meta",
+      "title": "GET /api/meta revalidates with ETag (304 on If-None-Match)",
+      "trace": "NFR-011",
+      "expected": "200 with ETag + Cache-Control no-cache; repeat with If-None-Match -> 304 empty body",
+      "actual": "ETag (compressed)=W/\"r...; cache-control=\"public, no-cache\"; revalidate with the ETag the client got -> 200; uncompressed strong ETag -> 304",
+      "result": "FAIL",
+      "ms": 63,
+      "note": "Edge compression turns the ETag into W/\"...\"; the Worker compares If-None-Match strictly (worker/index.ts cacheable), so compressed clients never get 304. Fix: strip a leading W/ before comparing."
+    },
+    {
+      "id": "E2E-LIVE-004",
+      "area": "meta",
+      "title": "GET /api/routes shape (id, name, group, openNow boolean)",
+      "trace": "FR-501; FR-503",
+      "expected": "200 JSON array, every route has id/name/group and boolean openNow",
+      "actual": "200 routes=52 openNow=4 cache-control=\"public, max-age=300\"",
+      "result": "PASS",
+      "ms": 251
+    },
+    {
+      "id": "E2E-LIVE-005",
+      "area": "meta",
+      "title": "GET /api/journey shape (academicYear, steps with id/title/page)",
+      "trace": "FR-401; FR-402; NFR-050",
+      "expected": "200 JSON; steps[] each with id, title and a handbook page",
+      "actual": "200 year=2025/2026 steps=5 keys=academicYear,handbook,steps,notices",
+      "result": "PASS",
+      "ms": 66
+    },
+    {
+      "id": "E2E-LIVE-006",
+      "area": "meta",
+      "title": "GET /api/journey does not expose the internal builtAt stamp",
+      "trace": "n/a",
+      "expected": "no builtAt key in body",
+      "actual": "builtAt present=false",
+      "result": "PASS",
+      "ms": 82
+    },
+    {
+      "id": "E2E-LIVE-007",
+      "area": "results",
+      "title": "POST /api/results physKur (PHYS, KUR, z=1.4821) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=64 hidden=191 S/L/R/O/N=38/6/9/11/0 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 125
+    },
+    {
+      "id": "E2E-LIVE-008",
+      "area": "results",
+      "title": "POST /api/results bioCol (BIO, COL, z=1.5000) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=121 hidden=134 S/L/R/O/N=75/1/16/29/0 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 95
+    },
+    {
+      "id": "E2E-LIVE-009",
+      "area": "results",
+      "title": "POST /api/results commGal (COMMERCE, GAL, z=1.0000) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=51 hidden=206 S/L/R/O/N=6/2/0/43/0 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 78
+    },
+    {
+      "id": "E2E-LIVE-010",
+      "area": "results",
+      "title": "POST /api/results artsJaf (ARTS, JAF, z=0.8000) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=41 hidden=214 S/L/R/O/N=4/0/2/31/4 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 101
+    },
+    {
+      "id": "E2E-LIVE-011",
+      "area": "results",
+      "title": "POST /api/results etAmp (ET, AMP, z=0.5000) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=41 hidden=214 S/L/R/O/N=1/4/4/32/0 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 121
+    },
+    {
+      "id": "E2E-LIVE-012",
+      "area": "results",
+      "title": "POST /api/results bstMon (BST, MON, z=0.3000) sanity",
+      "trace": "FR-201; FR-205; FR-206; NFR-051",
+      "expected": "200 JSON; SAFE+LIKELY+REACH > 0; counts sum = offerings; every band valid; gap = z - latest cut-off; integers only, no NaN",
+      "actual": "200 offerings=27 hidden=228 S/L/R/O/N=1/1/3/22/0 badBand=0 badGap=0",
+      "result": "PASS",
+      "ms": 108
+    },
+    {
+      "id": "E2E-LIVE-013",
+      "area": "results",
+      "title": "Hidden offerings each carry a reason and handbook page",
+      "trace": "FR-204; NFR-050",
+      "expected": "every hidden item has non-empty reason and integer page",
+      "actual": "hidden=191 missing reason/page=0",
+      "result": "PASS",
+      "ms": 0
+    },
+    {
+      "id": "E2E-LIVE-014",
+      "area": "results",
+      "title": "Edge: maximum Z-score +4.0000 is accepted; nothing is Reach/Out of range",
+      "trace": "FR-102; BR-030",
+      "expected": "200; REACH=0 and OUT_OF_RANGE=0; SAFE > 0",
+      "actual": "200 S/L/R/O/N=64/0/0/0/0",
+      "result": "PASS",
+      "ms": 95
+    },
+    {
+      "id": "E2E-LIVE-015",
+      "area": "results",
+      "title": "Edge: minimum Z-score -4.0000 is accepted; nothing is Safe or Likely",
+      "trace": "FR-102; BR-030",
+      "expected": "200; SAFE=0 and LIKELY=0",
+      "actual": "200 S/L/R/O/N=0/0/0/64/0",
+      "result": "PASS",
+      "ms": 77
+    },
+    {
+      "id": "E2E-LIVE-016",
+      "area": "results",
+      "title": "Edge: Z-score 0.0000 accepted",
+      "trace": "FR-102",
+      "expected": "200 JSON, counts sum = offerings",
+      "actual": "200 S/L/R/O/N=0/0/0/51/0",
+      "result": "PASS",
+      "ms": 96
+    },
+    {
+      "id": "E2E-LIVE-017",
+      "area": "results",
+      "title": "Monotonic: higher Z-score never lowers the Safe count (same profile)",
+      "trace": "BR-030 to BR-036",
+      "expected": "SAFE(z=2.0) >= SAFE(z=1.0) >= SAFE(z=0.5)",
+      "actual": "SAFE at 0.5/1.0/2.0 = 2/20/115",
+      "result": "PASS",
+      "ms": 395
+    },
+    {
+      "id": "E2E-LIVE-018",
+      "area": "results",
+      "title": "District matters: same results, different district changes bands",
+      "trace": "BR-014",
+      "expected": "COL vs a disadvantaged district (MON) give different band counts",
+      "actual": "COL {\"SAFE\":75,\"LIKELY\":1,\"REACH\":16,\"OUT_OF_RANGE\":29,\"NOT_ENOUGH_DATA\":0} | MON {\"SAFE\":71,\"LIKELY\":5,\"REACH\":19,\"OUT_OF_RANGE\":19,\"NOT_ENOUGH_DATA\":7}",
+      "result": "PASS",
+      "ms": 258
+    },
+    {
+      "id": "E2E-LIVE-019",
+      "area": "results",
+      "title": "Results are not cached publicly and set no cookie",
+      "trace": "NFR-030",
+      "expected": "no Set-Cookie; Cache-Control not public",
+      "actual": "set-cookie=false cache-control=(none)",
+      "result": "PASS",
+      "ms": 93
+    },
+    {
+      "id": "E2E-LIVE-020",
+      "area": "results",
+      "title": "No response states or implies certain admission",
+      "trace": "FR-207",
+      "expected": "no \"guarantee\"/\"you will get in\"/\"certain to\" in results, meta, routes, journey",
+      "actual": "no certainty wording found",
+      "result": "PASS",
+      "ms": 279
+    },
+    {
+      "id": "E2E-LIVE-021",
+      "area": "offering",
+      "title": "GET /api/offerings/:uniCode with district: cited history with district cut-offs",
+      "trace": "FR-208; FR-209; NFR-050",
+      "expected": "200; requirementCitation.page; each history row has citation and numeric/null zE4; some non-null",
+      "actual": "200 uni=011G groups=1 historyRows=5 nonNull=5",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-022",
+      "area": "offering",
+      "title": "Offering without district: history zE4 all null (no guessing)",
+      "trace": "FR-208",
+      "expected": "200; every history zE4 === null",
+      "actual": "200 rows=5 nonNull=0",
+      "result": "PASS",
+      "ms": 64
+    },
+    {
+      "id": "E2E-LIVE-023",
+      "area": "offering",
+      "title": "Uni-Code lookup is case-insensitive",
+      "trace": "n/a",
+      "expected": "lower-case code -> 200 same uniCode",
+      "actual": "200 uniCode=011G",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-024",
+      "area": "offering",
+      "title": "Unknown Uni-Code -> 404 JSON error",
+      "trace": "NFR-035",
+      "expected": "404 JSON {error}",
+      "actual": "404 {\"error\":\"No such Uni-Code\"}",
+      "result": "PASS",
+      "ms": 69
+    },
+    {
+      "id": "E2E-LIVE-025",
+      "area": "offering",
+      "title": "Unknown district query is ignored safely (no 500)",
+      "trace": "NFR-035",
+      "expected": "200; history zE4 all null",
+      "actual": "200 nonNull=0",
+      "result": "PASS",
+      "ms": 70
+    },
+    {
+      "id": "E2E-LIVE-026",
+      "area": "validation",
+      "title": "POST /api/results rejects no body",
+      "trace": "FR-101; NFR-035",
+      "expected": "400 JSON {error}",
+      "actual": "400 {\"error\":\"A JSON profile is required\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-027",
+      "area": "validation",
+      "title": "POST /api/results rejects non-JSON body",
+      "trace": "NFR-035",
+      "expected": "400 JSON {error}",
+      "actual": "400 {\"error\":\"A JSON profile is required\"}",
+      "result": "PASS",
+      "ms": 61
+    },
+    {
+      "id": "E2E-LIVE-028",
+      "area": "validation",
+      "title": "POST /api/results rejects unknown stream",
+      "trace": "FR-101; NFR-035",
+      "expected": "400 JSON {error, field:stream}",
+      "actual": "400 {\"error\":\"Unknown stream\",\"field\":\"stream\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-029",
+      "area": "validation",
+      "title": "POST /api/results rejects unknown district",
+      "trace": "FR-101; NFR-035",
+      "expected": "400 JSON {error, field:district}",
+      "actual": "400 {\"error\":\"Unknown district\",\"field\":\"district\"}",
+      "result": "PASS",
+      "ms": 92
+    },
+    {
+      "id": "E2E-LIVE-030",
+      "area": "validation",
+      "title": "POST /api/results rejects Z-score above +4.0000",
+      "trace": "FR-102",
+      "expected": "400 JSON {error, field:zE4}",
+      "actual": "400 {\"error\":\"Z-score must be between −4.0000 and +4.0000\",\"field\":\"zE4\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-031",
+      "area": "validation",
+      "title": "POST /api/results rejects Z-score below -4.0000",
+      "trace": "FR-102",
+      "expected": "400 JSON {error, field:zE4}",
+      "actual": "400 {\"error\":\"Z-score must be between −4.0000 and +4.0000\",\"field\":\"zE4\"}",
+      "result": "PASS",
+      "ms": 118
+    },
+    {
+      "id": "E2E-LIVE-032",
+      "area": "validation",
+      "title": "POST /api/results rejects Z-score with more than four decimals (non-integer zE4)",
+      "trace": "FR-102",
+      "expected": "400 JSON {error, field:zE4}",
+      "actual": "400 {\"error\":\"Z-score must be between −4.0000 and +4.0000\",\"field\":\"zE4\"}",
+      "result": "PASS",
+      "ms": 83
+    },
+    {
+      "id": "E2E-LIVE-033",
+      "area": "validation",
+      "title": "POST /api/results rejects Z-score as string",
+      "trace": "FR-102; NFR-035",
+      "expected": "400 JSON {error, field:zE4}",
+      "actual": "400 {\"error\":\"Z-score must be between −4.0000 and +4.0000\",\"field\":\"zE4\"}",
+      "result": "PASS",
+      "ms": 79
+    },
+    {
+      "id": "E2E-LIVE-034",
+      "area": "validation",
+      "title": "POST /api/results rejects only two subjects",
+      "trace": "FR-101",
+      "expected": "400 JSON {error, field:al}",
+      "actual": "400 {\"error\":\"Enter exactly three A/L subjects\",\"field\":\"al\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-035",
+      "area": "validation",
+      "title": "POST /api/results rejects invalid grade E",
+      "trace": "FR-101",
+      "expected": "400 JSON {error, field:al}",
+      "actual": "400 {\"error\":\"Each subject needs a grade of A, B, C or S\",\"field\":\"al\"}",
+      "result": "PASS",
+      "ms": 66
+    },
+    {
+      "id": "E2E-LIVE-036",
+      "area": "validation",
+      "title": "POST /api/auth/signup with an invalid username -> 400 (nothing created)",
+      "trace": "BR-050; NFR-035",
+      "expected": "400 JSON field=username; no Set-Cookie",
+      "actual": "400 {\"error\":\"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\",\"field\":\"username\"}",
+      "result": "PASS",
+      "ms": 73
+    },
+    {
+      "id": "E2E-LIVE-037",
+      "area": "validation",
+      "title": "POST /api/auth/signup with valid-format username but malformed key -> 400 (nothing created)",
+      "trace": "FR-114; NFR-036",
+      "expected": "400 JSON field=key; no Set-Cookie",
+      "actual": "400 {\"error\":\"Malformed sign-up request\",\"field\":\"key\"}",
+      "result": "PASS",
+      "ms": 61
+    },
+    {
+      "id": "E2E-LIVE-038",
+      "area": "auth",
+      "title": "GET /api/me without session -> 401",
+      "trace": "FR-116; FR-117",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-LIVE-039",
+      "area": "auth",
+      "title": "PUT /api/me without session -> 401",
+      "trace": "FR-116; FR-117",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 85
+    },
+    {
+      "id": "E2E-LIVE-040",
+      "area": "auth",
+      "title": "DELETE /api/me without session -> 401",
+      "trace": "FR-116; FR-117",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-LIVE-041",
+      "area": "auth",
+      "title": "PUT /api/me/contact without session -> 401",
+      "trace": "FR-116; FR-117",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 60
+    },
+    {
+      "id": "E2E-LIVE-042",
+      "area": "auth",
+      "title": "PUT /api/me/avatar without session -> 401",
+      "trace": "FR-116; FR-117",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-043",
+      "area": "auth",
+      "title": "GET /api/me/journey without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-044",
+      "area": "auth",
+      "title": "PUT /api/me/journey/courses/ZZZ999 without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-LIVE-045",
+      "area": "auth",
+      "title": "DELETE /api/me/journey/courses/ZZZ999 without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 61
+    },
+    {
+      "id": "E2E-LIVE-046",
+      "area": "auth",
+      "title": "PUT /api/me/journey/notices/R001 without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-047",
+      "area": "auth",
+      "title": "DELETE /api/me/journey/notices/R001 without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 91
+    },
+    {
+      "id": "E2E-LIVE-048",
+      "area": "auth",
+      "title": "PUT /api/me/journey/notices/R001/applied without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-LIVE-049",
+      "area": "auth",
+      "title": "PUT /api/me/journey/steps/UGC_APPLY without session -> 401",
+      "trace": "FR-411; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 74
+    },
+    {
+      "id": "E2E-LIVE-050",
+      "area": "auth",
+      "title": "POST /api/auth/logout without session -> 401",
+      "trace": "FR-115",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-LIVE-051",
+      "area": "auth",
+      "title": "POST /api/auth/logout-all without session -> 401",
+      "trace": "FR-115",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 63
+    },
+    {
+      "id": "E2E-LIVE-052",
+      "area": "auth",
+      "title": "GET /api/groups without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-053",
+      "area": "auth",
+      "title": "POST /api/groups/join without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 64
+    },
+    {
+      "id": "E2E-LIVE-054",
+      "area": "auth",
+      "title": "GET /api/groups/1 without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-LIVE-055",
+      "area": "auth",
+      "title": "POST /api/groups/1/leave without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-056",
+      "area": "auth",
+      "title": "GET /api/groups/1/live without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-LIVE-057",
+      "area": "auth",
+      "title": "GET /api/groups/1/members without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 104
+    },
+    {
+      "id": "E2E-LIVE-058",
+      "area": "auth",
+      "title": "POST /api/groups/1/report without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-LIVE-059",
+      "area": "auth",
+      "title": "GET /api/blocks without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 87
+    },
+    {
+      "id": "E2E-LIVE-060",
+      "area": "auth",
+      "title": "POST /api/blocks without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-LIVE-061",
+      "area": "auth",
+      "title": "DELETE /api/blocks/someone without session -> 401",
+      "trace": "FR-705; NFR-038",
+      "expected": "401 JSON {error}",
+      "actual": "401 {\"error\":\"Please log in\"}",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-LIVE-062",
+      "area": "auth",
+      "title": "Forged well-formed session cookie -> 401 and cookie cleared",
+      "trace": "NFR-036",
+      "expected": "401; Set-Cookie clears zp session",
+      "actual": "401 set-cookie=zp_session=; Max-Age=0; Path=/api; HttpOnly; Secure; SameSite=Lax",
+      "result": "PASS",
+      "ms": 82
+    },
+    {
+      "id": "E2E-LIVE-063",
+      "area": "auth",
+      "title": "Malformed session cookie -> 401",
+      "trace": "NFR-035",
+      "expected": "401",
+      "actual": "401",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-LIVE-064",
+      "area": "cors",
+      "title": "Foreign Origin on PUT /api/me -> 403 (refused before session check)",
+      "trace": "NFR-035",
+      "expected": "403 JSON \"Cross-site request refused\"",
+      "actual": "403 {\"error\":\"Cross-site request refused\"}",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-LIVE-065",
+      "area": "cors",
+      "title": "Foreign Origin on POST /api/auth/signup -> 403",
+      "trace": "NFR-035; NFR-037",
+      "expected": "403",
+      "actual": "403 {\"error\":\"Cross-site request refused\"}",
+      "result": "PASS",
+      "ms": 60
+    },
+    {
+      "id": "E2E-LIVE-066",
+      "area": "cors",
+      "title": "Foreign Origin on PUT /api/me/journey/steps -> 403",
+      "trace": "NFR-038",
+      "expected": "403",
+      "actual": "403",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-LIVE-067",
+      "area": "cors",
+      "title": "Foreign Origin on POST /api/groups/join -> 403",
+      "trace": "NFR-038",
+      "expected": "403",
+      "actual": "403",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-LIVE-068",
+      "area": "cors",
+      "title": "GET /api/meta from a foreign Origin: no credentialed CORS grant",
+      "trace": "NFR-035",
+      "expected": "Access-Control-Allow-Origin absent, or not the foreign origin with credentials",
+      "actual": "ACAO=(none) ACAC=(none)",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-LIVE-069",
+      "area": "cors",
+      "title": "OPTIONS preflight from a foreign Origin for PUT /api/me: not granted",
+      "trace": "NFR-035",
+      "expected": "no Access-Control-Allow-Origin for the foreign origin",
+      "actual": "403 ACAO=(none) ACAM=(none)",
+      "result": "PASS",
+      "ms": 53
+    },
+    {
+      "id": "E2E-LIVE-070",
+      "area": "routing",
+      "title": "Unknown API route -> 404 JSON",
+      "trace": "n/a",
+      "expected": "404 JSON {error:\"Not found\"}",
+      "actual": "404 {\"error\":\"Not found\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-LIVE-071",
+      "area": "routing",
+      "title": "Wrong method on a known route (GET /api/results) -> 404 JSON, not 500",
+      "trace": "n/a",
+      "expected": "404 or 405 JSON",
+      "actual": "404 {\"error\":\"Not found\"}",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-LIVE-072",
+      "area": "routing",
+      "title": "POST /api/dev/embed is disabled in production -> 404 (no model call)",
+      "trace": "NFR-033",
+      "expected": "404",
+      "actual": "404 {\"error\":\"Not found\"}",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-LIVE-073",
+      "area": "routing",
+      "title": "POST /api/dev/search is disabled in production -> 404 (no model call)",
+      "trace": "NFR-033",
+      "expected": "404",
+      "actual": "404 {\"error\":\"Not found\"}",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-LIVE-074",
+      "area": "routing",
+      "title": "Path traversal attempt on offerings -> 404, no file content",
+      "trace": "NFR-035",
+      "expected": "404 JSON",
+      "actual": "404 {\"error\":\"No such Uni-Code\"}",
+      "result": "PASS",
+      "ms": 64
+    },
+    {
+      "id": "E2E-LIVE-075",
+      "area": "static",
+      "title": "GET / serves the app HTML",
+      "trace": "NFR-012; NFR-063",
+      "expected": "200 text/html with <div id=\"root\"> or a script tag",
+      "actual": "200 text/html bytes=1229",
+      "result": "PASS",
+      "ms": 64
+    },
+    {
+      "id": "E2E-LIVE-076",
+      "area": "static",
+      "title": "Deep link (SPA route) serves the app HTML, not a 404 page",
+      "trace": "NFR-063",
+      "expected": "200 text/html",
+      "actual": "200 text/html",
+      "result": "PASS",
+      "ms": 65
+    },
+    {
+      "id": "E2E-LIVE-077",
+      "area": "headers",
+      "title": "Security headers recorded on HTML (/)",
+      "trace": "NFR-035",
+      "expected": "Content-Type present (fail only if missing); other headers recorded",
+      "actual": "content-type=text/html; present=[]; missing=[strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy]",
+      "result": "PASS",
+      "ms": 61,
+      "note": "Recommend adding: strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy"
+    },
+    {
+      "id": "E2E-LIVE-078",
+      "area": "headers",
+      "title": "Security headers recorded on API (/api/meta)",
+      "trace": "NFR-035",
+      "expected": "Content-Type present (fail only if missing); other headers recorded",
+      "actual": "content-type=application/json; present=[]; missing=[strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy]",
+      "result": "PASS",
+      "ms": 57,
+      "note": "Recommend adding: strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy"
+    },
+    {
+      "id": "E2E-LIVE-079",
+      "area": "headers",
+      "title": "Security headers recorded on API error (/api/me 401)",
+      "trace": "NFR-035",
+      "expected": "Content-Type present (fail only if missing); other headers recorded",
+      "actual": "content-type=application/json; present=[]; missing=[strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy]",
+      "result": "PASS",
+      "ms": 55,
+      "note": "Recommend adding: strict-transport-security, x-content-type-options, content-security-policy, x-frame-options, referrer-policy, permissions-policy"
+    },
+    {
+      "id": "E2E-LIVE-080",
+      "area": "headers",
+      "title": "Server does not leak framework/version headers (X-Powered-By)",
+      "trace": "n/a",
+      "expected": "no X-Powered-By",
+      "actual": "x-powered-by=(none)",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-LIVE-081",
+      "area": "headers",
+      "title": "All JSON endpoints answer with application/json",
+      "trace": "n/a",
+      "expected": "content-type application/json on health, meta, routes, journey, offering, results, 400, 401, 404",
+      "actual": "all 9 JSON",
+      "result": "PASS",
+      "ms": 844
+    },
+    {
+      "id": "E2E-LIVE-082",
+      "area": "performance",
+      "title": "GET /api/meta p95 over 10 calls <= 1500 ms",
+      "trace": "NFR-002; NFR-003",
+      "expected": "p95 <= 1500 ms on this network (all 10 return 200)",
+      "actual": "p50=58 ms p95=59 ms max=59 ms non200=0",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-LIVE-083",
+      "area": "performance",
+      "title": "POST /api/results p95 over 10 calls <= 1500 ms",
+      "trace": "NFR-002; NFR-003",
+      "expected": "p95 <= 1500 ms on this network (all 10 return 200)",
+      "actual": "p50=73 ms p95=145 ms max=145 ms non200=0",
+      "result": "PASS",
+      "ms": 145
+    },
+    {
+      "id": "E2E-LIVE-084",
+      "area": "performance",
+      "title": "GET /api/offerings/:uni p95 over 10 calls <= 1500 ms",
+      "trace": "NFR-002; NFR-003",
+      "expected": "p95 <= 1500 ms on this network (all 10 return 200)",
+      "actual": "p50=57 ms p95=153 ms max=153 ms non200=0",
+      "result": "PASS",
+      "ms": 153
+    },
+    {
+      "id": "E2E-LIVE-085",
+      "area": "performance",
+      "title": "GET /api/routes p95 over 10 calls <= 1500 ms",
+      "trace": "NFR-002; NFR-003",
+      "expected": "p95 <= 1500 ms on this network (all 10 return 200)",
+      "actual": "p50=78 ms p95=213 ms max=213 ms non200=0",
+      "result": "PASS",
+      "ms": 213
+    },
+    {
+      "id": "E2E-LIVE-086",
+      "area": "performance",
+      "title": "GET /api/journey p95 over 10 calls <= 1500 ms",
+      "trace": "NFR-002; NFR-003",
+      "expected": "p95 <= 1500 ms on this network (all 10 return 200)",
+      "actual": "p50=59 ms p95=352 ms max=352 ms non200=0",
+      "result": "PASS",
+      "ms": 352
+    }
+  ]
+}
