@@ -38,6 +38,13 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Sanduni'), null, 'Is Combined Maths needed?'],
     [STUDENT('Ravindu'), SENIOR('Computer Science', 2), 'The course page lists the exact subjects from the UGC handbook, with the page number. Check it there.'],
   ],
+  'COURSE:013': [
+    [STUDENT('Sachini'), null, 'I might get Physical Science at Colombo. I\'m from Kurunegala. Do first-years actually get a hostel? I can\'t find anything clear online.'],
+    [STUDENT('Dilan'), SENIOR('Physical Science', 2), 'In my batch most first-years from outside Colombo got a hostel place. The hostel form comes with the registration documents, so fill it in the same day. Students living close to Colombo usually don\'t get one: distance from home matters.'],
+    [STUDENT('Nuwan'), null, 'What should we bring in the first week?'],
+    [STUDENT('Dilan'), SENIOR('Physical Science', 2), 'A mattress, a bucket and a padlock. Rooms are shared. Join your batch group as soon as you register: seniors post the first-week timetable there.'],
+    [STUDENT('Sachini'), null, 'Thank you! That helps a lot.'],
+  ],
   'COURSE:016': [
     [STUDENT('Pasindu'), null, 'Commerce stream, Colombo. Management or Commerce degree, which is better?'],
     [STUDENT('Ishara'), SENIOR('Management', 2), 'Depends on you. Open both in Compare: you can see the entry rules, places and your chances side by side.'],
