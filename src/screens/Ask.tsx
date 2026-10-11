@@ -18,6 +18,7 @@ import { askZedPath, sendFeedback } from '../ask.ts';
 import { layoutAnswer } from '../../shared/answer.ts';
 import { getLang, t, type Key } from '../i18n/index.ts';
 import { longDate } from './Journey.tsx';
+import { askSuggestions } from '../ask-suggest.ts';
 
 export interface AskTurn { question: string; reply: AskResponse | null; error: string | null }
 export interface AskContext {
@@ -178,8 +179,8 @@ export function AskScreen({ profile, extras, turns, setTurns, initialQuestion, o
   useEffect(() => { if (initialQuestion) { onConsumedInitial(); void send(initialQuestion); } }, [initialQuestion]);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, [turns]);
 
-  // Five questions that show what Ask can do with this student's own details (video 2: "five questions for the demo").
-  const suggestions = profile ? [t('ask.q.chances'), ...(extras.achievements.length ? [t('ask.q.beyond')] : []), t('ask.q.loan'), t('ask.q.ugc'), t('ask.q.jobs')].slice(0, 5) : general();
+  // Five questions built from this student's own details (src/ask-suggest.ts).
+  const suggestions = profile ? askSuggestions(extras, ctx.list) : general();
   const submit = (e: FormEvent) => { e.preventDefault(); void send(q); };
   return (
     <div className="ask-screen">
