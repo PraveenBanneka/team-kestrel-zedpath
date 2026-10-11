@@ -14,6 +14,7 @@ import { matches } from '../shared/search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
+demoOn();                                                        // remember ?demo=kasun on first open (the installed app opens without it)
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchJourney, fetchMe, followCourse as apiFollowCourse, followNotice as apiFollowNotice, logOut, logOutEverywhere, markApplied, markStep,
   saveAvatar, saveMe } from './account.ts';
