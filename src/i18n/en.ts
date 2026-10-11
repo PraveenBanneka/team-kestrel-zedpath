@@ -29,6 +29,7 @@ export const en = {
   'welcome.body': 'Every path your results can reach: state universities, private degrees, diplomas, job exams and more. With the real deadlines, and a source for every fact.',
   'welcome.choose': 'Choose your language', 'welcome.continue': 'Continue', 'welcome.login': 'Already have an account? Log in',
   'welcome.fine': 'Free. You create an account to start; we ask only for the details we need and say why. ZedPath is independent and not affiliated with the University Grants Commission.',
+  'welcome.team': 'Team Kestrel · Undergraduate bracket · IntelliCon ’26',
   'intro.1.title': 'See every path you can reach',
   'intro.1.body': 'State university courses, and the roads that do not go through one: private degrees, higher diplomas, professional bodies, job exams and study abroad.',
   'intro.2.title': 'Know your real chances',

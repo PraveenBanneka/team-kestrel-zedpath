@@ -96,6 +96,7 @@ main { width: 100%; max-width: 640px; margin: 0 auto; padding: 12px 16px 40px; d
 .welcome .lead { color: rgba(255, 255, 255, .95); }
 .welcome .subtitle { color: rgba(255, 255, 255, .8); }
 .welcome .fineprint { color: rgba(255, 255, 255, .72); }
+.welcome .team-line { margin: 4px 0 0; text-align: center; font-size: 13px; font-weight: 600; letter-spacing: .02em; color: #fff; }
 .welcome .section-label { color: rgba(255, 255, 255, .72); }
 .lang-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .lang-tile { min-height: 84px; border-radius: var(--r-m); border: 1px solid rgba(255, 255, 255, .26); background: rgba(255, 255, 255, .10); color: #fff;

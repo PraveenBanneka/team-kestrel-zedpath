@@ -38,6 +38,7 @@ export function Welcome({ onStart, onLogin, setLang }: { onStart: () => void; on
         </div>
         <button className="btn text on-aurora" onClick={onLogin}>{t('welcome.login')}</button>
         <p className="fineprint">{t('welcome.fine')}</p>
+        <p className="team-line">{t('welcome.team')}</p>
       </motion.div>
     </div>
   );

@@ -157,7 +157,9 @@ export function App() {
     for (const r of ids.filter(x => !saved.includes(x))) ops.followNotice(r, true);
     for (const r of saved.filter(x => !ids.includes(x))) ops.followNotice(r, false);
   };
-  const finishIntro = () => { setOnboarded(); setOnb(true); go('/signup'); };       // CR-003: an account comes first
+  // CR-003: an account comes first. The phone counts as onboarded only once it signs up or logs in (onSignedUp/onLoggedIn),
+  // so Back from Create account returns to the Welcome screen instead of being sent straight back to sign-up.
+  const finishIntro = () => go('/signup');
   const onSave = (p: ProfileInput, e: Extras) => {
     saveProfile(p); saveExtras(e); setProfile(p); setExtras(e);
     if (me?.role === 'STUDENT') void push(p, e);
@@ -180,7 +182,7 @@ export function App() {
     return (
       <div className="shell">
         <header className="app-bar">
-          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
+          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => (!me && !onboarded && path !== 'recover' ? go('/') : history.back())} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
           <span className="brand">{titles[path]}</span>
         </header>
         <main><Page k={route}>{path === 'saved-code'
