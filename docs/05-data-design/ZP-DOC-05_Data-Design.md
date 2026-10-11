@@ -3,7 +3,7 @@ id: ZP-DOC-05
 title: Data Design
 subtitle: Conceptual EER model, relational mapping, normalisation and the Cloudflare D1 physical schema
 version: 0.9
-date: 5 October 2026
+date: 11 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -13,6 +13,7 @@ reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Enhanced ER model and mapping algorithm (Elmasri and Navathe, 7th ed.); relational normalisation to BCNF/4NF; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: four EER diagrams, rule grammar, mapping, normalisation, D1 schema validated against the real UGC 2025/26 and 2024/25 data; submitted for approval
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Revised in review for CR-001 (student accounts, approved by the product owner): Section 2.5 EER model, mapping, normalisation, security conventions, 7 tables (migrations 0002 and 0003), 1:1 cardinality in the generated logical diagrams, evidence
+revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-002 (Journey, Alerts, Groups; product owner's GO): Section 2.6, migrations 0005 and 0006, read-model decision for dates and notices
 ---
 
 # Introduction
@@ -100,6 +101,43 @@ partial key Position; interests are a multi-valued attribute. No name, email add
 anywhere in the model.
 
 ![EER model of optional student accounts: sign-in, sessions, recovery and the student's results](diagrams/eer-accounts.png)
+
+## Journey, Alerts and Groups (CR-002)
+
+**Where each kind of data lives.** CR-002 adds three features. Each puts its data where the existing design already
+puts that kind of data, rather than adding a new store:
+
+| Data | Where | Why |
+|---|---|---|
+| UGC admission steps (order, rule, handbook page) and dated notices (Gazette job exams, intakes) | Bundled read model `worker/generated/journey-2025-2026.json`, built by `tools/journey/build-journey.ts` from `data/journey/` and `data/alerts/` | Reference facts, like cut-offs and routes (ADR-002): no database reads per request. The build refuses to write unless every quote is found verbatim in its source |
+| A student's saved dates, date of birth, seen alerts, scheduled reminder ids | The student's phone only | Personal and only needed on that phone; nothing stored without asking (NFR-030). Eligibility is checked on the phone |
+| Course groups, members, senior invites, reports, blocks | D1, migration 0006 | Shared between accounts, so it must be on the server, enforced by keys and CHECKs |
+| Group messages | Each group's GroupRoom Durable Object (its own SQLite storage) | High write rate per group, never joined with other data; keeps chat traffic off D1 |
+
+The `deadline` table of migration 0001 remains the system-of-record design for dates. It is not loaded in this
+release: the UGC sets its dates by press notice each year, so the steps carry the official *rule* (for example,
+"within two weeks of the closing date", p.116) and dated items come from cited notices. No date is invented.
+
+**Verified seniors reuse the existing model.** ACCOUNT already has the disjoint subclass SENIOR with the attribute
+VerifiedFor (`account.verified_for_letter`), and the 0003 triggers already keep student data off non-student
+accounts. A SENIOR_INVITE (one-time code, stored only as its SHA-256) names the course, institution and study year
+the product owner checked; redeeming it at sign-up creates the SENIOR account and marks the invite in one atomic
+batch. A trigger allows redemption only by a SENIOR account of the invite's institution, and only once.
+
+**Reference rows for foreign keys.** Migration 0005 loads the 121 courses and 20 institutions of 2025/26 (generated
+by `tools/seed/courses-sql.ts` from the official Uni-Code list), so SENIOR_INVITE and COURSE_GROUP reference them.
+
+| Table (0006) | Key | Constraints and indexes | Deleting an account |
+|---|---|---|---|
+| senior_invite | invite_id; code_hash UNIQUE; redeemed_by UNIQUE | FK course, institution; CHECK study_year 1 to 6, expires after created, redeemed_by and redeemed_at both set or both null; trigger on redemption | Its redeemed invite is deleted (CASCADE) |
+| course_group | group_id | kind COURSE (course_code) or BATCH (stream_code + district_code), enforced by three CHECKs; one group per course and per batch by two partial UNIQUE indexes (SQLite treats NULLs as distinct in a plain UNIQUE) | Unaffected |
+| group_member | (group_id, account_id) | FK both, CASCADE; index on account_id | Memberships deleted |
+| message_report | (group_id, message_id, reporter_id) | one report per member per message; reason CHECK in four values; message_id CHECK 32 hex | Reports deleted |
+| account_block | (blocker_id, blocked_id) | CHECK not self; index on blocked_id | Blocks both ways deleted |
+
+Messages are outside D1's cascade, so deleting an account also tells every group it was in to delete that account's
+messages (tested). All tables are in BCNF: every determinant is a candidate key; derived values (member counts, the
+senior badge text) are computed, never stored.
 
 ## Entity catalogue
 
@@ -379,6 +417,13 @@ Reproduced verbatim from `migrations/0003_student_accounts.sql`. Migration 0002 
 streams, 25 districts, 59 subjects) and is generated by `tools/seed/reference-sql.ts` from the compiled rulebook.
 
 <!-- include: migrations/0003_student_accounts.sql -->
+
+# Groups (migration 0006) {.appendix}
+
+Reproduced verbatim from `migrations/0006_groups.sql`. Migration 0005 inserts the courses and institutions and is
+generated by `tools/seed/courses-sql.ts`.
+
+<!-- include: migrations/0006_groups.sql -->
 
 # Glossary {.appendix}
 
