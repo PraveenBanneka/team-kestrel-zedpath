@@ -28,7 +28,7 @@ import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
 import { loadNotifyPrefs, saveNotifyPrefs } from './storage.ts';
 import type { NotifyPrefs } from '../shared/journey.ts';
-import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, clearOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
 import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
@@ -182,7 +182,7 @@ export function App() {
     return (
       <div className="shell">
         <header className="app-bar">
-          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => (!me && !onboarded && path !== 'recover' ? go('/') : history.back())} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
+          {path !== 'saved-code' ? <button className="icon-btn" onClick={() => { if (me || path === 'recover') { history.back(); return; } clearOnboarded(); setOnb(false); go('/'); }} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
           <span className="brand">{titles[path]}</span>
         </header>
         <main><Page k={route}>{path === 'saved-code'

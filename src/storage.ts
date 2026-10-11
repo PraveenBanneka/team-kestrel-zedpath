@@ -19,6 +19,8 @@ export const loadExtras = (): Extras => read<Extras>(KEYS.extras) ?? { achieveme
 export const saveExtras = (e: Extras) => write(KEYS.extras, e);
 export const isOnboarded = () => read<boolean>(KEYS.onboarded) === true;
 export const setOnboarded = () => write(KEYS.onboarded, true);
+/** Back to the Welcome screen while logged out (keeps results, list and language on the phone). */
+export const clearOnboarded = () => { try { localStorage.removeItem(KEYS.onboarded); } catch { /* private mode */ } };
 export const loadLang = () => read<'si' | 'ta' | 'en'>(KEYS.lang) ?? 'en';
 export const saveLang = (l: 'si' | 'ta' | 'en') => write(KEYS.lang, l);
 /** My list (US-301): kept on this device only (ZP-DOC-05 scope). */
