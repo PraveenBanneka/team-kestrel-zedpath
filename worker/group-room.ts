@@ -6,11 +6,13 @@ import { DurableObject } from 'cloudflare:workers';
 import { samplesFor } from '../shared/group-samples.ts';
 import { HISTORY_LIMIT, canPost, cleanMessage, moderationSays, visibleTo, type ChatMessage, type ServerFrame } from '../shared/groups.ts';
 
-interface Member { accountId: number; author: string; badge: string | null; blocked: number[] }
-type Row = { message_id: string; account_id: number; author: string; badge: string | null; body: string; created_at: string; hidden: number } & Record<string, SqlStorageValue>;
+interface Member { accountId: number; author: string; badge: string | null; avatar: string | null; blocked: number[] }
+type Row = { message_id: string; account_id: number; author: string; badge: string | null; avatar: string | null; body: string; created_at: string; hidden: number } & Record<string, SqlStorageValue>;
 
 const MODERATION_MODEL = '@cf/meta/llama-guard-3-8b';
-const toMessage = (r: Pick<Row, 'message_id' | 'author' | 'badge' | 'body' | 'created_at'>): ChatMessage => ({ id: r.message_id, author: r.author, badge: r.badge, body: r.body, at: r.created_at });
+const toMessage = (r: Pick<Row, 'message_id' | 'author' | 'badge' | 'avatar' | 'body' | 'created_at'>): ChatMessage =>
+  ({ id: r.message_id, author: r.author, badge: r.badge, avatar: r.avatar ?? null, body: r.body, at: r.created_at });
+const AVATAR_RE = /^a(0[1-9]|1[0-2])$/;                 // the preset codes (shared/account.ts AVATARS)
 const randomHex = (n: number) => [...crypto.getRandomValues(new Uint8Array(n))].map(b => b.toString(16).padStart(2, '0')).join('');
 
 export class GroupRoom extends DurableObject<Env> {
@@ -28,6 +30,12 @@ export class GroupRoom extends DurableObject<Env> {
         body        TEXT NOT NULL CHECK (length(body) BETWEEN 1 AND 500),
         created_at  TEXT NOT NULL,
         hidden      INTEGER NOT NULL DEFAULT 0 CHECK (hidden IN (0, 1)))`);
+    // CR-006: the author's avatar when they posted, a snapshot like the author name. Added to rooms created before it.
+    if (!this.sql.exec<{ name: string }>('PRAGMA table_info(message)').toArray().some(c => c.name === 'avatar'))
+      this.sql.exec('ALTER TABLE message ADD COLUMN avatar TEXT');
+    // CR-006: the phone sends "ping" every 25 s; the runtime answers "pong" without waking the room, so idle
+    // connections are not closed by proxies (the random "Disconnected" Praveen saw) and the room still costs nothing idle.
+    this.ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair('ping', 'pong'));
     this.sql.exec('CREATE INDEX IF NOT EXISTS idx_message_created ON message(created_at)');
     this.sql.exec('CREATE INDEX IF NOT EXISTS idx_message_account ON message(account_id, created_at)');
   }
@@ -38,7 +46,8 @@ export class GroupRoom extends DurableObject<Env> {
       if (req.headers.get('Upgrade') !== 'websocket') return new Response('Expected a WebSocket', { status: 426 });
       const member: Member = {
         accountId: Number(req.headers.get('X-ZP-Account')), author: req.headers.get('X-ZP-Author') ?? '',
-        badge: req.headers.get('X-ZP-Badge') ? decodeURIComponent(req.headers.get('X-ZP-Badge')!) : null, blocked: JSON.parse(req.headers.get('X-ZP-Blocked') ?? '[]') as number[],
+        badge: req.headers.get('X-ZP-Badge') ? decodeURIComponent(req.headers.get('X-ZP-Badge')!) : null,
+        avatar: AVATAR_RE.test(req.headers.get('X-ZP-Avatar') ?? '') ? req.headers.get('X-ZP-Avatar') : null, blocked: JSON.parse(req.headers.get('X-ZP-Blocked') ?? '[]') as number[],
       };
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
@@ -98,10 +107,10 @@ export class GroupRoom extends DurableObject<Env> {
     if (verdict === 'ERROR') return this.send(ws, { type: 'error', error: 'Could not check your message right now. Try again in a moment.' });
     if (verdict === 'UNSAFE') return this.send(ws, { type: 'error', error: 'This message was not posted: it may break the group rules. Keep it kind and on topic.' });
 
-    const row: Row = { message_id: randomHex(16), account_id: member.accountId, author: member.author, badge: member.badge,
+    const row: Row = { message_id: randomHex(16), account_id: member.accountId, author: member.author, badge: member.badge, avatar: member.avatar,
       body: clean.body, created_at: new Date(now).toISOString(), hidden: 0 };
-    this.sql.exec('INSERT INTO message (message_id, account_id, author, badge, body, created_at, hidden) VALUES (?, ?, ?, ?, ?, ?, 0)',
-      row.message_id, row.account_id, row.author, row.badge, row.body, row.created_at);
+    this.sql.exec('INSERT INTO message (message_id, account_id, author, badge, avatar, body, created_at, hidden) VALUES (?, ?, ?, ?, ?, ?, ?, 0)',
+      row.message_id, row.account_id, row.author, row.badge, row.avatar, row.body, row.created_at);
     for (const peer of this.ctx.getWebSockets()) {
       const p = peer.deserializeAttachment() as Member;
       if (!p.blocked.includes(member.accountId)) this.send(peer, { type: 'message', message: toMessage(row) });

@@ -123,20 +123,32 @@ describe('groups API', () => {
     const batch = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'BATCH' }, a)).json() as GroupSummary;
     expect(batch.title).toMatch(/Physical Science · Kurunegala/i);
   });
-  it('CR-005: joins only with the current rules accepted, records them, and keeps the room shut without them', async () => {
+  it('CR-006: rules are accepted once per account, recorded, and the room stays shut without them', async () => {
     const a = (await signup('nimal')).cookie;
-    expect((await call('POST', '/groups/join', { kind: 'COURSE', courseCode: '012' }, a)).status).toBe(400);                       // no acceptance
+    expect((await call('POST', '/groups/join', { kind: 'COURSE', courseCode: '012' }, a)).status).toBe(400);                       // never accepted
     expect((await call('POST', '/groups/join', { kind: 'COURSE', courseCode: '012', acceptRules: '2020-01-01' }, a)).status).toBe(400);   // old version
     expect(n('SELECT count(*) AS n FROM group_member')).toBe(0);
+    expect(((await (await call('GET', '/groups', undefined, a)).json()) as GroupsResponse).rulesAccepted).toBe(false);
     const g = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, a)).json() as GroupSummary;
     expect(g.rulesAccepted).toBe(true);
-    expect(raw.prepare('SELECT rules_version AS v FROM group_member').get()).toEqual({ v: GROUP_RULES_VERSION });
-    raw.exec('UPDATE group_member SET rules_version = NULL');                     // a member from before the rules
+    expect(raw.prepare('SELECT rules_version AS v FROM group_rules_acceptance').all()).toEqual([{ v: GROUP_RULES_VERSION }]);
+    // once: a second group needs no acceptance, and nothing is recorded twice
+    expect((await call('POST', '/groups/join', { kind: 'COURSE', courseCode: '001' }, a)).status).toBe(200);
+    expect(n('SELECT count(*) AS n FROM group_rules_acceptance')).toBe(1);
+    expect(((await (await call('GET', '/groups', undefined, a)).json()) as GroupsResponse).rulesAccepted).toBe(true);
+    raw.exec('DELETE FROM group_rules_acceptance');                                // an account that never accepted
     expect((await call('GET', `/groups/${g.id}/live`, undefined, a, { Upgrade: 'websocket' })).status).toBe(403);
     expect(((await (await call('GET', `/groups/${g.id}`, undefined, a)).json()) as GroupSummary).rulesAccepted).toBe(false);
-    await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, a);   // accepting again re-opens it
-    expect(raw.prepare('SELECT rules_version AS v FROM group_member').get()).toEqual({ v: GROUP_RULES_VERSION });
-    expect(() => raw.exec(`UPDATE group_member SET rules_version = 'whatever'`)).toThrow();    // the CHECK holds
+    expect(() => raw.exec(`INSERT INTO group_rules_acceptance VALUES (1, 'whatever', 't')`)).toThrow();   // the CHECK holds
+  });
+  it('CR-006: shows members to members only, with usernames and avatars, never names', async () => {
+    const a = (await signup('nimal')).cookie, b = (await signup('kamal')).cookie;
+    raw.exec(`UPDATE account SET avatar = 'a03' WHERE account_id = 1`);
+    const g = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, a)).json() as GroupSummary;
+    expect((await call('GET', `/groups/${g.id}/members`, undefined, b)).status).toBe(403);
+    const m = await (await call('GET', `/groups/${g.id}/members`, undefined, a)).json() as { username: string; avatar: string | null; badge: string | null }[];
+    expect(m).toEqual([{ username: 'nimal', avatar: 'a03', badge: null }]);
+    expect(JSON.stringify(m)).not.toContain('Test Student');                     // the contact name never leaves
   });
   it('lists the popular course groups for everyone, without repeating ones already suggested', async () => {
     const a = (await signup('nimal')).cookie;

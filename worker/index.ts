@@ -8,6 +8,7 @@ import { assessOffering, book, districtIndex, parseProfile, SUBJECT_NAMES } from
 import { accountRoutes } from './account.ts';
 import { askRoutes } from './ask.ts';
 import { groupRoutes } from './groups.ts';
+import { myJourneyRoutes } from './my-journey.ts';
 import { SYLLABI, SYLLABI_VERSION } from './syllabi.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import type { JourneyResponse } from '../shared/journey.ts';
@@ -111,6 +112,7 @@ app.get('/journey', c => {
 
 // Student accounts (CR-001): /api/auth/* and /api/me.
 app.route('/', accountRoutes);
+app.route('/', myJourneyRoutes);              // after accountRoutes: its '/me/*' middleware guards these (CR-006)
 // Ask ZedPath: /api/ask (cited answers) and the localhost-only /api/dev/embed tool.
 app.route('/', askRoutes);
 // Course groups (CR-002): /api/groups/* and /api/blocks; messages live in the GroupRoom Durable Objects.

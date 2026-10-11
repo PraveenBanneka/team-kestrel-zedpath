@@ -29,11 +29,15 @@ export interface GroupSummary {
   universities: number;                          // COURSE: how many universities offer it
   members: number;
   joined: boolean;
-  rulesAccepted: boolean;                        // CR-005: this member accepted the current group rules
+  rulesAccepted: boolean;                        // CR-006: this account accepted the current group rules (once, for every group)
 }
-export interface GroupsResponse { groups: GroupSummary[]; popular: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER' }
+export interface GroupsResponse { groups: GroupSummary[]; popular: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER'; rulesAccepted: boolean }
+/** CR-006: a member as shown on the group's info page: the username (never the name), the preset avatar, the badge. */
+export interface GroupMemberInfo { username: string; avatar: string | null; badge: string | null }
 /** sample: a labelled sample message (shared/group-samples.ts), never a real member's. */
-export interface ChatMessage { id: string; author: string; badge: string | null; body: string; at: string; sample?: true }
+export interface ChatMessage { id: string; author: string; badge: string | null; body: string; at: string; sample?: true;
+  /** CR-006: the author's avatar when they posted (a snapshot, like the author name). */
+  avatar?: string | null }
 export type ServerFrame =
   | { type: 'history'; messages: ChatMessage[] }
   | { type: 'message'; message: ChatMessage }

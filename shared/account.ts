@@ -39,6 +39,11 @@ export function specialIntakeHint(e: Extras): { applies: boolean; sport: boolean
   return { applies: qualifying.length > 0, sport: qualifying.some(a => a.kind === 'SPORT') };
 }
 
+/** CR-006: preset profile pictures (no photo upload). Mirrored by the CHECK on account.avatar (migration 0010). */
+export const AVATARS = ['a01', 'a02', 'a03', 'a04', 'a05', 'a06', 'a07', 'a08', 'a09', 'a10', 'a11', 'a12'] as const;
+export type Avatar = typeof AVATARS[number];
+export const isAvatar = (x: unknown): x is Avatar => (AVATARS as readonly unknown[]).includes(x);
+
 /** Lower-cased, trimmed; the only form ever stored or compared. */
 export const normaliseUsername = (u: string) => u.trim().toLowerCase();
 
@@ -52,5 +57,7 @@ export interface SignupResponse { username: string; recoveryCode: string }
 export interface MeResponse { username: string; role: 'STUDENT' | 'SENIOR'; senior: { course: string; institution: string; year: number } | null;
   /** CR-003: compulsory contact details; null only for accounts made before CR-003 (the app asks them to complete it). */
   contact: Contact | null;
+  /** CR-006: the chosen preset picture; null = initials. */
+  avatar: Avatar | null;
   profile: ProfileInput | null; extras: Extras }
 export interface SaveMeRequest { profile: ProfileInput; extras: Extras }

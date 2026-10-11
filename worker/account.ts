@@ -16,7 +16,7 @@ import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import type { ApiError, ProfileInput } from '../shared/api.ts';
 import {
   ACHIEVEMENT_KINDS, ACTIVITY_MAX, INTERESTS, KDF, KEY_HEX_RE, LEVELS, MAX_ACHIEVEMENTS, PLACES, RECOVERY_RE, SESSION_DAYS,
-  USERNAME_RE, normaliseUsername, type Achievement, type Extras, type MeResponse, type SaltResponse, type SignupResponse,
+  USERNAME_RE, isAvatar, normaliseUsername, type Achievement, type Extras, type MeResponse, type SaltResponse, type SignupResponse,
 } from '../shared/account.ts';
 import { parseProfile } from './rulebook.ts';
 import { CONSENT_VERSION, parseContact, type Contact } from '../shared/contact.ts';
@@ -145,7 +145,7 @@ function saveStatements(db: D1Database, id: { sql: string; args: unknown[] }, p:
 
 async function loadMe(db: D1Database, accountId: number, username: string): Promise<MeResponse> {
   const [acc, p, subs, ach, ints, ct] = await db.batch([
-    db.prepare(`SELECT a.role, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
+    db.prepare(`SELECT a.role, a.avatar, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
       LEFT JOIN senior_invite v ON v.redeemed_by = a.account_id LEFT JOIN course c ON c.course_code = v.course_code
       LEFT JOIN institution i ON i.letter = v.institution_letter WHERE a.account_id = ?`).bind(accountId),
     db.prepare('SELECT stream_code, district_code, z_e4 FROM student_profile WHERE account_id = ?').bind(accountId),
@@ -158,12 +158,13 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
   const prof = (p.results as { stream_code: ProfileInput['stream']; district_code: string; z_e4: number }[])[0];
   const al = Object.fromEntries((subs.results as { subject_code: string; grade: string }[]).map(r => [r.subject_code, r.grade]));
   const order = (t: string) => (INTERESTS as readonly string[]).indexOf(t);
-  const a = (acc.results as { role: string; course: string | null; institution: string | null; year: number | null }[])[0];
+  const a = (acc.results as { role: string; avatar: string | null; course: string | null; institution: string | null; year: number | null }[])[0];
   return {
     username,
     role: a?.role === 'SENIOR' ? 'SENIOR' : 'STUDENT',
     senior: a?.role === 'SENIOR' && a.course && a.institution && a.year ? { course: a.course, institution: a.institution, year: a.year } : null,
     contact: c ? { fullName: c.full_name, email: c.email, mobile: c.mobile, birthDate: c.birth_date } : null,
+    avatar: isAvatar(a?.avatar) ? a.avatar : null,
     profile: prof ? { stream: prof.stream_code, district: prof.district_code, zE4: prof.z_e4, al: al as ProfileInput['al'] } : null,
     extras: {
       achievements: (ach.results as (Omit<Achievement, 'id'> & { achievement_id: number })[])
@@ -327,6 +328,15 @@ accountRoutes.put('/me/contact', async c => {
   const contact = parseContact(b?.contact, b?.consent, nowIso().slice(0, 10));
   if (!contact.ok) return err(c, 400, contact.error, contact.field);
   await contactStatement(c.env.DB, { sql: '?', args: [c.get('accountId')] }, contact.contact, nowIso()).run();
+  return c.json(await loadMe(c.env.DB, c.get('accountId'), c.get('username')));
+});
+
+/** CR-006: choose a preset avatar, or null for initials. Only the preset codes are accepted (also a CHECK in D1). */
+accountRoutes.put('/me/avatar', async c => {
+  const b = await body(c);
+  const avatar = b?.avatar ?? null;
+  if (avatar !== null && !isAvatar(avatar)) return err(c, 400, 'Choose one of the avatars', 'avatar');
+  await c.env.DB.prepare('UPDATE account SET avatar = ? WHERE account_id = ?').bind(avatar, c.get('accountId')).run();
   return c.json(await loadMe(c.env.DB, c.get('accountId'), c.get('username')));
 });
 

@@ -6,7 +6,9 @@
 import type { ProfileInput } from './api.ts';
 
 export type StepKind = 'UGC_APPLICATION_CLOSE' | 'PREFERENCE_CHANGE_CLOSE' | 'APTITUDE_APPLICATION' | 'CUTOFF_RELEASE' | 'REGISTRATION_CLOSE';
-export interface JourneyStep { id: string; kind: StepKind; title: string; detail: string; when: string; page: number; quote: string }
+export interface JourneyStep { id: string; kind: StepKind; title: string; detail: string; when: string; page: number; quote: string;
+  /** CR-006: the day the step's window opens, from the UGC press notice; absent or null = not announced yet. */
+  opensOn?: string | null }
 export interface Notice {
   routeId: string; kind: 'JOB_EXAM_CLOSE' | 'ROUTE_INTAKE'; title: string; provider: string;
   opensOn: string | null; closesOn: string;
@@ -16,6 +18,33 @@ export interface Notice {
   sourceLocator: string; sourceUrl: string; officialUrl: string | null; retrievedOn: string;
 }
 export interface JourneyResponse { academicYear: string; handbook: string; steps: JourneyStep[]; notices: Notice[] }
+
+/**
+ * CR-006 (Praveen 2026-10-11): the Journey is the student's own checklist, saved on the account. Every step starts
+ * unticked; the student ticks it. A step can be ticked only once its window is open: the three preparation steps are
+ * open at any time; the UGC steps open on the date in their press notice, so while the date is not announced they
+ * cannot be ticked (ZedPath never invents a date). Mirrored by the CHECK on journey_step.step_id (migration 0010).
+ */
+export const PREP_STEPS = ['RESULTS', 'LIST', 'COMPARE'] as const;
+export const JOURNEY_STEP_IDS = ['RESULTS', 'LIST', 'COMPARE', 'UGC_APPLY', 'UGC_ORDER', 'APTITUDE', 'UGC_SELECTION', 'UGC_REGISTER'] as const;
+export type JourneyStepId = typeof JOURNEY_STEP_IDS[number];
+export const isStepId = (x: unknown): x is JourneyStepId => (JOURNEY_STEP_IDS as readonly unknown[]).includes(x);
+
+/** Whether a step can be ticked today, and why not. */
+export function stepWindow(id: JourneyStepId, steps: JourneyStep[], today: string): { open: boolean; opensOn: string | null } {
+  if ((PREP_STEPS as readonly string[]).includes(id)) return { open: true, opensOn: null };
+  const opensOn = steps.find(s => s.id === id)?.opensOn ?? null;
+  return { open: opensOn !== null && opensOn <= today, opensOn };
+}
+/** "I applied" can be ticked once a followed notice is open (a notice with no opening date is open on publication). */
+export const noticeTickable = (n: { opensOn: string | null } | undefined, today: string) => !n || n.opensOn === null || n.opensOn <= today;
+
+/** The Journey saved on the account. */
+export interface MyJourney {
+  courses: { uniCode: string; followedAt: string }[];
+  notices: { routeId: string; followedAt: string; appliedAt: string | null }[];
+  steps: { stepId: JourneyStepId; doneAt: string }[];
+}
 
 const DAY = 86_400_000;
 const isoDay = (d: Date) => d.toISOString().slice(0, 10);

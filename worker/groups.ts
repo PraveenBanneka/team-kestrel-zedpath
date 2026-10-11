@@ -2,15 +2,17 @@
 // comes only from the session cookie. Group rows, members, reports and blocks are in D1 (migration 0006); messages are
 // in each group's GroupRoom Durable Object.
 //   GET  /groups?courses=045,046     -> GroupsResponse: the groups for those courses + the student's batch + joined ones
-//   POST /groups/join {kind, courseCode?, acceptRules} -> GroupSummary (creates the group on first join; CR-005: the
-//                                    current GROUP_RULES_VERSION must be sent, and is recorded on the membership)
+//   POST /groups/join {kind, courseCode?, acceptRules?} -> GroupSummary (creates the group on first join). CR-006: the
+//                                    rules are accepted ONCE per account: the first join must send the current
+//                                    GROUP_RULES_VERSION, which is recorded in group_rules_acceptance; later joins need not
+//   GET  /groups/:id/members         -> GroupMemberInfo[] (members only; usernames and avatars, never names)
 //   GET  /groups/:id                 -> GroupSummary (name and members, for the room's header)
 //   POST /groups/:id/leave           -> 204
 //   GET  /groups/:id/live            -> WebSocket into the room (members only)
 //   POST /groups/:id/report {messageId, reason} -> 204; REPORTS_TO_HIDE distinct reports hide the message
 //   GET  /blocks | POST /blocks {username} | DELETE /blocks/:username
 import { Hono, type Context } from 'hono';
-import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, seniorBadge, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
+import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, seniorBadge, type GroupMemberInfo, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
 import { sampleKey } from '../shared/group-samples.ts';
 import { normaliseUsername, USERNAME_RE } from '../shared/account.ts';
 import { book } from './rulebook.ts';
@@ -44,8 +46,12 @@ function summary(r: Pick<GroupRow, 'kind' | 'course_code' | 'stream_code' | 'dis
 
 const GROUP_SELECT = `SELECT g.group_id, g.kind, g.course_code, g.stream_code, g.district_code,
     (SELECT count(*) FROM group_member m WHERE m.group_id = g.group_id) AS members,
-    mine.account_id IS NOT NULL AS joined, coalesce(mine.rules_version = '${GROUP_RULES_VERSION}', 0) AS rules_ok
-  FROM course_group g LEFT JOIN group_member mine ON mine.group_id = g.group_id AND mine.account_id = ?`;
+    mine.account_id IS NOT NULL AS joined,
+    EXISTS (SELECT 1 FROM group_rules_acceptance r WHERE r.account_id = ?1 AND r.rules_version = '${GROUP_RULES_VERSION}') AS rules_ok
+  FROM course_group g LEFT JOIN group_member mine ON mine.group_id = g.group_id AND mine.account_id = ?1`;
+/** CR-006: has this account accepted the current group rules (once, for every group)? */
+const rulesAccepted = async (c: C, accountId: number) => !!(await c.env.DB.prepare(
+  'SELECT 1 FROM group_rules_acceptance WHERE account_id = ? AND rules_version = ?').bind(accountId, GROUP_RULES_VERSION).first());
 
 groupRoutes.get('/groups', async c => {
   const me = c.get('accountId'), db = c.env.DB;
@@ -56,11 +62,12 @@ groupRoutes.get('/groups', async c => {
       OR (g.kind = 'COURSE' AND g.course_code IN (SELECT value FROM json_each(?)))
       OR (g.kind = 'BATCH' AND g.stream_code = ? AND g.district_code = ?)`)
     .bind(me, me, JSON.stringify(courses), acc?.stream_code ?? null, acc?.district_code ?? null).all<GroupRow>()).results;
+  const ok = await rulesAccepted(c, me), rok = ok ? 1 : 0;
   const out = existing.map(summary);
   for (const code of courses) if (!existing.some(g => g.kind === 'COURSE' && g.course_code === code))
-    out.push(summary({ group_id: null, kind: 'COURSE', course_code: code, stream_code: null, district_code: null, members: 0, joined: 0 }));
+    out.push(summary({ group_id: null, kind: 'COURSE', course_code: code, stream_code: null, district_code: null, members: 0, joined: 0, rules_ok: rok }));
   if (acc?.stream_code && !existing.some(g => g.kind === 'BATCH' && g.stream_code === acc.stream_code && g.district_code === acc.district_code))
-    out.push(summary({ group_id: null, kind: 'BATCH', course_code: null, stream_code: acc.stream_code, district_code: acc.district_code, members: 0, joined: 0 }));
+    out.push(summary({ group_id: null, kind: 'BATCH', course_code: null, stream_code: acc.stream_code, district_code: acc.district_code, members: 0, joined: 0, rules_ok: rok }));
   out.sort((a, b) => Number(b.joined) - Number(a.joined) || Number(a.kind === 'COURSE') - Number(b.kind === 'COURSE') || b.members - a.members);
   // Popular course groups for everyone (video 2), except those already listed above.
   const listed = new Set(out.filter(g => g.kind === 'COURSE').map(g => g.courseCode));
@@ -68,14 +75,15 @@ groupRoutes.get('/groups', async c => {
   const popRows = popCodes.length ? (await db.prepare(`${GROUP_SELECT} WHERE g.kind = 'COURSE' AND g.course_code IN (SELECT value FROM json_each(?))`)
     .bind(me, JSON.stringify(popCodes)).all<GroupRow>()).results : [];
   const popular = popCodes.map(code => { const r = popRows.find(x => x.course_code === code);
-    return r ? summary(r) : summary({ group_id: null, kind: 'COURSE', course_code: code, stream_code: null, district_code: null, members: 0, joined: 0 }); });
-  return c.json({ groups: out, popular, role: acc?.role === 'SENIOR' ? 'SENIOR' : acc?.role === 'STUDENT' ? 'STUDENT' : 'OTHER' } satisfies GroupsResponse);
+    return r ? summary(r) : summary({ group_id: null, kind: 'COURSE', course_code: code, stream_code: null, district_code: null, members: 0, joined: 0, rules_ok: rok }); });
+  return c.json({ groups: out, popular, rulesAccepted: ok, role: acc?.role === 'SENIOR' ? 'SENIOR' : acc?.role === 'STUDENT' ? 'STUDENT' : 'OTHER' } satisfies GroupsResponse);
 });
 
 groupRoutes.post('/groups/join', async c => {
   const me = c.get('accountId'), db = c.env.DB, now = nowIso();
   const b = (await c.req.json().catch(() => null)) as { kind?: unknown; courseCode?: unknown; acceptRules?: unknown } | null;
-  if (b?.acceptRules !== GROUP_RULES_VERSION) return err(c, 400, 'Read and accept the group rules to join', 'acceptRules');
+  const accepting = b?.acceptRules === GROUP_RULES_VERSION;
+  if (!accepting && !(await rulesAccepted(c, me))) return err(c, 400, 'Read and accept the group rules to join', 'acceptRules');
   let where: string, args: unknown[], insert: D1PreparedStatement;
   if (b?.kind === 'COURSE') {
     const code = String(b.courseCode ?? '');
@@ -90,8 +98,9 @@ groupRoutes.post('/groups/join', async c => {
     insert = db.prepare(`INSERT OR IGNORE INTO course_group (kind, stream_code, district_code, created_at) VALUES ('BATCH', ?, ?, ?)`).bind(p.stream_code, p.district_code, now);
   } else return err(c, 400, 'Choose a course group or your batch group', 'kind');
   await db.batch([insert,
-    db.prepare(`INSERT INTO group_member (group_id, account_id, joined_at, rules_version) SELECT group_id, ?, ?, ? FROM course_group WHERE ${where}
-      ON CONFLICT (group_id, account_id) DO UPDATE SET rules_version = excluded.rules_version`).bind(me, now, GROUP_RULES_VERSION, ...args)]);
+    ...(accepting ? [db.prepare('INSERT OR IGNORE INTO group_rules_acceptance (account_id, rules_version, accepted_at) VALUES (?, ?, ?)')
+      .bind(me, GROUP_RULES_VERSION, now)] : []),
+    db.prepare(`INSERT OR IGNORE INTO group_member (group_id, account_id, joined_at) SELECT group_id, ?, ? FROM course_group WHERE ${where}`).bind(me, now, ...args)]);
   const row = await db.prepare(`${GROUP_SELECT} WHERE ${where.replace(/\b(kind|course_code|stream_code|district_code)\b/g, 'g.$1')}`).bind(me, ...args).first<GroupRow>();
   return c.json(summary(row!));
 });
@@ -114,10 +123,11 @@ groupRoutes.post('/groups/:id/leave', async c => {
 
 groupRoutes.get('/groups/:id/live', async c => {
   const id = groupId(c), me = c.get('accountId');
-  const m = id ? await c.env.DB.prepare(`SELECT g.kind, g.course_code, mb.rules_version FROM group_member mb JOIN course_group g USING (group_id)
-    WHERE mb.group_id = ? AND mb.account_id = ?`).bind(id, me).first<{ kind: 'COURSE' | 'BATCH'; course_code: string | null; rules_version: string | null }>() : null;
+  const m = id ? await c.env.DB.prepare(`SELECT g.kind, g.course_code, a.avatar FROM group_member mb JOIN course_group g USING (group_id)
+    JOIN account a ON a.account_id = mb.account_id WHERE mb.group_id = ? AND mb.account_id = ?`)
+    .bind(id, me).first<{ kind: 'COURSE' | 'BATCH'; course_code: string | null; avatar: string | null }>() : null;
   if (!id || !m) return err(c, 403, 'Join the group first');
-  if (m.rules_version !== GROUP_RULES_VERSION) return err(c, 403, 'Accept the group rules first', 'acceptRules');   // CR-005
+  if (!(await rulesAccepted(c, me))) return err(c, 403, 'Accept the group rules first', 'acceptRules');   // CR-006: once per account
   if (c.req.header('Upgrade') !== 'websocket') return err(c, 400, 'Expected a WebSocket');
   if (!c.env.GROUP_ROOM) return err(c, 503, 'Groups are not available yet');
   const [senior, blocked] = await c.env.DB.batch([
@@ -130,9 +140,23 @@ groupRoutes.get('/groups/:id/live', async c => {
   headers.set('X-ZP-Account', String(me));
   headers.set('X-ZP-Author', c.get('username'));                // usernames are [a-z0-9_.] only
   headers.set('X-ZP-Badge', s ? encodeURIComponent(seniorBadge(titleCaseName(s.course), s.year)) : '');   // headers are ASCII-only
+  headers.set('X-ZP-Avatar', m.avatar ?? '');                   // a preset code (CHECK in D1), ASCII
   headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code));    // which labelled sample thread the room shows first
   headers.set('X-ZP-Blocked', JSON.stringify((blocked.results as { blocked_id: number }[]).map(r => r.blocked_id)));
   return room(c, id).fetch(new Request('https://room/live', { headers }));
+});
+
+/** CR-006: the group's members for its info page. Members only; usernames (never real names), avatars and senior badges. */
+groupRoutes.get('/groups/:id/members', async c => {
+  const id = groupId(c);
+  if (!id || !(await isMember(c, id))) return err(c, 403, 'Join the group first');
+  const rows = (await c.env.DB.prepare(`SELECT p.username, a.avatar, c2.name_en AS course, v.study_year AS year
+      FROM group_member m JOIN account a ON a.account_id = m.account_id JOIN password_login p ON p.account_id = m.account_id
+      LEFT JOIN senior_invite v ON v.redeemed_by = m.account_id AND a.role = 'SENIOR' LEFT JOIN course c2 ON c2.course_code = v.course_code
+      WHERE m.group_id = ? ORDER BY (a.role = 'SENIOR') DESC, m.joined_at LIMIT 200`).bind(id)
+    .all<{ username: string; avatar: string | null; course: string | null; year: number | null }>()).results;
+  return c.json(rows.map(r => ({ username: r.username, avatar: r.avatar,
+    badge: r.course && r.year ? seniorBadge(titleCaseName(r.course), r.year) : null } satisfies GroupMemberInfo)));
 });
 
 groupRoutes.post('/groups/:id/report', async c => {
