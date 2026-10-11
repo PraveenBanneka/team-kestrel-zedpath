@@ -8,6 +8,8 @@ import { createTestD1 } from './testing/d1-sqlite.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { GroupSummary, GroupsResponse } from '../shared/groups.ts';
 import type { ProfileInput } from '../shared/api.ts';
+import { CONSENT_VERSION } from '../shared/contact.ts';
+const CONTACT = { fullName: 'Test Student', email: 'student@example.com', mobile: '0712345678', birthDate: '2006-05-01' };
 
 const key = (s: string) => createHash('sha256').update(s).digest('hex');
 const PROFILE: ProfileInput = { stream: 'PHYS', district: 'KUR', zE4: 14821, al: { CMATH: 'B', PHY: 'C', ICT: 'A' } };
@@ -36,7 +38,7 @@ const call = (method: string, p: string, body?: unknown, cookie?: string, header
     body: body === undefined ? undefined : JSON.stringify(body) }, env);
 const cookieOf = (r: Response) => r.headers.get('set-cookie')!.split(';')[0];
 async function signup(username: string, extra: Record<string, unknown> = {}, profile: ProfileInput | null = PROFILE) {
-  const r = await call('POST', '/auth/signup', { username, key: key(username), profile, extras: EXTRAS, ...extra });
+  const r = await call('POST', '/auth/signup', { username, key: key(username), profile, extras: EXTRAS, contact: CONTACT, consent: CONSENT_VERSION, ...extra });
   return { r, cookie: r.status === 201 ? cookieOf(r) : '' };
 }
 function invite(code = CODE, opts: { course?: string; letter?: string; expires?: string } = {}) {

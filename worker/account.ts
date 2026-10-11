@@ -6,6 +6,8 @@
 //   POST /auth/recover  {username, code, key}  -> {username, recoveryCode} + session cookie (all other sessions end)
 //   POST /auth/logout | /auth/logout-all       -> 204
 //   GET /me | PUT /me {profile, extras} | DELETE /me (deletes the account and every row under it)
+//   PUT /me/contact {contact, consent}       -> MeResponse (CR-003: completes or edits the compulsory contact details)
+// CR-003: sign-up also requires {contact, consent}: full name, email, Sri Lankan mobile, date of birth, agreed wording.
 // Security model: the password never reaches the server (the phone sends key = PBKDF2(password, salt, 600000));
 // the server stores SHA-256(key), so a login costs microseconds of CPU (Free plan: 10 ms per request).
 // Which account a request acts on comes ONLY from the session cookie, never from the request body.
@@ -17,6 +19,7 @@ import {
   USERNAME_RE, normaliseUsername, type Achievement, type Extras, type MeResponse, type SaltResponse, type SignupResponse,
 } from '../shared/account.ts';
 import { parseProfile } from './rulebook.ts';
+import { CONSENT_VERSION, parseContact, type Contact } from '../shared/contact.ts';
 
 export type AppEnv = { Bindings: Env; Variables: { accountId: number; username: string; tokenHash: string } };
 type C = Context<AppEnv>;
@@ -98,6 +101,7 @@ for (const p of ['/auth/*', '/me']) accountRoutes.use(p, ready, sameOrigin);
 accountRoutes.use('/auth/logout', requireSession);
 accountRoutes.use('/auth/logout-all', requireSession);
 accountRoutes.use('/me', requireSession);
+accountRoutes.use('/me/*', ready, sameOrigin, requireSession);
 
 // ---------------------------------------------------------------- validation
 export function parseExtras(x: unknown): Extras | ApiError {
@@ -140,7 +144,7 @@ function saveStatements(db: D1Database, id: { sql: string; args: unknown[] }, p:
 }
 
 async function loadMe(db: D1Database, accountId: number, username: string): Promise<MeResponse> {
-  const [acc, p, subs, ach, ints] = await db.batch([
+  const [acc, p, subs, ach, ints, ct] = await db.batch([
     db.prepare(`SELECT a.role, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
       LEFT JOIN senior_invite v ON v.redeemed_by = a.account_id LEFT JOIN course c ON c.course_code = v.course_code
       LEFT JOIN institution i ON i.letter = v.institution_letter WHERE a.account_id = ?`).bind(accountId),
@@ -148,7 +152,9 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
     db.prepare('SELECT subject_code, grade FROM student_subject WHERE account_id = ? ORDER BY position').bind(accountId),
     db.prepare('SELECT achievement_id, activity, kind, level, place, year FROM student_achievement WHERE account_id = ? ORDER BY position').bind(accountId),
     db.prepare('SELECT interest FROM student_interest WHERE account_id = ?').bind(accountId),
+    db.prepare('SELECT full_name, email, mobile, birth_date FROM student_contact WHERE account_id = ?').bind(accountId),
   ]);
+  const c = (ct.results as { full_name: string; email: string; mobile: string; birth_date: string }[])[0];
   const prof = (p.results as { stream_code: ProfileInput['stream']; district_code: string; z_e4: number }[])[0];
   const al = Object.fromEntries((subs.results as { subject_code: string; grade: string }[]).map(r => [r.subject_code, r.grade]));
   const order = (t: string) => (INTERESTS as readonly string[]).indexOf(t);
@@ -157,6 +163,7 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
     username,
     role: a?.role === 'SENIOR' ? 'SENIOR' : 'STUDENT',
     senior: a?.role === 'SENIOR' && a.course && a.institution && a.year ? { course: a.course, institution: a.institution, year: a.year } : null,
+    contact: c ? { fullName: c.full_name, email: c.email, mobile: c.mobile, birthDate: c.birth_date } : null,
     profile: prof ? { stream: prof.stream_code, district: prof.district_code, zE4: prof.z_e4, al: al as ProfileInput['al'] } : null,
     extras: {
       achievements: (ach.results as (Omit<Achievement, 'id'> & { achievement_id: number })[])
@@ -164,6 +171,17 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
       interests: (ints.results as { interest: string }[]).map(r => r.interest).sort((a, b) => order(a) - order(b)),
     },
   };
+}
+
+/** Inserts or replaces the account's contact details (CR-003). `id` is SQL yielding the account_id plus its args. */
+function contactStatement(db: D1Database, id: { sql: string; args: unknown[] }, c: Contact, now: string) {
+  return db.prepare(`INSERT INTO student_contact (account_id, full_name, email, mobile, birth_date, consent_version, consent_at, updated_at)
+      VALUES (${id.sql}, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT (account_id) DO UPDATE SET full_name = excluded.full_name, email = excluded.email, mobile = excluded.mobile,
+        birth_date = excluded.birth_date, consent_version = excluded.consent_version, consent_at = excluded.consent_at, updated_at = excluded.updated_at,
+        email_verified_at = CASE WHEN student_contact.email = excluded.email THEN student_contact.email_verified_at END,
+        mobile_verified_at = CASE WHEN student_contact.mobile = excluded.mobile THEN student_contact.mobile_verified_at END`)
+    .bind(...id.args, c.fullName, c.email, c.mobile, c.birthDate, CONSENT_VERSION, now, now);
 }
 
 function sessionStatement(db: D1Database, idSql: string, idArgs: unknown[], tokenHash: string) {
@@ -194,6 +212,8 @@ accountRoutes.post('/auth/signup', async c => {
   if (profile && 'error' in profile) return c.json(profile, 400);
   const extras = parseExtras(b?.extras);
   if ('error' in extras) return c.json(extras, 400);
+  const contact = parseContact(b?.contact, b?.consent, nowIso().slice(0, 10));
+  if (!contact.ok) return err(c, 400, contact.error, contact.field);
   const invite = b?.inviteCode == null || b.inviteCode === '' ? null : normaliseCode(String(b.inviteCode));
   if (invite !== null && !RECOVERY_RE.test(invite)) return err(c, 400, 'That invite code is not in the right format', 'inviteCode');
   if (await limited(c, 'signup', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
@@ -217,6 +237,7 @@ accountRoutes.post('/auth/signup', async c => {
       db.prepare(`INSERT INTO recovery_code (account_id, code_hash, created_at) VALUES (${id.sql}, ?, ?)`)
         .bind(subject, await sha256Hex(enc.encode(code)), now),
       sessionStatement(db, id.sql, id.args, await sha256Hex(fromHex(token))),
+      contactStatement(db, id, contact.contact, now),
       ...(inviteHash
         ? [db.prepare(`UPDATE senior_invite SET redeemed_by = ${id.sql}, redeemed_at = ? WHERE code_hash = ? AND redeemed_by IS NULL`)
             .bind(subject, now, inviteHash)]                     // seniors keep no student data (0003 triggers)
@@ -299,6 +320,14 @@ accountRoutes.put('/me', async c => {
   if (role !== 'STUDENT') return err(c, 403, 'Senior accounts do not store A/L results');
   await c.env.DB.batch(saveStatements(c.env.DB, { sql: '?', args: [id] }, profile, extras, nowIso()));
   return c.json(await loadMe(c.env.DB, id, c.get('username')));
+});
+
+accountRoutes.put('/me/contact', async c => {
+  const b = await body(c);
+  const contact = parseContact(b?.contact, b?.consent, nowIso().slice(0, 10));
+  if (!contact.ok) return err(c, 400, contact.error, contact.field);
+  await contactStatement(c.env.DB, { sql: '?', args: [c.get('accountId')] }, contact.contact, nowIso()).run();
+  return c.json(await loadMe(c.env.DB, c.get('accountId'), c.get('username')));
 });
 
 accountRoutes.delete('/me', async c => {

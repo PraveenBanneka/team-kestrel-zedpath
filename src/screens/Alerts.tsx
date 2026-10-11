@@ -2,12 +2,12 @@
 // student meets the A/L and age rules, checked on this phone (results and date of birth never leave it). O/L rules are
 // shown for the student to check: ZedPath does not hold O/L results. "Add to my Journey" makes it a dated step.
 // Notice titles, rules and sources stay in English, as published (the screen says so in Sinhala and Tamil).
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { CalendarCheck, CalendarPlus, CircleCheck, CircleHelp, CircleX, ExternalLink, Landmark, ScrollText } from 'lucide-react';
 import type { ProfileInput } from '../../shared/api.ts';
 import { checkNotice, sortNotices, type Check, type JourneyResponse } from '../../shared/journey.ts';
-import { loadDob, saveAlertsSeen, saveDob } from '../storage.ts';
+import { saveAlertsSeen } from '../storage.ts';
 import { Stagger, rise } from '../ui.tsx';
 import { getLang, t } from '../i18n/index.ts';
 import { longDate, today } from './Journey.tsx';
@@ -21,14 +21,12 @@ function Line({ c, text }: { c: Check; text: string }) {
   return <span className="row body-m" style={{ flexWrap: 'nowrap', gap: 8, alignItems: 'flex-start' }}><Icon size={18} aria-hidden="true" style={{ color: tone, flex: 'none', marginTop: 2 }} /><span>{text}</span></span>;
 }
 
-export function AlertsScreen({ data, profile, saved, setSaved, go }: { data: JourneyResponse | null; profile: ProfileInput | null;
-  saved: string[]; setSaved: (ids: string[]) => void; go: (to: string) => void }) {
-  const [dob, setDob] = useState<string | null>(() => loadDob());
+export function AlertsScreen({ data, profile, dob, saved, setSaved, go }: { data: JourneyResponse | null; profile: ProfileInput | null;
+  dob: string | null; saved: string[]; setSaved: (ids: string[]) => void; go: (to: string) => void }) {
   useEffect(() => { if (data) saveAlertsSeen(data.notices.map(n => n.routeId)); }, [data]);       // opening Alerts clears the bell
   if (!data) return <><div className="skeleton" /><div className="skeleton" /></>;
   const day = today();
   const items = sortNotices(data.notices.map(n => ({ n, c: checkNotice(n, profile, dob, day) })));
-  const setBirth = (v: string) => { const d = /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null; saveDob(d); setDob(d); };
 
   return (
     <>
@@ -37,11 +35,6 @@ export function AlertsScreen({ data, profile, saved, setSaved, go }: { data: Jou
         <p className="subtitle">{t('al.sub')}</p>
         {getLang() !== 'en' && <p className="helper">{t('al.official')}</p>}
       </div>
-      <label className="field card" style={{ gap: 6 }}>
-        <span>{t('al.dob')}</span>
-        <input className="input" type="date" value={dob ?? ''} max={day} onChange={e => setBirth(e.target.value)} />
-        <span className="helper">{t('al.dobHelp')}</span>
-      </label>
 
       <Stagger className="stack">
         {items.map(({ n, c }) => {

@@ -47,17 +47,19 @@ preference order or deadlines, and none covers routes outside the UGC.**
 
 | | Feature | What it means for the student | Status |
 |---|---|---|---|
-| 1 | **Results in, paths out** | Stream, district, Z-score and grades, plus sports and achievements ("beyond grades"). No account needed. | ✅ Live |
+| 1 | **Results in, paths out** | Stream, district, Z-score and grades, plus sports and achievements ("beyond grades"). Subjects and courses are searchable. | ✅ Live |
 | 2 | **Safe / Likely / Reach** | All 255 Uni-Codes banded against **five years** of official district cut-offs, with a trend and a cut-off chart. | ✅ Live |
 | 3 | **Fine-print check** | Subject and minimum-grade rules for all 121 courses from the handbook. Hidden courses always say *why*, with the page. | ✅ Live |
 | 4 | **My list (preference checker)** | Warns when a Safe course sits above a Likely/Reach one or when there is no Safe course; proposes a fixed order; copies Uni-Codes. | ✅ Live |
 | 5 | **Compare and syllabi** | Up to 3 courses side by side; "What you'll study" from the university's own curriculum (12 programmes so far). | ✅ Live |
 | 6 | **Every other route** | 52 official routes: private degrees, HNDs, professional bodies, vocational, job exams, scholarships abroad, with "open now". | ✅ Live |
 | 7 | **Ask ZedPath, with sources** | Questions in English, Sinhala or Tamil, answered only from the UGC handbook and official routes, citing the page, using *your* results. | ✅ Live |
-| 8 | **Accounts** | Optional username + password (no email or phone), recovery code, same details on any device. | ✅ Live |
-| 9 | **Journey and reminders** | Deadlines marked *confirmed* or *estimated*, calendar file, native reminders. | Next |
-| 10 | **Gazette watch** | Weekly scan of Government Gazette job-exam notices with alerts. | Planned |
-| 11 | **People around you** | Verified seniors, a family summary card, a class view for teachers. | Later |
+| 8 | **Accounts** | Required at the start: username + password, full name, email, Sri Lankan mobile and date of birth, each with its purpose shown and consent recorded; recovery code; same details on any device. Email and mobile are not verified yet. | ✅ Live |
+| 9 | **Journey and reminders** | The UGC steps in order with the handbook page for each; dated items with phone reminders (Android) or a calendar file. | ✅ Live |
+| 10 | **Alerts** | Gazette job exams and other intakes with closing dates, checked against the student's results and age. | ✅ Live |
+| 11 | **Groups** | A live group per target course and per A/L batch; verified seniors (invite codes); automatic moderation, report and block. | ✅ Live |
+| 12 | **Three languages** | The whole interface in Sinhala, Tamil and English (AI translation, native-speaker review pending); official names and quotes as published. | ✅ Live |
+| 13 | **Gazette watch** | Weekly automatic scan of Government Gazette notices (today the notices are added by hand from the Gazette). | Planned |
 
 Concept screens (33 screens, one student's whole journey):
 **[ZedPath mobile preview](https://claude.ai/artifact/N8wGu87fiY8ksUbb82yU8f)**. These are illustrative, with sample data.
@@ -89,8 +91,9 @@ In short:
 - **One Cloudflare Worker** (`zedpath`, Hono + TypeScript) serves the API; the React app is free static assets.
 - **Results need no database reads:** cut-offs, rules, routes and syllabi are compiled into a read model bundled
   inside the Worker, so a full eligibility check costs a few milliseconds of CPU on the free plan.
-- **D1** holds only what must persist: optional student accounts (secrets stored as hashes) and Ask's daily
-  allowance (salted hashes, no IPs).
+- **D1** holds only what must persist: student accounts (secrets stored as hashes; contact details in their own table),
+  groups, invites, reports and blocks, and Ask's daily allowance (salted hashes, no IPs). Group messages live in one
+  Durable Object per group.
 - **Ask ZedPath:** Workers AI (bge-m3) embeds the question → Vectorize returns the closest of 572 handbook/route
   passages → the rule engine adds the student's own facts → the model answers through **AI Gateway** (cache on,
   payload logs off) with a fallback chain across four Flash models.
@@ -106,11 +109,11 @@ In short:
 | App | React 19 + TypeScript, Vite, motion, PWA | Mobile-first, installable, small (141 KB JS gzip, within the 200 KB budget NFR-006); TypeScript everywhere |
 | API | Hono 4 on Cloudflare Workers (+ Static Assets) | One Worker, free static hosting; Next.js SSR risked the free plan's 10 ms CPU limit (ADR in ZP-DOC-06) |
 | Read model | Rulebook JSON compiled from the validated SQLite schema | Zero database reads per student request |
-| Data | Cloudflare D1 (36-table schema; accounts + allowance at runtime) | Foreign keys, CHECK constraints, cascade delete |
+| Data | Cloudflare D1 (42-table schema; accounts, groups and allowance at runtime) + Durable Objects (group rooms) | Foreign keys, CHECK constraints, cascade delete |
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (83 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
+| Tests | Vitest (147 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.
@@ -121,10 +124,10 @@ costs nothing until it grows.
 |---|---|---|
 | **Gate 1: Problem & Proof** | Six interviews, tool test, market sizing, first rules and dates collected by hand | ✅ Submitted |
 | **Core flow** | Results once → 255 Uni-Codes banded from five years of official cut-offs → 52 other routes → course pages with sources, cut-off charts and syllabi → public link | ✅ Live |
-| **Applying** | My list with order checks ✅ · Compare ✅ · accounts ✅ · Journey with confirmed/estimated dates and reminders | 🔨 Building |
+| **Applying** | My list with order checks ✅ · Compare ✅ · accounts ✅ · Journey and reminders ✅ · Alerts ✅ · Groups ✅ | ✅ Live |
 | **AI and depth** | Handbook → rules (two-model reconciled) ✅ · Ask ZedPath with cited pages in three languages ✅ · weekly Gazette scan | 🔨 Building |
 | **Apps** | Installable PWA ✅ · native Android app (Capacitor) ✅ · Google Play (internal testing first) | 🔨 Building |
-| **People and money** | Verified seniors, family share card, teacher view, costs by campus, Sinhala/Tamil interface | Later |
+| **People and money** | Verified seniors ✅ · Sinhala/Tamil interface ✅ · email and SMS verification and reminders (needs a domain and an SMS service) · family share card, teacher view | 🔨 Building |
 
 ## Engineering documentation
 
@@ -152,7 +155,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 - **Official numbers only.** Every cut-off comes from the UGC's published tables and links to its source.
 - **Honest about uncertainty.** It never says "you will get in". Past cut-offs describe the past, and the app says so.
 - **No paid placement.** No institute can pay to appear in results or look more recognised than it is.
-- **Nothing stored without asking.** No account needed to explore. Sharing with a teacher or parent is always the student's choice.
+- **Only what is needed, with consent.** An account is required. It asks for a username, full name, email, mobile and date of birth, says why each is needed, and records consent (Sri Lanka's Personal Data Protection Act, No. 9 of 2022; a parent or guardian agrees for students under 18). Contact details are kept apart from results, never sold, never shown to other students, and deleted with the account.
 
 ## Running locally
 

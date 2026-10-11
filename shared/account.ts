@@ -2,6 +2,7 @@
 // Accounts hold a username only (no name, email or phone: NFR-030). Passwords never leave the phone: the phone
 // stretches them with PBKDF2 and sends only the derived key; the server stores a hash of that key.
 import type { ProfileInput } from './api.ts';
+import type { Contact } from './contact.ts';
 
 export const USERNAME_RE = /^[a-z0-9_.]{3,24}$/;
 export const PASSWORD_MIN = 8;
@@ -30,11 +31,14 @@ export interface Extras { achievements: Achievement[]; interests: string[] }
 export const normaliseUsername = (u: string) => u.trim().toLowerCase();
 
 export interface SaltResponse { salt: string; kdf: typeof KDF }
-export interface SignupRequest { username: string; key: string; profile: ProfileInput | null; extras: Extras; inviteCode?: string }
+export interface SignupRequest { username: string; key: string; profile: ProfileInput | null; extras: Extras; inviteCode?: string;
+  contact: Contact; consent: string }
 export interface LoginRequest { username: string; key: string }
 export interface RecoverRequest { username: string; code: string; key: string }
 export interface SignupResponse { username: string; recoveryCode: string }
 /** role SENIOR = a verified senior (CR-002): no A/L results stored; `senior` says what they study. */
 export interface MeResponse { username: string; role: 'STUDENT' | 'SENIOR'; senior: { course: string; institution: string; year: number } | null;
+  /** CR-003: compulsory contact details; null only for accounts made before CR-003 (the app asks them to complete it). */
+  contact: Contact | null;
   profile: ProfileInput | null; extras: Extras }
 export interface SaveMeRequest { profile: ProfileInput; extras: Extras }

@@ -3,6 +3,7 @@
 import type { ProfileInput } from '../shared/api.ts';
 import type { Extras, MeResponse, SaltResponse, SignupResponse } from '../shared/account.ts';
 import { normaliseUsername } from '../shared/account.ts';
+import { CONSENT_VERSION, type Contact } from '../shared/contact.ts';
 import { deriveKey } from '../shared/kdf.ts';
 
 export class ApiFailure extends Error {
@@ -35,9 +36,10 @@ export async function fetchMe(): Promise<MeResponse | null> {
   }
 }
 
-export async function signUp(username: string, password: string, profile: ProfileInput | null, extras: Extras, inviteCode?: string): Promise<SignupResponse> {
+export async function signUp(username: string, password: string, profile: ProfileInput | null, extras: Extras, contact: Contact, inviteCode?: string): Promise<SignupResponse> {
   const u = normaliseUsername(username);
-  return call<SignupResponse>('POST', '/auth/signup', { username: u, key: await keyFor(u, password), profile, extras, ...(inviteCode ? { inviteCode } : {}) });
+  return call<SignupResponse>('POST', '/auth/signup', { username: u, key: await keyFor(u, password), profile, extras, contact, consent: CONSENT_VERSION,
+    ...(inviteCode ? { inviteCode } : {}) });
 }
 
 export async function logIn(username: string, password: string): Promise<MeResponse> {
@@ -51,6 +53,8 @@ export async function recover(username: string, code: string, newPassword: strin
 }
 
 export const saveMe = (profile: ProfileInput, extras: Extras) => call<MeResponse>('PUT', '/me', { profile, extras });
+/** CR-003: complete or edit the compulsory contact details (consent is to the current wording). */
+export const saveContact = (contact: Contact) => call<MeResponse>('PUT', '/me/contact', { contact, consent: CONSENT_VERSION });
 export const logOut = () => call<void>('POST', '/auth/logout');
 export const logOutEverywhere = () => call<void>('POST', '/auth/logout-all');
 export const deleteAccount = () => call<void>('DELETE', '/me');

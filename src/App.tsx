@@ -13,7 +13,7 @@ import { nameOf } from '../shared/describe.ts';
 import { matches } from '../shared/search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
-import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
+import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
 import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
@@ -25,7 +25,7 @@ import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addToList, type ListEntry } from '../shared/list.ts';
-import { clearEverything, loadAlertsSeen, loadDob, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
+import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
 import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
@@ -89,7 +89,11 @@ export function App() {
   // Accounts (CR-001): with no account (or no accounts on the server) everything below is skipped and the app behaves
   // exactly as before. With one, every save also goes to the account, and the account's copy is loaded on start,
   // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
-  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior'] } | null>(null);
+  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact'] } | null>(null);
+  const [checked, setChecked] = useState(false);              // CR-003: the account check has finished (no anonymous use)
+  const [offline, setOffline] = useState(false);              // the check failed for lack of a connection, not for lack of an account
+  const checkAccount = () => { setOffline(false); setChecked(false);
+    fetchMe().then(m => m && adopt(m)).catch(() => setOffline(true)).finally(() => setChecked(true)); };
   const [recovery, setRecovery] = useState<{ username: string; code: string } | null>(null);
   const [syncNote, setSyncNote] = useState<string | null>(null);
   const [list, setListRaw] = useState<ListEntry[]>(() => loadList());
@@ -102,7 +106,7 @@ export function App() {
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
   const adopt = (m: MeResponse) => {
-    setMe({ username: m.username, role: m.role, senior: m.senior });
+    setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact });
     if (m.role !== 'STUDENT') { setOnboarded(); setOnb(true); return; }       // a senior's results (if any) stay on this phone
     const local = loadProfile();
     if (local && (isPendingSync() || !m.profile)) { void push(local, loadExtras()); return; }
@@ -110,10 +114,10 @@ export function App() {
     saveProfile(m.profile); saveExtras(m.extras); setProfile(m.profile); setExtras(m.extras);
     setOnboarded(); setOnb(true);
   };
-  useEffect(() => { fetchMe().then(m => m && adopt(m)).catch(() => {}); }, []);   // once, on start
+  useEffect(checkAccount, []);   // once, on start   // eslint-disable-line react-hooks/exhaustive-deps
 
   const [path, arg] = route.split('/').filter(Boolean);
-  const finishIntro = () => { setOnboarded(); setOnb(true); go('/about'); };
+  const finishIntro = () => { setOnboarded(); setOnb(true); go('/signup'); };       // CR-003: an account comes first
   const onSave = (p: ProfileInput, e: Extras) => {
     saveProfile(p); saveExtras(e); setProfile(p); setExtras(e);
     if (me?.role === 'STUDENT') void push(p, e);
@@ -122,7 +126,7 @@ export function App() {
   const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setSavedRaw([]); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
-    username: me?.username ?? null, senior: me?.senior ?? null, syncNote,
+    username: me?.username ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
     logOut: async () => { await logOut().catch(() => {}); setMe(null); },
     logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
     deleteAccount: async () => { await deleteAccount(); reset(); },
@@ -131,7 +135,7 @@ export function App() {
   // Account screens: a focused flow with Back and no bottom navigation, reachable before and after onboarding.
   if (['signup', 'login', 'recover', 'saved-code'].includes(path)) {
     const titles: Record<string, string> = { signup: t('title.signup'), login: t('title.login'), recover: t('title.recover'), 'saved-code': t('title.savedCode') };
-    const afterAuth = () => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : loadProfile() ? '/me' : '/about'); }).catch(() => go('/about'));
+    const afterAuth = () => fetchMe().then(m => { if (m) adopt(m); go(m?.role === 'SENIOR' ? '/groups' : loadProfile() ? '/paths' : '/about'); }).catch(() => go('/about'));
     return (
       <div className="shell">
         <header className="app-bar">
@@ -142,11 +146,27 @@ export function App() {
           ? (recovery ? <RecoveryCodeScreen username={recovery.username} code={recovery.code} onDone={() => { setRecovery(null); afterAuth(); }} />
             : <div className="card"><p className="subtitle">{t('auth.codeGone')}</p></div>)
           : <AuthScreen mode={path as 'signup' | 'login' | 'recover'} profile={profile} extras={extras} go={go}
-              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
+              onSignedUp={(username, code) => { setMe({ username, role: 'STUDENT', senior: null, contact: null }); setPendingSync(false); setRecovery({ username, code }); setOnboarded(); setOnb(true); go('/saved-code'); }}
               onLoggedIn={m => { adopt(m); setOnboarded(); setOnb(true); go(m.role === 'SENIOR' ? '/groups' : m.profile || loadProfile() ? '/paths' : '/about'); }} />}
         </Page></main>
       </div>);
   }
+
+  // CR-003: every use needs an account. Until the check finishes, a blank shell; then sign-up (or log in) first, and an
+  // account made before CR-003 completes its contact details before anything else.
+  if (onboarded && !checked) return <div className="shell"><main><div className="skeleton" style={{ height: 200, marginTop: 24 }} /></main></div>;
+  if (onboarded && !me && offline) return (
+    <div className="shell"><main><div className="card stack" style={{ marginTop: 24 }}><p className="subtitle">{t('app.offline')}</p>
+      <button className="btn filled" onClick={checkAccount}>{t('app.retry')}</button></div></main></div>);
+  if (onboarded && !me) { go('/signup'); return null; }
+  if (me && !me.contact || path === 'contact') return (
+    <div className="shell">
+      <header className="app-bar">
+        {me?.contact ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
+        <span className="brand">{t('title.me')}</span>
+      </header>
+      <main><Page k="contact"><CompleteContactScreen initial={me?.contact ?? null} onDone={m => { adopt(m); go(me?.contact ? '/me' : loadProfile() || m.role === 'SENIOR' ? '/paths' : '/about'); }} /></Page></main>
+    </div>);
 
   // First run
   if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang} /></main></div>;
@@ -167,7 +187,7 @@ export function App() {
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
   else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} />; }
   else if (path === 'journey') { tab = 'journey'; title = t('title.journey'); screen = <JourneyScreen data={journey} saved={saved} setSaved={setSaved} list={list} results={results} go={go} />; }
-  else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} saved={saved} setSaved={setSaved} go={go} />; }
+  else if (path === 'alerts') { tab = null; back = true; title = t('title.alerts'); screen = <AlertsScreen data={journey} profile={profile} dob={me?.contact?.birthDate ?? null} saved={saved} setSaved={setSaved} go={go} />; }
   else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
   else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
   else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
@@ -183,7 +203,7 @@ export function App() {
   const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', t('nav.paths'), MapIcon, '#/paths'], ['list', t('nav.list'), ListOrdered, '#/list'],
     ['journey', t('nav.journey'), CalendarDays, '#/journey'], ['groups', t('nav.groups'), Users, '#/groups'], ['ask', t('nav.ask'), Sparkles, '#/ask']];
   // The bell counts open notices the student has not opened yet and is not ruled out for (checked on this phone).
-  const seen = loadAlertsSeen(), dob = loadDob(), day = today();
+  const seen = loadAlertsSeen(), dob = me?.contact?.birthDate ?? null, day = today();
   const unread = (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
   return (
     <div className="shell has-nav">
@@ -488,7 +508,7 @@ function RouteDetail({ id, routes }: { id: string; routes: RouteSummary[] | null
 }
 
 // ---------------------------------------------------------------- Me
-interface AccountControls { username: string | null; senior: MeResponse['senior']; syncNote: string | null; logOut: () => Promise<void>;
+interface AccountControls { username: string | null; senior: MeResponse['senior']; contact: MeResponse['contact']; syncNote: string | null; logOut: () => Promise<void>;
   logOutEverywhere: () => Promise<void>; deleteAccount: () => Promise<void> }
 
 function AccountCard({ account, go }: { account: AccountControls; go: (to: string) => void }) {
@@ -512,6 +532,12 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
           <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('acc.saved')}</span>
         </span>
       </div>
+      {account.contact && (
+        <div className="stack" style={{ gap: 2 }}>
+          <span className="body-m"><b>{account.contact.fullName}</b></span>
+          <span className="helper">{account.contact.email} · {account.contact.mobile}</span>
+          <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/contact')}><Pencil size={16} aria-hidden="true" />{t('ct.edit')}</button>
+        </div>)}
       {account.senior && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><ShieldCheck size={13} aria-hidden="true" />{t('acc.senior', { course: titleCase(account.senior.course), inst: shortInstitution(account.senior.institution), y: account.senior.year })}</span>}
       {account.syncNote && <div className="alert info"><Info size={20} aria-hidden="true" />{account.syncNote}</div>}
       <div className="row">

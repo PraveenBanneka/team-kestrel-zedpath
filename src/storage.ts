@@ -7,7 +7,7 @@ export { INTERESTS, type Achievement, type Extras, type Level, type Place } from
 
 const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
   pendingSync: 'zedpath.pendingSync.v1', list: 'zedpath.list.v1', compare: 'zedpath.compare.v1',
-  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1', alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1' };
+  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1' };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
@@ -28,9 +28,6 @@ export const saveCompare = (c: string[]) => write(KEYS.compare, c);
 /** Journey (CR-002): notices the student added (route ids). On this device only. */
 export const loadJourney = (): string[] => read<string[]>(KEYS.journey) ?? [];
 export const saveJourney = (ids: string[]) => write(KEYS.journey, ids);
-/** Date of birth (YYYY-MM-DD), optional, only to check age limits in Alerts; never sent anywhere. */
-export const loadDob = () => read<string>(KEYS.dob);
-export const saveDob = (d: string | null) => d ? write(KEYS.dob, d) : (() => { try { localStorage.removeItem(KEYS.dob); } catch { /* */ } })();
 /** Alerts the student has seen (route ids), for the unread count on the bell. */
 export const loadAlertsSeen = (): string[] => read<string[]>(KEYS.alertsSeen) ?? [];
 export const saveAlertsSeen = (ids: string[]) => write(KEYS.alertsSeen, ids);

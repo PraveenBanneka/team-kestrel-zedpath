@@ -10,6 +10,8 @@ import { createTestD1 } from './testing/d1-sqlite.ts';
 import { normaliseCode } from './account.ts';
 import { INTERESTS, RECOVERY_RE, type Extras, type MeResponse, type SignupResponse } from '../shared/account.ts';
 import type { ProfileInput } from '../shared/api.ts';
+import { CONSENT_VERSION } from '../shared/contact.ts';
+const CONTACT = { fullName: 'Test Student', email: 'student@example.com', mobile: '0712345678', birthDate: '2006-05-01' };
 
 const key = (s: string) => createHash('sha256').update(s).digest('hex');      // stands in for the phone's PBKDF2 key
 const PROFILE: ProfileInput = { stream: 'PHYS', district: 'KUR', zE4: 14821, al: { CMATH: 'B', PHY: 'C', ICT: 'A' } };
@@ -34,7 +36,7 @@ async function call(method: string, p: string, body?: unknown, cookie?: string, 
 }
 const cookieOf = (r: Response) => r.headers.get('set-cookie')!.split(';')[0];
 async function signup(username = 'nimal_99', pw = 'pw-one', profile: ProfileInput | null = PROFILE, extras = EXTRAS) {
-  const r = await call('POST', '/auth/signup', { username, key: key(pw), profile, extras });
+  const r = await call('POST', '/auth/signup', { username, key: key(pw), profile, extras, contact: CONTACT, consent: CONSENT_VERSION });
   return { r, cookie: r.status === 201 ? cookieOf(r) : '', body: await r.json() as SignupResponse };
 }
 const count = (table: string) => (raw.prepare(`SELECT count(*) AS n FROM ${table}`).get() as { n: number }).n;
@@ -248,5 +250,48 @@ describe('safe default: no database or secret means no accounts, and nothing els
     const res = await call('POST', '/results', PROFILE);
     expect(res.status).toBe(200);
     expect((await res.json() as { counts: Record<string, number> }).counts.SAFE).toBeGreaterThan(0);
+  });
+});
+
+describe('migration 0007: contact details (CR-003)', () => {
+  it('accepts exactly the consent wording version the app sends', () => {
+    const sql = fs.readFileSync(path.resolve(import.meta.dirname, '..', 'migrations', '0007_student_contact.sql'), 'utf8');
+    expect(sql).toContain(`consent_version IN ('${CONSENT_VERSION}')`);
+  });
+});
+
+describe('contact details are compulsory (CR-003)', () => {
+  it('refuses a sign-up without them, naming the field, and creates nothing', async () => {
+    const r = await call('POST', '/auth/signup', { username: 'no_contact', key: key('x'), profile: PROFILE, extras: EXTRAS });
+    expect(r.status).toBe(400);
+    expect((await r.json() as { field: string }).field).toBe('fullName');
+    const r2 = await call('POST', '/auth/signup', { username: 'no_consent', key: key('x'), profile: PROFILE, extras: EXTRAS, contact: CONTACT });
+    expect((await r2.json() as { field: string }).field).toBe('consent');
+    expect(count('account')).toBe(0);
+  });
+  it('stores them normalised, returns them in /me, and deletes them with the account', async () => {
+    const { cookie } = await signup();
+    const me = await (await call('GET', '/me', undefined, cookie)).json() as MeResponse;
+    expect(me.contact).toEqual({ fullName: 'Test Student', email: 'student@example.com', mobile: '+94712345678', birthDate: '2006-05-01' });
+    await call('DELETE', '/me', undefined, cookie);
+    expect(count('student_contact')).toBe(0);
+  });
+  it('lets an account made before CR-003 complete them, and refuses bad values on the server', async () => {
+    const { cookie } = await signup();
+    raw.exec('DELETE FROM student_contact');                                      // as if made before CR-003
+    expect((await (await call('GET', '/me', undefined, cookie)).json() as MeResponse).contact).toBeNull();
+    expect((await call('PUT', '/me/contact', { contact: { ...CONTACT, mobile: '0112345678' }, consent: CONSENT_VERSION }, cookie)).status).toBe(400);
+    const ok = await call('PUT', '/me/contact', { contact: { ...CONTACT, fullName: 'Nimal Perera' }, consent: CONSENT_VERSION }, cookie);
+    expect((await ok.json() as MeResponse).contact?.fullName).toBe('Nimal Perera');
+    expect((await call('PUT', '/me/contact', { contact: CONTACT, consent: CONSENT_VERSION })).status).toBe(401);   // needs a session
+  });
+  it('refuses malformed rows at the database level too', () => {
+    raw.exec(`INSERT INTO account (auth_subject, role, created_at) VALUES ('local:s', 'STUDENT', 't')`);
+    for (const bad of [
+      `INSERT INTO student_contact VALUES (1, 'N P', 'a@b.lk', '0712345678', '2006-05-01', '2026-10-11', 't', NULL, NULL, 't')`,   // not E.164
+      `INSERT INTO student_contact VALUES (1, 'N P', 'A@B.lk', '+94712345678', '2006-05-01', '2026-10-11', 't', NULL, NULL, 't')`, // not lower-case
+      `INSERT INTO student_contact VALUES (1, 'N P', 'a@b.lk', '+94712345678', '2006-02-30', '2026-10-11', 't', NULL, NULL, 't')`, // no such date
+      `INSERT INTO student_contact VALUES (1, 'N P', 'a@b.lk', '+94712345678', '2006-05-01', '2020-01-01', 't', NULL, NULL, 't')`, // unknown wording
+    ]) expect(() => raw.exec(bad), bad).toThrow();
   });
 });
