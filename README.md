@@ -113,7 +113,7 @@ In short:
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (147 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
+| Tests | Vitest (164 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.

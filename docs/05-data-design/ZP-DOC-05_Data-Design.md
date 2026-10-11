@@ -16,6 +16,7 @@ revision: 0.9 | 5 Oct 2026 | Team Kestrel | Revised in review for CR-001 (studen
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-002 (Journey, Alerts, Groups; product owner's GO): Section 2.6, migrations 0005 and 0006, read-model decision for dates and notices
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-003 (compulsory account with contact details; product owner's decision): STUDENT_CONTACT, migration 0007, the "username only" statement of CR-001 withdrawn
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-004 (Ask answer feedback): ANSWER_FEEDBACK, migration 0008
+revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-005 (group rules, product owner's request): GROUP_MEMBER.rules_version, migration 0009; labelled sample conversations as read-model data
 ---
 
 # Introduction
@@ -173,6 +174,20 @@ Not `mistake_report`: that table reports a stored, cited fact (its `fact_id` is 
 A row holds the rating, the question, the answer, the handbook pages it cited (JSON, checked by `json_valid`), an
 optional note, the app language and a review state. It holds nothing that identifies the student: no account, device
 or IP. The screen says the question and answer are sent before the student sends a report.
+
+## Group rules and sample conversations (CR-005)
+
+A member accepts the group rules before taking part. The accepted version is a fact about one membership, so it is a
+column on `group_member` (`rules_version`, migration 0009) rather than a new table: one value per (group, member), fully
+dependent on the key, so the table stays in BCNF. A CHECK lists the versions that exist (`'2026-10-11'`); a new version
+of the rules adds a value and asks members again. NULL means joined before the rules existed. Server enforcement: the
+Worker refuses a join without the current version and keeps the live room closed for a member whose row is not on it
+(`worker/groups.ts`). Rule 3 (no phone numbers or email addresses) is checked on every message by the group's room.
+
+Sample conversations, which show a new student how a group works, are **not stored**. Like the Journey steps they are
+curated read-model data in code (`shared/group-samples.ts`), added by the room in front of the real messages. Every
+sample is marked `sample`, its author starts with "Sample", no badge says "verified", and its id is not a message id, so
+it cannot be reported, blocked or mistaken for a member (trust rule: sample data is labelled as sample; pinned by tests).
 
 ## Entity catalogue
 
@@ -464,6 +479,12 @@ Reproduced verbatim from `migrations/0007_student_contact.sql`.
 Reproduced verbatim from `migrations/0008_answer_feedback.sql`.
 
 <!-- include: migrations/0008_answer_feedback.sql -->
+
+# Group rules (migration 0009) {.appendix}
+
+Reproduced verbatim from `migrations/0009_group_rules.sql`.
+
+<!-- include: migrations/0009_group_rules.sql -->
 
 # Groups (migration 0006) {.appendix}
 

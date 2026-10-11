@@ -274,3 +274,28 @@
   Sinhala, Tamil and the Ask card. 152 tests.
 - Open: guard repo-rename edit still uncommitted (needs Praveen's permission); Ask not exercised live (no Gemini calls,
   as asked); translations need a native-speaker check.
+
+## 2026-10-11 (afternoon): video-2 fixes, CR-005 group rules — built and tested locally, NOT yet live
+Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L option", "groups should have rules",
+"WhatsApp-style groups"). Commits, each with tests:
+- 239d548 "Name" label; "Sit the A/L again" tile removed; numbers on every cut-off chart point; Ask box pinned to the
+  bottom; a new account goes straight to About you.
+- 89e5166 Compare: every Compare button opens it; columns swipe (scroll-snap); "+" column on the right opens a picker
+  (search your Safe/Likely/Reach courses, or My list).
+- 9cb2337 Ask: route citations show the route's name (the index stored research notes such as "sources/ifsl_faq.html",
+  which looked like broken links); links are https-only and space-escaped (safeUrl); handbook citations link the UGC
+  handbook; "See it in ZedPath" opens the route page. Achievements/interests are sent with the question (validated by
+  parseExtras, never stored); ZedPath's own special-intake rule (now shared/account.ts) becomes an engine fact, and the
+  special-intake passage is retrieved too. Five demo suggestion chips. Both official PDFs checked to load via WebFetch.
+- 894c631 Groups (CR-005): rules accepted before joining, server-enforced (join 400 without the current version; live
+  room 403 for a member whose group_member.rules_version is not current; migration 0009 adds that column + CHECK);
+  phone numbers and emails refused in messages; popular groups (001 008 012 016 018 025); labelled sample conversations
+  (shared/group-samples.ts, read-model, not stored, cannot be reported); WhatsApp-style list, room, bubbles, composer.
+- 79beb09 Journey: checklist of the student's own next steps (results, list, compare, aptitude tests, deadlines, apply
+  to the UGC with its handbook quote) replaces the UGC step list. Notification settings in Me (7-day / 1-day reminders,
+  8 am / 6 pm, bell count), on this phone; defaults = previous behaviour (pinned by tests).
+- Docs: ZP-DOC-05 CR-005 section + appendix (migration 0009), docx/pdf rebuilt. README tests 164.
+- Verified: tsc clean, 164/164 tests; local build clicked through at 390x844 (groups, rules, room, journey, me, compare,
+  course chart, ask). Ask was NOT called against Gemini (quota rule).
+- To go live (needs Praveen's GO): D1 backup, then migration 0009 on the live database (it only ADDS a nullable column),
+  then the new version. Reversal: roll back to e5e2d55b (the old code ignores the new column).
