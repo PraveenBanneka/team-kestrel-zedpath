@@ -3,13 +3,14 @@
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Award, Bell, BellRing, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { Search, ArrowLeft, Award, Bell, BellRing, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   ListOrdered, RotateCcw, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
 import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
+import { matches } from '../shared/search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { AuthScreen, RecoveryCodeScreen } from './screens/Account.tsx';
@@ -263,8 +264,11 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
 // ---------------------------------------------------------------- Courses by band
 function Courses({ results, band, go, listCount }: { results: ResultsResponse | null; band: Band; go: (to: string) => void; listCount: number }) {
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
-  const list = useMemo(() => (results?.offerings ?? []).filter(o => o.band === band)
-    .sort((a, b) => (b.gapToLatestE4 ?? 0) - (a.gapToLatestE4 ?? 0)), [results, band]);
+  const [query, setQuery] = useState('');
+  const searching = query.trim() !== '';
+  // While searching, all three bands are searched at once (the band shows on each row's colour strip).
+  const list = useMemo(() => (results?.offerings ?? []).filter(o => searching ? tabs.includes(o.band) && matches(query, o.course, o.institution, o.uniCode)
+    : o.band === band).sort((a, b) => (b.gapToLatestE4 ?? 0) - (a.gapToLatestE4 ?? 0)), [results, band, query]);   // eslint-disable-line react-hooks/exhaustive-deps
   const total = results ? results.counts.SAFE + results.counts.LIKELY + results.counts.REACH : 0;
   return (
     <>
@@ -274,17 +278,20 @@ function Courses({ results, band, go, listCount }: { results: ResultsResponse | 
         <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />My list{listCount ? ` (${listCount})` : ''}</button>
         <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />Compare courses</button>
       </div>
-      <div className="seg" role="tablist" aria-label="Band">
+      <label className="search"><Search size={20} aria-hidden="true" /><input placeholder="Search courses, universities or Uni-Codes" value={query}
+        onChange={e => setQuery(e.target.value)} aria-label="Search courses" enterKeyHint="search" /></label>
+      {!searching && <div className="seg" role="tablist" aria-label="Band">
         {tabs.map(t => (
           <button key={t} role="tab" aria-selected={t === band} onClick={() => go(`/courses/${t.toLowerCase()}`)}>
             {t === band && <motion.span layoutId="seg-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
             <span>{BAND_LABEL[t]}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
           </button>))}
-      </div>
+      </div>}
+      {searching && results && <p className="helper" role="status">{list.length} course{list.length === 1 ? '' : 's'} within reach match "{query.trim()}" (Safe, Likely and Reach).</p>}
       {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
-      {results && list.length === 0 && <div className="card"><p className="subtitle">No courses in this band for your results.</p></div>}
+      {results && list.length === 0 && <div className="card"><p className="subtitle">{searching ? 'No course within your reach matches that. Courses you are not eligible for are under "courses hidden".' : 'No courses in this band for your results.'}</p></div>}
       {list.length > 0 && (
-        <Stagger key={band} className="list-card" role="tabpanel">
+        <Stagger key={searching ? 'search' : band} className="list-card" role="tabpanel">
           {list.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)} />)}
         </Stagger>)}
       {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{results.hidden.length} courses hidden</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>See why<ChevronRight size={16} aria-hidden="true" /></span></button>}

@@ -7,6 +7,7 @@ import { Atom, Calculator, ChevronRight, Cpu, Microscope, Palette, Search, Sprou
 import type { Meta, ProfileInput } from '../../shared/api.ts';
 import { formatZ, parseZ } from '../../shared/banding.ts';
 import type { Grade, StreamCode } from '../../shared/rules.ts';
+import { matches } from '../../shared/search.ts';
 import { nameOf } from '../../shared/describe.ts';
 import { INTERESTS, type Achievement, type Extras, type Level, type Place } from '../storage.ts';
 
@@ -118,7 +119,9 @@ export function AboutFlow({ meta, initial, extrasInitial, onSave }: { meta: Meta
   const [z, setZ] = useState(initial ? formatZ(initial.zE4).replace('−', '-') : '');
   const [subjects, setSubjects] = useState<[string, Grade | ''][]>(
     initial ? Object.entries(initial.al) as [string, Grade][] : [['', ''], ['', ''], ['', '']]);
-  const [picking, setPicking] = useState<number | null>(null);
+  const [picking, setPickingRaw] = useState<number | null>(null);
+  const [subjectQuery, setSubjectQuery] = useState('');
+  const setPicking = (i: number | null) => { setPickingRaw(i); setSubjectQuery(''); };
   const [extras, setExtras] = useState<Extras>(extrasInitial);
   const [draft, setDraft] = useState<Omit<Achievement, 'id'>>({ activity: '', kind: 'SPORT', level: 'DISTRICT', place: 'FIRST', year: 2025 });
 
@@ -141,8 +144,9 @@ export function AboutFlow({ meta, initial, extrasInitial, onSave }: { meta: Meta
     onSave({ stream: stream as StreamCode, district, zE4: zE4!, al: Object.fromEntries(subjects) as Record<string, Grade> }, extras);
   };
   const list = (code: StreamCode | '') => {
-    const sugg = code ? SUGGESTED[code].filter(c => subjectNames.has(c)) : [];
-    const rest = [...subjectNames.keys()].filter(c => !sugg.includes(c)).sort((a, b) => subjectNames.get(a)!.localeCompare(subjectNames.get(b)!));
+    const hit = (c: string) => matches(subjectQuery, subjectNames.get(c), c);
+    const sugg = code && !subjectQuery.trim() ? SUGGESTED[code].filter(c => subjectNames.has(c)) : [];
+    const rest = [...subjectNames.keys()].filter(c => !sugg.includes(c) && hit(c)).sort((a, b) => subjectNames.get(a)!.localeCompare(subjectNames.get(b)!));
     return { sugg, rest };
   };
 
@@ -168,7 +172,7 @@ export function AboutFlow({ meta, initial, extrasInitial, onSave }: { meta: Meta
             <p className="subtitle">The UGC rule: the district of the school you attended most in the three years before the exam.</p>
             <label className="search"><Search size={20} aria-hidden="true" /><input placeholder="Search districts" value={districtQuery} onChange={e => setDistrictQuery(e.target.value)} aria-label="Search districts" /></label>
             <div className="choice-list" role="radiogroup" aria-label="District">
-              {(meta?.districts ?? []).filter(d => d.name.toLowerCase().includes(districtQuery.toLowerCase())).map(d => (
+              {(meta?.districts ?? []).filter(d => matches(districtQuery, d.name, d.code)).map(d => (
                 <button key={d.code} type="button" role="radio" aria-checked={district === d.code} className="choice" onClick={() => setDistrict(d.code)}>
                   {d.name.charAt(0) + d.name.slice(1).toLowerCase()}{district === d.code && <span aria-hidden="true">✓</span>}
                 </button>))}
@@ -194,6 +198,9 @@ export function AboutFlow({ meta, initial, extrasInitial, onSave }: { meta: Meta
                 </button>
                 {picking === i && (() => { const { sugg, rest } = list(stream); return (
                   <div className="choice-list compact" role="listbox" aria-label={`Subject ${i + 1}`}>
+                    <label className="search"><Search size={20} aria-hidden="true" /><input autoFocus placeholder="Search subjects" value={subjectQuery}
+                      onChange={e => setSubjectQuery(e.target.value)} aria-label="Search subjects" /></label>
+                    {sugg.length === 0 && rest.length === 0 && <p className="helper">No subject matches "{subjectQuery}".</p>}
                     {sugg.length > 0 && <p className="section-label">Common in your stream</p>}
                     {sugg.map(c => <SubjectOption key={c} c={c} name={subjectNames.get(c)!} selected={code === c} disabled={chosen.includes(c) && code !== c}
                       onPick={() => { setSubjects(s => s.map((x, j) => j === i ? [c, x[1]] : x)); setPicking(null); }} />)}
