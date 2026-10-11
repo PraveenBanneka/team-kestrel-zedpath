@@ -1,0 +1,354 @@
+{
+  "suite": "live-static",
+  "server": "live (production)",
+  "ranAt": "2026-10-11T18:37:35.493Z",
+  "totals": {
+    "cases": 38,
+    "pass": 35,
+    "fail": 3
+  },
+  "cases": [
+    {
+      "id": "E2E-STATIC-001",
+      "area": "Shell",
+      "title": "index.html returns 200 text/html",
+      "trace": "NFR-063",
+      "expected": "200, text/html",
+      "actual": "200, text/html",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-002",
+      "area": "Shell",
+      "title": "charset and viewport meta present",
+      "trace": "NFR-025",
+      "expected": "meta charset=utf-8 and viewport with width=device-width",
+      "actual": "charset=true, viewport=\"width=device-width, initial-scale=1, viewport-fit=cover\"",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-003",
+      "area": "Shell",
+      "title": "document title set",
+      "trace": "n/a",
+      "expected": "non-empty <title> mentioning ZedPath",
+      "actual": "\"ZedPath\"",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-004",
+      "area": "PWA",
+      "title": "index links the web manifest",
+      "trace": "NFR-063",
+      "expected": "<link rel=\"manifest\"> in index.html",
+      "actual": "present",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-005",
+      "area": "Caching",
+      "title": "HTML cache-control forces revalidation",
+      "trace": "NFR-001",
+      "expected": "no-cache / max-age=0 / must-revalidate (new deploys seen at once)",
+      "actual": "cache-control: public, max-age=0, must-revalidate; etag: (none)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-006",
+      "area": "Bundle",
+      "title": "entry script is a hashed /assets/ file",
+      "trace": "n/a",
+      "expected": "one <script type=module src=/assets/<name>-<hash>.js>",
+      "actual": "scripts=[\"/assets/index-CnwVxMJ1.js\"], modulepreload=0, css=[\"/assets/index-X5nxDzOi.css\"]",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-007",
+      "area": "Bundle",
+      "title": "main JS 200 with JavaScript content-type",
+      "trace": "n/a",
+      "expected": "200, text/javascript or application/javascript",
+      "actual": "200, text/javascript",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-008",
+      "area": "Caching",
+      "title": "hashed /assets/* JS has a long cache",
+      "trace": "NFR-001, NFR-011",
+      "expected": "max-age >= 1 year (31536000) and/or immutable",
+      "actual": "cache-control: public, max-age=0, must-revalidate",
+      "result": "fail"
+    },
+    {
+      "id": "E2E-STATIC-009",
+      "area": "Performance",
+      "title": "main JS compressed transfer < 350 KB (task budget)",
+      "trace": "NFR-001",
+      "expected": "< 350 KB compressed",
+      "actual": "raw 683.1 KB; br 193.6 KB; gzip 190.9 KB",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-010",
+      "area": "Performance",
+      "title": "main JS compressed transfer <= 200 KB (SRS NFR-006)",
+      "trace": "NFR-006",
+      "expected": "<= 200 KB compressed (SRS budget, stricter than the task budget)",
+      "actual": "smallest compressed transfer 190.9 KB",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-011",
+      "area": "Bundle",
+      "title": "CSS bundle reachable, size recorded",
+      "trace": "NFR-001",
+      "expected": "200 text/css (or inlined), compressed size recorded",
+      "actual": "200, text/css, raw 38.9 KB, transfer 9.3 KB (br)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-012",
+      "area": "Caching",
+      "title": "hashed CSS has a long cache",
+      "trace": "NFR-001",
+      "expected": "max-age >= 31536000 and/or immutable",
+      "actual": "cache-control: public, max-age=0, must-revalidate",
+      "result": "fail"
+    },
+    {
+      "id": "E2E-STATIC-013",
+      "area": "Security",
+      "title": "no source maps published",
+      "trace": "NFR-033",
+      "expected": "no sourceMappingURL in bundle; <main>.js.map not served as a map",
+      "actual": "sourceMappingURL in bundle: false; .map -> 200 text/html",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-014",
+      "area": "Security",
+      "title": "no secret-looking strings in shipped JS ('AIza', 'sk-ant', 'ghp_', 'BEGIN PRIVATE KEY')",
+      "trace": "NFR-033",
+      "expected": "0 matches",
+      "actual": "0 matches in 1 file(s)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-015",
+      "area": "Features",
+      "title": "team line text in live bundle",
+      "trace": "n/a",
+      "expected": "contains \"Team Kestrel\" and \"Undergraduate bracket\"",
+      "actual": "Team Kestrel: true; Undergraduate bracket: true (scanned 1 JS files)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-016",
+      "area": "Features",
+      "title": "demo mode marker in live bundle",
+      "trace": "n/a",
+      "expected": "contains 'demo=kasun' (or the demo param + 'kasun')",
+      "actual": "demo=kasun literal: true; 'kasun': true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-017",
+      "area": "Features",
+      "title": "Ask suggestion text in live bundle",
+      "trace": "n/a",
+      "expected": "contains \"When do UGC applications usually open?\" and the aptitude suggestion",
+      "actual": "UGC suggestion: true; aptitude suggestion: true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-018",
+      "area": "PWA",
+      "title": "manifest.webmanifest is valid JSON",
+      "trace": "NFR-063",
+      "expected": "200, parses as JSON, manifest content-type",
+      "actual": "200, application/manifest+json, JSON valid",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-019",
+      "area": "PWA",
+      "title": "manifest has name, icons, start_url, display",
+      "trace": "NFR-063",
+      "expected": "name, icons[192 & 512], start_url, display set",
+      "actual": "name=\"ZedPath: everything after A/Ls\", start_url=\"/?source=pwa\", display=\"standalone\", icons=192x192,512x512,512x512,any,512x512",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-020",
+      "area": "PWA",
+      "title": "icon 192x192 reachable",
+      "trace": "NFR-063",
+      "expected": "200 image/png with PNG signature",
+      "actual": "/icons/icon-192.png -> 200, image/png, 3.9 KB, PNG signature true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-021",
+      "area": "PWA",
+      "title": "icon 512x512 reachable",
+      "trace": "NFR-063",
+      "expected": "200 image/png with PNG signature",
+      "actual": "/icons/icon-512.png -> 200, image/png, 12.0 KB, PNG signature true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-022",
+      "area": "PWA",
+      "title": "service worker sw.js reachable as JavaScript",
+      "trace": "NFR-063",
+      "expected": "200, JavaScript content-type, not the SPA HTML shell",
+      "actual": "200, text/javascript, 2.0 KB, html-shell=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-023",
+      "area": "Caching",
+      "title": "sw.js is not long-cached",
+      "trace": "NFR-063",
+      "expected": "cache-control allows revalidation (so SW updates land)",
+      "actual": "cache-control: public, max-age=0, must-revalidate",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-024",
+      "area": "PWA",
+      "title": "app registers the service worker",
+      "trace": "NFR-063",
+      "expected": "bundle or index references 'sw.js' (serviceWorker.register)",
+      "actual": "sw.js referenced: true; serviceWorker in bundle: true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-025",
+      "area": "Assets",
+      "title": "all 12 avatars /avatars/a01..a12.svg are 200 image/svg+xml",
+      "trace": "n/a",
+      "expected": "12 of 12 OK",
+      "actual": "12 of 12 OK",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-026",
+      "area": "Assets",
+      "title": "favicon reachable",
+      "trace": "n/a",
+      "expected": "200 image/*",
+      "actual": "/favicon.svg -> 200, image/svg+xml",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-027",
+      "area": "Routing",
+      "title": "SPA deep link /#/paths serves the app shell",
+      "trace": "NFR-012",
+      "expected": "200 text/html with the same shell (root div + module script)",
+      "actual": "200, text/html, shell=true (hash route: fragment never reaches the server)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-028",
+      "area": "Routing",
+      "title": "SPA deep link /paths serves the app shell",
+      "trace": "NFR-012",
+      "expected": "200 text/html with the same shell (root div + module script)",
+      "actual": "200, text/html, shell=true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-029",
+      "area": "Routing",
+      "title": "SPA deep link /ask serves the app shell",
+      "trace": "NFR-012",
+      "expected": "200 text/html with the same shell (root div + module script)",
+      "actual": "200, text/html, shell=true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-030",
+      "area": "Routing",
+      "title": "SPA deep link /profile/settings serves the app shell",
+      "trace": "NFR-012",
+      "expected": "200 text/html with the same shell (root div + module script)",
+      "actual": "200, text/html, shell=true",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-031",
+      "area": "Routing",
+      "title": "missing hashed asset is not served as valid JS",
+      "trace": "n/a",
+      "expected": "404 (preferred), never 200 JavaScript",
+      "actual": "200, text/html, shell=true (note: 200 HTML shell for a missing script is SPA fallback; a stale tab would get a MIME error rather than a clean 404)",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-032",
+      "area": "Security",
+      "title": "plain HTTP redirects to HTTPS",
+      "trace": "n/a",
+      "expected": "301/302/307/308 with Location https://",
+      "actual": "200, location (none)",
+      "result": "fail"
+    },
+    {
+      "id": "E2E-STATIC-033",
+      "area": "Security",
+      "title": "GET /.env does not expose project files",
+      "trace": "NFR-033",
+      "expected": "404, or the SPA shell with no secret/config content",
+      "actual": "200, text/html, shell=true, secret/config content=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-034",
+      "area": "Security",
+      "title": "GET /.dev.vars does not expose project files",
+      "trace": "NFR-033",
+      "expected": "404, or the SPA shell with no secret/config content",
+      "actual": "200, text/html, shell=true, secret/config content=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-035",
+      "area": "Security",
+      "title": "GET /wrangler.jsonc does not expose project files",
+      "trace": "NFR-033",
+      "expected": "404, or the SPA shell with no secret/config content",
+      "actual": "200, text/html, shell=true, secret/config content=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-036",
+      "area": "Security",
+      "title": "GET /.git/config does not expose project files",
+      "trace": "NFR-033",
+      "expected": "404, or the SPA shell with no secret/config content",
+      "actual": "200, text/html, shell=true, secret/config content=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-037",
+      "area": "Security",
+      "title": "GET /package.json does not expose project files",
+      "trace": "NFR-033",
+      "expected": "404, or the SPA shell with no secret/config content",
+      "actual": "200, text/html, shell=true, secret/config content=false",
+      "result": "pass"
+    },
+    {
+      "id": "E2E-STATIC-038",
+      "area": "Performance",
+      "title": "index TTFB over 10 cold-connection runs (p50/p95)",
+      "trace": "NFR-001, NFR-003",
+      "expected": "p50 < 800 ms, p95 < 1500 ms (incl. DNS+TCP+TLS from the test laptop)",
+      "actual": "p50 413 ms, p95 609 ms, min 324, max 609 (runs: 421, 397, 333, 413, 412, 437, 609, 324, 458, 456)",
+      "result": "pass"
+    }
+  ]
+}
