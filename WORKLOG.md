@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **413c11d5** (53572556 + demo mode ?demo=kasun, solid top bar). Rollback target 53572556 (code only).
+  Live (workers.dev) = version **7ab12039** (demo mode works in the installed app). Rollback target 413c11d5 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -337,3 +337,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-11 (night): 413c11d5 LIVE (Praveen's GO): demo mode + solid top bar
 - ?demo=kasun prefills sign-up and About you with the sample student (src/demo.ts; off by default, tab-only, consent never pre-ticked). 185/185.
 - Live check: with ?demo=kasun the sign-up fields are filled; without it they are empty.
+
+## 2026-10-11 (night): f48393ad then 7ab12039 LIVE (GO): demo mode kept on the phone (localStorage) and saved on first open of ?demo=kasun, so the installed app is prefilled. Live check: demo link, then plain start link -> form filled.
