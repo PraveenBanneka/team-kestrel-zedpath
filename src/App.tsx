@@ -3,7 +3,7 @@
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, ArrowLeft, Award, Bell, BellRing, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { Search, ArrowLeft, Award, Bell, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
   ListOrdered, Scale, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -15,7 +15,6 @@ import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchMe, logOut, logOutEverywhere, saveMe } from './account.ts';
-import { notificationsSupported, sendTestNotification } from './notify.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
 import { JourneyScreen, today } from './screens/Journey.tsx';
@@ -564,25 +563,6 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
     </section>);
 }
 
-function TestNotification() {
-  const [state, setState] = useState<'idle' | 'sending' | 'sent' | string>('idle');
-  if (!notificationsSupported()) return null;
-  const send = async () => {
-    if (state === 'sending') return;                     // one tap, one notification
-    setState('sending');
-    const r = await sendTestNotification().catch(() => ({ ok: false as const, reason: 'Could not show the notification. Try again.' }));
-    setState(r.ok ? 'sent' : r.reason);
-  };
-  return (
-    <div className="stack" style={{ gap: 6 }}>
-      <button className="btn tonal" onClick={send} disabled={state === 'sending'}><BellRing size={18} aria-hidden="true" />
-        {state === 'sending' ? t('me.sending') : t('me.test')}</button>
-      {state === 'sent' && <p className="helper" role="status">{t('me.sent')}</p>}
-      {!['idle', 'sending', 'sent'].includes(state) && <p className="helper" role="status">{state}</p>}
-    </div>
-  );
-}
-
 /** Notification settings (video 2): which reminders, at what time, and the new-alert count on the bell. On this phone. */
 function NotificationSettings({ prefs, setPrefs }: { prefs: NotifyPrefs; setPrefs: (p: NotifyPrefs) => void }) {
   const Toggle = ({ k, label, sub }: { k: 'week' | 'day' | 'badge'; label: string; sub?: string }) => (
@@ -605,7 +585,6 @@ function NotificationSettings({ prefs, setPrefs }: { prefs: NotifyPrefs; setPref
       </div>
       <Toggle k="badge" label={t('ns.badge')} sub={t('ns.badgeSub')} />
       {!prefs.week && !prefs.day && <p className="helper" role="status">{t('ns.noneOn')}</p>}
-      <TestNotification />
     </section>);
 }
 
