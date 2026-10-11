@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **ef419fb6** (40628ac5 + Back works on phones with the old onboarded flag). Rollback target 40628ac5 (code only).
+  Live (workers.dev) = version **53572556** (ef419fb6 + personalised Ask suggestions). Rollback target ef419fb6 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -327,3 +327,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-11 (evening): 40628ac5 LIVE (Praveen's GO): Back from Create account returns to Welcome (onboarded set only after sign-up/log-in); Welcome team line "Team Kestrel · Undergraduate bracket · IntelliCon '26" (en/si/ta). 179/179. Live check in a fresh browser: team line shown; English > Skip > signup > Back lands on Welcome.
 
 ## 2026-10-11 (evening): ef419fb6 LIVE (Praveen's GO): Back on Create account / Log in while logged out clears the onboarded flag and opens Welcome. 40628ac5 missed phones that still had the old flag (my live check used a fresh browser; lesson: test the user's actual state). Live check with the old flag set: signup > Back lands on Welcome.
+
+## 2026-10-11 (evening): demo account + 53572556 LIVE (Praveen's GO)
+- Demo account kasun_demo (sample student Kasun Perera, placeholder contact) created on live with tools/demo-account.ts (same sign-up API and PBKDF2 as the app); login checked (200, profile and extras back).
+- Ask suggestions built from the student's own details (src/ask-suggest.ts): chances, best achievement vs the Reach course in the list, interests, aptitude test, student loan; en/si/ta; 183/183.
+- Live check: logged in as kasun_demo with Physical Science Colombo in the list; Ask shows the five questions exactly.
