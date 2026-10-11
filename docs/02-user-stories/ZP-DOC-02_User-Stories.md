@@ -2,14 +2,14 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 1.0
-date: 5 October 2026
-status: Approved
+version: 2.0 (draft)
+date: 11 October 2026
+status: Under revision
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026
-signature: Approved in writing (project channel)
+approved: 5 Oct 2026 (v1.0)
+signature: v1.0 approved in writing (project channel); this revision awaits approval
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Agile user stories (Cohn), INVEST, Gherkin-style acceptance criteria; MoSCoW (DSDM); ZP-DOC-00
@@ -17,6 +17,7 @@ revision: 0.1 | 5 Oct 2026 | Team Kestrel | First draft from Gate 1 evidence (6 
 revision: 0.2 | 5 Oct 2026 | Team Kestrel | Story totals verified by script; corrected 3 summary figures
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Restructured to ZP-DOC-00; numbered acceptance criteria; reminders and senior verification changed to fit the Cloudflare free plan (no outbound email); submitted for approval
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
+revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 19 new stories (US-106 to US-111, US-209, US-305, US-407 to US-411, US-605 to US-607, US-706 to US-708); revised US-105, US-207, US-401 to US-404, US-501, US-503, US-604, US-702 to US-704; US-406 superseded and US-507 withdrawn; principle 3 replaced (an account is now required); epic totals and release plan recomputed. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 ---
 
 # Introduction
@@ -70,6 +71,28 @@ Table: Position of this document in the ZedPath document set
   (a 5 is about five times a 1); they are not hours.
 - **Release:** **R1** = Gate 3 build (due 11 October 2026); **R2** = after the buildathon.
 - **Story IDs** are **US-enn**: *e* is the epic number, *nn* the story within it. IDs are never reused.
+- **Change markers** (since v1.0): an item added or changed by a change request carries a marker in italics:
+  *New (CR-nnn)*, *Revised (CR-nnn)*, *Superseded by X (CR-nnn)* or *Withdrawn (reason)*. A superseded or withdrawn
+  story or criterion keeps its ID and its text for traceability (it is *Deleted* in the sense of ZP-DOC-00), is no
+  longer delivered and no longer counts in the totals.
+
+## Change requests since version 1.0
+
+After v1.0 was approved on 5 October 2026, the product owner approved the change requests below. Their data
+design is in ZP-DOC-05 and their delivery is logged in `WORKLOG.md`. "VR" is the product owner's video review of the
+live app on 11 October 2026, whose changes were delivered with CR-002 to CR-004.
+
+Table: Change requests and the stories they affect
+
+| CR | Date | Change | Stories |
+|---|---|---|---|
+| CR-001 | 5 October 2026 | Student accounts: username and password (key derived on the phone), recovery code, profile kept on the account across devices, delete account | US-106, US-107, US-108; AC-101.4 superseded |
+| CR-002 | 11 October 2026 | Journey with reminders (phone notifications in the Android app, calendar file elsewhere); Alerts for Gazette and intake notices checked on the phone; Groups per target course and per A/L batch with verified seniors (invite codes), automatic moderation, report, block and rate limits; navigation Paths, My list, Journey, Groups, Ask | US-401 to US-404, US-503, US-702 to US-704, US-706 |
+| CR-003 | 11 October 2026 | Account required at the start, with full name, email, Sri Lankan mobile and date of birth, each with its purpose and recorded consent (Personal Data Protection Act, No. 9 of 2022); date of birth moved from Alerts into registration | US-106, US-109; principle 3 |
+| CR-004 | 11 October 2026 | Ask ZedPath answer card: verdict, lead and bullets, next-step actions from ZedPath's own data, readable source chips, follow-up questions, Helpful / Report a wrong answer | US-604, US-605, US-606 |
+| VR | 11 October 2026 | Sinhala and Tamil interface; search in subjects and courses; Compare redesign; values on the cut-off chart; achievements and interests used in Ask; notification settings; "Sit the A/L again" removed; test-notification button removed; press and hold to select several courses | US-105, US-111, US-204, US-207, US-209, US-305, US-408, US-501, US-507, US-607 |
+| CR-005 | 11 October 2026 | Group rules accepted before taking part (server-enforced); no phone numbers or email addresses in messages; popular course groups; labelled sample conversations; WhatsApp-style group screens | US-704, US-706, US-707 |
+| CR-006 | 11 October 2026 | Group rules accepted once per account; group info page; preset avatars; rooms stay connected; selection on My list with Compare; Journey steps ticked by the student within their window; follow courses and notices; Journey saved on the account; Alerts moved into the Journey as "Open now" | US-110, US-305, US-401, US-406, US-407, US-409 to US-411, US-503, US-704, US-707, US-708 |
 
 ## Sources of evidence
 
@@ -88,6 +111,8 @@ Table: Evidence sources and what each one showed
 | T1 | Tool test, 27 September 2026 | findmydegree, Unicompass, induwara and ThuSh LK check no grade rules, order or deadlines |
 | S | Concept preview (33 screens) | The intended experience, screen by screen |
 | Deck S7 | Gate 1 deck, Section 7 | How the product keeps AI-extracted facts honest |
+| CR-001 to CR-006 | Change requests approved by the product owner, 5 and 11 October 2026 | Accounts, Journey, Alerts, Groups, contact details, the Ask answer card and group rules (see the table above) |
+| VR | Product owner's video review of the live app, 11 October 2026 | Language, search, Compare, chart values, Ask context, reminders, removal of the resit path, selecting several courses |
 
 ## Product principles
 
@@ -95,7 +120,9 @@ Every story must respect these principles. ZP-DOC-03 restates them as testable n
 
 1. **Every fact has a source.** Every cut-off, rule, date and fee links to the official page it came from.
 2. **Honest about uncertainty.** The app never says "you will get in". Dates are *confirmed* or *estimated*.
-3. **No account needed to explore.** Nothing personal is stored on the server without explicit consent.
+3. **Only what is needed, with consent.** *Revised (CR-003); it replaces "No account needed to explore".* An account
+   is required. Each personal detail asked for states its purpose, consent is recorded, other students never see the
+   details, and everything is deleted with the account.
 4. **No paid placement.** No institution can pay to rank higher or look more recognised.
 5. **Three languages.** Sinhala, Tamil and English throughout.
 6. **Works on a low-cost phone on mobile data.**
@@ -152,24 +179,28 @@ Table: System actors (non-human)
 # Story map
 
 The story map shows the nine epics along the student's journey. EP1 to EP6 form the core of the product,
-EP7 and EP8 deepen it, and EP9 makes every fact trustworthy.
+EP7 and EP8 deepen it, and EP9 makes every fact trustworthy. The diagram shows the v1.0 baseline; the stories added by
+CR-001 to CR-006 sit inside the same nine epics (accounts in EP1, Journey in EP4, Ask in EP6, groups in EP7).
 
 ![ZedPath story map: nine epics and their main capabilities](diagrams/story-map.png)
 
-Table: Epic summary (verified by script against the stories in this document)
+Table: Epic summary (verified by script against the stories in this document; superseded and withdrawn stories excluded)
 
 | Epic | Name | Stories | Points | Must | Primary persona |
 |---|---|---|---|---|---|
-| EP1 | Profile and results | 5 | 13 | 3 | P1, P2 |
-| EP2 | State university course discovery | 8 | 29 | 4 | P1 |
-| EP3 | Preference list | 4 | 12 | 3 | P1 |
-| EP4 | Journey and deadlines | 6 | 18 | 3 | P1 |
-| EP5 | Other routes | 7 | 26 | 3 | P1, P2 |
-| EP6 | Ask, with sources | 4 | 16 | 2 | P1, P2 |
-| EP7 | People around the student | 5 | 21 | 1 | P3, P4, P5 |
+| EP1 | Profile and results | 11 | 27 | 6 | P1, P2 |
+| EP2 | State university course discovery | 9 | 31 | 4 | P1 |
+| EP3 | Preference list | 5 | 15 | 3 | P1 |
+| EP4 | Journey and deadlines | 10 | 28 | 5 | P1 |
+| EP5 | Other routes | 6 | 24 | 3 | P1, P2 |
+| EP6 | Ask, with sources | 7 | 23 | 2 | P1, P2 |
+| EP7 | People around the student | 8 | 31 | 3 | P1, P3, P4, P5 |
 | EP8 | After selection | 4 | 10 | 0 | P1 |
 | EP9 | Data and trust | 7 | 31 | 5 | P6 |
-| | **Total** | **50** | **176** | **24** | |
+| | **Total** | **67** | **220** | **31** | |
+
+The backlog holds 69 story IDs: the 67 above, plus US-406 (superseded) and US-507 (withdrawn). At v1.0 it held 50
+stories, 176 points and 24 Must stories.
 
 # Epic EP1: Profile and results
 
@@ -192,7 +223,8 @@ Table: Epic summary (verified by script against the stories in this document)
 - **AC-101.1** **Given** I open ZedPath for the first time, **when** I choose a stream, district, Z-score and three subject grades and tap *Show my options*, **then** I see my results screen within 2 seconds on a 3G connection.
 - **AC-101.2** **Given** I enter a Z-score outside the valid range (−4.0000 to +4.0000) or with more than 4 decimals, **then** I see an inline error and cannot continue.
 - **AC-101.3** **Given** my subjects do not form a valid combination for the chosen stream, **then** I am told which subject does not fit.
-- **AC-101.4** **Given** I have entered my profile, **when** I close and reopen the app on the same device, **then** my profile is still there, and nothing was sent to the server for storage.
+- **AC-101.4** *Superseded by AC-101.5 and AC-106.3 (CR-001, CR-003).* **Given** I have entered my profile, **when** I close and reopen the app on the same device, **then** my profile is still there, and nothing was sent to the server for storage.
+- **AC-101.5** *New (CR-003).* **Given** I have entered my profile, **when** I close and reopen the app on the same device, **then** my profile is still there, and it is the same profile that is kept on my account (AC-106.3).
 
 
 ## US-102 Change my profile at any time
@@ -252,6 +284,115 @@ Z-score **range**, **so that** I can plan before results day.
 
 - **AC-105.1** **Given** any screen, **when** I switch language, **then** all interface text changes without losing my place.
 - **AC-105.2** **Given** a fact whose official source exists only in one language, **then** the original-language source link is still shown.
+- **AC-105.3** *New (VR).* **Given** the Sinhala or Tamil interface, **then** course names, university names and official quotations are shown in English, as published.
+- **AC-105.4** *New (VR).* **Given** the Sinhala or Tamil interface, **then** the app states that the text is an AI translation that native speakers are still checking, until that review is complete.
+
+
+## US-106 Create an account and use it on any device
+
+*New (CR-001); required at the start since CR-003.*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 5 pts | R1 | EP1 | P1, P2 | CR-001, CR-003 |
+
+> **As a** student, **I want** an account with a username and password that keeps my results, achievements and
+interests, **so that** I see the same profile on any phone or computer I log in from.
+
+**Acceptance criteria**
+
+- **AC-106.1** **Given** I open ZedPath without being logged in, **when** I try to go past the welcome screen, **then** I am asked to create an account or log in first.
+- **AC-106.2** **Given** I create an account, **then** my username must follow BR-050 and my password BR-051, and the password itself never leaves my device: only a key derived from it on the device is sent.
+- **AC-106.3** **Given** I am logged in and save my results, achievements or interests, **when** I log in on another device, **then** the same profile is restored there.
+- **AC-106.4** **Given** I changed my profile while offline, **when** the device is online again, **then** my change is sent to my account and is not overwritten by the older copy on the server.
+
+
+## US-107 Get back into my account with a recovery code
+
+*New (CR-001).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R1 | EP1 | P1 | CR-001 |
+
+> **As a** student who has forgotten my password, **I want** to reset it with a recovery code, **so that** I do not
+lose my account (ZedPath cannot send reset emails).
+
+**Acceptance criteria**
+
+- **AC-107.1** **Given** I create an account, **then** I am shown a recovery code once, with a warning that I will not see it again, and I confirm that I have saved it before I continue.
+- **AC-107.2** **Given** I enter my username, my recovery code and a new password, **then** my password is changed, a new recovery code is shown, and the old code no longer works.
+- **AC-107.3** **Given** I type the digits 0, 1 or 8 where the code has the letters O, I or B, **then** the code is still accepted.
+
+
+## US-108 Delete my account and everything in it
+
+*New (CR-001).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 2 pts | R1 | EP1 | P1 | CR-001 |
+
+> **As a** student, **I want** to delete my account, **so that** ZedPath keeps nothing about me.
+
+**Acceptance criteria**
+
+- **AC-108.1** **Given** I confirm *Delete account*, **then** my account and everything stored under it (contact details, results, achievements, interests, sessions, recovery code, group memberships, reports, blocks and my Journey) are deleted on the server, my data is cleared from this device, and I return to the welcome screen.
+- **AC-108.2** **Given** I posted messages in groups, **when** I delete my account, **then** my messages are deleted from every group I was in.
+
+
+## US-109 Give my contact details with a stated purpose and consent
+
+*New (CR-003).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 3 pts | R1 | EP1 | P1, P3 | CR-003 |
+
+> **As a** student creating an account, **I want** to know why each personal detail is asked for and to agree to
+it, **so that** I can trust ZedPath with my name, email, mobile number and date of birth.
+
+**Acceptance criteria**
+
+- **AC-109.1** **Given** I create an account, **then** I must give my full name, email address, Sri Lankan mobile number and date of birth, and the screen states what each is used for before I agree.
+- **AC-109.2** **Given** I have not ticked the consent statement, which includes that a parent or guardian agrees if I am under 18, **then** the account is not created, and the server refuses it too.
+- **AC-109.3** **Given** a value breaks a rule (BR-052 to BR-055), **then** I see which field is wrong, and the server refuses the same value.
+- **AC-109.4** **Given** my account was made before CR-003 and has no contact details, **when** I next open ZedPath, **then** I am asked to complete them before anything else.
+- **AC-109.5** **Given** I enter an email address or mobile number, **then** the screen tells me that ZedPath does not yet send a code to verify it.
+- **AC-109.6** **Given** my details are stored, **then** other students never see them: groups show only my username and avatar.
+
+
+## US-110 Choose a profile picture
+
+*New (CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Could | 1 pt | R1 | EP1 | P1, P5 | CR-006 |
+
+> **As a** student, **I want** to pick a picture for my account from a set of avatars, **so that** others in groups
+recognise me without my photograph.
+
+**Acceptance criteria**
+
+- **AC-110.1** **Given** I open *Me*, **then** I can choose one of 12 preset avatars, or keep my initials, which is the default.
+- **AC-110.2** **Given** I have chosen an avatar, **then** it is shown in the app bar, in group member lists and next to the group messages I post, on every device I log in from.
+- **AC-110.3** **Given** any device, **then** there is no way to upload a photograph, and the server accepts only the preset avatars or none.
+
+
+## US-111 Find my subjects by searching
+
+*New (VR).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 1 pt | R1 | EP1 | P1, P2 | VR |
+
+> **As a** student entering my results, **I want** to search the subject list, **so that** I find my subjects quickly.
+
+**Acceptance criteria**
+
+- **AC-111.1** **Given** *About you*, **when** I type the start of each word of a subject name, or a common short form (for example "comb math" or "ict"), **then** only matching subjects are listed, ignoring case and punctuation.
 
 
 # Epic EP2: State university course discovery
@@ -320,6 +461,7 @@ aptitude-test flag and what the first year teaches, **so that** I can decide wit
 
 - **AC-204.1** **Given** I open an offering, **then** I see a table of cut-offs by year for my district, with my Z-score in the last row.
 - **AC-204.2** **Given** any number on the page, **then** it links to the source document and page it came from, with the date it was verified.
+- **AC-204.3** *New (VR).* **Given** the cut-off chart on a course page, **then** each point shows its cut-off value printed beside it, so it can be read without tapping.
 
 
 ## US-205 Filter and sort courses
@@ -350,17 +492,22 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 - **AC-206.2** **Then** I see up to 3 closest offerings in the same field that are Safe or Likely for me.
 
 
-## US-207 Compare two courses
+## US-207 Compare up to three courses
+
+*Revised (VR): v1.0 title "Compare two courses"; Compare now takes up to three courses.*
 
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Could | 3 pts | R1 | EP2 | P1 | E2, E4, T1, S |
+| Could | 3 pts | R1 | EP2 | P1 | E2, E4, T1, S, VR |
 
-> **As a** student, **I want** two offerings side by side, **so that** I can choose between them.
+> **As a** student, **I want** up to three offerings side by side, **so that** I can choose between them.
 
 **Acceptance criteria**
 
 - **AC-207.1** **Given** I select two offerings, **then** I see band, length, medium, campus, extra steps (aptitude test) and trend in two columns.
+- **AC-207.2** *New (VR).* **Given** I compare up to three offerings, **then** each is a column, and on a narrow screen the columns swipe sideways one at a time.
+- **AC-207.3** *New (VR).* **Given** fewer than three offerings are compared, **then** a "+" column on the right opens a picker where I search my Safe, Likely and Reach courses or choose from My list.
+- **AC-207.4** *New (VR).* **Given** any *Compare* button anywhere in the app, **when** I tap it, **then** the Compare screen opens with that course included.
 
 
 ## US-208 See what living there costs
@@ -374,6 +521,22 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 **Acceptance criteria**
 
 - **AC-208.1** **Given** an offering, **then** I see board, food and travel estimates with the number of reports behind them and the date collected.
+
+
+## US-209 Find a course by searching
+
+*New (VR).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R1 | EP2 | P1 | E2, VR |
+
+> **As a** student, **I want** to search all my courses by name, university or Uni-Code, **so that** I find a course
+without scrolling through every band.
+
+**Acceptance criteria**
+
+- **AC-209.1** **Given** *Courses*, **when** I type the start of words of a course or university name (for example "ruh comp"), a common short form, or a Uni-Code (for example "012F"), **then** matching courses from every band are listed, ignoring case and punctuation.
 
 
 # Epic EP3: Preference list
@@ -439,6 +602,24 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 - **AC-304.1** **Given** I open the guide, **then** I see each step of the official process with the most common mistake for that step, linked to the official instructions.
 
 
+## US-305 Select several courses at once
+
+*New (VR on Courses; extended to My list with Compare by CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Could | 3 pts | R1 | EP3 | P1 | VR, CR-006 |
+
+> **As a** student, **I want** to select several courses at once, **so that** I can add them to my list or compare
+them in one step instead of one by one.
+
+**Acceptance criteria**
+
+- **AC-305.1** **Given** a course in *Courses* or in *My list*, **when** I press and hold it (or tap *Select*), **then** selection starts with that course ticked, and each further tap ticks or unticks a course instead of opening it.
+- **AC-305.2** **Given** courses selected in *Courses*, **when** I tap *Add to my list* on the selection bar, **then** every selected course is added under the same rules as adding one (AC-301.3, at most 125, no duplicates), and I am told how many were added, how many were already on my list, and whether the list was full.
+- **AC-305.3** **Given** courses selected in *Courses* or *My list*, **when** I tap *Compare* on the selection bar, **then** Compare opens with the selected courses in the order I selected them, at most three.
+
+
 # Epic EP4: Journey and deadlines
 
 | | |
@@ -448,15 +629,18 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-401 See my journey with the next step first
 
+*Revised (CR-002, CR-006): the student, not the date, marks a step done (US-407).*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Must | 3 pts | R1 | EP4 | P1 | E5 |
+| Must | 3 pts | R1 | EP4 | P1 | E5, CR-002, CR-006 |
 
 > **As a** student, **I want** one screen showing every stage from results to registration, with the next action on top, **so that** I always know what to do now.
 
 **Acceptance criteria**
 
-- **AC-401.1** **Given** today's date and my profile, **then** stages before today are marked done, and the next open deadline is shown at the top with days remaining.
+- **AC-401.1** *Superseded by AC-401.2 and US-407 (CR-006).* **Given** today's date and my profile, **then** stages before today are marked done, and the next open deadline is shown at the top with days remaining.
+- **AC-401.2** *New (CR-006).* **Given** my Journey, **then** I see the steps in order (three preparation steps, then the UGC steps), the courses and notices I follow, and the next dated item at the top with the days remaining; no step is shown as done unless I ticked it.
 
 
 ## US-402 Know whether a date is confirmed or estimated
@@ -470,7 +654,8 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 **Acceptance criteria**
 
 - **AC-402.1** **Given** a deadline from an official notice, **then** it is marked Confirmed and links to the notice.
-- **AC-402.2** **Given** a deadline inferred from previous years, **then** it is marked Estimated and states "based on last year: June".
+- **AC-402.2** *Superseded by AC-402.3 (CR-002, CR-006).* **Given** a deadline inferred from previous years, **then** it is marked Estimated and states "based on last year: June".
+- **AC-402.3** *New (CR-002, CR-006).* **Given** a UGC step whose date the UGC has not yet announced by press notice, **then** it shows *Not announced yet* with the official rule and its handbook page (for example "within two weeks of the closing date", p.116), and no date is invented.
 
 
 ## US-403 Be told about aptitude tests for courses on my list
@@ -488,22 +673,28 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-404 Get reminders before deadlines
 
+*Revised (CR-002): reminders are phone notifications in the Android app and a calendar file elsewhere; web push is
+not used.*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Should | 5 pts | R1 | EP4 | P1 | E1, E3, S |
+| Should | 5 pts | R1 | EP4 | P1 | E1, E3, S, CR-002 |
 
 > **As a** student, **I want** my deadlines in my phone's calendar or as notifications, **so that** I'm reminded 7 days and 1 day before each deadline on my journey.
 
 **Acceptance criteria**
 
 - **AC-404.1** **Given** my journey, **when** I tap *Add to calendar*, **then** I receive a calendar file (.ics) with every deadline and alarms 7 days and 1 day before each.
-- **AC-404.2** **Given** a browser that supports web push, **when** I turn on notifications, **then** I receive a notification 7 days and 1 day before each deadline on my journey.
-- **AC-404.3** **Given** I turn notifications off, **then** my push subscription is deleted from the server and no further notifications are sent.
-- **AC-404.4** **Given** I never turn notifications on, **then** no identifier of mine exists on the server.
+- **AC-404.2** *Superseded by AC-404.5 (CR-002).* **Given** a browser that supports web push, **when** I turn on notifications, **then** I receive a notification 7 days and 1 day before each deadline on my journey.
+- **AC-404.3** *Superseded by AC-404.6 (CR-002).* **Given** I turn notifications off, **then** my push subscription is deleted from the server and no further notifications are sent.
+- **AC-404.4** *Superseded by AC-404.6 (CR-002).* **Given** I never turn notifications on, **then** no identifier of mine exists on the server.
+- **AC-404.5** *New (CR-002).* **Given** the ZedPath Android app with notifications allowed, **then** the phone shows a notification 7 days and 1 day before each dated item in my Journey, at the time set in my reminder settings (US-408).
+- **AC-404.6** *New (CR-002).* **Given** any reminder, **then** it is scheduled on my phone or in my calendar; no push subscription or device identifier is stored on the server for reminders, and turning notifications off on the phone stops them.
 
 > **Note:** Email reminders were dropped in v0.9. The Cloudflare free plan does not allow Workers to send email
-> to arbitrary recipients (Cloudflare Email Service pricing, retrieved 5 October 2026). Calendar files and web
-> push are free and need no contact details. See ZP-DOC-06.
+> to arbitrary recipients (Cloudflare Email Service pricing, retrieved 5 October 2026). CR-002 replaced web push with
+> notifications scheduled by the Android app on the phone; calendar files remain for every other device. Both are
+> free. SMS and email reminders wait for a sending domain and an SMS service.
 
 
 ## US-405 Check whether a special intake applies to me
@@ -521,13 +712,107 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-406 Add my own steps to the journey
 
+*Superseded by US-409 and US-410 (CR-002, CR-006). Not counted in the totals.*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
 | Could | 3 pts | R2 | EP4 | P1 | E1, E3, S |
 
 > **As a** student, **I want** to add a route's dates (e.g. a job exam) to my journey, **so that** everything is on one timeline.
 
-**Acceptance criteria:** to be detailed when the story is scheduled (R2 backlog refinement).
+**Acceptance criteria:** none; the need is met by following courses (US-409) and notices or other paths (US-410).
+
+
+## US-407 Tick my own Journey steps when they open
+
+*New (CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 3 pts | R1 | EP4 | P1 | E5, CR-006 |
+
+> **As a** student, **I want** to tick each Journey step myself when I have done it, **so that** my Journey shows
+what I have really done, not what the calendar assumes.
+
+**Acceptance criteria**
+
+- **AC-407.1** **Given** a new account, **then** every Journey step starts unticked.
+- **AC-407.2** **Given** one of the three preparation steps (enter my results, build my list, compare courses), **then** I can tick or untick it at any time.
+- **AC-407.3** **Given** a UGC step, **when** the opening date in the UGC press notice has arrived (Sri Lanka date), **then** I can tick or untick it.
+- **AC-407.4** **Given** a UGC step whose date is not announced or not yet reached, **then** its tick box is disabled with the reason, and if a request to tick it reaches the server anyway, the server refuses it and stores nothing.
+
+
+## US-408 Choose how I am reminded
+
+*New (VR).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R1 | EP4 | P1 | E1, VR |
+
+> **As a** student, **I want** to choose which reminders I get and at what time, **so that** they arrive when they
+are useful to me.
+
+**Acceptance criteria**
+
+- **AC-408.1** **Given** *Me*, **then** I can turn the 7-day reminder and the 1-day reminder on or off, choose 8 am or 6 pm, and turn the new-alert count on or off.
+- **AC-408.2** **Given** I have never changed these settings, **then** both reminders are on at 8 am and the count is shown, exactly as before the settings existed.
+- **AC-408.3** **Given** I change a setting, **then** it applies to the phone notifications and to the next calendar file I download, and it is kept on this phone.
+- **AC-408.4** **Given** *Me*, **then** there is no test-notification button (removed after the video review).
+
+
+## US-409 Follow a course into my Journey
+
+*New (CR-006); with US-410 it supersedes US-406.*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R1 | EP4 | P1 | E1, CR-006 |
+
+> **As a** student, **I want** to follow a course from its course page, **so that** it stays in my Journey while I
+decide.
+
+**Acceptance criteria**
+
+- **AC-409.1** **Given** a course page, **when** I tap *Follow*, **then** the course appears in my Journey, and I can unfollow it again.
+- **AC-409.2** **Given** a request to follow something that is not a 2025/26 course offering, **then** the server refuses it.
+
+
+## US-410 Follow a notice or other path and record that I applied
+
+*New (CR-006); with US-409 it supersedes US-406.*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 3 pts | R1 | EP4 | P1 | E3, E5, CR-006 |
+
+> **As a** student, **I want** to follow a Gazette exam, an intake or another path and tick *I applied*, **so that**
+every application I am making is on one timeline.
+
+**Acceptance criteria**
+
+- **AC-410.1** **Given** a notice under *Open now* or an other-path page, **when** I tap *Follow*, **then** it appears in my Journey with its closing date and source, and I can unfollow it again.
+- **AC-410.2** **Given** a followed notice whose application period has opened (or which has no opening date), **then** I can tick or untick *I applied*.
+- **AC-410.3** **Given** a followed notice that has not opened yet, **then** *I applied* cannot be ticked, and the server refuses the tick if it is sent anyway.
+- **AC-410.4** **Given** a request to follow an identifier that is not in ZedPath's route catalogue, **then** the server refuses it.
+
+
+## US-411 Keep my Journey on my account
+
+*New (CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 3 pts | R1 | EP4 | P1 | CR-001, CR-006 |
+
+> **As a** student, **I want** my followed courses, followed notices and ticked steps saved on my account, **so that**
+my Journey is the same on every device and I never lose my progress.
+
+**Acceptance criteria**
+
+- **AC-411.1** **Given** I follow, tick or untick anything in my Journey, **when** I log in on another device, **then** the same Journey is shown there.
+- **AC-411.2** **Given** I delete my account, **then** my Journey is deleted with it (AC-108.1).
+- **AC-411.3** **Given** a request about the Journey without a valid session, **then** the server refuses it, and one account can never read or change another account's Journey.
 
 
 # Epic EP5: Other routes
@@ -547,7 +832,8 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 **Acceptance criteria**
 
-- **AC-501.1** **Given** my profile, **then** I see routes in groups: private and non-state degrees, higher national diplomas, professional qualifications, vocational courses, job exams, study abroad and a retry.
+- **AC-501.1** *Superseded by AC-501.3 (VR: the "Sit the A/L again" path was removed).* **Given** my profile, **then** I see routes in groups: private and non-state degrees, higher national diplomas, professional qualifications, vocational courses, job exams, study abroad and a retry.
+- **AC-501.3** *New (VR).* **Given** my profile, **then** I see routes in six groups: private and non-state degrees, higher national diplomas, professional qualifications, vocational courses, job exams and study abroad; there is no "Sit the A/L again" path.
 - **AC-501.2** **Given** a route requires something I don't meet (e.g. Biology stream for nursing), **then** it is shown as *Not open to you* with the reason.
 
 
@@ -566,9 +852,12 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-503 Be alerted about job exams I qualify for
 
+*Revised (CR-002: intake notices too, checked on the phone; CR-003: date of birth from registration; CR-006: Alerts
+become the Journey's "Open now" tab).*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Must | 5 pts | R1 | EP5 | P1 | E3 |
+| Must | 5 pts | R1 | EP5 | P1 | E3, CR-002, CR-003, CR-006 |
 
 > **As a** student (E3), **I want** to be told when a government exam I qualify for is announced in the Gazette, **so that** I don't find out too late.
 
@@ -576,6 +865,9 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 - **AC-503.1** **Given** a new Gazette notice is processed, **when** it announces an exam whose education and age rules I meet, **then** it appears in my Alerts with the closing date and a link to the notice.
 - **AC-503.2** **Given** the notice's details were extracted with low confidence, **then** it is not shown until a curator has reviewed it.
+- **AC-503.3** *New (CR-002, CR-003).* **Given** a Gazette job-exam or intake notice with a closing date, **then** it shows whether I meet its A/L-pass rule and its age rule, checked on my phone against my results and the date of birth I gave at registration, and marks a rule *unknown* when the data is missing; O/L rules are shown for me to check, not evaluated.
+- **AC-503.4** *New (CR-002).* **Given** the list of notices, **then** open and upcoming notices come first, soonest closing date first, and closed ones last.
+- **AC-503.5** *New (CR-006).* **Given** the Journey, **then** open notices are in its second tab, *Open now*; there is no bell in the top bar, and the number of new notices shows on the Journey tab when the new-alert count is on (US-408).
 
 
 ## US-504 Check whether a degree is recognised
@@ -614,6 +906,9 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 
 ## US-507 Understand what retrying would take
+
+*Withdrawn (VR, 11 October 2026: the product owner removed the "Sit the A/L again" path from the app). Not counted
+in the totals. The gap to a dream course remains in US-206.*
 
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
@@ -676,13 +971,73 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-604 Turn an answer into an action
 
+*Revised (CR-004): moved from R2 to R1 and detailed.*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Could | 5 pts | R2 | EP6 | P1 | E2, S |
+| Could | 5 pts | R1 | EP6 | P1 | E2, S, CR-004 |
 
 > **As a** student, **I want** quick actions under an answer (add to list, add to journey, compare), **so that** I act straight away.
 
-**Acceptance criteria:** to be detailed when the story is scheduled (R2 backlog refinement).
+**Acceptance criteria**
+
+- **AC-604.1** **Given** an answer about courses, **then** up to three matching places are listed under it, best chance first, each with my band when I have results; tapping one opens its course page, and it offers *Add to my list* (only when I am eligible) and *Compare*.
+- **AC-604.2** **Given** an answer about a Gazette exam or intake that ZedPath holds, **then** the notice is listed with its closing date and an action to add it to my Journey.
+- **AC-604.3** **Given** any action under an answer, **then** it was built by ZedPath from its own data, never from the text the language model wrote.
+
+
+## US-605 Read a clear answer card
+
+*New (CR-004, with readable sources from VR).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 3 pts | R1 | EP6 | P1 | E2, CR-004, VR |
+
+> **As a** student, **I want** each answer as a short card with a clear verdict and its sources, **so that** I get
+the answer at a glance instead of a wall of text.
+
+**Acceptance criteria**
+
+- **AC-605.1** **Given** an answer, **when** the model gave a verdict, **then** a chip shows *Yes*, *No*, *It depends* or *Not in official sources*; when it gave none, no chip is shown (never a guess).
+- **AC-605.2** **Given** an answer, **then** it shows one lead line followed by short bullets, and bullets beyond the first four are folded behind *Show more*.
+- **AC-605.3** **Given** a cited source, **then** its chip shows a readable name (the handbook page, or the route's name, never an internal file note), opens the exact quote, and links to the official document; a cited route also links to its page in ZedPath.
+- **AC-605.4** **Given** an answer about a course, **then** two follow-up questions about that course are offered; an answer of *Not in official sources* offers none.
+
+
+## US-606 Tell ZedPath whether an answer helped
+
+*New (CR-004).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R1 | EP6 | P1, P6 | Deck S7, CR-004 |
+
+> **As a** student, **I want** to mark an answer *Helpful* or report it as wrong, **so that** wrong answers are found
+and fixed.
+
+**Acceptance criteria**
+
+- **AC-606.1** **Given** an answer, **when** I tap *Helpful*, **then** the rating is recorded with the question, the answer and its cited pages.
+- **AC-606.2** **Given** an answer, **when** I tap *Report a wrong answer*, **then** I may add a note of up to 500 characters, and the screen tells me that the question and answer will be sent before I send the report.
+- **AC-606.3** **Given** any rating or report, **then** nothing that identifies me is stored with it: no account, device or network address.
+
+
+## US-607 Let Ask use my achievements and interests
+
+*New (VR).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Could | 2 pts | R1 | EP6 | P1 | E5, VR |
+
+> **As a** student with achievements beyond my grades, **I want** Ask to take them into account, **so that** I hear
+about doors such as the special intake that I might otherwise miss.
+
+**Acceptance criteria**
+
+- **AC-607.1** **Given** I have saved achievements or interests, **when** I ask a question, **then** they are sent with that question and used for that answer only; the server does not store them with the question.
+- **AC-607.2** **Given** my achievements, **then** whether the special intake for outstanding achievements may apply is decided by ZedPath's own rule (BR-080, handbook p.166 to p.167), not by the language model, and the answer cites that handbook section.
 
 
 # Epic EP7: People around the student
@@ -708,41 +1063,60 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 
 ## US-702 Ask a verified senior
 
+*Revised (CR-002): moved from R2 to R1; seniors answer in the course groups (US-704).*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Should | 5 pts | R2 | EP7 | P1 | E6 |
+| Should | 5 pts | R1 | EP7 | P1 | E6, CR-002 |
 
 > **As a** student, **I want** to ask questions to students already in the course, **so that** I hear what it's really like.
 
 **Acceptance criteria**
 
 - **AC-702.1** **Given** a senior's answer, **then** it shows their course, year and a *verified* badge.
+- **AC-702.2** *New (CR-002).* **Given** a message from a verified senior in a group, **then** it carries the badge "Verified senior · *course*, year *n*", and no other member can show that badge.
 
 
 ## US-703 Become a verified senior
 
+*Revised (CR-002): moved from R2 to R1; verification by a one-time invite code replaces Google accounts and proof
+uploads.*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Should | 5 pts | R2 | EP7 | P5 | E6 |
+| Should | 5 pts | R1 | EP7 | P5 | E6, CR-002 |
 
 > **As a** university student (P5), **I want** to prove that I'm enrolled, **so that** I can answer questions with a verified badge.
 
 **Acceptance criteria**
 
-- **AC-703.1** **Given** I sign in with my university Google account, **when** its domain is on the recognised university-domain list, **then** I am marked verified for that university.
-- **AC-703.2** **Given** my university does not use Google accounts, **when** I submit proof of enrolment, **then** a curator approves or rejects it and the proof is deleted after the decision.
+- **AC-703.1** *Superseded by AC-703.4 (CR-002).* **Given** I sign in with my university Google account, **when** its domain is on the recognised university-domain list, **then** I am marked verified for that university.
+- **AC-703.2** *Superseded by AC-703.4 (CR-002).* **Given** my university does not use Google accounts, **when** I submit proof of enrolment, **then** a curator approves or rejects it and the proof is deleted after the decision.
 - **AC-703.3** **Given** a verified senior is reported for misconduct, **then** the curator can revoke the badge.
+- **AC-703.4** *New (CR-002).* **Given** the ZedPath team has checked my enrolment and given me a one-time invite code naming my course, university and year of study, **when** I enter it while creating my account, **then** my account becomes a verified senior account for that course, shown with a badge in groups, and it keeps no A/L results.
+- **AC-703.5** *New (CR-002).* **Given** an invite code that has already been used or is more than 14 days old, **then** it is refused.
 
 
 ## US-704 Join a group for my batch and target course
 
+*Revised (CR-002): moved from R2 to R1 and detailed; extended by CR-005 and CR-006.*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
-| Could | 5 pts | R2 | EP7 | P1 | E6 |
+| Could | 5 pts | R1 | EP7 | P1 | E6, CR-002, CR-005, CR-006 |
 
 > **As a** student, **I want** to join a group for my batch and target course, **so that** I can share updates (e.g. second-round notices).
 
-**Acceptance criteria:** to be detailed when the story is scheduled (R2 backlog refinement).
+**Acceptance criteria**
+
+- **AC-704.1** *(CR-002)* **Given** I am logged in, **then** *Groups* lists a group for each course on my list (or, with an empty list, my three best-chance courses), one group for my A/L batch (same stream and same district), and every group I have joined.
+- **AC-704.2** *(CR-002)* **Given** a group nobody has joined yet, **when** I join it, **then** it is created; there is only ever one group per course and one per batch.
+- **AC-704.3** *(CR-002)* **Given** I have not saved my results to my account, **then** I cannot join a batch group.
+- **AC-704.4** *(CR-002)* **Given** I am not a member of a group, **then** I cannot open its live room, and the server refuses it.
+- **AC-704.5** *New (CR-005).* **Given** *Groups*, **then** popular course groups (Medicine, Engineering, Computer Science, Management, Commerce and Law) are listed for everyone.
+- **AC-704.6** *New (CR-005).* **Given** a group, **then** labelled sample conversations are shown before the real messages, each marked *Sample* with an author name starting "Sample" and no verified badge; they cannot be reported or blocked and are not stored.
+- **AC-704.7** *New (CR-005).* **Given** *Groups*, **then** the list and the rooms follow a chat-app layout: a list of groups, message bubbles and a message box at the bottom.
+- **AC-704.8** *New (CR-006).* **Given** I am in a group room, **then** the connection stays open while I am idle and reconnects by itself after a short drop, without showing "Disconnected".
 
 
 ## US-705 See my class's progress as a teacher
@@ -756,6 +1130,64 @@ alternatives, **so that** I can decide whether to aim higher or move on.
 **Acceptance criteria**
 
 - **AC-705.1** **Given** students choose to share with my class code, **then** I see aggregate counts and the names of only those who shared.
+
+
+## US-706 Stay safe in groups
+
+*New (CR-002, CR-005).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 5 pts | R1 | EP7 | P1, P5 | E6, CR-002, CR-005 |
+
+> **As a** student, many of whom are under 18, **I want** groups to be moderated and to be able to report and block
+people, **so that** I can ask questions without being harassed or misled.
+
+**Acceptance criteria**
+
+- **AC-706.1** *(CR-002)* **Given** I send a message, **then** it is text only, 1 to 500 characters, and is checked by an automatic moderation model before anyone else sees it; if the check says unsafe or cannot be completed, the message is not posted and I am told why.
+- **AC-706.2** *(CR-002)* **Given** I send messages quickly, **then** I can post at most one message every 3 seconds and 20 in any 10 minutes in a group.
+- **AC-706.3** *(CR-002)* **Given** a message, **when** I report it with a reason (harmful, wrong information, spam or other), **then** the report is recorded once per member, and a message reported by 3 different members is hidden for everyone.
+- **AC-706.4** *(CR-002)* **Given** I block a member, **then** I no longer see their messages, and I can unblock them later.
+- **AC-706.5** *New (CR-005).* **Given** a message that contains a phone number or an email address, **then** it is refused with an explanation, and the refusal happens on the server.
+
+
+## US-707 Accept the group rules once
+
+*New (CR-005, revised by CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Must | 2 pts | R1 | EP7 | P1, P5 | CR-005, CR-006 |
+
+> **As a** student joining groups, **I want** to read and accept the group rules before I take part, **so that**
+everyone in every group has agreed to the same rules.
+
+**Acceptance criteria**
+
+- **AC-707.1** *Superseded by AC-707.3 (CR-006).* **Given** I join a group, **then** I must accept the group rules for that group, and a member who has not accepted them for that group cannot open its live room.
+- **AC-707.2** *(CR-005)* **Given** the rules screen, **then** it lists the six group rules in my language, and I must tick that I have read them before *Agree and join*.
+- **AC-707.3** *New (CR-006).* **Given** I join my first group, **then** I accept the rules once for my account; later joins of other groups do not ask again; the server refuses a first join without acceptance and keeps every live room closed until the account has accepted.
+- **AC-707.4** *New (CR-006).* **Given** a new version of the group rules is published, **then** I am asked to accept the new version before I take part again, and my earlier acceptance stays recorded.
+- **AC-707.5** *New (CR-006).* **Given** I accept, **then** the rules version and the time are recorded on my account and deleted with it.
+
+
+## US-708 See a group's details and members, and leave it
+
+*New (CR-006).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 3 pts | R1 | EP7 | P1, P5 | E6, CR-006 |
+
+> **As a** group member, **I want** a page about the group with its rules and members, **so that** I know who I am
+talking to and can leave when I want.
+
+**Acceptance criteria**
+
+- **AC-708.1** **Given** a group room, **when** I tap the group's name, **then** its info page opens with the group's description, the general group rules and the rule specific to that kind of group (a course group or an A/L batch group), both written by ZedPath; the separate (i) button is removed.
+- **AC-708.2** **Given** the info page, **then** it lists the members with their usernames, avatars and any senior badge, never their real names; only members of the group can see the list, and the server refuses it to anyone else.
+- **AC-708.3** **Given** the info page, **when** I tap *Exit group* at the bottom, **then** I leave the group and its room closes for me.
 
 
 # Epic EP8: After selection
@@ -920,20 +1352,24 @@ shows R1 end to end: results in, eligible courses with bands and reasons, a pref
 checks, a journey with aptitude tests, other routes and job-exam alerts, cited answers in three languages and
 a shareable family card, all backed by sourced data and an AI extraction pipeline with human review.
 
+Change requests CR-001 to CR-006 added to R1 an account with consent, a Journey the student ticks with followed
+courses and notices, open notices in the Journey, next steps under answers, and course and batch groups with verified
+seniors. They moved four stories from R2 into R1 (US-604, US-702, US-703, US-704), added 19 stories, superseded
+US-406 and withdrew US-507.
+
 Table: Release R1 content by priority
 
 | Priority | Stories | Points |
 |---|---:|---:|
-| Must | 24 | 84 |
-| Should | 10 | 35 |
-| Could | 1 | 3 |
-| **R1 total** | **35** | **122** |
+| Must | 31 | 107 |
+| Should | 20 | 63 |
+| Could | 6 | 19 |
+| **R1 total** | **57** | **189** |
 
 ## Release R2: after the buildathon
 
-The remaining 15 stories (54 points: 4 Should, 11 Could): recognition and loan checks, cost of living,
-verified seniors and groups, teacher view, the after-selection epic, special intake, custom journey steps
-and answer actions.
+The remaining 10 stories (31 points: 2 Should, 8 Could): recognition and loan checks, scholarships abroad, cost of
+living, teacher view, the after-selection epic and special intake.
 
 ## Walking skeleton
 
@@ -966,14 +1402,21 @@ Table: Evidence-to-story traceability matrix
 
 | Evidence | Stories it drives |
 |---|---|
-| E1 (doesn't know Z-score needed, CIMA unknown) | US-103, US-201, US-203, US-501 |
-| E2 (no proper place; applied only nearby) | US-201, US-205, US-601 |
-| E3 (Gazette unknown; regret) | US-503, US-904, US-501 |
+| E1 (doesn't know Z-score needed, CIMA unknown) | US-103, US-201, US-203, US-501, US-408, US-409 |
+| E2 (no proper place; applied only nearby) | US-201, US-205, US-209, US-601, US-604, US-605 |
+| E3 (Gazette unknown; regret) | US-503, US-904, US-501, US-410 |
 | E4 (preference list mistake) | US-301, US-302, US-303, US-304 |
-| E5 (options found by luck) | US-501, US-506, US-401 |
-| E6 (curriculum; verified seniors) | US-204, US-702, US-703 |
+| E5 (options found by luck) | US-501, US-506, US-401, US-407, US-410, US-607 |
+| E6 (curriculum; verified seniors) | US-204, US-702, US-703, US-704, US-706, US-708 |
 | T1 (no grade, order or deadline checks) | US-201, US-202, US-302, US-402, US-403 |
-| Deck Section 7 (how we keep it honest) | US-602, US-901 to US-906 |
+| Deck Section 7 (how we keep it honest) | US-602, US-606, US-901 to US-906 |
+| CR-001 (student accounts) | US-106, US-107, US-108, US-411 |
+| CR-002 (Journey, Alerts, Groups) | US-401 to US-404, US-503, US-702 to US-704, US-706 |
+| CR-003 (account required, contact details, consent) | US-106, US-109, US-503 |
+| CR-004 (Ask answer card) | US-604, US-605, US-606 |
+| CR-005 (group rules, popular groups, sample conversations) | US-704, US-706, US-707 |
+| CR-006 (rules once per account, group info, avatars, Journey on the account) | US-110, US-305, US-401, US-407, US-409 to US-411, US-503, US-704, US-707, US-708 |
+| VR (video review, 11 October 2026) | US-105, US-111, US-204, US-207, US-209, US-305, US-408, US-501, US-607; withdrew US-507 |
 
 # Glossary {.appendix}
 
@@ -983,14 +1426,24 @@ Table: Terms and abbreviations used in this document
 |---|---|
 | A/L | G.C.E. Advanced Level examination, the university entrance examination in Sri Lanka |
 | Aptitude test | A separate test some university courses hold on their own dates (e.g. Architecture) |
+| Avatar | One of 12 preset pictures a student may choose for their account; the default is their initials (CR-006) |
 | Band | ZedPath's label for a course relative to the student's Z-score: Safe, Likely or Reach |
+| Batch group | The group for students of the same A/L stream and district (CR-002) |
+| CR | Change request: a change to the approved baseline, approved by the product owner |
+| Follow | Keep a course, notice or other path in the student's Journey (CR-006) |
 | Cut-off | The lowest Z-score admitted to a course offering in a district in a given intake year |
 | District quota | The share of places allocated by district; the cut-off differs by district |
 | Gazette | The Government Gazette of Sri Lanka, where government job examinations are announced |
 | INVEST | Independent, Negotiable, Valuable, Estimable, Small, Testable: quality criteria for stories |
 | Mahapola | A government scholarship paid to eligible state-university students |
 | MoSCoW | Must, Should, Could, Won't: a prioritisation method from DSDM |
+| Notice | An official announcement with a closing date: a Gazette job examination or an intake of another route |
 | Offering | A course at a specific university, identified by its uni-code |
+| Open now | The Journey's second tab, listing open notices; it replaces the Alerts bell (CR-006) |
+| PDPA | Personal Data Protection Act, No. 9 of 2022 (Sri Lanka) |
+| Recovery code | A one-time code, shown once, that lets a student reset a forgotten password (CR-001) |
+| Verified senior | A university student whose enrolment the ZedPath team checked; shown with a badge in groups |
+| VR | The product owner's video review of the live app, 11 October 2026 |
 | UGC | University Grants Commission, which runs state-university admission |
 | Uni-code | The code a student enters on the UGC application for a course offering |
 | Z-score | A standardised score that combines a student's three A/L subject results |
@@ -1009,3 +1462,6 @@ Table: Documents referred to in this document
 | [6] | ISO/IEC/IEEE 29148:2018, *Systems and software engineering: Life cycle processes, Requirements engineering* |
 | [7] | ZP-DOC-00, *ZedPath Documentation Standard* |
 | [8] | Cloudflare, *Workers platform limits and pricing*, developers.cloudflare.com, retrieved 5 October 2026 |
+| [9] | ZP-DOC-05, *ZedPath Data Design*, sections on CR-001 to CR-006 |
+| [10] | Personal Data Protection Act, No. 9 of 2022, Democratic Socialist Republic of Sri Lanka |
+| [11] | University Grants Commission, *Admission to Undergraduate Courses of the Universities in Sri Lanka, Academic Year 2025/2026* (handbook), Section 6, p.166 to p.167 (special intake) |

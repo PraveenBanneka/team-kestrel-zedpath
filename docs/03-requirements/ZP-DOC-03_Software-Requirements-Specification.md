@@ -2,19 +2,20 @@
 id: ZP-DOC-03
 title: Software Requirements Specification
 subtitle: Functional, non-functional and business-rule requirements for ZedPath Release 1 and 2
-version: 1.0
-date: 5 October 2026
-status: Approved
+version: 2.0 (draft)
+date: 11 October 2026
+status: Under revision
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026
-signature: Approved in writing (project channel)
+approved: 5 Oct 2026 (v1.0)
+signature: v1.0 approved in writing (project channel); this revision awaits approval
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: ISO/IEC/IEEE 29148:2018, software requirements specification content; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: functional requirements derived from ZP-DOC-02; NFRs; business rules from the UGC handbook and cut-off table 2025/26; submitted for approval
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
+revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): new FR-114 to FR-124, FR-215 to FR-218, FR-309 to FR-311, FR-409 to FR-417, FR-509, FR-510, FR-607 to FR-612, FR-707 to FR-719, UI-4, UI-5, SI-8, SI-9; revised UI-1, CON-4, FR-101, FR-213, FR-401, FR-402, FR-404, FR-501, FR-503, FR-606, FR-703, FR-705, NFR-030; superseded FR-104, FR-405, FR-406, FR-408, FR-704, FR-713 and SI-4; withdrew FR-508; new NFR-036 to NFR-039, NFR-043, NFR-070 to NFR-075, BR-050 to BR-058, BR-060 to BR-063, BR-070 to BR-077, BR-080; traceability extended. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 ---
 
 # Introduction
@@ -54,6 +55,24 @@ Table: Position of this document in the ZedPath document set
   **BR-nnn**: business rule, a fact or policy of the domain that the system must respect.
 - **Priority** uses MoSCoW (M, S, C), inherited from the parent story unless stated.
 - **Verification method** (ISO/IEC/IEEE 29148): **T** test, **D** demonstration, **I** inspection, **A** analysis.
+- **Change markers** (since v1.0): a requirement added or changed by a change request starts with a marker in
+  italics: *New (CR-nnn)*, *Revised (CR-nnn)*, *Superseded by X (CR-nnn)* or *Withdrawn (reason)*. A superseded or
+  withdrawn requirement keeps its ID and text for traceability (it is *Deleted* in the sense of ZP-DOC-00) and no
+  longer has to be met. A new requirement is in force from this revision's approval.
+
+## Change requests since version 1.0
+
+Table: Change requests and the requirements they affect (the stories are listed in ZP-DOC-02)
+
+| CR | Date | Change | Requirements |
+|---|---|---|---|
+| CR-001 | 5 October 2026 | Student accounts, key derived on the phone, recovery code, cross-device profile, delete account | FR-104, FR-114, FR-115, FR-117 to FR-119, NFR-036, NFR-037, NFR-075, BR-050, BR-051, BR-058 |
+| CR-002 | 11 October 2026 | Journey with reminders on the phone; Alerts checked on the phone; Groups with verified seniors, moderation, report, block and rate limits; new navigation | UI-1, UI-5, SI-4, SI-8, SI-9, FR-401, FR-402, FR-405, FR-406, FR-412, FR-503, FR-509, FR-510, FR-703 to FR-705, FR-707 to FR-711, NFR-039, NFR-072, BR-070 to BR-073, BR-076 |
+| CR-003 | 11 October 2026 | Account required at the start with name, email, Sri Lankan mobile and date of birth, purpose stated and consent recorded | FR-101, FR-116, FR-120, FR-121, NFR-030, NFR-070, BR-052 to BR-057 |
+| CR-004 | 11 October 2026 | Ask answer card: verdict, layout, actions, sources, follow-ups, feedback | FR-606 to FR-611, NFR-073 |
+| VR | 11 October 2026 | Video review: languages, search, Compare, chart values, Ask context, reminder settings, resit path removed, multi-select | FR-123, FR-124, FR-213, FR-215 to FR-218, FR-309, FR-310, FR-413, FR-501, FR-508, FR-612, NFR-074, BR-063, BR-080 |
+| CR-005 | 11 October 2026 | Group rules before taking part; no phone numbers or emails in messages; popular groups; labelled samples; chat layout | UI-4, FR-712, FR-713, FR-715, FR-716, BR-074 |
+| CR-006 | 11 October 2026 | Rules once per account; group info page; preset avatars; rooms stay connected; selection on My list with Compare; Journey ticked by the student within windows; follow courses and notices; Journey on the account; Alerts into the Journey | FR-122, FR-311, FR-401, FR-408, FR-409 to FR-411, FR-414 to FR-417, FR-713, FR-714, FR-717 to FR-719, NFR-038, NFR-043, NFR-071, BR-060 to BR-062, BR-075, BR-077 |
 
 # Overall description
 
@@ -65,10 +84,11 @@ is shown in ZP-DOC-01. It runs entirely on the Cloudflare free plan (ZP-DOC-06).
 
 ## Product functions
 
-At the highest level, ZedPath shall let a student: enter their results once (FE-1); see every reachable
+At the highest level, ZedPath shall let a student: create an account with consent and enter their results once (FE-1); see every reachable
 state-university course with a likelihood band and reasons (FE-2); build and check a UGC preference list
-(FE-3); follow a dated journey with reminders (FE-4); see every other route (FE-5); ask cited questions in
-three languages (FE-6); share with family and get help from others (FE-7); and prepare for university (FE-8).
+(FE-3); follow a journey they tick themselves, with followed courses and notices and reminders (FE-4); see every
+other route and the notices open now (FE-5); ask cited questions in three languages (FE-6); share with family and
+talk with peers and verified seniors in moderated groups (FE-7); and prepare for university (FE-8).
 Behind these, ZedPath shall keep every fact sourced, checked and correctable (FE-9).
 
 ## User classes and characteristics
@@ -86,7 +106,8 @@ Table: User classes
 ## Operating environment
 
 - Client: mobile web browsers (Chrome for Android 120+, Samsung Internet 24+, Safari for iOS 17+) and current
-  desktop browsers. Screen widths from 360 px.
+  desktop browsers. Screen widths from 360 px. *Revised (CR-002):* also the ZedPath Android app, which loads the
+  same web application and posts native notifications (UI-5).
 - Server: Cloudflare Workers runtime and Cloudflare data services (free plan).
 
 ## Design and implementation constraints
@@ -96,7 +117,9 @@ These constraints are binding. Their detail is in ZP-DOC-06.
 - **CON-1** The system shall run within the Cloudflare **free plan** limits verified on 5 October 2026.
 - **CON-2** The application, API and tooling shall be written in **TypeScript**.
 - **CON-3** The user interface shall follow **Material Design 3**.
-- **CON-4** The system shall not send email, SMS or WhatsApp messages (not available or not free).
+- **CON-4** The system shall not send email, SMS or WhatsApp messages (not available or not free). *Revised (CR-003):
+  this holds until a sending domain and an SMS service exist; email addresses and mobile numbers collected under
+  FR-116 are therefore not verified yet.*
 - **CON-5** Official third-party documents shall be stored privately and cited, not redistributed.
 
 ## Assumptions and dependencies
@@ -107,10 +130,16 @@ As stated in ZP-DOC-01 (AS-1 to AS-4, DE-1 to DE-3).
 
 ## User interfaces
 
-- **UI-1** The interface shall be a responsive, mobile-first web application with bottom navigation of at most
-  four destinations (Journey, Courses, Routes, Ask), as specified in ZP-DOC-07.
+- **UI-1** *Revised (CR-002, CR-006).* The interface shall be a responsive, mobile-first web application with
+  bottom navigation of five destinations (Paths, My list, Journey, Groups, Ask) and *Me* (the student's avatar) in the
+  top bar, as specified in ZP-DOC-07. Alerts are the Journey's *Open now* tab; the top bar has no bell (FR-417).
+  The v1.0 text was "at most four destinations (Journey, Courses, Routes, Ask)".
 - **UI-2** Every screen shall offer a language switch between Sinhala, Tamil and English.
 - **UI-3** Every displayed fact shall offer access to its source (document, page, date verified).
+- **UI-4** *New (CR-005).* Group screens shall follow a chat-app layout: a list of groups, a room with message
+  bubbles, and a message box at the bottom.
+- **UI-5** *New (CR-002).* An Android app shall load the same web application in its own window and post native
+  notifications for reminders (FR-412).
 
 ## Software interfaces
 
@@ -121,10 +150,12 @@ Table: Software interfaces
 | SI-1 | Google Gemini API, through Cloudflare AI Gateway | Read documents and photos; generate answers in three languages | HTTPS, JSON |
 | SI-2 | Cloudflare Workers AI | Embeddings and fallback inference | Workers binding |
 | SI-3 | Government Gazette website | Fetch weekly Gazette issues | HTTPS, PDF |
-| SI-4 | Web Push services of browsers | Deliver reminders | Web Push protocol (RFC 8030) with VAPID (RFC 8292) |
+| SI-4 | Web Push services of browsers. *Superseded by SI-8 (CR-002).* | Deliver reminders | Web Push protocol (RFC 8030) with VAPID (RFC 8292) |
 | SI-5 | Device calendar | Import deadlines | iCalendar file (RFC 5545) |
 | SI-6 | Device share sheet | Share the family card | Web Share API |
 | SI-7 | Google Sign-In (R2) | Verify university accounts of seniors | OpenID Connect |
+| SI-8 | Android notification system, through the Android app. *New (CR-002).* | Show reminders scheduled on the phone | Local notifications (Capacitor plugin) |
+| SI-9 | Cloudflare Workers AI moderation model. *New (CR-002).* | Screen each group message before others see it | Workers binding |
 
 ## Communications interfaces
 
@@ -141,10 +172,10 @@ Table: Functional requirements, FE-1 Profile and results
 
 | ID | Requirement | Source | Pri | Ver |
 |---|---|---|---|---|
-| FR-101 | The system shall let a student enter stream, district, Z-score and three subjects with grades, without an account. | US-101, AC-101.1 | M | T |
+| FR-101 | *Revised (CR-003): "without an account" removed; an account comes first (FR-116).* The system shall let a student enter stream, district, Z-score and three subjects with grades. | US-101, AC-101.1 | M | T |
 | FR-102 | The system shall reject a Z-score outside −4.0000 to +4.0000 or with more than four decimal places, with an inline message. | AC-101.2 | M | T |
 | FR-103 | The system shall reject a subject combination that is not admissible for the selected stream (BR-010) and name the offending subject. | AC-101.3 | M | T |
-| FR-104 | The system shall store the profile only on the student's device and restore it on the next visit. | AC-101.4 | M | T |
+| FR-104 | *Superseded by FR-117 (CR-001, CR-003).* The system shall store the profile only on the student's device and restore it on the next visit. | AC-101.4 | M | T |
 | FR-105 | The system shall recalculate every result immediately when any profile field changes. | AC-102.1 | M | T |
 | FR-106 | The system shall delete the profile from the device on request. | AC-102.2 | M | T |
 | FR-107 | The system shall estimate a Z-score **range** from expected marks, using at least the three most recent years of subject statistics, labelled *Estimate*. | US-103 | S | T |
@@ -154,6 +185,17 @@ Table: Functional requirements, FE-1 Profile and results
 | FR-111 | The system shall delete an uploaded photo as soon as reading finishes, and record the deletion in the audit log. | AC-104.3 | S | I |
 | FR-112 | The system shall switch all interface text between Sinhala, Tamil and English without losing the current screen or data. | US-105 | M | D |
 | FR-113 | When an offering has an O/L requirement (BR-022), the system shall ask for the relevant O/L grades, evaluate them, and show the offering as *Check O/L requirement* until they are given. | US-201; BR-022 | M | T |
+| FR-114 | *New (CR-001).* The system shall create a student account from a username (BR-050) and a password (BR-051). The device shall derive a key from the password with PBKDF2-HMAC-SHA256 at 600,000 iterations and send only that key; the password shall never be sent (NFR-036). | US-106, AC-106.2 | M | T |
+| FR-115 | *New (CR-001).* The system shall let a student log in with username and password on any device, keep the session for 30 days (BR-058), and log out on this device or on every device. | US-106 | M | T |
+| FR-116 | *New (CR-003).* The system shall require an account before any screen other than the welcome, sign-up and log-in screens. Sign-up shall require full name, email address, Sri Lankan mobile number and date of birth (BR-052 to BR-055), shall state the purpose of each before consent, and shall be refused by the server when any of them, or the consent, is missing or invalid. | US-106, AC-106.1; US-109, AC-109.1 to AC-109.3 | M | T |
+| FR-117 | *New (CR-001; supersedes FR-104).* The system shall keep the student's profile (results, achievements, interests) on the account, restore it on log-in on any device, and keep a copy on the device. A change made offline shall be sent when the device is online and shall not be overwritten by the older copy on the server. | US-106, AC-106.3, AC-106.4; AC-101.5 | M | T |
+| FR-118 | *New (CR-001).* The system shall show an 80-bit recovery code once at sign-up and require the student to confirm saving it; it shall let the student set a new password with username and recovery code, then issue a new code and invalidate the old one. Typed 0, 1 and 8 shall be read as O, I and B. | US-107 | S | T |
+| FR-119 | *New (CR-001).* On confirmed request, the system shall delete the account and every row stored under it (NFR-075), delete the account's messages from every group it was in, clear the student's data from the device and return to the welcome screen. | US-108 | M | T |
+| FR-120 | *New (CR-003).* An account made before CR-003 without contact details shall be asked to complete them before any other screen; no value shall be invented for it. | AC-109.4 | M | T |
+| FR-121 | *New (CR-003).* The consent statement shall include that a parent or guardian agrees when the student is under 18 (BR-056); the system shall record the consent version and time (BR-057), and shall tell the student that email and mobile are not verified yet (CON-4). | AC-109.2, AC-109.5 | M | T |
+| FR-122 | *New (CR-006).* The system shall let a student choose one of 12 preset avatars, or none (initials, the default), shall accept no other value and no photo upload (BR-077), and shall show the avatar in the app bar, in group member lists and with the group messages the student posts. | US-110 | C | T |
+| FR-123 | *New (VR).* The system shall filter the subject list in *About you* as the student types: every word typed must start a word of the subject name, common short forms are understood, and case, accents and punctuation are ignored. | US-111 | S | T |
+| FR-124 | *New (VR).* While the Sinhala and Tamil interface text has not been reviewed by native speakers, the system shall say that it is an AI translation being checked; official names and quotations shall stay in English as published. | AC-105.3, AC-105.4 | M | I |
 
 ## FE-2 State-university course discovery
 
@@ -173,8 +215,12 @@ Table: Functional requirements, FE-2 State-university course discovery
 | FR-210 | The system shall filter offerings by band, university, field of study and distance from the student's district, and update the count. | US-205 | S | T |
 | FR-211 | For a chosen dream offering, the system shall show the gap to its lowest cut-off in the available years and classify the gap as *small* (≤ 0.10) or *large* (> 0.10). | US-206 | S | T |
 | FR-212 | For a dream offering, the system shall suggest up to three offerings in the same field that are Safe or Likely for the student. | AC-206.2 | S | T |
-| FR-213 | The system shall compare two offerings side by side on band, duration, medium, campus, aptitude test and trend. | US-207 | C | D |
+| FR-213 | *Revised (VR): "two" became "up to three".* The system shall compare up to three offerings side by side on band, duration, medium, campus, aptitude test and trend. | US-207, AC-207.1, AC-207.2 | C | D |
 | FR-214 | The system shall show monthly living-cost estimates by campus with sample size and collection date. | US-208 | C (R2) | D |
+| FR-215 | *New (VR).* The system shall search the student's courses across every band by course name, university name, common short forms or Uni-Code, with the matching rule of FR-123. | US-209 | S | T |
+| FR-216 | *New (VR).* Compare shall show each offering as a column that swipes sideways on a narrow screen and, while fewer than three are compared, a "+" column that opens a picker of the student's Safe, Likely and Reach courses (searchable) and of My list. | AC-207.2, AC-207.3 | C | D |
+| FR-217 | *New (VR).* Every *Compare* button in the app shall open the Compare screen with that offering included. | AC-207.4 | C | D |
+| FR-218 | *New (VR).* The cut-off chart on a course page shall print each point's cut-off value beside the point. | AC-204.3 | S | I |
 
 ## FE-3 Preference list
 
@@ -190,6 +236,9 @@ Table: Functional requirements, FE-3 Preference list
 | FR-305 | The system shall propose a corrected order that keeps the student's most-wanted offerings first and Safe ones last, applied only after the student confirms. | AC-302.3 | M | T |
 | FR-306 | The system shall copy the list's uni-codes to the clipboard, one per line, in list order. | US-303 | M | T |
 | FR-307 | The system shall present the official application steps with the most common mistake for each, linked to the official instructions. | US-304 | S | I |
+| FR-309 | *New (VR, CR-006).* Pressing and holding a course in *Courses* or *My list*, or tapping *Select*, shall start selection with that course ticked; while selecting, a tap shall tick or untick a course instead of opening it. | US-305, AC-305.1 | C | T |
+| FR-310 | *New (VR).* The selection bar in *Courses* shall offer *Add to my list*, which adds every selected course under FR-302 and FR-308 and reports how many were added, how many were already listed, and whether the list was full. | AC-305.2 | C | T |
+| FR-311 | *New (CR-006).* The selection bar in *Courses* and *My list* shall offer *Compare*, which opens Compare with the selected courses in the order selected, at most three. | AC-305.3 | C | T |
 
 ## FE-4 Journey and deadlines
 
@@ -197,14 +246,23 @@ Table: Functional requirements, FE-4 Journey and deadlines
 
 | ID | Requirement | Source | Pri | Ver |
 |---|---|---|---|---|
-| FR-401 | The system shall show the student's journey stages in date order, marking past stages done and placing the next open deadline at the top with days remaining. | US-401 | M | T |
-| FR-402 | Every date shall be labelled *Confirmed* (with its source) or *Estimated* (with the basis, e.g. the previous year's date). | US-402 | M | T |
+| FR-401 | *Revised (CR-006): past stages are no longer marked done by date (FR-409).* The system shall show the student's Journey steps in order (BR-060), the courses and notices the student follows, and the next dated item at the top with days remaining. | US-401, AC-401.2 | M | T |
+| FR-402 | *Revised (CR-002, CR-006): no estimated dates.* A date shall be shown only when it is announced, labelled *Confirmed* with its source. A UGC step whose date is not announced shall show *Not announced yet* with the official rule and its handbook page; the system shall never invent or estimate a date. | US-402, AC-402.1, AC-402.3 | M | T |
 | FR-403 | When the list contains an offering with an aptitude or practical test (BR-025), the journey shall add the test's application and test dates. | US-403 | M | T |
-| FR-404 | The system shall generate an iCalendar file of the journey's deadlines with alarms 7 days and 1 day before each. | AC-404.1 | S | T |
-| FR-405 | The system shall send web-push reminders 7 days and 1 day before each deadline to students who opted in. | AC-404.2 | S | T |
-| FR-406 | The system shall delete a push subscription when the student turns notifications off. | AC-404.3 | S | T |
+| FR-404 | *Revised (VR): alarms follow the reminder settings (FR-413).* The system shall generate an iCalendar file of the journey's dated items with alarms 7 days and 1 day before each, as set in FR-413. | AC-404.1 | S | T |
+| FR-405 | *Superseded by FR-412 (CR-002).* The system shall send web-push reminders 7 days and 1 day before each deadline to students who opted in. | AC-404.2 | S | T |
+| FR-406 | *Superseded by FR-412 (CR-002): no push subscription is stored on the server.* The system shall delete a push subscription when the student turns notifications off. | AC-404.3 | S | T |
 | FR-407 | The system shall check special-intake categories against the student's answers and link each to its handbook section. | US-405 | C (R2) | T |
-| FR-408 | The system shall let the student add a route's dates to the journey. | US-406 | C (R2) | D |
+| FR-408 | *Superseded by FR-414 and FR-416 (CR-006).* The system shall let the student add a route's dates to the journey. | US-406 | C (R2) | D |
+| FR-409 | *New (CR-006).* Every Journey step shall start unticked; only the student shall tick or untick a step. | US-407, AC-407.1 | M | T |
+| FR-410 | *New (CR-006).* The server shall accept a tick only inside the step's window (BR-061) and shall refuse a tick outside it without storing anything; the app shall disable the tick box and state why. | AC-407.2 to AC-407.4 | M | T |
+| FR-411 | *New (CR-006).* The system shall save the student's followed courses, followed notices (with the *I applied* state) and ticked steps on the account, show the same Journey on every device, and delete it with the account. | US-411 | M | T |
+| FR-412 | *New (CR-002; supersedes FR-405, FR-406).* In the Android app, the phone shall schedule a notification 7 days and 1 day before each dated item in the Journey, at the hour set in FR-413; no push subscription or device identifier shall be stored on the server for reminders. On other devices the calendar file (FR-404) provides the reminders. | AC-404.5, AC-404.6 | S | T |
+| FR-413 | *New (VR).* *Me* shall offer reminder settings, kept on the phone: 7-day reminder on or off, 1-day reminder on or off, 8 am or 6 pm, and the new-notice count on or off. Unset or unreadable settings shall fall back to the default (both reminders on, 8 am, count shown), field by field (BR-063). There shall be no test-notification button. | US-408 | S | T |
+| FR-414 | *New (CR-006; with FR-416 supersedes FR-408).* The student shall be able to follow and unfollow a notice or other path from *Open now* and from other-path pages; a followed one shall appear in the Journey with its closing date and source. The server shall accept only identifiers in ZedPath's route catalogue. | US-410, AC-410.1, AC-410.4 | S | T |
+| FR-415 | *New (CR-006).* The student shall be able to tick *I applied* on a followed notice only once it has opened (BR-062); the server shall refuse it before then, and for a notice that is not followed. | AC-410.2, AC-410.3 | S | T |
+| FR-416 | *New (CR-006).* The student shall be able to follow and unfollow a course from its course page; the server shall accept only 2025/26 offerings. | US-409 | S | T |
+| FR-417 | *New (CR-006).* The Journey shall have a second tab, *Open now*, listing the open notices (FR-503); the top bar shall have no bell, and the count of new notices shall show on the Journey tab when the setting is on (FR-413). | AC-503.5 | M | D |
 
 ## FE-5 Other routes
 
@@ -212,14 +270,16 @@ Table: Functional requirements, FE-5 Other routes
 
 | ID | Requirement | Source | Pri | Ver |
 |---|---|---|---|---|
-| FR-501 | The system shall list non-UGC routes in seven groups (private and non-state degrees, higher national diplomas, professional qualifications, vocational courses, job examinations, study abroad, retry) and mark each as open or not open to the student with the reason. | US-501 | M | T |
+| FR-501 | *Revised (VR): the retry group ("Sit the A/L again") was removed.* The system shall list non-UGC routes in six groups (private and non-state degrees, higher national diplomas, professional qualifications, vocational courses, job examinations, study abroad) and mark each as open or not open to the student with the reason. | US-501, AC-501.2, AC-501.3 | M | T |
 | FR-502 | Each route shall show entry requirements, duration, approximate cost, intake timing and sources with verified dates. | US-502 | M | I |
-| FR-503 | The system shall show newly announced job examinations whose education and age rules the student meets, with closing date and Gazette link. | US-503 | M | T |
+| FR-503 | *Revised (CR-002, CR-006): intake notices added; shown under the Journey's Open now tab (FR-417).* The system shall show announced Gazette job examinations and intakes of other routes, each with its closing date, provider and a link to the official notice, and the result of the eligibility check of FR-509. | US-503, AC-503.1, AC-503.3 | M | T |
 | FR-504 | A job-examination notice extracted with low confidence shall not be shown until a curator approves it. | AC-503.2 | M | T |
 | FR-505 | The system shall show the recognition status of a programme's awarding university and local approval, each with source and date checked. | US-504 | S (R2) | I |
 | FR-506 | The system shall check the basic conditions of the government interest-free loan scheme. | US-505 | S (R2) | T |
 | FR-507 | The system shall list government scholarships abroad open to school leavers with usual timing and requirements. | US-506 | C (R2) | I |
-| FR-508 | For a dream offering, the system shall show the Z-score gap, the student's attempt number out of the maximum (BR-004) and alternative routes. | US-507 | S | T |
+| FR-508 | *Withdrawn (VR, 11 October 2026: the "Sit the A/L again" path was removed).* For a dream offering, the system shall show the Z-score gap, the student's attempt number out of the maximum (BR-004) and alternative routes. | US-507 | S | T |
+| FR-509 | *New (CR-002, CR-003).* For each notice, the device shall check the A/L-pass rule against the student's results and the age rule against the date of birth given at registration, showing each as met, not met or unknown (data missing); O/L rules shall be shown for the student to check and not evaluated. The check shall run on the device (NFR-072). | AC-503.3 | M | T |
+| FR-510 | *New (CR-002).* Notices shall be ordered with open and upcoming ones first, soonest closing date first, then closed ones, most recently closed first. | AC-503.4 | S | T |
 
 ## FE-6 Ask
 
@@ -232,7 +292,13 @@ Table: Functional requirements, FE-6 Ask
 | FR-603 | Every factual answer shall cite at least one stored source (document and page). | US-602 | M | T |
 | FR-604 | When no stored source supports an answer, the system shall say it does not know and point to an official contact, and shall not generate an unsupported answer. | AC-602.2 | M | T |
 | FR-605 | The system shall decline to predict future cut-offs or guarantee admission, and offer the historical pattern instead. | US-603 | S | T |
-| FR-606 | The system shall offer actions under an answer (add to list, add to journey, compare). | US-604 | C (R2) | D |
+| FR-606 | *Revised (CR-004): moved to R1 and detailed.* The system shall offer actions under an answer, built by ZedPath from its own data and never from the model's text: for up to three course places, best chance first, open the course, add to list (only when eligible) and compare; for a matching notice, add to the Journey. | US-604 | C | D |
+| FR-607 | *New (CR-004).* When the model's reply starts with a verdict, the answer shall show it as a chip: *Yes*, *No*, *It depends* or *Not in official sources*; with no verdict, no chip shall be shown. | AC-605.1 | S | T |
+| FR-608 | *New (CR-004).* An answer shall be shown as one lead line and short bullets; bullets after the fourth shall be folded behind *Show more*. | AC-605.2 | S | T |
+| FR-609 | *New (CR-004, VR).* Each citation chip shall show a readable source name (handbook page, or the route's name; never an internal file note), open the quoted passage, and link to the official document over HTTPS; a route citation shall also open the route's page in ZedPath. | AC-605.3 | S | T |
+| FR-610 | *New (CR-004).* An answer about a course shall offer two follow-up questions about that course; an answer whose verdict is *Not in official sources* shall offer none. | AC-605.4 | C | D |
+| FR-611 | *New (CR-004).* The system shall record *Helpful* and *Report a wrong answer* (optional note of up to 500 characters) with the question, the answer, the cited pages and the app language, and nothing that identifies the student (NFR-073); the screen shall say that the question and answer will be sent before the report is sent; submissions shall be rate-limited. | US-606 | S | T |
+| FR-612 | *New (VR).* The app shall send the student's achievements and interests with a question; the server shall use them for that answer only and not store them (NFR-074). Whether the special intake may apply shall be decided by BR-080 in code and given to the model as a fact, and the special-intake handbook section shall be retrieved with the question. | US-607 | C | T |
 
 ## FE-7 People around the student
 
@@ -242,10 +308,23 @@ Table: Functional requirements, FE-7 People around the student
 |---|---|---|---|---|
 | FR-701 | The system shall generate a share card (image and short text) in the chosen language and pass it to the device share sheet. | US-701 | M | D |
 | FR-702 | The share card shall exclude the student's name and Z-score unless the student includes them. | AC-701.2 | M | T |
-| FR-703 | The system shall show seniors' answers with course, year and a verified badge. | US-702 | S (R2) | D |
-| FR-704 | The system shall verify a senior by a university Google account on a recognised domain, or by curator review of proof that is deleted after the decision. | US-703 | S (R2) | T |
-| FR-705 | The system shall provide groups by batch and target course. | US-704 | C (R2) | D |
+| FR-703 | *Revised (CR-002): moved to R1; seniors answer in groups.* The system shall show seniors' messages with the badge "Verified senior · *course*, year *n*", set by the server from the redeemed invite and never by the member. | US-702 | S | D |
+| FR-704 | *Superseded by FR-707 (CR-002).* The system shall verify a senior by a university Google account on a recognised domain, or by curator review of proof that is deleted after the decision. | US-703 | S (R2) | T |
+| FR-705 | *Revised (CR-002): moved to R1 and detailed.* The system shall provide one group per target course and one per A/L batch (BR-070, BR-071); *Groups* shall list the groups for the courses on the student's list (or the three best-chance courses when the list is empty), the student's batch group and every joined group; only members shall open a group's live room. | US-704, AC-704.1 to AC-704.4 | C | T |
 | FR-706 | The system shall show a teacher aggregate counts for students who shared with the teacher's class code, and names only of those who shared. | US-705 | C (R2) | T |
+| FR-707 | *New (CR-002; supersedes FR-704).* The system shall verify a senior by a one-time invite code issued by the product owner after checking enrolment, naming course, institution and year of study (BR-076). Redeeming it at sign-up shall create a senior account that keeps no A/L results; a used or expired code shall be refused. | US-703, AC-703.4, AC-703.5 | S | T |
+| FR-708 | *New (CR-002).* Group messages shall be text only, 1 to 500 characters, and shall be checked by an automatic moderation model before any other member sees them; a message judged unsafe, or one the check cannot judge, shall not be posted (NFR-039), and the sender shall be told why. | AC-706.1 | M | T |
+| FR-709 | *New (CR-002).* The room shall limit each member to one message every 3 seconds and 20 messages in any 10 minutes (BR-072). | AC-706.2 | M | T |
+| FR-710 | *New (CR-002).* A member shall be able to report a message once, with a reason (BR-073); a message reported by three different members shall be hidden for everyone. | AC-706.3 | M | T |
+| FR-711 | *New (CR-002).* A member shall be able to block and unblock another member by username; a blocked member's messages shall not be shown or delivered to the blocker. | AC-706.4 | M | T |
+| FR-712 | *New (CR-005).* The room shall refuse a message containing a Sri Lankan phone number or an email address, with an explanation (group rule 3, BR-074). | AC-706.5 | M | T |
+| FR-713 | *Superseded by FR-714 (CR-006).* A member shall accept the current group rules for each group before taking part; the server shall refuse a join without the current rules version and keep the live room closed for a member whose membership is not on it. | AC-707.1 | M | T |
+| FR-714 | *New (CR-006; supersedes FR-713).* A student shall accept the current group rules once per account, at the first join of any group (BR-075); the server shall record the version and time, refuse a first join without acceptance, and keep every live room closed until the account has accepted the current version. A new rules version shall be asked for again. | AC-707.2 to AC-707.5 | M | T |
+| FR-715 | *New (CR-005).* *Groups* shall list popular course groups for everyone: Medicine (001), Engineering (008), Computer Science (012), Management (016), Commerce (018) and Law (025). | AC-704.5 | C | D |
+| FR-716 | *New (CR-005).* A group may show curated sample conversations before the real messages; each shall be marked *Sample*, have an author name starting "Sample" and no verified badge, shall not be reportable or blockable, and shall not be stored as a message. | AC-704.6 | C | T |
+| FR-717 | *New (CR-006).* Tapping the group's name in a room shall open its info page: description, general group rules and any group-specific rules, the member list, and *Exit group* at the bottom. The (i) button shall be removed. | US-708, AC-708.1 | S | D |
+| FR-718 | *New (CR-006).* The member list shall show usernames, avatars and senior badges, never real names, and the server shall return it only to members of the group (NFR-071). *Exit group* shall end the membership and close the room for that student. | AC-708.2, AC-708.3 | S | T |
+| FR-719 | *New (CR-006).* An open group room shall be kept alive by a message from the app at least every 25 seconds and shall reconnect by itself after a dropped connection, without showing "Disconnected" (NFR-043). | AC-704.8 | S | T |
 
 ## FE-8 After selection
 
@@ -322,12 +401,16 @@ Table: Security and privacy requirements
 
 | ID | Requirement | Ver |
 |---|---|---|
-| NFR-030 | The system shall store no personal data on the server without the student's explicit opt-in, in line with the Personal Data Protection Act No. 9 of 2022 (Sri Lanka). | I |
+| NFR-030 | *Revised (CR-003): an account is now required, so personal data is stored by consent at sign-up rather than by optional opt-in.* The system shall store personal data on the server only for a purpose stated to the student and with the student's recorded consent (FR-121), in line with the Personal Data Protection Act No. 9 of 2022 (Sri Lanka); it shall collect no personal detail beyond those in FR-116. | I |
 | NFR-031 | Results photos shall be deleted within 5 minutes of upload, whether or not reading succeeds. | T |
 | NFR-032 | Curator functions shall require authentication; every curator action shall be logged. | T |
 | NFR-033 | Secrets (API keys) shall be stored as Cloudflare secrets and never in source code or the repository. | I |
 | NFR-034 | Ask shall accept at most 10 questions per client per minute and 100 per client per day. | T |
 | NFR-035 | All input shall be validated on the server; database access shall use bound parameters only. | I |
+| NFR-036 | *New (CR-001).* A password shall never leave the device; the server shall store only a SHA-256 hash of the key derived on the device (FR-114). Session tokens and recovery codes shall be stored only as SHA-256 hashes, and the session cookie shall be HttpOnly, Secure and SameSite=Lax; cross-site writes shall be refused. | I |
+| NFR-037 | *New (CR-001).* Sign-up and log-in attempts shall be limited to 10 a minute per network address and username, and 100 a minute per network address. | T |
+| NFR-038 | *New (CR-002, CR-005, CR-006).* Group membership, group-rules acceptance, the Journey tick windows and the *I applied* rule shall be enforced by the server; checks in the app are a convenience only. Which account acts shall come only from the session, never from the request body. | T |
+| NFR-039 | *New (CR-002).* Message moderation shall fail closed: when the moderation result cannot be read, the message shall not be posted. | T |
 
 ## Reliability and availability
 
@@ -338,6 +421,7 @@ Table: Reliability and availability requirements
 | NFR-040 | Core browsing (courses, bands, list) shall remain usable if the AI services are unavailable. | T |
 | NFR-041 | Scheduled jobs shall retry failed steps at least three times with back-off. | T |
 | NFR-042 | The database shall be restorable to any point in the previous 7 days (D1 Time Travel). | D |
+| NFR-043 | *New (CR-006).* An idle group-room connection shall stay open (keep-alive at least every 25 seconds, answered without waking the room), and a dropped connection shall be re-established without the student's action; the room retries after 1, 2, 4 ... up to 15 seconds and shows "Reconnecting" only after three failed tries; "Disconnected" is shown only when the account was deleted. | T |
 
 ## Data quality
 
@@ -360,6 +444,21 @@ Table: Maintainability and portability requirements
 | NFR-061 | Rule-engine code shall have at least 90% branch coverage. | A |
 | NFR-062 | A new intake year's handbook and cut-offs shall be loadable without code changes. | D |
 | NFR-063 | The front end shall run in any standards-compliant browser without installation; it may be installed as a progressive web app. | D |
+
+## Privacy of accounts, groups and Ask
+
+*New (CR-001 to CR-006).* These requirements make the privacy promises of the change requests verifiable.
+
+Table: Privacy requirements added by the change requests
+
+| ID | Requirement | Ver |
+|---|---|---|
+| NFR-070 | *New (CR-003).* Contact details (full name, email, mobile, date of birth) shall be kept in their own table, apart from results; they shall never be shown to other students, never be sold, and be deleted with the account. Email and mobile shall not be unique, so that sign-up never reveals whether an address is already registered. | I |
+| NFR-071 | *New (CR-006).* In groups the system shall show only a member's username, preset avatar and any senior badge: never a real name, contact detail or uploaded photograph. | T |
+| NFR-072 | *New (CR-002).* The eligibility of notices (FR-509) shall be computed on the student's device; no request for this check shall send the student's results or date of birth. | I |
+| NFR-073 | *New (CR-004).* Answer feedback (FR-611) shall be stored without any account, device or network identifier. | I |
+| NFR-074 | *New (VR).* Achievements and interests sent with a question (FR-612) shall be used for that answer only and shall not be stored with the question or the answer. | I |
+| NFR-075 | *New (CR-001, CR-006).* Deleting an account shall remove every row stored under it in every table (account, sign-in, sessions, recovery code, redeemed senior invite, profile, subjects, achievements, interests, contact details, group memberships, rules acceptances, reports, blocks in both directions and the Journey) and its group messages, and nothing of another account. | T |
 
 # Business rules
 
@@ -462,12 +561,72 @@ Table: Business rules, preference-list checks
 | BR-042 | **Coverage warning:** when the list contains no Safe offering, the student is warned that they may not be placed anywhere. |
 | BR-043 | The list enforces BR-017: at most 125 entries and no duplicates. |
 
+## Accounts and contact details (ZedPath policy, CR-001 and CR-003)
+
+*New.* The same rules are checked on the device, for a clear message, and on the server, which refuses anything the
+device let through. The database repeats them as constraints (ZP-DOC-05).
+
+Table: Business rules, accounts and contact details
+
+| ID | Rule | Source |
+|---|---|---|
+| BR-050 | A username has 3 to 24 characters from lower-case letters, digits, "_" and "."; it is stored and compared lower-cased and trimmed, and is unique. | ZedPath policy (CR-001) |
+| BR-051 | A password has 8 to 128 characters. | ZedPath policy (CR-001) |
+| BR-052 | A full name has 2 to 80 characters after trimming and joining spaces. | ZedPath policy (CR-003) |
+| BR-053 | An email address has the shape *name@domain.tld*, at most 254 characters, and is stored in lower case. It is not unique. | ZedPath policy (CR-003) |
+| BR-054 | A mobile number is a Sri Lankan mobile number, entered as 07..., +94 7..., 94 7... or 0094 7... with any spacing, and stored as +947 followed by eight digits. It is not unique (siblings may share a parent's number). | ZedPath policy (CR-003) |
+| BR-055 | A date of birth is a real calendar date, and the student's age on the day of sign-up is 13 to 70 years. | ZedPath policy (CR-003) |
+| BR-056 | A student under 18 confirms that a parent or guardian agrees to the details being kept. | ZedPath policy (CR-003); Personal Data Protection Act, No. 9 of 2022 [4] |
+| BR-057 | Consent is recorded with the version of the privacy wording agreed to (currently 2026-10-11) and the time; a new wording is a new version. | ZedPath policy (CR-003) |
+| BR-058 | A session lasts 30 days. | ZedPath policy (CR-001) |
+
+## Journey and reminders (ZedPath policy, CR-002, CR-006 and VR)
+
+*New.*
+
+Table: Business rules, Journey and reminders
+
+| ID | Rule | Source |
+|---|---|---|
+| BR-060 | The Journey has eight steps: three preparation steps (enter results, build the list, compare courses) and five UGC steps (apply to the UGC, change the Uni-Code order once, apply for the aptitude test, selection results, register for the course). The aptitude step appears only when a course on the list has a test (BR-025). | ZedPath policy; HB p.116, p.118, p.151 |
+| BR-061 | A preparation step can be ticked at any time. A UGC step can be ticked only on or after the opening date given in the UGC press notice, as a Sri Lanka date (UTC+05:30); while that date is not announced the step cannot be ticked. ZedPath never invents a date. | ZedPath policy (CR-006) |
+| BR-062 | *I applied* can be ticked on a followed notice only from the notice's opening date; a notice without an opening date is open from publication. | ZedPath policy (CR-006) |
+| BR-063 | Reminders fall 7 days and 1 day before a dated item, at 08:00 or 18:00 on the phone's clock; the default is both reminders at 08:00, the behaviour before settings existed. | ZedPath policy (CR-002, VR) |
+
+## Groups (ZedPath policy, CR-002, CR-005 and CR-006)
+
+*New.*
+
+Table: Business rules, groups
+
+| ID | Rule | Source |
+|---|---|---|
+| BR-070 | There is at most one course group per course code and one batch group per pair of A/L stream and district. A group is created when its first member joins. | ZedPath policy (CR-002) |
+| BR-071 | Only a student whose results are saved on the account can join a batch group; it is the group of that student's stream and district. | ZedPath policy (CR-002) |
+| BR-072 | A message is text only, 1 to 500 characters. A member may post at most one message every 3 seconds and 20 in any 10 minutes in a group. | ZedPath policy (CR-002) |
+| BR-073 | A member may report a message once, for one of four reasons: harmful, wrong information, spam, other. A message reported by 3 different members is hidden for everyone. | ZedPath policy (CR-002) |
+| BR-074 | The group rules (version 2026-10-11) are six: be kind; stay on topic; never share phone numbers, email or home addresses, or passwords (ZedPath blocks phone numbers and emails); no selling, paid tuition adverts or exam leaks; members give opinions, so check official sources; report anything wrong (3 reports hide a message). | ZedPath policy (CR-005) |
+| BR-075 | The group rules are accepted once per account for each rules version, at the first join of any group; a new version must be accepted again, and earlier acceptances are kept. *Replaces the CR-005 rule "once per membership".* | ZedPath policy (CR-006) |
+| BR-076 | A senior invite names a course, an institution and a year of study from 1 to 6, is valid for 14 days, can be redeemed once, and only by a senior account of that institution. Its code is 80 random bits and is stored only as a SHA-256 hash. | ZedPath policy (CR-002) |
+| BR-077 | An avatar is one of 12 preset pictures (a01 to a12) or none, meaning initials. Photographs are never uploaded. | ZedPath policy (CR-006) |
+
+## Ask (ZedPath policy, VR)
+
+*New.*
+
+Table: Business rules, Ask
+
+| ID | Rule | Source |
+|---|---|---|
+| BR-080 | ZedPath tells a student that the special intake for outstanding achievements **may** apply when they list a first, second or third place at national level, or an achievement at international level, dated 2023 to 2025. It only flags the possibility and cites the section; the handbook's further conditions (up to 0.5% of places per course, a Z-score within 0.2000 of the district cut-off) are decided by the UGC. | HB Section 6, p.166, p.167; ZedPath policy |
+
 ## Known gaps in the official sources
 
 The 2025/26 handbook does not state: application opening and closing dates (announced by press notice),
 test dates for aptitude tests, a tie-break rule, a re-scrutiny procedure, Mahapola or bursary eligibility rules,
-hostel allocation rules, or the registration deadline. ZedPath shows these as *Estimated* or *Not yet announced*
-(FR-402), never as confirmed facts. Subject means and standard deviations needed for the Z-score estimate (FR-107)
+hostel allocation rules, or the registration deadline. *Revised (CR-002, CR-006):* ZedPath shows these as
+*Not announced yet* with the official rule and its page (FR-402), never as confirmed facts and never as estimated
+dates. Subject means and standard deviations needed for the Z-score estimate (FR-107)
 are not in either source; FR-107 is therefore at risk until those statistics are obtained.
 
 # Verification
@@ -482,45 +641,64 @@ Table: Story-to-requirement traceability (every story in ZP-DOC-02 is covered)
 
 | Story | Title | Requirements |
 |---|---|---|
-| US-101 | Enter my results once | FR-101, FR-102, FR-103, FR-104 |
+| US-101 | Enter my results once | FR-101, FR-102, FR-103, FR-117 (FR-104 superseded) |
 | US-102 | Change my profile at any time | FR-105, FR-106 |
 | US-103 | Estimate my Z-score before results | FR-107, FR-108 |
 | US-104 | Read my results sheet from a photo | FR-109, FR-110, FR-111 |
-| US-105 | Use the app in my language | FR-112 |
+| US-105 | Use the app in my language | FR-112, FR-124 |
+| US-106 | Create an account and use it on any device | FR-114, FR-115, FR-116, FR-117; NFR-036, NFR-037 |
+| US-107 | Get back into my account with a recovery code | FR-118 |
+| US-108 | Delete my account and everything in it | FR-119; NFR-075 |
+| US-109 | Give my contact details with a stated purpose and consent | FR-116, FR-120, FR-121; NFR-030, NFR-070 |
+| US-110 | Choose a profile picture | FR-122 |
+| US-111 | Find my subjects by searching | FR-123 |
 | US-201 | See every course I am eligible for | FR-113, FR-201, FR-202, FR-203 |
 | US-202 | See why a course is hidden from me | FR-204 |
 | US-203 | See Safe / Likely / Reach for each course | FR-205, FR-206, FR-207 |
-| US-204 | Open a course page with sources | FR-208, FR-209 |
+| US-204 | Open a course page with sources | FR-208, FR-209, FR-218 |
 | US-205 | Filter and sort courses | FR-210 |
 | US-206 | Work backwards from a dream course | FR-211, FR-212 |
-| US-207 | Compare two courses | FR-213 |
+| US-207 | Compare up to three courses | FR-213, FR-216, FR-217 |
 | US-208 | See what living there costs | FR-214 |
+| US-209 | Find a course by searching | FR-215 |
 | US-301 | Build my preference list | FR-301, FR-302, FR-308 |
 | US-302 | Get warned about a bad order | FR-303, FR-304, FR-305 |
 | US-303 | Copy uni-codes in order | FR-306 |
 | US-304 | Learn the UGC form step by step | FR-307 |
+| US-305 | Select several courses at once | FR-309, FR-310, FR-311 |
 | US-401 | See my journey with the next step first | FR-401 |
 | US-402 | Know whether a date is confirmed or estimated | FR-402 |
 | US-403 | Be told about aptitude tests for courses on my list | FR-403 |
-| US-404 | Get reminders before deadlines | FR-404, FR-405, FR-406 |
+| US-404 | Get reminders before deadlines | FR-404, FR-412 (FR-405, FR-406 superseded) |
 | US-405 | Check whether a special intake applies to me | FR-407 |
-| US-406 | Add my own steps to the journey | FR-408 |
+| US-406 | Add my own steps to the journey (superseded) | FR-408 (superseded by FR-414, FR-416) |
+| US-407 | Tick my own Journey steps when they open | FR-409, FR-410; NFR-038 |
+| US-408 | Choose how I am reminded | FR-413 |
+| US-409 | Follow a course into my Journey | FR-416 |
+| US-410 | Follow a notice or other path and record that I applied | FR-414, FR-415 |
+| US-411 | Keep my Journey on my account | FR-411; NFR-075 |
 | US-501 | See every route my results open | FR-501 |
 | US-502 | Open a route's details | FR-502 |
-| US-503 | Be alerted about job exams I qualify for | FR-503, FR-504 |
+| US-503 | Be alerted about job exams I qualify for | FR-503, FR-504, FR-509, FR-510, FR-417; NFR-072 |
 | US-504 | Check whether a degree is recognised | FR-505 |
 | US-505 | Check the interest-free loan scheme | FR-506 |
 | US-506 | See scholarships abroad | FR-507 |
-| US-507 | Understand what retrying would take | FR-508 |
+| US-507 | Understand what retrying would take (withdrawn) | FR-508 (withdrawn) |
 | US-601 | Ask a question in my language | FR-601, FR-602 |
 | US-602 | Every answer cites its source | FR-603, FR-604 |
 | US-603 | The assistant won't predict the future | FR-605 |
 | US-604 | Turn an answer into an action | FR-606 |
+| US-605 | Read a clear answer card | FR-607, FR-608, FR-609, FR-610 |
+| US-606 | Tell ZedPath whether an answer helped | FR-611; NFR-073 |
+| US-607 | Let Ask use my achievements and interests | FR-612; NFR-074; BR-080 |
 | US-701 | Share a summary with my family | FR-701, FR-702 |
 | US-702 | Ask a verified senior | FR-703 |
-| US-703 | Become a verified senior | FR-704 |
-| US-704 | Join a group for my batch and target course | FR-705 |
+| US-703 | Become a verified senior | FR-707 (FR-704 superseded) |
+| US-704 | Join a group for my batch and target course | FR-705, FR-715, FR-716, FR-719; UI-4; NFR-043 |
 | US-705 | See my class's progress as a teacher | FR-706 |
+| US-706 | Stay safe in groups | FR-708, FR-709, FR-710, FR-711, FR-712; NFR-039 |
+| US-707 | Accept the group rules once | FR-714 (FR-713 superseded); NFR-038 |
+| US-708 | See a group's details and members, and leave it | FR-717, FR-718; NFR-071 |
 | US-801 | Get my registration checklist | FR-801 |
 | US-802 | Check Mahapola and bursary | FR-802 |
 | US-803 | Plan the gap year | FR-803 |
@@ -543,8 +721,12 @@ Table: Terms and abbreviations used in this document
 | COP | The UGC table of minimum Z-scores ("cut-off points") by course, university and district |
 | NQC | "No Qualified Candidates": a cut-off cell for which no candidate from that district was selected |
 | Offering | One course of study at one university |
+| PBKDF2 | Password-Based Key Derivation Function 2: stretches a password into a key with many hash rounds |
 | SRS | Software Requirements Specification |
 | VAPID | Voluntary Application Server Identification for Web Push (RFC 8292) |
+| Verdict | The one-word answer shown above an Ask answer: Yes, No, It depends or Not in official sources (CR-004) |
+| VR | The product owner's video review of the live app, 11 October 2026 |
+| Window | The period in which a Journey step or *I applied* can be ticked (BR-061, BR-062) |
 
 # References {.appendix}
 
@@ -559,3 +741,4 @@ Table: Sources referred to in this document
 | [5] | W3C, *Web Content Accessibility Guidelines (WCAG) 2.2* |
 | [6] | IETF RFC 5545 (iCalendar), RFC 8030 (Web Push), RFC 8292 (VAPID) |
 | [7] | ZP-DOC-02 User Stories; ZP-DOC-06 Software Architecture |
+| [8] | ZP-DOC-05 Data Design, sections on CR-001 to CR-006 (migrations 0003 and 0005 to 0010) |
