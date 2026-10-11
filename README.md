@@ -113,7 +113,7 @@ In short:
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (179 tests), characterisation tests, planted-bug checks | Rules and accounts proven, not assumed |
+| Tests | Vitest (515 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.
@@ -144,9 +144,9 @@ Each document is available as Markdown (source), Word and PDF.
 | [ZP-DOC-03](docs/03-requirements/) | Software Requirements Specification (80 FR, 32 NFR, 38 business rules) | ISO/IEC/IEEE 29148:2018 | v1.0 approved |
 | [ZP-DOC-04](docs/04-use-cases/) | Use Case Model (18 use cases) | UML 2.5.1, Cockburn | v1.0 approved |
 | [ZP-DOC-05](docs/05-data-design/) | Data Design (EER → relational → normalisation → D1), incl. student accounts | Elmasri and Navathe EER | v0.9 in review |
-| ZP-DOC-06 | Software Architecture | ISO/IEC/IEEE 42010, C4, ADRs | planned |
-| ZP-DOC-07 | UI/UX Specification | Material Design 3, WCAG 2.2 AA | planned |
-| ZP-DOC-08 | Test Plan | ISO/IEC/IEEE 29119-3 | planned |
+| [ZP-DOC-06](docs/06-architecture/) | Software Architecture | ISO/IEC/IEEE 42010, C4, ADRs | v0.9 in review |
+| [ZP-DOC-07](docs/07-ui-ux/) | UI/UX Specification | Material Design 3, WCAG 2.2 AA | v0.9 in review |
+| [ZP-DOC-08](docs/08-test-plan/) | Test Plan + Test Summary Report (1,053 executed cases) | ISO/IEC/IEEE 29119-3 | v0.9 in review |
 
 The documents are built from Markdown by a small TypeScript tool ([docs/_build](docs/_build/)).
 
@@ -163,7 +163,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 npm install
 npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
 npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
-npm test                                            # 179 tests
+npm test                                            # 515 tests (21 perf tests opt-in with PERF=1)
 ```
 
 Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs
