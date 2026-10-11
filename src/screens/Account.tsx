@@ -9,6 +9,7 @@ import { PASSWORD_MAX, PASSWORD_MIN, USERNAME_RE, normaliseUsername, type Extras
 import { ApiFailure, logIn, recover, saveContact, signUp } from '../account.ts';
 import { parseContact, CONSENT_VERSION, type Contact, type ContactField } from '../../shared/contact.ts';
 import { t } from '../i18n/index.ts';
+import { DEMO_CONTACT, DEMO_PASSWORD, DEMO_USERNAME, demoOn } from '../demo.ts';
 import { Rich } from '../i18n/Rich.tsx';
 
 type Mode = 'signup' | 'login' | 'recover';
@@ -88,12 +89,13 @@ export function AuthScreen({ mode, profile, extras, go, onSignedUp, onLoggedIn }
   mode: Mode; profile: ProfileInput | null; extras: Extras; go: (to: string) => void;
   onSignedUp: (username: string, recoveryCode: string) => void; onLoggedIn: (me: MeResponse) => void;
 }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const demo = mode === 'signup' && demoOn();                        // ?demo=kasun: prefilled for the recording (src/demo.ts)
+  const [username, setUsername] = useState(demo ? DEMO_USERNAME : '');
+  const [password, setPassword] = useState(demo ? DEMO_PASSWORD : '');
+  const [confirm, setConfirm] = useState(demo ? DEMO_PASSWORD : '');
   const [code, setCode] = useState('');
   const [invite, setInvite] = useState('');
-  const [contact, setContact] = useState<Contact>(EMPTY);
+  const [contact, setContact] = useState<Contact>(demo ? DEMO_CONTACT : EMPTY);
   const [consent, setConsent] = useState(false);
   const [badField, setBadField] = useState<ContactField | null>(null);
   const [busy, setBusy] = useState(false);

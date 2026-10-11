@@ -13,6 +13,7 @@ import { nameOf } from '../shared/describe.ts';
 import { matches } from '../shared/search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
+import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchJourney, fetchMe, followCourse as apiFollowCourse, followNotice as apiFollowNotice, logOut, logOutEverywhere, markApplied, markStep,
   saveAvatar, saveMe } from './account.ts';
@@ -222,7 +223,8 @@ export function App() {
         {profile ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{t('title.about')}</span>
       </header>
-      <main><AboutFlow meta={meta} initial={profile} extrasInitial={extras} onSave={onSave} /></main>
+      <main><AboutFlow meta={meta} initial={profile ?? (demoOn() ? DEMO_PROFILE : null)}
+        extrasInitial={!profile && demoOn() && !extras.achievements.length && !extras.interests.length ? DEMO_EXTRAS : extras} onSave={onSave} /></main>
     </div>);
 
   // The Journey tab counts open notices the student has not seen yet and is not ruled out for (checked on this phone).
