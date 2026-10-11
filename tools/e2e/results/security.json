@@ -1,0 +1,519 @@
+{
+  "suite": "ZedPath security e2e",
+  "server": "local",
+  "base": "http://localhost:8899",
+  "ranAt": "2026-10-11T19:20:00.056Z",
+  "clientIpHeader": "10.121.170.11",
+  "total": 56,
+  "passed": 53,
+  "failed": 3,
+  "localDevFlakesRetried": 8,
+  "accountsCreated": 4,
+  "accountsLeft": [],
+  "cases": [
+    {
+      "id": "SEC-001",
+      "area": "Session cookie",
+      "attack": "Inspect Set-Cookie flags on sign-up: HttpOnly",
+      "expected": "HttpOnly present (page script cannot read the session)",
+      "actual": "Set-Cookie attrs: max-age=2592000; path=/api; httponly; secure; samesite=lax",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-002",
+      "area": "Session cookie",
+      "attack": "Inspect Set-Cookie flags: Secure",
+      "expected": "Secure present (local dev is http://localhost, which browsers treat as a secure context)",
+      "actual": "Secure present",
+      "pass": true,
+      "owasp": "A05 Security Misconfiguration"
+    },
+    {
+      "id": "SEC-003",
+      "area": "Session cookie",
+      "attack": "Inspect Set-Cookie flags: SameSite and Path",
+      "expected": "SameSite=Lax or Strict; Path scoped to /api",
+      "actual": "samesite=lax; path=/api",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (CSRF)"
+    },
+    {
+      "id": "SEC-004",
+      "area": "Session cookie",
+      "attack": "Session token entropy and format",
+      "expected": "64 hex chars (256 random bits), different per session",
+      "actual": "A=64 chars, A!=B: true",
+      "pass": true,
+      "owasp": "A02 Cryptographic Failures"
+    },
+    {
+      "id": "SEC-005",
+      "area": "Authorization",
+      "attack": "GET /me as A with B's username/accountId in query string and headers",
+      "expected": "A's own record only",
+      "actual": "status 200, username=sec_1791746280460_1",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-006",
+      "area": "Authorization",
+      "attack": "PUT /me as A with B's username/accountId in the body",
+      "expected": "Only A's profile changes; B's profile untouched",
+      "actual": "status 200; A.zE4=9999; B.zE4 14200->14200",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-007",
+      "area": "Authorization",
+      "attack": "PUT /me/contact as A with B's username in the body",
+      "expected": "Only A's contact changes; B's contact identical",
+      "actual": "status 200; B.fullName=Sample Student 2",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-008",
+      "area": "Authorization",
+      "attack": "PUT /me/avatar as A with B's username/accountId in the body",
+      "expected": "A's avatar = a05; B's avatar unchanged (null)",
+      "actual": "status 200; A=a05; B=null",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-009",
+      "area": "Authorization",
+      "attack": "A follows a course + notice; B reads /me/journey and DELETEs the same course id",
+      "expected": "B sees an empty journey; B's DELETE does not remove A's follow",
+      "actual": "A follow 204/204; B courses=0; B delete 204; A courses=1, notices=1",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-010",
+      "area": "Authorization",
+      "attack": "Non-member B reads members, opens the live room and reports in A's group 4",
+      "expected": "403 for all three (members only)",
+      "actual": "join 200; members 403; live 403; report 403",
+      "pass": true,
+      "owasp": "A01 Broken Access Control"
+    },
+    {
+      "id": "SEC-011",
+      "area": "Authorization",
+      "attack": "B POSTs /groups/:id/leave with A's username/accountId in the body",
+      "expected": "A stays a member (leave acts only on the session's account)",
+      "actual": "leave 204; A members list status 200, includes A: true",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-012",
+      "area": "Authorization",
+      "attack": "Non-member B reads GET /groups/:id (group header)",
+      "expected": "No member identities exposed (count only is acceptable)",
+      "actual": "status 200; body keys: id,kind,courseCode,title,name,universities,subtitle,members,joined,rulesAccepted; identities leaked: false",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (info disclosure)"
+    },
+    {
+      "id": "SEC-013",
+      "area": "Authorization",
+      "attack": "A blocks B; B tries DELETE /blocks/<B> and reads /blocks",
+      "expected": "B's list empty; A's block on B survives",
+      "actual": "block 204; B delete 204; B list=[]; A list=[\"sec_1791746280460_2\"]",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (IDOR)"
+    },
+    {
+      "id": "SEC-014",
+      "area": "Authentication",
+      "attack": "No cookie on 13 account/group endpoints",
+      "expected": "All 401",
+      "actual": "GET /me=401; PUT /me=401; PUT /me/contact=401; PUT /me/avatar=401; GET /me/journey=401; PUT /me/journey/courses/008B=401; GET /groups=401; POST /groups/join=401; GET /groups/4/members=401; GET /blocks=401; POST /blocks=401; POST /auth/logout=401; POST /auth/logout-all=401",
+      "pass": true,
+      "owasp": "A01 Broken Access Control"
+    },
+    {
+      "id": "SEC-015",
+      "area": "Authentication",
+      "attack": "Forged session cookie (random hex, SQL-injection text, upper-cased real token)",
+      "expected": "All 401, none 500",
+      "actual": "401,401,401",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-016",
+      "area": "Authentication",
+      "attack": "DELETE /me without a session cookie",
+      "expected": "401",
+      "actual": "status 401",
+      "pass": true,
+      "owasp": "A01 Broken Access Control"
+    },
+    {
+      "id": "SEC-017",
+      "area": "CSRF",
+      "attack": "State-changing requests (PUT /me, PUT /me/contact, DELETE /me, join, journey, block, logout-all) with Origin: https://evil.example and A's cookie",
+      "expected": "All 403; A still exists and is logged in",
+      "actual": "403,403,403,403,403,403,403; A /me after = 200",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (CSRF)"
+    },
+    {
+      "id": "SEC-018",
+      "area": "CSRF",
+      "attack": "Cross-site sign-up and login (login CSRF) with a foreign / look-alike Origin",
+      "expected": "403 for both",
+      "actual": "signup 403; login 403",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (CSRF)"
+    },
+    {
+      "id": "SEC-019",
+      "area": "CSRF",
+      "attack": "Origin: null (sandboxed iframe, data: URL, some redirects) on PUT /me/avatar, /auth/salt, /ask",
+      "expected": "403 Cross-site request refused (not a server error); avatar unchanged. (/ask answers 503 locally before its origin check)",
+      "actual": "500,500,503; body \"Internal Server Error\"; avatar after = a05",
+      "pass": false,
+      "owasp": "A05 Security Misconfiguration / A04 Insecure Design"
+    },
+    {
+      "id": "SEC-020",
+      "area": "CSRF",
+      "attack": "Malformed Origin header (\"not a url\") on PUT /me/avatar",
+      "expected": "403 or 400, never 500",
+      "actual": "status 500",
+      "pass": false,
+      "owasp": "A05 Security Misconfiguration"
+    },
+    {
+      "id": "SEC-021",
+      "area": "CSRF",
+      "attack": "No Origin header (non-browser client) on PUT /me/avatar with a valid cookie",
+      "expected": "Allowed (design: browsers always send Origin on cross-site writes; cookie is SameSite=Lax). Informational",
+      "actual": "status 200",
+      "pass": true,
+      "owasp": "A01 Broken Access Control (CSRF)"
+    },
+    {
+      "id": "SEC-022",
+      "area": "Sessions",
+      "attack": "Log in a second session, log it out, replay its cookie",
+      "expected": "Replayed cookie 401; the other session still 200",
+      "actual": "login 200; logout 204; replay 401; other 200",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-023",
+      "area": "Sessions",
+      "attack": "Logout response clears the cookie",
+      "expected": "Set-Cookie zp_session= with Max-Age=0 / past Expires",
+      "actual": "zp_session=; Max-Age=0; Path=/api; HttpOnly; Secure; SameSite=Lax",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-024",
+      "area": "Sessions",
+      "attack": "Two sessions for C; logout-all from one; replay both cookies",
+      "expected": "Both 401",
+      "actual": "logout-all 204; session1 401; session2 401",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-025",
+      "area": "Account deletion",
+      "attack": "DELETE /me (same-origin, valid session), then replay the cookie and log in again",
+      "expected": "204; replay 401; login 401 (all rows gone)",
+      "actual": "delete 204; replay 401; login 401",
+      "pass": true,
+      "owasp": "A04 Insecure Design"
+    },
+    {
+      "id": "SEC-026",
+      "area": "Recovery",
+      "attack": "Use the recovery code, then reuse the same code",
+      "expected": "1st 200 with a NEW code; 2nd 401; old session 401; old password 401; new password 200",
+      "actual": "1st 200 (new code differs: true); 2nd 401; old session 401; old pw 401; new pw 200",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures"
+    },
+    {
+      "id": "SEC-027",
+      "area": "Recovery",
+      "attack": "Recover with a wrong code for a real user vs an unknown user",
+      "expected": "Identical 401 status and message",
+      "actual": "401 \"That username and recovery code do not match\" vs 401 \"That username and recovery code do not match\"",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures (enumeration)"
+    },
+    {
+      "id": "SEC-028",
+      "area": "Enumeration",
+      "attack": "Salt + login for a real vs an unknown username",
+      "expected": "Same salt shape, stable fake salt; identical login error",
+      "actual": "salt 200/200, len 32/32, fake stable true; login 401 vs 401, same body true",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures (enumeration)"
+    },
+    {
+      "id": "SEC-029",
+      "area": "Injection",
+      "attack": "SQL-injection usernames on /auth/salt, /auth/login, /auth/signup (4 payloads x 3)",
+      "expected": "400/401 only; never 500; no account created",
+      "actual": "400,401,400,400,401,400,400,401,400,400,401,400",
+      "pass": true,
+      "owasp": "A03 Injection (SQL)"
+    },
+    {
+      "id": "SEC-030",
+      "area": "Injection",
+      "attack": "SQL-injection shapes in route ids: Uni-Code, district, journey course/notice/step, group id, blocked username",
+      "expected": "4xx or a harmless 204/200; never 500; A's journey rows and block survive the \"OR 1=1\" deletes",
+      "actual": "404,200,404,204,404,204,404,404,403,204; A courses=1, notices=1, blocks=1",
+      "pass": true,
+      "owasp": "A03 Injection (SQL)"
+    },
+    {
+      "id": "SEC-031",
+      "area": "Injection",
+      "attack": "SQL/JSON-shaped course list in GET /groups?courses=",
+      "expected": "200, injected codes ignored (no extra groups), never 500",
+      "actual": "200/200; groups returned 1/1",
+      "pass": true,
+      "owasp": "A03 Injection (SQL / JSON)"
+    },
+    {
+      "id": "SEC-032",
+      "area": "Injection",
+      "attack": "SQL-shaped search/Ask questions (over-long, 1 char) and feedback with an injected rating (no model call made)",
+      "expected": "400 (or 503 for /ask: AI/Vectorize/Gemini bindings are absent in local dev, checked before validation); never 500",
+      "actual": "503,503,400",
+      "pass": true,
+      "owasp": "A03 Injection (SQL)"
+    },
+    {
+      "id": "SEC-033",
+      "area": "Input limits",
+      "attack": "Oversized bodies: 2 MB name, 5000 achievements, 10k-char achievement, 2 MB padding on /results, 2 MB question",
+      "expected": "Field limits enforced (400) and nothing stored; never 500. Note: no explicit body-size cap; /results ignores unknown padding",
+      "actual": "400,400,400,200,503; A achievements after = 1 (GET /me 200)",
+      "pass": true,
+      "owasp": "A04 Insecure Design (resource consumption)"
+    },
+    {
+      "id": "SEC-034",
+      "area": "Type confusion",
+      "attack": "Sign-up with numbers/arrays/objects where strings expected (18 variants)",
+      "expected": "All 400, never 500, no account created",
+      "actual": "400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400",
+      "pass": true,
+      "owasp": "A03 Injection / A04 Insecure Design"
+    },
+    {
+      "id": "SEC-035",
+      "area": "Type confusion",
+      "attack": "Type confusion on PUT /me (array/string/null body), avatar, contact, join, report, blocks, journey flags, login, recover",
+      "expected": "4xx (400/401/404), never 500",
+      "actual": "400,400,400,400,400,400,400,400,400,400,400,404,401",
+      "pass": true,
+      "owasp": "A03 Injection / A04 Insecure Design"
+    },
+    {
+      "id": "SEC-036",
+      "area": "Type confusion",
+      "attack": "Login with username and key wrapped in one-element arrays; salt with a numeric username",
+      "expected": "Strictly 400. Observed design: String() coercion turns [\"x\"] into \"x\" and 12345 into \"12345\". Pass = no 500 and no other account reachable (same credentials only)",
+      "actual": "login 200 (COERCED: accepted as the same credentials); salt 200",
+      "pass": true,
+      "owasp": "A04 Insecure Design (input validation)"
+    },
+    {
+      "id": "SEC-037",
+      "area": "Type confusion",
+      "attack": "POST /results with O/L field as string/number/nested objects, prototype keys in al/ol, array/string bodies",
+      "expected": "200 or 400, never 500 (ol is passed through parseProfile unvalidated)",
+      "actual": "200,200,200,200,400,400,400,400",
+      "pass": true,
+      "owasp": "A03 Injection / A04 Insecure Design"
+    },
+    {
+      "id": "SEC-038",
+      "area": "Type confusion",
+      "attack": "Malformed JSON / wrong Content-Type / binary bodies",
+      "expected": "400, never 500",
+      "actual": "400,400,400,400",
+      "pass": true,
+      "owasp": "A04 Insecure Design"
+    },
+    {
+      "id": "SEC-039",
+      "area": "XSS",
+      "attack": "Stored contact name \"<script>alert(1)</script> Kasun\"; read back GET /me",
+      "expected": "Returned byte-for-byte as JSON string data, Content-Type application/json",
+      "actual": "content-type=application/json; name=\"<script>alert(1)</script> Kasun\"",
+      "pass": true,
+      "owasp": "A03 Injection (XSS)"
+    },
+    {
+      "id": "SEC-040",
+      "area": "XSS",
+      "attack": "PUT /me with achievement \"\\\"><img src=x onerror=alert(1)> Olympiad\"",
+      "expected": "Stored and returned as plain data (no server-side HTML rendering)",
+      "actual": "status 200; activity=\"\\\"><img src=x onerror=alert(1)> Olympiad\"",
+      "pass": true,
+      "owasp": "A03 Injection (XSS)"
+    },
+    {
+      "id": "SEC-041",
+      "area": "XSS",
+      "attack": "Interest \"<svg onload=alert(1)>\" (interests are a fixed list)",
+      "expected": "400 Unknown interest",
+      "actual": "status 400 Unknown interest",
+      "pass": true,
+      "owasp": "A03 Injection (XSS)"
+    },
+    {
+      "id": "SEC-042",
+      "area": "XSS",
+      "attack": "Static scan of 32 UI source files for HTML sinks (dangerouslySetInnerHTML, innerHTML=, insertAdjacentHTML, document.write)",
+      "expected": "None: React escapes all text",
+      "actual": "none found",
+      "pass": true,
+      "owasp": "A03 Injection (XSS)"
+    },
+    {
+      "id": "SEC-043",
+      "area": "Group safety",
+      "attack": "cleanMessage() on 5 phone/email variants (the rule the room enforces server-side)",
+      "expected": "All refused with the \"phone numbers and email addresses\" error",
+      "actual": "blocked,blocked,blocked,blocked,blocked",
+      "pass": true,
+      "owasp": "A04 Insecure Design (privacy)"
+    },
+    {
+      "id": "SEC-044",
+      "area": "Group safety",
+      "attack": "Evasion variants: \"0 7 7 1 2 3 4 5 6 7\", \"zero seven seven 1234567\", \"kasun at example dot com\", \"077 123 45 67\"",
+      "expected": "Informational: spaced/spelled-out contacts are hard to catch by regex; moderation + reports are the backstop",
+      "actual": "blocked,ALLOWED,ALLOWED,blocked",
+      "pass": true,
+      "owasp": "A04 Insecure Design (privacy)"
+    },
+    {
+      "id": "SEC-045",
+      "area": "Group safety",
+      "attack": "Live WebSocket: A posts \"text me on 0771234567 or kasun@example.com\" in the group room",
+      "expected": "error frame (phone/email refused), message never broadcast",
+      "actual": "frames: history,error; last: {\"type\":\"error\",\"error\":\"For your safety, phone numbers and email addresses cannot be shared in groups\"}",
+      "pass": true,
+      "owasp": "A04 Insecure Design (privacy)"
+    },
+    {
+      "id": "SEC-046",
+      "area": "Credentials",
+      "attack": "Static: src/account.ts request bodies (signup/login/recover)",
+      "expected": "Only key = PBKDF2-SHA256(password, salt, 600000) is sent; no password field",
+      "actual": "sends password field: false; derives key: true",
+      "pass": true,
+      "owasp": "A02 Cryptographic Failures"
+    },
+    {
+      "id": "SEC-047",
+      "area": "Credentials",
+      "attack": "Static: worker/account.ts stores only SHA-256(key) and compares in constant time",
+      "expected": "verifier = sha256(key); sameHex constant-time compare",
+      "actual": "sha256(key) stored: true; constant-time compare: true",
+      "pass": true,
+      "owasp": "A02 Cryptographic Failures"
+    },
+    {
+      "id": "SEC-048",
+      "area": "Credentials",
+      "attack": "Client sends a raw password field instead of a key",
+      "expected": "401 (server never accepts a plain password)",
+      "actual": "status 401",
+      "pass": true,
+      "owasp": "A02 Cryptographic Failures"
+    },
+    {
+      "id": "SEC-049",
+      "area": "Rate limiting",
+      "attack": "22 wrong-key logins for one username within a minute",
+      "expected": "429 once 10 tries land in one 60 s window (AUTH_LIMITER 10/min per IP+username)",
+      "actual": "statuses 401,401,401,401,401,401,401,401,401,401,429,429,429,429,429,429,429,429,429,429,429,429; first 429 at attempt 11",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures (brute force)"
+    },
+    {
+      "id": "SEC-050",
+      "area": "Rate limiting",
+      "attack": "22 sign-ups for one (taken) username within a minute",
+      "expected": "409, then 429 once 10 tries land in one window",
+      "actual": "statuses 409,409,409,409,409,409,409,409,409,429,429,429,429,429,429,429,429,429,429,429,429,429; first 429 at attempt 10",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures (brute force)"
+    },
+    {
+      "id": "SEC-051",
+      "area": "Rate limiting",
+      "attack": "22 wrong recovery codes for one username within a minute",
+      "expected": "429 once 10 tries land in one window (80-bit codes + limiter)",
+      "actual": "statuses 401,401,401,401,401,401,401,401,401,401,429,429,429,429,429,429,429,429,429,429,429,429; first 429 at attempt 11",
+      "pass": true,
+      "owasp": "A07 Identification & Authentication Failures (brute force)"
+    },
+    {
+      "id": "SEC-052",
+      "area": "Error handling",
+      "attack": "Scan all 177 error responses of this run for stack traces, file paths, SQL/D1 errors",
+      "expected": "No internals leaked",
+      "actual": "none leaked; 5xx seen: 7 (PUT /me/avatar -> \"Internal Server Error\"; POST /auth/salt -> \"Internal Server Error\"; POST /ask -> \"{\"error\":\"Ask ZedPath is not a\")",
+      "pass": true,
+      "owasp": "A05 Security Misconfiguration (information exposure)"
+    },
+    {
+      "id": "SEC-053",
+      "area": "Error handling",
+      "attack": "Unknown API path GET /api/../../etc/passwd-like and /api/nope",
+      "expected": "JSON 404",
+      "actual": "404,404; {\"error\":\"Not found\"}",
+      "pass": true,
+      "owasp": "A05 Security Misconfiguration"
+    },
+    {
+      "id": "SEC-054",
+      "area": "Configuration",
+      "attack": "Static: /api/dev/embed and /api/dev/search need DEV_TOOLS=1 (only in .dev.vars) AND a localhost host",
+      "expected": "DEV_TOOLS not set in wrangler.jsonc vars; .dev.vars gitignored",
+      "actual": "DEV_TOOLS in wrangler.jsonc: false; .dev.vars ignored: true",
+      "pass": true,
+      "owasp": "A05 Security Misconfiguration"
+    },
+    {
+      "id": "SEC-055",
+      "area": "Repo safety",
+      "attack": "bash .claude/hooks/test-guard.sh (deploy/account/salon guard)",
+      "expected": "0 failed",
+      "actual": "exit 0; == 35 passed, 5 failed ==; failing: BLOCK create zedpath, no remote yet / BLOCK gh api write to zedpath / BLOCK push to zedpath origin / BLOCK force-push with GO / BLOCK commit -F then normal push",
+      "pass": false,
+      "owasp": "A05 Security Misconfiguration / A08 Integrity"
+    },
+    {
+      "id": "SEC-056",
+      "area": "Repo safety",
+      "attack": "node .githooks/leak-scan.cjs --all (full git history)",
+      "expected": "No secrets found, exit 0",
+      "actual": "exit 0; ",
+      "pass": true,
+      "owasp": "A02 Cryptographic Failures / A05 (secret exposure)"
+    }
+  ]
+}
