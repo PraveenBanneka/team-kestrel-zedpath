@@ -1,0 +1,204 @@
+{
+  "suite": "pwa",
+  "server": "local (http://localhost:8899, wrangler dev serving dist/client)",
+  "viewport": "390x844",
+  "ranAt": "2026-10-11T19:14:40.325Z",
+  "totals": {
+    "cases": 21,
+    "pass": 20,
+    "fail": 1,
+    "blocked": 0
+  },
+  "note": "The local server hung for ~8 min at the start of the run (TCP accepted, no HTTP reply; curl 000) and recovered on its own; it was not restarted. Browser cases use fresh agent-browser profiles (sessions pwa2..pwa5). Offline emulation: `agent-browser set offline on` does NOT survive a CLI `open`/`reload` (the navigation went to the network: /api/me returned 401), so every offline navigation here is an in-page location.replace() after offline was set, confirmed by a fetch log (init script) showing /api/* 'Failed to fetch'.",
+  "cases": [
+    {
+      "id": "PWA-001",
+      "area": "Manifest",
+      "title": "index.html links the web manifest",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "<link rel=\"manifest\" href=\"/manifest.webmanifest\">",
+      "actual": "present",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-002",
+      "area": "Manifest",
+      "title": "manifest is valid JSON with installability fields",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "parses; name, short_name, start_url, scope, display=standalone, theme/background colour, any-purpose 192 + 512 icons",
+      "actual": "name=\"ZedPath: everything after A/Ls\", short_name=\"ZedPath\", start_url=\"/?source=pwa\", scope=\"/\", display=\"standalone\", id=\"/\", theme=\"#2A4A7F\", bg=\"#F4F5F7\", icons=192x192/any, 512x512/any, 512x512/maskable, any/any, 512x512/monochrome",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-003",
+      "area": "Icons",
+      "title": "every manifest icon file exists (PNG signature valid) + apple-touch-icon",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "all icon files present, PNG signature valid",
+      "actual": "/icons/icon-192.png=3960B; /icons/icon-512.png=12288B; /icons/maskable-512.png=8425B; /icons/icon.svg=present; /icons/monochrome-512.png=6632B; apple-touch-icon=2595B",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-004",
+      "area": "Shell",
+      "title": "theme-color meta present and matches manifest",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "meta theme-color = manifest theme_color (#2A4A7F)",
+      "actual": "meta theme-color=#2A4A7F",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-005",
+      "area": "Service worker",
+      "title": "built bundle registers /sw.js (PROD guard compiled away)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "bundle contains navigator.serviceWorker.register('/sw.js') with no dev-only guard",
+      "actual": "register('/sw.js') on window load present; import.meta.env.PROD folded to true",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-006",
+      "area": "Offline",
+      "title": "sw.js precaches the app shell on install",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "install caches '/', manifest, icons then skipWaiting; activate deletes old caches + clients.claim",
+      "actual": "SHELL=['/', '/manifest.webmanifest', '/icons/icon.svg', '/icons/icon-192.png']; skipWaiting=true; clients.claim=true; old-cache cleanup=true",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-007",
+      "area": "API",
+      "title": "sw.js never handles or caches /api/ (static)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "fetch handler returns early for non-GET, cross-origin and /api/ requests",
+      "actual": "early return for non-GET || cross-origin || /api/ present",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-008",
+      "area": "Caching",
+      "title": "hashed /assets/* cache-first and stored on first fetch (static)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "cache-first for /assets/ and /icons/, stored in the versioned cache; built filenames content-hashed",
+      "actual": "cache-first branch=true; built assets: index-CnwVxMJ1.js, index-X5nxDzOi.css",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-009",
+      "area": "Offline",
+      "title": "navigations: network first, cached \"/\" fallback offline (static)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "navigate: fetch + refresh cached '/'; on failure caches.match('/')",
+      "actual": "refresh '/'=true; offline fallback=true",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-010",
+      "area": "Notifications",
+      "title": "notificationclick handler present (static)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "closes the notification; focuses an open same-origin window and navigates to data.url, else opens a window",
+      "actual": "listener=true; close=true; focus+navigate=true; openWindow=true; target resolved on own origin=true",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-011",
+      "area": "Install",
+      "title": "install prompt hidden when already standalone (static, src/pwa.ts)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "canInstall = deferred && !matchMedia('(display-mode: standalone)'); beforeinstallprompt preventDefault; reset on appinstalled; UI gated on canInstall",
+      "actual": "standalone check=true; canInstall=!!deferred && !installed: true; preventDefault=true; appinstalled resets=true; install buttons gated on install.canInstall: 2",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-012",
+      "area": "Offline",
+      "title": "offline screen logic: failed account check shows message + Retry (static)",
+      "method": "static (built dist/client, the files wrangler dev serves)",
+      "expected": "onboarded && !me && offline -> app.offline text + Retry re-running checkAccount",
+      "actual": "branch present=true; Retry->checkAccount=true; en text=\"No connection. ZedPath needs the internet to check your account.\"",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-013",
+      "area": "Service worker",
+      "title": "service worker registers and controls the page after reload",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "registration scope http://localhost:8899/, active /sw.js; after reload navigator.serviceWorker.controller.scriptURL = /sw.js",
+      "actual": "first load: reg=true, scope=http://localhost:8899/, active=/sw.js, controller already set (clients.claim); after reload controller=http://localhost:8899/sw.js; viewport 390x844",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-014",
+      "area": "Caching",
+      "title": "hashed assets in the SW cache after reload",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "caches.keys()=['zedpath-v2'] holding /, manifest, icons and /assets/index-CnwVxMJ1.js + index-X5nxDzOi.css",
+      "actual": "after reload: zedpath-v2 = /, /manifest.webmanifest, /icons/icon.svg, /icons/icon-192.png, /assets/index-CnwVxMJ1.js, /assets/index-X5nxDzOi.css",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-015",
+      "area": "Caching",
+      "title": "hashed assets in the SW cache after exactly ONE visit",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "entry JS + CSS precached by the SW on its first install, so offline does not depend on the browser HTTP cache",
+      "actual": "after one visit (SW active, controlling): zedpath-v2 = /, /manifest.webmanifest, /icons/icon.svg, /icons/icon-192.png only. The first page fetched its JS/CSS before the SW (registered on window load) existed, and SHELL does not list them",
+      "result": "fail"
+    },
+    {
+      "id": "PWA-016",
+      "area": "API",
+      "title": "no /api/ entries in any cache after using the app",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "no cached request path starts with /api/",
+      "actual": "after /api/meta 200, /api/routes 200, /api/journey 200, /api/me 401 (app + manual calls): 6 cache entries, 0 under /api/",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-017",
+      "area": "Offline",
+      "title": "app shell loads offline after first visit",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "fresh profile, one visit, then offline navigation: ZedPath shell renders",
+      "actual": "rendered Welcome ('Everything after A/Ls, in one place.'); navigation served by the SW (workerStart 11.5 ms, cached '/'); /api/* 'Failed to fetch'; index-*.js/css came from the browser HTTP cache (deliveryType=cache, transfer 0) via the SW's cache-miss fetch, and were stored in the SW cache only then. Screenshot screens/pwa-offline-first-visit.png",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-018",
+      "area": "Offline",
+      "title": "offline / retry screen when the account check cannot reach the server",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "onboarded flag + no connection, open #/paths: 'No connection. ZedPath needs the internet to check your account.' + a retry button; back online, retry continues",
+      "actual": "text 'No connection. ZedPath needs the internet to check your account.' + button 'Try again' (only button); online again, Try again -> /api/me 401 -> #/signup. Screenshot screens/pwa-offline-retry.png",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-019",
+      "area": "Routing",
+      "title": "deep link #/paths after reload, fresh phone (logged out)",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "Welcome screen (first run), no crash",
+      "actual": "hash stays #/paths, Welcome screen shown, /api/me 401 handled. Screenshot screens/pwa-deeplink-paths-fresh.png",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-020",
+      "area": "Routing",
+      "title": "deep link #/journey after reload, onboarded flag but no session",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "redirects to #/signup",
+      "actual": "start #/journey, /api/me 401, hashchange -> #/signup (Create account screen)",
+      "result": "pass"
+    },
+    {
+      "id": "PWA-021",
+      "area": "Routing",
+      "title": "deep link #/me after reload, onboarded flag but no session",
+      "method": "browser (agent-browser) at 390x844 against http://localhost:8899",
+      "expected": "redirects to #/signup",
+      "actual": "start #/me, /api/me 401, hashchange -> #/signup within ~80 ms",
+      "result": "pass"
+    }
+  ]
+}
