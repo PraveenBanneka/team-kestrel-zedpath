@@ -1,0 +1,2298 @@
+{
+  "summary": {
+    "suite": "ZedPath API end-to-end",
+    "server": "local (wrangler dev --local)",
+    "startedAt": "2026-10-11T19:11:54.135Z",
+    "durationMs": 30442,
+    "total": 228,
+    "executed": 218,
+    "passed": 211,
+    "failed": 7,
+    "skipped": 10,
+    "aborted": null,
+    "accountsCreated": 4,
+    "accountsLeft": 0
+  },
+  "cases": [
+    {
+      "id": "E2E-API-001",
+      "area": "Meta & static data",
+      "title": "GET /health returns ok and the academic year",
+      "trace": "NFR-040",
+      "expected": "200 {ok:true, academicYear:\"2025/2026\"}",
+      "actual": "200 ok=true rules=RECONCILED",
+      "result": "PASS",
+      "ms": 35
+    },
+    {
+      "id": "E2E-API-002",
+      "area": "Meta & static data",
+      "title": "GET /meta lists the 6 A/L streams",
+      "trace": "BR-010",
+      "expected": "200, 6 streams",
+      "actual": "200 streams=ARTS,COMMERCE,BIO,PHYS,ET,BST",
+      "result": "PASS",
+      "ms": 67
+    },
+    {
+      "id": "E2E-API-003",
+      "area": "Meta & static data",
+      "title": "GET /meta lists the 25 districts",
+      "trace": "BR-006",
+      "expected": "25 districts",
+      "actual": "districts=25",
+      "result": "PASS",
+      "ms": 87
+    },
+    {
+      "id": "E2E-API-004",
+      "area": "Meta & static data",
+      "title": "GET /meta lists cited sources",
+      "trace": "FR-209, NFR-050",
+      "expected": "sources non-empty",
+      "actual": "5 sources",
+      "result": "PASS",
+      "ms": 76
+    },
+    {
+      "id": "E2E-API-005",
+      "area": "Meta & static data",
+      "title": "GET /meta lists subjects",
+      "trace": "BR-012",
+      "expected": "subjects > 40",
+      "actual": "subjects=59",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-API-006",
+      "area": "Meta & static data",
+      "title": "GET /meta with matching If-None-Match -> 304",
+      "trace": "NFR-003",
+      "expected": "304, ETag present",
+      "actual": "304",
+      "result": "PASS",
+      "ms": 85
+    },
+    {
+      "id": "E2E-API-007",
+      "area": "Meta & static data",
+      "title": "GET /routes lists every other route with an openNow flag",
+      "trace": "FR-501, FR-503",
+      "expected": "200, each id R### with boolean openNow",
+      "actual": "200 routes=52, open now=4",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-API-008",
+      "area": "Meta & static data",
+      "title": "GET /routes is cacheable for 5 minutes",
+      "trace": "NFR-011",
+      "expected": "Cache-Control has max-age=300",
+      "actual": "public, max-age=300",
+      "result": "PASS",
+      "ms": 90
+    },
+    {
+      "id": "E2E-API-009",
+      "area": "Meta & static data",
+      "title": "GET /journey returns steps and notices (no build stamp)",
+      "trace": "BR-060, FR-401",
+      "expected": "200, steps + notices arrays, no builtAt",
+      "actual": "200 steps=5 notices=5",
+      "result": "PASS",
+      "ms": 69
+    },
+    {
+      "id": "E2E-API-010",
+      "area": "Meta & static data",
+      "title": "GET /journey with matching If-None-Match -> 304",
+      "trace": "NFR-003",
+      "expected": "304",
+      "actual": "304",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-011",
+      "area": "Meta & static data",
+      "title": "Unknown API route -> 404 JSON",
+      "trace": "n/a",
+      "expected": "404 {error:\"Not found\"}",
+      "actual": "404 \"Not found\"",
+      "result": "PASS",
+      "ms": 16
+    },
+    {
+      "id": "E2E-API-012",
+      "area": "Meta & static data",
+      "title": "Wrong method: POST /meta -> 404",
+      "trace": "n/a",
+      "expected": "404",
+      "actual": "404 \"Not found\"",
+      "result": "PASS",
+      "ms": 92
+    },
+    {
+      "id": "E2E-API-013",
+      "area": "Meta & static data",
+      "title": "Wrong method: GET /results -> 404",
+      "trace": "n/a",
+      "expected": "404",
+      "actual": "404 \"Not found\"",
+      "result": "PASS",
+      "ms": 90
+    },
+    {
+      "id": "E2E-API-014",
+      "area": "Meta & static data",
+      "title": "Wrong method: DELETE /routes -> 404",
+      "trace": "n/a",
+      "expected": "404",
+      "actual": "404 \"Not found\"",
+      "result": "PASS",
+      "ms": 19
+    },
+    {
+      "id": "E2E-API-015",
+      "area": "Results & banding",
+      "title": "POST /results for a PHYS profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=89 hidden=166 counts={\"SAFE\":42,\"LIKELY\":4,\"REACH\":16,\"OUT_OF_RANGE\":26,\"NOT_ENOUGH_DATA\":1}",
+      "result": "PASS",
+      "ms": 121
+    },
+    {
+      "id": "E2E-API-016",
+      "area": "Results & banding",
+      "title": "POST /results for a BIO profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=121 hidden=134 counts={\"SAFE\":75,\"LIKELY\":1,\"REACH\":16,\"OUT_OF_RANGE\":29,\"NOT_ENOUGH_DATA\":0}",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-API-017",
+      "area": "Results & banding",
+      "title": "POST /results for a COMMERCE profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=52 hidden=205 counts={\"SAFE\":4,\"LIKELY\":2,\"REACH\":1,\"OUT_OF_RANGE\":45,\"NOT_ENOUGH_DATA\":0}",
+      "result": "PASS",
+      "ms": 73
+    },
+    {
+      "id": "E2E-API-018",
+      "area": "Results & banding",
+      "title": "POST /results for a ARTS profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=40 hidden=215 counts={\"SAFE\":1,\"LIKELY\":4,\"REACH\":2,\"OUT_OF_RANGE\":31,\"NOT_ENOUGH_DATA\":2}",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-019",
+      "area": "Results & banding",
+      "title": "POST /results for a ET profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=41 hidden=214 counts={\"SAFE\":3,\"LIKELY\":2,\"REACH\":4,\"OUT_OF_RANGE\":30,\"NOT_ENOUGH_DATA\":2}",
+      "result": "PASS",
+      "ms": 56
+    },
+    {
+      "id": "E2E-API-020",
+      "area": "Results & banding",
+      "title": "POST /results for a BST profile",
+      "trace": "FR-201, FR-205",
+      "expected": "200; every offering has one valid band; counts add up",
+      "actual": "200 offerings=28 hidden=227 counts={\"SAFE\":2,\"LIKELY\":1,\"REACH\":3,\"OUT_OF_RANGE\":22,\"NOT_ENOUGH_DATA\":0}",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-API-021",
+      "area": "Results & banding",
+      "title": "ARTS profile hides science-only courses with the rule quoted",
+      "trace": "FR-204",
+      "expected": "hidden > 0, each with reason + page",
+      "actual": "hidden=215",
+      "result": "PASS",
+      "ms": 37
+    },
+    {
+      "id": "E2E-API-022",
+      "area": "Results & banding",
+      "title": "Very high Z (+3.0000, PHYS) gives Safe offerings",
+      "trace": "BR-032",
+      "expected": "counts.SAFE > 0",
+      "actual": "{\"SAFE\":88,\"LIKELY\":0,\"REACH\":0,\"OUT_OF_RANGE\":0,\"NOT_ENOUGH_DATA\":1}",
+      "result": "PASS",
+      "ms": 84
+    },
+    {
+      "id": "E2E-API-023",
+      "area": "Results & banding",
+      "title": "Very low Z (-3.0000, PHYS) gives no Safe offering",
+      "trace": "BR-032",
+      "expected": "counts.SAFE = 0",
+      "actual": "{\"SAFE\":0,\"LIKELY\":0,\"REACH\":0,\"OUT_OF_RANGE\":88,\"NOT_ENOUGH_DATA\":1}",
+      "result": "PASS",
+      "ms": 75
+    },
+    {
+      "id": "E2E-API-024",
+      "area": "Results & banding",
+      "title": "Banded offerings carry the latest cut-off and the gap",
+      "trace": "FR-206, FR-208",
+      "expected": "latestE4 and gapToLatestE4 integers where banded",
+      "actual": "banded=88, sample gap=-4521",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-API-025",
+      "area": "Results & banding",
+      "title": "computedAt is an ISO time; no \"guarantee\" wording",
+      "trace": "FR-207",
+      "expected": "ISO date; no \"guarantee\" in body",
+      "actual": "computedAt=2026-10-11T19:11:55.879Z",
+      "result": "PASS",
+      "ms": 48
+    },
+    {
+      "id": "E2E-API-026",
+      "area": "Results & banding",
+      "title": "Edge Z = +4.0000 accepted",
+      "trace": "BR-005, FR-102",
+      "expected": "200",
+      "actual": "200",
+      "result": "PASS",
+      "ms": 64
+    },
+    {
+      "id": "E2E-API-027",
+      "area": "Results & banding",
+      "title": "Edge Z = -4.0000 accepted",
+      "trace": "BR-005, FR-102",
+      "expected": "200",
+      "actual": "200",
+      "result": "PASS",
+      "ms": 86
+    },
+    {
+      "id": "E2E-API-028",
+      "area": "Results & banding",
+      "title": "Edge Z = 0.0000 accepted",
+      "trace": "BR-005",
+      "expected": "200",
+      "actual": "200",
+      "result": "PASS",
+      "ms": 105
+    },
+    {
+      "id": "E2E-API-029",
+      "area": "Results & banding",
+      "title": "Z = +4.0001 rejected",
+      "trace": "BR-005, FR-102",
+      "expected": "400 field=zE4",
+      "actual": "400 \"Z-score must be between −4.0000 and +4.0000\" field=zE4",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-030",
+      "area": "Results & banding",
+      "title": "Z = -4.0001 rejected",
+      "trace": "BR-005, FR-102",
+      "expected": "400 field=zE4",
+      "actual": "400 \"Z-score must be between −4.0000 and +4.0000\" field=zE4",
+      "result": "PASS",
+      "ms": 25
+    },
+    {
+      "id": "E2E-API-031",
+      "area": "Results & banding",
+      "title": "Z with a fifth decimal (non-integer zE4) rejected",
+      "trace": "FR-102",
+      "expected": "400 field=zE4",
+      "actual": "400 \"Z-score must be between −4.0000 and +4.0000\" field=zE4",
+      "result": "PASS",
+      "ms": 21
+    },
+    {
+      "id": "E2E-API-032",
+      "area": "Results & banding",
+      "title": "Z sent as a string rejected",
+      "trace": "FR-102, NFR-035",
+      "expected": "400 field=zE4",
+      "actual": "400 \"Z-score must be between −4.0000 and +4.0000\" field=zE4",
+      "result": "PASS",
+      "ms": 32
+    },
+    {
+      "id": "E2E-API-033",
+      "area": "Results & banding",
+      "title": "Unknown stream rejected",
+      "trace": "BR-010, NFR-035",
+      "expected": "400 field=stream",
+      "actual": "400 \"Unknown stream\" field=stream",
+      "result": "PASS",
+      "ms": 39
+    },
+    {
+      "id": "E2E-API-034",
+      "area": "Results & banding",
+      "title": "Unknown district rejected",
+      "trace": "BR-006, NFR-035",
+      "expected": "400 field=district",
+      "actual": "400 \"Unknown district\" field=district",
+      "result": "PASS",
+      "ms": 29
+    },
+    {
+      "id": "E2E-API-035",
+      "area": "Results & banding",
+      "title": "Two subjects rejected",
+      "trace": "BR-001",
+      "expected": "400 field=al",
+      "actual": "400 \"Enter exactly three A/L subjects\" field=al",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-036",
+      "area": "Results & banding",
+      "title": "Four subjects rejected",
+      "trace": "BR-001",
+      "expected": "400 field=al",
+      "actual": "400 \"Enter exactly three A/L subjects\" field=al",
+      "result": "PASS",
+      "ms": 39
+    },
+    {
+      "id": "E2E-API-037",
+      "area": "Results & banding",
+      "title": "Grade F rejected",
+      "trace": "BR-011",
+      "expected": "400 field=al",
+      "actual": "400 \"Each subject needs a grade of A, B, C or S\" field=al",
+      "result": "PASS",
+      "ms": 63
+    },
+    {
+      "id": "E2E-API-038",
+      "area": "Results & banding",
+      "title": "Malformed subject code rejected",
+      "trace": "NFR-035",
+      "expected": "400 field=al",
+      "actual": "400 \"Each subject needs a grade of A, B, C or S\" field=al",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-039",
+      "area": "Results & banding",
+      "title": "Invalid JSON body rejected",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "400 \"A JSON profile is required\"",
+      "result": "PASS",
+      "ms": 27
+    },
+    {
+      "id": "E2E-API-040",
+      "area": "Results & banding",
+      "title": "JSON null body rejected",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "400 \"A JSON profile is required\"",
+      "result": "PASS",
+      "ms": 45
+    },
+    {
+      "id": "E2E-API-041",
+      "area": "Offerings",
+      "title": "GET /offerings/001A returns detail with a citation",
+      "trace": "FR-208, FR-209",
+      "expected": "200, uniCode 001A, requirementCitation.page",
+      "actual": "200 Medicine @ UNIVERSITY OF COLOMBO",
+      "result": "PASS",
+      "ms": 40
+    },
+    {
+      "id": "E2E-API-042",
+      "area": "Offerings",
+      "title": "Uni-Code lookup is case-insensitive (001a)",
+      "trace": "BR-015",
+      "expected": "200 uniCode 001A",
+      "actual": "200 001A",
+      "result": "PASS",
+      "ms": 40
+    },
+    {
+      "id": "E2E-API-043",
+      "area": "Offerings",
+      "title": "History without a district has null cut-offs",
+      "trace": "FR-208",
+      "expected": "every history zE4 null",
+      "actual": "5 years, all null",
+      "result": "PASS",
+      "ms": 31
+    },
+    {
+      "id": "E2E-API-044",
+      "area": "Offerings",
+      "title": "History with ?district=COL has cut-offs, each year cited",
+      "trace": "FR-208, FR-209",
+      "expected": "some zE4 numeric; every year has a citation page",
+      "actual": "5 years; first 22721",
+      "result": "PASS",
+      "ms": 21
+    },
+    {
+      "id": "E2E-API-045",
+      "area": "Offerings",
+      "title": "Requirement lines (needs) present",
+      "trace": "FR-202",
+      "expected": "needs non-empty array",
+      "actual": "4 lines",
+      "result": "PASS",
+      "ms": 35
+    },
+    {
+      "id": "E2E-API-046",
+      "area": "Offerings",
+      "title": "Unknown Uni-Code -> 404",
+      "trace": "BR-015",
+      "expected": "404",
+      "actual": "404 \"No such Uni-Code\"",
+      "result": "PASS",
+      "ms": 31
+    },
+    {
+      "id": "E2E-API-047",
+      "area": "Offerings",
+      "title": "Injection-like Uni-Code -> 404",
+      "trace": "NFR-035",
+      "expected": "404",
+      "actual": "404 \"No such Uni-Code\"",
+      "result": "PASS",
+      "ms": 47
+    },
+    {
+      "id": "E2E-API-048",
+      "area": "Offerings",
+      "title": "Offering detail with matching If-None-Match -> 304",
+      "trace": "NFR-003",
+      "expected": "304",
+      "actual": "304",
+      "result": "PASS",
+      "ms": 72
+    },
+    {
+      "id": "E2E-API-049",
+      "area": "Auth: sign-up validation",
+      "title": "Username too short (\"ab\")",
+      "trace": "BR-050",
+      "expected": "400 field=username",
+      "actual": "400 \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\" field=username",
+      "result": "PASS",
+      "ms": 31
+    },
+    {
+      "id": "E2E-API-050",
+      "area": "Auth: sign-up validation",
+      "title": "Username with illegal characters",
+      "trace": "BR-050",
+      "expected": "400 field=username",
+      "actual": "400 \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\" field=username",
+      "result": "PASS",
+      "ms": 28
+    },
+    {
+      "id": "E2E-API-051",
+      "area": "Auth: sign-up validation",
+      "title": "Username too long (25 characters)",
+      "trace": "BR-050",
+      "expected": "400 field=username",
+      "actual": "400 \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\" field=username",
+      "result": "PASS",
+      "ms": 33
+    },
+    {
+      "id": "E2E-API-052",
+      "area": "Auth: sign-up validation",
+      "title": "Key too short",
+      "trace": "NFR-036",
+      "expected": "400 field=key",
+      "actual": "400 \"Malformed sign-up request\" field=key",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-API-053",
+      "area": "Auth: sign-up validation",
+      "title": "Key in upper-case hex",
+      "trace": "NFR-036",
+      "expected": "400 field=key",
+      "actual": "400 \"Malformed sign-up request\" field=key",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-054",
+      "area": "Auth: sign-up validation",
+      "title": "Full name of 1 character",
+      "trace": "BR-052",
+      "expected": "400 field=fullName",
+      "actual": "400 \"Enter your full name\" field=fullName",
+      "result": "PASS",
+      "ms": 48
+    },
+    {
+      "id": "E2E-API-055",
+      "area": "Auth: sign-up validation",
+      "title": "Full name over 80 characters",
+      "trace": "BR-052",
+      "expected": "400 field=fullName",
+      "actual": "400 \"Enter your full name\" field=fullName",
+      "result": "PASS",
+      "ms": 66
+    },
+    {
+      "id": "E2E-API-056",
+      "area": "Auth: sign-up validation",
+      "title": "Email without a domain",
+      "trace": "BR-053",
+      "expected": "400 field=email",
+      "actual": "400 \"Enter a valid email address\" field=email",
+      "result": "PASS",
+      "ms": 47
+    },
+    {
+      "id": "E2E-API-057",
+      "area": "Auth: sign-up validation",
+      "title": "Email with a space",
+      "trace": "BR-053",
+      "expected": "400 field=email",
+      "actual": "400 \"Enter a valid email address\" field=email",
+      "result": "PASS",
+      "ms": 46
+    },
+    {
+      "id": "E2E-API-058",
+      "area": "Auth: sign-up validation",
+      "title": "Mobile too short",
+      "trace": "BR-054",
+      "expected": "400 field=mobile",
+      "actual": "400 \"Enter a Sri Lankan mobile number, for example 071 234 5678\" field=mobile",
+      "result": "PASS",
+      "ms": 50
+    },
+    {
+      "id": "E2E-API-059",
+      "area": "Auth: sign-up validation",
+      "title": "Landline instead of a mobile",
+      "trace": "BR-054",
+      "expected": "400 field=mobile",
+      "actual": "400 \"Enter a Sri Lankan mobile number, for example 071 234 5678\" field=mobile",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-API-060",
+      "area": "Auth: sign-up validation",
+      "title": "Birth date not a real date (2006-02-30)",
+      "trace": "BR-055",
+      "expected": "400 field=birthDate",
+      "actual": "400 \"Enter your date of birth\" field=birthDate",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-061",
+      "area": "Auth: sign-up validation",
+      "title": "Birth date in the wrong format",
+      "trace": "BR-055",
+      "expected": "400 field=birthDate",
+      "actual": "400 \"Enter your date of birth\" field=birthDate",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-API-062",
+      "area": "Auth: sign-up validation",
+      "title": "Under 13 (12 years old)",
+      "trace": "BR-055",
+      "expected": "400 field=birthDate",
+      "actual": "400 \"Check your date of birth\" field=birthDate",
+      "result": "PASS",
+      "ms": 188
+    },
+    {
+      "id": "E2E-API-063",
+      "area": "Auth: sign-up validation",
+      "title": "Over 70 (71 years old)",
+      "trace": "BR-055",
+      "expected": "400 field=birthDate",
+      "actual": "400 \"Check your date of birth\" field=birthDate",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-064",
+      "area": "Auth: sign-up validation",
+      "title": "Consent missing",
+      "trace": "BR-057, FR-121",
+      "expected": "400 field=consent",
+      "actual": "400 \"Please read and agree to how ZedPath uses your details\" field=consent",
+      "result": "PASS",
+      "ms": 66
+    },
+    {
+      "id": "E2E-API-065",
+      "area": "Auth: sign-up validation",
+      "title": "Consent of an old wording version",
+      "trace": "BR-057",
+      "expected": "400 field=consent",
+      "actual": "400 \"Please read and agree to how ZedPath uses your details\" field=consent",
+      "result": "PASS",
+      "ms": 34
+    },
+    {
+      "id": "E2E-API-066",
+      "area": "Auth: sign-up validation",
+      "title": "Contact details missing",
+      "trace": "FR-116",
+      "expected": "400 field=fullName",
+      "actual": "400 \"Enter your full name\" field=fullName",
+      "result": "PASS",
+      "ms": 79
+    },
+    {
+      "id": "E2E-API-067",
+      "area": "Auth: sign-up validation",
+      "title": "Profile with an unknown stream",
+      "trace": "FR-117, NFR-035",
+      "expected": "400 field=stream",
+      "actual": "400 \"Unknown stream\" field=stream",
+      "result": "PASS",
+      "ms": 106
+    },
+    {
+      "id": "E2E-API-068",
+      "area": "Auth: sign-up validation",
+      "title": "Profile with an unknown subject (strict on save)",
+      "trace": "NFR-035",
+      "expected": "400 field=al",
+      "actual": "400 \"Unknown subject\" field=al",
+      "result": "PASS",
+      "ms": 30
+    },
+    {
+      "id": "E2E-API-069",
+      "area": "Auth: sign-up validation",
+      "title": "Unknown interest",
+      "trace": "FR-612",
+      "expected": "400 field=interests",
+      "actual": "400 \"Unknown interest\" field=interests",
+      "result": "PASS",
+      "ms": 29
+    },
+    {
+      "id": "E2E-API-070",
+      "area": "Auth: sign-up validation",
+      "title": "Achievement with an unknown level",
+      "trace": "BR-080",
+      "expected": "400 field=achievements",
+      "actual": "400 \"An achievement has an unknown type, level, result or year\" field=achievements",
+      "result": "PASS",
+      "ms": 71
+    },
+    {
+      "id": "E2E-API-071",
+      "area": "Auth: sign-up validation",
+      "title": "Invite code in the wrong format",
+      "trace": "FR-707",
+      "expected": "400 field=inviteCode",
+      "actual": "400 \"That invite code is not in the right format\" field=inviteCode",
+      "result": "PASS",
+      "ms": 73
+    },
+    {
+      "id": "E2E-API-072",
+      "area": "Auth: sign-up validation",
+      "title": "Age exactly 13 passes the birth-date rule",
+      "trace": "BR-055",
+      "expected": "not refused on birthDate",
+      "actual": "400 \"That invite code is not valid, already used or expired\" field=inviteCode (stopped at the invite check, after the birth-date rule)",
+      "result": "PASS",
+      "ms": 288
+    },
+    {
+      "id": "E2E-API-073",
+      "area": "Auth: sign-up validation",
+      "title": "Valid-format but unknown invite code refused",
+      "trace": "FR-707, BR-076",
+      "expected": "400 field=inviteCode",
+      "actual": "400 \"That invite code is not valid, already used or expired\" field=inviteCode",
+      "result": "PASS",
+      "ms": 80
+    },
+    {
+      "id": "E2E-API-074",
+      "area": "Auth: sign-up validation",
+      "title": "Sign-up with an invalid JSON body",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "400 \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\" field=username",
+      "result": "PASS",
+      "ms": 49
+    },
+    {
+      "id": "E2E-API-075",
+      "area": "Auth: session required",
+      "title": "GET /me without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 33
+    },
+    {
+      "id": "E2E-API-076",
+      "area": "Auth: session required",
+      "title": "PUT /me without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 149
+    },
+    {
+      "id": "E2E-API-077",
+      "area": "Auth: session required",
+      "title": "DELETE /me without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 175
+    },
+    {
+      "id": "E2E-API-078",
+      "area": "Auth: session required",
+      "title": "PUT /me/contact without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 258
+    },
+    {
+      "id": "E2E-API-079",
+      "area": "Auth: session required",
+      "title": "PUT /me/avatar without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 209
+    },
+    {
+      "id": "E2E-API-080",
+      "area": "Auth: session required",
+      "title": "GET /me/journey without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 125
+    },
+    {
+      "id": "E2E-API-081",
+      "area": "Auth: session required",
+      "title": "PUT /me/journey/courses/001A without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 97
+    },
+    {
+      "id": "E2E-API-082",
+      "area": "Auth: session required",
+      "title": "DELETE /me/journey/courses/001A without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 121
+    },
+    {
+      "id": "E2E-API-083",
+      "area": "Auth: session required",
+      "title": "PUT /me/journey/notices/R001 without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 285
+    },
+    {
+      "id": "E2E-API-084",
+      "area": "Auth: session required",
+      "title": "DELETE /me/journey/notices/R001 without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 385
+    },
+    {
+      "id": "E2E-API-085",
+      "area": "Auth: session required",
+      "title": "PUT /me/journey/notices/R001/applied without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 395
+    },
+    {
+      "id": "E2E-API-086",
+      "area": "Auth: session required",
+      "title": "PUT /me/journey/steps/RESULTS without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 252
+    },
+    {
+      "id": "E2E-API-087",
+      "area": "Auth: session required",
+      "title": "POST /auth/logout without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 128
+    },
+    {
+      "id": "E2E-API-088",
+      "area": "Auth: session required",
+      "title": "POST /auth/logout-all without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 203
+    },
+    {
+      "id": "E2E-API-089",
+      "area": "Auth: session required",
+      "title": "GET /groups without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 25
+    },
+    {
+      "id": "E2E-API-090",
+      "area": "Auth: session required",
+      "title": "POST /groups/join without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 67
+    },
+    {
+      "id": "E2E-API-091",
+      "area": "Auth: session required",
+      "title": "GET /groups/1 without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 76
+    },
+    {
+      "id": "E2E-API-092",
+      "area": "Auth: session required",
+      "title": "GET /groups/1/members without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 36
+    },
+    {
+      "id": "E2E-API-093",
+      "area": "Auth: session required",
+      "title": "POST /groups/1/leave without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 140
+    },
+    {
+      "id": "E2E-API-094",
+      "area": "Auth: session required",
+      "title": "GET /blocks without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 67
+    },
+    {
+      "id": "E2E-API-095",
+      "area": "Auth: session required",
+      "title": "POST /blocks without a session -> 401",
+      "trace": "FR-116, NFR-038",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 90
+    },
+    {
+      "id": "E2E-API-096",
+      "area": "Ask (validation only, no model call)",
+      "title": "Empty question -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-097",
+      "area": "Ask (validation only, no model call)",
+      "title": "One-character question -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-098",
+      "area": "Ask (validation only, no model call)",
+      "title": "Whitespace-only question -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-099",
+      "area": "Ask (validation only, no model call)",
+      "title": "Question over 500 characters -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-100",
+      "area": "Ask (validation only, no model call)",
+      "title": "Question that is not a string -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-101",
+      "area": "Ask (validation only, no model call)",
+      "title": "Invalid JSON body -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-102",
+      "area": "Ask (validation only, no model call)",
+      "title": "Valid question with an invalid profile -> 400 (before any model)",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-103",
+      "area": "Ask (validation only, no model call)",
+      "title": "Valid question with invalid extras -> 400 (before any model)",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "SKIPPED: Ask is switched off on this local server (503 \"Ask ZedPath is not available yet\": AI / Vectorize / key bindings absent); that check runs before validation by design",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-104",
+      "area": "Ask (validation only, no model call)",
+      "title": "Ask switched off answers 503 with a clear message (safe default)",
+      "trace": "NFR-040",
+      "expected": "503 \"Ask ZedPath is not available yet\"",
+      "actual": "503 \"Ask ZedPath is not available yet\"",
+      "result": "PASS",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-105",
+      "area": "Ask (validation only, no model call)",
+      "title": "Feedback with an unknown rating -> 400",
+      "trace": "FR-611",
+      "expected": "400",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 78
+    },
+    {
+      "id": "E2E-API-106",
+      "area": "Ask (validation only, no model call)",
+      "title": "Feedback with nothing to report -> 400",
+      "trace": "FR-611",
+      "expected": "400",
+      "actual": "400 \"Nothing to report\"",
+      "result": "PASS",
+      "ms": 31
+    },
+    {
+      "id": "E2E-API-107",
+      "area": "Auth: sign-up",
+      "title": "Valid sign-up -> 201 with a recovery code and a session",
+      "trace": "FR-114, FR-118",
+      "expected": "201 {username, recoveryCode XXXX-XXXX-XXXX-XXXX} + cookie",
+      "actual": "201, recovery code in base32 groups, cookie set",
+      "result": "PASS",
+      "ms": 594
+    },
+    {
+      "id": "E2E-API-108",
+      "area": "Auth: sign-up",
+      "title": "Duplicate username -> 409",
+      "trace": "BR-050, FR-114",
+      "expected": "409 field=username",
+      "actual": "409 \"That username is taken. Try another\" field=username",
+      "result": "PASS",
+      "ms": 80
+    },
+    {
+      "id": "E2E-API-109",
+      "area": "Auth: sign-up",
+      "title": "Mixed-case username is stored in lower case",
+      "trace": "BR-050",
+      "expected": "201, username lower-case",
+      "actual": "201 e2e_mv4797h3_b",
+      "result": "PASS",
+      "ms": 334
+    },
+    {
+      "id": "E2E-API-110",
+      "area": "Auth: sign-up",
+      "title": "Sign-up without results (profile null) is allowed",
+      "trace": "FR-116",
+      "expected": "201; /me profile null",
+      "actual": "201, profile null",
+      "result": "PASS",
+      "ms": 493
+    },
+    {
+      "id": "E2E-API-111",
+      "area": "Auth: salt / login / sessions",
+      "title": "Salt for a valid username: 32 hex + KDF name",
+      "trace": "BR-050, NFR-036",
+      "expected": "200 {salt: 32 hex, kdf: PBKDF2-SHA256-600000}",
+      "actual": "200 kdf=PBKDF2-SHA256-600000",
+      "result": "PASS",
+      "ms": 38
+    },
+    {
+      "id": "E2E-API-112",
+      "area": "Auth: salt / login / sessions",
+      "title": "Salt is stable and the same shape for an unknown username",
+      "trace": "NFR-036",
+      "expected": "200 twice, same salt",
+      "actual": "200, stable salt",
+      "result": "PASS",
+      "ms": 99
+    },
+    {
+      "id": "E2E-API-113",
+      "area": "Auth: salt / login / sessions",
+      "title": "Salt with an invalid username -> 400",
+      "trace": "BR-050",
+      "expected": "400 field=username",
+      "actual": "400 \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\" field=username",
+      "result": "PASS",
+      "ms": 21
+    },
+    {
+      "id": "E2E-API-114",
+      "area": "Auth: salt / login / sessions",
+      "title": "Login with the right password returns the profile",
+      "trace": "FR-115",
+      "expected": "200, username + contact + profile",
+      "actual": "200 role=STUDENT",
+      "result": "PASS",
+      "ms": 65
+    },
+    {
+      "id": "E2E-API-115",
+      "area": "Auth: salt / login / sessions",
+      "title": "Username is case-insensitive at login",
+      "trace": "BR-050",
+      "expected": "200",
+      "actual": "200",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-API-116",
+      "area": "Auth: salt / login / sessions",
+      "title": "Session cookie is HttpOnly, Secure, SameSite=Lax, Path=/api, 30 days",
+      "trace": "NFR-036, BR-058",
+      "expected": "all flags present, Max-Age=2592000",
+      "actual": "zp_session=<token>; Max-Age=2592000; Path=/api; HttpOnly; Secure; SameSite=Lax",
+      "result": "PASS",
+      "ms": 116
+    },
+    {
+      "id": "E2E-API-117",
+      "area": "Auth: salt / login / sessions",
+      "title": "Login with a wrong password -> 401",
+      "trace": "FR-115",
+      "expected": "401",
+      "actual": "401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 645
+    },
+    {
+      "id": "E2E-API-118",
+      "area": "Auth: salt / login / sessions",
+      "title": "Login for an unknown username -> 401 with the same message",
+      "trace": "FR-115",
+      "expected": "401 \"Wrong username or password\"",
+      "actual": "401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 62
+    },
+    {
+      "id": "E2E-API-119",
+      "area": "Auth: salt / login / sessions",
+      "title": "Login with a malformed key -> 401",
+      "trace": "NFR-035",
+      "expected": "401",
+      "actual": "401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-API-120",
+      "area": "Auth: salt / login / sessions",
+      "title": "Logout ends that session (204, then /me 401)",
+      "trace": "BR-058",
+      "expected": "204 then 401",
+      "actual": "204, then 401",
+      "result": "PASS",
+      "ms": 217
+    },
+    {
+      "id": "E2E-API-121",
+      "area": "Auth: salt / login / sessions",
+      "title": "Logout-all ends every session of the account",
+      "trace": "BR-058",
+      "expected": "204; another session then 401",
+      "actual": "204, other session 401",
+      "result": "PASS",
+      "ms": 384
+    },
+    {
+      "id": "E2E-API-122",
+      "area": "Auth: salt / login / sessions",
+      "title": "Recover with a wrong recovery code -> 401",
+      "trace": "FR-118",
+      "expected": "401",
+      "actual": "401 \"That username and recovery code do not match\"",
+      "result": "PASS",
+      "ms": 118
+    },
+    {
+      "id": "E2E-API-123",
+      "area": "Auth: salt / login / sessions",
+      "title": "Recover with a malformed code -> 401",
+      "trace": "FR-118",
+      "expected": "401",
+      "actual": "401 \"That username and recovery code do not match\"",
+      "result": "PASS",
+      "ms": 77
+    },
+    {
+      "id": "E2E-API-124",
+      "area": "Auth: salt / login / sessions",
+      "title": "Recover with the right code (typed lower-case, no dashes): new password, new code, old sessions end",
+      "trace": "FR-118",
+      "expected": "200 + new code; old session 401; new password logs in",
+      "actual": "200, old session 401, new login 200",
+      "result": "PASS",
+      "ms": 634
+    },
+    {
+      "id": "E2E-API-125",
+      "area": "Auth: salt / login / sessions",
+      "title": "A garbage session cookie -> 401",
+      "trace": "NFR-035",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 12
+    },
+    {
+      "id": "E2E-API-126",
+      "area": "Auth: salt / login / sessions",
+      "title": "A well-formed but unknown session token -> 401",
+      "trace": "BR-058",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 23
+    },
+    {
+      "id": "E2E-API-127",
+      "area": "Origin (CSRF) checks",
+      "title": "PUT /me/avatar from another site -> 403",
+      "trace": "NFR-035",
+      "expected": "403",
+      "actual": "403 \"Cross-site request refused\"",
+      "result": "PASS",
+      "ms": 35
+    },
+    {
+      "id": "E2E-API-128",
+      "area": "Origin (CSRF) checks",
+      "title": "POST /auth/login from another site -> 403",
+      "trace": "NFR-035",
+      "expected": "403",
+      "actual": "403 \"Cross-site request refused\"",
+      "result": "PASS",
+      "ms": 41
+    },
+    {
+      "id": "E2E-API-129",
+      "area": "Origin (CSRF) checks",
+      "title": "DELETE /me from another site -> 403 and the account is kept",
+      "trace": "NFR-035, FR-119",
+      "expected": "403, then /me 200",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 62
+    },
+    {
+      "id": "E2E-API-130",
+      "area": "Origin (CSRF) checks",
+      "title": "PUT /me/journey/courses from another site -> 403",
+      "trace": "NFR-035",
+      "expected": "403",
+      "actual": "403 \"Cross-site request refused\"",
+      "result": "PASS",
+      "ms": 20
+    },
+    {
+      "id": "E2E-API-131",
+      "area": "Origin (CSRF) checks",
+      "title": "POST /groups/join from another site -> 403",
+      "trace": "NFR-035",
+      "expected": "403",
+      "actual": "403 \"Cross-site request refused\"",
+      "result": "PASS",
+      "ms": 53
+    },
+    {
+      "id": "E2E-API-132",
+      "area": "Origin (CSRF) checks",
+      "title": "POST /ask from another site -> 403 (before any model)",
+      "trace": "NFR-035",
+      "expected": "403",
+      "actual": "SKIPPED: Ask is switched off on this local server (its 503 comes first)",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-133",
+      "area": "Origin (CSRF) checks",
+      "title": "Write without an Origin header is allowed (documented design: browsers always send it cross-site)",
+      "trace": "NFR-035",
+      "expected": "200",
+      "actual": "500 body=\"Error: Network connection lost. at async Object.fetch (file:///C:/Users/prave/OneDrive/Documents/ZedPath/node_module\"",
+      "result": "FAIL",
+      "ms": 95
+    },
+    {
+      "id": "E2E-API-134",
+      "area": "Me: profile / contact / avatar",
+      "title": "GET /me returns contact, profile and extras; mobile normalised",
+      "trace": "FR-117, NFR-070, BR-054",
+      "expected": "200; contact.mobile +94771234567",
+      "actual": "200 mobile=+94771234567",
+      "result": "PASS",
+      "ms": 34
+    },
+    {
+      "id": "E2E-API-135",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me saves a new profile and extras",
+      "trace": "FR-117, FR-105",
+      "expected": "200 with stream BIO, no achievements",
+      "actual": "200 stream=BIO",
+      "result": "PASS",
+      "ms": 68
+    },
+    {
+      "id": "E2E-API-136",
+      "area": "Me: profile / contact / avatar",
+      "title": "Interests come back in the fixed app order",
+      "trace": "FR-612",
+      "expected": "[\"Maths\",\"Teaching\"]",
+      "actual": "[\"Maths\",\"Teaching\"]",
+      "result": "PASS",
+      "ms": 62
+    },
+    {
+      "id": "E2E-API-137",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me with an out-of-range Z -> 400",
+      "trace": "FR-102",
+      "expected": "400 field=zE4",
+      "actual": "400 \"Z-score must be between −4.0000 and +4.0000\" field=zE4",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-138",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me with an unknown subject -> 400",
+      "trace": "NFR-035",
+      "expected": "400 field=al",
+      "actual": "400 \"Unknown subject\" field=al",
+      "result": "PASS",
+      "ms": 70
+    },
+    {
+      "id": "E2E-API-139",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me without a profile -> 400",
+      "trace": "NFR-035",
+      "expected": "400",
+      "actual": "400 \"A JSON profile is required\"",
+      "result": "PASS",
+      "ms": 54
+    },
+    {
+      "id": "E2E-API-140",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me with duplicate interests -> 400",
+      "trace": "NFR-035",
+      "expected": "400 field=interests",
+      "actual": "400 \"Unknown interest\" field=interests",
+      "result": "PASS",
+      "ms": 62
+    },
+    {
+      "id": "E2E-API-141",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me with 31 achievements -> 400",
+      "trace": "NFR-035",
+      "expected": "400 field=achievements",
+      "actual": "400 \"At most 30 achievements\" field=achievements",
+      "result": "PASS",
+      "ms": 30
+    },
+    {
+      "id": "E2E-API-142",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me/contact updates and normalises name, email and mobile",
+      "trace": "FR-120, BR-052, BR-053, BR-054",
+      "expected": "200; trimmed name, lower-case email, +94712345678",
+      "actual": "{\"fullName\":\"Test Student\",\"email\":\"e2e.new@example.com\",\"mobile\":\"+94712345678\",\"birthDate\":\"2006-03-14\"}",
+      "result": "PASS",
+      "ms": 44
+    },
+    {
+      "id": "E2E-API-143",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me/contact with a bad email -> 400",
+      "trace": "BR-053",
+      "expected": "400 field=email",
+      "actual": "400 \"Enter a valid email address\" field=email",
+      "result": "PASS",
+      "ms": 35
+    },
+    {
+      "id": "E2E-API-144",
+      "area": "Me: profile / contact / avatar",
+      "title": "PUT /me/contact without consent -> 400",
+      "trace": "BR-057",
+      "expected": "400 field=consent",
+      "actual": "400 \"Please read and agree to how ZedPath uses your details\" field=consent",
+      "result": "PASS",
+      "ms": 22
+    },
+    {
+      "id": "E2E-API-145",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a01 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a01",
+      "actual": "200 avatar=a01",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-146",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a02 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a02",
+      "actual": "200 avatar=a02",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-147",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a03 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a03",
+      "actual": "200 avatar=a03",
+      "result": "PASS",
+      "ms": 61
+    },
+    {
+      "id": "E2E-API-148",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a04 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a04",
+      "actual": "200 avatar=a04",
+      "result": "PASS",
+      "ms": 59
+    },
+    {
+      "id": "E2E-API-149",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a05 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a05",
+      "actual": "200 avatar=a05",
+      "result": "PASS",
+      "ms": 99
+    },
+    {
+      "id": "E2E-API-150",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a06 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a06",
+      "actual": "200 avatar=a06",
+      "result": "PASS",
+      "ms": 153
+    },
+    {
+      "id": "E2E-API-151",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a07 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a07",
+      "actual": "200 avatar=a07",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-API-152",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a08 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a08",
+      "actual": "200 avatar=a08",
+      "result": "PASS",
+      "ms": 41
+    },
+    {
+      "id": "E2E-API-153",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a09 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a09",
+      "actual": "200 avatar=a09",
+      "result": "PASS",
+      "ms": 80
+    },
+    {
+      "id": "E2E-API-154",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a10 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a10",
+      "actual": "200 avatar=a10",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-155",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a11 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a11",
+      "actual": "200 avatar=a11",
+      "result": "PASS",
+      "ms": 48
+    },
+    {
+      "id": "E2E-API-156",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar preset a12 accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=a12",
+      "actual": "200 avatar=a12",
+      "result": "PASS",
+      "ms": 52
+    },
+    {
+      "id": "E2E-API-157",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar null (initials) accepted",
+      "trace": "FR-122, BR-077",
+      "expected": "200 avatar=null",
+      "actual": "200 avatar=null",
+      "result": "PASS",
+      "ms": 102
+    },
+    {
+      "id": "E2E-API-158",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar \"a13\" rejected",
+      "trace": "BR-077",
+      "expected": "400 field=avatar",
+      "actual": "400 \"Choose one of the avatars\" field=avatar",
+      "result": "PASS",
+      "ms": 25
+    },
+    {
+      "id": "E2E-API-159",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar \"a00\" rejected",
+      "trace": "BR-077",
+      "expected": "400 field=avatar",
+      "actual": "400 \"Choose one of the avatars\" field=avatar",
+      "result": "PASS",
+      "ms": 24
+    },
+    {
+      "id": "E2E-API-160",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar \"A01\" rejected",
+      "trace": "BR-077",
+      "expected": "400 field=avatar",
+      "actual": "400 \"Choose one of the avatars\" field=avatar",
+      "result": "PASS",
+      "ms": 23
+    },
+    {
+      "id": "E2E-API-161",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar 5 rejected",
+      "trace": "BR-077",
+      "expected": "400 field=avatar",
+      "actual": "400 \"Choose one of the avatars\" field=avatar",
+      "result": "PASS",
+      "ms": 20
+    },
+    {
+      "id": "E2E-API-162",
+      "area": "Me: profile / contact / avatar",
+      "title": "Avatar \"https://x.example/y.png\" rejected",
+      "trace": "BR-077",
+      "expected": "400 field=avatar",
+      "actual": "400 \"Choose one of the avatars\" field=avatar",
+      "result": "PASS",
+      "ms": 21
+    },
+    {
+      "id": "E2E-API-163",
+      "area": "My Journey",
+      "title": "GET /me/journey starts empty",
+      "trace": "FR-409, FR-411",
+      "expected": "200 {courses:[], notices:[], steps:[]}",
+      "actual": "200 empty",
+      "result": "PASS",
+      "ms": 29
+    },
+    {
+      "id": "E2E-API-164",
+      "area": "My Journey",
+      "title": "Follow course 001A",
+      "trace": "FR-416",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-165",
+      "area": "My Journey",
+      "title": "Following the same course again is idempotent",
+      "trace": "FR-416",
+      "expected": "204, listed once",
+      "actual": "204, listed once",
+      "result": "PASS",
+      "ms": 75
+    },
+    {
+      "id": "E2E-API-166",
+      "area": "My Journey",
+      "title": "Follow lower-case Uni-Code (001a) -> 404",
+      "trace": "BR-015",
+      "expected": "404",
+      "actual": "404 \"No such course\"",
+      "result": "PASS",
+      "ms": 48
+    },
+    {
+      "id": "E2E-API-167",
+      "area": "My Journey",
+      "title": "Follow unknown Uni-Code 999Z -> 404",
+      "trace": "BR-015",
+      "expected": "404",
+      "actual": "404 \"No such course\"",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-168",
+      "area": "My Journey",
+      "title": "Follow malformed Uni-Code -> 404",
+      "trace": "NFR-035",
+      "expected": "404",
+      "actual": "404 \"No such course\"",
+      "result": "PASS",
+      "ms": 36
+    },
+    {
+      "id": "E2E-API-169",
+      "area": "My Journey",
+      "title": "Followed course appears in GET /me/journey",
+      "trace": "FR-411",
+      "expected": "courses contains 001A with followedAt",
+      "actual": "{\"uniCode\":\"001A\",\"followedAt\":\"2026-10-11T19:12:08.193Z\"}",
+      "result": "PASS",
+      "ms": 57
+    },
+    {
+      "id": "E2E-API-170",
+      "area": "My Journey",
+      "title": "Unfollow course 001A",
+      "trace": "FR-416",
+      "expected": "204 and gone",
+      "actual": "204, gone",
+      "result": "PASS",
+      "ms": 75
+    },
+    {
+      "id": "E2E-API-171",
+      "area": "My Journey",
+      "title": "Follow notice R001",
+      "trace": "FR-414",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 84
+    },
+    {
+      "id": "E2E-API-172",
+      "area": "My Journey",
+      "title": "Follow unknown notice R999 -> 404",
+      "trace": "FR-414",
+      "expected": "404",
+      "actual": "404 \"No such notice\"",
+      "result": "PASS",
+      "ms": 34
+    },
+    {
+      "id": "E2E-API-173",
+      "area": "My Journey",
+      "title": "Follow malformed notice id -> 404",
+      "trace": "NFR-035",
+      "expected": "404",
+      "actual": "404 \"No such notice\"",
+      "result": "PASS",
+      "ms": 33
+    },
+    {
+      "id": "E2E-API-174",
+      "area": "My Journey",
+      "title": "\"I applied\" without a flag -> 400",
+      "trace": "FR-415",
+      "expected": "400 field=applied",
+      "actual": "400 \"Say whether you applied\" field=applied",
+      "result": "PASS",
+      "ms": 34
+    },
+    {
+      "id": "E2E-API-175",
+      "area": "My Journey",
+      "title": "\"I applied\" on a notice not followed -> 404",
+      "trace": "FR-415, BR-062",
+      "expected": "404 \"Follow it first\"",
+      "actual": "404 \"Follow it first\"",
+      "result": "PASS",
+      "ms": 84
+    },
+    {
+      "id": "E2E-API-176",
+      "area": "My Journey",
+      "title": "\"I applied\" on followed, already-open notice R043",
+      "trace": "FR-415, BR-062",
+      "expected": "204 and appliedAt set",
+      "actual": "204, appliedAt=2026-10-11T19:12:08.888Z",
+      "result": "PASS",
+      "ms": 104
+    },
+    {
+      "id": "E2E-API-177",
+      "area": "My Journey",
+      "title": "\"I applied\" before the notice opens -> 409",
+      "trace": "BR-062",
+      "expected": "409",
+      "actual": "SKIPPED: every dated notice in the 2025/26 data has already opened (today 2026-10-12), so the 409 path cannot be reached over HTTP; covered by worker/my-journey.test.ts",
+      "result": "SKIP",
+      "ms": 0
+    },
+    {
+      "id": "E2E-API-178",
+      "area": "My Journey",
+      "title": "Un-tick \"I applied\" (applied:false)",
+      "trace": "FR-415",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 51
+    },
+    {
+      "id": "E2E-API-179",
+      "area": "My Journey",
+      "title": "Unfollow notice R001",
+      "trace": "FR-414",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 45
+    },
+    {
+      "id": "E2E-API-180",
+      "area": "My Journey",
+      "title": "Preparation step RESULTS can be ticked any time",
+      "trace": "BR-061, FR-410",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 36
+    },
+    {
+      "id": "E2E-API-181",
+      "area": "My Journey",
+      "title": "Preparation step LIST can be ticked any time",
+      "trace": "BR-061, FR-410",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 30
+    },
+    {
+      "id": "E2E-API-182",
+      "area": "My Journey",
+      "title": "Preparation step COMPARE can be ticked any time",
+      "trace": "BR-061, FR-410",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 40
+    },
+    {
+      "id": "E2E-API-183",
+      "area": "My Journey",
+      "title": "UGC step UGC_APPLY has no open window: tick refused",
+      "trace": "BR-061, FR-410",
+      "expected": "409",
+      "actual": "409 \"This step has not opened yet\"",
+      "result": "PASS",
+      "ms": 40
+    },
+    {
+      "id": "E2E-API-184",
+      "area": "My Journey",
+      "title": "UGC step UGC_ORDER has no open window: tick refused",
+      "trace": "BR-061, FR-410",
+      "expected": "409",
+      "actual": "409 \"This step has not opened yet\"",
+      "result": "PASS",
+      "ms": 23
+    },
+    {
+      "id": "E2E-API-185",
+      "area": "My Journey",
+      "title": "UGC step APTITUDE has no open window: tick refused",
+      "trace": "BR-061, FR-410",
+      "expected": "409",
+      "actual": "409 \"This step has not opened yet\"",
+      "result": "PASS",
+      "ms": 19
+    },
+    {
+      "id": "E2E-API-186",
+      "area": "My Journey",
+      "title": "UGC step UGC_SELECTION has no open window: tick refused",
+      "trace": "BR-061, FR-410",
+      "expected": "409",
+      "actual": "409 \"This step has not opened yet\"",
+      "result": "PASS",
+      "ms": 31
+    },
+    {
+      "id": "E2E-API-187",
+      "area": "My Journey",
+      "title": "UGC step UGC_REGISTER has no open window: tick refused",
+      "trace": "BR-061, FR-410",
+      "expected": "409",
+      "actual": "409 \"This step has not opened yet\"",
+      "result": "PASS",
+      "ms": 26
+    },
+    {
+      "id": "E2E-API-188",
+      "area": "My Journey",
+      "title": "Un-tick a UGC step (done:false) is always allowed",
+      "trace": "FR-409",
+      "expected": "204",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 43
+    },
+    {
+      "id": "E2E-API-189",
+      "area": "My Journey",
+      "title": "Unknown step id -> 404",
+      "trace": "BR-060",
+      "expected": "404 \"No such step\"",
+      "actual": "404 \"No such step\"",
+      "result": "PASS",
+      "ms": 27
+    },
+    {
+      "id": "E2E-API-190",
+      "area": "My Journey",
+      "title": "Step with a non-boolean done flag -> 400",
+      "trace": "FR-410",
+      "expected": "400 field=done",
+      "actual": "400 \"Say whether the step is done\" field=done",
+      "result": "PASS",
+      "ms": 41
+    },
+    {
+      "id": "E2E-API-191",
+      "area": "My Journey",
+      "title": "GET /me/journey shows exactly the 3 ticked preparation steps",
+      "trace": "FR-409, FR-411",
+      "expected": "COMPARE,LIST,RESULTS",
+      "actual": "COMPARE,LIST,RESULTS",
+      "result": "PASS",
+      "ms": 35
+    },
+    {
+      "id": "E2E-API-192",
+      "area": "My Journey",
+      "title": "Un-tick a preparation step",
+      "trace": "FR-409",
+      "expected": "204 and removed",
+      "actual": "204, removed",
+      "result": "PASS",
+      "ms": 161
+    },
+    {
+      "id": "E2E-API-193",
+      "area": "Groups",
+      "title": "GET /groups lists the popular course groups; rules not yet accepted",
+      "trace": "FR-715, FR-714",
+      "expected": "200, 6 popular course codes, rulesAccepted=false, role STUDENT",
+      "actual": "200 popular=001,008,012,016,018,025",
+      "result": "PASS",
+      "ms": 81
+    },
+    {
+      "id": "E2E-API-194",
+      "area": "Groups",
+      "title": "GET /groups?courses= lists asked course groups and ignores unknown codes",
+      "trace": "FR-705",
+      "expected": "012 listed; 999 not",
+      "actual": ",012,001,008,016,018,025",
+      "result": "PASS",
+      "ms": 161
+    },
+    {
+      "id": "E2E-API-195",
+      "area": "Groups",
+      "title": "Join without accepting the rules (first join) -> 400",
+      "trace": "FR-714, BR-075",
+      "expected": "400 field=acceptRules",
+      "actual": "400 \"Read and accept the group rules to join\" field=acceptRules",
+      "result": "PASS",
+      "ms": 58
+    },
+    {
+      "id": "E2E-API-196",
+      "area": "Groups",
+      "title": "Join with an old rules version -> 400",
+      "trace": "BR-075",
+      "expected": "400 field=acceptRules",
+      "actual": "400 \"Read and accept the group rules to join\" field=acceptRules",
+      "result": "PASS",
+      "ms": 33
+    },
+    {
+      "id": "E2E-API-197",
+      "area": "Groups",
+      "title": "Join an unknown course group -> 400",
+      "trace": "BR-070",
+      "expected": "400 field=courseCode",
+      "actual": "400 \"Unknown course\" field=courseCode",
+      "result": "PASS",
+      "ms": 280
+    },
+    {
+      "id": "E2E-API-198",
+      "area": "Groups",
+      "title": "Join with an unknown kind -> 400",
+      "trace": "BR-070",
+      "expected": "400 field=kind",
+      "actual": "400 \"Choose a course group or your batch group\" field=kind",
+      "result": "PASS",
+      "ms": 42
+    },
+    {
+      "id": "E2E-API-199",
+      "area": "Groups",
+      "title": "Join course group 001, accepting the rules (first join)",
+      "trace": "FR-705, FR-714, BR-075",
+      "expected": "200 joined=true rulesAccepted=true",
+      "actual": "200 group id=2 members=6",
+      "result": "PASS",
+      "ms": 46
+    },
+    {
+      "id": "E2E-API-200",
+      "area": "Groups",
+      "title": "Joining the same group twice keeps one membership",
+      "trace": "BR-070",
+      "expected": "200, same id, member count unchanged",
+      "actual": "200 members=6",
+      "result": "PASS",
+      "ms": 149
+    },
+    {
+      "id": "E2E-API-201",
+      "area": "Groups",
+      "title": "Second group 008: the rules are not asked again",
+      "trace": "FR-714, BR-075",
+      "expected": "200 without acceptRules",
+      "actual": "200 group id=4",
+      "result": "PASS",
+      "ms": 242
+    },
+    {
+      "id": "E2E-API-202",
+      "area": "Groups",
+      "title": "GET /groups now says rules accepted and lists joined groups first",
+      "trace": "FR-714",
+      "expected": "rulesAccepted=true; first group joined",
+      "actual": "joined=2",
+      "result": "PASS",
+      "ms": 165
+    },
+    {
+      "id": "E2E-API-203",
+      "area": "Groups",
+      "title": "Join own batch group (results saved on the account)",
+      "trace": "BR-071, FR-705",
+      "expected": "200 kind=BATCH",
+      "actual": "200 \"Biological Science · Colombo\"",
+      "result": "PASS",
+      "ms": 205
+    },
+    {
+      "id": "E2E-API-204",
+      "area": "Groups",
+      "title": "Batch group for an account without saved results -> 403",
+      "trace": "BR-071",
+      "expected": "403",
+      "actual": "403 \"Batch groups are for students who saved their results to their account\"",
+      "result": "PASS",
+      "ms": 193
+    },
+    {
+      "id": "E2E-API-205",
+      "area": "Groups",
+      "title": "GET /groups/:id returns the summary",
+      "trace": "FR-717",
+      "expected": "200 with a title",
+      "actual": "200 \"Waiting for Medicine\"",
+      "result": "PASS",
+      "ms": 33
+    },
+    {
+      "id": "E2E-API-206",
+      "area": "Groups",
+      "title": "GET /groups/abc -> 404",
+      "trace": "NFR-035",
+      "expected": "404",
+      "actual": "404 \"No such group\"",
+      "result": "PASS",
+      "ms": 26
+    },
+    {
+      "id": "E2E-API-207",
+      "area": "Groups",
+      "title": "Member list for a non-member -> 403",
+      "trace": "FR-718",
+      "expected": "403",
+      "actual": "403 \"Join the group first\"",
+      "result": "PASS",
+      "ms": 30
+    },
+    {
+      "id": "E2E-API-208",
+      "area": "Groups",
+      "title": "Second account joins; member list has both usernames and no contact details",
+      "trace": "FR-718, NFR-071",
+      "expected": "200; both usernames; keys only username/avatar/badge",
+      "actual": "200 7 members, keys=username,avatar,badge",
+      "result": "PASS",
+      "ms": 106
+    },
+    {
+      "id": "E2E-API-209",
+      "area": "Groups",
+      "title": "Room connection without a WebSocket upgrade -> 400 (member)",
+      "trace": "FR-719",
+      "expected": "400 \"Expected a WebSocket\"",
+      "actual": "400 \"Expected a WebSocket\"",
+      "result": "PASS",
+      "ms": 53
+    },
+    {
+      "id": "E2E-API-210",
+      "area": "Groups",
+      "title": "Room connection for a non-member -> 403",
+      "trace": "FR-705",
+      "expected": "403",
+      "actual": "403 \"Join the group first\"",
+      "result": "PASS",
+      "ms": 92
+    },
+    {
+      "id": "E2E-API-211",
+      "area": "Groups",
+      "title": "Report with a malformed message id -> 400",
+      "trace": "FR-710",
+      "expected": "400 field=messageId",
+      "actual": "400 \"Unknown message\" field=messageId",
+      "result": "PASS",
+      "ms": 98
+    },
+    {
+      "id": "E2E-API-212",
+      "area": "Groups",
+      "title": "Message containing a phone number is refused by the room (WebSocket)",
+      "trace": "FR-712, BR-074",
+      "expected": "error frame about phone numbers / emails; nothing posted",
+      "actual": "error frame: For your safety, phone numbers and email addresses cannot be shared in groups",
+      "result": "PASS",
+      "ms": 234
+    },
+    {
+      "id": "E2E-API-213",
+      "area": "Groups",
+      "title": "Block another member; the block list shows them",
+      "trace": "FR-711",
+      "expected": "204 then listed",
+      "actual": "204, listed",
+      "result": "PASS",
+      "ms": 201
+    },
+    {
+      "id": "E2E-API-214",
+      "area": "Groups",
+      "title": "Block yourself -> 400",
+      "trace": "FR-711",
+      "expected": "400",
+      "actual": "400 \"Choose someone else to block\" field=username",
+      "result": "PASS",
+      "ms": 55
+    },
+    {
+      "id": "E2E-API-215",
+      "area": "Groups",
+      "title": "Block an unknown username -> 404",
+      "trace": "FR-711",
+      "expected": "404",
+      "actual": "404 \"No such member\"",
+      "result": "PASS",
+      "ms": 63
+    },
+    {
+      "id": "E2E-API-216",
+      "area": "Groups",
+      "title": "Unblock",
+      "trace": "FR-711",
+      "expected": "204 and gone",
+      "actual": "204, gone",
+      "result": "PASS",
+      "ms": 111
+    },
+    {
+      "id": "E2E-API-217",
+      "area": "Groups",
+      "title": "Leave the group, then the member list -> 403",
+      "trace": "FR-705",
+      "expected": "204 then 403",
+      "actual": "204 then 403 \"Join the group first\"",
+      "result": "PASS",
+      "ms": 104
+    },
+    {
+      "id": "E2E-API-218",
+      "area": "Groups",
+      "title": "Leave with an invalid group id -> 404",
+      "trace": "NFR-035",
+      "expected": "404",
+      "actual": "404 \"No such group\"",
+      "result": "PASS",
+      "ms": 19
+    },
+    {
+      "id": "E2E-API-219",
+      "area": "Account delete (cascade)",
+      "title": "Before delete: account C follows a course, a notice and ticks a step",
+      "trace": "FR-411",
+      "expected": "204 x3",
+      "actual": "204",
+      "result": "PASS",
+      "ms": 97
+    },
+    {
+      "id": "E2E-API-220",
+      "area": "Account delete (cascade)",
+      "title": "DELETE /me -> 204 and clears the cookie",
+      "trace": "FR-119, NFR-075",
+      "expected": "204, zp_session cookie expired",
+      "actual": "204, cookie cleared",
+      "result": "PASS",
+      "ms": 40
+    },
+    {
+      "id": "E2E-API-221",
+      "area": "Account delete (cascade)",
+      "title": "After delete: old session -> 401",
+      "trace": "FR-119",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 18
+    },
+    {
+      "id": "E2E-API-222",
+      "area": "Account delete (cascade)",
+      "title": "After delete: the journey cannot be read -> 401",
+      "trace": "NFR-075",
+      "expected": "401",
+      "actual": "401 \"Please log in\"",
+      "result": "PASS",
+      "ms": 20
+    },
+    {
+      "id": "E2E-API-223",
+      "area": "Account delete (cascade)",
+      "title": "After delete: login -> 401",
+      "trace": "FR-119",
+      "expected": "401",
+      "actual": "401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 28
+    },
+    {
+      "id": "E2E-API-224",
+      "area": "Account delete (cascade)",
+      "title": "After delete: the recovery code no longer works -> 401",
+      "trace": "NFR-075",
+      "expected": "401",
+      "actual": "401 \"That username and recovery code do not match\"",
+      "result": "PASS",
+      "ms": 61
+    },
+    {
+      "id": "E2E-API-225",
+      "area": "Account delete (cascade)",
+      "title": "The deleted username can be signed up again (login row gone); then deleted",
+      "trace": "FR-119, NFR-075",
+      "expected": "201 then 204",
+      "actual": "201, then 204",
+      "result": "PASS",
+      "ms": 719
+    },
+    {
+      "id": "E2E-API-226",
+      "area": "Cleanup",
+      "title": "Delete test account e2e_<run>_a; login then 401",
+      "trace": "FR-119",
+      "expected": "204 then login 401",
+      "actual": "204, then 401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 253
+    },
+    {
+      "id": "E2E-API-227",
+      "area": "Cleanup",
+      "title": "Delete test account e2e_<run>_b; login then 401",
+      "trace": "FR-119",
+      "expected": "204 then login 401",
+      "actual": "204, then 401 \"Wrong username or password\"",
+      "result": "PASS",
+      "ms": 186
+    },
+    {
+      "id": "E2E-API-228",
+      "area": "Account delete (cascade)",
+      "title": "No orphan rows under any deleted account (local D1 query, after cleanup)",
+      "trace": "NFR-075",
+      "expected": "0 orphan rows in every account table",
+      "actual": "13 tables checked, 0 orphans",
+      "result": "PASS",
+      "ms": 10693
+    }
+  ]
+}
