@@ -1,0 +1,399 @@
+{
+  "date": "2026-10-12 00:55 (local)",
+  "server": "local (wrangler dev), http://127.0.0.1:8899",
+  "viewport": "390x844",
+  "tool": "agent-browser CLI",
+  "accounts": "one test account ui_1791746005_1, deleted at the end (/api/me 401, login refused)",
+  "summary": {
+    "total": 42,
+    "passed": 42,
+    "failed": 0
+  },
+  "cases": [
+    {
+      "title": "Welcome shows 3 language tiles and the team line",
+      "steps": "Open / in a fresh session",
+      "expected": "Sinhala, Tamil, English tiles; Team Kestrel line",
+      "actual": "3 tiles (සිංහල, தமிழ், English) + \"Log in\" link; footer \"Team Kestrel · Undergraduate bracket · IntelliCon ’26\"",
+      "result": "pass",
+      "screenshot": "screens/001-welcome.png",
+      "id": "E2E-UI-001"
+    },
+    {
+      "title": "Sinhala tile switches the UI to Sinhala",
+      "steps": "Tap සිංහල",
+      "expected": "Intro in Sinhala, language stored",
+      "actual": "Intro \"3 න් 1 / මඟ හරින්න ...\"; localStorage zedpath.lang.v1=\"si\"; URL #/intro",
+      "result": "pass",
+      "screenshot": "screens/002-sinhala-intro.png",
+      "id": "E2E-UI-002"
+    },
+    {
+      "title": "Tamil tile switches the UI to Tamil",
+      "steps": "Clear storage, open /, tap தமிழ்",
+      "expected": "Intro in Tamil",
+      "actual": "Intro \"3 இல் 1 / தவிர் / அடுத்து\"",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-003"
+    },
+    {
+      "title": "Intro Skip goes to Create account",
+      "steps": "English tile, then Skip",
+      "expected": "#/signup Create your account",
+      "actual": "#/signup, heading \"Create your account\", 9 inputs + consent",
+      "result": "pass",
+      "screenshot": "screens/003-create-account.png",
+      "id": "E2E-UI-004"
+    },
+    {
+      "title": "Empty-field validation on Create account",
+      "steps": "Press Create account with every field empty",
+      "expected": "Inline error, no request, stays on #/signup",
+      "actual": "role=alert \"Usernames are 3 to 24 characters: letters, numbers, dot or underscore\", 2 fields aria-invalid, stays on #/signup. (First automated click via find-role did not register; ref click and requestSubmit both work.)",
+      "result": "pass",
+      "screenshot": "screens/004-empty-validation.png",
+      "id": "E2E-UI-005"
+    },
+    {
+      "title": "Back on Create account returns to Welcome",
+      "steps": "On #/signup tap Back",
+      "expected": "#/ Welcome",
+      "actual": "#/ Welcome shown",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-006"
+    },
+    {
+      "title": "Back on Create account with onboarded flag and no session",
+      "steps": "localStorage zedpath.onboarded.v1=true, lang en, no session; open / (lands #/signup); tap Back",
+      "expected": "Welcome, not a loop back to signup",
+      "actual": "Opened on #/signup; Back -> #/ Welcome",
+      "result": "pass",
+      "screenshot": "screens/005-back-onboarded.png",
+      "id": "E2E-UI-007"
+    },
+    {
+      "title": "Log in link opens Log in",
+      "steps": "On #/signup tap \"Already have an account? Log in\"",
+      "expected": "#/login with username + password",
+      "actual": "#/login, heading \"Log in\", 2 inputs (find-text click missed once; ref click worked)",
+      "result": "pass",
+      "screenshot": "screens/006-login.png",
+      "id": "E2E-UI-008"
+    },
+    {
+      "title": "Demo mode ?demo=kasun prefills sign-up later",
+      "steps": "Open /?demo=kasun, then plain /#/signup",
+      "expected": "Form prefilled with Kasun sample + demo chip",
+      "actual": "kasun_demo / password x2 / Kasun Perera / kasun.perera@example.com / 0771234567 / 2006-03-14 / consent ticked; chip \"Demo: sample student Kasun Perera (placeholder details)\". Sign-up NOT completed",
+      "result": "pass",
+      "screenshot": "screens/007-demo-prefill.png",
+      "id": "E2E-UI-009"
+    },
+    {
+      "title": "Removing zedpath.demo turns demo off",
+      "steps": "localStorage.removeItem(\"zedpath.demo\"), reload #/signup",
+      "expected": "Empty form",
+      "actual": "All text fields empty after reload",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-010"
+    },
+    {
+      "title": "Fresh session without demo shows empty sign-up",
+      "steps": "New browser session, open /#/signup",
+      "expected": "All fields empty, consent unticked, no demo chip",
+      "actual": "All empty, consent false, no chip, zedpath.demo null",
+      "result": "pass",
+      "screenshot": "screens/008-fresh-empty.png",
+      "id": "E2E-UI-011"
+    },
+    {
+      "title": "Full sign-up shows recovery code",
+      "steps": "Fill ui_1791746005_1, password x2, name, email, 0771234567, DOB 2006-03-14, consent; submit; wait PBKDF2",
+      "expected": "#/saved-code/new with a one-time recovery code",
+      "actual": "#/saved-code/new, code in XXXX-XXXX-XXXX-XXXX form shown (about 9 s). Note: first click via find-role did not register; requestSubmit did",
+      "result": "pass",
+      "screenshot": "screens/009-recovery-code.png",
+      "id": "E2E-UI-012"
+    },
+    {
+      "title": "Recovery code Continue is gated on \"I have saved\"",
+      "steps": "Look at Continue, tick checkbox, Continue",
+      "expected": "Continue disabled until ticked, then #/about",
+      "actual": "Continue [disabled] before tick; after tick -> #/about",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-013"
+    },
+    {
+      "title": "About you step 1 of 5: stream",
+      "steps": "Pick Physical Science, Next",
+      "expected": "Step 2 of 5",
+      "actual": "STEP 1 OF 5 with 6 streams; Next -> STEP 2 OF 5",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-014"
+    },
+    {
+      "title": "About you step 2 of 5: district is required",
+      "steps": "Next without a district, then pick Kurunegala, Next",
+      "expected": "Inline error, then step 3",
+      "actual": "\"Choose the district you sat from\" shown; after Kurunegala -> STEP 3 OF 5",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-015"
+    },
+    {
+      "title": "About you step 3 of 5: Z-score",
+      "steps": "Enter 1.4200, Next",
+      "expected": "Step 4 of 5",
+      "actual": "STEP 4 OF 5",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-016"
+    },
+    {
+      "title": "About you step 4 of 5: subjects and grades",
+      "steps": "Combined Maths B, Physics C, Chemistry C (chosen subjects disabled in later pickers)",
+      "expected": "Step 5 of 5",
+      "actual": "Pickers disable already-chosen subjects; grades checked; Next -> STEP 5 OF 5",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-017"
+    },
+    {
+      "title": "About you step 5 of 5: achievement + interests",
+      "steps": "Add \"Sri Lanka Mathematics Olympiad\" Competition/National/Second/2024; tap Building apps, Maths",
+      "expected": "Achievement listed; interests pressed",
+      "actual": "\"Competition · National · Second place · 2024\" with Remove; aria-pressed on Building apps, Maths",
+      "result": "pass",
+      "screenshot": "screens/010-about-step5.png",
+      "id": "E2E-UI-018"
+    },
+    {
+      "title": "Show my paths shows the Paths ring",
+      "steps": "Tap Show my paths",
+      "expected": "#/paths with ring + Safe/Likely/Reach counts",
+      "actual": "#/paths: \"62 courses within your reach\", ring + legend 42 Safe / 4 Likely / 16 Reach, special-intake note citing UGC handbook p.166, other-path tiles",
+      "result": "pass",
+      "screenshot": "screens/011-paths-ring.png",
+      "id": "E2E-UI-019"
+    },
+    {
+      "title": "Courses search \"data\"",
+      "steps": "See the courses, type \"data\"",
+      "expected": "Matching courses across bands",
+      "actual": "1 match across Safe/Likely/Reach: Data Science, Sabaragamuwa (+0.0222, Safe)",
+      "result": "pass",
+      "screenshot": "screens/012-courses-search-data.png",
+      "id": "E2E-UI-020"
+    },
+    {
+      "title": "Course detail sections",
+      "steps": "Open Data Science",
+      "expected": "Bands, cut-off, needs, syllabus, cut-off history",
+      "actual": "#/course/136L: Safe, Z 1.4200 vs cut-off 1.3978; sections \"What it needs\" (handbook p.75, You have B/C/C), \"What you'll study\" (61 modules, Semester I-VIII), \"Cut-offs for your district\"",
+      "result": "pass",
+      "screenshot": "screens/013-course-detail.png",
+      "id": "E2E-UI-021"
+    },
+    {
+      "title": "Add to my list from course detail",
+      "steps": "Tap Add to my list",
+      "expected": "Button becomes \"On my list\"",
+      "actual": "\"On my list: #1\" + Remove",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-022"
+    },
+    {
+      "title": "Press-and-hold multi-select shows select bar",
+      "steps": "Reach tab, PointerEvent pointerdown on Software Engineering (SJP), wait 600 ms, pointerup",
+      "expected": "Select bar appears, row selected, no navigation",
+      "actual": "Region \"Selected courses\": \"1 selected · Compare · Add to my list\"; header Select -> Cancel; URL unchanged",
+      "result": "pass",
+      "screenshot": "screens/014-hold-select-bar.png",
+      "id": "E2E-UI-023"
+    },
+    {
+      "title": "Add to my list from the select bar",
+      "steps": "Tap Add to my list in the bar",
+      "expected": "Bar closes, confirmation",
+      "actual": "Bar gone; status \"Added 1 course to My list. Open My list\"",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-024"
+    },
+    {
+      "title": "My list entries",
+      "steps": "Open #/list",
+      "expected": "Both courses, numbered",
+      "actual": "\"2 of 125\": #1 Data Science (Safe) #2 Software Engineering (Reach) with Remove + Reorder; nav badge 2",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-025"
+    },
+    {
+      "title": "My list Safe-above-Reach warning",
+      "steps": "Same screen",
+      "expected": "Warning that Reach courses below a Safe one are unlikely",
+      "actual": "\"Data Science is Safe, so the Likely and Reach courses listed below it are unlikely to be reached.\" + \"Fix the order\"",
+      "result": "pass",
+      "screenshot": "screens/015-mylist-warning.png",
+      "id": "E2E-UI-026"
+    },
+    {
+      "title": "Compare with 2 courses",
+      "steps": "Compare courses, add Data Science, Add a course, Software Engineering",
+      "expected": "Two columns side by side",
+      "actual": "Columns Data Science (136L) and Software Engineering (099C) + \"Add a course\"; rows chance, cut-off, trend, needs, aptitude, duration, places, selection, syllabus, source",
+      "result": "pass",
+      "screenshot": "screens/016-compare-2.png",
+      "id": "E2E-UI-027"
+    },
+    {
+      "title": "Ask shows 5 chips incl. an achievement question",
+      "steps": "Open #/ask (no question sent)",
+      "expected": "5 suggestion chips, one about the achievement",
+      "actual": "5 chips; #2 \"I came 2nd at national level in the Sri Lanka Mathematics Olympiad in 2024. Can that help me get into Software Engineering at Sri Jayewardenepura?\"; #3 uses interests",
+      "result": "pass",
+      "screenshot": "screens/017-ask-chips.png",
+      "id": "E2E-UI-028"
+    },
+    {
+      "title": "Ask Send is disabled when the box is empty",
+      "steps": "Look at Send",
+      "expected": "Disabled",
+      "actual": "Send [disabled]",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-029"
+    },
+    {
+      "title": "Journey tabs",
+      "steps": "Open #/journey, switch tab",
+      "expected": "My steps / Open now tabs switch",
+      "actual": "Tabs \"My steps\" (selected) and \"Open now 4\"; Open now lists notices with gazette citation, closing date, Follow",
+      "result": "pass",
+      "screenshot": "screens/019-journey-open-now.png",
+      "id": "E2E-UI-030"
+    },
+    {
+      "title": "Journey UGC step locked",
+      "steps": "My steps list",
+      "expected": "Apply to the UGC disabled until the window opens",
+      "actual": "0 of 8 done; \"Apply to the UGC\" checkbox disabled, \"Opens when the UGC announces the date\", cites handbook p.118; later steps also disabled",
+      "result": "pass",
+      "screenshot": "screens/018-journey-ugc-locked.png",
+      "id": "E2E-UI-031"
+    },
+    {
+      "title": "Groups: join an existing group with the rules",
+      "steps": "Join \"Waiting for Computer Science\" (9 members); tick I agree; Agree and join",
+      "expected": "Rules shown once, then room",
+      "actual": "Rules dialog (6 rules, \"You accept these once\"), Agree disabled until ticked; -> #/group/1 \"10 members · live\", sample messages labelled Sample. (First click did not register until scrolled into view)",
+      "result": "pass",
+      "screenshot": "screens/020-group-rules.png",
+      "id": "E2E-UI-032"
+    },
+    {
+      "title": "Groups: second existing group has no rules prompt",
+      "steps": "Join \"Waiting for Medicine\" (5 members)",
+      "expected": "Joins straight away",
+      "actual": "No rules dialog; -> #/group/2 \"6 members · live\"",
+      "result": "pass",
+      "screenshot": "screens/022-second-group-no-rules.png",
+      "id": "E2E-UI-033"
+    },
+    {
+      "title": "Group info shows members",
+      "steps": "Group info in the Medicine room",
+      "expected": "Description, rules, member list",
+      "actual": "#/group/2/info: About, rules + group-specific rule, \"Members (6)\" usernames only incl. \"You\"",
+      "result": "pass",
+      "screenshot": "screens/023-group-info.png",
+      "id": "E2E-UI-034"
+    },
+    {
+      "title": "Group info Exit group",
+      "steps": "Exit group, confirm",
+      "expected": "Confirmation, then left",
+      "actual": "Confirm \"Exit this group? You can join again at any time.\"; -> #/groups, Medicine no longer under Your groups",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-035"
+    },
+    {
+      "title": "Me: avatar picker saves",
+      "steps": "Tap Picture 3, reload",
+      "expected": "Saved to the account",
+      "actual": "/api/me avatar \"a03\"; Picture 3 still checked after reload; app-bar shows /avatars/a03.svg",
+      "result": "pass",
+      "screenshot": "screens/024-me-avatar.png",
+      "id": "E2E-UI-036"
+    },
+    {
+      "title": "Me: notification settings",
+      "steps": "Open Me, switch reminder time to 6 pm",
+      "expected": "Settings visible and saved",
+      "actual": "Section shows 7-day, 1-day switches, 8 am/6 pm, alert count; 6 pm saves zedpath.notify.v1 hour 18",
+      "result": "pass",
+      "screenshot": "screens/025-notification-settings.png",
+      "id": "E2E-UI-037"
+    },
+    {
+      "title": "Me: language switch",
+      "steps": "Tap සිංහල, then English",
+      "expected": "UI language changes and back",
+      "actual": "Bottom nav became \"මාර්ග/මගේ ලැයිස්තුව/ගමන් මඟ/කණ්ඩායම්/අසන්න\", then back to English",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-038"
+    },
+    {
+      "title": "App bar opaque when scrolled",
+      "steps": "Courses, scroll 1200 px",
+      "expected": "Sticky opaque bar, list does not show through",
+      "actual": "header.app-bar sticky top 0, background rgb(244,246,251), opacity 1, no backdrop",
+      "result": "pass",
+      "screenshot": "screens/026-appbar-scrolled.png",
+      "id": "E2E-UI-039"
+    },
+    {
+      "title": "Bottom nav present and works",
+      "steps": "Check nav, tap Groups",
+      "expected": "5 destinations, navigates",
+      "actual": "nav \"Main\" fixed: Paths / My list (badge 2) / Journey / Groups / Ask; Groups -> #/groups",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-040"
+    },
+    {
+      "title": "Log out, wrong password, log back in",
+      "steps": "Me > Log out; log in with wrong then right password",
+      "expected": "Error, then data restored",
+      "actual": "Log out -> /api/me 401; wrong password \"Wrong username or password\"; right password -> #/paths with same 62 courses + My list 2",
+      "result": "pass",
+      "screenshot": null,
+      "id": "E2E-UI-041"
+    },
+    {
+      "title": "Delete account returns to Welcome",
+      "steps": "Me > Delete my account > Delete for good",
+      "expected": "Welcome, session gone, account gone",
+      "actual": "Confirm dialog; -> #/ Welcome; /api/me 401; logging in again gives \"Wrong username or password\"",
+      "result": "pass",
+      "screenshot": "screens/028-after-delete-welcome.png",
+      "id": "E2E-UI-042"
+    }
+  ],
+  "observations": [
+    "Some university names render cut off: \"Sabaragamuwa University of\", \"Uva Wellassa University of\", \"Rajarata University of\", \"Wayamba University of\" (courses list, course detail, My list, Compare). Looks like a data/name-trimming issue, not covered by a case.",
+    "Grammar: \"1 courses within reach match \\\"data\\\"\" (singular not handled).",
+    "Automation note: agent-browser \"find role/text ... click\" missed 3 times (Create account, Log in link, Groups nav link) while the same controls worked with snapshot refs or requestSubmit. Treated as tool flakiness, retried once each; not app defects.",
+    "Group joins were only on existing groups (Computer Science 9 members, Medicine 5 members). No chat messages posted, no Ask questions sent. The Medicine group was exited in the test; the Computer Science membership was left for the account delete to remove (not re-checked in the UI afterwards).",
+    "Reminder time was left at 6 pm on the deleted account (stored on the device only)."
+  ]
+}
