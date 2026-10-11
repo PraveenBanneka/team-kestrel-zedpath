@@ -5,7 +5,7 @@ one clip at a time; join the clips in Clipchamp and keep the total under 4:00 (a
 
 ## The demo student (account already created on the live app)
 
-Log in as **`kasun_demo`**, password **`Kestrel@2026`** (created with tools/demo-account.ts; sign-up is too long to show).
+Create this account yourself before recording (username **`kasun_demo`**, password **`Kestrel@2026`**), then log in on camera.
 Kasun Perera · Physical Science · Kurunegala · Z-score 1.4200 · Combined Mathematics B, Physics C, Chemistry C ·
 Sri Lanka Mathematics Olympiad, National, 2nd place, 2024 · interests Building apps, Maths. Placeholder email and
 mobile (kasun.perera@example.com, 0771234567): never contacted. This profile gives about 42 Safe, 4 Likely, 16 Reach.

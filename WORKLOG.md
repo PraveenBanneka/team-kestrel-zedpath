@@ -332,3 +332,4 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Demo account kasun_demo (sample student Kasun Perera, placeholder contact) created on live with tools/demo-account.ts (same sign-up API and PBKDF2 as the app); login checked (200, profile and extras back).
 - Ask suggestions built from the student's own details (src/ask-suggest.ts): chances, best achievement vs the Reach course in the list, interests, aptitude test, student loan; en/si/ta; 183/183.
 - Live check: logged in as kasun_demo with Physical Science Colombo in the list; Ask shows the five questions exactly.
+- Praveen: delete the demo account, he creates it himself. kasun_demo deleted via DELETE /me (204; login now 401). Username free.
