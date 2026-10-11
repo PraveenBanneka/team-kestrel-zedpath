@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **8daa557b** (6cbd4cbe minus the test-notification button). Rollback target 6cbd4cbe (code only).
+  Live (workers.dev) = version **d6323d59** (8daa557b + press-and-hold multi-select on Courses). Rollback target 8daa557b (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -313,3 +313,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
   Kestrel_AI_Usage_Report.pdf, Kestrel_Declaration (sign before upload), ZedPath_Demo_Script.md (Kurunegala PhysSci student).
 
 ## 2026-10-11: 8daa557b LIVE (Praveen's GO): test-notification button removed from Me; live bundle checked (button code gone).
+
+## 2026-10-11: d6323d59 LIVE (Praveen's GO): Courses press-and-hold multi-select -> Add to my list (addManyToList, tested); 165/165; live bundle checked.
