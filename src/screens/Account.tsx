@@ -133,6 +133,7 @@ export function AuthScreen({ mode, profile, extras, go, onSignedUp, onLoggedIn }
   return (
     <form className="stack" style={{ gap: 14 }} onSubmit={submit} noValidate>
       <div className="stack" style={{ gap: 4 }}>
+        {demo && <p className="chip small" style={{ alignSelf: 'flex-start' }}>Demo: sample student Kasun Perera (placeholder details)</p>}
         <h1 className="screen-title">{title}</h1>
         <p className="subtitle">{lead}</p>
       </div>
