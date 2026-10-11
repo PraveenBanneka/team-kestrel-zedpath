@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **f589f1a8** (CR-006: Journey on the account, rules once, group info, avatars, My list Compare, Ask fixes; remote D1 at 0010). Rollback target d6323d59 (safe: 0010 kept group_member.rules_version).
+  Live (workers.dev) = version **40628ac5** (f589f1a8 + Welcome Back fix and team line). Rollback target f589f1a8 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -323,3 +323,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live check (throwaway account, deleted after): signup 201; journey empty; follow 136L + R043 204; tick RESULTS 204; tick UGC_APPLY 409
   (not open yet); avatar a05 200, bad avatar 400; DELETE /me 204 and journey rows cascaded to 0. Avatars a01/a12 served as SVG; /api/me/journey 401 without session.
 - Tests 179/179, tsc -b clean. Docs 01-04 at 2.0 (draft) awaiting approval; ZP-DOC-05 updated for 0010.
+
+## 2026-10-11 (evening): 40628ac5 LIVE (Praveen's GO): Back from Create account returns to Welcome (onboarded set only after sign-up/log-in); Welcome team line "Team Kestrel · Undergraduate bracket · IntelliCon '26" (en/si/ta). 179/179. Live check in a fresh browser: team line shown; English > Skip > signup > Back lands on Welcome.
