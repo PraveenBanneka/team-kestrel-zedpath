@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **d6323d59** (8daa557b + press-and-hold multi-select on Courses). Rollback target 8daa557b (code only).
+  Live (workers.dev) = version **f589f1a8** (CR-006: Journey on the account, rules once, group info, avatars, My list Compare, Ask fixes; remote D1 at 0010). Rollback target d6323d59 (safe: 0010 kept group_member.rules_version).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -315,3 +315,11 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-11: 8daa557b LIVE (Praveen's GO): test-notification button removed from Me; live bundle checked (button code gone).
 
 ## 2026-10-11: d6323d59 LIVE (Praveen's GO): Courses press-and-hold multi-select -> Add to my list (addManyToList, tested); 165/165; live bundle checked.
+
+## 2026-10-11 (afternoon): f589f1a8 LIVE (Praveen's GO): CR-006 + Ask fixes + avatars
+- whoami = ZedPath account (e6474e41...). Backup: C:/Users/prave/zedpath-backups/zedpath-before-0010-20261011.sql (56 KB).
+- Remote D1: migration 0010 applied (255 offerings, group_rules_acceptance with 1 carried-over row, journey_course/notice/step).
+  Expand-then-contract: group_member.rules_version kept but unused, so rolling back code to d6323d59 stays safe; a later migration drops it.
+- Live check (throwaway account, deleted after): signup 201; journey empty; follow 136L + R043 204; tick RESULTS 204; tick UGC_APPLY 409
+  (not open yet); avatar a05 200, bad avatar 400; DELETE /me 204 and journey rows cascaded to 0. Avatars a01/a12 served as SVG; /api/me/journey 401 without session.
+- Tests 179/179, tsc -b clean. Docs 01-04 at 2.0 (draft) awaiting approval; ZP-DOC-05 updated for 0010.
