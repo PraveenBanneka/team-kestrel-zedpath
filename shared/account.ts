@@ -30,9 +30,11 @@ export interface Extras { achievements: Achievement[]; interests: string[] }
 export const normaliseUsername = (u: string) => u.trim().toLowerCase();
 
 export interface SaltResponse { salt: string; kdf: typeof KDF }
-export interface SignupRequest { username: string; key: string; profile: ProfileInput | null; extras: Extras }
+export interface SignupRequest { username: string; key: string; profile: ProfileInput | null; extras: Extras; inviteCode?: string }
 export interface LoginRequest { username: string; key: string }
 export interface RecoverRequest { username: string; code: string; key: string }
 export interface SignupResponse { username: string; recoveryCode: string }
-export interface MeResponse { username: string; profile: ProfileInput | null; extras: Extras }
+/** role SENIOR = a verified senior (CR-002): no A/L results stored; `senior` says what they study. */
+export interface MeResponse { username: string; role: 'STUDENT' | 'SENIOR'; senior: { course: string; institution: string; year: number } | null;
+  profile: ProfileInput | null; extras: Extras }
 export interface SaveMeRequest { profile: ProfileInput; extras: Extras }

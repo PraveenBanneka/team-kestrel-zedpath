@@ -1,0 +1,52 @@
+{
+  "academicYear": "2025/2026",
+  "retrievedOn": "2026-10-11",
+  "note": "The UGC admission steps, in order, from the UGC handbook 2025/26. Every quote is verbatim (checked against the handbook text by tools/rulebook/check-journey.ts). The handbook gives the ORDER and the RULES; the dates themselves are set each year by UGC press notices, so no date is invented here.",
+  "steps": [
+    {
+      "id": "UGC_APPLY",
+      "kind": "UGC_APPLICATION_CLOSE",
+      "title": "Apply to the UGC",
+      "detail": "Apply online at ugc.ac.lk, then send the signed printout with your documents by registered post so it reaches the UGC before the closing date.",
+      "when": "Closing date: set by the UGC press notice",
+      "page": 118,
+      "quote": "The last date for the receipt of applications for admission will be specified in the press notice referred to above."
+    },
+    {
+      "id": "UGC_ORDER",
+      "kind": "PREFERENCE_CHANGE_CLOSE",
+      "title": "Change your Uni-Code order (once)",
+      "detail": "You may change, add or remove Uni-Codes online only once, then post the signed new order. Check your list's order in ZedPath before you do.",
+      "when": "Within 2 weeks of the application closing date",
+      "page": 116,
+      "quote": "Candidates are permitted to change their order of “Uni Codes” online within two (02) weeks of the closing date of applications"
+    },
+    {
+      "id": "APTITUDE",
+      "kind": "APTITUDE_APPLICATION",
+      "title": "Apply for the aptitude test",
+      "detail": "Courses on your list with a practical or aptitude test need a separate application to that university.",
+      "when": "Set by each university's press notice",
+      "page": 151,
+      "quote": "the students should apply directly to the respective universities in order to face the practical/ aptitude tests"
+    },
+    {
+      "id": "UGC_SELECTION",
+      "kind": "CUTOFF_RELEASE",
+      "title": "Selection results",
+      "detail": "The UGC tells each selected student their course and university.",
+      "when": "Announced by the UGC",
+      "page": 118,
+      "quote": "The successful candidates will be informed of their course of study and the university to which they have been selected by the UGC."
+    },
+    {
+      "id": "UGC_REGISTER",
+      "kind": "REGISTRATION_CLOSE",
+      "title": "Register for your course",
+      "detail": "If you accept the offer, pay the Rs. 50 registration fee and register online before the UGC's last date.",
+      "when": "Last date: given by the UGC with your selection",
+      "page": 118,
+      "quote": "should make the payment of Rs. 50/= as the registration fee to the bank or online in credit of the University Grants Commission and register online via the official website of UGC for the selected course of study of the university on or before the last date given for registration by the UGC."
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 // Student accounts API (CR-001, approved 2026-10-05). Mounted under /api by worker/index.ts.
 //   POST /auth/salt     {username}             -> {salt, kdf}   (same answer shape for unknown usernames)
-//   POST /auth/signup   {username, key, profile, extras} -> 201 {username, recoveryCode} + session cookie
+//   POST /auth/signup   {username, key, profile, extras, inviteCode?} -> 201 {username, recoveryCode} + session cookie
+//                       (with a valid senior invite code: a SENIOR account, verified for the invite's institution, CR-002)
 //   POST /auth/login    {username, key}        -> MeResponse + session cookie
 //   POST /auth/recover  {username, code, key}  -> {username, recoveryCode} + session cookie (all other sessions end)
 //   POST /auth/logout | /auth/logout-all       -> 204
@@ -17,7 +18,7 @@ import {
 } from '../shared/account.ts';
 import { parseProfile } from './rulebook.ts';
 
-type AppEnv = { Bindings: Env; Variables: { accountId: number; username: string; tokenHash: string } };
+export type AppEnv = { Bindings: Env; Variables: { accountId: number; username: string; tokenHash: string } };
 type C = Context<AppEnv>;
 
 const COOKIE = 'zp_session';
@@ -26,7 +27,7 @@ const enc = new TextEncoder();
 const hex = (b: ArrayBuffer | Uint8Array) => [...(b instanceof Uint8Array ? b : new Uint8Array(b))].map(x => x.toString(16).padStart(2, '0')).join('');
 const fromHex = (h: string) => new Uint8Array((h.match(/../g) ?? []).map(x => parseInt(x, 16)));
 const randomHex = (bytes: number) => hex(crypto.getRandomValues(new Uint8Array(bytes)));
-const sha256Hex = async (data: Uint8Array) => hex(await crypto.subtle.digest('SHA-256', data));
+export const sha256Hex = async (data: Uint8Array) => hex(await crypto.subtle.digest('SHA-256', data));
 const nowIso = () => new Date().toISOString();
 async function hmacHex(secret: string, msg: string): Promise<string> {
   const k = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
@@ -54,19 +55,19 @@ function newRecoveryCode(): string {
 export const normaliseCode = (s: string) => (s.toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/0/g, 'O').replace(/1/g, 'I')
   .replace(/8/g, 'B').match(/.{1,4}/g) ?? []).join('-');
 const saltFor = async (pepper: string, username: string) => (await hmacHex(pepper, `salt:${username}`)).slice(0, 32);
-const err = (c: C, status: 400 | 401 | 403 | 404 | 409 | 429 | 503, error: string, field?: string) =>
+export const err = (c: C, status: 400 | 401 | 403 | 404 | 409 | 429 | 503, error: string, field?: string) =>
   c.json({ error, ...(field ? { field } : {}) } satisfies ApiError, status);
 const body = async (c: C) => (await c.req.json().catch(() => null)) as Record<string, unknown> | null;
 
 export const accountRoutes = new Hono<AppEnv>();
 
 // The feature is off until the database and the server secret exist (safe default: the app works without accounts).
-const ready = async (c: C, next: Next) => {
+export const ready = async (c: C, next: Next) => {
   if (!c.env.DB || !c.env.PEPPER) return err(c, 503, 'Accounts are not available yet');
   await next();
 };
 // Writes from other websites are refused (browsers always send Origin on cross-site POST/PUT/DELETE).
-const sameOrigin = async (c: C, next: Next) => {
+export const sameOrigin = async (c: C, next: Next) => {
   if (!['GET', 'HEAD'].includes(c.req.method)) {
     const origin = c.req.header('Origin');
     if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
@@ -81,7 +82,7 @@ const limited = async (c: C, action: string, username: string) => {
 };
 const ip = (c: C) => c.req.header('CF-Connecting-IP') ?? 'local';
 
-const requireSession = async (c: C, next: Next) => {
+export const requireSession = async (c: C, next: Next) => {
   const token = getCookie(c, COOKIE);
   if (!token || !/^[0-9a-f]{64}$/.test(token)) return err(c, 401, 'Please log in');
   const tokenHash = await sha256Hex(fromHex(token));
@@ -139,7 +140,10 @@ function saveStatements(db: D1Database, id: { sql: string; args: unknown[] }, p:
 }
 
 async function loadMe(db: D1Database, accountId: number, username: string): Promise<MeResponse> {
-  const [p, subs, ach, ints] = await db.batch([
+  const [acc, p, subs, ach, ints] = await db.batch([
+    db.prepare(`SELECT a.role, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
+      LEFT JOIN senior_invite v ON v.redeemed_by = a.account_id LEFT JOIN course c ON c.course_code = v.course_code
+      LEFT JOIN institution i ON i.letter = v.institution_letter WHERE a.account_id = ?`).bind(accountId),
     db.prepare('SELECT stream_code, district_code, z_e4 FROM student_profile WHERE account_id = ?').bind(accountId),
     db.prepare('SELECT subject_code, grade FROM student_subject WHERE account_id = ? ORDER BY position').bind(accountId),
     db.prepare('SELECT achievement_id, activity, kind, level, place, year FROM student_achievement WHERE account_id = ? ORDER BY position').bind(accountId),
@@ -148,8 +152,11 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
   const prof = (p.results as { stream_code: ProfileInput['stream']; district_code: string; z_e4: number }[])[0];
   const al = Object.fromEntries((subs.results as { subject_code: string; grade: string }[]).map(r => [r.subject_code, r.grade]));
   const order = (t: string) => (INTERESTS as readonly string[]).indexOf(t);
+  const a = (acc.results as { role: string; course: string | null; institution: string | null; year: number | null }[])[0];
   return {
     username,
+    role: a?.role === 'SENIOR' ? 'SENIOR' : 'STUDENT',
+    senior: a?.role === 'SENIOR' && a.course && a.institution && a.year ? { course: a.course, institution: a.institution, year: a.year } : null,
     profile: prof ? { stream: prof.stream_code, district: prof.district_code, zE4: prof.z_e4, al: al as ProfileInput['al'] } : null,
     extras: {
       achievements: (ach.results as (Omit<Achievement, 'id'> & { achievement_id: number })[])
@@ -187,23 +194,37 @@ accountRoutes.post('/auth/signup', async c => {
   if (profile && 'error' in profile) return c.json(profile, 400);
   const extras = parseExtras(b?.extras);
   if ('error' in extras) return c.json(extras, 400);
+  const invite = b?.inviteCode == null || b.inviteCode === '' ? null : normaliseCode(String(b.inviteCode));
+  if (invite !== null && !RECOVERY_RE.test(invite)) return err(c, 400, 'That invite code is not in the right format', 'inviteCode');
   if (await limited(c, 'signup', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
 
   const db = c.env.DB, now = nowIso(), subject = `local:${randomHex(16)}`;
+  const inviteHash = invite ? await sha256Hex(enc.encode(invite)) : null;
+  if (inviteHash && !(await db.prepare('SELECT 1 FROM senior_invite WHERE code_hash = ? AND redeemed_by IS NULL AND expires_at > ?').bind(inviteHash, now).first()))
+    return err(c, 400, 'That invite code is not valid, already used or expired', 'inviteCode');
   const id = { sql: '(SELECT account_id FROM account WHERE auth_subject = ?)', args: [subject] };
   const code = newRecoveryCode(), token = randomHex(32);
   try {
     await db.batch([
-      db.prepare(`INSERT INTO account (auth_subject, role, created_at) VALUES (?, 'STUDENT', ?)`).bind(subject, now),
+      // A senior account takes its institution from the invite; if the invite stopped being valid meanwhile (another
+      // sign-up used it), no account row is inserted and the next statement's foreign key aborts the whole batch.
+      inviteHash
+        ? db.prepare(`INSERT INTO account (auth_subject, role, verified_for_letter, created_at) SELECT ?, 'SENIOR', institution_letter, ?
+            FROM senior_invite WHERE code_hash = ? AND redeemed_by IS NULL AND expires_at > ?`).bind(subject, now, inviteHash, now)
+        : db.prepare(`INSERT INTO account (auth_subject, role, created_at) VALUES (?, 'STUDENT', ?)`).bind(subject, now),
       db.prepare(`INSERT INTO password_login (account_id, username, salt, verifier, kdf, updated_at) VALUES (${id.sql}, ?, ?, ?, ?, ?)`)
         .bind(subject, username, await saltFor(c.env.PEPPER, username), await sha256Hex(fromHex(key)), KDF, now),
       db.prepare(`INSERT INTO recovery_code (account_id, code_hash, created_at) VALUES (${id.sql}, ?, ?)`)
         .bind(subject, await sha256Hex(enc.encode(code)), now),
       sessionStatement(db, id.sql, id.args, await sha256Hex(fromHex(token))),
-      ...saveStatements(db, id, profile, extras, now),
+      ...(inviteHash
+        ? [db.prepare(`UPDATE senior_invite SET redeemed_by = ${id.sql}, redeemed_at = ? WHERE code_hash = ? AND redeemed_by IS NULL`)
+            .bind(subject, now, inviteHash)]                     // seniors keep no student data (0003 triggers)
+        : saveStatements(db, id, profile, extras, now)),
     ]);
   } catch (e) {
     if (String(e).includes('password_login.username')) return err(c, 409, 'That username is taken. Try another', 'username');
+    if (inviteHash) return err(c, 400, 'That invite code is not valid, already used or expired', 'inviteCode');
     throw e;
   }
   setSessionCookie(c, token);
@@ -274,12 +295,19 @@ accountRoutes.put('/me', async c => {
   const extras = parseExtras(b?.extras);
   if ('error' in extras) return c.json(extras, 400);
   const id = c.get('accountId');
+  const role = await c.env.DB.prepare('SELECT role FROM account WHERE account_id = ?').bind(id).first<string>('role');
+  if (role !== 'STUDENT') return err(c, 403, 'Senior accounts do not store A/L results');
   await c.env.DB.batch(saveStatements(c.env.DB, { sql: '?', args: [id] }, profile, extras, nowIso()));
   return c.json(await loadMe(c.env.DB, id, c.get('username')));
 });
 
 accountRoutes.delete('/me', async c => {
-  await c.env.DB.prepare('DELETE FROM account WHERE account_id = ?').bind(c.get('accountId')).run();   // cascades to every student row
+  const id = c.get('accountId');
+  const groups = (await c.env.DB.prepare('SELECT group_id FROM group_member WHERE account_id = ?').bind(id).all<{ group_id: number }>()).results;
+  await c.env.DB.prepare('DELETE FROM account WHERE account_id = ?').bind(id).run();   // cascades to every row under it
+  // Messages live in each group's room, outside D1's cascade: tell every group the account was in to delete them.
+  if (c.env.GROUP_ROOM) await Promise.allSettled(groups.map(g => c.env.GROUP_ROOM.get(c.env.GROUP_ROOM.idFromName(`group:${g.group_id}`))
+    .fetch('https://room/purge', { method: 'POST', body: JSON.stringify({ accountId: id }) })));
   deleteCookie(c, COOKIE, COOKIE_OPTS);
   return c.body(null, 204);
 });

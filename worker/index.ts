@@ -7,7 +7,10 @@ import { describe } from '../shared/describe.ts';
 import { assessOffering, book, districtIndex, parseProfile, SUBJECT_NAMES } from './rulebook.ts';
 import { accountRoutes } from './account.ts';
 import { askRoutes } from './ask.ts';
+import { groupRoutes } from './groups.ts';
 import { SYLLABI, SYLLABI_VERSION } from './syllabi.ts';
+import journey from './generated/journey-2025-2026.json' with { type: 'json' };
+import type { JourneyResponse } from '../shared/journey.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
 function groupName(code: string, label: string | null): string {
@@ -22,7 +25,7 @@ const app = new Hono<{ Bindings: Env }>().basePath('/api');
 
 // Cached answers must change the moment the data or the API changes: the ETag is the rulebook build, and clients
 // revalidate every time (304 when unchanged), so a deploy can never leave a phone holding an old response shape.
-const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}"`;     // changes with the rulebook OR the syllabus data
+const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}-jn-${journey.builtAt}"`;   // rulebook, syllabus or journey data
 const cacheable = (c: { req: { header: (n: string) => string | undefined }; header: (n: string, v: string) => void }) => {
   c.header('Cache-Control', 'public, no-cache');
   c.header('ETag', ETAG);
@@ -99,11 +102,21 @@ app.get('/routes', c => {
   return c.json(out);
 });
 
+/** Journey steps and Alerts notices (CR-002): official, cited, bundled; eligibility is checked on the phone. */
+app.get('/journey', c => {
+  if (cacheable(c)) return c.body(null, 304);
+  const { builtAt: _b, ...body } = journey;
+  return c.json(body as JourneyResponse);
+});
+
 // Student accounts (CR-001): /api/auth/* and /api/me.
 app.route('/', accountRoutes);
 // Ask ZedPath: /api/ask (cited answers) and the localhost-only /api/dev/embed tool.
 app.route('/', askRoutes);
+// Course groups (CR-002): /api/groups/* and /api/blocks; messages live in the GroupRoom Durable Objects.
+app.route('/', groupRoutes);
 
 app.notFound(c => c.json({ error: 'Not found' } satisfies ApiError, 404));
 
 export default app;
+export { GroupRoom } from './group-room.ts';

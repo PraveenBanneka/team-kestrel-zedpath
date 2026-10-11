@@ -1,0 +1,56 @@
+{
+  "retrievedOn": "2026-10-11",
+  "note": "Alerts: official notices a student can act on, each tied to a route in data/routes (which holds the full verbatim requirements and the Gazette source). Eligibility fields restate the quoted rule so the phone can check it; the quote is verbatim from the route's requirements text (checked by tools/rulebook/check-journey.ts). O/L rules are shown, never checked: ZedPath does not hold O/L results.",
+  "notices": [
+    {
+      "routeId": "R043",
+      "kind": "JOB_EXAM_CLOSE",
+      "title": "Inspector of Customs, Grade II: open competitive exam",
+      "opensOn": "2026-09-14",
+      "closesOn": "2026-10-12",
+      "age": { "min": 18, "max": 24, "asOf": "2026-10-12", "quote": "is not less than 18 years and not more than 24 years of age to the closing date of applications" },
+      "al": { "passes": 3, "subjects": null, "quote": "Should have passed three main subjects at the GCE (A/L) examination in one sitting" },
+      "ol": "Six O/L passes with five credits, including Sinhala or Tamil and Mathematics, and at least a pass in English"
+    },
+    {
+      "routeId": "R027",
+      "kind": "ROUTE_INTAKE",
+      "title": "National Diploma in Technology, University of Moratuwa",
+      "opensOn": "2026-09-18",
+      "closesOn": "2026-10-19",
+      "age": { "min": null, "max": 23, "asOf": "2025-12-31", "quote": "Applicants should be below 24 years of age on 31.12.2025" },
+      "al": { "passes": 3, "subjects": { "all": ["PHY", "CHEM"], "oneOf": ["CMATH", "HMATH"] }, "quote": "Applicants should have obtained passes for following three (03) subjects: (i) Physics (ii) Chemistry (iii) Combined Mathematics or Higher Mathematics at one and the same sitting" },
+      "ol": "Marine Engineering Technology and Nautical Studies also need a credit (C) in English at O/L"
+    },
+    {
+      "routeId": "R040",
+      "kind": "ROUTE_INTAKE",
+      "title": "Electrician (Special) apprenticeship, NAITA IETI Moratuwa",
+      "opensOn": null,
+      "closesOn": "2026-10-14",
+      "age": { "min": 16, "max": 35, "asOf": "2026-12-31", "quote": "Candidates must be between 16 and 35 years of age as of 31.12.2026" },
+      "al": null,
+      "ol": "Six O/L passes including Sinhala, Science and Mathematics (with a credit in Mathematics or Science), or two A/L passes including Science or a technology subject with the O/L passes"
+    },
+    {
+      "routeId": "R041",
+      "kind": "ROUTE_INTAKE",
+      "title": "ICT Technician apprenticeship, NAITA IETI Moratuwa",
+      "opensOn": null,
+      "closesOn": "2026-10-14",
+      "age": { "min": 16, "max": 35, "asOf": "2026-12-31", "quote": "Candidates must be between 16 and 35 years of age as of 31.12.2026" },
+      "al": null,
+      "ol": "Six O/L passes including Sinhala and Mathematics, a pass in English (O/L or A/L) and a basic computer course"
+    },
+    {
+      "routeId": "R044",
+      "kind": "JOB_EXAM_CLOSE",
+      "title": "Management Service Officers, Grade III: open competitive exam",
+      "opensOn": "2026-08-31",
+      "closesOn": "2026-09-25",
+      "age": { "min": 18, "max": 30, "asOf": "2026-09-25", "quote": "Shall be not less than 18 years and not more than 30 years of age as at the closing date of applications" },
+      "al": { "passes": 3, "subjects": null, "quote": "Shall have passed all the subjects in General Certificate of Education (Advanced Level) at one sitting" },
+      "ol": "Six O/L passes with four credits, including a language and Mathematics, at one sitting"
+    }
+  ]
+}

@@ -27,6 +27,9 @@
   ],
   // Free Workers Rate Limiting. AUTH_LIMITER: 10/min per IP + username (slows guessing one account's password).
   // IP_LIMITER: 100/min per IP overall (stops floods, yet a school lab or a home Wi-Fi sharing one IP still fits).
+  // Course groups (CR-002): one GroupRoom Durable Object per group, SQLite storage (available on the Free plan).
+  "durable_objects": { "bindings": [ { "name": "GROUP_ROOM", "class_name": "GroupRoom" } ] },
+  "migrations": [ { "tag": "v1-group-room", "new_sqlite_classes": ["GroupRoom"] } ],
   "ratelimits": [
     { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
     { "name": "IP_LIMITER", "namespace_id": "1002", "simple": { "limit": 100, "period": 60 } }
