@@ -539,3 +539,5 @@ button.wa-head { width: 100%; border: 0; text-align: left; cursor: pointer; colo
 .list-row .pick-ic { margin: 0 4px; }
 
 .select-bar .grow { white-space: nowrap; }
+
+img.person-avatar { object-fit: cover; background: var(--surface-2); }

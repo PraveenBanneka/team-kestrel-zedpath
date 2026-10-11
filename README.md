@@ -186,6 +186,10 @@ Secrets live in `.dev.vars` locally (gitignored) and in Cloudflare secrets in pr
 
 **Team Kestrel** · B.M.P Banneka (solo, undergraduate bracket), with Claude (Anthropic) as coding partner.
 
+## Credits
+
+Profile pictures: "Bottts" by Pablo Stanley ([bottts.com](https://bottts.com/)), generated with [DiceBear](https://www.dicebear.com/) (`tools/avatars/make-avatars.ts`) and served as static files.
+
 ## Disclaimer
 
 ZedPath is an independent project. It is not affiliated with the University Grants Commission, the
