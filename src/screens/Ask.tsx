@@ -9,8 +9,9 @@
 // Questions are sent with the app language, so an unclear question is answered in the language of the interface.
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUp, BookOpenCheck, CalendarPlus, Check, ChevronDown, ExternalLink, Flag, ListPlus, Scale, ShieldCheck, Sparkles, ThumbsUp, TriangleAlert } from 'lucide-react';
+import { ArrowUp, BookOpenCheck, CalendarPlus, Check, ChevronDown, ChevronRight, ExternalLink, Flag, ListPlus, Scale, ShieldCheck, Sparkles, ThumbsUp, TriangleAlert } from 'lucide-react';
 import type { ProfileInput, ResultsResponse } from '../../shared/api.ts';
+import type { Extras } from '../../shared/account.ts';
 import { QUESTION_MAX, type AskAction, type AskResponse, type Verdict } from '../../shared/ask.ts';
 import { addToList, type ListEntry } from '../../shared/list.ts';
 import { askZedPath, sendFeedback } from '../ask.ts';
@@ -128,13 +129,16 @@ function Reply({ question, reply, ctx, onAsk }: { question: string; reply: AskRe
           <div className="chips source-chips" aria-label={t('ask.sources')}>
             {reply.citations.map(c => (
               <button key={c.n} type="button" className={`chip small ${open === c.n ? 'on' : ''}`} aria-expanded={open === c.n} onClick={() => cite(c.n)}>
-                <BookOpenCheck size={14} aria-hidden="true" /><span className="num">{c.n}</span> · {c.page ? `p.${c.page}` : c.source}</button>))}
+                <BookOpenCheck size={14} aria-hidden="true" /><span className="num">{c.n}</span><span className="chip-text">{c.page ? `${t('ask.handbook')} p.${c.page}` : c.source}</span></button>))}
           </div>
           {quote && (
             <div className="source-quote card-inset">
-              <span className="helper">{quote.source}{quote.page ? `, p.${quote.page}` : ''}</span>
+              <span className="title-s" lang="en">{quote.source}{quote.page ? `, p.${quote.page}` : ''}</span>
               <p lang="en">“{quote.quote}…”</p>
-              {quote.url && <a className="source-link" href={quote.url} target="_blank" rel="noopener">{t('ask.openSource')} <ExternalLink size={13} aria-hidden="true" /></a>}
+              <div className="row" style={{ gap: 16 }}>
+                {quote.routeId && <button type="button" className="source-link link-btn" onClick={() => ctx.go(`/route/${quote.routeId}`)}>{t('ask.inZedPath')}<ChevronRight size={14} aria-hidden="true" /></button>}
+                {quote.url && <a className="source-link" href={quote.url} target="_blank" rel="noopener">{quote.page ? t('ask.openHandbook') : t('ask.openSource')} <ExternalLink size={13} aria-hidden="true" /></a>}
+              </div>
             </div>)}
         </div>)}
 
@@ -151,8 +155,8 @@ function Reply({ question, reply, ctx, onAsk }: { question: string; reply: AskRe
   );
 }
 
-export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsumedInitial, ctx }: {
-  profile: ProfileInput | null; turns: AskTurn[]; setTurns: (f: (t: AskTurn[]) => AskTurn[]) => void;
+export function AskScreen({ profile, extras, turns, setTurns, initialQuestion, onConsumedInitial, ctx }: {
+  profile: ProfileInput | null; extras: Extras; turns: AskTurn[]; setTurns: (f: (t: AskTurn[]) => AskTurn[]) => void;
   initialQuestion: string | null; onConsumedInitial: () => void; ctx: AskContext;
 }) {
   const [q, setQ] = useState('');
@@ -165,7 +169,7 @@ export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsume
     setQ('');
     setTurns(x => [...x, { question: text, reply: null, error: null }]);
     try {
-      const reply = await askZedPath(text, profile);
+      const reply = await askZedPath(text, profile, extras.achievements.length || extras.interests.length ? extras : null);
       setTurns(x => x.map((y, i) => i === x.length - 1 ? { ...y, reply } : y));
     } catch (e) {
       setTurns(x => x.map((y, i) => i === x.length - 1 ? { ...y, error: (e as Error).message } : y));
@@ -174,7 +178,8 @@ export function AskScreen({ profile, turns, setTurns, initialQuestion, onConsume
   useEffect(() => { if (initialQuestion) { onConsumedInitial(); void send(initialQuestion); } }, [initialQuestion]);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, [turns]);
 
-  const suggestions = profile ? [t('ask.q.medicine'), t('ask.q.cs'), ...general().slice(0, 3)] : general();
+  // Five questions that show what Ask can do with this student's own details (video 2: "five questions for the demo").
+  const suggestions = profile ? [t('ask.q.chances'), ...(extras.achievements.length ? [t('ask.q.beyond')] : []), t('ask.q.loan'), t('ask.q.ugc'), t('ask.q.jobs')].slice(0, 5) : general();
   const submit = (e: FormEvent) => { e.preventDefault(); void send(q); };
   return (
     <div className="ask-screen">

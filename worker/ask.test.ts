@@ -4,8 +4,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { DEVICE_PER_DAY, MIN_SCORE, askActions, coursesFor, engineFacts, finish, tidyName } from './ask.ts';
-import { takeVerdict } from '../shared/ask.ts';
+import { DEVICE_PER_DAY, MIN_SCORE, askActions, coursesFor, engineFacts, extrasFacts, finish, safeUrl, tidyName } from './ask.ts';
+import { HANDBOOK_URL, takeVerdict } from '../shared/ask.ts';
 import type { AskResponse, CorpusPassage } from '../shared/ask.ts';
 
 const P50: Omit<CorpusPassage, 'id'> = { kind: 'HANDBOOK', source: 'UGC handbook 2025/26', page: 50, url: null,
@@ -57,7 +57,7 @@ describe('Ask ZedPath', () => {
     expect(r.status).toBe(200);
     const b = await r.json() as AskResponse;
     expect(b.answer).toContain('[1]');
-    expect(b.citations).toEqual([{ n: 1, source: 'UGC handbook 2025/26', page: 50, url: null, quote: expect.stringContaining('Medicine') }]);
+    expect(b.citations).toEqual([{ n: 1, source: 'UGC handbook 2025/26', page: 50, url: HANDBOOK_URL, routeId: null, quote: expect.stringContaining('Medicine') }]);
   });
 
   it('sends the model only the relevant passages, the rules, and never the provider name to the student', async () => {
@@ -109,6 +109,40 @@ describe('Ask ZedPath', () => {
     expect(tidyName('UNIVERSITY OF SRI JAYEWARDENEPURA')).toBe('University of Sri Jayewardenepura');
     expect(tidyName('UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING (UCSC)')).toBe('University of Colombo School of Computing (UCSC)');
     expect(engineFacts(['012'], STUDENT as never)[0]).not.toMatch(/UNIVERSITY|KURUNEGALA/);
+  });
+
+  it('shows a route by its name and official document, never the research notes (video 2)', () => {
+    const route: CorpusPassage = { id: 'route-R001', kind: 'ROUTE', source: 'Student Handbook IFSLS, Section 1.2 (p.5); timing from sources/ifsl_faq.html', page: null,
+      url: 'https://example.invalid/x', text: 'Interest Free Student Loan Scheme ...' };
+    const [c] = finish('It is a loan [1].', [route]).citations;
+    expect(c.source).toMatch(/^Interest Free Student Loan Scheme/);
+    expect(c.source).not.toContain('sources/');
+    expect(c.routeId).toBe('R001');
+    expect(c.url).toMatch(/^https:\/\/studentloans\.mohe\.gov\.lk\//);
+  });
+
+  it('escapes spaces in official links and refuses anything but https', () => {
+    expect(safeUrl('https://documents.gov.lk/api/x?file=/a b (1).pdf')).toBe('https://documents.gov.lk/api/x?file=/a%20b%20(1).pdf');
+    expect(safeUrl('https://documents.gov.lk/a%20b.pdf')).toBe('https://documents.gov.lk/a%20b.pdf');   // not escaped twice
+    expect(safeUrl('javascript:alert(1)')).toBeNull();
+    expect(safeUrl('http://example.com')).toBeNull();
+    expect(safeUrl(null)).toBeNull();
+  });
+
+  it('turns achievements into facts, with ZedPath (not the model) deciding the special intake', () => {
+    const national = { achievements: [{ id: '', activity: 'Cricket', kind: 'SPORT' as const, level: 'NATIONAL' as const, place: 'FIRST' as const, year: 2024 }], interests: [] };
+    expect(extrasFacts(national).join(' ')).toMatch(/MAY qualify for the special intake .*p\.166-167.*Sports Science/);
+    const school = { achievements: [{ ...national.achievements[0], level: 'SCHOOL' as const }], interests: ['Maths'] };
+    expect(extrasFacts(school).join(' ')).toMatch(/none of these achievements/);
+    expect(extrasFacts(null)).toEqual([]);
+    expect(extrasFacts({ achievements: [], interests: [] })).toEqual([]);   // safe default: nothing added
+  });
+
+  it('sends the achievements to the model only for that answer, and validates them', async () => {
+    const extras = { achievements: [{ activity: 'Chess', kind: 'OTHER', level: 'INTERNATIONAL', place: 'SECOND', year: 2025 }], interests: [] };
+    expect((await ask({ question: 'Does chess help me?', extras })).status).toBe(200);
+    expect(sentToModel.at(-1)!.body.contents[0].parts[0].text).toContain('Chess (other, international level, 2nd place, 2025)');
+    expect((await ask({ question: 'Does chess help me?', extras: { achievements: [{ activity: '', kind: 'X' }] } })).status).toBe(400);
   });
 
   it('keeps only citations that exist', () => {

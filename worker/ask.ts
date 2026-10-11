@@ -6,9 +6,11 @@
 import { Hono, type Context } from 'hono';
 import type { ApiError, ProfileInput } from '../shared/api.ts';
 import { formatZ } from '../shared/banding.ts';
-import { EMBED_MODEL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
+import { EMBED_MODEL, HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import { assessOffering, book, districtIndex, parseProfile } from './rulebook.ts';
+import { parseExtras } from './account.ts';
+import { specialIntakeHint, type Extras } from '../shared/account.ts';
 
 type AppEnv = { Bindings: Env };
 type C = Context<AppEnv>;
@@ -133,11 +135,39 @@ export function finish(raw: string, passages: CorpusPassage[]): { answer: string
     for (const n of m[1].split(',').map(Number)) if (n >= 1 && n <= passages.length && !cited.includes(n)) cited.push(n);
   const toCitation = (n: number): AskCitation => {
     const p = passages[n - 1];
-    return { n, source: p.kind === 'HANDBOOK' ? 'UGC handbook 2025/26' : p.source, page: p.page, url: p.url,
-      quote: p.text.replace(/\s+/g, ' ').slice(0, 280).trim() };
+    const quote = p.text.replace(/\s+/g, ' ').slice(0, 280).trim();
+    if (p.kind === 'HANDBOOK') return { n, source: 'UGC handbook 2025/26', page: p.page, url: HANDBOOK_URL, routeId: null, quote };
+    // Routes: the index stores the researcher's source notes; students see the route's name and its official document.
+    const routeId = p.id.replace(/^route-/, ''), r = book.routes.find(x => x.id === routeId);
+    return { n, source: r ? r.name : 'Official source', page: null, url: safeUrl(r?.sourceUrl ?? p.url), routeId: r ? r.id : null, quote };
   };
   return { answer, citations: cited.map(toCitation) };
 }
+
+/** An https link with spaces and brackets escaped (some Gazette file names have them), or null. */
+export function safeUrl(u: string | null | undefined): string | null {
+  if (!u) return null;
+  try { const url = new URL(u.trim()); return url.protocol === 'https:' ? encodeURI(decodeURI(url.href)) : null; } catch { return null; }
+}
+
+/** Video 2 (Praveen 2026-10-11): achievements and interests ("beyond grades") make answers personal. Plain facts for
+ *  the model; the special-intake check is ZedPath's own rule (shared/account.ts), never the model's guess. */
+export function extrasFacts(e: Extras | null): string[] {
+  if (!e || (e.achievements.length === 0 && e.interests.length === 0)) return [];
+  const lvl = { SCHOOL: 'school', ZONAL: 'zonal', DISTRICT: 'district', PROVINCIAL: 'provincial', NATIONAL: 'national', INTERNATIONAL: 'international' } as Record<string, string>;
+  const place = { FIRST: '1st place', SECOND: '2nd place', THIRD: '3rd place', TAKING_PART: 'took part' } as Record<string, string>;
+  const out: string[] = [];
+  if (e.achievements.length) out.push(`The student's achievements (entered by the student): ${e.achievements.map(a =>
+    `${a.activity} (${a.kind.toLowerCase()}, ${lvl[a.level] ?? a.level.toLowerCase()} level, ${place[a.place] ?? a.place.toLowerCase()}, ${a.year})`).join('; ')}.`);
+  if (e.interests.length) out.push(`The student's interests: ${e.interests.map(i => i.toLowerCase().replace(/_/g, ' ')).join(', ')}.`);
+  const hint = specialIntakeHint(e);
+  out.push(hint.applies
+    ? `ZedPath's check: these achievements MAY qualify for the special intake for outstanding achievements (UGC handbook 2025/26 Section 6, p.166-167), ` +
+      `which applies to candidates within a Z-score of 0.2000 of their district cut-off${hint.sport ? '; sport also has extra places in Sports Science and Physical Education' : ''}. It is not a guarantee.`
+    : 'ZedPath\'s check: none of these achievements is at the level the special intake needs (1st to 3rd at national level, or international, in 2023 to 2025).');
+  return out;
+}
+const SPECIAL_INTAKE_Q = 'special intake outstanding achievements sports national international level';
 
 const NOT_FOUND = 'I could not find this in the UGC handbook or the official sources ZedPath checks. Please look at ugc.ac.lk or ask the institution directly.';
 
@@ -145,7 +175,7 @@ askRoutes.post('/ask', async c => {
   if (!c.env.AI || !c.env.ASK_INDEX || !c.env.GEMINI_API_KEY || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
   const origin = c.req.header('Origin');
   if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
-  const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown } | null;
+  const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown; extras?: unknown } | null;
   const question = typeof b?.question === 'string' ? b.question.trim() : '';
   if (question.length < 2 || question.length > QUESTION_MAX) return err(c, 400, `Ask a question of up to ${QUESTION_MAX} characters`);
   let profile: ProfileInput | null = null;
@@ -154,21 +184,30 @@ askRoutes.post('/ask', async c => {
     if ('error' in p) return err(c, 400, p.error);
     profile = p;
   }
+  let extras: Extras | null = null;                                     // used for this answer only; never stored
+  if (b?.extras != null) {
+    const e = parseExtras(b.extras);
+    if ('error' in e) return err(c, 400, e.error);
+    extras = e;
+  }
   if (c.env.AUTH_LIMITER && !(await c.env.AUTH_LIMITER.limit({ key: `ask:${ip(c)}:${c.req.header('X-ZedPath-Device') ?? ''}` })).success)
     return err(c, 429, 'Too many questions at once. Wait a minute and try again');
   if (await overQuota(c)) return err(c, 429, `That is today's limit of ${DEVICE_PER_DAY} questions. Ask again tomorrow`);
 
   // 1. Find the passages closest in meaning (works across English, Sinhala and Tamil).
-  const emb = await c.env.AI.run(EMBED_MODEL as Parameters<Ai['run']>[0], { text: [question] } as never) as { data?: number[][] };
+  //    With qualifying achievements, the special-intake section is looked up too, so the answer can cite it.
+  const special = extras ? specialIntakeHint(extras).applies : false;
+  const emb = await c.env.AI.run(EMBED_MODEL as Parameters<Ai['run']>[0], { text: special ? [question, SPECIAL_INTAKE_Q] : [question] } as never) as { data?: number[][] };
   const vector = emb.data?.[0];
   if (!vector) return err(c, 503, 'Ask ZedPath is busy. Try again in a minute');
   const found = await c.env.ASK_INDEX.query(vector, { topK: TOP_K, returnMetadata: 'all' });
-  const passages = found.matches.filter(m => m.score >= MIN_SCORE && m.metadata)
+  const extra = special && emb.data?.[1] ? (await c.env.ASK_INDEX.query(emb.data[1], { topK: 2, returnMetadata: 'all' })).matches : [];
+  const passages = [...found.matches, ...extra.filter(m => !found.matches.some(f => f.id === m.id))].filter(m => m.score >= MIN_SCORE && m.metadata)
     .map(m => ({ id: m.id, ...(m.metadata as unknown as Omit<CorpusPassage, 'id'>) }));
 
   // 2. Facts about the courses involved, for this student, from ZedPath's own engine; and the next steps (CR-004).
   const codes = coursesFor(question, passages);
-  const facts = engineFacts(codes, profile);
+  const facts = [...engineFacts(codes, profile), ...extrasFacts(extras)];
   const actions = askActions(question, codes, profile);
 
   const localScript = SINHALA.test(question) || TAMIL.test(question);

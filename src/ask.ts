@@ -3,6 +3,7 @@
 // the daily allowance fairly when many students share one school network.
 import type { ProfileInput } from '../shared/api.ts';
 import type { AskFeedback, AskResponse } from '../shared/ask.ts';
+import type { Extras } from '../shared/account.ts';
 import { getLang } from './i18n/index.ts';
 
 const DEVICE_KEY = 'zedpath.device.v1';
@@ -14,11 +15,11 @@ function deviceId(): string {
   } catch { return ''; }
 }
 
-export async function askZedPath(question: string, profile: ProfileInput | null): Promise<AskResponse> {
+export async function askZedPath(question: string, profile: ProfileInput | null, extras: Extras | null = null): Promise<AskResponse> {
   let r: Response;
   try {
     r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-ZedPath-Device': deviceId() },
-      body: JSON.stringify({ question, profile, lang: getLang() }) });   // the app language guides an unclear question
+      body: JSON.stringify({ question, profile, extras, lang: getLang() }) });   // the app language guides an unclear question
   } catch {
     throw new Error('No connection. Check your internet and try again.');
   }

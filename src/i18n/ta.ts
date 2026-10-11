@@ -278,4 +278,10 @@ export const ta: Record<Key, string> = {
   'cmp.search': 'உங்கள் பாடநெறிகளைத் தேடுங்கள்',
   'cmp.noMatch': 'பொருந்தும் பாடநெறி இல்லை.',
   'cmp.swipe': 'எல்லாப் பாடநெறிகளையும் பார்க்கப் பக்கவாட்டில் தள்ளுங்கள்',
+  // Video 2: Ask sources and demo questions
+  'ask.handbook': 'கையேடு',
+  'ask.inZedPath': 'ZedPath இல் பார்',
+  'ask.openHandbook': 'UGC கையேட்டைத் திற',
+  'ask.q.chances': 'எந்தப் பாடநெறிகளில் சேர எனக்கு அதிக வாய்ப்பு உள்ளது?',
+  'ask.q.beyond': 'எனது சாதனைகள் பல்கலைக்கழகத்தில் சேர உதவுமா?',
 };

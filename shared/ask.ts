@@ -12,7 +12,10 @@ export interface CorpusPassage {
 }
 
 export interface AskRequest { question: string; lang?: 'en' | 'si' | 'ta' }
-export interface AskCitation { n: number; source: string; page: number | null; url: string | null; quote: string }
+/** source: a short readable name (never internal file notes); url: the official document; routeId: the same route's page in ZedPath. */
+export interface AskCitation { n: number; source: string; page: number | null; url: string | null; routeId: string | null; quote: string }
+/** The official UGC handbook 2025/26 (English), the document every handbook page number refers to. */
+export const HANDBOOK_URL = 'https://www.ugc.ac.lk/downloads/admissions/Handbook_2025_26/student_handbook_english.pdf';
 /** CR-004: the one-word answer shown as a chip above the text. null when the model gave none (no chip, never a guess). */
 export type Verdict = 'YES' | 'NO' | 'DEPENDS' | 'NOT_FOUND';
 /** CR-004: next steps under an answer, built by ZedPath from its own matches (never written by the model). */

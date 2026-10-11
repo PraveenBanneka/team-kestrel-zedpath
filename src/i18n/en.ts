@@ -277,6 +277,12 @@ export const en = {
   'cmp.search': 'Search your courses',
   'cmp.noMatch': 'No course matches.',
   'cmp.swipe': 'Swipe sideways to see every course',
+  // Video 2: Ask sources and demo questions
+  'ask.handbook': 'Handbook',
+  'ask.inZedPath': 'See it in ZedPath',
+  'ask.openHandbook': 'Open the UGC handbook',
+  'ask.q.chances': 'Which courses am I most likely to get into?',
+  'ask.q.beyond': 'Do my achievements help me get into university?',
 } as const;
 
 export type Key = keyof typeof en;

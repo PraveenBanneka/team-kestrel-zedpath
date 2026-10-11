@@ -435,3 +435,9 @@ details.exact p { margin: 0; color: var(--ink-2); }
   color: var(--brand-500); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font: 600 13px/16px var(--font-body); cursor: pointer; }
 .add-slot.on, .add-slot:hover { background: var(--likely-bg); }
 .list-card.flat { box-shadow: none; background: transparent; }
+
+/* ---------- Video 2: readable source chips */
+.source-chips .chip { max-width: 100%; }
+.chip-text { min-width: 0; max-width: 210px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.link-btn { border: 0; background: none; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 2px; }
+.source-quote .title-s { font-size: 13px; }

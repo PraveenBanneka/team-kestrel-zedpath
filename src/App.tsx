@@ -191,7 +191,7 @@ export function App() {
   else if (path === 'groups') { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} go={go} />; }
   else if (path === 'group' && arg && me) { tab = 'groups'; back = true; title = t('title.group'); screen = <GroupRoomScreen id={Number(arg)} username={me.username} go={go} />; }
   else if (path === 'course' && arg && profile) { tab = 'paths'; back = true; title = t('title.course'); screen = <DegreeDetails uniCode={arg} profile={profile} results={results} go={go} list={list} setList={setList} compare={compare} setCompare={setCompare} />; }
-  else if (path === 'ask') { tab = 'ask'; title = t('title.ask'); screen = <AskScreen profile={profile} turns={askTurns} setTurns={setAskTurns}
+  else if (path === 'ask') { tab = 'ask'; title = t('title.ask'); screen = <AskScreen profile={profile} extras={extras} turns={askTurns} setTurns={setAskTurns}
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')}
     ctx={{ results, list, setList, compare, setCompare, saved, setSaved, go }} />; }
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }

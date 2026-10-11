@@ -278,4 +278,10 @@ export const si: Record<Key, string> = {
   'cmp.search': 'ඔබේ පාඨමාලා සොයන්න',
   'cmp.noMatch': 'ගැළපෙන පාඨමාලාවක් නැත.',
   'cmp.swipe': 'සියලු පාඨමාලා බැලීමට පැත්තට ස්වයිප් කරන්න',
+  // Video 2: Ask sources and demo questions
+  'ask.handbook': 'අත්පොත',
+  'ask.inZedPath': 'ZedPath හි බලන්න',
+  'ask.openHandbook': 'UGC අත්පොත විවෘත කරන්න',
+  'ask.q.chances': 'මට ඇතුළු වීමට වැඩිම අවස්ථාව ඇති පාඨමාලා මොනවාද?',
+  'ask.q.beyond': 'මගේ ජයග්‍රහණ විශ්වවිද්‍යාලයට ඇතුළු වීමට උදව් වේද?',
 };

@@ -27,6 +27,18 @@ export type Place = typeof PLACES[number];
 export interface Achievement { id: string; activity: string; kind: typeof ACHIEVEMENT_KINDS[number]; level: Level; place: Place; year: number }
 export interface Extras { achievements: Achievement[]; interests: string[] }
 
+/**
+ * Special intake hint (handbook 2025/26 Section 6, printed p.166 to p.167): up to 0.5% of places per course for
+ * 1st/2nd/3rd places at national level or achievements at international level between 01.01.2023 and 31.12.2025,
+ * for candidates within a Z-score of 0.2000 of their district cut-off; extra places for elite sportspeople in
+ * Sports Science and Physical Education. ZedPath only flags that it MAY apply and links the section.
+ */
+export function specialIntakeHint(e: Extras): { applies: boolean; sport: boolean } {
+  const recent = e.achievements.filter(a => a.year >= 2023 && a.year <= 2025);
+  const qualifying = recent.filter(a => a.level === 'INTERNATIONAL' || (a.level === 'NATIONAL' && a.place !== 'TAKING_PART'));
+  return { applies: qualifying.length > 0, sport: qualifying.some(a => a.kind === 'SPORT') };
+}
+
 /** Lower-cased, trimmed; the only form ever stored or compared. */
 export const normaliseUsername = (u: string) => u.trim().toLowerCase();
 
