@@ -163,7 +163,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 npm install
 npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
 npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
-npm test                                            # 83 tests
+npm test                                            # 164 tests
 ```
 
 Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs
