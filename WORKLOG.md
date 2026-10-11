@@ -3,7 +3,8 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **e2501c73** (2026-10-11 pipeline test). Rollback target 99da5707.
+  Live (workers.dev) = version **3784f9c3** (CR-002: Journey, Alerts, Groups, new nav, Ask layout). Rollback target e2501c73
+  (code only: the D1 migrations 0005/0006 only ADD tables and rows, so the old code runs fine on the new schema).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -232,3 +233,26 @@
 - Rollback (needs GO): npx wrangler rollback 99da5707-8d9f-43cc-bd30-3358bc641d68
 - Open: guard update for the repo rename is half-done and uncommitted (the permission system blocked my edits on
   2026-10-06). Pushes work; test-guard.sh still expects the old repo name.
+
+## 2026-10-11: CR-002 live — Journey, Alerts, Groups, My list tab, Ask layout (Praveen's GO "all in one go")
+- Asked for in Praveen's screen recording (Gate 1 mock-ups 4 to 9). Plan approved with: all five today, no SMS/email
+  (no domain yet: Android reminders + calendar file), senior badge by invite codes, test dot removed.
+- Design first: ZP-DOC-05 revised (CR-002 section + migration 0006 appendix). Data placed where each kind already
+  lives: steps/notices in a bundled read model (quotes verified verbatim at build; mutation-checked); personal items on
+  the phone; groups/invites/reports/blocks in D1 (0006, FKs + CHECKs + partial unique indexes + redemption trigger);
+  messages in one GroupRoom Durable Object per group. Seniors reuse the existing SENIOR role. 0005 loads 121 courses
+  and 20 institutions for the foreign keys.
+- Tests: 126 (was 83). Local end-to-end on wrangler dev: two-user live chat, senior badge, invite reuse refused,
+  moderation refused a harmful message, rate limit. Two real bugs found and fixed there: posts handled concurrently
+  (second post skipped the rate limit and could overtake the first) -> posts now processed in order; non-ASCII
+  header for the badge -> URI-encoded.
+- LESSON: `wrangler dev` runs the BUILT copy (dist/zedpath) with the Vite plugin. Run `npm run build` before every
+  local test, or you test old code (cost ~20 minutes today). Port 8787 was taken by other projects' dev servers: used 8899.
+- Deploy runbook: whoami = ZedPath account; D1 backup first (C:/Users/prave/zedpath-backups/zedpath-before-0005-20261011.sql,
+  97 rows); migrations 0005+0006 --remote; deploy version 3784f9c3-6b39-4451-af00-d2601900ec49.
+- Verified LIVE: /api/journey (5 steps, 5 notices), /api/groups 401 without login, throwaway account joined group 012,
+  posted over wss, message received; account deleted -> its message purged from the room (wipe path proven in prod).
+  Live page serves the new bundle (index-BacDiSRm.js).
+- Not done: Gemini not called (Praveen's instruction; Ask layout checked with a fixed sample answer). No senior invite
+  created in production: Praveen chooses the senior (node tools/groups/make-invite.ts <Uni-Code> <year>, then the
+  printed --remote command with GO). UGC site timed out twice, so no UGC dates: steps show the official rule instead.
