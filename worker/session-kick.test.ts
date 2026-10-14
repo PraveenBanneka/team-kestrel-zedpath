@@ -16,7 +16,7 @@ beforeEach(() => {
   const allow = { limit: async () => ({ success: true }) };
   const GROUP_ROOM = { idFromName: (n: string) => n, get: (room: string) => ({ fetch: async (input: Request | string, init?: RequestInit) => {
     const req = input instanceof Request ? input : new Request(input, init);
-    const body = req.method === 'POST' ? await req.json().catch(() => null) : null;
+    const body = (req.method === 'POST' ? await req.json().catch(() => null) : null) as { accountId?: number; session?: string } | null;
     calls.push({ room, path: new URL(req.url).pathname, body, headers: req.headers });
     return new Response(null, { status: 204 });
   } }) };
