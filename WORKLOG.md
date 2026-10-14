@@ -379,3 +379,4 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Leads 2,3,4,6,7,8,10,11,12,13,14,15,16,17 fixed with tests (session-kick, hardening, groups, owner); lead 9 kept per username on purpose (school labs share an IP), Turnstile planned. D-12 fixed. 532 tests pass, 0 expected-fail.
 - Migration 0012 group_room_seen (designed in ZP-DOC-05) must be applied remotely BEFORE the deploy.
 - On GO: whoami, backup, check+delete kasun_demo (public password), migrations apply --remote (0012), deploy, live checks.
+- Decision (Praveen, 2026-10-15): job rates by field (tracer studies) NOT shown in the app yet: data too weak (UGC study 9 years old, 25% response; Ministry 2023 figures combine differing surveys). Extract kept in data/ugc/tracer/ for a newer national UGC study.
