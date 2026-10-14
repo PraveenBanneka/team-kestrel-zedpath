@@ -356,3 +356,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Bands renamed Very likely / Possible / Unlikely (Praveen's choice from 4 options) in every sentence, en/si/ta, with a one-line meaning under the tabs (BR-032 wording). Internal codes SAFE/LIKELY/REACH unchanged.
 - Tabs and the See why row wrap in Sinhala/Tamil. Open: Tamil Paths still ~14 px too wide at 320 px.
 - Live: bundle has the new labels; scoped CSS served, old global rule gone.
+
+## 2026-10-14 (evening): Gate 3 final video re-recorded and submitted by Praveen (deadline extended). Live = 00c551a7. Open items: Tamil Paths ~14 px too wide at 320 px; test-campaign findings D-01..D-07, D-09..D-13 (Summary Report); docs 01-04 await approval; signed declaration and old business-case drafts deliberately not in the public repo.
