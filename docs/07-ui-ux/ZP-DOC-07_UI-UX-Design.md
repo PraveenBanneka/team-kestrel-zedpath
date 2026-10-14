@@ -3,7 +3,7 @@ id: ZP-DOC-07
 title: UI/UX Design
 subtitle: Design principles, information architecture, design system, screen specifications and accessibility for the ZedPath app
 version: 0.9
-date: 11 October 2026
+date: 15 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -12,6 +12,7 @@ approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Material Design 3; WCAG 2.2 level AA; ZP-DOC-00
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue, written from the built app (CR-001 to CR-006 and the video-review fixes included); contrast measured from the colour tokens; submitted for approval
+revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 (14 October 2026: band names Very likely / Possible / Unlikely with a one-line meaning under the tabs, intro guide of seven slides, silhouette avatars, expired session returns to Log in) and CR-007 to CR-010 (15 October 2026: Try the demo button and demo note in Me, University facts card, Aptitude test card, NVQ ladder on route R042, Ask links only fill the box, failed log-out message, phone data cleared for the next student); journeys, routes, components, screens, patterns, usability evidence and traceability updated
 ---
 
 # Introduction
@@ -63,8 +64,8 @@ Table: Design principles and how the design applies them
 | # | Principle | Source | Applied as |
 |---|---|---|---|
 | DP-1 | **Every number links to its source** | Trust rules (CLAUDE.md), US-204, US-602 | Cut-offs, rules and answers carry a source line or source chip that opens the UGC handbook page or the official notice |
-| DP-2 | **Never "you will get in"** | Trust rules, US-603 | Chances are bands (Safe, Likely, Reach) with an explanation, never a promise; Ask gives a verdict chip such as "It depends", never a guarantee |
-| DP-3 | **Sample data is labelled as sample** | Trust rules, CR-005 | Sample group conversations carry a "Sample" label and cannot be reported or replied to as real; demo mode shows a label above the form |
+| DP-2 | **Never "you will get in"** | Trust rules, US-603 | Chances are bands, shown since VR2 as *Very likely*, *Possible* and *Unlikely*, each with a one-line meaning, never a promise; Ask gives a verdict chip such as "It depends", never a guarantee |
+| DP-3 | **Sample data is labelled as sample** | Trust rules, CR-005, CR-007 | Sample group conversations carry a "Sample" label and cannot be reported or replied to as real; demo mode shows a label above the form; a demo account says in *Me* that it is a demo with read-only groups, deleted after 24 hours |
 | DP-4 | **No paid placement** | Trust rules | Order of courses and routes comes only from the student's results and official data |
 | DP-5 | **Built for low-end Android on 3G** | NFR-001, NFR-006, interviews E1 to E6 | Static SPA, cached app shell, skeletons instead of spinners, one question per screen, no heavy images |
 | DP-6 | **Trilingual from the first screen** | NFR-023, US-105 | Sinhala, Tamil and English chosen on the Welcome screen; official names and quotes stay in English as published, and the app says so |
@@ -91,7 +92,8 @@ Table: Key journeys
 
 | Journey | Steps (screens) | Stories |
 |---|---|---|
-| J1 First run | Welcome (language) → Intro (3 slides) → Sign up → Save recovery code → About you (5 steps) → Paths | US-105, US-106, US-107, US-109, US-101 |
+| J1 First run | Welcome (language) → Intro (7 slides) → Sign up → Save recovery code → About you (5 steps) → Paths | US-105, US-106, US-107, US-109, US-101 |
+| J0 Try first | Welcome → *Try the demo, no sign-up* → Paths with the sample student (private demo account, read-only groups) | US-112 |
 | J2 Find my chances | Paths (band ring) → Courses (Safe / Likely / Reach tabs) → Course detail | US-201, US-202, US-203, US-204, US-209 |
 | J3 Decide | Course detail or Courses (press and hold) → Compare (up to 3) → Add to My list | US-207, US-305, US-301 |
 | J4 Build the application list | My list → reorder → order warning → Fix the order → Copy Uni-Codes | US-301, US-302, US-303 |
@@ -125,7 +127,7 @@ Table: Hash routes, screens and purpose
 | Route | Screen | Tab | Purpose |
 |---|---|---|---|
 | `#/` | Welcome | none | Choose language; start or log in |
-| `#/intro` | Intro | none | Three animated slides: paths, bands, sources |
+| `#/intro` | Intro | none | Seven animated slides with app scenes, marked *Example*: paths hub, chances ring, source link, list warning, Ask, Journey, Groups |
 | `#/signup`, `#/login`, `#/recover` | Account | none | Create an account, log in, reset with the recovery code |
 | `#/saved-code`, `#/saved-code/new` | Recovery code | none | Show the one-time recovery code to save |
 | `#/contact` | Complete your account | none | Accounts made before CR-003 add contact details; also edits them |
@@ -133,14 +135,14 @@ Table: Hash routes, screens and purpose
 | `#/paths` | Your paths (home) | Paths | Band ring, see courses, other routes, My list entry |
 | `#/courses/safe` `/likely` `/reach` | Courses | Paths | Courses by band, search, press-and-hold multi-select |
 | `#/hidden` | Hidden courses | Paths | Why each excluded course is out of reach |
-| `#/course/<Uni-Code>` | Course detail | Paths | Needs vs you have, cut-off chart, syllabus, actions |
+| `#/course/<Uni-Code>` | Course detail | Paths | Needs vs you have, cut-off chart, syllabus, university facts, aptitude test, actions |
 | `#/compare` | Compare | My list | Up to 3 courses side by side |
 | `#/list` | My list | My list | Ordered preference list for the UGC application |
 | `#/journey`, `#/journey/open`, `#/alerts` | Journey | Journey | My steps / Open now tabs |
 | `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees, job exams, vocational, abroad |
 | `#/groups` | Groups | Groups | Chat list: my groups, popular groups |
 | `#/group/<id>`, `#/group/<id>/info` | Group room, Group info | Groups | WhatsApp-style room; description, rules, members, exit |
-| `#/ask`, `#/ask/<question>` | Ask ZedPath | Ask | Cited answers; a deep link pre-fills a question |
+| `#/ask`, `#/ask/<question>` | Ask ZedPath | Ask | Cited answers; a deep link only fills the question box, never sends it (CR-010) |
 | `#/me` | Me | none | Avatar, profile, language, notification settings, account, delete |
 
 ## Guards
@@ -154,6 +156,8 @@ Table: Navigation guards
 | Account without contact details (pre CR-003) | Complete your account, before anything else |
 | No profile (student) | About you |
 | Senior without a student profile | Groups and Me only |
+| Session expired or ended elsewhere (any 401 outside the sign-in routes) | Log in (VR2), instead of "Please log in" inside a screen |
+| A different student logs in on this phone | The previous student's results, list, Journey and settings are cleared from the phone first; the language stays (CR-010) |
 
 # Design system
 
@@ -172,9 +176,9 @@ Table: Colour roles (light theme; dark theme redefines each)
 | Background | `--bg` | #F4F6FB | Page and app bar (solid) |
 | Surface | `--surface`, `-2`, `-3` | #FFFFFF, #EEF2F9, #E4EAF5 | Cards, inputs, tonal buttons |
 | Text | `--ink`, `-2`, `-3` | #0E1525, #4A5468, #7A8396 | Body, secondary, helper |
-| Safe | `--safe` on `--safe-bg` | #0F9D63 on #DDF7EA | Safe band |
-| Likely | `--likely` on `--likely-bg` | #2C63E8 on #E3EBFF | Likely band; selected rows |
-| Reach | `--reach` on `--reach-bg` | #B86E00 on #FFF0D2 | Reach band |
+| Safe | `--safe` on `--safe-bg` | #0F9D63 on #DDF7EA | Safe band, shown as *Very likely* |
+| Likely | `--likely` on `--likely-bg` | #2C63E8 on #E3EBFF | Likely band, shown as *Possible*; selected rows |
+| Reach | `--reach` on `--reach-bg` | #B86E00 on #FFF0D2 | Reach band, shown as *Unlikely* |
 | Out of range | `--out` on `--out-bg` | #C9303F on #FDE4E7 | Hidden or out-of-range |
 | Not enough data | `--none` on `--none-bg` | #5B6476 on #ECEFF5 | No cut-off history |
 | Error | `--danger` | #C9303F | Error text |
@@ -222,8 +226,10 @@ Table: Component catalogue
 | Top app bar | Sticky, 60 px, **solid** `--bg` (scrolled text never shows through the title); Back or logo, title, avatar link to Me | All main screens |
 | Navigation bar | Floating, fixed 12 px from the edges above the safe area; 5 equal items (icon 22 px + label); animated pill on the selected item; `aria-current="page"`; count badge on Journey | Main app |
 | Card | `--surface`, radius 22, shadow-1, 16 px padding; `raised` and `aurora` variants | Everywhere |
-| Band pill | Pill with text label (Safe, Likely, Reach, Out of range, Not enough data) in band colours; never colour alone | Courses, detail, Ask, My list |
-| Band ring | 116 px donut of Safe / Likely / Reach counts with a legend of numbers | Paths |
+| Band pill | Pill with text label (*Very likely*, *Possible*, *Unlikely*, *Out of range*, *Not enough data*; codes SAFE, LIKELY, REACH unchanged) in band colours; never colour alone | Courses, detail, Ask, My list |
+| Band ring | 116 px donut of Very likely / Possible / Unlikely counts with a legend of numbers | Paths |
+| Band meaning | One helper line under the *Courses* tabs giving the selected band's meaning (BR-037), hidden while searching | Courses |
+| Fact list | Card of label and value pairs; each value with its caveats as helper lines and a small source link "UGC Statistics 2024, Table *t*, p.*n*" | Course detail (University facts) |
 | Buttons | Filled (gradient, 48 px), tonal, white, text (44 px), block (56 px full width); pressed scale .97; disabled 40% opacity | Everywhere |
 | Chips | 40 px pill, outline; selected = `aria-pressed`/`aria-checked` filled brand; small chips 34 px | Subjects, interests, Ask suggestions, source chips |
 | Text fields | Label above (`.field`), helper below, error text after interaction | Account, About you |
@@ -231,7 +237,7 @@ Table: Component catalogue
 | Selection bar | Sticky above the navigation bar: count, Add to my list / Compare / Remove, Cancel | Courses, My list |
 | Composer | Sticky above the navigation bar: rounded input (48 px) and round 48 px send button | Ask, Group room |
 | Chat bubbles | Question right (brand gradient), answer left; group messages with avatar, name, senior badge | Ask, Groups |
-| Avatars | 12 preset silhouettes in different colours, or initials on a steady colour; decorative (`aria-hidden`) | Top bar, Me, Groups |
+| Avatars | 12 preset plain head-and-shoulders silhouettes, each in its own colour family (own artwork, no licence or credit; VR2), or initials on a steady colour; decorative (`aria-hidden`) | Top bar, Me, Groups |
 | Skeleton | Grey placeholder blocks while loading | Lists, Compare, Groups, Journey |
 | Alert | `info`, `warn`, `error`, `gold` boxes with `role="status"` or `role="alert"` | Order warnings, errors |
 
@@ -248,8 +254,8 @@ Table: Welcome, Intro and About you (onboarding): specification
 | Aspect | Specification |
 |---|---|
 | Purpose | Choose a language, understand what ZedPath does, give results once (US-101, US-105) |
-| Content | Welcome: aurora background, logo, lead line, three language tiles (සිංහල, தமிழ், English), Start and Log in, team line. Intro: three animated slides (paths, Safe/Likely/Reach pills, a sourced number) with dots. About you: five steps, one per screen: stream, district, Z-score, subjects and grades (searchable), beyond grades (achievements and interests) |
-| States | Error: shown under the field only after Next (`role="alert"`). Demo mode: a label above the form says the data is a sample |
+| Content | Welcome: aurora background, logo, lead line, three language tiles (සිංහල, தமிழ், English), Start and Log in, and a tonal **Try the demo, no sign-up** button (CR-007), team line. Intro (VR2): seven slides, each an animated scene of the real app marked *Example*: (1) every path you can reach, as a hub; (2) your real chances, a ring of Very likely / Possible / Unlikely; (3) every fact has a source, a cut-off with its handbook page; (4) order your list, the warning when a Very likely course sits above one wanted more; (5) Ask in your language, a sports-medal question answered "It depends" with handbook p.166; (6) never miss a date, Journey steps and *Open now*; (7) ask students who have been there, a group with a senior. Swipe, Back, Skip and 24 px dots; fits 320 px in all three languages. About you: five steps, one per screen: stream, district, Z-score, subjects and grades (searchable), beyond grades (achievements and interests) |
+| States | Error: shown under the field only after Next (`role="alert"`). Demo mode: a label above the form says the data is a sample. Try the demo: the button reads "Opening the demo…" while busy; an error (for example "The demo is busy") appears under it (`role="alert"`) |
 | Interactions | Language applies at once to the whole app; steps slide left or right; Back keeps answers |
 
 ## Account (sign up, log in, recover, recovery code, complete your account)
@@ -260,8 +266,8 @@ Table: Account (sign up, log in, recover, recovery code, complete your account):
 |---|---|
 | Purpose | A compulsory account with contact details and consent (US-106, US-107, US-109; CR-003) |
 | Content | Username, password; full name, email, Sri Lankan mobile, date of birth, each with its purpose; consent box. Recovery code shown once with copy and "I saved it" |
-| States | Error messages from the server (`role="alert"`); offline is never treated as "no account" |
-| Interactions | After sign-up the student goes straight to About you; a senior goes to Groups |
+| States | Error messages from the server (`role="alert"`); offline is never treated as "no account"; an expired session opens Log in (VR2) |
+| Interactions | After sign-up the student goes straight to About you; a senior goes to Groups; after *Try the demo* the visitor goes straight to Paths. Demo mode never prefills a password (CR-010) |
 
 ## Paths (home)
 
@@ -280,9 +286,9 @@ Table: Courses: specification
 | Aspect | Specification |
 |---|---|
 | Purpose | Browse courses by band (US-203, US-209, US-305) |
-| Content | Tabs Safe / Likely / Reach (`role="tab"`); search across all bands (names, short forms, Uni-Codes); rows with course, institution and band pill; Compare link |
+| Content | Tabs **Very likely / Possible / Unlikely** (`role="tab"`; codes SAFE / LIKELY / REACH) with the selected band's one-line meaning under them (VR2); the tabs wrap instead of widening the page in Sinhala and Tamil; search across all bands (names, short forms, Uni-Codes); rows with course, institution and band pill; Compare link |
 | States | Loading skeleton; empty search result message |
-| Interactions | Tap opens the course; **press and hold** starts selection; selection bar: Add to my list, Compare (first 3) |
+| Interactions | Tap opens the course; **press and hold** starts selection; one selection spans all three tabs; selection bar with the count as a badge: Add to my list, Compare (first 3) |
 
 ## Course detail
 
@@ -290,8 +296,9 @@ Table: Course detail: specification
 
 | Aspect | Specification |
 |---|---|
-| Purpose | Everything about one course, sourced (US-204, US-206, US-208) |
-| Content | Band pill and explanation; **needs vs you have** (each entry rule against the student's subjects); cut-off chart for the student's district with the value on every point; intake, duration, aptitude test; "What you'll study" syllabus by year with its source page; source lines |
+| Purpose | Everything about one course, sourced (US-204, US-206, US-208, US-210, US-211) |
+| Content | Band pill and explanation; **needs vs you have** (each entry rule against the student's subjects); cut-off chart for the student's district with the value on every point; intake, duration, aptitude test; "What you'll study" syllabus by year with its source page; source lines. **University facts** card (CR-008): heading, the line "From the UGC report *Sri Lanka University Statistics 2024*", then up to five facts for the course's institution: students admitted (2023/24, whole university), undergraduates studying here (2024), permanent hostel places (end of 2024) with "Enough for *p*% of undergraduates", students receiving support ("*m* Mahapola · *b* Bursary"), graduates in 2024; each fact shows its caveats ("2024 figures are provisional", "Some faculties did not submit figures, so this is a lower count", "Includes the campuses of the university") and its source link to the table and page. **Aptitude test** card (CR-009), only for the 24 offerings with a test: what the test is; "Last intake (2025/2026)" or "This intake" with applications opened or closed, and the test held or due, each with its date; for a past intake, "Dates for the next intake are announced by the university"; a link "Official notice: *university*"; for a joint practical test, the line that it can be sat at any one of the listed universities, with each notice |
+| States | Facts card hidden when the report has no figure for the institution; a value the report did not receive is never shown as zero; aptitude card hidden for a course without a test |
 | Interactions | Add to My list or "On your list (#n)"; Compare; Follow (adds the course to the Journey) |
 
 ## Compare
@@ -356,8 +363,8 @@ Table: Me: specification
 | Aspect | Specification |
 |---|---|
 | Purpose | The student's own settings (US-102, US-108, US-110) |
-| Content | Avatar picker (12 characters, `radiogroup`-style selection), profile summary and edit, language, **notification settings** (7-day / 1-day reminders, 8 am / 6 pm, badge count; defaults = previous behaviour), contact details, log out, delete account |
-| Interactions | Delete asks for confirmation and removes every server row (cascade) |
+| Content | Avatar picker (12 silhouettes, `radiogroup`-style selection), profile summary and edit, language, **notification settings** (7-day / 1-day reminders, 8 am / 6 pm, badge count; defaults = previous behaviour), contact details, log out, delete account. A demo account shows the note "Demo account with a sample student. Groups are read-only, and it is deleted 24 hours after you opened it" (CR-007) |
+| Interactions | Delete asks for confirmation and removes every server row (cascade). A failed log-out shows "Could not log out: check your connection and try again. You are still logged in." (`role="alert"`, CR-010). *Log out and clear this phone* and *Delete everything on this phone* also switch demo mode off |
 
 # Interaction patterns
 
@@ -371,8 +378,9 @@ Table: Shared interaction patterns
 | Reconnect | Group rooms ping every 25 s and reconnect on their own (1, 2, 4 ... up to 15 s) (NFR-043) | No "Disconnected" on a flaky network |
 | Locked steps | A step whose official date is not announced is shown locked with the rule; never an invented date | Trust (DP-1) |
 | Validate after interaction | Errors appear after Next or Submit, not while typing | Less anxiety for first-time users |
-| Deep links | `#/ask/<question>`, `#/course/<code>` and notification links open the right screen; Back works | Sharing and reminders |
-| Demo mode | `?demo=kasun` (off by default) prefills sign-up and About you with the sample student Kasun Perera for the recording; labelled as sample | Gate 3 video; real students always see empty forms |
+| Deep links | `#/ask/<question>`, `#/course/<code>` and notification links open the right screen; Back works. *Revised (CR-010):* `#/ask/<question>` only fills the question box; nothing is sent until the student taps send | Sharing and reminders; a link must never spend the student's daily questions |
+| Demo mode | `?demo=kasun` (off by default) prefills About you and the sign-up details, but never a password (CR-010), with the sample student for recordings; labelled as sample; cleared when the phone is cleared | Gate 3 video; real students always see empty forms |
+| Try the demo | One tap on Welcome opens a private demo account with the sample student; groups can be read but not posted to; deleted after 24 hours (CR-007) | Judges and students see the app working without signing up |
 
 # Content and language
 
@@ -385,6 +393,8 @@ Table: Content rules
 | Official text | Course and university names, handbook quotes and Gazette notices stay in English as published; Sinhala and Tamil screens say so |
 | Numbers | Every cut-off, intake and date shows its source (handbook page or notice); digits stay Western; tabular figures |
 | Sample data | Sample conversations and demo data are labelled "Sample"; sample messages cannot be reported |
+| Band names | *Very likely*, *Possible* and *Unlikely* in every sentence and all three languages (VR2); never "Safe" or "Reach" in the interface |
+| Statistics | University facts are quoted as printed, with the report's caveats; "Information not submitted" is shown as no number, never zero (CR-008) |
 | Errors | Say what happened and what to do next, in the interface language |
 
 # Accessibility checklist (WCAG 2.2 AA)
@@ -399,7 +409,7 @@ Table: Accessibility checklist and status
 | Helper text contrast (`--ink-3` #7A8396) | 1.4.3 | **Gap**: 3.8:1 on white, 3.5:1 on background (needs 4.5:1 for 12 to 13 px text). Action: darken to about #646D80. Dark theme passes (5.5:1) |
 | Band pill contrast (light) | 1.4.3 | **Gap**: Safe 3.1:1, Reach 3.5:1, Likely 4.3:1, Out 4.4:1 at 12 px bold; Not enough data passes (5.2:1). Action: darken the band ink colours. Dark theme passes (6.5 to 8.8:1) |
 | Colour not the only cue | 1.4.1 | Pass: every band pill carries a text label |
-| Touch targets | 2.5.8 (24 px min); NFR-022 (48 dp) | Pass for 2.5.8. Buttons 48 px, icon buttons 44 px, nav items 52 px, grips 44 × 52. **Gap against NFR-022**: chips 40 px, small chips 34 px |
+| Touch targets | 2.5.8 (24 px min); NFR-022 (48 dp) | Pass for 2.5.8. Buttons 48 px, icon buttons 44 px, nav items 52 px, grips 44 × 52, intro dots 24 px (VR2). **Gap against NFR-022**: chips 40 px, small chips 34 px |
 | Focus visible | 2.4.7, 2.4.11 | Pass: 3 px outline on `:focus-visible` everywhere |
 | Keyboard | 2.1.1 | Pass: list reorder by Arrow keys on the grip; "Select" button alternative to press and hold |
 | Names and roles | 4.1.2 | Icon buttons have `aria-label`; tabs use `role="tab"` and `aria-selected`; navigation uses `aria-current`; chips use `aria-pressed`/`aria-checked` |
@@ -440,6 +450,10 @@ Table: Changes driven by usability evidence
 | CR-005 | Walkthrough video 2 (8 min 50 s): "groups should have rules", "WhatsApp-style groups" | Rules sheet, WhatsApp-style list and room, labelled samples; Ask box pinned to the bottom; cut-off values on chart points; Compare columns swipe with "+" |
 | CR-006 | Product owner's decisions of 11 Oct after review | Rules accepted once, group info page, avatars, rooms that reconnect, My list selection with Compare, Journey ticks within window, Alerts moved into Journey as "Open now" |
 | Other review fixes | Same review round | Solid top app bar (scrolled text showed through the title); "Sit the A/L again" removed; press-and-hold multi-select on Courses; test-notification button removed from Me |
+| VR2 | Product owner's review and decisions of 14 Oct | Bands renamed *Very likely / Possible / Unlikely* (his choice of four options) with a one-line meaning under the tabs; intro guide rebuilt to seven slides with app scenes; avatars redrawn as plain silhouettes in 12 colours (same codes a01 to a12); expired session returns to Log in; intro scene styles scoped so they no longer narrowed the Courses and Groups lists; one selection across the Courses tabs |
+| CR-007 | Product owner's decision (15 Oct): a demo without sign-up, a private copy per visitor | *Try the demo, no sign-up* on Welcome; demo note in Me |
+| CR-008, CR-009 | Product owner's decisions (15 Oct) | University facts card and Aptitude test card on the course page; NVQ ladder text on the University of Vocational Technology route |
+| CR-010 | Security audit run-1 (15 Oct) | Ask links only fill the box; no prefilled demo password; failed log-out reported; the next student on a phone starts clean |
 
 # Traceability
 
@@ -452,10 +466,13 @@ Table: Traceability from requirements to this document
 | NFR-021, NFR-022, NFR-025 | Accessibility checklist |
 | NFR-023, NFR-024, US-105 | Typography; Content and language |
 | NFR-040, NFR-043 | Ask ZedPath; Interaction patterns |
-| US-101 to US-111 | Welcome, Intro and About you; Account; Me |
-| US-201 to US-209 | Paths; Courses; Course detail; Compare |
+| US-101 to US-112 | Welcome, Intro and About you; Account; Me; Guards |
+| US-201 to US-211 | Paths; Courses; Course detail; Compare |
+| US-508 | Paths (other routes) |
+| US-908, AC-601.3 | Interaction patterns (Deep links); Me |
 | US-301 to US-305 | My list; Interaction patterns (press and hold) |
 | US-401 to US-411, US-501 to US-503 | Journey; Paths (other routes) |
+| BR-037 (band names) | Components (band pill, band meaning); Courses; Content and language |
 | US-601 to US-607 | Ask ZedPath |
 | US-704 to US-708 | Groups, Group room and Group info |
 | Trust rules (CLAUDE.md) | Design principles DP-1 to DP-4; Content and language |

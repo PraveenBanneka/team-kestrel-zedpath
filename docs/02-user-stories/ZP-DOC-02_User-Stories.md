@@ -2,14 +2,14 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 2.0
-date: 14 October 2026
-status: Approved
+version: 2.1 (draft)
+date: 15 October 2026
+status: Under revision
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
 approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
+signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Agile user stories (Cohn), INVEST, Gherkin-style acceptance criteria; MoSCoW (DSDM); ZP-DOC-00
@@ -19,6 +19,7 @@ revision: 0.9 | 5 Oct 2026 | Team Kestrel | Restructured to ZP-DOC-00; numbered 
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 19 new stories (US-106 to US-111, US-209, US-305, US-407 to US-411, US-605 to US-607, US-706 to US-708); revised US-105, US-207, US-401 to US-404, US-501, US-503, US-604, US-702 to US-704; US-406 superseded and US-507 withdrawn; principle 3 replaced (an account is now required); epic totals and release plan recomputed. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
+revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (product owner's decisions of 14 October 2026: band names Very likely / Possible / Unlikely, intro guide, silhouette avatars, expired session) and CR-007 to CR-010 of 15 October 2026: 5 new stories (US-112 Try the demo, US-210 University facts, US-211 Aptitude test on the course page, US-508 NVQ to degree ladder, US-908 Close open chats when a session ends), all R2 and delivered on 15 October 2026; US-203 retitled with new AC-203.5; new AC-102.3, AC-102.4, AC-106.5, AC-106.6, AC-108.3, AC-601.3, AC-706.6 to AC-706.8 and AC-907.3; epic totals and release plan recomputed (72 stories, 231 points; R1 unchanged). No v2.0 commitment is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 ---
 
 # Introduction
@@ -76,6 +77,8 @@ Table: Position of this document in the ZedPath document set
   *New (CR-nnn)*, *Revised (CR-nnn)*, *Superseded by X (CR-nnn)* or *Withdrawn (reason)*. A superseded or withdrawn
   story or criterion keeps its ID and its text for traceability (it is *Deleted* in the sense of ZP-DOC-00), is no
   longer delivered and no longer counts in the totals.
+- **Band names** *(VR2)*: this document keeps the band codes Safe, Likely and Reach (SAFE, LIKELY, REACH in data). Since
+  14 October 2026 the app shows them to students as **Very likely**, **Possible** and **Unlikely** (AC-203.5).
 
 ## Change requests since version 1.0
 
@@ -94,6 +97,22 @@ Table: Change requests and the stories they affect
 | VR | 11 October 2026 | Sinhala and Tamil interface; search in subjects and courses; Compare redesign; values on the cut-off chart; achievements and interests used in Ask; notification settings; "Sit the A/L again" removed; test-notification button removed; press and hold to select several courses | US-105, US-111, US-204, US-207, US-209, US-305, US-408, US-501, US-507, US-607 |
 | CR-005 | 11 October 2026 | Group rules accepted before taking part (server-enforced); no phone numbers or email addresses in messages; popular course groups; labelled sample conversations; WhatsApp-style group screens | US-704, US-706, US-707 |
 | CR-006 | 11 October 2026 | Group rules accepted once per account; group info page; preset avatars; rooms stay connected; selection on My list with Compare; Journey steps ticked by the student within their window; follow courses and notices; Journey saved on the account; Alerts moved into the Journey as "Open now" | US-110, US-305, US-401, US-406, US-407, US-409 to US-411, US-503, US-704, US-707, US-708 |
+
+## Change requests since version 2.0
+
+*New in v2.1 (draft).* After v2.0 was approved on 14 October 2026, the product owner made the decisions below. "VR2" is
+the product owner's review and decisions of 14 October 2026. The stories added are in Release R2 and were delivered on
+15 October 2026; their data design is in ZP-DOC-05 and their tests in ZP-DOC-08.
+
+Table: Change requests since version 2.0 and the stories they affect
+
+| CR | Date | Change | Stories |
+|---|---|---|---|
+| VR2 | 14 October 2026 | Bands shown as Very likely, Possible and Unlikely (codes unchanged) with a one-line meaning under the tabs; intro guide of seven slides; preset avatars redrawn as plain silhouettes in 12 colours (same codes a01 to a12); an expired session returns to *Log in* | US-203, US-106 |
+| CR-007 | 15 October 2026 | *Try the demo* on the Welcome screen: a private throwaway account with the sample student, deleted 24 hours later; demo accounts read groups but cannot create groups, post or report | US-112 |
+| CR-008 | 15 October 2026 | University facts on the course page from the UGC report *Sri Lanka University Statistics 2024*, each citing table and page | US-210 |
+| CR-009 | 15 October 2026 | Aptitude tests on the course page for the 24 offerings that need one; the NVQ 5/6 to NVQ 7 ladder on the University of Vocational Technology route (R042) | US-211, US-508 |
+| CR-010 | 15 October 2026 | Security hardening from audit run-1 and the test campaign: open group chats closed when a session ends or the member leaves; account deletion purges every group the account ever opened; Ask links only fill the box; no demo password; demo flag cleared with the phone; local data tagged with its owner and cleared when another student logs in; a failed log-out is reported; disguised contact details and chat-invite links refused; reports from accounts under a day old or demo accounts do not count toward hiding; post attempts, open connections, account writes, demo accounts, answer feedback and Ask questions capped; cross-site, "null" and malformed Origins refused | US-908, US-102, US-106, US-108, US-112, US-601, US-706, US-907 |
 
 ## Sources of evidence
 
@@ -114,6 +133,7 @@ Table: Evidence sources and what each one showed
 | Deck S7 | Gate 1 deck, Section 7 | How the product keeps AI-extracted facts honest |
 | CR-001 to CR-006 | Change requests approved by the product owner, 5 and 11 October 2026 | Accounts, Journey, Alerts, Groups, contact details, the Ask answer card and group rules (see the table above) |
 | VR | Product owner's video review of the live app, 11 October 2026 | Language, search, Compare, chart values, Ask context, reminders, removal of the resit path, selecting several courses |
+| VR2, CR-007 to CR-010 | Product owner's decisions of 14 and 15 October 2026 | Band names, demo, university facts, aptitude tests, NVQ ladder, security hardening (see the table above) |
 
 ## Product principles
 
@@ -181,7 +201,8 @@ Table: System actors (non-human)
 
 The story map shows the nine epics along the student's journey. EP1 to EP6 form the core of the product,
 EP7 and EP8 deepen it, and EP9 makes every fact trustworthy. The diagram shows the v1.0 baseline; the stories added by
-CR-001 to CR-006 sit inside the same nine epics (accounts in EP1, Journey in EP4, Ask in EP6, groups in EP7).
+CR-001 to CR-010 sit inside the same nine epics (accounts and the demo in EP1, university facts and aptitude tests in EP2,
+Journey in EP4, the NVQ ladder in EP5, Ask in EP6, groups in EP7, session safety in EP9).
 
 ![ZedPath story map: nine epics and their main capabilities](diagrams/story-map.png)
 
@@ -189,19 +210,19 @@ Table: Epic summary (verified by script against the stories in this document; su
 
 | Epic | Name | Stories | Points | Must | Primary persona |
 |---|---|---|---|---|---|
-| EP1 | Profile and results | 11 | 27 | 6 | P1, P2 |
-| EP2 | State university course discovery | 9 | 31 | 4 | P1 |
+| EP1 | Profile and results | 12 | 30 | 6 | P1, P2 |
+| EP2 | State university course discovery | 11 | 36 | 4 | P1 |
 | EP3 | Preference list | 5 | 15 | 3 | P1 |
 | EP4 | Journey and deadlines | 10 | 28 | 5 | P1 |
-| EP5 | Other routes | 6 | 24 | 3 | P1, P2 |
+| EP5 | Other routes | 7 | 25 | 3 | P1, P2 |
 | EP6 | Ask, with sources | 7 | 23 | 2 | P1, P2 |
 | EP7 | People around the student | 8 | 31 | 3 | P1, P3, P4, P5 |
 | EP8 | After selection | 4 | 10 | 0 | P1 |
-| EP9 | Data and trust | 7 | 31 | 5 | P6 |
-| | **Total** | **67** | **220** | **31** | |
+| EP9 | Data and trust | 8 | 33 | 5 | P6, P1 |
+| | **Total** | **72** | **231** | **31** | |
 
-The backlog holds 69 story IDs: the 67 above, plus US-406 (superseded) and US-507 (withdrawn). At v1.0 it held 50
-stories, 176 points and 24 Must stories.
+The backlog holds 74 story IDs: the 72 above, plus US-406 (superseded) and US-507 (withdrawn). At v2.0 it held 67
+stories, 220 points and 31 Must stories; at v1.0, 50 stories, 176 points and 24 Must stories.
 
 # Epic EP1: Profile and results
 
@@ -240,6 +261,8 @@ stories, 176 points and 24 Must stories.
 
 - **AC-102.1** **Given** a saved profile, **when** I change any field, **then** all results recalculate immediately.
 - **AC-102.2** **Given** a saved profile, **when** I tap *Clear my data*, **then** the profile is removed from the device and I return to the start screen.
+- **AC-102.3** *New (CR-010).* **Given** demo mode was switched on on this phone, **when** I tap *Delete everything on this phone* or *Log out and clear this phone*, **then** demo mode is switched off too, so the next person sees empty forms.
+- **AC-102.4** *New (CR-010).* **Given** my results, list and Journey are kept on this phone, **when** a different student logs in on it, **then** my data is cleared from the phone first (the language choice stays), so they never see or inherit it.
 
 
 ## US-103 Estimate my Z-score before results
@@ -306,6 +329,8 @@ interests, **so that** I see the same profile on any phone or computer I log in 
 - **AC-106.2** **Given** I create an account, **then** my username must follow BR-050 and my password BR-051, and the password itself never leaves my device: only a key derived from it on the device is sent.
 - **AC-106.3** **Given** I am logged in and save my results, achievements or interests, **when** I log in on another device, **then** the same profile is restored there.
 - **AC-106.4** **Given** I changed my profile while offline, **when** the device is online again, **then** my change is sent to my account and is not overwritten by the older copy on the server.
+- **AC-106.5** *New (VR2).* **Given** my session has expired or was ended on another device, **when** the app next calls the server, **then** I am taken to *Log in*, instead of seeing "Please log in" inside a screen.
+- **AC-106.6** *New (CR-010).* **Given** I tap *Log out* or *Log out everywhere*, **when** the request fails (for example, no connection), **then** I am told that I am still logged in and should try again, instead of being shown as logged out.
 
 
 ## US-107 Get back into my account with a recovery code
@@ -340,6 +365,7 @@ lose my account (ZedPath cannot send reset emails).
 
 - **AC-108.1** **Given** I confirm *Delete account*, **then** my account and everything stored under it (contact details, results, achievements, interests, sessions, recovery code, group memberships, reports, blocks and my Journey) are deleted on the server, my data is cleared from this device, and I return to the welcome screen.
 - **AC-108.2** **Given** I posted messages in groups, **when** I delete my account, **then** my messages are deleted from every group I was in.
+- **AC-108.3** *New (CR-010).* **Given** I opened a group and later left it, **when** I delete my account, **then** my messages are deleted from that group too.
 
 
 ## US-109 Give my contact details with a stated purpose and consent
@@ -396,6 +422,28 @@ recognise me without my photograph.
 - **AC-111.1** **Given** *About you*, **when** I type the start of each word of a subject name, or a common short form (for example "comb math" or "ict"), **then** only matching subjects are listed, ignoring case and punctuation.
 
 
+## US-112 Try ZedPath with a sample student
+
+*New (CR-007); hardened by CR-010.*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 3 pts | R2 (delivered 15 Oct 2026) | EP1 | P1, P2 | CR-007, CR-010 |
+
+> **As a** student who wants to see ZedPath before giving my details, **I want** to try it with a sample student in one
+tap, **so that** I can judge whether it helps me before I create an account.
+
+**Acceptance criteria**
+
+- **AC-112.1** **Given** the Welcome screen, **when** I tap *Try the demo*, **then** a demo account holding the sample student (results, achievements, interests and sample contact details) is created and I am logged in, without a username, a password or any detail of mine.
+- **AC-112.2** **Given** two visitors try the demo, **then** each gets a private copy, and nothing one of them does is visible to the other.
+- **AC-112.3** **Given** a demo account, **then** nobody can log in to it with a password, and *Me* says that it is a demo whose groups are read-only and that it is deleted 24 hours after it was opened.
+- **AC-112.4** **Given** a demo account more than 24 hours old, **when** anyone next taps *Try the demo*, **then** it and every row stored under it are deleted, and no real account is touched.
+- **AC-112.5** **Given** a demo account in *Groups*, **then** it can join a group that already exists and read it, but it cannot create a group, post a message or report one, and the server refuses each attempt.
+- **AC-112.6** *(CR-010)* **Given** demo mode or the demo account, **then** no password is prefilled on any screen or shipped in the app.
+- **AC-112.7** *(CR-010)* **Given** 500 demo accounts already exist, **when** someone taps *Try the demo*, **then** they are told the demo is busy and invited to create an account; each tap deletes at most 50 expired demo accounts, and a failed clean-up never blocks the demo.
+
+
 # Epic EP2: State university course discovery
 
 | | |
@@ -434,6 +482,8 @@ recognise me without my photograph.
 
 ## US-203 See Safe / Likely / Reach for each course
 
+*Revised (VR2): shown to students as "See how likely each course is: Very likely, Possible or Unlikely" (AC-203.5).*
+
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
 | Must | 5 pts | R1 | EP2 | P1 | E1 |
@@ -447,6 +497,7 @@ cut-offs, **so that** I understand my real chances rather than a yes/no from one
 - **AC-203.2** **Given** fewer than 3 years of data, **then** the course is marked *Not enough history* rather than banded.
 - **AC-203.3** **Given** any band is shown, **then** the gap to last year's cut-off is shown with its sign (e.g. +0.061) and the trend (rising, steady, jumpy).
 - **AC-203.4** **Given** any band, **then** the wording never promises admission.
+- **AC-203.5** *New (VR2).* **Given** any screen that names a band, **then** Safe, Likely and Reach are shown as *Very likely*, *Possible* and *Unlikely* in every interface language, each band tab on *Courses* has a one-line meaning under it (for example "Above the latest cut-off, but not above every recent year"), and the band codes stored and sent by the server (SAFE, LIKELY, REACH) do not change.
 
 
 ## US-204 Open a course page with sources
@@ -538,6 +589,44 @@ without scrolling through every band.
 **Acceptance criteria**
 
 - **AC-209.1** **Given** *Courses*, **when** I type the start of words of a course or university name (for example "ruh comp"), a common short form, or a Uni-Code (for example "012F"), **then** matching courses from every band are listed, ignoring case and punctuation.
+
+
+## US-210 See official facts about the university
+
+*New (CR-008).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Could | 3 pts | R2 (delivered 15 Oct 2026) | EP2 | P1, P3 | E2, CR-008 |
+
+> **As a** student choosing between universities, **I want** official facts about the university on each course page,
+**so that** I compare campuses with numbers instead of hearsay (E2: "no proper place to get the information").
+
+**Acceptance criteria**
+
+- **AC-210.1** **Given** a course page, **then** a *University facts* card shows, for the course's university or institute, the students admitted for 2023/24, the undergraduates in 2024, the permanent hostel places and the share of undergraduates they can house, the Mahapola and Bursary recipients, and the graduates of 2024, wherever the UGC report gives them.
+- **AC-210.2** **Given** any fact on the card, **then** it names its table and page in the UGC report *Sri Lanka University Statistics 2024* and links to that page of the official PDF on the UGC website.
+- **AC-210.3** **Given** the report's own caveats, **then** they are shown with the number: 2024 figures are provisional; a count is lower where faculties did not submit figures; university totals include their campuses; and where the report says "Information not submitted", no number is shown, never a zero.
+
+
+## US-211 See a course's aptitude test on its page
+
+*New (CR-009).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R2 (delivered 15 Oct 2026) | EP2 | P1 | T1, S, CR-009 |
+
+> **As a** student looking at a course that needs an aptitude or practical test, **I want** its page to show the
+official notice and dates of that test, **so that** I do not lose the course by missing the test (screen S: "I missed
+the architecture aptitude test").
+
+**Acceptance criteria**
+
+- **AC-211.1** **Given** one of the 24 offerings that need an aptitude or practical test (BR-025), **then** its course page shows an *Aptitude test* card with the university that runs the test, the application and test dates from its official notice, and a link to that notice.
+- **AC-211.2** **Given** the dates on the card are the last intake's and have passed (Sri Lanka date), **then** they are labelled as the last intake's and in the past, with a note that the university announces the next dates; no date for the next intake is estimated.
+- **AC-211.3** **Given** a course whose test is one joint practical test held at other universities, **then** the card says so and links to the official notices of the universities that hold it.
+- **AC-211.4** **Given** a course without a test, **then** no aptitude card is shown; **and given** any card, every link is an official https page of the university.
 
 
 # Epic EP3: Preference list
@@ -922,6 +1011,23 @@ in the totals. The gap to a dream course remains in US-206.*
 - **AC-507.1** **Given** a dream offering, **then** I see the Z-score gap, my attempt number out of three, and the routes I could take while preparing.
 
 
+## US-508 See how a vocational qualification leads to a degree
+
+*New (CR-009).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Could | 1 pt | R2 (delivered 15 Oct 2026) | EP5 | P1 | E3, E5, CR-009 |
+
+> **As a** student considering a vocational course, **I want** to see the official route from an NVQ Level 5 or 6
+diploma to a degree, **so that** I know a vocational path does not close the door to a degree.
+
+**Acceptance criteria**
+
+- **AC-508.1** **Given** the University of Vocational Technology route (R042), **then** it quotes the Tertiary and Vocational Education Commission (TVEC) statement that holders of a relevant NVQ Level 5 or 6 qualification can progress to NVQ Level 7 degree programmes (B.Tech or B.Ed.Tech), with credit transfer for NVQ Level 6 holders, and cites the TVEC manual and page.
+- **AC-508.2** **Given** the same route, **then** it lists the degree programmes the university lists for 2026, with the date they were read.
+
+
 # Epic EP6: Ask, with sources
 
 | | |
@@ -941,6 +1047,7 @@ in the totals. The gap to a dream course remains in US-206.*
 
 - **AC-601.1** **Given** a question in Sinhala, **then** the answer is in Sinhala.
 - **AC-601.2** **Given** the question relates to my eligibility, **then** the answer uses my profile (stream, grades, district, Z-score).
+- **AC-601.3** *New (CR-010).* **Given** a link that opens Ask with a question in it, **when** it opens, **then** the question is put in the question box and is sent only when I tap send, so a link never spends my daily questions.
 
 
 ## US-602 Every answer cites its source
@@ -1151,6 +1258,9 @@ people, **so that** I can ask questions without being harassed or misled.
 - **AC-706.3** *(CR-002)* **Given** a message, **when** I report it with a reason (harmful, wrong information, spam or other), **then** the report is recorded once per member, and a message reported by 3 different members is hidden for everyone.
 - **AC-706.4** *(CR-002)* **Given** I block a member, **then** I no longer see their messages, and I can unblock them later.
 - **AC-706.5** *New (CR-005).* **Given** a message that contains a phone number or an email address, **then** it is refused with an explanation, and the refusal happens on the server.
+- **AC-706.6** *New (CR-010).* **Given** a message is reported, **then** only reports from accounts at least one day old that are not demo accounts count toward the three that hide it; other reports are still recorded.
+- **AC-706.7** *New (CR-010).* **Given** I try to post, **then** every attempt counts toward 20 in any 10 minutes, including messages that are refused, and at most three live connections of my account stay open in one group (the oldest closes).
+- **AC-706.8** *New (CR-010).* **Given** a message that disguises a phone number or email address (for example a 0094 prefix, digits split by dots or brackets, full-width or spelled-out digits, "name [at] mail [dot] com") or contains a WhatsApp or Telegram invite link, **then** it is refused like AC-706.5, while years, index numbers and Z-scores are still allowed.
 
 
 ## US-707 Accept the group rules once
@@ -1342,6 +1452,26 @@ talking to and can leave when I want.
 
 - **AC-907.1** **Given** a form submission (report, reminder sign-up, question), **then** a bot check is passed first.
 - **AC-907.2** **Given** a client exceeds the per-minute limit on Ask, **then** further requests get a friendly "slow down" response.
+- **AC-907.3** *New (CR-010).* **Given** a signed-in account, a network or the whole service, **then** limits apply: at most 100 changes a minute per account; network limits count an IPv6 /64 network as one network; Ask answers at most 3,000 questions a day across the service; answer feedback is capped at 2,000 a day and kept for one year.
+
+
+## US-908 Close my open chats when my session ends
+
+*New (CR-010, security audit run-1).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 2 pts | R2 (delivered 15 Oct 2026) | EP9 | P1, P5 | E6, CR-010 |
+
+> **As a** student who may use a shared or lost phone, **I want** my open group chats to close when I log out or
+reset my password, **so that** nobody on that device keeps reading my groups.
+
+**Acceptance criteria**
+
+- **AC-908.1** **Given** a group room is open on this device, **when** I log out on this device, **then** its live connection closes, and rooms I opened on my other devices stay open.
+- **AC-908.2** **Given** I log out on every device, or reset my password with my recovery code, **then** every live group connection of my account closes, on every device.
+- **AC-908.3** **Given** I exit a group, **then** my live connection to that group closes, and my other groups stay open.
+- **AC-908.4** **Given** a request that would change data comes from another website, or carries a "null" or malformed Origin, **then** the server refuses it with 403 and changes nothing.
 
 
 # Release plan
@@ -1369,8 +1499,13 @@ Table: Release R1 content by priority
 
 ## Release R2: after the buildathon
 
-The remaining 10 stories (31 points: 2 Should, 8 Could): recognition and loan checks, scholarships abroad, cost of
-living, teacher view, the after-selection epic and special intake.
+Fifteen stories (42 points: 5 Should, 10 Could).
+
+- *Delivered on 15 October 2026 (VR2 and CR-007 to CR-010):* 5 stories, 11 points: try the demo (US-112), university
+  facts (US-210), aptitude test on the course page (US-211), the NVQ ladder to a degree (US-508), and closing open chats
+  when a session ends (US-908).
+- *Remaining:* 10 stories, 31 points (2 Should, 8 Could): recognition and loan checks, scholarships abroad, cost of
+  living, teacher view, the after-selection epic and special intake.
 
 ## Walking skeleton
 
@@ -1418,6 +1553,11 @@ Table: Evidence-to-story traceability matrix
 | CR-005 (group rules, popular groups, sample conversations) | US-704, US-706, US-707 |
 | CR-006 (rules once per account, group info, avatars, Journey on the account) | US-110, US-305, US-401, US-407, US-409 to US-411, US-503, US-704, US-707, US-708 |
 | VR (video review, 11 October 2026) | US-105, US-111, US-204, US-207, US-209, US-305, US-408, US-501, US-607; withdrew US-507 |
+| VR2 (decisions of 14 October 2026) | US-203 (AC-203.5), US-106 (AC-106.5) |
+| CR-007 (try the demo) | US-112 |
+| CR-008 (university facts) | US-210 |
+| CR-009 (aptitude tests, NVQ ladder) | US-211, US-508 |
+| CR-010 (security hardening, audit run-1) | US-908; AC-102.3, AC-102.4, AC-106.6, AC-108.3, AC-112.6, AC-112.7, AC-601.3, AC-706.6 to AC-706.8, AC-907.3 |
 
 # Glossary {.appendix}
 
@@ -1428,16 +1568,18 @@ Table: Terms and abbreviations used in this document
 | A/L | G.C.E. Advanced Level examination, the university entrance examination in Sri Lanka |
 | Aptitude test | A separate test some university courses hold on their own dates (e.g. Architecture) |
 | Avatar | One of 12 preset pictures a student may choose for their account; the default is their initials (CR-006) |
-| Band | ZedPath's label for a course relative to the student's Z-score: Safe, Likely or Reach |
+| Band | ZedPath's label for a course relative to the student's Z-score: Safe, Likely or Reach, shown in the app since VR2 as Very likely, Possible or Unlikely |
 | Batch group | The group for students of the same A/L stream and district (CR-002) |
 | CR | Change request: a change to the approved baseline, approved by the product owner |
 | Follow | Keep a course, notice or other path in the student's Journey (CR-006) |
 | Cut-off | The lowest Z-score admitted to a course offering in a district in a given intake year |
+| Demo account | A private, throwaway account holding the sample student, opened by *Try the demo* and deleted after 24 hours (CR-007) |
 | District quota | The share of places allocated by district; the cut-off differs by district |
 | Gazette | The Government Gazette of Sri Lanka, where government job examinations are announced |
 | INVEST | Independent, Negotiable, Valuable, Estimable, Small, Testable: quality criteria for stories |
 | Mahapola | A government scholarship paid to eligible state-university students |
 | MoSCoW | Must, Should, Could, Won't: a prioritisation method from DSDM |
+| NVQ | National Vocational Qualification, Levels 1 to 7; Level 7 is a degree awarded by the University of Vocational Technology (CR-009) |
 | Notice | An official announcement with a closing date: a Gazette job examination or an intake of another route |
 | Offering | A course at a specific university, identified by its uni-code |
 | Open now | The Journey's second tab, listing open notices; it replaces the Alerts bell (CR-006) |
@@ -1445,6 +1587,7 @@ Table: Terms and abbreviations used in this document
 | Recovery code | A one-time code, shown once, that lets a student reset a forgotten password (CR-001) |
 | Verified senior | A university student whose enrolment the ZedPath team checked; shown with a badge in groups |
 | VR | The product owner's video review of the live app, 11 October 2026 |
+| VR2 | The product owner's review and decisions of 14 October 2026 (band names, intro guide, avatars, expired session) |
 | UGC | University Grants Commission, which runs state-university admission |
 | Uni-code | The code a student enters on the UGC application for a course offering |
 | Z-score | A standardised score that combines a student's three A/L subject results |
@@ -1466,3 +1609,6 @@ Table: Documents referred to in this document
 | [9] | ZP-DOC-05, *ZedPath Data Design*, sections on CR-001 to CR-006 |
 | [10] | Personal Data Protection Act, No. 9 of 2022, Democratic Socialist Republic of Sri Lanka |
 | [11] | University Grants Commission, *Admission to Undergraduate Courses of the Universities in Sri Lanka, Academic Year 2025/2026* (handbook), Section 6, p.166 to p.167 (special intake) |
+| [12] | University Grants Commission, *Sri Lanka University Statistics 2024*, Chapters 2, 3, 4 and 7 (US-210) |
+| [13] | Official aptitude and practical test notices of the universities for the 2025/2026 intake, listed in `data/aptitude/aptitude-2025-2026.json` (US-211) |
+| [14] | Tertiary and Vocational Education Commission, *NVQ Framework of Sri Lanka: Operations Manual*, October 2009 (US-508) |

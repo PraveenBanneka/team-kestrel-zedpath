@@ -2,14 +2,14 @@
 id: ZP-DOC-04
 title: Use Case Model
 subtitle: Actors, use case diagrams, fully dressed use cases and activity flows
-version: 2.0
-date: 14 October 2026
-status: Approved
+version: 2.1 (draft)
+date: 15 October 2026
+status: Under revision
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
 approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
+signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: UML 2.5.1 use case and activity diagrams; A. Cockburn fully dressed use case template; ZP-DOC-00
@@ -18,6 +18,7 @@ revision: 0.9 | 5 Oct 2026 | Team Kestrel | Review update: catalogue extended fo
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 15 new use cases UC-19 to UC-33 (four fully dressed: UC-19, UC-25, UC-29, UC-30); revised UC-01, UC-02, UC-03, UC-05, UC-06, UC-07, UC-13, UC-15, UC-16; UC-14 superseded; new actors (Android notification system, moderation model); catalogue re-checked against the revised ZP-DOC-03. The two use case diagrams still show the v1.0 baseline. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
+revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (14 October 2026) and CR-007 to CR-010 (15 October 2026): two new brief use cases, UC-34 Try the demo and UC-35 End a session; UC-03 revised (university facts, aptitude test); UC-02, UC-06, UC-07, UC-20, UC-22 and UC-29 revised for the new requirements (including the security hardening of CR-010); catalogue re-checked by script against all 148 functional requirement IDs of ZP-DOC-03 v2.1 (draft). No v2.0 use case is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 ---
 
 # Introduction
@@ -31,9 +32,9 @@ flows (ZP-DOC-07), the API design (ZP-DOC-06) and the system tests (ZP-DOC-08).
 
 ## Scope
 
-Thirty-three use cases covering Releases R1 and R2: the eighteen of v1.0 (one now superseded) and fifteen added by
-change requests CR-001 to CR-006. Eleven are written in Cockburn's *fully dressed* format because they carry the main
-risk or value; the rest are given in *brief* format.
+Thirty-five use cases covering Releases R1 and R2: the eighteen of v1.0 (one now superseded), fifteen added by
+change requests CR-001 to CR-006, and two added in v2.1 by CR-007 and CR-010. Eleven are written in Cockburn's *fully
+dressed* format because they carry the main risk or value; the rest are given in *brief* format.
 
 ## Intended audience
 
@@ -59,7 +60,9 @@ Table: Position of this document in the ZedPath document set
 - *The system* means ZedPath.
 - **Change markers** (since v1.0): *New (CR-nnn)*, *Revised (CR-nnn)* or *Superseded by X (CR-nnn)*. A superseded
   use case keeps its ID and text for traceability (it is *Deleted* in the sense of ZP-DOC-00). The change requests
-  are listed in ZP-DOC-02 and ZP-DOC-03; "VR" is the product owner's video review of 11 October 2026.
+  are listed in ZP-DOC-02 and ZP-DOC-03; "VR" is the product owner's video review of 11 October 2026 and "VR2" the
+  product owner's review and decisions of 14 October 2026. Since VR2 the app shows the bands Safe, Likely and Reach as
+  *Very likely*, *Possible* and *Unlikely*; this document keeps the band codes.
 
 # Actors
 
@@ -67,7 +70,7 @@ Table: Actors and their goals
 
 | Actor | Type | Goals |
 |---|---|---|
-| Student (P1, P2) | Primary, human | Find every reachable path, avoid costly mistakes, never miss a deadline; *(CR-001 to CR-006)* keep one account and Journey on every device, talk with peers safely |
+| Student (P1, P2) | Primary, human | Find every reachable path, avoid costly mistakes, never miss a deadline; *(CR-001 to CR-006)* keep one account and Journey on every device, talk with peers safely; *(CR-007)* try the app before signing up |
 | Family member (P3) | Secondary, human | Receive a clear summary in their language |
 | Teacher (P4) | Primary, human (R2) | See which students need help |
 | Verified senior (P5) | Primary, human (R1 since CR-002) | Help juniors in a trusted space |
@@ -95,12 +98,12 @@ Table: Use case catalogue with level, release and realised requirements
 | ID | Use case | Primary actor | Level | Release | Requirements |
 |---|---|---|---|---|---|
 | UC-01 | Set up profile | Student | User goal | R1 | FR-101 to FR-113, FR-123, FR-124 |
-| UC-02 | Explore eligible courses | Student | User goal | R1 | FR-201 to FR-207, FR-210 to FR-213, FR-215 to FR-217 |
-| UC-03 | View offering details | Student | User goal | R1 | FR-208, FR-209, FR-214, FR-218 |
+| UC-02 | Explore eligible courses | Student | User goal | R1 | FR-201 to FR-207, FR-210 to FR-213, FR-215 to FR-217, FR-221 |
+| UC-03 | View offering details (*revised, CR-008, CR-009*) | Student | User goal | R1; R2 for facts and aptitude card | FR-208, FR-209, FR-214, FR-218 to FR-220 |
 | UC-04 | Build and check preference list | Student | User goal | R1 | FR-301 to FR-308 |
 | UC-05 | Follow journey and reminders | Student | User goal | R1 | FR-401 to FR-408, FR-417 |
-| UC-06 | Explore other routes | Student | User goal | R1 | FR-501 to FR-510 |
-| UC-07 | Ask a question | Student | User goal | R1 | FR-601 to FR-612, FR-913 |
+| UC-06 | Explore other routes | Student | User goal | R1 | FR-501 to FR-511 |
+| UC-07 | Ask a question | Student | User goal | R1 | FR-601 to FR-615, FR-913 |
 | UC-08 | Share summary | Student | User goal | R1 | FR-701, FR-702 |
 | UC-09 | Report a mistake | Student | Subfunction | R1 | FR-910, FR-912 |
 | UC-10 | Register source document | Curator | User goal | R1 | FR-901, FR-902 |
@@ -113,20 +116,22 @@ Table: Use case catalogue with level, release and realised requirements
 | UC-17 | View class progress | Teacher | User goal | R2 | FR-706 |
 | UC-18 | Prepare for university | Student | User goal | R2 | FR-801 to FR-804 |
 | UC-19 | Create account and give contact details (*new, CR-001, CR-003*) | Student | User goal | R1 | FR-114, FR-116, FR-118, FR-120, FR-121 |
-| UC-20 | Log in and restore profile (*new, CR-001*) | Student | User goal | R1 | FR-115, FR-117 |
+| UC-20 | Log in and restore profile (*new, CR-001*) | Student | User goal | R1 | FR-115, FR-117, FR-129, FR-130 |
 | UC-21 | Recover account (*new, CR-001*) | Student | User goal | R1 | FR-118 |
-| UC-22 | Delete account (*new, CR-001*) | Student | User goal | R1 | FR-119 |
+| UC-22 | Delete account (*new, CR-001*) | Student | User goal | R1 | FR-119, FR-132 |
 | UC-23 | Choose an avatar (*new, CR-006*) | Student | User goal | R1 | FR-122 |
 | UC-24 | Select several courses (*new, VR, CR-006*) | Student | User goal | R1 | FR-309 to FR-311 |
 | UC-25 | Tick a Journey step (*new, CR-006*) | Student | User goal | R1 | FR-409 to FR-411 |
 | UC-26 | Follow a course (*new, CR-006*) | Student | User goal | R1 | FR-411, FR-416 |
 | UC-27 | Follow a notice and record applying (*new, CR-006*) | Student | User goal | R1 | FR-411, FR-414, FR-415 |
 | UC-28 | Get reminders and set them (*new, CR-002, VR*) | Student | User goal | R1 | FR-404, FR-412, FR-413 |
-| UC-29 | Take part in a group (*new, CR-002, CR-005*) | Student, Verified senior | User goal | R1 | FR-705, FR-708 to FR-712, FR-715, FR-716, FR-719 |
+| UC-29 | Take part in a group (*new, CR-002, CR-005*) | Student, Verified senior | User goal | R1 | FR-705, FR-708 to FR-712, FR-715, FR-716, FR-719, FR-720 to FR-723, FR-127 |
 | UC-30 | Accept group rules (*new, CR-005, CR-006*) | Student, Verified senior | Subfunction | R1 | FR-713 (superseded), FR-714 |
 | UC-31 | View group info and exit (*new, CR-006*) | Student, Verified senior | User goal | R1 | FR-717, FR-718 |
 | UC-32 | Rate an answer (*new, CR-004*) | Student | Subfunction | R1 | FR-611 |
 | UC-33 | Issue a senior invite (*new, CR-002*) | Curator | User goal | R1 | FR-707 |
+| UC-34 | Try the demo (*new, CR-007*) | Student (visitor) | User goal | R2 | FR-125 to FR-128 |
+| UC-35 | End a session (*new, CR-010*) | Student, Verified senior | User goal | R2 | FR-914, FR-131 |
 
 # Fully dressed use cases
 
@@ -488,6 +493,13 @@ The decision logic of this use case is shown below.
   members the message is hidden for everyone (FR-710).
 - *8b. The student blocks a member:* that member's messages are no longer shown to the student (FR-711).
 - *8c. The student opens the group's info page or leaves:* UC-31.
+- *2a. New (CR-007): the account is a demo account:* the student may join a group that already exists and read it; the
+  server refuses creating a group and reporting, and the room refuses posts (FR-127).
+- *\*b. New (CR-010): the student logs out or leaves the group:* the room's live connection closes (UC-35).
+- *7c. New (CR-010): the message disguises a phone number or email, or carries a chat-invite link, or the member has
+  made 20 attempts in 10 minutes:* the room refuses it and says why (FR-721, FR-723).
+- *8d. New (CR-010): the reporter's account is under a day old or a demo account:* the report is recorded but does not
+  count toward hiding (FR-720).
 
 | | |
 |---|---|
@@ -528,9 +540,9 @@ Table: Brief use cases
 
 | ID | Use case | Brief description |
 |---|---|---|
-| UC-03 | View offering details | The student opens an offering and sees its district cut-off history with their own Z-score, duration, medium, aptitude-test flag and first-year content, each with its source. |
+| UC-03 | View offering details | The student opens an offering and sees its district cut-off history with their own Z-score, duration, medium, aptitude-test flag and first-year content, each with its source. *Revised (CR-008, CR-009):* the page also shows a *University facts* card (admitted 2023/24, undergraduates 2024, hostel places and share, Mahapola and Bursary recipients, graduates 2024, each with its UGC table and page) and, for the 24 offerings that need one, an *Aptitude test* card with the official notice and the last intake's dates marked as past, or the notices of the joint test. |
 | UC-05 | Follow journey and reminders | *Revised (CR-002, CR-006).* The student sees the Journey steps in order, the followed courses and notices, and the next dated item first; a UGC date not yet announced shows *Not announced yet* with the official rule and page; aptitude-test steps are added automatically. The *Open now* tab lists open notices, and the Journey tab shows the count of new ones. Steps are ticked in UC-25 and reminders set in UC-28. (v1.0: dates confirmed or estimated; push reminders.) |
-| UC-06 | Explore other routes | *Revised (VR).* The student sees six groups of non-UGC routes (the retry group was removed), each marked open or not open with the reason, and opens a route's requirements, cost and timing with sources; open notices show whether the student meets their A/L-pass and age rules, checked on the device. |
+| UC-06 | Explore other routes | *Revised (VR).* The student sees six groups of non-UGC routes (the retry group was removed), each marked open or not open with the reason, and opens a route's requirements, cost and timing with sources; open notices show whether the student meets their A/L-pass and age rules, checked on the device. *Revised (CR-009):* the University of Vocational Technology route quotes the official NVQ 5/6 to NVQ 7 (degree) ladder and lists its degree programmes. |
 | UC-08 | Share summary | The student generates a card in a chosen language, without name or Z-score unless added, and sends it through the phone's share sheet. |
 | UC-09 | Report a mistake | From any fact, the student taps *Report a mistake*, adds an optional note and passes a bot check; the report is queued for the curator. |
 | UC-10 | Register source document | The curator uploads an official document with its metadata; the system stores it unchanged, fingerprints it and rejects duplicates. |
@@ -539,9 +551,9 @@ Table: Brief use cases
 | UC-16 | Answer as senior | *Revised (CR-002): R1, in groups.* A verified senior answers questions in the course groups (UC-29); messages show the badge "Verified senior · course, year". |
 | UC-17 | View class progress (R2) | A teacher sees aggregate progress of students who shared with the class code, and names only of those who shared. |
 | UC-18 | Prepare for university (R2) | A selected student follows the university's registration checklist, checks Mahapola and bursary eligibility, plans the months before lectures and keeps a documents checklist. |
-| UC-20 | Log in and restore profile | *New (CR-001).* The student logs in with username and password on any device; the device derives the key, the server checks it and starts a 30-day session, and the profile, achievements, interests and Journey are restored. The student may log out on this device or on every device. |
+| UC-20 | Log in and restore profile | *New (CR-001).* The student logs in with username and password on any device; the device derives the key, the server checks it and starts a 30-day session, and the profile, achievements, interests and Journey are restored. The student may log out on this device or on every device. *Revised (VR2):* when the session has expired, the app returns the student to *Log in* (FR-129). *Revised (CR-010):* when a different student logs in on the phone, the previous student's data is cleared from it first (FR-130). |
 | UC-21 | Recover account | *New (CR-001).* A student who forgot the password enters username, recovery code and a new password; the password is changed, a new recovery code is shown once, and the old code stops working. |
-| UC-22 | Delete account | *New (CR-001).* The student confirms *Delete account*; the server deletes every row stored under the account and its messages in every group, the device is cleared, and the welcome screen is shown. |
+| UC-22 | Delete account | *New (CR-001).* The student confirms *Delete account*; the server deletes every row stored under the account and its messages in every group, the device is cleared, and the welcome screen is shown. *Revised (CR-010):* the messages are also purged from groups the student opened and later left (FR-132). |
 | UC-23 | Choose an avatar | *New (CR-006).* In *Me*, the student picks one of 12 preset avatars or keeps the initials; the server accepts only the presets, and the avatar appears in the app bar, member lists and new group messages. |
 | UC-24 | Select several courses | *New (VR, CR-006).* In *Courses* or *My list*, the student presses and holds a course and ticks others; from *Courses* they add all selected courses to the list under the usual rules, and from either screen they open Compare with up to three in the order selected. |
 | UC-26 | Follow a course | *New (CR-006).* On a course page the student follows (or unfollows) the course; the server accepts only 2025/26 offerings and saves it on the account, and it appears in the Journey. |
@@ -550,13 +562,17 @@ Table: Brief use cases
 | UC-31 | View group info and exit | *New (CR-006).* In a room the student taps the group's name and sees the description, the general and group-specific rules and the member list (usernames, avatars, badges; members only), and may tap *Exit group* at the bottom. |
 | UC-32 | Rate an answer | *New (CR-004).* Under an Ask answer the student taps *Helpful*, or *Report a wrong answer* with an optional note after being told the question and answer will be sent; the rating is stored without anything that identifies the student. |
 | UC-33 | Issue a senior invite | *New (CR-002).* After checking a university student's enrolment, the product owner creates a one-time invite code for a course, institution and year of study, valid for 14 days, and gives it to the student privately; only its hash is stored. |
+| UC-34 | Try the demo | *New (CR-007).* On the Welcome screen a visitor taps *Try the demo*. The server first deletes expired demo accounts, then creates a private demo account holding the sample student, with a random username and no usable password, and logs the visitor in for 24 hours; the visitor goes straight to *Paths*. *Me* says it is a demo. In groups the demo account can join existing groups and read them, but cannot create a group, post or report (UC-29, 2a). Clearing the phone switches demo mode off (FR-128). Extension: too many demo taps from one network are refused with a request to wait (BR-059). |
+| UC-35 | End a session | *New (CR-010).* The student logs out on this device, logs out on every device, resets the password with the recovery code (UC-21), or exits a group (UC-31). If the log-out request fails, the app says the student is still logged in (FR-131).
+The server ends the session or membership and asks each affected group room to close the live connections opened under it: this device's only on log out; every device's on log out everywhere and recovery; that group's only on exit (FR-914). A room that cannot be reached closes the connection on its next message. |
 
 # Traceability: requirements to use cases {.appendix}
 
 Every functional requirement in ZP-DOC-03 is realised by at least one use case, as listed in the use case
-catalogue above (column *Requirements*); this was checked by script against all 80 requirements of v1.0, and
-again for this revision against all 128 functional requirement IDs of ZP-DOC-03 v2.0, including the
-superseded and withdrawn ones, which stay listed against the use case they belonged to.
+catalogue above (column *Requirements*); this was checked by script against all 80 requirements of v1.0, against
+all 128 functional requirement IDs of ZP-DOC-03 v2.0, and again for v2.1 (draft) against all 148 functional
+requirement IDs of ZP-DOC-03 v2.1 (draft), including the superseded and withdrawn ones, which stay listed against the use
+case they belonged to.
 
 # Glossary {.appendix}
 
@@ -567,6 +583,7 @@ Table: Terms used in this document
 | Extension | An alternative path that branches from a step of the main success scenario |
 | Fully dressed | Cockburn's complete use case format with stakeholders, guarantees, scenario and extensions |
 | Include | A UML relationship: the base use case always performs the included use case |
+| Demo account | A private, throwaway account holding the sample student, opened by *Try the demo* and deleted after 24 hours (CR-007) |
 | Extend | A UML relationship: the extending use case optionally adds behaviour to the base use case |
 | Minimal guarantee | What the system promises even when the goal fails |
 | Subfunction | A use case below user-goal level, performed as part of another |

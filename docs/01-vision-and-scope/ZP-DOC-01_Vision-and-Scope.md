@@ -2,14 +2,14 @@
 id: ZP-DOC-01
 title: Vision and Scope
 subtitle: Business requirements, product vision, scope boundaries and business context
-version: 2.0
-date: 14 October 2026
-status: Approved
+version: 2.1 (draft)
+date: 15 October 2026
+status: Under revision
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
 approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
+signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Vision and scope document template (K. Wiegers and J. Beatty, Software Requirements, 3rd ed.); ZP-DOC-00
@@ -17,6 +17,7 @@ revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue, derived from the Gate 1
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): change-request summary added; features FE-1, FE-4 to FE-7 restated; release scope recomputed from ZP-DOC-02 (R1 57 stories, 189 points; R2 10 stories, 31 points); limitations updated (account required; Android app exists; reminders on the phone); RK-02 and RK-07 mitigations updated; RK-08 added; market figures unchanged. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
+revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for CR-007 (Try the demo), CR-008 (university facts from UGC statistics), CR-009 (aptitude tests on course pages; NVQ 5/6 to NVQ 7 ladder in route R042), CR-010 (security hardening from audit run-1) and VR2 (band names Very likely / Possible / Unlikely and other decisions of 14 October 2026): change-request rows added; FE-1, FE-2, FE-5 and FE-9 restated; release scope recomputed from ZP-DOC-02 v2.1 (R1 unchanged; R2 15 stories, 42 points, of which 5 delivered on 15 October 2026); limitation on the required account qualified for the demo; RK-07 mitigation extended. These add to the approved scope without invalidating any v2.0 commitment, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 ---
 
 # Introduction
@@ -63,6 +64,22 @@ Table: Change requests that affect the vision and scope
 | Video review | 11 October 2026 | Sinhala and Tamil interface; search; Compare of up to three courses; chart values; achievements used in Ask; reminder settings; "Sit the A/L again" path removed; selecting several courses at once |
 | CR-005 | 11 October 2026 | Group rules before taking part; no phone numbers or emails in messages; popular groups; labelled sample conversations |
 | CR-006 | 11 October 2026 | Group rules once per account; group info page; preset avatars; the student ticks Journey steps within their windows; follow courses and notices; Journey saved on the account; Alerts become the Journey's *Open now* tab |
+
+## Changes since version 2.0
+
+*New in v2.1 (draft).* After v2.0 was approved on 14 October 2026, the product owner made the decisions below. They add to
+the scope without withdrawing any v2.0 commitment. Items they changed are marked *Revised (CR-nnn)* or *(VR2)* below;
+ZP-DOC-02 and ZP-DOC-03 hold the detail.
+
+Table: Change requests since version 2.0
+
+| CR | Date | What changed in scope |
+|---|---|---|
+| VR2 | 14 October 2026 | Product owner's review and decisions: the bands are shown as **Very likely**, **Possible** and **Unlikely** (internal codes SAFE, LIKELY and REACH unchanged) with a one-line meaning under the tabs; the intro guide has seven slides; preset avatars are plain silhouettes in 12 colours; an expired session returns to *Log in* |
+| CR-007 | 15 October 2026 | *Try the demo*: one tap on the Welcome screen opens a private throwaway account holding the sample student, without sign-up; it is deleted 24 hours later; demo accounts read groups but cannot create groups, report or post |
+| CR-008 | 15 October 2026 | University facts on the course page from the UGC report *Sri Lanka University Statistics 2024*: students admitted 2023/24, undergraduates 2024, permanent hostel places, Mahapola and Bursary recipients, graduates 2024 (provisional), each citing its table and page |
+| CR-009 | 15 October 2026 | Aptitude tests on the course page for all 24 offerings that need one, with the last intake's official notice and dates shown as past; the NVQ Level 5/6 to NVQ Level 7 (degree) ladder added to the University of Vocational Technology route |
+| CR-010 | 15 October 2026 | Security hardening from the first security audit (run-1) and the test campaign: open group chats close when the session ends or the member leaves; deleting an account removes its messages from every group it ever opened; a shared Ask link never spends questions; no demo password in the app; the next student on a shared phone never inherits the previous student's data; disguised phone numbers, emails and chat-invite links refused in groups; fresh and demo accounts cannot hide messages by reporting; per-account, per-network and whole-service limits; cross-site and malformed requests refused |
 
 # Business requirements
 
@@ -151,7 +168,7 @@ Table: Business risks, their likelihood and impact, and mitigations
 | RK-04 | AI answers are wrong or poorly translated in Sinhala or Tamil | Medium | High | Answers grounded only in stored sources; refuse when unsupported; native-speaker review of interface text |
 | RK-05 | ZedPath is mistaken for an official UGC service | Low | Medium | Clear independence notice on every page; no UGC branding |
 | RK-06 | A single developer cannot finish R1 by 11 October 2026 | Medium | High | Walking skeleton first; MoSCoW release plan; AI-assisted development; R2 holds deferrable stories |
-| RK-07 | Personal data of students (many are minors) is exposed | Low | High | *Revised (CR-001, CR-003):* only the details needed, each with its stated purpose and recorded consent (a parent or guardian agrees under 18); contact details kept apart and never shown to other students; passwords never leave the phone; secrets stored only as hashes; everything deleted with the account; photos deleted after reading. (v1.0: no account to explore; profile kept on the device.) |
+| RK-07 | Personal data of students (many are minors) is exposed | Low | High | *Revised (CR-001, CR-003):* only the details needed, each with its stated purpose and recorded consent (a parent or guardian agrees under 18); contact details kept apart and never shown to other students; passwords never leave the phone; secrets stored only as hashes; everything deleted with the account; photos deleted after reading. (v1.0: no account to explore; profile kept on the device.) *Revised (CR-007, CR-010):* the demo holds only sample details and each visitor gets a private copy; a security audit (run-1) was run and its findings are tracked in ZP-DOC-08 |
 | RK-08 | *New (CR-002, CR-005).* Students, many of them minors, are harassed, misled or exposed in groups | Medium | High | Automatic moderation of every message, failing closed; rules accepted before taking part; phone numbers and emails refused; report (three reports hide a message) and block; rate limits; usernames and preset avatars only; seniors verified by the product owner through invite codes |
 
 ## Assumptions and dependencies
@@ -178,36 +195,38 @@ Table: Major features
 
 | ID | Feature | Epic |
 |---|---|---|
-| FE-1 | *Revised (CR-001, CR-003, CR-006).* A required account with stated purpose and consent, the same profile on every device, a recovery code, account deletion and a preset avatar; results entered once (typed, estimated or read from a photo), in three languages | EP1 |
-| FE-2 | Eligible state-university courses with Safe/Likely/Reach bands, reasons for hidden courses, and sourced course pages; *(VR)* course search and Compare of up to three courses | EP2 |
+| FE-1 | *Revised (CR-001, CR-003, CR-006, CR-007).* A required account with stated purpose and consent, the same profile on every device, a recovery code, account deletion and a preset avatar; results entered once (typed, estimated or read from a photo), in three languages; *(CR-007)* a one-tap demo with the sample student that needs no sign-up | EP1 |
+| FE-2 | *Revised (VR2, CR-008, CR-009).* Eligible state-university courses with likelihood bands (shown as Very likely, Possible and Unlikely, each with its meaning), reasons for hidden courses, and sourced course pages with university facts from UGC statistics and the course's aptitude test; *(VR)* course search and Compare of up to three courses | EP2 |
 | FE-3 | Preference-list builder that detects ordering mistakes and copies uni-codes; *(VR, CR-006)* select several courses at once | EP3 |
 | FE-4 | *Revised (CR-002, CR-006).* Journey the student ticks within each step's window, with followed courses and notices, confirmed dates only (never estimated), aptitude tests, reminders on the phone or in a calendar file, saved on the account | EP4 |
-| FE-5 | *Revised (CR-002, VR).* Every other route matched to the student's results, in six groups (the retry path was removed), with Gazette job-exam and intake notices checked on the phone under the Journey's *Open now* tab | EP5 |
+| FE-5 | *Revised (CR-002, VR, CR-009).* Every other route matched to the student's results, in six groups (the retry path was removed), with Gazette job-exam and intake notices checked on the phone under the Journey's *Open now* tab; the official NVQ 5/6 to degree ladder | EP5 |
 | FE-6 | *Revised (CR-004).* Ask: cited answers in Sinhala, Tamil and English that refuse to guess, shown as a card with a verdict, sources, next steps and feedback | EP6 |
 | FE-7 | *Revised (CR-002, CR-005, CR-006).* Family share card; moderated groups per target course and per A/L batch with verified seniors, rules accepted once, and a member list; a teacher view | EP7 |
 | FE-8 | After selection: registration, Mahapola, gap-year plan, documents | EP8 |
-| FE-9 | Data and trust: source registry, AI extraction with two-model check, review queue, mistake reports | EP9 |
+| FE-9 | *Revised (CR-010).* Data and trust: source registry, AI extraction with two-model check, review queue, mistake reports; protection of accounts and group chats, hardened after a security audit | EP9 |
 
 ## Scope of initial and subsequent releases
 
-Table: Release scope by feature (story counts and points from ZP-DOC-02 v2.0 draft; superseded and withdrawn stories excluded)
+Table: Release scope by feature (story counts and points from ZP-DOC-02 v2.1 draft; superseded and withdrawn stories excluded)
 
 | Feature | Release R1, Gate 3 (11 October 2026) | Release R2, after the buildathon |
 |---|---|---|
-| FE-1 | All 11 stories: results, estimate, photo, language, account, recovery, delete, contact details and consent, avatar, subject search | None |
-| FE-2 | 8 stories: eligibility, hidden courses, bands, course page, filters, dream course, compare, course search | Cost of living |
+| FE-1 | All 11 stories: results, estimate, photo, language, account, recovery, delete, contact details and consent, avatar, subject search | *Delivered 15 October 2026 (CR-007):* try the demo |
+| FE-2 | 8 stories: eligibility, hidden courses, bands, course page, filters, dream course, compare, course search | Cost of living; *delivered 15 October 2026 (CR-008, CR-009):* university facts, aptitude test on the course page |
 | FE-3 | All 5 stories, including selecting several courses | None |
 | FE-4 | 9 stories: Journey, confirmed dates, aptitude tests, reminders, ticking steps, reminder settings, following courses and notices, Journey on the account | Special intake |
-| FE-5 | Route matcher, route details, Gazette and intake notices | Recognition check, loan scheme, scholarships |
+| FE-5 | Route matcher, route details, Gazette and intake notices | Recognition check, loan scheme, scholarships; *delivered 15 October 2026 (CR-009):* NVQ ladder to a degree |
 | FE-6 | All 7 stories: Ask in three languages, citations, no predictions, actions, answer card, feedback, achievements in answers | None |
 | FE-7 | 7 stories: family share card, verified seniors, groups, safety, group rules, group info | Teacher view |
 | FE-8 | None | All 4 stories |
-| FE-9 | All 7 stories | None |
-| **Total** | **57 stories, 189 points** | **10 stories, 31 points** |
+| FE-9 | All 7 stories | *Delivered 15 October 2026 (CR-010):* chats closed when a session ends |
+| **Total** | **57 stories, 189 points** | **15 stories, 42 points** (5 stories, 11 points, delivered on 15 October 2026) |
 
 v1.0 planned 35 stories (122 points) for R1 and 15 (54 points) for R2. The change requests added 19 stories, moved
 four from R2 to R1 (answer actions, senior answers, senior verification, groups), superseded "custom journey steps"
-(replaced by following courses and notices) and withdrew "what retrying would take" with the retry path.
+(replaced by following courses and notices) and withdrew "what retrying would take" with the retry path. After the
+buildathon submission, CR-007 to CR-010 added five R2 stories (11 points), all delivered on 15 October 2026; R1 is
+unchanged.
 
 ![ZedPath system context (C4 model, level 1)](diagrams/system-context.png)
 
@@ -226,7 +245,8 @@ ZedPath **will not**:
   *revised (CR-002):* reminders are notifications scheduled on the phone by the Android app, and calendar files;
 - *revised (CR-003):* collect personal details beyond username, full name, email, mobile and date of birth, or keep
   any of them without a stated purpose and recorded consent; an account **is** required (v1.0: "require an account
-  to explore");
+  to explore"); *(CR-007)* a visitor may instead try a throwaway demo account that holds only the sample student's
+  details and is deleted after 24 hours;
 - show a student's real name, contact details or photograph to other students; groups show usernames and preset
   avatars only (CR-006);
 - keep results photos after they are read;
@@ -282,6 +302,9 @@ Table: Terms and abbreviations used in this document
 | C4 model | A set of architecture diagrams at four levels; level 1, System Context, shows the system and its surroundings |
 | Gazette | The Government Gazette of Sri Lanka, which announces government job examinations |
 | CR | Change request: a change to the approved baseline, approved by the product owner |
+| Demo account | A private, throwaway account holding the sample student, opened by *Try the demo* and deleted after 24 hours (CR-007) |
+| NVQ | National Vocational Qualification, Levels 1 to 7, awarded under the Tertiary and Vocational Education Commission (TVEC) |
+| VR2 | The product owner's review and decisions of 14 October 2026 (band names, intro guide, avatars, expired session) |
 | SAM, SOM, TAM | Serviceable available market, serviceable obtainable market, total addressable market |
 | UGC | University Grants Commission of Sri Lanka |
 | Z-score | A standardised score combining a student's three A/L subject results; used for university selection |
@@ -299,3 +322,5 @@ Table: Sources referred to in this document
 | [5] | DataReportal, *Digital 2026: Sri Lanka* |
 | [6] | K. Wiegers and J. Beatty, *Software Requirements*, 3rd edition, Microsoft Press, 2013 |
 | [7] | G. Moore, *Crossing the Chasm*, HarperBusiness (vision statement template) |
+| [8] | University Grants Commission, *Sri Lanka University Statistics 2024* (Chapters 2, 3, 4 and 7) |
+| [9] | Tertiary and Vocational Education Commission, *NVQ Framework of Sri Lanka: Operations Manual*, 2009 |
