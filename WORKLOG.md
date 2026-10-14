@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **926c9217** (sports demo student, ITUM https link). Rollback target f974eb8a (code only).
+  Live (workers.dev) = version **00c551a7** (bands Very likely / Possible / Unlikely, list widths fixed, selection across tabs). Rollback target 926c9217 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -349,3 +349,10 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-14: f974eb8a LIVE (Praveen's GO): intro slide 5 example switched to sports (national athletics medal; special intake within 0.2 of the cut-off, extra Sports Science places, handbook p.166). Live bundle contains the new text.
 
 ## 2026-10-14: 926c9217 LIVE (Praveen's GO): demo student now has a national sports achievement (All Island School Games: Athletics 400 m, 2nd, 2024; a real Ministry of Education event, sample student) and interests Sport, Making and engineering, Maths; demo data in shared/demo-data.ts with a server-acceptance test. R027 ITUM link now https://itum.mrt.ac.lk (verified as ITUM's site); test-campaign D-08 http item closed. Live: bundle has the new demo data, /api/routes and /api/journey serve the https link; R027 open until 19 Oct.
+
+## 2026-10-14: 00c551a7 LIVE (Praveen's GO), from his review video
+- Bug of mine fixed: the intro's scene CSS reused .list-card/.chat/.bubble and had narrowed every list (Courses, Groups) and leaked into Ask since 2c1ee555; all scene rules now scoped under .scene.
+- Courses keeps one screen across its tabs, so a selection spans Very likely / Possible / Unlikely; select bars show the count as a badge (buttons no longer wrap).
+- Bands renamed Very likely / Possible / Unlikely (Praveen's choice from 4 options) in every sentence, en/si/ta, with a one-line meaning under the tabs (BR-032 wording). Internal codes SAFE/LIKELY/REACH unchanged.
+- Tabs and the See why row wrap in Sinhala/Tamil. Open: Tamil Paths still ~14 px too wide at 320 px.
+- Live: bundle has the new labels; scoped CSS served, old global rule gone.
