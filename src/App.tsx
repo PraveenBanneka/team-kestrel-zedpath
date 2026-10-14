@@ -701,6 +701,7 @@ function AvatarPicker({ avatar, name, setAvatar }: { avatar: string | null; name
           aria-label={t('av.one', { n: Number(a.slice(1)) })}><PersonAvatar avatar={a} name={name} size={44} /></button>)}
       </div>
       {err && <p className="helper" role="status">{err}</p>}
+      <p className="helper" style={{ margin: 0 }}>{t('av.credit')}</p>
     </section>);
 }
 

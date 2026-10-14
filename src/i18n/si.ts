@@ -440,6 +440,7 @@ export const si: Record<Key, string> = {
   'ck.compareHave': 'දැන් සැසඳීමේ පාඨමාලා {n} ක් ඇත.',
   'ck.resultsHave': 'ඔබේ ප්‍රතිඵල ZedPath හි ඇත.',
   'av.h': 'පැතිකඩ පින්තූරය',
+  'av.credit': 'අවතාර: Multiavatar.com විසිනි',
   'av.sub': 'පින්තූරයක් තෝරන්න. අනෙක් අය එය කණ්ඩායම්වල දකිනවා.',
   'av.initials': 'මගේ මුලකුරු භාවිත කරන්න',
   'av.one': 'පින්තූරය {n}',

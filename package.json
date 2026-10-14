@@ -24,8 +24,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.62.5",
-    "@dicebear/collection": "^9.2.2",
-    "@dicebear/core": "^9.2.2",
+    "@multiavatar/multiavatar": "1.0.7",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
