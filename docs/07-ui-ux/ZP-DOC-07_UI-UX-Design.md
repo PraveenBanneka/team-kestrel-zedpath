@@ -231,7 +231,7 @@ Table: Component catalogue
 | Selection bar | Sticky above the navigation bar: count, Add to my list / Compare / Remove, Cancel | Courses, My list |
 | Composer | Sticky above the navigation bar: rounded input (48 px) and round 48 px send button | Ask, Group room |
 | Chat bubbles | Question right (brand gradient), answer left; group messages with avatar, name, senior badge | Ask, Groups |
-| Avatars | 12 preset characters (Multiavatar), or initials on a steady colour; decorative (`aria-hidden`) | Top bar, Me, Groups |
+| Avatars | 12 preset silhouettes in different colours, or initials on a steady colour; decorative (`aria-hidden`) | Top bar, Me, Groups |
 | Skeleton | Grey placeholder blocks while loading | Lists, Compare, Groups, Journey |
 | Alert | `info`, `warn`, `error`, `gold` boxes with `role="status"` or `role="alert"` | Order warnings, errors |
 

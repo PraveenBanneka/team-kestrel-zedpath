@@ -439,7 +439,6 @@ export const en = {
   'ck.compareHave': '{n} courses in Compare now.',
   'ck.resultsHave': 'Your results are in ZedPath.',
   'av.h': 'Profile picture',
-  'av.credit': 'Avatars by Multiavatar.com',
   'av.sub': 'Pick a picture. Others see it in groups.',
   'av.initials': 'Use my initials',
   'av.one': 'Picture {n}',

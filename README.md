@@ -188,7 +188,7 @@ Secrets live in `.dev.vars` locally (gitignored) and in Cloudflare secrets in pr
 
 ## Credits
 
-Profile pictures: Avatars by [Multiavatar.com](https://multiavatar.com) (Gie Katon, Multiavatar License v1.0), generated once with `tools/avatars/make-avatars.ts` and served as static files.
+Profile pictures: 12 plain silhouettes in different colours, drawn for ZedPath (`tools/avatars/make-avatars.ts`, no third-party artwork) and served as static files.
 
 ## Disclaimer
 

@@ -1,24 +1,38 @@
 // Generates the 12 preset profile pictures (CR-006) as static SVG files in public/avatars/a01.svg ... a12.svg.
-// Style: Multiavatar by Gie Katon (multiavatar.com), Multiavatar License v1.0: free for commercial use, attribution
-// "Avatars by Multiavatar.com" given in the README and under the avatar picker. Praveen 2026-10-14: "use multiavatar",
-// replacing the earlier robot set. The seeds were chosen from a preview of 24 for friendly, varied, student-looking
-// faces. Generated once and served as files: no outside service is called when a student views them.
+// Style: a plain person silhouette (head and shoulders) on a coloured circle, one colour family per picture
+// (Praveen 2026-10-14: "icons like this, just different colours and shades", replacing the earlier character sets).
+// Drawn here, so there is no third-party artwork, licence or credit. Generated once and served as files.
 // Run from the repo root:  node tools/avatars/make-avatars.ts
 import fs from 'node:fs';
 import path from 'node:path';
-import multiavatar from '@multiavatar/multiavatar';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const OUT = path.join(ROOT, 'public', 'avatars');
+// [background, figure]: a mid tone with a light tint of the same hue (contrast >= 3:1 so the figure reads clearly).
 // a01..a12 keep their codes (account.avatar CHECK in migration 0010), so saved choices keep working.
-const SEEDS = ['kestrel-1', 'kestrel-5', 'zedpath-03', 'kestrel-10', 'zedpath-07', 'zedpath-11',
-  'kestrel-4', 'zedpath-06', 'zedpath-09', 'kestrel-3', 'kestrel-9', 'zedpath-02'];
+const PALETTE: [string, string][] = [
+  ['#647887', '#D3DCE4'],   // slate (the classic)
+  ['#3F6FB5', '#CFE0F7'],   // blue
+  ['#24868A', '#C9EEEE'],   // teal
+  ['#3E8E5A', '#CDEBD6'],   // green
+  ['#7A8A2E', '#E6EDC2'],   // olive
+  ['#B7791F', '#F6E3C0'],   // amber
+  ['#C0603A', '#F7D9CB'],   // terracotta
+  ['#B4456E', '#F5D2DF'],   // rose
+  ['#8650B0', '#E6D6F3'],   // purple
+  ['#5257B8', '#D7D9F5'],   // indigo
+  ['#2C7FA3', '#CBE7F3'],   // ocean
+  ['#5F5A55', '#DCD8D3'],   // stone
+];
+
+const svg = ([bg, fg]: [string, string], id: string) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><clipPath id="${id}"><circle cx="50" cy="50" r="50"/></clipPath></defs>` +
+  `<g clip-path="url(#${id})"><rect width="100" height="100" fill="${bg}"/><circle cx="50" cy="40" r="17" fill="${fg}"/>` +
+  `<ellipse cx="50" cy="96" rx="33" ry="29" fill="${fg}"/></g></svg>`;
 
 fs.mkdirSync(OUT, { recursive: true });
-SEEDS.forEach((seed, i) => {
+PALETTE.forEach((pair, i) => {
   const code = `a${String(i + 1).padStart(2, '0')}`;
-  const svg = (multiavatar as (s: string) => string)(seed);
-  if (!svg.startsWith('<svg')) throw new Error(`unexpected output for ${seed}`);
-  fs.writeFileSync(path.join(OUT, `${code}.svg`), svg);
+  fs.writeFileSync(path.join(OUT, `${code}.svg`), svg(pair, `c${code}`));
 });
-console.log(`wrote ${SEEDS.length} avatars to ${path.relative(ROOT, OUT)}`);
+console.log(`wrote ${PALETTE.length} avatars to ${path.relative(ROOT, OUT)}`);
