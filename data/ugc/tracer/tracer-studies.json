@@ -1,0 +1,220 @@
+{
+  "retrievedOn": "2026-10-15",
+  "readMethod": "WebFetch (binary saved) -> text extracted locally with PyMuPDF (python -I) -> PDFs deleted. Every quote below was re-checked by script against the extracted text (whitespace-normalised) on 2026-10-15.",
+  "studies": [
+    {
+      "title": "TRACER STUDY OF GRADUATES UNIVERSITIES IN SRI LANKA",
+      "subtitle": "(Sponsored by the UNESCO Participation Programme 2016/2017)",
+      "publisher": "University Grants Commission",
+      "isbn": "978-955-583-142-0",
+      "published": "2018",
+      "year": 2017,
+      "surveyPeriod": "August/September 2017",
+      "cohort": "State universities: graduated 2014 and 2015 (about 3 and 2 years before the survey). Non-state (SLIIT, APIIT): graduated 2015.",
+      "url": "https://www.ugc.ac.lk/downloads/statistics/webTracer/2018/Tracer%20Study%202018.pdf",
+      "scope": "Sample survey (not a census). 14 conventional state universities under the UGC (Open University excluded); Medicine, Dental Surgery, Veterinary Medicine and Indigenous Medicine graduates excluded. Supplementary non-state sample from two institutions (SLIIT, APIIT).",
+      "definitionOfEmployed": "No formal definition is printed. Status is as reported 'at the time of the survey'; respondents are classified as 'Employed', 'Engaged as a volunteer' or 'Not employed' (Figure 7, p.12). Employed includes part-time: 'Graduates who were employed at the time of survey were classified into two categories: full time employed and part-time employed.' and part-time = 'less than 40 hours a week' (Section 3.4.1, p.35).",
+      "definitionQuotes": [
+        { "page": 12, "quote": "Employed Engaged as a volunteer Not employed" },
+        { "page": 35, "quote": "Graduates who were employed at the time of survey were classified into two categories: full time employed and part-time employed." },
+        { "page": 35, "quote": "89.7% were engaged in full-time employment while 10.3% were engaged in part-time employment (less than 40 hours a week)." }
+      ],
+      "responseRate": "25% (1,265 of a potential sample of 5,000; population 30,270). Non-state: 234 of 251 (94 percent).",
+      "responseRateQuotes": [
+        { "page": 7, "quote": "Of the 5,000 graduates selected from the state sector, the potential sample, only 1,265 (25%) responded to the survey." },
+        { "page": 4, "quote": "A potential sample of 5,000 graduates was selected from the 30,2703 students who graduated in the years 2014 and 2015 from the 14 conventional universities under the purview of the UGC.", "note": "'30,2703' is '30,270' followed by footnote marker 3 in the PDF text." },
+        { "page": 6, "quote": "A high response rate of 94 percent was achieved in this phase of the survey." },
+        { "page": 9, "quote": "Out of 251 non–state graduates in the sample, 234 graduates responded to the survey." }
+      ],
+      "overall": [
+        { "group": "State universities (all streams surveyed)", "employedPercent": 65.5, "page": "ix", "table": "Executive Summary", "quote": "Out of the 1,265 graduates traced from state universities, 65.5% were employed, 32.2% were unemployed and 2.4% were engaged as volunteers." },
+        { "group": "Non-state institutions (SLIIT, APIIT)", "employedPercent": 66, "page": 12, "table": "Figure 7", "quote": "In the non-state sector, 66% was employed and 34% was not employed." }
+      ],
+      "byField": [
+        { "sector": "state", "field": "Architecture", "employedPercent": 100.0, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Computer Science/IT and Architecture graduates had reached full employment status at the time of the survey." },
+        { "sector": "state", "field": "Comp. Sc./IT", "employedPercent": 100.0, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Computer Science/IT and Architecture graduates had reached full employment status at the time of the survey." },
+        { "sector": "state", "field": "Education", "employedPercent": 100.0, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Among the HEMS disciplines, full employment status was achieved only by the graduates of the Education stream as they had been fully absorbed into the teaching profession by the Ministry of Education and Provincial Ministries of Education." },
+        { "sector": "state", "field": "Allied Health Science", "employedPercent": 95.7, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Allied Health Sciences, Engineering, Science and Agriculture - had achieved the employment rates of 95.7%, 92.2%, 83.0% and 82.6% respectively." },
+        { "sector": "state", "field": "Engineering", "employedPercent": 92.2, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Allied Health Sciences, Engineering, Science and Agriculture - had achieved the employment rates of 95.7%, 92.2%, 83.0% and 82.6% respectively." },
+        { "sector": "state", "field": "Law", "employedPercent": 85.7, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "In HEMS disciplines, the next highest employment rate was observed in the Law stream (85.7%) followed by the Management stream (71.9%)." },
+        { "sector": "state", "field": "Science", "employedPercent": 83.0, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Allied Health Sciences, Engineering, Science and Agriculture - had achieved the employment rates of 95.7%, 92.2%, 83.0% and 82.6% respectively." },
+        { "sector": "state", "field": "Agriculture", "employedPercent": 82.6, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Allied Health Sciences, Engineering, Science and Agriculture - had achieved the employment rates of 95.7%, 92.2%, 83.0% and 82.6% respectively." },
+        { "sector": "state", "field": "Management", "employedPercent": 71.9, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "In HEMS disciplines, the next highest employment rate was observed in the Law stream (85.7%) followed by the Management stream (71.9%)." },
+        { "sector": "state", "field": "Arts", "employedPercent": 45.6, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Graduates produced by the Arts and Performing Arts streams had the lower employment rates of 45.6% and 37.1% respectively." },
+        { "sector": "state", "field": "Performing Arts", "employedPercent": 37.1, "page": 16, "table": "Figure 14: Employment Status by Academic Stream- State Universities", "quote": "Graduates produced by the Arts and Performing Arts streams had the lower employment rates of 45.6% and 37.1% respectively." },
+        { "sector": "non-state", "field": "Management", "employedPercent": 83.8, "page": 17, "table": "Figure 15: Employment Status by Academic Stream - Non- State Institutions", "quote": "Among these academic streams, the highest employment rate was recorded in the Management stream (83.8%)." },
+        { "sector": "non-state", "field": "Engineering", "employedPercent": 73.1, "page": 17, "table": "Figure 15: Employment Status by Academic Stream - Non- State Institutions", "quote": "22.7% 71.1% 73.1% 83.8% 77.3% 28.9% 26.9% 16.2% 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% Law IT Engineering Management Employed Not employed", "sourceNote": "Chart data labels only (no sentence). Mapping by axis order Law, IT, Engineering, Management; Law (22.7) and Management (83.8) match the text, which confirms the order." },
+        { "sector": "non-state", "field": "IT", "employedPercent": 71.1, "page": 17, "table": "Figure 15: Employment Status by Academic Stream - Non- State Institutions", "quote": "22.7% 71.1% 73.1% 83.8% 77.3% 28.9% 26.9% 16.2% 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% Law IT Engineering Management Employed Not employed", "sourceNote": "Chart data labels only (no sentence); see Engineering row." },
+        { "sector": "non-state", "field": "Law", "employedPercent": 22.7, "page": 17, "table": "Figure 15: Employment Status by Academic Stream - Non- State Institutions", "quote": "The employment rate was significantly low among Law graduates produced by these institutions (22.7%)." }
+      ],
+      "timeToJob": [
+        { "group": "State universities, all employed", "page": 22, "table": "Figure 22", "quote": "Altogether, 43.3% were employed before releasing the final results, 24.4% were employed within six months of receiving the results, and a 16.2% have found a job within the 7 to 12 months of receiving the results. However, there are about 5.6% who have spent more than 2 years to find a job." },
+        { "group": "By stream: found job after final results", "page": 22, "table": "Figure 23", "quote": "The majority of the graduates in the streams of Education (100%), Performing Arts (92.3%), Agriculture (75.4%) and Arts (70.5%) who were employed at the time of survey had found their jobs “after releasing the final results”." },
+        { "group": "Faster streams", "page": 22, "table": "Figure 23", "quote": "a higher percentage of graduates of Computer Science/IT, Engineering, Architecture and Management have found their first job faster than their counterparts in other streams." },
+        { "group": "Waited more than 2 years", "page": 22, "table": "Figure 23", "quote": "A high percentage of the Performing Arts graduates (23.1%) have taken more than two years to find a job after graduation. Further, among Arts graduates, 12.1% waited for more than 2 years to find a job after graduation." }
+      ],
+      "sectorOfEmployment": [
+        { "group": "State universities, all employed", "page": 36, "table": "Figure 48", "quote": "46.2% of which the employment opportunities for graduates are created by the private sector. Teaching positions in the public sector have created the second largest source of employment for graduates (21%)." },
+        { "group": "Private sector share by stream", "page": 38, "table": "Figure 51: Sector of Employment by Academic Stream- State Universities", "quote": "A higher percentage of Computer Science/IT (72.7%), Engineering (68.7%), Law (66.7%), Management (64.3%) and Architecture (60%) graduates have been attracted by the private sector." },
+        { "group": "Public school teachers by stream", "page": 38, "table": "Figure 51: Sector of Employment by Academic Stream- State Universities", "quote": "On the other hand, all Education graduates (100%) were employed as public sector teachers. Further, a higher percentage of graduates in the fields of Performing Arts (76.9%), Agriculture (36.8%) and Arts (32.9%) were also employed as teachers in public schools." },
+        { "group": "Non-state institutions", "page": 37, "table": "Figure 49", "quote": "non-state sector graduates are overwhelmingly employed by the private sector (89%)." }
+      ],
+      "partTime": [
+        { "page": 35, "table": "Figure 46", "quote": "part-time employment is comparatively high in the fields of Performing Arts (30.8%), Computer Science/IT (25%) and Education (15.6%) compared to other fields of studies." }
+      ],
+      "notes": [
+        "Data is old: survey fielded August/September 2017 for 2014-2015 graduates; it is still the most recent national UGC tracer study (ugc.ac.lk/downloads/statistics/webTracer/ holds only a 2018 folder, checked 2026-10-15).",
+        "Low and uneven response: 25% overall; by stream from 38.4% (Education) and 35.2% (Arts) down to 7.0% (Comp. Sc./IT) (Figure 1, p.7). The report itself says 'Strangely, the response rate in Architecture and Computer Science/IT fields was low compared to others.' (p.16). The 100% figures for Architecture and Comp. Sc./IT rest on very few respondents and should not be shown without that caveat.",
+        "Medicine, Dental Surgery, Veterinary Medicine and Indigenous Medicine were NOT surveyed, 'due to the reason that these graduates are fully absorbed by the state sector for employment' (p.4). The report gives no employment figure for them.",
+        "Education stream 100% reflects state absorption into teaching in that period ('fully absorbed into the teaching profession by the Ministry of Education and Provincial Ministries of Education', p.16); the 2023 MoHE compilation reports Education at 32.0%, so this is not stable over time.",
+        "Employment measured 2 to 3 years after graduation and includes part-time work (<40 h/week, 10.3% of employed). 'Engaged as a volunteer' (2.4%) is counted separately, not as employed.",
+        "Underemployment: 'approximately one in every ten employed graduates of the sample was underemployed' (p.ix).",
+        "Small internal inconsistency: text on p.15 gives Sinhala-medium employment as 46.5% while Figure 12's label reads 46.9%. Not used per field.",
+        "Page numbers are the printed page numbers (printed p.1 = PDF page 15; Roman-numbered front matter before that).",
+        "Non-state sample covers only two institutions (SLIIT, APIIT) and four streams; 'only two non-state institutions agreed to share their information' (p.12)."
+      ]
+    },
+    {
+      "title": "Progress Report 2024 (Higher Education) - Section 4.3 Employability of Graduates",
+      "publisher": "Ministry of Education, Higher Education and Vocational Education | Higher Education",
+      "published": "2025 (report for 2024)",
+      "year": 2023,
+      "cohort": "Not stated. The report says the figures are 'for the year 2023'; graduating batch, time since graduation and survey timing are not printed.",
+      "url": "https://www.mohe.gov.lk/images/pdf/Progress_Report_2024_Eng.pdf",
+      "scope": "Compilation of graduate employability surveys run by individual universities (not one national survey). Sources named: University of Colombo, University of Moratuwa, University of Sri Jayewardenepura, University of Jaffna, University of Ruhuna, Eastern University, South Eastern University, Wayamba University, Open University. Peradeniya, Kelaniya, Rajarata, Sabaragamuwa, Uva Wellassa, UVPA and others are not in the source list.",
+      "definitionOfEmployed": null,
+      "definitionNote": "No definition of 'employed'/'employability' is printed; the text uses 'employability rate' and 'employment rate' interchangeably for the same figures.",
+      "responseRate": null,
+      "responseRateNote": "No sample size or response rate is printed.",
+      "overall": [
+        { "group": "All reporting universities", "employedPercent": 69.1, "page": 20, "table": "Figure 4.2 University-wise overall graduate employability", "quote": "according to the results of surveys conducted by several universities for the year 2023, the overall graduate employability rate in 2023 is 69.1%." },
+        { "group": "Average across subject streams", "employedPercent": 69.2, "page": 21, "table": "Table 4.5 Subject-wise overall graduate employability", "quote": "Average 69.2" }
+      ],
+      "byField": [
+        { "field": "Arts", "employedPercent": 32.6, "page": 21, "table": "Table 4.5", "quote": "Arts 32.6" },
+        { "field": "Management", "employedPercent": 76.9, "page": 21, "table": "Table 4.5", "quote": "Management 76.9" },
+        { "field": "Business Studies", "employedPercent": 69.4, "page": 21, "table": "Table 4.5", "quote": "Business Studies 69.4" },
+        { "field": "Education", "employedPercent": 32.0, "page": 21, "table": "Table 4.5", "quote": "Education 32.0" },
+        { "field": "Science", "employedPercent": 73.1, "page": 21, "table": "Table 4.5", "quote": "Science 73.1" },
+        { "field": "Applied Science", "employedPercent": 60.2, "page": 21, "table": "Table 4.5", "quote": "Applied Science 60.2" },
+        { "field": "Law", "employedPercent": 52.0, "page": 21, "table": "Table 4.5", "quote": "Law 52.0" },
+        { "field": "Medicine", "employedPercent": 76.2, "page": 21, "table": "Table 4.5", "quote": "Medicine 76.2", "fieldNote": "University of Colombo only: 'According to the University of Colombo, the employability rate of medical graduates is 76.2%.'" },
+        { "field": "Dentistry", "employedPercent": null, "page": 21, "table": "Table 4.5", "quote": "Dentistry -" },
+        { "field": "Fisheries and Marin Science", "employedPercent": 42.9, "page": 21, "table": "Table 4.5", "quote": "Fisheries and Marin Science 42.9" },
+        { "field": "*Veterinary Science", "employedPercent": null, "page": 21, "table": "Table 4.5", "quote": "*Veterinary Science -", "fieldNote": "'* - Details have not been reported.'" },
+        { "field": "Livestock, Fisheries and Nutrition", "employedPercent": 85.0, "page": 21, "table": "Table 4.5", "quote": "Livestock, Fisheries and Nutrition 85.0" },
+        { "field": "Agriculture", "employedPercent": 65.2, "page": 21, "table": "Table 4.5", "quote": "Agriculture 65.2" },
+        { "field": "Engineering", "employedPercent": 80.6, "page": 21, "table": "Table 4.5", "quote": "Engineering 80.6" },
+        { "field": "Architecture", "employedPercent": 78.0, "page": 21, "table": "Table 4.5", "quote": "Architecture 78.0" },
+        { "field": "Computer Science / IT", "employedPercent": 90.0, "page": 21, "table": "Table 4.5", "quote": "Computer Science / IT 90.0" },
+        { "field": "Allied Health Science", "employedPercent": 34.2, "page": 21, "table": "Table 4.5", "quote": "Allied Health Science 34.2" },
+        { "field": "Indigenous Medicine", "employedPercent": 37.5, "page": 21, "table": "Table 4.5", "quote": "Indigenous Medicine 37.5" },
+        { "field": "Nursing", "employedPercent": 81.0, "page": 21, "table": "Table 4.5", "quote": "Nursing 81.0" },
+        { "field": "IT", "employedPercent": 90.0, "page": 21, "table": "Table 4.5", "quote": "IT 90.0" },
+        { "field": "Bio System Technology", "employedPercent": 42.0, "page": 21, "table": "Table 4.5", "quote": "Bio System Technology 42.0" },
+        { "field": "Technology", "employedPercent": 59.7, "page": 21, "table": "Table 4.5", "quote": "Technology 59.7" },
+        { "field": "Technological Studies", "employedPercent": 85.1, "page": 21, "table": "Table 4.5", "quote": "Technological Studies 85.1" },
+        { "field": "Quantity Surveying", "employedPercent": 96.4, "page": 21, "table": "Table 4.5", "quote": "Quantity Surveying 96.4" },
+        { "field": "*Agro Technology and Rural Science", "employedPercent": null, "page": 21, "table": "Table 4.5", "quote": "*Agro Technology and Rural Science -" },
+        { "field": "Fashion Design and Product development", "employedPercent": 87.5, "page": 21, "table": "Table 4.5", "quote": "Fashion Design and Product development 87.5" },
+        { "field": "Designing", "employedPercent": 93.6, "page": 21, "table": "Table 4.5", "quote": "Designing 93.6" },
+        { "field": "Business Science", "employedPercent": 96.7, "page": 21, "table": "Table 4.5", "quote": "Business Science 96.7" },
+        { "field": "Engineering Technology", "employedPercent": 65.0, "page": 21, "table": "Table 4.5", "quote": "Engineering Technology 65.0" },
+        { "field": "Facilities Management", "employedPercent": 91.1, "page": 21, "table": "Table 4.5", "quote": "Facilities Management 91.1" },
+        { "field": "IT and Management", "employedPercent": 82.2, "page": 21, "table": "Table 4.5", "quote": "IT and Management 82.2" },
+        { "field": "Transport and Logistics Management", "employedPercent": 86.4, "page": 21, "table": "Table 4.5", "quote": "Transport and Logistics Management 86.4" },
+        { "field": "Town and Country Planning", "employedPercent": 77.3, "page": 21, "table": "Table 4.5", "quote": "Town and Country Planning 77.3" },
+        { "field": "Mass Media and Performing Arts ( Sri Palee Campus)", "employedPercent": 35.5, "page": 21, "table": "Table 4.5", "quote": "Mass Media and Performing Arts ( Sri Palee Campus) 35.5" },
+        { "field": "Landscape Architecture", "employedPercent": 63.6, "page": 21, "table": "Table 4.5", "quote": "Landscape Architecture 63.6" },
+        { "field": "Islamic Studies and Arabic Language", "employedPercent": 65.1, "page": 21, "table": "Table 4.5", "quote": "Islamic Studies and Arabic Language 65.1" }
+      ],
+      "byUniversity": [
+        { "page": 20, "table": "Figure 4.2", "quote": "In 2023, the University of Moratuwa reported an employability rate of 85.5%, the Open University reported an employability rate of 93.8%, the Wayamba University reported an employment rate of 72.3%, the University of Sri Jayewardenepura reported an employability rate of 71.4%, the South Eastern University reported an employability rate of 67.5%, the University of Colombo reported an employment rate of 66.8%, and the Universities of Ruhuna, Jaffna, and Eastern reported an employability rate of 58.1%, 53.5%, and 52.8% respectively." }
+      ],
+      "notes": [
+        "Most recent official per-field figures found, but they are a ministry compilation of separate university surveys: methods, timing after graduation, definitions and response rates are not stated and probably differ by university.",
+        "Not national: only 9 institutions listed as sources (including the Open University, whose students are often already employed, 93.8%). Large universities such as Peradeniya and Kelaniya are absent.",
+        "A field's figure may come from one or two universities (e.g. Medicine = University of Colombo only; Quantity Surveying, Facilities Management, Town and Country Planning are Moratuwa-type programmes). Sample sizes per field are not printed, so small-n fields cannot be identified.",
+        "Overall rate printed twice with different values: 69.1% (text and Figure 4.2 'All', p.20) vs 'Average 69.2' (Table 4.5, p.21).",
+        "Figure 4.2's source caption lists 'North Western University' while Table 4.5's lists 'Wayamba University' (Wayamba University of Sri Lanka is in the North Western Province); the text says 'Wayamba University'.",
+        "Text on p.21 says the subject data is 'based on calculations from the University of Colombo, University of Sri Jayewardenepura, University of Jaffna, University of Ruhuna, Eastern University, South Eastern University, Wayamba University, and the Open University' (Moratuwa not in that sentence, though it is in the table's source caption).",
+        "No public vs private split and no time-to-job figures are given.",
+        "Page numbers are printed page numbers (printed p.20 = PDF page 29; p.21 = PDF page 30)."
+      ]
+    },
+    {
+      "title": "GRADUATE EMPLOYABILITY 2020 University of Kelaniya",
+      "publisher": "University Statistics & Data Monitoring Unit, University of Kelaniya",
+      "published": "2021",
+      "year": 2020,
+      "cohort": "Main cohort graduating in 2020 (2017/18 academic year); repeat candidates and Medicine excluded.",
+      "url": "https://units.kln.ac.lk/usdmu/media/attachments/2024/11/07/report_graduate-employability-2020_002_20241001.pdf",
+      "scope": "ONE university only (University of Kelaniya), four faculties. Included as an example of a university's own published tracer survey, not national data.",
+      "definitionOfEmployed": "Graduate employment rate of the University of Kelaniya is calculated based on the sample proportion who are employed by the time of survey which is within the first 10 months of the graduation (results valid date) of each year. Accordingly, the sample employment rate is the ratio of employed graduates to which the total number of responses.",
+      "definitionPage": 18,
+      "responseRate": "79% (1755 responses of 2,226 accessible population, Table 1-3, p.11); text also says 'the overall response rate was 78%'.",
+      "responseRateQuotes": [
+        { "page": 11, "quote": "Accordingly, the overall response rate was 78%." },
+        { "page": 11, "quote": "Total 2,226 1755 79%" }
+      ],
+      "byField": [
+        { "field": "Faculty of Science (FSC)", "employedPercent": 68, "page": 19, "table": "Table 4-6: Graduate employability by Faculty", "quote": "Employment Status FCMS FHU FSC FSS Employed 52% 19% 68% 14%", "responseRate": "76% (326 of 431)" },
+        { "field": "Faculty of Commerce & Management Studies (FCMS)", "employedPercent": 52, "page": 19, "table": "Table 4-6: Graduate employability by Faculty", "quote": "Employment Status FCMS FHU FSC FSS Employed 52% 19% 68% 14%", "responseRate": "73% (347 of 473)" },
+        { "field": "Faculty of Humanities (FHU)", "employedPercent": 19, "page": 19, "table": "Table 4-6: Graduate employability by Faculty", "quote": "Employment Status FCMS FHU FSC FSS Employed 52% 19% 68% 14%", "responseRate": "78% (356 of 454)" },
+        { "field": "Faculty of Social Sciences (FSS)", "employedPercent": 14, "page": 19, "table": "Table 4-6: Graduate employability by Faculty", "quote": "Employment Status FCMS FHU FSC FSS Employed 52% 19% 68% 14%", "responseRate": "84% (726 of 868)" }
+      ],
+      "overall": [
+        { "group": "University of Kelaniya (sample)", "employedPercent": 33.7, "page": 18, "table": "Table 4-4", "quote": "Employed 33.7% Unemployed 66.3%" },
+        { "group": "University of Kelaniya (stratified estimate)", "employedPercent": 34.6, "page": 18, "table": "-", "quote": "Employment ratest (Estimate)= 34.6%" }
+      ],
+      "notes": [
+        "Measured within about 10 months of results, in 2020 (COVID-19 year); the report says 'easter blasts and the COVID 19 pandemic has affected the employment rates of Sri Lanka and has influenced the University’s graduate employment rate too.' 2019 rates were higher (overall 51%, FCMS 81%, FSC 84%; Table 4-7, p.20).",
+        "Internal inconsistency: Table 4-6 gives FSS 14%, but the text on p.19 says 'in 2020 it is 16%'. Table numbering also differs between the contents list (5-x) and the body (4-x).",
+        "Not comparable with the UGC 2017 study (2-3 years after graduation) or the MoHE 2023 compilation (timing not stated)."
+      ]
+    }
+  ],
+  "labourForce": [
+    {
+      "title": "Sri Lanka Labour Force Survey Annual Report - 2025",
+      "publisher": "Department of Census and Statistics, Ministry of Finance, Planning and Economic Development",
+      "isbn": "978-624-6716-50-9",
+      "year": 2025,
+      "url": "https://www.statistics.gov.lk/Resource/en/LabourForce/Annual_Reports/LFS2025.pdf",
+      "sample": "The total sample size for the annual survey results for 2025 report were based on 25,000 housing units which were selected using a known probability sampling technique.",
+      "samplePage": "I (Preface)",
+      "definitionOfEmployed": "Employed: Persons, who during the reference period, worked as paid employees, employers, own account workers, or unpaid family workers are said to be employed. This includes persons with a job but not at work during the reference period.",
+      "definitionOfUnemployed": "Unemployed: Persons who are seeking and available for work, but had no employment during the reference period.",
+      "definitionPage": 84,
+      "referencePeriodNote": "Reference period is the week before the survey week (Explanatory notes, p.84). Ages 15 and over.",
+      "byEducation": [
+        { "level": "Total", "unemploymentPercent": 3.9, "male": 2.8, "female": 6.1, "page": 25, "table": "Table 5.5: Unemployment rate by level of education - 2025", "quote": "Total 3.9 2.8 6.1" },
+        { "level": "G.C.E. (O/L)", "unemploymentPercent": 5.5, "male": 4.2, "female": 8.2, "page": 25, "table": "Table 5.5: Unemployment rate by level of education - 2025", "quote": "G.C.E. (O/L) 5.5 4.2 8.2" },
+        { "level": "G.C.E. (A/L) & above", "unemploymentPercent": 6.0, "male": 3.9, "female": 8.3, "page": 25, "table": "Table 5.5: Unemployment rate by level of education - 2025", "quote": "G.C.E. (A/L) & above 6.0 3.9 8.3" }
+      ],
+      "youthByEducation": [
+        { "level": "G.C.E. (A/L) & above", "ageGroup": "15-24", "byYear": { "2021": 39.3, "2022": 28.6, "2023": 29.8, "2024": 30.0, "2025": 22.5 }, "page": 28, "table": "Table 5.8: Youth unemployment rate by level of education, 2021 - 2025", "quote": "G.C.E. (A/L) & above 39.3 28.6 29.8 30.0 22.5" },
+        { "level": "Total (all education levels)", "ageGroup": "15-24", "byYear": { "2021": 26.5, "2022": 22.7, "2023": 23.0, "2024": 22.0, "2025": 19.5 }, "page": 28, "table": "Table 5.8", "quote": "Total 26.5 22.7 23.0 22.0 19.5" }
+      ],
+      "unemployedGraduates": [
+        { "page": 25, "table": "Table 5.5a: Unemployment of the Graduates – 2025 (Age 20 & above)", "quote": "Total no. of unemployed graduates 39,680 100.0 Art degree 19,873 50.1 Other degrees 19,808 49.9" }
+      ],
+      "notes": [
+        "The DCS does not publish an unemployment RATE for degree holders separately: 'G.C.E. (A/L) & above' combines A/L passers and graduates. Table 5.5a gives only the COUNT of unemployed graduates (39,680) split Art degree vs Other degrees.",
+        "Youth age band is 15-24 ('Overall youth (age 15- 24) unemployment rate is 19.5 percent', p.25).",
+        "Table 5.5 and 5.8 carry the printed caution 'These figures are to be treated with caution as the corresponding CV (Coefficient of variation) values are high.' (it attaches to flagged cells; the flag marker did not survive text extraction, so which cells is not recoverable from text).",
+        "National household survey (25,000 housing units); weighted estimates, not a graduate tracer. Page numbers are printed page numbers (p.25 = PDF page 45; p.28 = PDF page 48; p.84 = PDF page 104)."
+      ]
+    }
+  ],
+  "notFound": [
+    "No UGC tracer / graduate employment study newer than the 2018 report (survey 2017). The ugc.ac.lk/downloads/statistics/webTracer/ directory lists only a '2018/' folder (checked 2026-10-15). UGC 'Sri Lanka University Statistics' yearbooks (2020-2024) carry graduate output counts, not employment.",
+    "No UGC 'Graduate Employment Census' was found on ugc.ac.lk.",
+    "MoHE 'Employability Study of University Graduands of Sri Lanka (2012)' is listed on mohe.gov.lk, but its file (/images/pdf/Overall_FINAL_report_2012.pdf) returned HTTP 404 on both www.mohe.gov.lk and mohe.gov.lk (2026-10-15).",
+    "MoHE 'Annual Performance Report 2025' (HE_Annual_Report_2025_English.pdf) contains no graduate employability figures.",
+    "The UGC Publications page (ugc.ac.lk index.php?...id=102) timed out (300 s) and was not read.",
+    "No official source found giving national employment rates for Medicine, Dental Surgery or Veterinary Science graduates (UGC 2017 excluded them; MoHE 2023 has Medicine from University of Colombo only, Dentistry/Veterinary not reported).",
+    "No official national time-to-first-job or public/private split by field after 2017.",
+    "No DCS Labour Force Survey table with a separate unemployment rate for degree holders (only 'G.C.E. (A/L) & above')."
+  ]
+}

@@ -48,13 +48,15 @@ preference order or deadlines, and none covers routes outside the UGC.**
 | | Feature | What it means for the student | Status |
 |---|---|---|---|
 | 1 | **Results in, paths out** | Stream, district, Z-score and grades, plus sports and achievements ("beyond grades"). Subjects and courses are searchable. | ✅ Live |
-| 2 | **Safe / Likely / Reach** | All 255 Uni-Codes banded against **five years** of official district cut-offs, with a trend and a cut-off chart. | ✅ Live |
+| 2 | **Very likely / Possible / Unlikely** | All 255 Uni-Codes banded against **five years** of official district cut-offs, with a trend, a cut-off chart and a one-line meaning for each band. | ✅ Live |
 | 3 | **Fine-print check** | Subject and minimum-grade rules for all 121 courses from the handbook. Hidden courses always say *why*, with the page. | ✅ Live |
-| 4 | **My list (preference checker)** | Warns when a Safe course sits above a Likely/Reach one or when there is no Safe course; proposes a fixed order; copies Uni-Codes. | ✅ Live |
+| 4 | **My list (preference checker)** | Warns when a Very likely course sits above a Possible/Unlikely one or when there is no Very likely course; proposes a fixed order; copies Uni-Codes. | ✅ Live |
 | 5 | **Compare and syllabi** | Up to 3 courses side by side; "What you'll study" from the university's own curriculum (12 programmes so far). | ✅ Live |
-| 6 | **Every other route** | 52 official routes: private degrees, HNDs, professional bodies, vocational, job exams, scholarships abroad, with "open now". | ✅ Live |
+| 6 | **Every other route** | 52 official routes: private degrees, HNDs, professional bodies, vocational (with the NVQ 5/6 → B.Tech ladder at UoVT), job exams, scholarships abroad, with "open now". | ✅ Live |
+| 6a | **University facts** | On every course page: students admitted, undergraduates, hostel places, Mahapola/Bursary recipients and graduates, from the UGC's *Sri Lanka University Statistics 2024*, each with its table and page. | Built, not yet live |
+| 6b | **Aptitude tests** | The 24 courses that need one: the official notice and last intake's dates (shown as past), or the joint test to apply for. | Built, not yet live |
 | 7 | **Ask ZedPath, with sources** | Questions in English, Sinhala or Tamil, answered only from the UGC handbook and official routes, citing the page, using *your* results. | ✅ Live |
-| 8 | **Accounts** | Required at the start: username + password, full name, email, Sri Lankan mobile and date of birth, each with its purpose shown and consent recorded; recovery code; same details on any device. Email and mobile are not verified yet. | ✅ Live |
+| 8 | **Accounts and demo** | **Try the demo**: one tap opens a private throwaway account with a sample student (read-only in groups, deleted after 24 hours). Accounts: required at the start: username + password, full name, email, Sri Lankan mobile and date of birth, each with its purpose shown and consent recorded; recovery code; same details on any device. Email and mobile are not verified yet. | ✅ Live |
 | 9 | **Journey and reminders** | The student's own checklist, saved to their account: steps unlock when their window opens (never on an invented date); followed courses and notices with phone reminders (Android) or a calendar file. | ✅ Live |
 | 10 | **Alerts (Journey › Open now)** | Gazette job exams and other intakes with closing dates, checked against the student's results and age; follow one to track it. | ✅ Live |
 | 11 | **Groups** | A live group per target course and per A/L batch; rules accepted once; group info with members; preset avatars; verified seniors (invite codes); automatic moderation, report and block. | ✅ Live |

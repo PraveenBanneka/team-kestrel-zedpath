@@ -364,3 +364,13 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live check: demo tap 201 (demo_..., demo=true, PHYS/KUR/1.4200, athletics achievement); /me 200; report 403 (demo read-only); Origin null 403 (D-03 fixed); DELETE /me 204, then 401. Two test demo accounts created and deleted. Welcome button present in the live bundle.
 - Also today: ZP-DOC-01..04 v2.0 approved and tagged; leak-scan fixed (--no-textconv, new refs scan only unpushed commits); tag pushes need http.version=HTTP/1.1 on this network; Cloudflare security-audit skill vendored locally (gitignored) and a deep audit running; UGC University Statistics 2024 reviewed (hostels Ch.7 and admissions Ch.2 proposed).
 - Local dev: wrangler state moved out of OneDrive (--persist-to scratch) because OneDrive locks froze it; the local rate-limiter binding then fails (login/demo 500 locally only).
+
+## 2026-10-15 (after 59ad7760): built, committed, NOT yet deployed (awaiting GO)
+- University facts (UGC Sri Lanka University Statistics 2024, Ch 2/3/4/7) on course pages; 4 extraction agents, double-checked, hand spot-checked (Colombo hostels 5152/38.5%, admitted 3728; Sabaragamuwa 9736). D-05 weak-ETag 304 fixed.
+- Aptitude tests for the 24 offerings (22 official notices, dates re-read by me on the official pages; Sabaragamuwa -> joint test). R042 gains the TVEC NVQ 5/6 -> 7 quote and UoVT's 17 programmes.
+- Security audit run-1 (Cloudflare security-audit skill, 37 agents, report outside the repo): 0 confirmed (no sandbox on this laptop), 17 needs-validation, 1 rejected. Fixed: leads 1/5 (demo password removed, never prefilled, demo flag cleared with the phone), 2 (sockets closed on logout/logout-all/recovery/leave), 15 (#/ask links only fill the box), Ask null-Origin 403. Open: 3, 4, 6-14, 16, 17, email-regex gap.
+- Research safety: one Sabaragamuwa practical-test page blocked by SHA-256 fingerprint (Praveen: block that page only; www.sab.ac.lk syllabi stay); check-url tool; CLAUDE.md rule 1; DAT-054.
+- Tracer studies researched (UGC 2018 study of 2014/15 graduates; Ministry Progress Report 2024 Table 4.5; Kelaniya 2020; LFS 2025): data/ugc/tracer, not yet in the app (needs Praveen's decision on presentation).
+- On GO: check remote D1 for a kasun_demo account and delete it (its password was public), then deploy and verify live.
+- Tests 515 + 6 expected-fail + 21 opt-in; build green.
+
