@@ -313,7 +313,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
       {hint.applies && <div className="alert gold"><Trophy size={20} aria-hidden="true" /><span>{t('paths.special', { sport: hint.sport ? t('paths.sport') : '' })}
         <span className="source" style={{ display: 'block', marginTop: 4, color: 'inherit', opacity: .75 }}>UGC handbook 2025/26, Section 6, p.166</span></span></div>}
       {results && results.hidden.length > 0 && (
-        <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('paths.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>)}
+        <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('paths.hidden', { n: results.hidden.length })}</span><span className="row see-why">{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>)}
       <button className="card list-entry" onClick={() => go('/list')}>
         <span className="ic" style={{ background: 'var(--likely-bg)', color: 'var(--likely)' }}><ListOrdered size={22} aria-hidden="true" /></span>
         <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
@@ -380,6 +380,7 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
             <span>{bandLabel(t)}<span className="count num">{results?.counts[t] ?? '–'}</span></span>
           </button>))}
       </div>}
+      {!searching && <p className="helper band-hint">{t(`bandHint.${band}` as Key)}</p>}
       {searching && results && <p className="helper" role="status">{t('courses.matches', { n: shown.length, q: query.trim() })}</p>}
       {note && <p className="helper" role="status">{note} <button className="btn text small" onClick={() => go('/list')}>{t('sel.openList')}</button></p>}
       {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
@@ -397,7 +398,7 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
             <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>
           <button className="btn filled small" disabled={picked.length === 0} onClick={addPicked}><ListOrdered size={16} aria-hidden="true" />{t('sel.add')}</button>
         </div>)}
-      {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('courses.hidden', { n: results.hidden.length })}</span><span className="row" style={{ flexWrap: 'nowrap', gap: 4 }}>{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
+      {results && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('courses.hidden', { n: results.hidden.length })}</span><span className="row see-why">{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
     </>
   );
 }
