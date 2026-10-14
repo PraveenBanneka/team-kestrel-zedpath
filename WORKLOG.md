@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **2c1ee555** (new 7-slide intro guide, expired session -> Log in). Rollback target 7ab12039 (code only).
+  Live (workers.dev) = version **57b54596** (silhouette avatars in 12 colours). Rollback target 2c1ee555 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -343,3 +343,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-14: 2c1ee555 LIVE (Praveen's GO): intro guide rebuilt (7 slides, animated app scenes, hub drawing on slide 1, Example tags, swipe/Back, 24 px dots, fits 320 px in en/si/ta); expired session -> Log in (SESSION_LOST event) instead of "Please log in" in screens; e2e test files kept out of tsc projects.
 - Context: 20-agent test campaign (1,053 executed cases) + ZP-DOC-06/07/08 + Test Summary Report pushed on 12 Oct. kasun_demo deleted at Praveen's request, which left his phone's session stale (the "Please log in" report).
 - Live check: intro shows 7 dots and the hub scene.
+
+## 2026-10-14: 57b54596 LIVE (Praveen's GO): avatars are now plain silhouettes in 12 colours (own artwork; Multiavatar tried and dropped before deploy, DiceBear removed). Same codes a01..a12, no data change. Live check: all 12 SVGs match the new files (edge took a moment to update).
