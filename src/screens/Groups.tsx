@@ -12,7 +12,7 @@ import { GROUP_RULES_VERSION, GROUP_RULE_COUNT, MESSAGE_MAX, REPORT_REASONS, typ
   type ReportReason, type ServerFrame } from '../../shared/groups.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { ListEntry } from '../../shared/list.ts';
-import { ApiFailure } from '../account.ts';
+import { ApiFailure, noteStatus } from '../account.ts';
 import { PersonAvatar } from '../avatars.tsx';
 import { Stagger, rise } from '../ui.tsx';
 import { locale, t, type Key } from '../i18n/index.ts';
@@ -24,7 +24,7 @@ async function call<T>(method: string, path: string, body?: unknown): Promise<T>
   catch { throw new ApiFailure(0, 'No connection. Check your internet and try again'); }
   if (r.status === 204) return undefined as T;
   const data = await r.json().catch(() => ({}));
-  if (!r.ok) throw new ApiFailure(r.status, data.error ?? `Something went wrong (${r.status})`);
+  if (!r.ok) { noteStatus(path, r.status); throw new ApiFailure(r.status, data.error ?? `Something went wrong (${r.status})`); }
   return data as T;
 }
 /** Join a group. The current rules version is sent only when the student has just accepted them (the first time). */

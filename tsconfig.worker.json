@@ -25,6 +25,7 @@
   ],
   "exclude": [
     "worker/**/*.test.ts",
-    "worker/testing"
+    "worker/testing",
+    "shared/**/*.e2e.test.ts"
   ]
 }

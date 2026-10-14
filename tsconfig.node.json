@@ -13,5 +13,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["vite.config.ts", "tools", "shared/**/*.test.ts"]
+  "include": ["vite.config.ts", "tools", "shared/**/*.test.ts"],
+  "exclude": ["shared/**/*.e2e.test.ts", "tools/e2e"]
 }

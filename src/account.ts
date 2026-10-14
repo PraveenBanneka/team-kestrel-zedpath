@@ -7,6 +7,13 @@ import { CONSENT_VERSION, type Contact } from '../shared/contact.ts';
 import { deriveKey } from '../shared/kdf.ts';
 import type { MyJourney } from '../shared/journey.ts';
 
+/** The server no longer knows this phone's session (expired, logged out everywhere, account deleted). App listens and
+ *  sends the student to Log in instead of showing "Please log in" inside a screen. Not raised by the /auth/ calls. */
+export const SESSION_LOST = 'zedpath:session-lost';
+export function noteStatus(path: string, status: number) {
+  if (status === 401 && !path.startsWith('/auth/') && typeof window !== 'undefined') window.dispatchEvent(new Event(SESSION_LOST));
+}
+
 export class ApiFailure extends Error {
   constructor(readonly status: number, message: string, readonly field?: string) { super(message); }
 }
@@ -20,7 +27,7 @@ async function call<T>(method: string, path: string, body?: unknown): Promise<T>
   }
   if (r.status === 204) return undefined as T;
   const data = await r.json().catch(() => ({}));
-  if (!r.ok) throw new ApiFailure(r.status, data.error ?? `Something went wrong (${r.status})`, data.field);
+  if (!r.ok) { noteStatus(path, r.status); throw new ApiFailure(r.status, data.error ?? `Something went wrong (${r.status})`, data.field); }
   return data as T;
 }
 

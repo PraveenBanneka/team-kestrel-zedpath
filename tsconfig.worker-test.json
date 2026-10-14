@@ -24,5 +24,6 @@
     "worker/**/*.test.ts",
     "worker/testing",
     "worker/env.d.ts"
-  ]
+  ],
+  "exclude": ["worker/**/*.e2e.test.ts"]
 }

@@ -1,9 +1,9 @@
-// First-run experience (Gate 1 deck, slide 11 "Tell us about you once"), design v2: aurora welcome, three animated intro
+// First-run experience (Gate 1 deck, slide 11 "Tell us about you once"), design v2: aurora welcome, seven animated intro
 // slides, then About you as one question per screen (stream, district, Z-score, subjects, beyond grades).
 // Errors appear only after Next (ui-ux-pro-max: validate after interaction; one task per screen).
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { Atom, Calculator, ChevronRight, Cpu, Microscope, Palette, Search, Sprout, Trophy } from 'lucide-react';
+import { Atom, Building2, Calculator, ChevronRight, ClipboardList, Cpu, GraduationCap, Microscope, Palette, Plane, Search, Sprout, Trophy, Wrench } from 'lucide-react';
 import type { Meta, ProfileInput } from '../../shared/api.ts';
 import { formatZ, parseZ } from '../../shared/banding.ts';
 import type { Grade, StreamCode } from '../../shared/rules.ts';
@@ -45,48 +45,161 @@ export function Welcome({ onStart, onLogin, setLang }: { onStart: () => void; on
 }
 
 // ---------------------------------------------------------------- Intro slides
-const SLIDES = [{ n: 1, art: 'paths' }, { n: 2, art: 'bands' }, { n: 3, art: 'source' }] as const;
+// Seven slides (Praveen 2026-10-14: "4 more screens and better graphics"): each shows a small animated scene of the
+// real app. Numbers in the scenes are illustrations and carry an "Example" tag (trust rule: sample data is labelled).
+// Swipe or tap Next; Skip leaves at any time; reduced motion shows the scenes without animation.
+const SLIDES = [
+  { n: 1, art: 'paths' }, { n: 2, art: 'bands' }, { n: 3, art: 'source' }, { n: 4, art: 'list' },
+  { n: 5, art: 'ask' }, { n: 6, art: 'journey' }, { n: 7, art: 'groups' },
+] as const;
+type Art = typeof SLIDES[number]['art'];
 
-function SlideArt({ kind }: { kind: typeof SLIDES[number]['art'] }) {
-  if (kind === 'bands') return (
-    <div className="art-bands" aria-hidden="true">
-      {(['SAFE', 'LIKELY', 'REACH'] as const).map((b, i) => (
-        <motion.span key={b} className={`pill band-${b}`} initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.12 }}>
-          {t(`band.${b}`)}</motion.span>))}
-    </div>);
+function Example() { return <span className="scene-tag">{t('intro.art.example')}</span>; }
+
+function SlideArt({ kind }: { kind: Art }) {
+  const reduce = useReducedMotion();
+  const pop = (d: number, y = 14) => (reduce ? {} : { initial: { opacity: 0, y }, animate: { opacity: 1, y: 0 }, transition: { delay: d, duration: 0.45, ease: [0.2, 0.8, 0.2, 1] as const } });
+  if (kind === 'paths') {
+    // A hub: the student in the middle, five kinds of path around (Praveen 2026-10-14: a clearer drawing for slide 1).
+    const spots = [
+      { k: 'uni', I: GraduationCap, a: -90 }, { k: 'private', I: Building2, a: -18 }, { k: 'jobs', I: ClipboardList, a: 54 },
+      { k: 'diploma', I: Wrench, a: 126 }, { k: 'abroad', I: Plane, a: 198 },
+    ] as const;
+    const at = (deg: number, r = 34) => ({ x: 50 + r * Math.cos((deg * Math.PI) / 180), y: 50 + r * Math.sin((deg * Math.PI) / 180) });
+    return (
+      <div className="scene-inner">
+        <div className="hub" aria-hidden="true">
+          <svg viewBox="0 0 100 100" className="hub-lines">
+            {spots.map((sp, i) => { const e = at(sp.a, 24); return (
+              <motion.line key={sp.k} x1="50" y1="50" x2={e.x} y2={e.y} stroke="rgba(255,255,255,.75)" strokeWidth="0.9" strokeDasharray="1.6 2.2" strokeLinecap="round"
+                initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.25 + i * 0.08, duration: 0.5 }} />); })}
+          </svg>
+          <div className="hub-pos" style={{ left: '50%', top: '50%' }}>
+            <motion.div className="hub-me" initial={reduce ? false : { scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 18 }}>
+              <img src="/avatars/a05.svg" alt="" /><span>{t('intro.art.you')}</span>
+            </motion.div>
+          </div>
+          {spots.map((sp, i) => { const e = at(sp.a); return (
+            <div key={sp.k} className="hub-pos" style={{ left: `${e.x}%`, top: `${e.y}%` }}>
+              <motion.div className={`hub-spot ${i === 0 ? 'lead' : ''}`}
+                initial={reduce ? false : { scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.65 + i * 0.1, type: 'spring', stiffness: 280, damping: 20 }}>
+                <span className="hub-icon"><sp.I size={20} strokeWidth={2.2} /></span><span className="hub-label">{t(`intro.art.${sp.k}` as Key)}</span>
+              </motion.div>
+            </div>); })}
+        </div>
+      </div>);
+  }
+  if (kind === 'bands') {
+    const parts = [{ b: 'SAFE', n: 44, c: 'var(--safe)' }, { b: 'LIKELY', n: 3, c: 'var(--likely)' }, { b: 'REACH', n: 17, c: 'var(--reach)' }] as const;
+    const total = 64, C = 2 * Math.PI * 42;
+    let off = 0;
+    return (
+      <div className="scene-inner"><Example />
+        <motion.div className="glass ring-card" {...pop(0.05)}>
+          <svg viewBox="0 0 100 100" className="mini-ring" aria-hidden="true">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--surface-3)" strokeWidth="11" />
+            {parts.map(p => { const len = (p.n / total) * C; const el = (
+              <motion.circle key={p.b} cx="50" cy="50" r="42" fill="none" stroke={p.c} strokeWidth="11" strokeDasharray={`${len} ${C}`} strokeDashoffset={-off}
+                transform="rotate(-90 50 50)" initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + off / C, duration: 0.5 }} />);
+              off += len; return el; })}
+            <text x="50" y="49" textAnchor="middle" className="ring-n">64</text>
+            <text x="50" y="62" textAnchor="middle" className="ring-l">{t('intro.art.within')}</text>
+          </svg>
+          <div className="stack" style={{ gap: 8 }}>
+            {parts.map((p, i) => <motion.span key={p.b} className={`pill band-${p.b}`} {...pop(0.6 + i * 0.15, 0)}><b>{p.n}</b> {t(`band.${p.b}`)}</motion.span>)}
+          </div>
+        </motion.div>
+      </div>);
+  }
   if (kind === 'source') return (
-    <motion.div className="art-source" aria-hidden="true" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }}>
-      <span>UGC handbook 2025/26</span><b>{t('intro.art.page')}</b><span className="helper">{t('intro.art.rules')}</span></motion.div>);
+    <div className="scene-inner"><Example />
+      <motion.div className="glass src-num" {...pop(0.05)}><span className="helper">{t('intro.art.cutoff')}</span><b>1.3842</b></motion.div>
+      <svg className="src-link" viewBox="0 0 40 60" aria-hidden="true">
+        <motion.path d="M20 2 V 58" stroke="#fff" strokeWidth="3" strokeDasharray="4 6" fill="none" initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.35, duration: 0.5 }} />
+      </svg>
+      <motion.div className="glass src-page" {...pop(0.75)}>
+        <span className="src-head">UGC handbook 2025/26 · <b>{t('intro.art.page')}</b></span>
+        <span className="src-line" /><span className="src-line hl" /><span className="src-line short" />
+        <span className="helper">{t('intro.art.rules')}</span>
+      </motion.div>
+    </div>);
+  if (kind === 'list') {
+    const rows = [{ c: 'Physical Science · Colombo', b: 'REACH' }, { c: 'Software Engineering · Sabaragamuwa', b: 'LIKELY' }, { c: 'Data Science · Sabaragamuwa', b: 'SAFE' }] as const;
+    return (
+      <div className="scene-inner"><Example />
+        <div className="glass list-card">
+          {rows.map((r, i) => (
+            <motion.div key={r.c} className="mini-row" {...pop(0.1 + i * 0.12)}>
+              <span className="mini-n">{i + 1}</span><span className="mini-c">{r.c}</span><span className={`pill band-${r.b}`}>{t(`band.${r.b}`)}</span>
+            </motion.div>))}
+        </div>
+        <motion.div className="glass warn-toast" {...pop(0.9)}><span aria-hidden="true">⚠️</span>{t('intro.art.warn')}</motion.div>
+      </div>);
+  }
+  if (kind === 'ask') return (
+    <div className="scene-inner chat"><Example />
+      <motion.div className="bubble me" {...pop(0.1)}>{t('intro.art.q')}</motion.div>
+      <motion.div className="bubble them" {...pop(0.6)}>
+        <span className="pill band-LIKELY">{t('intro.art.depends')}</span>
+        <span>{t('intro.art.a')}</span>
+        <span className="src-chip">📖 {t('intro.art.src')}</span>
+      </motion.div>
+    </div>);
+  if (kind === 'journey') {
+    const steps = [{ k: 'step1', s: 'done' }, { k: 'step2', s: 'open' }, { k: 'step3', s: 'locked' }] as const;
+    return (
+      <div className="scene-inner"><Example />
+        <div className="glass tl-card">
+          {steps.map((st, i) => (
+            <motion.div key={st.k} className={`tl-row ${st.s}`} {...pop(0.15 + i * 0.18)}>
+              <span className="tl-dot" aria-hidden="true">{st.s === 'done' ? '✓' : st.s === 'locked' ? '🔒' : ''}</span>
+              <span className="tl-text"><b>{t(`intro.art.${st.k}` as Key)}</b>
+                <span className="helper">{st.s === 'done' ? t('intro.art.done') : st.s === 'open' ? t('intro.art.open') : t('intro.art.locked')}</span></span>
+            </motion.div>))}
+        </div>
+        <motion.div className="glass bell" {...pop(0.85)}><span aria-hidden="true">🔔</span>{t('intro.art.remind')}</motion.div>
+      </div>);
+  }
   return (
-    <svg className="art-paths" viewBox="0 0 240 140" aria-hidden="true">
-      <motion.path d="M20 115 C 80 115, 80 30, 140 30 S 200 70, 220 45" fill="none" stroke="#fff" strokeWidth="7" strokeLinecap="round"
-        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.1 }} />
-      <path d="M20 115 C 90 115, 120 85, 220 95" fill="none" stroke="rgba(255,255,255,.45)" strokeWidth="5" strokeLinecap="round" strokeDasharray="2 12" />
-      <path d="M20 115 C 70 105, 100 128, 220 128" fill="none" stroke="rgba(255,255,255,.45)" strokeWidth="5" strokeLinecap="round" strokeDasharray="2 12" />
-      <circle cx="20" cy="115" r="10" fill="#fff" />
-      <motion.circle cx="220" cy="45" r="13" fill="#FFC94A" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.9, type: 'spring' }} />
-    </svg>);
+    <div className="scene-inner chat"><Example />
+      <motion.div className="g-msg" {...pop(0.1)}><img src="/avatars/a03.svg" alt="" aria-hidden="true" /><div className="bubble them">{t('intro.art.g1')}</div></motion.div>
+      <motion.div className="g-msg" {...pop(0.6)}><img src="/avatars/a07.svg" alt="" aria-hidden="true" />
+        <div className="bubble them"><span className="senior-badge">{t('intro.art.senior')}</span>{t('intro.art.g2')}</div></motion.div>
+      <motion.div className="glass shield" {...pop(1.0)}><span aria-hidden="true">🛡️</span>{t('intro.art.safe')}</motion.div>
+    </div>);
 }
 
 export function Intro({ onDone }: { onDone: () => void }) {
   const [i, setI] = useState(0);
+  const [dir, setDir] = useState(1);
+  const reduce = useReducedMotion();
   const s = SLIDES[i];
   const last = i === SLIDES.length - 1;
+  const go = (to: number) => { if (to < 0 || to >= SLIDES.length) return; setDir(to > i ? 1 : -1); setI(to); };
   return (
     <div className="intro">
-      <div className="row" style={{ justifyContent: 'space-between' }}><span className="section-label" style={{ margin: 0 }}>{t('intro.count', { i: i + 1, n: SLIDES.length })}</span><button className="btn text" onClick={onDone}>{t('intro.skip')}</button></div>
-      <AnimatePresence mode="wait">
-        <motion.div key={i} className="stack" style={{ gap: 18, flex: 1 }} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.28, ease: [0.2, 0.8, 0.2, 1] }}>
-          <div className={`intro-art ${s.art === 'paths' ? 'aurora' : ''}`} style={s.art === 'paths' ? undefined : { background: 'var(--surface-2)' }}><SlideArt kind={s.art} /></div>
+      <div className="row" style={{ justifyContent: 'space-between' }}>
+        <span className="section-label" style={{ margin: 0 }}>{t('intro.count', { i: i + 1, n: SLIDES.length })}</span>
+        <button className="btn text" onClick={onDone}>{t('intro.skip')}</button>
+      </div>
+      <AnimatePresence mode="wait" custom={dir}>
+        <motion.div key={i} className="stack" style={{ gap: 16, flex: 1 }}
+          initial={reduce ? false : { opacity: 0, x: 40 * dir }} animate={{ opacity: 1, x: 0 }} exit={reduce ? undefined : { opacity: 0, x: -40 * dir }}
+          transition={{ duration: 0.28, ease: [0.2, 0.8, 0.2, 1] }}
+          drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.18}
+          onDragEnd={(_, info) => { if (info.offset.x < -60) go(i + 1); else if (info.offset.x > 60) go(i - 1); }}>
+          <div className={`intro-art scene scene-${s.art}`}><SlideArt kind={s.art} /></div>
           <h1 className="screen-title" style={{ textAlign: 'center' }}>{t(`intro.${s.n}.title` as Key)}</h1>
           <p className="subtitle intro-body">{t(`intro.${s.n}.body` as Key)}</p>
         </motion.div>
       </AnimatePresence>
       <div className="dots" role="tablist" aria-label={t('intro.label')}>
-        {SLIDES.map((_, k) => <button key={k} role="tab" aria-selected={k === i} aria-label={t('intro.slide', { n: k + 1 })} onClick={() => setI(k)} />)}
+        {SLIDES.map((_, k) => <button key={k} role="tab" aria-selected={k === i} aria-label={t('intro.slide', { n: k + 1 })} onClick={() => go(k)}><span /></button>)}
       </div>
-      <div className="flow-nav"><button className="btn filled block" onClick={() => (last ? onDone() : setI(i + 1))}>{last ? t('intro.start') : t('intro.next')}</button></div>
+      <div className="flow-nav row" style={{ gap: 10 }}>
+        {i > 0 && <button className="btn text" onClick={() => go(i - 1)}>{t('about.back')}</button>}
+        <button className="btn filled block" style={{ flex: 1 }} onClick={() => (last ? onDone() : go(i + 1))}>{last ? t('intro.start') : t('intro.next')}</button>
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
 demoOn();                                                        // remember ?demo=kasun on first open (the installed app opens without it)
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchJourney, fetchMe, followCourse as apiFollowCourse, followNotice as apiFollowNotice, logOut, logOutEverywhere, markApplied, markStep,
-  saveAvatar, saveMe } from './account.ts';
+  saveAvatar, saveMe, SESSION_LOST } from './account.ts';
 import { AVATAR_CODES, PersonAvatar } from './avatars.tsx';
 import type { JourneyStepId, MyJourney } from '../shared/journey.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
@@ -97,6 +97,12 @@ export function App() {
   // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
   const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact']; avatar: MeResponse['avatar'] } | null>(null);
   const [checked, setChecked] = useState(false);              // CR-003: the account check has finished (no anonymous use)
+  const meRef = useRef(me); meRef.current = me;
+  // The server dropped this phone's session (e.g. logged out on all devices, account deleted): forget it and go to Log in.
+  useEffect(() => {
+    const lost = () => { if (meRef.current) { setMe(null); go('/login'); } };
+    addEventListener(SESSION_LOST, lost); return () => removeEventListener(SESSION_LOST, lost);
+  }, []);   // eslint-disable-line react-hooks/exhaustive-deps
   const [offline, setOffline] = useState(false);              // the check failed for lack of a connection, not for lack of an account
   const checkAccount = () => { setOffline(false); setChecked(false);
     fetchMe().then(m => m && adopt(m)).catch(() => setOffline(true)).finally(() => setChecked(true)); };
