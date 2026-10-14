@@ -8,6 +8,7 @@
 // and the list gets updated deliberately. Details: tools/e2e/results/data-integrity.md.
 import fs from 'node:fs';
 import path from 'node:path';
+import { isBlockedPage } from '../tools/research/blocked-pages.ts';
 import { describe, expect, it } from 'vitest';
 import { SYLLABI } from './syllabi.ts';
 import { sampleKey, samplesFor } from '../shared/group-samples.ts';
@@ -453,5 +454,15 @@ describe('DAT Sinhala and Tamil wherever English is', () => {
   });
   it('DAT-053 the Sinhala and Tamil dictionaries cover every English key with non-empty text', () => {
     for (const d of [si, ta]) for (const k of Object.keys(en) as (keyof typeof en)[]) expect((d[k] ?? '').trim(), k).not.toBe('');
+  });
+});
+
+describe('DAT blocked pages', () => {
+  it('DAT-054 no URL anywhere in the data is a page blocked during research (fingerprints in tools/research/blocked-pages.ts)', () => {
+    const files = [...fs.readdirSync(path.join(ROOT, 'data'), { recursive: true }) as string[]].filter(f => f.endsWith('.json'))
+      .map(f => fs.readFileSync(path.join(ROOT, 'data', f), 'utf8')).concat(fs.readFileSync(path.join(ROOT, 'worker', 'generated', 'rulebook-2025-2026.json'), 'utf8'));
+    const urls = files.flatMap(t => t.match(/https?:\/\/[^"\s<>|)]+/g) ?? []);
+    expect(urls.length).toBeGreaterThan(50);
+    expect(urls.filter(u => { try { return isBlockedPage(u); } catch { return false; } })).toEqual([]);
   });
 });

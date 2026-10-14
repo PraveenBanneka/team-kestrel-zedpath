@@ -122,8 +122,11 @@ Reversal plan: `npx wrangler rollback <previous-version-id>` (also GO-gated), wr
 Applies to ANY research that reads outside websites (syllabi, routes, gazettes, deadlines), by this session or a subagent.
 Learned the hard way: a university faculty site returned planted upload-tool content during the syllabus research.
 
-1. **Off-limits hosts.** Never fetch, open, search, scrape or link any host in `BLOCKED_HOSTS` (`worker/syllabi.ts`). Not with
-   WebFetch, curl, Firecrawl, a browser or a subagent. Praveen: "Do not visit it again."
+1. **Off-limits hosts and pages.** Never fetch, open, search, scrape or link any host in `BLOCKED_HOSTS` (`worker/syllabi.ts`)
+   or any page fingerprinted in `tools/research/blocked-pages.ts` (stored as SHA-256 so the address is never published).
+   Not with WebFetch, curl, Firecrawl, a browser or a subagent. Praveen: "Do not visit it again." Before fetching, run
+   `node tools/research/check-url.ts <url>` (prints BLOCKED or ok). A page is blocked alone when the rest of its host is fine
+   (Praveen 2026-10-15: "block that page only"); test DAT-054 keeps blocked pages out of all data.
 2. **Allow-list only.** Fetch only official sources: the university's own domain (`*.ac.lk`, or the university's own domain such as
    `uom.lk`), `ugc.ac.lk`, and government domains (`*.gov.lk`). A domain is "official" only if the UGC handbook or `ugc.ac.lk`
    names it as that institution's site. No blogs, aggregators, tuition sites, social media or lookalike domains.
