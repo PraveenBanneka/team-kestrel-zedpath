@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **00c551a7** (bands Very likely / Possible / Unlikely, list widths fixed, selection across tabs). Rollback target 926c9217 (code only).
+  Live (workers.dev) = version **59ad7760** (CR-007 Try the demo; remote D1 at 0011). Rollback target 00c551a7 (code only; the 0011 column is harmless to it).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -358,3 +358,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live: bundle has the new labels; scoped CSS served, old global rule gone.
 
 ## 2026-10-14 (evening): Gate 3 final video re-recorded and submitted by Praveen (deadline extended). Live = 00c551a7. Open items: Tamil Paths ~14 px too wide at 320 px; test-campaign findings D-01..D-07, D-09..D-13 (Summary Report); docs 01-04 await approval; signed declaration and old business-case drafts deliberately not in the public repo.
+
+## 2026-10-15: 59ad7760 LIVE (Praveen's GO): CR-007 Try the demo
+- Backup C:/Users/prave/zedpath-backups/zedpath-before-0011-20261015.sql (99 KB); remote D1 migration 0011 applied (account.demo_expires_at + partial index).
+- Live check: demo tap 201 (demo_..., demo=true, PHYS/KUR/1.4200, athletics achievement); /me 200; report 403 (demo read-only); Origin null 403 (D-03 fixed); DELETE /me 204, then 401. Two test demo accounts created and deleted. Welcome button present in the live bundle.
+- Also today: ZP-DOC-01..04 v2.0 approved and tagged; leak-scan fixed (--no-textconv, new refs scan only unpushed commits); tag pushes need http.version=HTTP/1.1 on this network; Cloudflare security-audit skill vendored locally (gitignored) and a deep audit running; UGC University Statistics 2024 reviewed (hostels Ch.7 and admissions Ch.2 proposed).
+- Local dev: wrangler state moved out of OneDrive (--persist-to scratch) because OneDrive locks froze it; the local rate-limiter binding then fails (login/demo 500 locally only).
