@@ -27,7 +27,11 @@ const isSalonId = id => sha256(id) === SALON_ACCOUNT_SHA256 ||
 // Tests may substitute a fake one via ZEDPATH_GUARD_TEST_ACCOUNT_ID.
 const ZEDPATH_ACCOUNT_ID = (process.env.ZEDPATH_GUARD_TEST_ACCOUNT_ID || 'e6474e41044c5722ad57c3372ab7492e').toLowerCase();
 const SALON_DIR_PATTERN = /new website june 20/i;
-const OUR_REPO = /github\.com[/:]PraveenBanneka\/zedpath(\.git)?\b/i;
+// The one repo (renamed from "zedpath" on 2026-10-06). The name must end exactly: a lookalike such as
+// team-kestrel-zedpath-x is a different repo (a hyphen counts as a \b word boundary, so \b alone let it through).
+const REPO = 'PraveenBanneka/team-kestrel-zedpath';
+const REPO_END = '(?:\\.git)?(?![\\w.-])';
+const OUR_REPO = new RegExp(`github\\.com[/:]${REPO}${REPO_END}`, 'i');
 
 const ACCOUNT_SWITCH = [
   /\bwrangler(\.cmd)?\s+(login|logout)\b/i,
@@ -103,7 +107,7 @@ function requireGo(input, what) {
   }
 }
 
-// Rule 8: one public repo (PraveenBanneka/zedpath); every other repo is off-limits.
+// Rule 8: one public repo (PraveenBanneka/team-kestrel-zedpath); every other repo is off-limits.
 function checkGitHub(cmd, input) {
   const projectDir = process.env.CLAUDE_PROJECT_DIR || input.cwd || process.cwd();
   const m = cmd.match(/\bgh\s+repo\s+(create|edit|delete|archive|unarchive|rename|fork|set-default)\b(.*)/i);
@@ -111,22 +115,22 @@ function checkGitHub(cmd, input) {
     const [, verb, rest] = m;
     const gitCfg = path.join(projectDir, '.git', 'config');
     const hasRemote = fs.existsSync(gitCfg) && /\[remote "/.test(fs.readFileSync(gitCfg, 'utf8'));
-    const createOurs = verb.toLowerCase() === 'create' && /^\s*PraveenBanneka\/zedpath\s/i.test(rest + ' ') && !hasRemote;
+    const createOurs = verb.toLowerCase() === 'create' && new RegExp(`^\\s*${REPO}\\s`, 'i').test(rest + ' ') && !hasRemote;
     if (!createOurs) block(`"gh repo ${verb}" is not allowed. Only the one ZedPath repo exists, and other repos are never touched (rule 8).`);
   }
-  if (/\bgh\s+api\b/i.test(cmd) && /(-X|--method)\s*(POST|PUT|PATCH|DELETE)/i.test(cmd) && !/repos\/PraveenBanneka\/zedpath\b/i.test(cmd)) {
-    block('gh api write calls are only allowed against repos/PraveenBanneka/zedpath (rule 8).');
+  if (/\bgh\s+api\b/i.test(cmd) && /(-X|--method)\s*(POST|PUT|PATCH|DELETE)/i.test(cmd) && !new RegExp(`repos/${REPO}(?![\\w.-])`, 'i').test(cmd)) {
+    block(`gh api write calls are only allowed against repos/${REPO} (rule 8).`);
   }
   if (/\bgit\s+remote\s+(add|set-url)\b/i.test(cmd) && !OUR_REPO.test(cmd)) {
-    block('git remotes may only point to github.com/PraveenBanneka/zedpath (rule 8).');
+    block(`git remotes may only point to github.com/${REPO} (rule 8).`);
   }
   if (/\bgit\s+push\b/i.test(cmd)) {
     const urls = cmd.match(/(https?:\/\/|git@)\S+/gi) || [];
-    if (urls.some(u => !OUR_REPO.test(u))) block('git push to a URL other than PraveenBanneka/zedpath (rule 8).');
+    if (urls.some(u => !OUR_REPO.test(u))) block(`git push to a URL other than ${REPO} (rule 8).`);
     const gitCfg = path.join(projectDir, '.git', 'config');
     const cfg = fs.existsSync(gitCfg) ? fs.readFileSync(gitCfg, 'utf8') : '';
     const remoteUrls = [...cfg.matchAll(/^\s*url\s*=\s*(.+)$/gim)].map(x => x[1].trim());
-    if (remoteUrls.some(u => !OUR_REPO.test(u))) block('this repo has a remote that is not PraveenBanneka/zedpath. Stop and tell Praveen (rule 8).');
+    if (remoteUrls.some(u => !OUR_REPO.test(u))) block(`this repo has a remote that is not ${REPO}. Stop and tell Praveen (rule 8).`);
     // Only the push segment counts (so `git commit -F msg && git push` is not a force-push); flags are case-sensitive.
     const pushSegs = cmd.match(/\bgit\s+push\b[^;&|\n]*/g) || [];
     if (pushSegs.some(s => /\s(--force(-with-lease)?|-f)(\s|=|$)|\s\+\S/.test(s))) requireGoOnly(input, 'force-push rewrites public history');

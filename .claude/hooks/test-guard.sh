@@ -10,7 +10,7 @@ export ZEDPATH_GUARD_TEST_ACCOUNT_ID=0123456789abcdef0123456789abcdef
 mkdir -p $S/stranger; echo '{"account_id":"fedcba9876543210fedcba9876543210"}' > $S/stranger/wrangler.jsonc
 echo "{\"name\":\"x\",\"account_id\":\"$SID\"}" > $S/salon/wrangler.jsonc
 printf '{"name":"x", // comment\n "account_id": "0123456789abcdef0123456789abcdef"}\n' > $S/good/wrangler.jsonc
-printf '[remote "origin"]\n\turl = https://github.com/PraveenBanneka/zedpath.git\n' > $S/good/.git/config
+printf '[remote "origin"]\n\turl = https://github.com/PraveenBanneka/team-kestrel-zedpath.git\n' > $S/good/.git/config
 printf '[remote "origin"]\n\turl = https://github.com/PraveenBanneka/some-private-repo.git\n' > $S/other/.git/config
 printf '[core]\n\tbare = false\n' > $S/fresh/.git/config
 mk(){ printf '%s\n' "{\"type\":\"user\",\"message\":{\"role\":\"user\",\"content\":\"$1\"}}" '{"type":"assistant","message":{"content":[]}}' '{"type":"user","message":{"role":"user","content":[{"type":"tool_result","content":"GO"}]}}' > $S/$2.jsonl; }
@@ -51,13 +51,13 @@ t "CF MCP execute, no GO"                good ok   mcp__plugin_cloudflare_cloudf
 t "CF MCP search allowed"                good ok   mcp__plugin_cloudflare_cloudflare__search "" ALLOW
 t "other MCP allowed"                    good ok   mcp__claude_ai_Canva__help "" ALLOW
 echo "-- GitHub (rule 8: one public repo, nothing else)"
-t "create zedpath, no remote yet"        fresh ok  Bash "gh repo create PraveenBanneka/zedpath --public --source . --push" ALLOW
-t "create zedpath again (remote exists)" good ok   Bash "gh repo create PraveenBanneka/zedpath --public" BLOCK
+t "create zedpath, no remote yet"        fresh ok  Bash "gh repo create PraveenBanneka/team-kestrel-zedpath --public --source . --push" ALLOW
+t "create zedpath again (remote exists)" good ok   Bash "gh repo create PraveenBanneka/team-kestrel-zedpath --public" BLOCK
 t "create any other repo"                fresh go  Bash "gh repo create PraveenBanneka/other --public" BLOCK
 t "make another repo public"             good go   Bash "gh repo edit PraveenBanneka/salon --visibility public" BLOCK
-t "delete a repo"                        good go   Bash "gh repo delete PraveenBanneka/zedpath --yes" BLOCK
+t "delete a repo"                        good go   Bash "gh repo delete PraveenBanneka/team-kestrel-zedpath --yes" BLOCK
 t "gh api write to other repo"           good go   Bash "gh api -X PATCH repos/PraveenBanneka/salon -f private=false" BLOCK
-t "gh api write to zedpath"              good ok   Bash "gh api -X PATCH repos/PraveenBanneka/zedpath -f description=x" ALLOW
+t "gh api write to zedpath"              good ok   Bash "gh api -X PATCH repos/PraveenBanneka/team-kestrel-zedpath -f description=x" ALLOW
 t "add remote to other repo"             good go   Bash "git remote add x https://github.com/PraveenBanneka/salon.git" BLOCK
 t "push to zedpath origin"               good ok   Bash "git push origin main" ALLOW
 t "push with explicit other URL"         good go   Bash "git push https://github.com/PraveenBanneka/salon.git main" BLOCK
