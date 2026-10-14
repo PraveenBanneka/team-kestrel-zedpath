@@ -9,7 +9,7 @@ import { formatZ } from '../shared/banding.ts';
 import { EMBED_MODEL, HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import { assessOffering, book, districtIndex, parseProfile } from './rulebook.ts';
-import { crossSite, parseExtras } from './account.ts';
+import { crossSite, ipBucket, parseExtras } from './account.ts';
 import { specialIntakeHint, type Extras } from '../shared/account.ts';
 
 type AppEnv = { Bindings: Env };
@@ -21,7 +21,8 @@ const GATEWAY_ID = 'zedpath';
 export const MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
 const TOP_K = 6;
 export const MIN_SCORE = 0.50;  // calibrated 2026-10-05 (tools/ask/calibrate.ts): weakest right page 0.551 (Sinhala), strongest off-topic 0.474
-export const DEVICE_PER_DAY = 30, IP_PER_DAY = 300;
+export const FEEDBACK_PER_DAY = 2000;
+export const DEVICE_PER_DAY = 30, IP_PER_DAY = 300, ALL_PER_DAY = 3000;   // ALL: whole service per day (audit lead 12; free-plan AI budget)
 const SINHALA = /[඀-෿]/, TAMIL = /[஀-௿]/;
 
 const SYSTEM = `You are Ask ZedPath, a friendly guide for Sri Lankan students choosing what to do after their A-Level (A/L) results.
@@ -45,12 +46,18 @@ const sha256Hex = async (s: string) => [...new Uint8Array(await crypto.subtle.di
   .map(b => b.toString(16).padStart(2, '0')).join('');
 const err = (c: C, status: 400 | 403 | 404 | 429 | 503, error: string) => c.json({ error } satisfies ApiError, status);
 const norm = (s: string) => ` ${s.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim()} `;
-const ip = (c: C) => c.req.header('CF-Connecting-IP') ?? 'local';
+const ip = (c: C) => ipBucket(c.req.header('CF-Connecting-IP') ?? 'local');
 /** "UNIVERSITY OF SRI JAYEWARDENEPURA" -> "University of Sri Jayewardenepura" (the source tables are in capitals). */
 export const tidyName = (s: string) => s.toLowerCase().replace(/\b[a-z]/g, m => m.toUpperCase())
   .replace(/\b(Of|And|In|The|For)\b/g, w => w.toLowerCase()).replace(/\b(Ucsc|Ict|It|Sp)\b/g, w => w.toUpperCase()).replace(/^./, m => m.toUpperCase());
 
 export const askRoutes = new Hono<AppEnv>();
+
+/** Audit lead 12: the whole service answers at most ALL_PER_DAY questions a day (sum of today's device counters). */
+export async function serviceOverDaily(db: D1Database, day: string): Promise<boolean> {
+  const all = await db.prepare(`SELECT coalesce(sum(used), 0) AS n FROM ask_quota WHERE day = ? AND scope = 'DEVICE'`).bind(day).first<{ n: number }>();
+  return (all?.n ?? 0) > ALL_PER_DAY;
+}
 
 /** Counts this question against the daily allowance; true when over. Rows hold only daily-salted hashes. */
 async function overQuota(c: C): Promise<boolean> {
@@ -69,7 +76,7 @@ async function overQuota(c: C): Promise<boolean> {
     const cutoff = new Date(Date.now() - 2 * 86_400_000).toISOString().slice(0, 10);
     await db.prepare('DELETE FROM ask_quota WHERE day < ?').bind(cutoff).run();
   }
-  return used(d) > DEVICE_PER_DAY || used(i) > IP_PER_DAY;
+  return used(d) > DEVICE_PER_DAY || used(i) > IP_PER_DAY || await serviceOverDaily(db, day);
 }
 
 /** Courses the question is about: named in the question, or whose course code appears in the retrieved passages. */
@@ -266,6 +273,11 @@ askRoutes.post('/ask/feedback', async c => {
   if (!c.env.DB) return err(c, 503, 'Feedback is not available yet');
   if (crossSite(c)) return err(c, 403, 'Cross-site request refused');   // a null/malformed Origin is a 403, not a 500
   if (c.env.IP_LIMITER && !(await c.env.IP_LIMITER.limit({ key: `fb:${ip(c)}` })).success) return err(c, 429, 'Too many reports. Wait a minute');
+  // Audit lead 10: at most FEEDBACK_PER_DAY rows a day for the whole service, and rows older than a year are removed.
+  const today = new Date().toISOString().slice(0, 10);
+  const n = await c.env.DB.prepare('SELECT count(*) AS n FROM answer_feedback WHERE created_at >= ?').bind(today).first<{ n: number }>();
+  if ((n?.n ?? 0) >= FEEDBACK_PER_DAY) return err(c, 429, 'Thanks, we have enough reports for today. Try again tomorrow');
+  await c.env.DB.prepare('DELETE FROM answer_feedback WHERE created_at < ?').bind(new Date(Date.now() - 365 * 86_400_000).toISOString()).run();
   const b = await c.req.json().catch(() => null) as Partial<AskFeedback> | null;
   const question = String(b?.question ?? '').trim(), answer = String(b?.answer ?? '').trim(), note = b?.note ? String(b.note).trim().slice(0, 500) : null;
   const pages = Array.isArray(b?.pages) ? b!.pages.filter(n => Number.isInteger(n) && n > 0 && n < 1000).slice(0, 20) : [];
@@ -281,7 +293,7 @@ askRoutes.post('/ask/feedback', async c => {
 // .dev.vars) AND the request is to localhost, so it can never run in production.
 askRoutes.post('/dev/embed', async c => {
   const host = new URL(c.req.url).hostname;
-  if (c.env.DEV_TOOLS !== '1' || !['localhost', '127.0.0.1'].includes(host)) return err(c, 404, 'Not found');
+  if (c.env.DEV_TOOLS !== '1' || !['localhost', '127.0.0.1'].includes(host) || crossSite(c)) return err(c, 404, 'Not found');   // lead 17
   const b = await c.req.json() as { texts: string[] };
   const r = await c.env.AI.run(EMBED_MODEL as Parameters<Ai['run']>[0], { text: b.texts } as never) as { data: number[][] };
   return c.json({ vectors: r.data });
@@ -290,7 +302,7 @@ askRoutes.post('/dev/embed', async c => {
 // Local developer tool: what retrieval returns for a question (id, score, page), to calibrate MIN_SCORE on evidence.
 askRoutes.post('/dev/search', async c => {
   const host = new URL(c.req.url).hostname;
-  if (c.env.DEV_TOOLS !== '1' || !['localhost', '127.0.0.1'].includes(host)) return err(c, 404, 'Not found');
+  if (c.env.DEV_TOOLS !== '1' || !['localhost', '127.0.0.1'].includes(host) || crossSite(c)) return err(c, 404, 'Not found');   // lead 17
   const { q, k } = await c.req.json() as { q: string; k?: number };
   const emb = await c.env.AI.run(EMBED_MODEL as Parameters<Ai['run']>[0], { text: [q] } as never) as { data: number[][] };
   const res = await c.env.ASK_INDEX.query(emb.data[0], { topK: k ?? 8, returnMetadata: 'all' });

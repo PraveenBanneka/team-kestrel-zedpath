@@ -29,7 +29,7 @@ export function parseContact(x: unknown, consent: unknown, today: string): { ok:
   const fullName = typeof c.fullName === 'string' ? c.fullName.trim().replace(/\s+/g, ' ') : '';
   if (fullName.length < 2 || fullName.length > NAME_MAX) return { ok: false, field: 'fullName', error: 'Enter your full name' };
   const email = typeof c.email === 'string' ? normaliseEmail(c.email) : '';
-  if (!EMAIL_RE.test(email) || email.length > 254) return { ok: false, field: 'email', error: 'Enter a valid email address' };
+  if (email.length > 254 || !EMAIL_RE.test(email)) return { ok: false, field: 'email', error: 'Enter a valid email address' };
   const mobile = typeof c.mobile === 'string' ? normaliseMobile(c.mobile) : null;
   if (!mobile) return { ok: false, field: 'mobile', error: 'Enter a Sri Lankan mobile number, for example 071 234 5678' };
   const birthDate = typeof c.birthDate === 'string' ? c.birthDate : '';

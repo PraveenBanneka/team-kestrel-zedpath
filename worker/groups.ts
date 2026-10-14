@@ -16,7 +16,7 @@ import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, 
 import { sampleKey } from '../shared/group-samples.ts';
 import { normaliseUsername, USERNAME_RE } from '../shared/account.ts';
 import { book } from './rulebook.ts';
-import { err, isDemo, kickFromRooms, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
+import { accountBudget, err, isDemo, kickFromRooms, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
 import { tidyName as titleCaseName } from './ask.ts';
 
 
@@ -25,7 +25,7 @@ const nowIso = () => new Date().toISOString();
 const COURSE_RE = /^\d{3}$/;
 
 export const groupRoutes = new Hono<AppEnv>();
-for (const p of ['/groups', '/groups/*', '/blocks', '/blocks/*']) groupRoutes.use(p, ready, sameOrigin, requireSession);
+for (const p of ['/groups', '/groups/*', '/blocks', '/blocks/*']) groupRoutes.use(p, ready, sameOrigin, requireSession, accountBudget);
 
 const room = (c: C, groupId: number) => c.env.GROUP_ROOM.get(c.env.GROUP_ROOM.idFromName(`group:${groupId}`));
 const streamName = (code: string) => book.streams.find(s => s.code === code)?.name ?? code;

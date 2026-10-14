@@ -88,7 +88,9 @@ const limited = async (c: C, action: string, username: string) => {
   const checks = [c.env.AUTH_LIMITER?.limit({ key: `${action}:${ip(c)}:${username}` }), c.env.IP_LIMITER?.limit({ key: `ip:${ip(c)}` })];
   return (await Promise.all(checks)).some(r => r && !r.success);
 };
-const ip = (c: C) => c.req.header('CF-Connecting-IP') ?? 'local';
+/** The client network for limits: an IPv4 address, or an IPv6 /64 (one home or phone network; audit lead 12). */
+export const ipBucket = (raw: string) => raw.includes(':') ? raw.split(':').slice(0, 4).join(':') + '::/64' : raw;
+const ip = (c: C) => ipBucket(c.req.header('CF-Connecting-IP') ?? 'local');
 
 export const requireSession = async (c: C, next: Next) => {
   const token = getCookie(c, COOKIE);
@@ -107,6 +109,14 @@ accountRoutes.use('/auth/logout', requireSession);
 accountRoutes.use('/auth/logout-all', requireSession);
 accountRoutes.use('/me', requireSession);
 accountRoutes.use('/me/*', ready, sameOrigin, requireSession);
+/** Audit lead 8: a signed-in account may write at most 100 times a minute (profile, Journey, groups, blocks). */
+export const accountBudget = async (c: C, next: Next) => {
+  if (!['GET', 'HEAD'].includes(c.req.method) && c.env.IP_LIMITER && !(await c.env.IP_LIMITER.limit({ key: `acct:${c.get('accountId')}` })).success)
+    return err(c, 429, 'Too many changes. Wait a minute and try again');
+  await next();
+};
+accountRoutes.use('/me', accountBudget);
+accountRoutes.use('/me/*', accountBudget);
 
 // ---------------------------------------------------------------- validation
 export function parseExtras(x: unknown): Extras | ApiError {
@@ -223,6 +233,8 @@ accountRoutes.post('/auth/signup', async c => {
   if (!contact.ok) return err(c, 400, contact.error, contact.field);
   const invite = b?.inviteCode == null || b.inviteCode === '' ? null : normaliseCode(String(b.inviteCode));
   if (invite !== null && !RECOVERY_RE.test(invite)) return err(c, 400, 'That invite code is not in the right format', 'inviteCode');
+  // Audit lead 9 (per-username key is caller-chosen): NOT tightened per network, because a school lab shares one IP
+  // (test: whole class behind one IP). The network-wide 100/min still applies; a human check (Turnstile) is the planned fix.
   if (await limited(c, 'signup', username)) return err(c, 429, 'Too many tries. Wait a minute and try again');
 
   const db = c.env.DB, now = nowIso(), subject = `local:${randomHex(16)}`;
@@ -271,7 +283,7 @@ export async function kickFromRooms(env: Env, accountId: number, session?: strin
 // CR-007: "Try the demo". Each tap makes a private throwaway account with the sample student (shared/demo-data.ts) and
 // logs it in; it expires after DEMO_HOURS and is deleted on a later demo tap (no cron on the free plan). Nobody can log in
 // to it with a password (random verifier). Demo accounts read groups but cannot post, report or create groups.
-const DEMO_HOURS = 24;
+const DEMO_HOURS = 24, DEMO_MAX_LIVE = 500;   // at most 500 demo accounts at once (audit lead 11)
 /** The sample contact, normalised exactly as a sign-up would be (+94 mobile etc.). */
 const demoContact = (now: string) => { const r = parseContact(DEMO_CONTACT, CONSENT_VERSION, now.slice(0, 10)); if (!r.ok) throw new Error(`demo contact: ${r.error}`); return r.contact; };
 export const isDemo = async (db: D1Database, accountId: number) =>
@@ -279,7 +291,12 @@ export const isDemo = async (db: D1Database, accountId: number) =>
 accountRoutes.post('/auth/demo', async c => {
   if (await limited(c, 'demo', 'demo')) return err(c, 429, 'Too many tries. Wait a minute and try again');
   const db = c.env.DB, now = nowIso(), expires = new Date(Date.now() + DEMO_HOURS * 3_600_000).toISOString();
-  await db.prepare('DELETE FROM account WHERE demo_expires_at IS NOT NULL AND demo_expires_at < ?').bind(now).run();   // cascades
+  try {                                                         // bounded clean-up (audit lead 11): 50 expired demos per tap
+    await db.prepare(`DELETE FROM account WHERE account_id IN (SELECT account_id FROM account
+      WHERE demo_expires_at IS NOT NULL AND demo_expires_at < ? LIMIT 50)`).bind(now).run();   // cascades to every child row
+  } catch { /* clean-up never blocks a demo; the next tap retries */ }
+  const live = await db.prepare('SELECT count(*) AS n FROM account WHERE demo_expires_at IS NOT NULL').first<{ n: number }>();
+  if ((live?.n ?? 0) >= DEMO_MAX_LIVE) return err(c, 503, 'The demo is busy. Try again later or create an account');
   const subject = `demo:${randomHex(16)}`, username = `demo_${randomHex(4)}`, token = randomHex(32);
   const id = { sql: '(SELECT account_id FROM account WHERE auth_subject = ?)', args: [subject] };
   await db.batch([
