@@ -48,7 +48,16 @@ export interface ResultsResponse {
 
 export interface Citation { sourceId: string; page: number; label: string }
 
+/** Official aptitude/practical test notice for an offering (data/aptitude, every date verified on the official page).
+ *  Dates are those of the most recent intake; `past` tells the app to show them as last year's, never as upcoming. */
+export interface AptitudeNotice {
+  academicYear: string; institution: string; officialUrl: string;
+  registrationOpens: string | null; registrationCloses: string | null; testDate: string | null; past: boolean;
+  /** Courses whose practical test is run jointly by several universities: apply at any one of these. */
+  joint: { institution: string; officialUrl: string }[];
+}
 export interface OfferingDetail {
+  aptitude: AptitudeNotice | null;
   /** UGC 'Sri Lanka University Statistics 2024' facts for the offering's institution (each cites table and page). */
   facts: import('./statistics.ts').InstitutionFact[];
   uniCode: string;

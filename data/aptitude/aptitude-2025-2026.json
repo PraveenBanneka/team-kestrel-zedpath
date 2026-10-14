@@ -1,0 +1,195 @@
+{
+  "retrievedOn": "2026-10-15",
+  "academicYear": "2025/2026",
+  "basedOn": "G.C.E. (A/L) 2025 results",
+  "handbook": {
+    "source": "UGC handbook 'Admission to Undergraduate Courses of the Universities in Sri Lanka, Academic Year 2025/2026' (course pages cited per test; list of aptitude courses at PDF p158) and the UGC cut-off table 2025/26 '#' marker",
+    "copMarkerQuote": "# = 'Courses of Study for which the subject oriented Practical Tests / Aptitude Tests were conducted.'",
+    "offeringsFlagged": 24
+  },
+  "tests": [
+    {
+      "institution": "University of Moratuwa",
+      "letter": "G",
+      "uniCodes": ["023G"],
+      "course": "Architecture",
+      "officialUrl": "https://uom.lk/sites/default/files/exams/files/Apritude%20Test%20-%20Web%20Notice%20-%20English%202025_0.pdf",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-06",
+      "testDate": "2026-06-06",
+      "quote": "UNIVERSITY ADMISSIONS - ACADEMIC YEAR 2025/2026 ... Bachelor of Architecture Degree | 9.30 a.m. to 12.00 p.m. | 06th June 2026 ... Candidates are required to fill and submit the online application form available in the University of Moratuwa Website (https://uom.lk/) ... Examination Fee per programme is Rs. 1,500/- ... Completed Applications should be submitted online with the required documents on or before 06 May 2026 at 6.00 p.m.",
+      "handbookQuote": "The University of Moratuwa will publish a press notice calling for applications to sit the aptitude test for the Architecture programme and candidates may contact the Registrar of the University of Moratuwa for further particulars. [handbook PDF 93, printed 86]",
+      "note": "Dates for 2025/26 have passed. Notice dated 10.04.2026; no separate opening date stated. Fee Rs. 1,500 per programme (Bank of Ceylon or pay.uom.lk)."
+    },
+    {
+      "institution": "University of Moratuwa",
+      "letter": "G",
+      "uniCodes": ["097G"],
+      "course": "Landscape Architecture",
+      "officialUrl": "https://uom.lk/sites/default/files/exams/files/Apritude%20Test%20-%20Web%20Notice%20-%20English%202025_0.pdf",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-06",
+      "testDate": "2026-06-06",
+      "quote": "Bachelor of Landscape Architecture Degree (Faculty of Architecture) | 9.30 a.m. to 12.00 p.m. | 06th June 2026 ... Completed Applications should be submitted online with the required documents on or before 06 May 2026 at 6.00 p.m.",
+      "handbookQuote": "University of Moratuwa will publish a press notice calling for applications to sit the aptitude test for the Landscape Architecture programme and candidates may contact the Registrar of the University of Moratuwa for further particulars. [handbook PDF 95, printed 88]",
+      "note": "Dates for 2025/26 have passed. Shares the 9.30 a.m. slot with Architecture. Fee Rs. 1,500 per programme."
+    },
+    {
+      "institution": "University of Moratuwa",
+      "letter": "G",
+      "uniCodes": ["024G"],
+      "course": "Design",
+      "officialUrl": "https://uom.lk/sites/default/files/exams/files/Apritude%20Test%20-%20Web%20Notice%20-%20English%202025_0.pdf",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-06",
+      "testDate": "2026-06-06",
+      "quote": "Bachelor of Design Degree (Faculty of Architecture) | 1.30 p.m. to 4.00 p.m. | 06th June 2026 ... Completed Applications should be submitted online with the required documents on or before 06 May 2026 at 6.00 p.m.",
+      "handbookQuote": "University of Moratuwa will publish a press notice calling for applications to sit the Aptitude Test for the Design programme and candidates may contact the Registrar of the University of Moratuwa for further particulars. [handbook PDF 96, printed 89]",
+      "note": "Dates for 2025/26 have passed. In the notice's timetable the '06th June 2026' date cell is a merged cell spanning both the Architecture/Landscape row and the Design row (checked from the PDF table structure); spot-check visually before publishing."
+    },
+    {
+      "institution": "University of Moratuwa",
+      "letter": "G",
+      "uniCodes": ["034G"],
+      "course": "Fashion Design & Product Development",
+      "officialUrl": "https://uom.lk/sites/default/files/exams/files/Apritude%20Test%20-%20Web%20Notice%20-%20English%202025_0.pdf",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-06",
+      "testDate": "2026-06-07",
+      "quote": "Fashion Design & Product Development Degree (Faculty of Engineering) | 9.00 a.m. to 12.00 p.m. | 07th June 2026 ... Completed Applications should be submitted online with the required documents on or before 06 May 2026 at 6.00 p.m.",
+      "handbookQuote": "The University of Moratuwa will publish a press notice calling for applications to sit the aptitude test for the Fashion Design & Product Development degree programme and candidates may contact the Registrar of the University of Moratuwa for further particulars. [handbook PDF 94, printed 87]",
+      "note": "Dates for 2025/26 have passed. Fee Rs. 1,500 per programme."
+    },
+    {
+      "institution": "University of Colombo - Sri Palee Campus",
+      "letter": "S",
+      "uniCodes": ["020S", "041S"],
+      "course": "Arts (SP) - Mass Media; Arts (SP) - Performing Arts",
+      "officialUrl": "https://spc.cmb.ac.lk/wp-content/uploads/2026/04/Aptitude-Test-Adv.-2026-English.pdf",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-18",
+      "testDate": null,
+      "quote": "Candidates should submit their applications for the Aptitude Test on or before 18.05.2026 through the online mode through Sri Palee Campus website (https://spc.cmb.ac.lk) ... a practical /oral test is expected to be conducted at Sri Palee Campus premises from the 3rd week of June, 2026 for the students who qualify for the Aptitude Test. ... Completed applications should be submitted online with the required documents on or before 18 May 2026 at 11.59 p.m.",
+      "handbookQuote": "The Sripalee Campus of the University of Colombo will publish a press notice calling for applications to sit the Aptitude Test. [handbook PDF 42, printed 35]",
+      "note": "Dates for 2025/26 have passed. Notice dated 28.04.2026; no opening date stated. Test only 'from the 3rd week of June, 2026' (no exact day). Fee Rs. 2,000 per course. Sinhala medium."
+    },
+    {
+      "institution": "University of the Visual & Performing Arts",
+      "letter": "Z",
+      "uniCodes": ["068Z", "069Z", "071Z", "085Z"],
+      "course": "Music; Dance; Drama & Theatre; Visual Arts",
+      "officialUrl": "https://vpa.ac.lk/wp-content/uploads/2026/04/Aptitude_Advertisement_2025_2026_English.pdf",
+      "registrationOpens": "2026-04-26",
+      "registrationCloses": "2026-05-11",
+      "testDate": null,
+      "quote": "The University of the Visual and Performing Arts invites applications from 26.04.2026 to 11.05.2026 for the Aptitude Test required for admission to the degree programs mentioned above. ... Navigate to the \"Aptitude Test – 2025/2026\" section and submit the application online. ... Aptitude test fee of Rs. 2,000/- per course",
+      "handbookQuote": "The University of the Visual and Performing Arts will publish a press notice, calling for applications for the Practical/ Aptitude tests. Students are requested to contact the Registrar of the University of the Visual and Performing Arts for further details. [handbook PDF 45, printed 38]",
+      "note": "Registration dates for 2025/26 have passed. Test dates not in the notice (it points to the 'Aptitude Test – 2025/2026' section of vpa.ac.lk, which was not found). Sinhala medium only."
+    },
+    {
+      "institution": "University of Sri Jayewardenepura",
+      "letter": "C",
+      "uniCodes": ["068C"],
+      "course": "Music",
+      "officialUrl": "https://fhss.sjp.ac.lk/mct/2026/05/05/b-a-honours-degree-in-music-aptitude-test-2026/",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-18",
+      "testDate": null,
+      "quote": "The closing date for applications is 18.05.2026 (May 18, 2026) ... applications can be submitted online through the link given below.",
+      "handbookQuote": "The University of Sri Jayewardenepura will publish a press notice calling for applications for the Practical/Aptitude Test. Students are requested to contact the Registrar of the University of Sri Jayewardenepura for further details. [handbook PDF 47, printed 40]",
+      "note": "Registration for 2025/26 has passed. Test date and fee not in the page text (the notice itself is an image). The department page https://fhss.sjp.ac.lk/mct/aptitude-test/ says 'Calling applications for the Aptitude Test University Admission – Academic Year 2025/2026 (Based on G.C.E. A/L – 2025)'."
+    },
+    {
+      "institution": "University of Jaffna",
+      "letter": "E",
+      "uniCodes": ["068E", "069E", "070E"],
+      "course": "Music; Dance; Art & Design",
+      "officialUrl": "https://jfn.ac.lk/aptitude-test-bachelor-of-fine-arts-honours-in-music-dance-art-design-degree-programmes-2/",
+      "registrationOpens": "2026-04-20",
+      "registrationCloses": "2026-05-19",
+      "testDate": null,
+      "quote": "கல்வியாண்டு 2025/2026 ... 20.04.2026 தொடக்கம் 19.05.2026 ஆம் திகதி வரை ஏற்றுக்கொள்ளப்படும் ... நிகழ்நிலையாக (Online) 19.05.2026 ஆம் திகதிக்கு முன்னர் ... 21.05.2026 ஆம் திகதிக்கு முன்னர் ... பரீட்சை தொடர்பான அனைத்துத் தகவல்களும் யாழ்ப்பாணப் பல்கலைக்கழக இணையத்தளத்தில் அறிவிக்கப்படும்.",
+      "handbookQuote": "The University of Jaffna will publish a press notice, calling for applications for the Practical/ Aptitude Tests. Students are requested to contact the Registrar of the University of Jaffna for further details. [handbook PDF 46, printed 39]",
+      "note": "Dates for 2025/26 have passed. Tamil-language notice: applications accepted 20.04.2026 to 19.05.2026 (online before 19.05.2026; posted documents before 21.05.2026). Fees Rs. 1,000 Music, Rs. 1,000 Dance, Rs. 2,600 Art & Design. A later candidate-list page gives test days without a year, so testDate is left null. Apply via https://jfn.ac.lk/online-application-aptitude-test-2026/."
+    },
+    {
+      "institution": "University of Jaffna",
+      "letter": "E",
+      "uniCodes": ["081E"],
+      "course": "Physical Education",
+      "officialUrl": "https://jfn.ac.lk/bachelor-of-science-honours-in-physical-education-degree-programme-academic-year-2025-2026/",
+      "registrationOpens": "2026-04-20",
+      "registrationCloses": "2026-05-19",
+      "testDate": null,
+      "quote": "Bachelor of Science Honours in Physical Education Degree Programme | Academic Year 2025/2026 ... From 20.04.2026 to 19.05.2026. ... on or before 19.05.2026.",
+      "handbookQuote": "The Practical Test will be conducted by the Sabaragamuwa University of Sri Lanka, the University of Jaffna, the University of Sri Jayewardenepura and the University of Kelaniya collaboratively. ... it is sufficient to apply and appear in the practical test conducted in one of the above universities. [handbook PDF 103, printed 96]",
+      "note": "Dates for 2025/26 have passed. Fee Rs. 2,000 (People's Bank). Posted/hand-delivered documents due before 21.05.2026. Test date not stated on this page."
+    },
+    {
+      "institution": "University of Sri Jayewardenepura",
+      "letter": "C",
+      "uniCodes": ["082C"],
+      "course": "Sports Science & Management",
+      "officialUrl": "https://www.sjp.ac.lk/news/aptitude-test-for-bsc-honours-in-sports-science-management-2025-2026/",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-18",
+      "testDate": "2026-05-23",
+      "quote": "Aptitude Test to Select Candidates for BSc Honours in Sports Science & Management for the Academic Year 2025/2026 ... The closing date for the online application submission is 18th May 2026. ... 23.05.2026 ... 24.05.2026 ... 07:30 a.m. – 06.00 p.m. ... Venue of the Aptitude Test: University of Sri Jayewardenepura",
+      "handbookQuote": "The Practical Test will be conducted by the Sabaragamuwa University of Sri Lanka, the University of Jaffna, the University of Sri Jayewardenepura and the University of Kelaniya collaboratively. ... it is sufficient to apply and appear in the practical test conducted in one of the above universities. [handbook PDF 104, printed 97]",
+      "note": "Dates for 2025/26 have passed. Test on 23.05.2026 and 24.05.2026. Fee Rs. 2,000 (People's Bank). Also posted at https://science.sjp.ac.lk/blog/aptitude-test-for-bsc-honours-in-sports-science-management-2025-2026/."
+    },
+    {
+      "institution": "University of Kelaniya",
+      "letter": "D",
+      "uniCodes": ["141D"],
+      "course": "Sports Science",
+      "officialUrl": "https://aptitudetest.kln.ac.lk/admission",
+      "registrationOpens": null,
+      "registrationCloses": null,
+      "testDate": "2026-05-23",
+      "quote": "unable to participate in the practical test held on 23 and 24 May 2026 ... Date: 17 June 2026 (Wednesday)",
+      "handbookQuote": "The Practical Test will be conducted by the Sabaragamuwa University of Sri Lanka, the University of Jaffna, the University of Sri Jayewardenepura and the University of Kelaniya collaboratively. ... it is sufficient to apply and appear in the practical test conducted in one of the above universities. [handbook PDF 104-105, printed 97-98]",
+      "note": "Dates for 2025/26 have passed. Practical test held 23 and 24 May 2026; an additional session on 17 June 2026 for candidates who missed it. Page titled 'Aptitude Test 2026'; no application dates or fee stated."
+    },
+    {
+      "institution": "University of Kelaniya",
+      "letter": "D",
+      "uniCodes": ["100D"],
+      "course": "Film & Television Studies",
+      "officialUrl": "https://aptitudetest.kln.ac.lk/admission",
+      "registrationOpens": null,
+      "registrationCloses": null,
+      "testDate": null,
+      "quote": "The aptitude test will be held on 28th May at the University of Kelaniya, Dalugama premises.",
+      "handbookQuote": "The University of Kelaniya will publish a press notice calling for applications to sit the Aptitude Test. Candidates may contact the Registrar of the University of Kelaniya for further particulars. [handbook PDF 108, printed 101]",
+      "note": "Page is titled 'Aptitude Test 2026' but the test date '28th May' has no year, so testDate is null. No application dates or fee stated. Almost certainly past for 2025/26."
+    },
+    {
+      "institution": "Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka",
+      "letter": "Y",
+      "uniCodes": ["068Y", "069Y", "071Y", "072Y"],
+      "course": "Music; Dance; Drama & Theatre; Visual & Technological Arts",
+      "officialUrl": "https://www.svias.esn.ac.lk/university-admissions-academic-year-2025-2026/",
+      "registrationOpens": null,
+      "registrationCloses": "2026-05-19",
+      "testDate": null,
+      "quote": "UNIVERSITY ADMISSIONS ACADEMIC YEAR – 2025/2026 ... extended from May 13, 2026, to May 19, 2026.",
+      "handbookQuote": "The Institute also conducts Practical/Aptitude Tests for selection. These are for Music, Dance, Drama & Theatre and Visual & Technological Arts. [handbook PDF 45-47, printed 38-40]",
+      "note": "Registration for 2025/26 has passed (deadline extended to 19 May 2026). The advertisements are images, so opening date, fee and test dates were not readable as text."
+    }
+  ],
+  "notFound": [
+    {
+      "course": "Physical Education",
+      "uniCode": "081L",
+      "institution": "Sabaragamuwa University of Sri Lanka",
+      "reason": "The university's own practical-test page was not used (flagged for review). Per the handbook the practical test is run collaboratively and it is sufficient to apply at one of the four universities; see the Jaffna (081E), Sri Jayewardenepura (082C) and Kelaniya (141D) entries."
+    },
+    {
+      "course": "Sports Science & Management",
+      "uniCode": "082L",
+      "institution": "Sabaragamuwa University of Sri Lanka",
+      "reason": "The university's own practical-test page was not used (flagged for review). Per the handbook the practical test is run collaboratively and it is sufficient to apply at one of the four universities; see the Jaffna (081E), Sri Jayewardenepura (082C) and Kelaniya (141D) entries."
+    }
+  ]
+}

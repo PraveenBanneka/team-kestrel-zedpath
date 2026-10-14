@@ -1,0 +1,408 @@
+{
+ "retrievedOn": "2026-10-15",
+ "method": "WebFetch (remote, text). Quotes from HTML pages pass through the WebFetch extraction step; PDF quotes were extracted locally with pymupdf from the official PDF. Spot-check word for word before shipping (rule 7).",
+ "steps": [
+  {
+   "step": "NVQ framework: seven levels; Levels 5-6 National Diploma; Level 7 Bachelors Degree, certified by UoVT (Univotec)",
+   "institution": "Tertiary and Vocational Education Commission (TVEC)",
+   "officialUrl": "https://tvec.gov.lk/wp-content/uploads/2025/03/NVQ_Operation-Manual-2009.pdf",
+   "requirement": "Framework statement (not an entry rule)",
+   "quote": "Level 7 recognizes the vocational/technological competencies at Bachelors Degree level ... Certification of 1 – 6 levels shall be carried out by institutions accredited by the TVEC. Certification at level 7 shall be carried out by the Univotec.",
+   "locator": "NVQ Framework of Sri Lanka Operations Manual, October 2009, PDF p.13 (level table)",
+   "readOn": "2026-10-15",
+   "caveat": "Document dated October 2009. A 2021 manual indexed at tvec.gov.lk/wp-content/uploads/2022/03/NVQ_Operation_Manual_2021_new.pdf returned HTTP 404 on 2026-10-15."
+  },
+  {
+   "step": "Official NVQ 5/6 -> NVQ 7 (degree) progression",
+   "institution": "Tertiary and Vocational Education Commission (TVEC)",
+   "officialUrl": "https://tvec.gov.lk/wp-content/uploads/2025/03/NVQ_Operation-Manual-2009.pdf",
+   "requirement": "Relevant NVQ Level 5 or Level 6 qualification; NVQ 6 holders eligible for credit transfer determined by UoVT",
+   "quote": "NVQ level 7 programmes conducted by the Univotec allow students to acquire B.Tech. or B.Ed. Tech. degree qualifications. Pathways, from the National Diplomas, will be available to students who have achieved the relevant NVQ qualifications at levels 5 or level 6 to proceed to degree programmes. Those with NVQ level 6 qualifications are eligible to receive appropriate credit transfer towards the degree programme, to be determined by the Univotec.",
+   "locator": "Operations Manual Oct 2009, PDF p.17, Section 2.3 (c) NVQ Level 7",
+   "readOn": "2026-10-15"
+  },
+  {
+   "step": "NVQ Level 5 -> NVQ Level 6 (same technology area)",
+   "institution": "Tertiary and Vocational Education Commission (TVEC)",
+   "officialUrl": "https://tvec.gov.lk/wp-content/uploads/2025/03/NVQ_Operation-Manual-2009.pdf",
+   "requirement": "NVQ Level 5 qualification in the same technology area",
+   "quote": "A level 5 qualification allows direct entry to the NVQ level 6 training programme in the same technology area with the credits earned towards the NVQ level 5 qualification counted towards the NVQ level 6 qualification.",
+   "locator": "Operations Manual Oct 2009, PDF p.17, Section 2.3 (b)",
+   "readOn": "2026-10-15"
+  },
+  {
+   "step": "Framework rule for entering an NVQ Level 5 diploma (2009 text)",
+   "institution": "Tertiary and Vocational Education Commission (TVEC)",
+   "officialUrl": "https://tvec.gov.lk/wp-content/uploads/2025/03/NVQ_Operation-Manual-2009.pdf",
+   "requirement": "NVQ Level 3 or 4 in a relevant occupation (lateral entry via TVEC mapping / RPL)",
+   "quote": "The entry qualification to the Level 5 Diploma program is therefore fixed at NVQ Level 3 or Level 4 in a relevant occupation. The list of relevant occupations for each level 5 diploma will be notified when applications are called for these programmes. There is also a path of lateral entry for students with non NVQ qualifications mapped by the TVEC",
+   "locator": "Operations Manual Oct 2009, PDF p.16, Section 2.3 (b)",
+   "readOn": "2026-10-15",
+   "caveat": "Does not mention A/L. Current DTET (Gazette 31.10.2025) and VTA course entries accept 3 A/L passes as an alternative; see routes R032-R039."
+  },
+  {
+   "step": "NVQ Level 5 or 6 diploma after A/L",
+   "institution": "University of Vocational Technology",
+   "officialUrl": "https://uovt.ac.lk/en/academics/nvq_pathway",
+   "requirement": "After G.C.E. A/L: direct entry to NVQ Level 5 or 6",
+   "quote": "Direct entry to Level 5 or 6 (Diploma/HND). Specialized for technical streams.",
+   "locator": "NVQ Pathway page, entry point \"After G.C.E. A/L\" (the same card lists \"Level 7 Degree Path\")",
+   "readOn": "2026-10-15"
+  },
+  {
+   "step": "UoVT is the NVQ 7 degree-awarding body",
+   "institution": "University of Vocational Technology",
+   "officialUrl": "https://uovt.ac.lk/en/academics/nvq_pathway",
+   "requirement": "Statement (not an entry rule)",
+   "quote": "Degree Awarding Body (NVQ 7) ... The apex body of the NVQSL Framework. ... UoVT is the only government university in Sri Lanka dedicated to offering degree-level pathways for diploma holders.",
+   "locator": "NVQ Pathway page; level table there: 5 = Diploma (Supervisor), 6 = Higher Diploma (Technologist), 7 = Bachelor's Degree (Professional)",
+   "readOn": "2026-10-15"
+  },
+  {
+   "step": "UoVT degree entry: NVQ 5 or 6",
+   "institution": "University of Vocational Technology",
+   "officialUrl": "https://uovt.ac.lk/en/academics/admission_page",
+   "requirement": "NVQ Level 5 or Level 6, or equivalent; apply via the UoVT online portal within the published period; aptitude test; interview depending on programme",
+   "quote": "UoVT generally accepts NVQ Level 5 or Level 6, or equivalent qualifications.",
+   "locator": "Admission page, Step 01. Step 02: \"Submit your application through the official UoVT online portal within the published period.\"",
+   "readOn": "2026-10-15",
+   "alreadyAs": "R042"
+  },
+  {
+   "step": "NVQ 7 equivalence (VTA statement)",
+   "institution": "Vocational Training Authority of Sri Lanka (VTA)",
+   "officialUrl": "https://www.vtasl.gov.lk/national-vocational-qualification",
+   "requirement": "Statement (not an entry rule)",
+   "quote": "The NVQ level 7 is equivalent to the bachelor degree qualification.",
+   "locator": "VTA NVQ page; same page: \"the NVQ is designed for the job seekers soon after their A/L exams.\"",
+   "readOn": "2026-10-15"
+  }
+ ],
+ "programmes": [
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Engineering Technology - Building Services Technology",
+   "award": "B.Eng Tech",
+   "faculty": "Faculty of Engineering Technology",
+   "duration": "3 Academic Years",
+   "entry": "Accepted Qualifications (NVQ fields): Building Services Technology; Building Construction Technology; Electrical Technology; Electronic Technology; Refrigeration & Air Conditioning Technology; Telecommunication Technology; Renewable Energy technology. Weekend option \"available only for NVQ students\".",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/bengtech-building-services-technology",
+   "quote": "The minimum qualifications required for admission to the programme on the standard route are: [Accepted Qualifications] Building Services Technology, Building Construction Technology, Electrical Technology, Electronic Technology, Refrigeration & Air Conditioning Technology, Telecommunication Technology, Renewable Energy technology",
+   "note": "Entry table (NVQ Level 5 / NVQ Level 6 / A/L Stream / Equivalent Qualifications) renders with headers only; cell values not readable. Start Date 2026. Fees \"will be provided soon\"."
+  },
+  {
+   "name": "Bachelor of Engineering Technology in Construction Technology & Resource Management",
+   "award": "B.Eng Tech (from faculty pattern, not seen on a programme page)",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Engineering Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/engineering_technology",
+   "quote": "Bachelor of Engineering Technology in Construction Technology & Resource Management | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Engineering Technology in Manufacturing Technology",
+   "award": "B.Eng Tech",
+   "faculty": "Faculty of Engineering Technology",
+   "duration": "3 Academic Years (optional 4th year)",
+   "entry": "Accepted Qualifications (NVQ fields): Production, Mechatronics, Refrigeration & Air Conditioning, Mechanical, Automobile, Welding, Farm Machinery, Chemical and Polymer Technology",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/bengtech-manufacturing-technology",
+   "quote": "The minimum qualifications required for admission to the programme on the standard route are: [Accepted Qualifications] Production, Mechatronics, Refrigeration & Air Conditioning, Mechanical, Automobile, Welding, Farm Machinery, Chemical and Polymer Technology",
+   "note": "Entry table headers only; cell values not readable. Start 2026."
+  },
+  {
+   "name": "Bachelor of Engineering Technology in Mechatronics Technology",
+   "award": "B.Eng Tech (from faculty pattern, not seen on a programme page)",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Engineering Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/engineering_technology",
+   "quote": "Bachelor of Engineering Technology in Mechatronics Technology | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "B.Tech in Computer Networks and Cloud Security",
+   "award": "B.Tech",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Information Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/information_technology",
+   "quote": "B.Tech in Computer Networks and Cloud Security | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Technology - Software and Intelligent Systems",
+   "award": "B.Tech",
+   "faculty": "Faculty of Information Technology",
+   "duration": "3 Academic Years",
+   "entry": "Minimum NVQ level 5 ICT diploma holder",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/btech-software-and-intelligent-systems",
+   "quote": "The minimum qualifications required for admission to the programme on the standard route are: [Accepted Qualifications] Minimum NVQ level 5 ICT diploma holder",
+   "note": "Week Day and Week End options. Start 2026."
+  },
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Technology - Web and Creative Media",
+   "award": "B.Tech",
+   "faculty": "Faculty of Information Technology",
+   "duration": "3 Academic Years",
+   "entry": "Minimum NVQ level 5 ICT diploma holder",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/btech-web-and-creative-media",
+   "quote": "The minimum qualifications required for admission to the programme on the standard route are: [Accepted Qualifications] Minimum NVQ level 5 ICT diploma holder",
+   "note": "Week Day (B1) and Week End (B2) options. Start 2026. Fees section empty."
+  },
+  {
+   "name": "B.Tech in Food Process Technology",
+   "award": "B.Tech",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/industrial_technology",
+   "quote": "B.Tech in Food Process Technology | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Technology in Film and Television Production Technology",
+   "award": "B.Tech",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Academic Years",
+   "entry": "NVQ Level 5 in Film/Television Production/Post Production, Multimedia, Visual Communication, Photography/Image Art, Media/Journalism (incl. Film, Television/Audio Visual Production, Electronics/Telecommunication), or a TVEC-certified NVQ-equivalent diploma in those disciplines",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/btech-film-and-television-production-technology",
+   "quote": "Possess an NVQ Level 5 qualification in disciplines related to Film/Television Production/Post Production, Multimedia, Visual Communication, Photography/Image Art, Media/Journalism,including subjects such as Film, Television/Audio Visual Production, Electronics/Telecommunication. Hold an NVQ-equivalent diploma qualification in any of the aforementioned disciplines, as certified by the Tertiary and Vocational Education Commission in Sri Lanka (TVEC).",
+   "note": "Week End option only. Start 2026. WebFetch returned this quote in fragments; re-check the joins word for word."
+  },
+  {
+   "name": "B.Tech in Media Arts Production Technology",
+   "award": "B.Tech",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/industrial_technology",
+   "quote": "B.Tech in Media Arts Production Technology | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "B.Tech in Quantity Surveying",
+   "award": "B.Tech",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/industrial_technology",
+   "quote": "B.Tech in Quantity Surveying | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "institution": "University of Vocational Technology",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "name": "Bachelor of Technology - Hotel Management",
+   "award": "B.Tech",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Academic Years",
+   "entry": "NVQ Level 5 in Event Management, Hospitality Management or Travel and Tour Management",
+   "officialUrl": "https://www.uovt.ac.lk/en/academics/courses/btech-hotel-management",
+   "quote": "The minimum qualifications required for admission to the programme on the standard route are: [Accepted Qualifications] NVQ Level 5 in Event Management, Hospitality Management or Travel and Tour Management",
+   "note": "Start Date 2026 (no month on the page; a search snippet said September 2026 but the page read did not show it, so not used)."
+  },
+  {
+   "name": "B.Tech in Industrial Management Technology",
+   "award": "B.Tech",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Industrial Technology",
+   "duration": "3 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/industrial_technology",
+   "quote": "B.Tech in Industrial Management Technology | 3 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "Bachelor of Education in English Language Teaching",
+   "award": "B.Ed",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Education",
+   "duration": "4 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/education",
+   "quote": "Bachelor of Education in English Language Teaching | 4 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "Bachelor of Education in Engineering Technology",
+   "award": "B.Ed",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Education",
+   "duration": "4 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/education",
+   "quote": "Bachelor of Education in Engineering Technology | 4 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "Bachelor of Education in Bio Systems Technology",
+   "award": "B.Ed",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Education",
+   "duration": "4 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/education",
+   "quote": "Bachelor of Education in Bio Systems Technology | 4 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  },
+  {
+   "name": "Bachelor of Education in Information and Communication Technology",
+   "award": "B.Ed",
+   "institution": "University of Vocational Technology",
+   "faculty": "Faculty of Education",
+   "duration": "4 Years",
+   "entry": null,
+   "officialUrl": "https://uovt.ac.lk/en/academics/faculties/education",
+   "quote": "Bachelor of Education in Information and Communication Technology | 4 Years | 2026",
+   "readOn": "2026-10-15",
+   "intake": {
+    "opens": null,
+    "closes": null,
+    "quote": null
+   },
+   "note": "Listed on the faculty page (title, duration, start 2026). Programme page not read; entry requirements not captured."
+  }
+ ],
+ "programmeCount": {
+  "quote": "17 Degree programmes",
+  "officialUrl": "https://uovt.ac.lk/en/academics/prospectus",
+  "readOn": "2026-10-15",
+  "note": "Prospectus 2026/2027 page (\"Academic year 2026 / 2027\"). Faculty pages list 4 + 3 + 6 + 4 = 17, matching."
+ },
+ "selection": {
+  "officialUrl": "https://uovt.ac.lk/documents/selection_criteria_11_5_26.pdf",
+  "readOn": "2026-10-15",
+  "quote": "Comprehensive Framework for Student Selection: Intake 2025/2026 ... Final CSS = (S-NAR × 0.4) + (ATR × 0.6) ... Tie-Breaker NVQ Applicants B2: For NVQ stream applicants where Z-scores are absent, the selection will be based on ATR. In case of same final marks, verifiable experience after obtaining NVQ 4/5 qualification is used as the tie-breaker.",
+  "note": "Intake 2025/2026 document, already cited by R042. A/L applicants ranked on stream-weighted Z-score (40%) + aptitude (60%); NVQ applicants on aptitude."
+ },
+ "alreadyInZedPath": [
+  "R032",
+  "R033",
+  "R034",
+  "R035",
+  "R036",
+  "R037",
+  "R038",
+  "R039",
+  "R040",
+  "R041",
+  "R042"
+ ],
+ "notFound": [
+  "UoVT intake 2026/2027 application opening or closing dates: not stated on admission, prospectus, faculty or programme pages (admission page says only \"within the published period\").",
+  "portal.uovt.ac.lk returned HTTP 522 on 2026-10-15, so the intake notice could not be read. A search snippet showed \"Calling Applications for Intake 2025/26 Applications are closed\"; not read from the page, so not used.",
+  "UoVT programme-level NVQ 5 / NVQ 6 / A/L-stream requirements: the entry table on programme pages shows headers only (cell values not readable as text).",
+  "UoVT fees: programme pages say fee information \"will be provided soon\".",
+  "Programme pages for 11 of 17 programmes not read (read budget); their Accepted Qualifications are not captured.",
+  "Current (2021) TVEC NVQ Operations Manual: indexed URL returned HTTP 404; the 2009 manual (hosted on tvec.gov.lk, uploaded 2025/03) was used instead.",
+  "tvec.gov.lk home and /nvq-course/ pages: no framework-level text. www.tvec.gov.lk/?page_id=140 returned 404. nvq.gov.lk/Home/index2.htm returned 404.",
+  "CGTTI: not researched in this pass (read budget); no official CGTTI entry text captured.",
+  "ssu.uovt.ac.lk/downloads/admission_guidelin.pdf returned 404."
+ ]
+}

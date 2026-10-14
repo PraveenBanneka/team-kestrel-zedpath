@@ -12,8 +12,25 @@ import { myJourneyRoutes } from './my-journey.ts';
 import { SYLLABI, SYLLABI_VERSION } from './syllabi.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import statistics from './generated/statistics-2024.json' with { type: 'json' };
+import aptitudeData from '../data/aptitude/aptitude-2025-2026.json' with { type: 'json' };
+import type { AptitudeNotice } from '../shared/api.ts';
 import type { InstitutionFact, StatisticsFile } from '../shared/statistics.ts';
 const FACTS = (statistics as StatisticsFile).institutions;
+// Aptitude notices by Uni-Code. Sabaragamuwa's PE/Sports courses share one joint practical test (handbook): point to the
+// other three universities' official notices for the same test instead of a page we did not use.
+type AptTest = { institution: string; uniCodes: string[]; officialUrl: string; registrationOpens: string | null; registrationCloses: string | null; testDate: string | null };
+const APT = aptitudeData as { academicYear: string; tests: AptTest[]; notFound: { uniCode: string }[] };
+const JOINT_SPORTS = ['081E', '082C', '141D'];
+function aptitudeFor(uniCode: string, today: string): AptitudeNotice | null {
+  const t = APT.tests.find(x => x.uniCodes.includes(uniCode));
+  const joint = APT.notFound.some(n => n.uniCode === uniCode)
+    ? APT.tests.filter(x => x.uniCodes.some(u => JOINT_SPORTS.includes(u))).map(x => ({ institution: x.institution, officialUrl: x.officialUrl })) : [];
+  if (!t && !joint.length) return null;
+  const last = [t?.testDate, t?.registrationCloses].filter(Boolean).sort().pop() ?? null;
+  return { academicYear: APT.academicYear, institution: t?.institution ?? '', officialUrl: t?.officialUrl ?? '',
+    registrationOpens: t?.registrationOpens ?? null, registrationCloses: t?.registrationCloses ?? null, testDate: t?.testDate ?? null,
+    past: last === null || last < today, joint };
+}
 import type { JourneyResponse } from '../shared/journey.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
@@ -91,7 +108,8 @@ app.get('/offerings/:uniCode', c => {
     requirementCitation: { sourceId: '1', page: course?.page ?? o.page, label: 'UGC handbook 2025/26' },
     otherRequirements: o.other,
     syllabus: SYLLABI.get(o.uniCode) ?? null,
-    facts: (FACTS[o.uniCode.slice(-1)] ?? []) as InstitutionFact[],   // UGC University Statistics 2024 for this institution
+    facts: (FACTS[o.uniCode.slice(-1)] ?? []) as InstitutionFact[],
+    aptitude: o.hasAptitudeTest ? aptitudeFor(o.uniCode, new Date(Date.now() + 330 * 60_000).toISOString().slice(0, 10)) : null,   // UGC University Statistics 2024 for this institution
     groups: o.groups.map(g => ({ code: g.code, label: g.label, history: g.years.map(y => ({
       academicYear: y.academicYear, zE4: di === undefined ? null : y.zE4[di],
       citation: { sourceId: y.source, page: y.page, label: y.sourceLabel } })) })),

@@ -175,7 +175,8 @@ describe('DAT dates', () => {
     }
   });
   it('DAT-011 every route and file retrieval date is ISO and not after the build', () => {
-    const built = JOURNEY.builtAt.slice(0, 10);
+    // Project dates are Sri Lanka dates (UTC+05:30); builtAt is UTC, so compare on the Sri Lanka calendar day.
+    const built = new Date(Date.parse(JOURNEY.builtAt) + 330 * 60_000).toISOString().slice(0, 10);
     for (const d of [routesFile.retrievedOn, noticesFile.retrievedOn, syllabiFile.retrievedOn, ...ROUTES.map(r => r.retrieved_on)]) {
       expect(isIso(d), d).toBe(true);
       expect(d <= built, d).toBe(true);

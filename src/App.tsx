@@ -22,7 +22,7 @@ import { AVATAR_CODES, PersonAvatar } from './avatars.tsx';
 import type { JourneyStepId, MyJourney } from '../shared/journey.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
 import { MyListScreen } from './screens/MyList.tsx';
-import { JourneyScreen, today, type JourneyOps } from './screens/Journey.tsx';
+import { JourneyScreen, longDate, today, type JourneyOps } from './screens/Journey.tsx';
 import { GroupInfoScreen, GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
@@ -37,6 +37,7 @@ import { shortDuration, shortInstitution, shortYear, titleCase } from './format.
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
 import { LANGS, locale, setLang as applyLang, t, type Key, type Lang } from './i18n/index.ts';
 import type { InstitutionFact } from '../shared/statistics.ts';
+import type { AptitudeNotice } from '../shared/api.ts';
 import { loadLang, saveLang } from './storage.ts';
 
 const bandLabel = (b: Band) => t(`band.${b}`);
@@ -507,6 +508,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
         </details>
       </section>
       {d.syllabus && <SyllabusCard s={d.syllabus} />}
+      {d.aptitude && <AptitudeCard a={d.aptitude} />}
       {d.facts.length > 0 && <FactsCard facts={d.facts} />}
       {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />{t('detail.ambiguous')}</div>}
 
@@ -779,5 +781,29 @@ function FactsCard({ facts }: { facts: InstitutionFact[] }) {
             </dd>
           </div>))}
       </dl>
+    </section>);
+}
+
+// Aptitude / practical test: the official notice, with the most recent intake's dates shown as past when they are.
+function AptitudeCard({ a }: { a: AptitudeNotice }) {
+  const line = (k: Key, kp: Key, d: string | null) => d && <li>{t(a.past ? k : kp, { d: longDate(d) })}</li>;
+  return (
+    <section className="card stack" aria-labelledby="apt-h">
+      <h2 id="apt-h" className="title-l" style={{ margin: 0 }}>{t('apt.h')}</h2>
+      <p className="helper" style={{ margin: 0 }}>{t('apt.sub')}</p>
+      {a.officialUrl && <>
+        <p className="section-label" style={{ margin: 0 }}>{t(a.past ? 'apt.last' : 'apt.current', { y: a.academicYear })}</p>
+        <ul className="plain-list">
+          {line('apt.opened', 'apt.opens', a.registrationOpens)}
+          {line('apt.closed', 'apt.closes', a.registrationCloses)}
+          {line('apt.tested', 'apt.test', a.testDate)}
+        </ul>
+        {a.past && <p className="helper" style={{ margin: 0 }}>{t('apt.next')}</p>}
+        <a className="source-link" href={a.officialUrl} target="_blank" rel="noopener noreferrer">{t('apt.notice', { i: a.institution })}</a>
+      </>}
+      {a.joint.length > 0 && <>
+        <p className="helper" style={{ margin: 0 }}>{t('apt.joint')}</p>
+        {a.joint.map(j => <a key={j.officialUrl} className="source-link" href={j.officialUrl} target="_blank" rel="noopener noreferrer">{t('apt.notice', { i: j.institution })}</a>)}
+      </>}
     </section>);
 }

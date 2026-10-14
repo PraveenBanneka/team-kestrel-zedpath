@@ -907,23 +907,23 @@
   },
   {
    "route_group": "VOCATIONAL",
-   "name": "University of Vocational Technology (UoVT) - B.Tech degree programmes (NVQ 5/6 and A/L entry)",
+   "name": "University of Vocational Technology (UoVT) - B.Tech, B.Eng Tech and B.Ed degrees (NVQ 5/6 and A/L entry)",
    "provider": "University of Vocational Technology, Ratmalana",
    "provider_type": "state university",
    "duration": "Three year degree programme; optional 4th year for selected courses (B.Tech Special / B.Tech NVQ 7) per prospectus pathway diagram",
    "cost_min_lkr": null,
    "cost_max_lkr": null,
    "intake_timing": "Not found: applications via portal.uovt.ac.lk 'within the published period'; intake 2025/2026 selection framework published 11.5.26; 2026/27 call dates not found.",
-   "entry_requirements_text": "UoVT generally accepts NVQ Level 5 or Level 6, or equivalent qualifications. [admission page] | We particularly welcome applicants with National Vocational Qualifications (NVQ), technical diplomas, industry certifications, and relevant work experience. Priority admission is given to NVQ Level 5 and Level 6 holders in recognition of their technical qualifications and industry experience. G.C.E. Advanced Level candidates are considered for remaining places based on aptitude test performance and Zscore. [prospectus 2026/2027, p.13, transcribed from page image]",
+   "entry_requirements_text": "UoVT generally accepts NVQ Level 5 or Level 6, or equivalent qualifications. [admission page] | We particularly welcome applicants with National Vocational Qualifications (NVQ), technical diplomas, industry certifications, and relevant work experience. Priority admission is given to NVQ Level 5 and Level 6 holders in recognition of their technical qualifications and industry experience. G.C.E. Advanced Level candidates are considered for remaining places based on aptitude test performance and Zscore. [prospectus 2026/2027, p.13, transcribed from page image] | NVQ level 7 programmes conducted by the Univotec allow students to acquire B.Tech. or B.Ed. Tech. degree qualifications. Pathways, from the National Diplomas, will be available to students who have achieved the relevant NVQ qualifications at levels 5 or level 6 to proceed to degree programmes. Those with NVQ level 6 qualifications are eligible to receive appropriate credit transfer towards the degree programme, to be determined by the Univotec. [TVEC NVQ Operations Manual, p.17: https://tvec.gov.lk/wp-content/uploads/2025/03/NVQ_Operation-Manual-2009.pdf]",
    "districts_locations": [
     "No.100, Kandawala, Ratmalana (main); 6 University Colleges (names not captured)"
    ],
    "official_url": "https://uovt.ac.lk/en",
    "source_url": "https://uovt.ac.lk/en/academics/admission_page",
    "source_locator": "Admission page 'How to Apply'; prospectus PDF p.13 'Qualifications Upgrading Pathway' (sources/uovt_prospectus_2026_2027.pdf, image-only, transcribed visually); selection formula from sources/uovt_selection_criteria_11_5_26.pdf",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-15",
    "confidence": 0.65,
-   "notes": "This is the NVQ 5/6 -> degree link. Prospectus is image-only PDF; text was read from the page image, not extracted. Fees and programme-level entry requirements not found. Registering for a 3-year UoVT university-college diploma makes a student ineligible for IFSLS.",
+   "notes": "This is the NVQ 5/6 -> degree link. Prospectus is image-only PDF; text was read from the page image, not extracted. Fees and programme-level entry requirements not found. Registering for a 3-year UoVT university-college diploma makes a student ineligible for IFSLS. 17 degree programmes listed by UoVT for 2026 (faculty pages read 2026-10-15): Bachelor of Engineering Technology - Building Services Technology; Bachelor of Engineering Technology in Construction Technology & Resource Management; Bachelor of Engineering Technology in Manufacturing Technology; Bachelor of Engineering Technology in Mechatronics Technology; B.Tech in Computer Networks and Cloud Security; Bachelor of Technology - Software and Intelligent Systems; Bachelor of Technology - Web and Creative Media; B.Tech in Food Process Technology; Bachelor of Technology in Film and Television Production Technology; B.Tech in Media Arts Production Technology; B.Tech in Quantity Surveying; Bachelor of Technology - Hotel Management; B.Tech in Industrial Management Technology; Bachelor of Education in English Language Teaching; Bachelor of Education in Engineering Technology; Bachelor of Education in Bio Systems Technology; Bachelor of Education in Information and Communication Technology. Selection 2025/26 (UoVT selection criteria PDF): A/L applicants 40% stream-weighted Z-score and 60% aptitude test; NVQ applicants ranked on the aptitude test. 2026/27 application dates not published (checked 2026-10-15).",
    "id": "R042"
   },
   {
