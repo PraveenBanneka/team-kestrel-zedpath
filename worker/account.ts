@@ -72,13 +72,14 @@ export const ready = async (c: C, next: Next) => {
   await next();
 };
 // Writes from other websites are refused (browsers always send Origin on cross-site POST/PUT/DELETE).
+/** True when the request carries an Origin from another site; "null" or malformed counts as cross-site (never a 500). */
+export function crossSite(c: Context): boolean {
+  const origin = c.req.header('Origin');
+  if (!origin) return false;
+  try { return new URL(origin).host !== new URL(c.req.url).host; } catch { return true; }
+}
 export const sameOrigin = async (c: C, next: Next) => {
-  if (!['GET', 'HEAD'].includes(c.req.method)) {
-    const origin = c.req.header('Origin');
-    let host: string | null = null;
-    try { host = origin ? new URL(origin).host : null; } catch { /* "null" or malformed: treated as cross-site (was a 500) */ }
-    if (origin && host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
-  }
+  if (!['GET', 'HEAD'].includes(c.req.method) && crossSite(c)) return err(c, 403, 'Cross-site request refused');
   await next();
 };
 /** Two limits: 10/min per action + IP + username (guessing one account) and 100/min per IP (floods). Never per IP
@@ -258,6 +259,15 @@ accountRoutes.post('/auth/signup', async c => {
   return c.json({ username, recoveryCode: code } satisfies SignupResponse, 201);
 });
 
+/** Close open group-chat sockets (security audit run-1, lead 2): one device on logout (session), every device on logout
+ *  everywhere, recovery or leaving. Best effort: a room that cannot be reached closes the socket on its next message. */
+export async function kickFromRooms(env: Env, accountId: number, session?: string, only?: number[]) {
+  if (!env.GROUP_ROOM) return;
+  const ids = only ?? ((await env.DB.prepare('SELECT group_id FROM group_member WHERE account_id = ?').bind(accountId).all<{ group_id: number }>()).results.map(r => r.group_id));
+  await Promise.allSettled(ids.map(g => env.GROUP_ROOM.get(env.GROUP_ROOM.idFromName(`group:${g}`))
+    .fetch('https://room/kick', { method: 'POST', body: JSON.stringify({ accountId, session }) })));
+}
+
 // CR-007: "Try the demo". Each tap makes a private throwaway account with the sample student (shared/demo-data.ts) and
 // logs it in; it expires after DEMO_HOURS and is deleted on a later demo tap (no cron on the free plan). Nobody can log in
 // to it with a password (random verifier). Demo accounts read groups but cannot post, report or create groups.
@@ -325,18 +335,21 @@ accountRoutes.post('/auth/recover', async c => {
     db.prepare('DELETE FROM session WHERE account_id = ?').bind(row.account_id),     // a reset logs out every device
     sessionStatement(db, '?', [row.account_id], await sha256Hex(fromHex(token))),
   ]);
+  await kickFromRooms(c.env, row.account_id);                                  // old devices lose their open chats too
   setSessionCookie(c, token);
   return c.json({ username, recoveryCode: fresh } satisfies SignupResponse);
 });
 
 accountRoutes.post('/auth/logout', async c => {
   await c.env.DB.prepare('DELETE FROM session WHERE token_hash = ?').bind(c.get('tokenHash')).run();
+  await kickFromRooms(c.env, c.get('accountId'), c.get('tokenHash'));
   deleteCookie(c, COOKIE, COOKIE_OPTS);
   return c.body(null, 204);
 });
 
 accountRoutes.post('/auth/logout-all', async c => {
   await c.env.DB.prepare('DELETE FROM session WHERE account_id = ?').bind(c.get('accountId')).run();
+  await kickFromRooms(c.env, c.get('accountId'));
   deleteCookie(c, COOKIE, COOKIE_OPTS);
   return c.body(null, 204);
 });

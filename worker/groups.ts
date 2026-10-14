@@ -16,7 +16,7 @@ import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, 
 import { sampleKey } from '../shared/group-samples.ts';
 import { normaliseUsername, USERNAME_RE } from '../shared/account.ts';
 import { book } from './rulebook.ts';
-import { err, isDemo, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
+import { err, isDemo, kickFromRooms, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
 import { tidyName as titleCaseName } from './ask.ts';
 
 
@@ -122,6 +122,7 @@ groupRoutes.post('/groups/:id/leave', async c => {
   const id = groupId(c);
   if (!id) return err(c, 404, 'No such group');
   await c.env.DB.prepare('DELETE FROM group_member WHERE group_id = ? AND account_id = ?').bind(id, c.get('accountId')).run();
+  await kickFromRooms(c.env, c.get('accountId'), undefined, [id]);   // an open chat stops reading the group it left
   return c.body(null, 204);
 });
 
@@ -145,7 +146,8 @@ groupRoutes.get('/groups/:id/live', async c => {
   headers.set('X-ZP-Author', c.get('username'));                // usernames are [a-z0-9_.] only
   headers.set('X-ZP-Badge', s ? encodeURIComponent(seniorBadge(titleCaseName(s.course), s.year)) : '');   // headers are ASCII-only
   headers.set('X-ZP-Avatar', m.avatar ?? '');
-  headers.set('X-ZP-ReadOnly', (await isDemo(c.env.DB, me)) ? '1' : '');   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
+  headers.set('X-ZP-ReadOnly', (await isDemo(c.env.DB, me)) ? '1' : '');
+  headers.set('X-ZP-Session', c.get('tokenHash'));             // lets logout close exactly this device's socket   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
   headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code));    // which labelled sample thread the room shows first
   headers.set('X-ZP-Blocked', JSON.stringify((blocked.results as { blocked_id: number }[]).map(r => r.blocked_id)));
   return room(c, id).fetch(new Request('https://room/live', { headers }));

@@ -9,7 +9,7 @@ import { formatZ } from '../shared/banding.ts';
 import { EMBED_MODEL, HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import { assessOffering, book, districtIndex, parseProfile } from './rulebook.ts';
-import { parseExtras } from './account.ts';
+import { crossSite, parseExtras } from './account.ts';
 import { specialIntakeHint, type Extras } from '../shared/account.ts';
 
 type AppEnv = { Bindings: Env };
@@ -185,8 +185,7 @@ const NOT_FOUND = 'I could not find this in the UGC handbook or the official sou
 
 askRoutes.post('/ask', async c => {
   if (!c.env.AI || !c.env.ASK_INDEX || !c.env.GEMINI_API_KEY || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
-  const origin = c.req.header('Origin');
-  if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
+  if (crossSite(c)) return err(c, 403, 'Cross-site request refused');   // a null/malformed Origin is a 403, not a 500
   const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown; extras?: unknown } | null;
   const question = typeof b?.question === 'string' ? b.question.trim() : '';
   if (question.length < 2 || question.length > QUESTION_MAX) return err(c, 400, `Ask a question of up to ${QUESTION_MAX} characters`);
@@ -265,8 +264,7 @@ export function askActions(question: string, codes: string[], p: ProfileInput | 
  *  the student. Rate-limited per IP; same-origin only. */
 askRoutes.post('/ask/feedback', async c => {
   if (!c.env.DB) return err(c, 503, 'Feedback is not available yet');
-  const origin = c.req.header('Origin');
-  if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
+  if (crossSite(c)) return err(c, 403, 'Cross-site request refused');   // a null/malformed Origin is a 403, not a 500
   if (c.env.IP_LIMITER && !(await c.env.IP_LIMITER.limit({ key: `fb:${ip(c)}` })).success) return err(c, 429, 'Too many reports. Wait a minute');
   const b = await c.req.json().catch(() => null) as Partial<AskFeedback> | null;
   const question = String(b?.question ?? '').trim(), answer = String(b?.answer ?? '').trim(), note = b?.note ? String(b.note).trim().slice(0, 500) : null;

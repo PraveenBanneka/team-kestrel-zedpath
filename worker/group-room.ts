@@ -6,7 +6,7 @@ import { DurableObject } from 'cloudflare:workers';
 import { samplesFor } from '../shared/group-samples.ts';
 import { HISTORY_LIMIT, canPost, cleanMessage, moderationSays, visibleTo, type ChatMessage, type ServerFrame } from '../shared/groups.ts';
 
-interface Member { accountId: number; author: string; badge: string | null; avatar: string | null; blocked: number[]; readOnly?: boolean }
+interface Member { accountId: number; author: string; badge: string | null; avatar: string | null; blocked: number[]; readOnly?: boolean; session?: string }
 type Row = { message_id: string; account_id: number; author: string; badge: string | null; avatar: string | null; body: string; created_at: string; hidden: number } & Record<string, SqlStorageValue>;
 
 const MODERATION_MODEL = '@cf/meta/llama-guard-3-8b';
@@ -49,6 +49,7 @@ export class GroupRoom extends DurableObject<Env> {
         badge: req.headers.get('X-ZP-Badge') ? decodeURIComponent(req.headers.get('X-ZP-Badge')!) : null,
         avatar: AVATAR_RE.test(req.headers.get('X-ZP-Avatar') ?? '') ? req.headers.get('X-ZP-Avatar') : null, blocked: JSON.parse(req.headers.get('X-ZP-Blocked') ?? '[]') as number[],
         readOnly: req.headers.get('X-ZP-ReadOnly') === '1',
+        session: req.headers.get('X-ZP-Session') ?? undefined,   // which login opened it: logout closes only that device
       };
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
@@ -61,6 +62,14 @@ export class GroupRoom extends DurableObject<Env> {
       const { messageId } = await req.json<{ messageId: string }>();
       this.sql.exec('UPDATE message SET hidden = 1 WHERE message_id = ?', messageId);
       this.broadcast({ type: 'hidden', id: messageId });
+      return new Response(null, { status: 204 });
+    }
+    if (url.pathname === '/kick' && req.method === 'POST') {                 // the session ended or the member left (audit lead 2)
+      const { accountId, session } = await req.json<{ accountId: number; session?: string }>();
+      for (const ws of this.ctx.getWebSockets()) {
+        const m = ws.deserializeAttachment() as Member;
+        if (m.accountId === accountId && (!session || m.session === session)) ws.close(1008, 'Signed out');
+      }
       return new Response(null, { status: 204 });
     }
     if (url.pathname === '/purge' && req.method === 'POST') {                // the account was deleted

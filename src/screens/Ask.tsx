@@ -176,7 +176,9 @@ export function AskScreen({ profile, extras, turns, setTurns, initialQuestion, o
       setTurns(x => x.map((y, i) => i === x.length - 1 ? { ...y, error: (e as Error).message } : y));
     }
   };
-  useEffect(() => { if (initialQuestion) { onConsumedInitial(); void send(initialQuestion); } }, [initialQuestion]);   // eslint-disable-line react-hooks/exhaustive-deps
+  // A #/ask/<question> link only fills the box (security audit run-1, lead 15): a link must never spend the student's
+  // daily questions without a tap.
+  useEffect(() => { if (initialQuestion) { onConsumedInitial(); setQ(initialQuestion); } }, [initialQuestion]);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, [turns]);
 
   // Five questions built from this student's own details (src/ask-suggest.ts).
