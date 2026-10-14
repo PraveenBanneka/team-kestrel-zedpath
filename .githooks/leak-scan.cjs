@@ -25,20 +25,23 @@ const FORBIDDEN_FILES = /(^|\/)(\.dev\.vars(\..*)?|\.env(\.(?!example$).*)?|.*\.
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
 
 function ranges() {
-  if (process.argv.includes('--all')) return ['HEAD'];
+  if (process.argv.includes('--all')) return [['HEAD']];
   const input = fs.readFileSync(0, 'utf8').trim();
   if (!input) return [];
   return input.split('\n').map(l => l.trim().split(/\s+/)).filter(p => p.length === 4 && !ZERO.test(p[1]))
-    .map(([, local, , remote]) => (ZERO.test(remote) ? local : `${remote}..${local}`));
+    // A new ref (tag or branch) is scanned only for commits the remote does not have yet: everything else was scanned when
+    // it was pushed. Ranges are argument lists.
+    .map(([, local, , remote]) => (ZERO.test(remote) ? [local, '--not', '--remotes'] : [`${remote}..${local}`]));
 }
 
 const problems = [];
 for (const range of ranges()) {
-  for (const f of git('log', '--format=', '--name-only', '--diff-filter=AM', range).split('\n').filter(Boolean)) {
+  for (const f of git('log', '--format=', '--name-only', '--diff-filter=AM', ...range).split('\n').filter(Boolean)) {
     if (FORBIDDEN_FILES.test(f)) problems.push(`secret file committed: ${f}`);
   }
   let file = '';
-  for (const line of git('log', '-p', '--format=commit %h', '--no-color', range).split('\n')) {
+  // --no-textconv: scan raw bytes, so a diff converter (e.g. astextplain for PDFs) cannot crash the scan.
+  for (const line of git('log', '-p', '--no-textconv', '--format=commit %h', '--no-color', ...range).split('\n')) {
     if (line.startsWith('+++ b/')) { file = line.slice(6); continue; }
     if (!line.startsWith('+') || line.startsWith('+++')) continue;
     for (const [name, re] of SECRET_PATTERNS) if (re.test(line)) problems.push(`${name} in ${file}`);
