@@ -1,0 +1,3793 @@
+{
+ "source": {
+  "title": "Sri Lanka University Statistics 2024",
+  "publisher": "University Grants Commission",
+  "chapter": "4",
+  "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf",
+  "retrievedOn": "2026-10-15"
+ },
+ "tables": [
+  {
+   "table": null,
+   "printedNumber": null,
+   "title": "Total Graduate (Bachelor Degree) Output - 2024",
+   "page": 2,
+   "printedPage": 89,
+   "year": 2024,
+   "level": "undergraduate (bachelor degree), all routes: internal (4.1) + Open University bachelor (4.3) + external degrees (4.4)",
+   "columns": {
+    "female": "Female",
+    "total": "Total"
+   },
+   "rows": [
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Arts",
+     "female": 9964,
+     "total": 11729,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Education",
+     "female": 410,
+     "total": 438,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 4962,
+     "total": 6912,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Law",
+     "female": 407,
+     "total": 733,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Medicine",
+     "female": 1024,
+     "total": 1621,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Dental Science",
+     "female": 0,
+     "total": 0,
+     "page": 2,
+     "printedAs": "-"
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Vet. Science",
+     "female": 59,
+     "total": 69,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 667,
+     "total": 951,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Engineering",
+     "female": 655,
+     "total": 2111,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Architecture",
+     "female": 192,
+     "total": 341,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Computer Science",
+     "female": 733,
+     "total": 1510,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 801,
+     "total": 950,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Science",
+     "female": 2610,
+     "total": 4129,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 244,
+     "total": 305,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Technology",
+     "female": 642,
+     "total": 1491,
+     "page": 2
+    },
+    {
+     "institution": "All universities and HEIs established under the Universities Act",
+     "letter": null,
+     "year": 2024,
+     "field": "Total",
+     "female": 23370,
+     "total": 33290,
+     "page": 2
+    }
+   ]
+  },
+  {
+   "table": "4.1",
+   "printedNumber": "Table 04 - 01",
+   "title": "GRADUATE OUTPUT BY HIGHER EDUCATIONAL INSTITUTION  AND MAJOR ACADEMIC PROGRAMME : 2023 - 2024",
+   "subtitle": "(Universities and HEIs established under the Universities Act.)",
+   "page": 3,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "printedPages": [
+    90,
+    91,
+    92
+   ],
+   "year": 2024,
+   "years": [
+    2023,
+    2024
+   ],
+   "level": "undergraduate (bachelor degree), internal; excludes the Open University (see 4.3) and external degrees (see 4.4)",
+   "columns": {
+    "female": "F - Female",
+    "total": "T - Total"
+   },
+   "footnotes": {
+    "1": "2024 - provisional.",
+    "2": "Excluding Open University as it shows separately under Table 04 - 03.",
+    "3": "No main examination was held/ Only repeat exams were held.",
+    "4": "Results have not yet been released for all/few exams.",
+    "5": "Exams for only General/Special degree was held.",
+    "6": "Includes two batches.",
+    "7": "Information not submitted.",
+    "8": "Institute of Indigenous Medicine was converted to the Faculty of Indigenous Medicine in the University of Colombo by the gazzete published on 13.02.2023.",
+    "9": "No Output in the year"
+   },
+   "footnoteUse": "Footnote 1 is printed on the 'Year' heading and footnote 2 on the 'UNIVERSITY/HEI' heading (whole table). A row's 'footnotes' are the markers printed on that cell, attributed to the data row directly below the marker. Uva Wellassa University carries (7) on its name; it is attached to its Total rows. Footnote 8 is listed but no marker for it was found in the table.",
+   "rows": [
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Arts",
+     "female": 613,
+     "total": 709,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 355,
+     "total": 552,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Law",
+     "female": 208,
+     "total": 240,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 106,
+     "total": 189,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 20,
+     "total": 27,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Science",
+     "female": 238,
+     "total": 435,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Indigenous Medicine",
+     "female": 170,
+     "total": 209,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2023,
+     "field": "Total",
+     "female": 1710,
+     "total": 2361,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Arts",
+     "female": 776,
+     "total": 904,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "7"
+     ]
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Law",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "7"
+     ]
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 113,
+     "total": 197,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 19,
+     "total": 28,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Science",
+     "female": 219,
+     "total": 386,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 147,
+     "total": 185,
+     "page": 3
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Technology",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "7"
+     ]
+    },
+    {
+     "institution": "University of Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Total",
+     "female": 1274,
+     "total": 1700,
+     "page": 3
+    },
+    {
+     "institution": "Sri Palee Campus",
+     "letter": "S",
+     "year": 2023,
+     "field": "Arts",
+     "female": 125,
+     "total": 152,
+     "page": 3
+    },
+    {
+     "institution": "Sri Palee Campus",
+     "letter": "S",
+     "year": 2023,
+     "field": "Total",
+     "female": 125,
+     "total": 152,
+     "page": 3
+    },
+    {
+     "institution": "Sri Palee Campus",
+     "letter": "S",
+     "year": 2024,
+     "field": "Arts",
+     "female": 127,
+     "total": 154,
+     "page": 3
+    },
+    {
+     "institution": "Sri Palee Campus",
+     "letter": "S",
+     "year": 2024,
+     "field": "Total",
+     "female": 127,
+     "total": 154,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Arts",
+     "female": 725,
+     "total": 867,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 126,
+     "total": 188,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Law",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 131,
+     "total": 214,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Dental Science",
+     "female": 52,
+     "total": 78,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Veterinary Science",
+     "female": 49,
+     "total": 80,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 1,
+     "total": 2,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Engineering",
+     "female": 188,
+     "total": 735,
+     "page": 3,
+     "footnotes": [
+      "6"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 114,
+     "total": 152,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Science",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2023,
+     "field": "Total",
+     "female": 1386,
+     "total": 2316,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Arts",
+     "female": 866,
+     "total": 1015,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 126,
+     "total": 183,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Law",
+     "female": 48,
+     "total": 52,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 119,
+     "total": 193,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Dental Science",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Veterinary Science",
+     "female": 59,
+     "total": 69,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 160,
+     "total": 231,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 74,
+     "total": 302,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 35,
+     "total": 48,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Science",
+     "female": 228,
+     "total": 428,
+     "page": 3
+    },
+    {
+     "institution": "University of Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Total",
+     "female": 1715,
+     "total": 2521,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Arts",
+     "female": 756,
+     "total": 913,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 725,
+     "total": 1124,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 93,
+     "total": 152,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Engineering",
+     "female": 29,
+     "total": 108,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 45,
+     "total": 73,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 65,
+     "total": 81,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Science",
+     "female": 441,
+     "total": 695,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Technology",
+     "female": 104,
+     "total": 279,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2023,
+     "field": "Total",
+     "female": 2258,
+     "total": 3425,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Arts",
+     "female": 717,
+     "total": 830,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 744,
+     "total": 1095,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 98,
+     "total": 161,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 78,
+     "total": 111,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 48,
+     "total": 64,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 70,
+     "total": 87,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Science",
+     "female": 499,
+     "total": 758,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Technology",
+     "female": 97,
+     "total": 283,
+     "page": 3
+    },
+    {
+     "institution": "University of Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Total",
+     "female": 2351,
+     "total": 3389,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Arts",
+     "female": 1266,
+     "total": 1478,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 453,
+     "total": 705,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 93,
+     "total": 162,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 51,
+     "total": 173,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 38,
+     "total": 39,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Science",
+     "female": 298,
+     "total": 490,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Technology",
+     "female": 18,
+     "total": 114,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2023,
+     "field": "Total",
+     "female": 2217,
+     "total": 3161,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Arts",
+     "female": 1118,
+     "total": 1287,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 468,
+     "total": 697,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 192,
+     "total": 306,
+     "page": 3,
+     "footnotes": [
+      "6"
+     ]
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 46,
+     "total": 183,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 40,
+     "total": 44,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Science",
+     "female": 312,
+     "total": 477,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Technology",
+     "female": 30,
+     "total": 86,
+     "page": 3
+    },
+    {
+     "institution": "University of Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Total",
+     "female": 2206,
+     "total": 3080,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 56,
+     "total": 92,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2023,
+     "field": "Engineering",
+     "female": 238,
+     "total": 933,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2023,
+     "field": "Architecture & Quantity Surveying",
+     "female": 156,
+     "total": 348,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 145,
+     "total": 300,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2023,
+     "field": "Total",
+     "female": 595,
+     "total": 1673,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 48,
+     "total": 69,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 217,
+     "total": 859,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Architecture & Quantity Surveying",
+     "female": 192,
+     "total": 341,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 166,
+     "total": 292,
+     "page": 3
+    },
+    {
+     "institution": "University of Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Total",
+     "female": 623,
+     "total": 1561,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Arts",
+     "female": 405,
+     "total": 501,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Law",
+     "female": 44,
+     "total": 69,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 88,
+     "total": 142,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 69,
+     "total": 96,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Engineering",
+     "female": null,
+     "total": 19,
+     "page": 3,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 14,
+     "total": 24,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Science",
+     "female": 164,
+     "total": 278,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Indigenous Medicine",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Technology",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2023,
+     "field": "Total",
+     "female": 784,
+     "total": 1129,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Arts",
+     "female": 463,
+     "total": 549,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 230,
+     "total": 346,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Law",
+     "female": 56,
+     "total": 69,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 90,
+     "total": 145,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 72,
+     "total": 110,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 41,
+     "total": 177,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 93,
+     "total": 129,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Science",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 52,
+     "total": 60,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Technology",
+     "female": 79,
+     "total": 175,
+     "page": 3
+    },
+    {
+     "institution": "University of Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Total",
+     "female": 1176,
+     "total": 1760,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Arts",
+     "female": 356,
+     "total": 433,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 241,
+     "total": 361,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 94,
+     "total": 154,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 157,
+     "total": 196,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Engineering",
+     "female": 55,
+     "total": 234,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 4,
+     "total": 7,
+     "page": 3,
+     "footnotes": [
+      "5"
+     ]
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 41,
+     "total": 50,
+     "page": 3,
+     "footnotes": [
+      "4"
+     ]
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Science",
+     "female": 106,
+     "total": 157,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Technology",
+     "female": 34,
+     "total": 40,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2023,
+     "field": "Total",
+     "female": 1088,
+     "total": 1632,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Arts",
+     "female": 383,
+     "total": 457,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 267,
+     "total": 404,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 111,
+     "total": 165,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": null,
+     "total": null,
+     "page": 3,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 59,
+     "total": 231,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 11,
+     "total": 42,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 90,
+     "total": 120,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Science",
+     "female": 240,
+     "total": 376,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Technology",
+     "female": 57,
+     "total": 131,
+     "page": 3
+    },
+    {
+     "institution": "University of Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Total",
+     "female": 1218,
+     "total": 1926,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Arts",
+     "female": 531,
+     "total": 684,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 101,
+     "total": 156,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 43,
+     "total": 79,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 38,
+     "total": 46,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": null,
+     "total": 1,
+     "page": 3,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Science",
+     "female": 78,
+     "total": 129,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Technology",
+     "female": 48,
+     "total": 66,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2023,
+     "field": "Total",
+     "female": 839,
+     "total": 1161,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Arts",
+     "female": 286,
+     "total": 444,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 0,
+     "total": 0,
+     "page": 3,
+     "footnotes": [
+      "4"
+     ]
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 43,
+     "total": 71,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 41,
+     "total": 48,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 32,
+     "total": 47,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Science",
+     "female": 19,
+     "total": 34,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Technology",
+     "female": 47,
+     "total": 53,
+     "page": 3
+    },
+    {
+     "institution": "Eastern University",
+     "letter": "H",
+     "year": 2024,
+     "field": "Total",
+     "female": 468,
+     "total": 697,
+     "page": 3
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Arts",
+     "female": 15,
+     "total": 15,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 78,
+     "total": 106,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 16,
+     "total": 44,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Science",
+     "female": 2,
+     "total": 9,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Indigenous Medicine",
+     "female": 33,
+     "total": 37,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2023,
+     "field": "Total",
+     "female": 144,
+     "total": 211,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Arts",
+     "female": 86,
+     "total": 89,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 121,
+     "total": 156,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 0,
+     "total": 3,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Science",
+     "female": 19,
+     "total": 38,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 41,
+     "total": 52,
+     "page": 4
+    },
+    {
+     "institution": "Trincomalee Campus",
+     "letter": "W",
+     "year": 2024,
+     "field": "Total",
+     "female": 267,
+     "total": 338,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Arts",
+     "female": 176,
+     "total": 197,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 73,
+     "total": 114,
+     "page": 4,
+     "footnotes": [
+      "4"
+     ]
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Engineering",
+     "female": 14,
+     "total": 82,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 9,
+     "total": 11,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Science",
+     "female": 77,
+     "total": 115,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Technology",
+     "female": 29,
+     "total": 90,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2023,
+     "field": "Total",
+     "female": 378,
+     "total": 609,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Arts",
+     "female": 169,
+     "total": 190,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 150,
+     "total": 211,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Engineering",
+     "female": 10,
+     "total": 73,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 62,
+     "total": 74,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Science",
+     "female": 123,
+     "total": 172,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Technology",
+     "female": 44,
+     "total": 70,
+     "page": 4
+    },
+    {
+     "institution": "South Eastern University",
+     "letter": "J",
+     "year": 2024,
+     "field": "Total",
+     "female": 558,
+     "total": 790,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Arts",
+     "female": 571,
+     "total": 652,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 270,
+     "total": 417,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Medicine",
+     "female": 103,
+     "total": 168,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 7,
+     "total": 10,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 39,
+     "total": 53,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Science",
+     "female": 117,
+     "total": 177,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Technology",
+     "female": 95,
+     "total": 270,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2023,
+     "field": "Total",
+     "female": 1202,
+     "total": 1747,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Arts",
+     "female": 422,
+     "total": 469,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 272,
+     "total": 395,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 210,
+     "total": 315,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 89,
+     "total": 121,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 7,
+     "total": 13,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Science",
+     "female": 168,
+     "total": 254,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Technology",
+     "female": 106,
+     "total": 266,
+     "page": 4
+    },
+    {
+     "institution": "Rajarata University",
+     "letter": "K",
+     "year": 2024,
+     "field": "Total",
+     "female": 1274,
+     "total": 1833,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Arts",
+     "female": 228,
+     "total": 263,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 204,
+     "total": 318,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 110,
+     "total": 152,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 36,
+     "total": 83,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Science",
+     "female": 140,
+     "total": 286,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2023,
+     "field": "Total",
+     "female": 718,
+     "total": 1102,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Arts",
+     "female": 235,
+     "total": 264,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 238,
+     "total": 339,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 105,
+     "total": 138,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 31,
+     "total": 82,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Science",
+     "female": 131,
+     "total": 290,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Technology",
+     "female": 64,
+     "total": 142,
+     "page": 4
+    },
+    {
+     "institution": "Sabaragamuwa University",
+     "letter": "L",
+     "year": 2024,
+     "field": "Total",
+     "female": 804,
+     "total": 1255,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 353,
+     "total": 532,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 100,
+     "total": 134,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2023,
+     "field": "Science",
+     "female": 163,
+     "total": 281,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2023,
+     "field": "Technology",
+     "female": 71,
+     "total": 217,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2023,
+     "field": "Total",
+     "female": 687,
+     "total": 1164,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 335,
+     "total": 475,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Medicine",
+     "female": 48,
+     "total": 68,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 114,
+     "total": 141,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Science",
+     "female": 214,
+     "total": 291,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Technology",
+     "female": 85,
+     "total": 180,
+     "page": 4
+    },
+    {
+     "institution": "Wayamba University",
+     "letter": "M",
+     "year": 2024,
+     "field": "Total",
+     "female": 796,
+     "total": 1155,
+     "page": 4
+    },
+    {
+     "institution": "Uva Wellassa University",
+     "letter": "U",
+     "year": 2023,
+     "field": "Total",
+     "female": 0,
+     "total": 0,
+     "page": 4,
+     "footnotes": [
+      "7"
+     ]
+    },
+    {
+     "institution": "Uva Wellassa University",
+     "letter": "U",
+     "year": 2024,
+     "field": "Total",
+     "female": 0,
+     "total": 0,
+     "page": 4,
+     "footnotes": [
+      "7"
+     ]
+    },
+    {
+     "institution": "University of Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2023,
+     "field": "Arts",
+     "female": 437,
+     "total": 524,
+     "page": 4
+    },
+    {
+     "institution": "University of Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2023,
+     "field": "Total",
+     "female": 437,
+     "total": 524,
+     "page": 4
+    },
+    {
+     "institution": "University of Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2024,
+     "field": "Arts",
+     "female": 415,
+     "total": 558,
+     "page": 4
+    },
+    {
+     "institution": "University of Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2024,
+     "field": "Total",
+     "female": 415,
+     "total": 558,
+     "page": 4
+    },
+    {
+     "institution": "Gampaha Wickramarachchi University",
+     "letter": "P",
+     "year": 2023,
+     "field": "Indigenous Medicine",
+     "female": 10,
+     "total": 14,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Gampaha Wickramarachchi University",
+     "letter": "P",
+     "year": 2023,
+     "field": "Total",
+     "female": 10,
+     "total": 14,
+     "page": 4
+    },
+    {
+     "institution": "Gampaha Wickramarachchi University",
+     "letter": "P",
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 4,
+     "total": 8,
+     "page": 4,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Gampaha Wickramarachchi University",
+     "letter": "P",
+     "year": 2024,
+     "field": "Total",
+     "female": 4,
+     "total": 8,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 108,
+     "total": 140,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 65,
+     "total": 85,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2023,
+     "field": "Science",
+     "female": 37,
+     "total": 48,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2023,
+     "field": "Technology",
+     "female": null,
+     "total": null,
+     "page": 4,
+     "footnotes": [
+      "9"
+     ]
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2023,
+     "field": "Total",
+     "female": 210,
+     "total": 273,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 138,
+     "total": 213,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 59,
+     "total": 89,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2024,
+     "field": "Science",
+     "female": 35,
+     "total": 57,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2024,
+     "field": "Technology",
+     "female": 33,
+     "total": 105,
+     "page": 4
+    },
+    {
+     "institution": "University of Vavuniya",
+     "letter": "R",
+     "year": 2024,
+     "field": "Total",
+     "female": 265,
+     "total": 464,
+     "page": 4
+    },
+    {
+     "institution": "Insitute of Human Resource Advancement",
+     "letter": null,
+     "year": 2023,
+     "field": "Arts",
+     "female": 101,
+     "total": 192,
+     "page": 5
+    },
+    {
+     "institution": "Insitute of Human Resource Advancement",
+     "letter": null,
+     "year": 2023,
+     "field": "Total",
+     "female": 101,
+     "total": 192,
+     "page": 5
+    },
+    {
+     "institution": "Insitute of Human Resource Advancement",
+     "letter": null,
+     "year": 2024,
+     "field": "Arts",
+     "female": 56,
+     "total": 106,
+     "page": 5
+    },
+    {
+     "institution": "Insitute of Human Resource Advancement",
+     "letter": null,
+     "year": 2024,
+     "field": "Total",
+     "female": 56,
+     "total": 106,
+     "page": 5
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 124,
+     "total": 278,
+     "page": 5
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2023,
+     "field": "Total",
+     "female": 124,
+     "total": 278,
+     "page": 5
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 131,
+     "total": 304,
+     "page": 5
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2024,
+     "field": "Total",
+     "female": 131,
+     "total": 304,
+     "page": 5
+    },
+    {
+     "institution": "Swamy Vipulananda Institue of Aesthetic Studies",
+     "letter": "Y",
+     "year": 2023,
+     "field": "Arts",
+     "female": 289,
+     "total": 338,
+     "page": 5
+    },
+    {
+     "institution": "Swamy Vipulananda Institue of Aesthetic Studies",
+     "letter": "Y",
+     "year": 2023,
+     "field": "Total",
+     "female": 289,
+     "total": 338,
+     "page": 5
+    },
+    {
+     "institution": "Swamy Vipulananda Institue of Aesthetic Studies",
+     "letter": "Y",
+     "year": 2024,
+     "field": "Arts",
+     "female": 152,
+     "total": 191,
+     "page": 5
+    },
+    {
+     "institution": "Swamy Vipulananda Institue of Aesthetic Studies",
+     "letter": "Y",
+     "year": 2024,
+     "field": "Total",
+     "female": 152,
+     "total": 191,
+     "page": 5
+    },
+    {
+     "institution": "Institute for Agro Technology and Rural Sciences",
+     "letter": null,
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 70,
+     "total": 142,
+     "page": 5
+    },
+    {
+     "institution": "Institute for Agro Technology and Rural Sciences",
+     "letter": null,
+     "year": 2023,
+     "field": "Total",
+     "female": 70,
+     "total": 142,
+     "page": 5
+    },
+    {
+     "institution": "Institute for Agro Technology and Rural Sciences",
+     "letter": null,
+     "year": 2024,
+     "field": "Agriculture",
+     "female": null,
+     "total": null,
+     "page": 5,
+     "footnotes": [
+      "3"
+     ]
+    },
+    {
+     "institution": "Institute for Agro Technology and Rural Sciences",
+     "letter": null,
+     "year": 2024,
+     "field": "Total",
+     "female": 0,
+     "total": 0,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Arts",
+     "female": 6594,
+     "total": 7918,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Management & Commerce",
+     "female": 3143,
+     "total": 4805,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Law",
+     "female": 252,
+     "total": 309,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Medicine",
+     "female": 751,
+     "total": 1260,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Dental Science",
+     "female": 52,
+     "total": 78,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Veterinary Science",
+     "female": 49,
+     "total": 80,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Agriculture",
+     "female": 552,
+     "total": 778,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Engineering",
+     "female": 524,
+     "total": 2111,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Architecture & Quantity Surveying",
+     "female": 156,
+     "total": 348,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Computer Science/IT",
+     "female": 548,
+     "total": 1131,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Allied Health Sciences",
+     "female": 278,
+     "total": 350,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Science",
+     "female": 1861,
+     "total": 3100,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Indigenous Medicine",
+     "female": 213,
+     "total": 260,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Technology",
+     "female": 399,
+     "total": 1076,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2023,
+     "field": "Total",
+     "female": 15372,
+     "total": 23604,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Arts",
+     "female": 6271,
+     "total": 7507,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Management & Commerce",
+     "female": 3137,
+     "total": 4583,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Law",
+     "female": 104,
+     "total": 121,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Medicine",
+     "female": 1024,
+     "total": 1621,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Dental Science",
+     "female": 0,
+     "total": 0,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Veterinary Science",
+     "female": 59,
+     "total": 69,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 581,
+     "total": 789,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Engineering",
+     "female": 479,
+     "total": 1753,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Architecture & Quantity Surveying",
+     "female": 192,
+     "total": 341,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Computer Science/IT",
+     "female": 596,
+     "total": 1194,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Allied Health Sciences",
+     "female": 344,
+     "total": 455,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Science",
+     "female": 2207,
+     "total": 3561,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Indigenous Medicine",
+     "female": 244,
+     "total": 305,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Technology",
+     "female": 642,
+     "total": 1491,
+     "page": 5
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Total",
+     "female": 15880,
+     "total": 23790,
+     "page": 5
+    }
+   ]
+  },
+  {
+   "table": "4.3",
+   "printedNumber": "Table 04 - 03",
+   "title": "STUDENT OUTPUT OF THE OPEN UNIVERSITY BY ACADEMIC PROGRAMME - 2024",
+   "page": 15,
+   "printedPage": 102,
+   "year": 2024,
+   "level": "all levels; the 'Bachelor Degree' rows are the undergraduate (bachelor) output",
+   "columns": {
+    "female": "F - Female",
+    "total": "T- Total"
+   },
+   "footnotes": {
+    "1": "Includes Master, MPhil and PhD degrees.",
+    "2": "Gender wise data for some courses were estimated."
+   },
+   "footnoteUse": "Footnote 2 is printed on the 'Certificate' and 'Diploma' row labels, footnote 1 on 'Postgraduate Degree'.",
+   "rows": [
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Arts",
+     "female": 130,
+     "total": 175,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Education",
+     "female": 16,
+     "total": 16,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Management & Commerce",
+     "female": 168,
+     "total": 222,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Science/IT",
+     "female": 51,
+     "total": 85,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Engineering",
+     "female": 11,
+     "total": 15,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Certificate",
+     "field": "Total",
+     "female": 376,
+     "total": 513,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Diploma",
+     "field": "Arts",
+     "female": 7,
+     "total": 25,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Diploma",
+     "field": "Education",
+     "female": 3,
+     "total": 3,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Diploma",
+     "field": "Science/IT",
+     "female": 42,
+     "total": 91,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Diploma",
+     "field": "Engineering",
+     "female": 291,
+     "total": 526,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Diploma",
+     "field": "Total",
+     "female": 343,
+     "total": 645,
+     "page": 15,
+     "footnotes": [
+      "2"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Arts",
+     "female": 448,
+     "total": 572,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Education",
+     "female": 215,
+     "total": 216,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Management & Commerce",
+     "female": 244,
+     "total": 323,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Law",
+     "female": 303,
+     "total": 612,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Science/IT",
+     "female": 364,
+     "total": 452,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Engineering",
+     "female": 176,
+     "total": 358,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Allied Health Sciences",
+     "female": 457,
+     "total": 495,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Bachelor Degree",
+     "field": "Total",
+     "female": 2207,
+     "total": 3028,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Arts",
+     "female": 1,
+     "total": 2,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Education",
+     "female": 1979,
+     "total": 2773,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Management & Commerce",
+     "female": 8,
+     "total": 14,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Science/IT",
+     "female": null,
+     "total": 2,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Engineering",
+     "female": null,
+     "total": 1,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Diploma",
+     "field": "Total",
+     "female": 1988,
+     "total": 2792,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Arts",
+     "female": 1,
+     "total": 5,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Education",
+     "female": 243,
+     "total": 334,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Management & Commerce",
+     "female": 29,
+     "total": 49,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Law",
+     "female": 12,
+     "total": 20,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Science/IT",
+     "female": 27,
+     "total": 52,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Engineering",
+     "female": 3,
+     "total": 7,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Allied Health Sciences",
+     "female": 3,
+     "total": 6,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Postgraduate Degree",
+     "field": "Total",
+     "female": 318,
+     "total": 473,
+     "page": 15,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Arts",
+     "female": 587,
+     "total": 779,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Education",
+     "female": 2456,
+     "total": 3342,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Management & Commerce",
+     "female": 449,
+     "total": 608,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Law",
+     "female": 315,
+     "total": 632,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Science/IT",
+     "female": 484,
+     "total": 682,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Engineering",
+     "female": 481,
+     "total": 907,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Allied Health Sciences",
+     "female": 460,
+     "total": 501,
+     "page": 15
+    },
+    {
+     "institution": "The Open University",
+     "letter": null,
+     "year": 2024,
+     "level": "Total",
+     "field": "Total",
+     "female": 5232,
+     "total": 7451,
+     "page": 15
+    }
+   ]
+  },
+  {
+   "table": "4.4",
+   "printedNumber": "Table 04 - 04",
+   "title": "GRADUATE OUTPUT OF EXTERNAL DEGREE PROGRAMMES BY HIGHER EDUCATIONAL INSTITUTION - 2024",
+   "subtitle": "(Universities and HEIs established under the Universities Act.)",
+   "page": 16,
+   "printedPage": 103,
+   "year": 2024,
+   "level": "undergraduate, external degree programmes",
+   "columns": {
+    "female": "Female",
+    "total": "Total"
+   },
+   "footnotes": {
+    "1": "No output (for some programmes) in this year."
+   },
+   "institutionNote": "Column headings are printed as short names (e.g. 'Colombo' = University of Colombo); 'institution' keeps the printed heading.",
+   "rows": [
+    {
+     "institution": "Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Science",
+     "female": 29,
+     "total": 101,
+     "page": 16
+    },
+    {
+     "institution": "Colombo",
+     "letter": "A",
+     "year": 2024,
+     "field": "Total",
+     "female": 29,
+     "total": 101,
+     "page": 16
+    },
+    {
+     "institution": "Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Arts",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Management",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Peradeniya",
+     "letter": "B",
+     "year": 2024,
+     "field": "Total",
+     "female": 0,
+     "total": 0,
+     "page": 16
+    },
+    {
+     "institution": "Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Arts",
+     "female": 889,
+     "total": 982,
+     "page": 16
+    },
+    {
+     "institution": "Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Management",
+     "female": 474,
+     "total": 571,
+     "page": 16
+    },
+    {
+     "institution": "Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Commerce",
+     "female": 328,
+     "total": 394,
+     "page": 16
+    },
+    {
+     "institution": "Sri Jayewardenepura",
+     "letter": "C",
+     "year": 2024,
+     "field": "Total",
+     "female": 1691,
+     "total": 1947,
+     "page": 16
+    },
+    {
+     "institution": "Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Arts",
+     "female": 1991,
+     "total": 2172,
+     "page": 16
+    },
+    {
+     "institution": "Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Management",
+     "female": 297,
+     "total": 367,
+     "page": 16
+    },
+    {
+     "institution": "Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Commerce",
+     "female": 14,
+     "total": 20,
+     "page": 16
+    },
+    {
+     "institution": "Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Science",
+     "female": 3,
+     "total": 3,
+     "page": 16
+    },
+    {
+     "institution": "Kelaniya",
+     "letter": "D",
+     "year": 2024,
+     "field": "Total",
+     "female": 2305,
+     "total": 2562,
+     "page": 16
+    },
+    {
+     "institution": "Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Computer Sc./IT",
+     "female": 49,
+     "total": 130,
+     "page": 16
+    },
+    {
+     "institution": "Moratuwa",
+     "letter": "G",
+     "year": 2024,
+     "field": "Total",
+     "female": 49,
+     "total": 130,
+     "page": 16
+    },
+    {
+     "institution": "Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Arts",
+     "female": 196,
+     "total": 287,
+     "page": 16
+    },
+    {
+     "institution": "Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Management",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Commerce",
+     "female": 16,
+     "total": 42,
+     "page": 16
+    },
+    {
+     "institution": "Jaffna",
+     "letter": "E",
+     "year": 2024,
+     "field": "Total",
+     "female": 212,
+     "total": 329,
+     "page": 16
+    },
+    {
+     "institution": "Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Arts",
+     "female": 254,
+     "total": 280,
+     "page": 16
+    },
+    {
+     "institution": "Ruhuna",
+     "letter": "F",
+     "year": 2024,
+     "field": "Total",
+     "female": 254,
+     "total": 280,
+     "page": 16
+    },
+    {
+     "institution": "Eastern",
+     "letter": "H",
+     "year": 2024,
+     "field": "Arts",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Eastern",
+     "letter": "H",
+     "year": 2024,
+     "field": "Management",
+     "female": 24,
+     "total": 61,
+     "page": 16
+    },
+    {
+     "institution": "Eastern",
+     "letter": "H",
+     "year": 2024,
+     "field": "Science",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Eastern",
+     "letter": "H",
+     "year": 2024,
+     "field": "Total",
+     "female": 24,
+     "total": 61,
+     "page": 16
+    },
+    {
+     "institution": "South Eastern",
+     "letter": "J",
+     "year": 2024,
+     "field": "Arts",
+     "female": 110,
+     "total": 151,
+     "page": 16
+    },
+    {
+     "institution": "South Eastern",
+     "letter": "J",
+     "year": 2024,
+     "field": "Management",
+     "female": 49,
+     "total": 89,
+     "page": 16
+    },
+    {
+     "institution": "South Eastern",
+     "letter": "J",
+     "year": 2024,
+     "field": "Commerce",
+     "female": 10,
+     "total": 14,
+     "page": 16
+    },
+    {
+     "institution": "South Eastern",
+     "letter": "J",
+     "year": 2024,
+     "field": "Total",
+     "female": 169,
+     "total": 254,
+     "page": 16
+    },
+    {
+     "institution": "Rajarata",
+     "letter": "K",
+     "year": 2024,
+     "field": "Management",
+     "female": 369,
+     "total": 448,
+     "page": 16
+    },
+    {
+     "institution": "Rajarata",
+     "letter": "K",
+     "year": 2024,
+     "field": "Science",
+     "female": 7,
+     "total": 12,
+     "page": 16
+    },
+    {
+     "institution": "Rajarata",
+     "letter": "K",
+     "year": 2024,
+     "field": "Total",
+     "female": 376,
+     "total": 460,
+     "page": 16
+    },
+    {
+     "institution": "Wayamba",
+     "letter": "M",
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 86,
+     "total": 162,
+     "page": 16
+    },
+    {
+     "institution": "Wayamba",
+     "letter": "M",
+     "year": 2024,
+     "field": "Total",
+     "female": 86,
+     "total": 162,
+     "page": 16
+    },
+    {
+     "institution": "Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2024,
+     "field": "Arts",
+     "female": null,
+     "total": null,
+     "page": 16,
+     "footnotes": [
+      "1"
+     ]
+    },
+    {
+     "institution": "Visual & Performing Arts",
+     "letter": "Z",
+     "year": 2024,
+     "field": "Total",
+     "female": 0,
+     "total": 0,
+     "page": 16
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2024,
+     "field": "Computer Sc./IT",
+     "female": 88,
+     "total": 186,
+     "page": 16
+    },
+    {
+     "institution": "University of Colombo School of Computing",
+     "letter": "T",
+     "year": 2024,
+     "field": "Total",
+     "female": 88,
+     "total": 186,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Arts",
+     "female": 3440,
+     "total": 3872,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Management",
+     "female": 1213,
+     "total": 1536,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Commerce",
+     "female": 368,
+     "total": 470,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Agriculture",
+     "female": 86,
+     "total": 162,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Science",
+     "female": 39,
+     "total": 116,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Computer Sc./IT",
+     "female": 137,
+     "total": 316,
+     "page": 16
+    },
+    {
+     "institution": "Total",
+     "letter": null,
+     "year": 2024,
+     "field": "Total",
+     "female": 5283,
+     "total": 6472,
+     "page": 16
+    }
+   ]
+  }
+ ],
+ "notes": [
+  "Graduate output = students who successfully completed the programme between 1 January and 31 December of the reference year; completion is by the effective date of the degree (chapter introduction, PDF page 1).",
+  "2024 figures in Table 4.1 are marked provisional (footnote 1).",
+  "'page' is the PDF page within Chapter 4.pdf (1-16); printed report page numbers are in 'printedPage(s)'. The page-2 summary has no table number, so its 'table' is null.",
+  "Rows are long format: one row per institution x field (x year for 4.1, x level for 4.3). 'female' and 'total' are the printed F and T values. null = cell printed blank; 0 = printed as 0 (summary 'Dental Science' was printed '-' and is stored as 0 with printedAs '-'). Cells blank on both F and T are left out unless a footnote marker sits on them (then both are null and 'footnotes' explains, e.g. 9 = no output in the year, 7 = information not submitted).",
+  "Uva Wellassa University (letter U) is printed with Total 0 / 0 in both years and footnote (7) 'Information not submitted': these 0s mean no data, not zero graduates.",
+  "University of Colombo 2024: Management & Commerce, Law and Technology carry footnote (7) 'Information not submitted' and are blank, so its 2024 total (1700) and the 2024 Law and Management & Commerce national totals are incomplete.",
+  "Eastern University (H) in 4.1 is reported separately from Trincomalee Campus (W) and Swamy Vipulananda Institue of Aesthetic Studies (Y); the letters follow that split.",
+  "Table 4.1 has no Education column. The page-2 summary shows Education 438 (F 410); the Open University (4.3) reports 216 (F 215) Bachelor Education graduates, so by arithmetic the other 222 (F 195) sit inside the Arts column of Table 4.1 (summary Arts 11,729 + Education 438 = 4.1 Arts 7,507 + 4.3 Arts 572 + 4.3 Education 216 + 4.4 Arts 3,872). This is an inference from the totals; the report does not say which institution.",
+  "Reconciliation, all exact: in Table 4.1 every institution's fields sum to its printed Total (F and T, both years) and every field column sums to the printed Total row; Tables 4.3 and 4.4 rows and columns sum to their printed totals; page-2 summary total 33,290 = 4.1 (23,790) + 4.3 Bachelor (3,028) + 4.4 (6,472). Per field, summary Science 4,129 = 4.1 Science 3,561 + 4.4 Science 116 + 4.3 Science/IT 452, and summary Computer Science 1,510 = 4.1 Computer Science/IT 1,194 + 4.4 Computer Sc./IT 316.",
+  "Not extracted (this file covers undergraduate output): Table 04 - 02 postgraduate output by HEI (PDF pages 7-13), the postgraduate half of page 2, Chart - 12 (page 6) and Chart - 13 (page 14). Table 4.3 is included whole (all levels) because it is one small table; filter on level = 'Bachelor Degree' for undergraduates.",
+  "Institution names are kept exactly as printed, including the report's spellings 'Insitute of Human Resource Advancement' and 'Swamy Vipulananda Institue of Aesthetic Studies'.",
+  "No ZedPath letter (not in data/ugc/2025-2026/unicodes.csv): Insitute of Human Resource Advancement; Institute for Agro Technology and Rural Sciences; The Open University. Their 'letter' is null."
+ ]
+}

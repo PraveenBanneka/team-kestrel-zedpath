@@ -1,0 +1,2122 @@
+{
+  "source": {
+    "title": "Sri Lanka University Statistics 2024",
+    "publisher": "University Grants Commission",
+    "chapter": "3",
+    "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf",
+    "retrievedOn": "2026-10-15"
+  },
+  "tables": [
+    {
+      "table": "3.1(a)",
+      "printedLabel": "Table 03 - 01 (a)",
+      "title": "DETAILED UNDERGRADUATES ENROLMENT OF HIGHER EDUCATIONAL INSTITUTIONS 2024 - UGC INTAKE",
+      "subtitle": "- Including Backlog - (Universities and HEIs established under the Universities Act.)",
+      "page": 4,
+      "pageEnd": 24,
+      "printedPage": 43,
+      "printedPageEnd": 63,
+      "year": 2024,
+      "columns": {
+        "male": "MALE",
+        "female": "FEMALE",
+        "total": "TOTAL"
+      },
+      "grandTotal": {
+        "male": 55325,
+        "female": 109476,
+        "total": 164801
+      },
+      "rowsNote": "One row per institution with field null (institution total), followed by one row per faculty (field = faculty heading as printed). Degree-programme and intake-year lines are not extracted.",
+      "rows": [
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": null,
+          "male": 4245,
+          "female": 10714,
+          "total": 14959
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Arts",
+          "male": 448,
+          "female": 3001,
+          "total": 3449
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Education",
+          "male": 30,
+          "female": 460,
+          "total": 490
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Law",
+          "male": 177,
+          "female": 1118,
+          "total": 1295
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Management & Finance",
+          "male": 851,
+          "female": 1968,
+          "total": 2819
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Medicine",
+          "male": 656,
+          "female": 814,
+          "total": 1470
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Science",
+          "male": 880,
+          "female": 1071,
+          "total": 1951
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Nursing",
+          "male": 131,
+          "female": 377,
+          "total": 508
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Technology",
+          "male": 827,
+          "female": 730,
+          "total": 1557
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Indigenous Medicine",
+          "male": 245,
+          "female": 1175,
+          "total": 1420
+        },
+        {
+          "institution": "Sripalee Campus",
+          "letter": "S",
+          "field": null,
+          "male": 113,
+          "female": 731,
+          "total": 844
+        },
+        {
+          "institution": "Sripalee Campus",
+          "letter": "S",
+          "field": "Mass Media",
+          "male": 60,
+          "female": 357,
+          "total": 417
+        },
+        {
+          "institution": "Sripalee Campus",
+          "letter": "S",
+          "field": "Performing Art",
+          "male": 53,
+          "female": 374,
+          "total": 427
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": null,
+          "male": 5511,
+          "female": 10359,
+          "total": 15870
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Arts",
+          "male": 832,
+          "female": 4662,
+          "total": 5494
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Agriculture",
+          "male": 473,
+          "female": 990,
+          "total": 1463
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Allied Health Sciences",
+          "male": 284,
+          "female": 754,
+          "total": 1038
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Dental Science",
+          "male": 179,
+          "female": 412,
+          "total": 591
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Engineering",
+          "male": 1641,
+          "female": 608,
+          "total": 2249
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Management",
+          "male": 249,
+          "female": 466,
+          "total": 715
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Medicine",
+          "male": 571,
+          "female": 785,
+          "total": 1356
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Science",
+          "male": 1146,
+          "female": 1335,
+          "total": 2481
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Veterinary Science",
+          "male": 136,
+          "female": 347,
+          "total": 483
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": null,
+          "male": 5706,
+          "female": 11094,
+          "total": 16800
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Applied Sciences",
+          "male": 958,
+          "female": 1726,
+          "total": 2684
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Humanities & Social Sciences",
+          "male": 676,
+          "female": 3369,
+          "total": 4045
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Management Studies & Commerce",
+          "male": 1724,
+          "female": 3466,
+          "total": 5190
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Medical Sciences",
+          "male": 425,
+          "female": 688,
+          "total": 1113
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Allied Health Sciences",
+          "male": 161,
+          "female": 583,
+          "total": 744
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Engineering",
+          "male": 419,
+          "female": 198,
+          "total": 617
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Technology",
+          "male": 1101,
+          "female": 666,
+          "total": 1767
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Dental Science",
+          "male": 26,
+          "female": 67,
+          "total": 93
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Urban & Aquatic Bioresources",
+          "male": 49,
+          "female": 211,
+          "total": 260
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Computing",
+          "male": 167,
+          "female": 120,
+          "total": 287
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": null,
+          "male": 4507,
+          "female": 11122,
+          "total": 15629
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Commerce & Management Studies",
+          "male": 1289,
+          "female": 2731,
+          "total": 4020
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Humanities",
+          "male": 442,
+          "female": 2391,
+          "total": 2833
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Medicine",
+          "male": 454,
+          "female": 1127,
+          "total": 1581
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Science",
+          "male": 1435,
+          "female": 1720,
+          "total": 3155
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Social Sciences",
+          "male": 361,
+          "female": 2667,
+          "total": 3028
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Computing & Technoogy",
+          "male": 526,
+          "female": 486,
+          "total": 1012
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": null,
+          "male": 5272,
+          "female": 3953,
+          "total": 9225
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Architecture",
+          "male": 956,
+          "female": 1259,
+          "total": 2215
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Engineering",
+          "male": 3018,
+          "female": 1333,
+          "total": 4351
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Information Technology",
+          "male": 922,
+          "female": 716,
+          "total": 1638
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Business",
+          "male": 261,
+          "female": 354,
+          "total": 615
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Medicine",
+          "male": 115,
+          "female": 291,
+          "total": 406
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": null,
+          "male": 4665,
+          "female": 9671,
+          "total": 14336
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Agriculture",
+          "male": 157,
+          "female": 523,
+          "total": 680
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Arts",
+          "male": 683,
+          "female": 3946,
+          "total": 4629
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Engineering",
+          "male": 693,
+          "female": 259,
+          "total": 952
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Management & Commerce",
+          "male": 821,
+          "female": 1658,
+          "total": 2479
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Medicine",
+          "male": 411,
+          "female": 670,
+          "total": 1081
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Allied Health Sciences",
+          "male": 272,
+          "female": 616,
+          "total": 888
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Sciences",
+          "male": 859,
+          "female": 983,
+          "total": 1842
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Siddha Medicine",
+          "male": 56,
+          "female": 352,
+          "total": 408
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Technology",
+          "male": 697,
+          "female": 600,
+          "total": 1297
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Hindu Studies",
+          "male": 16,
+          "female": 64,
+          "total": 80
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": null,
+          "male": 6052,
+          "female": 10412,
+          "total": 16464
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Agriculture",
+          "male": 297,
+          "female": 1021,
+          "total": 1318
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Engineering",
+          "male": 1713,
+          "female": 658,
+          "total": 2371
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Fisheries and Marine Science & Technology",
+          "male": 242,
+          "female": 363,
+          "total": 605
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Humanaties & Social Science",
+          "male": 386,
+          "female": 2816,
+          "total": 3202
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Management & Finance",
+          "male": 809,
+          "female": 1766,
+          "total": 2575
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Medicine",
+          "male": 463,
+          "female": 1058,
+          "total": 1521
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Allied Health Sciences",
+          "male": 256,
+          "female": 856,
+          "total": 1112
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Science",
+          "male": 1035,
+          "female": 1295,
+          "total": 2330
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Technology",
+          "male": 851,
+          "female": 579,
+          "total": 1430
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": null,
+          "male": 1799,
+          "female": 5273,
+          "total": 7072
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Agriculture",
+          "male": 62,
+          "female": 322,
+          "total": 384
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Arts and Culture",
+          "male": 480,
+          "female": 2428,
+          "total": 2908
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Management & Commerce",
+          "male": 451,
+          "female": 962,
+          "total": 1413
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Health Care Sciences",
+          "male": 241,
+          "female": 551,
+          "total": 792
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Science",
+          "male": 378,
+          "female": 642,
+          "total": 1020
+        },
+        {
+          "institution": "Eastern University, Sri lanka",
+          "letter": "H",
+          "field": "Technology",
+          "male": 187,
+          "female": 368,
+          "total": 555
+        },
+        {
+          "institution": "Trincomalee Campus",
+          "letter": "W",
+          "field": null,
+          "male": 692,
+          "female": 2093,
+          "total": 2785
+        },
+        {
+          "institution": "Trincomalee Campus",
+          "letter": "W",
+          "field": "Applied Sciences",
+          "male": 392,
+          "female": 200,
+          "total": 592
+        },
+        {
+          "institution": "Trincomalee Campus",
+          "letter": "W",
+          "field": "Communication and Business Studies",
+          "male": 228,
+          "female": 1622,
+          "total": 1850
+        },
+        {
+          "institution": "Trincomalee Campus",
+          "letter": "W",
+          "field": "Siddha Unit",
+          "male": 72,
+          "female": 271,
+          "total": 343
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": null,
+          "male": 2012,
+          "female": 5076,
+          "total": 7088
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Applied Science",
+          "male": 356,
+          "female": 774,
+          "total": 1130
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Art and Culture",
+          "male": 164,
+          "female": 1362,
+          "total": 1526
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Engineering",
+          "male": 334,
+          "female": 114,
+          "total": 448
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Islamic Studies and Arabic Language",
+          "male": 315,
+          "female": 1131,
+          "total": 1446
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Management and Commerce",
+          "male": 453,
+          "female": 1162,
+          "total": 1615
+        },
+        {
+          "institution": "South Eastern University of Sri Lanka",
+          "letter": "J",
+          "field": "Technology",
+          "male": 390,
+          "female": 533,
+          "total": 923
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": null,
+          "male": 2908,
+          "female": 6209,
+          "total": 9117
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Agriculture",
+          "male": 120,
+          "female": 406,
+          "total": 526
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Applied Sciences",
+          "male": 585,
+          "female": 991,
+          "total": 1576
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Management Studies",
+          "male": 606,
+          "female": 1436,
+          "total": 2042
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Medicine & Allied Sciences",
+          "male": 384,
+          "female": 806,
+          "total": 1190
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Social Sciences & Humanities",
+          "male": 210,
+          "female": 1890,
+          "total": 2100
+        },
+        {
+          "institution": "Rajarata University of Sri Lanka",
+          "letter": "K",
+          "field": "Technology",
+          "male": 1003,
+          "female": 680,
+          "total": 1683
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": null,
+          "male": 3389,
+          "female": 6347,
+          "total": 9736
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Agricultural Sciences",
+          "male": 241,
+          "female": 889,
+          "total": 1130
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Applied Sciences",
+          "male": 672,
+          "female": 1014,
+          "total": 1686
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Geomatics",
+          "male": 455,
+          "female": 212,
+          "total": 667
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Management Studies",
+          "male": 587,
+          "female": 1564,
+          "total": 2151
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Social Sciences & Languages",
+          "male": 193,
+          "female": 1389,
+          "total": 1582
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Medicine",
+          "male": 135,
+          "female": 380,
+          "total": 515
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Technology",
+          "male": 536,
+          "female": 485,
+          "total": 1021
+        },
+        {
+          "institution": "Sabaragamuwa University of Sri Lanka",
+          "letter": "L",
+          "field": "Computing",
+          "male": 570,
+          "female": 414,
+          "total": 984
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": null,
+          "male": 2595,
+          "female": 4770,
+          "total": 7365
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Agriculture & Plantation Management",
+          "male": 216,
+          "female": 966,
+          "total": 1182
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Applied Sciences",
+          "male": 278,
+          "female": 427,
+          "total": 705
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Business Studies & Finance",
+          "male": 928,
+          "female": 1955,
+          "total": 2883
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Livestock,Fisheries & Nutrition",
+          "male": 210,
+          "female": 754,
+          "total": 964
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Technology",
+          "male": 745,
+          "female": 158,
+          "total": 903
+        },
+        {
+          "institution": "Wayamba University of Sri Lanka",
+          "letter": "M",
+          "field": "Medicine",
+          "male": 218,
+          "female": 510,
+          "total": 728
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": null,
+          "male": 2396,
+          "female": 3737,
+          "total": 6133
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Animal Science & Export Agriculture",
+          "male": 437,
+          "female": 1199,
+          "total": 1636
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Management",
+          "male": 307,
+          "female": 1046,
+          "total": 1353
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Applied Sciences",
+          "male": 809,
+          "female": 814,
+          "total": 1623
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Technological Studies",
+          "male": 828,
+          "female": 654,
+          "total": 1482
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Medicine",
+          "male": 15,
+          "female": 24,
+          "total": 39
+        },
+        {
+          "institution": "University of the Visual And Performing Arts",
+          "letter": "Z",
+          "field": null,
+          "male": 929,
+          "female": 3128,
+          "total": 4057
+        },
+        {
+          "institution": "University of the Visual And Performing Arts",
+          "letter": "Z",
+          "field": "Dance & Drama",
+          "male": 323,
+          "female": 1535,
+          "total": 1858
+        },
+        {
+          "institution": "University of the Visual And Performing Arts",
+          "letter": "Z",
+          "field": "Music",
+          "male": 410,
+          "female": 1167,
+          "total": 1577
+        },
+        {
+          "institution": "University of the Visual And Performing Arts",
+          "letter": "Z",
+          "field": "Visual Arts",
+          "male": 196,
+          "female": 426,
+          "total": 622
+        },
+        {
+          "institution": "Gampaha Wickramarachchi Ayu. Uni. of Ind. Med.",
+          "letter": "P",
+          "field": null,
+          "male": 442,
+          "female": 1285,
+          "total": 1727
+        },
+        {
+          "institution": "Gampaha Wickramarachchi Ayu. Uni. of Ind. Med.",
+          "letter": "P",
+          "field": "Indigenous Medicine",
+          "male": 125,
+          "female": 560,
+          "total": 685
+        },
+        {
+          "institution": "Gampaha Wickramarachchi Ayu. Uni. of Ind. Med.",
+          "letter": "P",
+          "field": "Indigenous Health Sciences & Technology",
+          "male": 298,
+          "female": 575,
+          "total": 873
+        },
+        {
+          "institution": "Gampaha Wickramarachchi Ayu. Uni. of Ind. Med.",
+          "letter": "P",
+          "field": "Indigenous Social Sciences & Management Studies",
+          "male": 19,
+          "female": 150,
+          "total": 169
+        },
+        {
+          "institution": "Vavuniya University",
+          "letter": "R",
+          "field": null,
+          "male": 1151,
+          "female": 1771,
+          "total": 2922
+        },
+        {
+          "institution": "Vavuniya University",
+          "letter": "R",
+          "field": "Applied Science",
+          "male": 425,
+          "female": 645,
+          "total": 1070
+        },
+        {
+          "institution": "Vavuniya University",
+          "letter": "R",
+          "field": "Business Studies",
+          "male": 298,
+          "female": 919,
+          "total": 1217
+        },
+        {
+          "institution": "Vavuniya University",
+          "letter": "R",
+          "field": "Technological Studies",
+          "male": 428,
+          "female": 207,
+          "total": 635
+        },
+        {
+          "institution": "University of Colombo School of Computing",
+          "letter": "T",
+          "field": null,
+          "male": 680,
+          "female": 412,
+          "total": 1092
+        },
+        {
+          "institution": "Swami Vipulananda Institute of Aesthetic Studies",
+          "letter": "Y",
+          "field": null,
+          "male": 261,
+          "female": 1319,
+          "total": 1580
+        }
+      ]
+    },
+    {
+      "table": "3.1(b)",
+      "printedLabel": "Table 03 - 01 (b) (Contd.)",
+      "title": "DETAILED UNDERGRADUATES ENROLMENT OF HIGHER EDUCATIONAL INSTITUTIONS 2024 - OTHER INTAKE",
+      "subtitle": "(Universities and HEIs established under the Universities Act.)",
+      "page": 25,
+      "pageEnd": 26,
+      "printedPage": 64,
+      "printedPageEnd": 65,
+      "year": 2024,
+      "columns": {
+        "male": "MALE",
+        "female": "FEMALE",
+        "total": "TOTAL"
+      },
+      "grandTotal": {
+        "male": 9106,
+        "female": 23302,
+        "total": 32408
+      },
+      "rowsNote": "Same shape as 3.1(a). 'Foreign Qualification' and 'Lateral Entry' are printed as top-level blocks (student categories, not institutions); each has one sub-heading 'Faculty/Academic programme' with the same total, which is kept as printed in the field value.",
+      "rows": [
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": null,
+          "male": 8722,
+          "female": 22853,
+          "total": 31575
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Education",
+          "male": 454,
+          "female": 4400,
+          "total": 4854
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Engineering Technology",
+          "male": 2846,
+          "female": 2248,
+          "total": 5094
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Health Science",
+          "male": 345,
+          "female": 2897,
+          "total": 3242
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Humanities and Social Sc.",
+          "male": 2345,
+          "female": 6214,
+          "total": 8559
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Natural Sciences",
+          "male": 1423,
+          "female": 3479,
+          "total": 4902
+        },
+        {
+          "institution": "Open University of Sri lanka",
+          "letter": null,
+          "field": "Management Studies",
+          "male": 1309,
+          "female": 3615,
+          "total": 4924
+        },
+        {
+          "institution": "Institute of Human Resource Advancement",
+          "letter": null,
+          "field": null,
+          "male": 222,
+          "female": 256,
+          "total": 478
+        },
+        {
+          "institution": "Institute of Human Resource Advancement",
+          "letter": null,
+          "field": "Institute of Human Resource Advancement",
+          "male": 222,
+          "female": 256,
+          "total": 478
+        },
+        {
+          "institution": "Foreign Qualification",
+          "letter": null,
+          "field": null,
+          "male": 127,
+          "female": 140,
+          "total": 267
+        },
+        {
+          "institution": "Foreign Qualification",
+          "letter": null,
+          "field": "Faculty/Academic programme",
+          "male": 127,
+          "female": 140,
+          "total": 267
+        },
+        {
+          "institution": "Lateral Entry",
+          "letter": null,
+          "field": null,
+          "male": 35,
+          "female": 53,
+          "total": 88
+        },
+        {
+          "institution": "Lateral Entry",
+          "letter": null,
+          "field": "Faculty/Academic programme",
+          "male": 35,
+          "female": 53,
+          "total": 88
+        }
+      ]
+    },
+    {
+      "table": "3.2",
+      "printedLabel": "Table 03 - 02",
+      "title": "UNDERGRADUATE ENROLMENT(3) (4) BY ACADEMIC PROGRAMME AND HIGHER EDUCATIONAL INSTITUTION : 2022 - 2024",
+      "subtitle": "(Universities and HEIs established under the Universities Act.)",
+      "page": 29,
+      "pageEnd": 31,
+      "printedPage": 68,
+      "printedPageEnd": 70,
+      "year": 2024,
+      "columns": {
+        "field": "Faculty/Academic Programme column header (null = the 'Total' column)",
+        "enrolment": "number printed in that cell"
+      },
+      "totalRow": {
+        "institution": "Total",
+        "Arts": 37701,
+        "Management & Commerce": 29742,
+        "Law": 1975,
+        "Medicine": 9726,
+        "Dental Science": 610,
+        "Veterinary Science": 483,
+        "Agriculture": 8015,
+        "Engineering": 10149,
+        "Architecture & Quantity Surveying": 2215,
+        "Computer Science": 8505,
+        "Allied Health Sciences": 4909,
+        "Science": 18368,
+        "Indigenous Medicine": 2085,
+        "Technology": 13544,
+        "total": 148027
+      },
+      "rowsNote": "Only the 2024 line of each institution is extracted (the table also prints 2022 and 2023). Blank cells are omitted (no row), not zero. Footnote markers printed after a name are in 'footnotes'.",
+      "rows": [
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Arts",
+          "enrolment": 4053,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Management & Commerce",
+          "enrolment": 2819,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Law",
+          "enrolment": 1295,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Medicine",
+          "enrolment": 1168,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Allied Health Sciences",
+          "enrolment": 619,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Science",
+          "enrolment": 1951,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Indigenous Medicine",
+          "enrolment": 1003,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": "Technology",
+          "enrolment": 1332,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Colombo",
+          "letter": "A",
+          "field": null,
+          "enrolment": 14240,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Arts",
+          "enrolment": 4033
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Management & Commerce",
+          "enrolment": 715
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Law",
+          "enrolment": 287
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Medicine",
+          "enrolment": 1200
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Dental Science",
+          "enrolment": 517
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Veterinary Science",
+          "enrolment": 483
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Agriculture",
+          "enrolment": 1194
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Engineering",
+          "enrolment": 1835
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Computer Science",
+          "enrolment": 112
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Allied Health Sciences",
+          "enrolment": 857
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": "Science",
+          "enrolment": 1894
+        },
+        {
+          "institution": "University of Peradeniya",
+          "letter": "B",
+          "field": null,
+          "enrolment": 13127
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Arts",
+          "enrolment": 4045
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Management & Commerce",
+          "enrolment": 4875
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Medicine",
+          "enrolment": 948
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Dental Science",
+          "enrolment": 93
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Agriculture",
+          "enrolment": 260
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Engineering",
+          "enrolment": 622
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Computer Science",
+          "enrolment": 602
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Allied Health Sciences",
+          "enrolment": 747
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Science",
+          "enrolment": 2702
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": "Technology",
+          "enrolment": 1767
+        },
+        {
+          "institution": "University of Sri Jayewardenepura",
+          "letter": "C",
+          "field": null,
+          "enrolment": 16661
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Arts",
+          "enrolment": 5907
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Management & Commerce",
+          "enrolment": 4020
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Medicine",
+          "enrolment": 1001
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Computer Science",
+          "enrolment": 981
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Allied Health Sciences",
+          "enrolment": 456
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Science",
+          "enrolment": 2445
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": "Technology",
+          "enrolment": 739
+        },
+        {
+          "institution": "University of Kelaniya",
+          "letter": "D",
+          "field": null,
+          "enrolment": 15549
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Management & Commerce",
+          "enrolment": 615
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Medicine",
+          "enrolment": 407
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Engineering",
+          "enrolment": 4357
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Architecture & Quantity Surveying",
+          "enrolment": 2215
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": "Computer Science",
+          "enrolment": 1638
+        },
+        {
+          "institution": "University of Moratuwa",
+          "letter": "G",
+          "field": null,
+          "enrolment": 9232
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Arts",
+          "enrolment": 3481
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Management & Commerce",
+          "enrolment": 2090
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Law",
+          "enrolment": 393
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Medicine",
+          "enrolment": 934
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Agriculture",
+          "enrolment": 584
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Engineering",
+          "enrolment": 777
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Computer Science",
+          "enrolment": 352
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Allied Health Sciences",
+          "enrolment": 740
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Science",
+          "enrolment": 1190
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Indigenous Medicine",
+          "enrolment": 348
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": "Technology",
+          "enrolment": 1297
+        },
+        {
+          "institution": "University of Jaffna",
+          "letter": "E",
+          "field": null,
+          "enrolment": 12186
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Arts",
+          "enrolment": 2503
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Management & Commerce",
+          "enrolment": 2575
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Medicine",
+          "enrolment": 1337
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Agriculture",
+          "enrolment": 1084
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Engineering",
+          "enrolment": 2110
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Computer Science",
+          "enrolment": 364
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Allied Health Sciences",
+          "enrolment": 990
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Science",
+          "enrolment": 2014
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": "Technology",
+          "enrolment": 1264
+        },
+        {
+          "institution": "University of Ruhuna",
+          "letter": "F",
+          "field": null,
+          "enrolment": 14241
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Arts",
+          "enrolment": 2980,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Management & Commerce",
+          "enrolment": 2069,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Medicine",
+          "enrolment": 507,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Agriculture",
+          "enrolment": 328,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Computer Science",
+          "enrolment": 311,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Allied Health Sciences",
+          "enrolment": 176,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Science",
+          "enrolment": 819,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Indigenous Medicine",
+          "enrolment": 240,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": "Technology",
+          "enrolment": 407,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "Eastern University",
+          "letter": "H",
+          "field": null,
+          "enrolment": 7837,
+          "footnotes": [
+            "2"
+          ]
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Arts",
+          "enrolment": 2972
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Management & Commerce",
+          "enrolment": 1139
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Engineering",
+          "enrolment": 448
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Computer Science",
+          "enrolment": 476
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Science",
+          "enrolment": 859
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": "Technology",
+          "enrolment": 772
+        },
+        {
+          "institution": "South Eastern University",
+          "letter": "J",
+          "field": null,
+          "enrolment": 6666
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Arts",
+          "enrolment": 1565
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Management & Commerce",
+          "enrolment": 2042
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Medicine",
+          "enrolment": 1011
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Agriculture",
+          "enrolment": 529
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Computer Science",
+          "enrolment": 385
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Science",
+          "enrolment": 767
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": "Technology",
+          "enrolment": 1408
+        },
+        {
+          "institution": "Rajarata University",
+          "letter": "K",
+          "field": null,
+          "enrolment": 7707
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Arts",
+          "enrolment": 1308
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Management & Commerce",
+          "enrolment": 1822
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Medicine",
+          "enrolment": 515
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Agriculture",
+          "enrolment": 995
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Computer Science",
+          "enrolment": 888
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Science",
+          "enrolment": 2006
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": "Technology",
+          "enrolment": 881
+        },
+        {
+          "institution": "Sabaragamuwa University",
+          "letter": "L",
+          "field": null,
+          "enrolment": 8415
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": "Management & Commerce",
+          "enrolment": 2366,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": "Medicine",
+          "enrolment": 659,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": "Agriculture",
+          "enrolment": 1502,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": "Science",
+          "enrolment": 546,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": "Technology",
+          "enrolment": 1393,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Wayamba University",
+          "letter": "M",
+          "field": null,
+          "enrolment": 6466,
+          "footnotes": [
+            "5"
+          ]
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Management & Commerce",
+          "enrolment": 1230
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Medicine",
+          "enrolment": 39
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Agriculture",
+          "enrolment": 1474
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Computer Science",
+          "enrolment": 817
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Science",
+          "enrolment": 592
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": "Technology",
+          "enrolment": 1313
+        },
+        {
+          "institution": "Uva Wellassa University",
+          "letter": "U",
+          "field": null,
+          "enrolment": 5465
+        },
+        {
+          "institution": "University of Visual & Performing Arts",
+          "letter": "Z",
+          "field": "Arts",
+          "enrolment": 2880
+        },
+        {
+          "institution": "University of Visual & Performing Arts",
+          "letter": "Z",
+          "field": null,
+          "enrolment": 2880
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Arts",
+          "enrolment": 169
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Management & Commerce",
+          "enrolment": 148
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Agriculture",
+          "enrolment": 65
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Allied Health Sciences",
+          "enrolment": 324
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Indigenous Medicine",
+          "enrolment": 494
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": "Technology",
+          "enrolment": 336
+        },
+        {
+          "institution": "Gampaha Wickramarachchi University of Indigenous Medicine",
+          "letter": "P",
+          "field": null,
+          "enrolment": 1536
+        },
+        {
+          "institution": "University of Vavuniya",
+          "letter": "R",
+          "field": "Management & Commerce",
+          "enrolment": 1217
+        },
+        {
+          "institution": "University of Vavuniya",
+          "letter": "R",
+          "field": "Computer Science",
+          "enrolment": 487
+        },
+        {
+          "institution": "University of Vavuniya",
+          "letter": "R",
+          "field": "Science",
+          "enrolment": 583
+        },
+        {
+          "institution": "University of Vavuniya",
+          "letter": "R",
+          "field": "Technology",
+          "enrolment": 635
+        },
+        {
+          "institution": "University of Vavuniya",
+          "letter": "R",
+          "field": null,
+          "enrolment": 2922
+        },
+        {
+          "institution": "Institute of Human Resource Advancement",
+          "letter": null,
+          "field": "Arts",
+          "enrolment": 478
+        },
+        {
+          "institution": "Institute of Human Resource Advancement",
+          "letter": null,
+          "field": null,
+          "enrolment": 478
+        },
+        {
+          "institution": "University of Colombo School of Computing",
+          "letter": "T",
+          "field": "Computer Science",
+          "enrolment": 1092
+        },
+        {
+          "institution": "University of Colombo School of Computing",
+          "letter": "T",
+          "field": null,
+          "enrolment": 1092
+        },
+        {
+          "institution": "Swamy Vipulananda Institute of Aesthetic Studies",
+          "letter": "Y",
+          "field": "Arts",
+          "enrolment": 1327
+        },
+        {
+          "institution": "Swamy Vipulananda Institute of Aesthetic Studies",
+          "letter": "Y",
+          "field": null,
+          "enrolment": 1327
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Table 3.1 includes backlog students; Table 3.2 excludes them (Chapter 3 introduction, PDF page 1). The two are not directly comparable: 3.1(a) grand total 164801 vs 3.2 total 148027.",
+    "Table 3.1(a) lists Sripalee Campus (letter S) and Trincomalee Campus (letter W) as separate blocks; Table 3.2 folds them into University of Colombo and Eastern University (footnote 2).",
+    "Institution and faculty names are as printed, including the source's spelling (e.g. 'Eastern University, Sri lanka', 'Humanaties & Social Science', 'Computing & Technoogy', 'Performing Art'); only repeated spaces were collapsed (e.g. 'South Eastern University of  Sri Lanka'). Table 3.2 names spread over two printed lines are joined.",
+    "In 3.1(a), University of Colombo School of Computing and Swami Vipulananda Institute of Aesthetic Studies print a second, unlabelled subtotal equal to the institution total (no faculty heading); it is not repeated as a field row.",
+    "Open University of Sri Lanka, Institute of Human Resource Advancement, 'Foreign Qualification', 'Lateral Entry' and 'Institute of Indigenous Medicine' have no ZedPath letter in data/ugc/2025-2026/unicodes.csv, so letter is null.",
+    "Table 3.2 'Institute of Indigenous Medicine(6)' prints a 2022 value only (2023 and 2024 blank) and is therefore not in rows.",
+    "Table 3.2 footnotes as printed: (1) Excluding Open University as it shows separately under Table 03 - 04. (2) University of Colombo includes Sripalee Campus while Eastern University includes Trincomalee Campus too. (3) This excludes backlog students 15290 in 2022, 20467 in 2023 and 17607 in 2024. (4) This includes foreign and lateral entry too. (5) Faculty of Livestock, Fisheries & Nutrition of Wayamba University includes in Agriculture stream too. (6) Institute of Indigenous Medicine became a Faculty of the University of Colombo in 2023.",
+    "Table 3.2 'field' values are the UGC's programme columns (Arts, Management & Commerce, Law, Medicine, Dental Science, Veterinary Science, Agriculture, Engineering, Architecture & Quantity Surveying, Computer Science, Allied Health Sciences, Science, Indigenous Medicine, Technology); they are a grouping, not the faculty headings used in 3.1(a).",
+    "Verification: every 3.1 figure satisfies male + female = total; each institution total equals the sum of its faculties, each faculty the sum of its degree programmes, each programme the sum of its intake-year lines; institution totals sum to the printed grand totals (164801; 32408). Every 3.2 row sums to its Total column and every column sums to the printed Total row for 2022, 2023 and 2024. All extracted figures and names were re-read with a second PDF text extractor and matched.",
+    "Not extracted: postgraduate tables 3.3(a)/(b) (separate tables by academic programme; no per-university postgraduate total inside 3.1 or 3.2), Open University level-on-roll tables 3.4(a)-(c), Institute tables 3.5(a)/(b), external degree programmes table 3.6, and charts 07-10."
+  ]
+}

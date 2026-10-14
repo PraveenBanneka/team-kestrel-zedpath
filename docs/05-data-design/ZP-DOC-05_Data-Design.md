@@ -19,6 +19,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-004 (Ask a
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-005 (group rules, product owner's request): GROUP_MEMBER.rules_version, migration 0009; labelled sample conversations as read-model data
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (product owner's decisions of 11 Oct): rules accepted once per account (GROUP_RULES_ACCEPTANCE, GROUP_MEMBER.rules_version withdrawn), ACCOUNT.avatar, the Journey on the account (JOURNEY_COURSE, JOURNEY_NOTICE, JOURNEY_STEP), OFFERING populated; migration 0010
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
+revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
 ---
 
 # Introduction
@@ -264,6 +265,17 @@ Table: CR-007 changes
 **Enforced on the server** (tested in `worker/demo-login.test.ts`): a demo account has a random username and an
 unusable random verifier (no password log-in); it reads groups but cannot create a group, report a message or post
 (the group room refuses its posts); visitors never see each other's data. Real accounts are unchanged (safe default).
+
+## University facts from UGC statistics (read model)
+
+Five facts per institution (students admitted 2023/24, undergraduates 2024, permanent hostel places, Mahapola and
+Bursary recipients, graduates 2024) come from the UGC report *Sri Lanka University Statistics 2024*, Chapters 2, 3, 4
+and 7. They follow the read-model decision used for routes and dates: the extracts (`data/ugc/statistics-2024/*.json`,
+each number checked twice against the printed table and its totals, and spot-checked by hand) are compiled by
+`tools/statistics/build-statistics.ts` into `worker/generated/statistics-2024.json`, keyed by institution letter. They
+are published, versioned reference data that students only read, so they are not stored in D1. Each fact keeps its
+table, PDF page and URL, and the report's own caveats as flags (2024 provisional; "Information not submitted" shown as
+no number, never as zero; university totals that include campuses).
 
 ## Entity catalogue
 

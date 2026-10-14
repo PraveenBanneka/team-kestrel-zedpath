@@ -11,6 +11,9 @@ import { groupRoutes } from './groups.ts';
 import { myJourneyRoutes } from './my-journey.ts';
 import { SYLLABI, SYLLABI_VERSION } from './syllabi.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
+import statistics from './generated/statistics-2024.json' with { type: 'json' };
+import type { InstitutionFact, StatisticsFile } from '../shared/statistics.ts';
+const FACTS = (statistics as StatisticsFile).institutions;
 import type { JourneyResponse } from '../shared/journey.ts';
 
 /** Short names for selection groups (seat splits by stream or category). */
@@ -26,11 +29,12 @@ const app = new Hono<{ Bindings: Env }>().basePath('/api');
 
 // Cached answers must change the moment the data or the API changes: the ETag is the rulebook build, and clients
 // revalidate every time (304 when unchanged), so a deploy can never leave a phone holding an old response shape.
-const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}-jn-${journey.builtAt}"`;   // rulebook, syllabus or journey data
+const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}-jn-${journey.builtAt}-st-${(statistics as StatisticsFile).retrievedOn}"`;   // rulebook, syllabus, journey or statistics data
 const cacheable = (c: { req: { header: (n: string) => string | undefined }; header: (n: string, v: string) => void }) => {
   c.header('Cache-Control', 'public, no-cache');
   c.header('ETag', ETAG);
-  return c.req.header('If-None-Match') === ETAG;
+  // A compressed response carries the weak form W/"..." back (D-05: compared exactly, it never matched, so no 304).
+  return (c.req.header('If-None-Match') ?? '').split(',').some(t => t.trim().replace(/^W\//, '') === ETAG);
 };
 
 app.get('/health', c => c.json({ ok: true, academicYear: book.academicYear, rules: book.rulesStatus, generatedAt: book.generatedAt }));
@@ -87,6 +91,7 @@ app.get('/offerings/:uniCode', c => {
     requirementCitation: { sourceId: '1', page: course?.page ?? o.page, label: 'UGC handbook 2025/26' },
     otherRequirements: o.other,
     syllabus: SYLLABI.get(o.uniCode) ?? null,
+    facts: (FACTS[o.uniCode.slice(-1)] ?? []) as InstitutionFact[],   // UGC University Statistics 2024 for this institution
     groups: o.groups.map(g => ({ code: g.code, label: g.label, history: g.years.map(y => ({
       academicYear: y.academicYear, zE4: di === undefined ? null : y.zE4[di],
       citation: { sourceId: y.source, page: y.page, label: y.sourceLabel } })) })),

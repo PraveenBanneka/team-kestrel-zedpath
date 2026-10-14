@@ -1,0 +1,1211 @@
+{
+ "title": "Sri Lanka University Statistics 2024",
+ "publisher": "University Grants Commission",
+ "retrievedOn": "2026-10-15",
+ "institutions": {
+  "A": [
+   {
+    "kind": "ADMITTED",
+    "value": 3728,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 14959,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 5152,
+    "share": 38.5,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 6352,
+    "value2": 2055,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
+     "page": 3,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1700,
+    "flags": [
+     "PROVISIONAL",
+     "INCOMPLETE"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "S": [
+   {
+    "kind": "ADMITTED",
+    "value": 222,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 844,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 304,
+    "share": 36,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 154,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "B": [
+   {
+    "kind": "ADMITTED",
+    "value": 3593,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 15870,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 8990,
+    "share": 68.5,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 6067,
+    "value2": 614,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
+     "page": 3,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 2521,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "C": [
+   {
+    "kind": "ADMITTED",
+    "value": 5106,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 16800,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 3479,
+    "share": 20.9,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 9619,
+    "value2": 1315,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
+     "page": 3,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 3389,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "D": [
+   {
+    "kind": "ADMITTED",
+    "value": 4503,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 15629,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 5006,
+    "share": 32.2,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 5259,
+    "value2": 3469,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
+     "page": 4,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 3080,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "G": [
+   {
+    "kind": "ADMITTED",
+    "value": 2356,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 9225,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 1974,
+    "share": 21.4,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 3400,
+    "value2": 838,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
+     "page": 4,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1561,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "E": [
+   {
+    "kind": "ADMITTED",
+    "value": 3793,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 14336,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 4345,
+    "share": 35.7,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 5259,
+    "value2": 3249,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
+     "page": 4,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1760,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "F": [
+   {
+    "kind": "ADMITTED",
+    "value": 4527,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 16464,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 5578,
+    "share": 39.2,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 6180,
+    "value2": 3888,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
+     "page": 4,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1926,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "H": [
+   {
+    "kind": "ADMITTED",
+    "value": 1956,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 7072,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 3406,
+    "share": 61.3,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 1887,
+    "value2": 4011,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
+     "page": 5,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 697,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=3",
+     "page": 3,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "W": [
+   {
+    "kind": "ADMITTED",
+    "value": 854,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 2785,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 1368,
+    "share": 60.1,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 338,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "J": [
+   {
+    "kind": "ADMITTED",
+    "value": 2219,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 7088,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 3695,
+    "share": 55.4,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 1672,
+    "value2": 3372,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
+     "page": 5,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 790,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "K": [
+   {
+    "kind": "ADMITTED",
+    "value": 2454,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 9117,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 4796,
+    "share": 62.2,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 2082,
+    "value2": 2376,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
+     "page": 5,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1833,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "L": [
+   {
+    "kind": "ADMITTED",
+    "value": 2655,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 9736,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 3104,
+    "share": 36.9,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 3075,
+    "value2": 3094,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
+     "page": 5,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1255,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "M": [
+   {
+    "kind": "ADMITTED",
+    "value": 1997,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 7365,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 3854,
+    "share": 59.6,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 2264,
+    "value2": 1039,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 1155,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "U": [
+   {
+    "kind": "ADMITTED",
+    "value": 1739,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 6133,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 504,
+    "share": 9.2,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 1356,
+    "value2": 1183,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   }
+  ],
+  "Z": [
+   {
+    "kind": "ADMITTED",
+    "value": 792,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 4057,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 1524,
+    "share": 52.9,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 407,
+    "value2": 1092,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 558,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "P": [
+   {
+    "kind": "ADMITTED",
+    "value": 686,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 1727,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 134,
+    "share": 8.7,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 638,
+    "value2": 444,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 8,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "R": [
+   {
+    "kind": "ADMITTED",
+    "value": 956,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 2922,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 992,
+    "share": 33.9,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 521,
+    "value2": 1317,
+    "flags": [
+     "INCLUDES_CAMPUSES"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 464,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=4",
+     "page": 4,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "T": [
+   {
+    "kind": "ADMITTED",
+    "value": 352,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 1092,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 266,
+    "value2": 42,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 304,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=5",
+     "page": 5,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ],
+  "Y": [
+   {
+    "kind": "ADMITTED",
+    "value": 393,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%202.pdf#page=6",
+     "page": 6,
+     "table": "2.2",
+     "chapter": "2"
+    }
+   },
+   {
+    "kind": "STUDENTS",
+    "value": 1580,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%203.pdf#page=4",
+     "page": 4,
+     "table": "3.1(a)",
+     "chapter": "3"
+    }
+   },
+   {
+    "kind": "HOSTEL",
+    "value": 376,
+    "share": 28.3,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
+     "page": 2,
+     "table": "7.1",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "WELFARE",
+    "value": 89,
+    "value2": 1082,
+    "flags": [],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
+     "page": 6,
+     "table": "7.2",
+     "chapter": "7"
+    }
+   },
+   {
+    "kind": "GRADUATES",
+    "value": 191,
+    "flags": [
+     "PROVISIONAL"
+    ],
+    "source": {
+     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%204.pdf#page=5",
+     "page": 5,
+     "table": "4.1",
+     "chapter": "4"
+    }
+   }
+  ]
+ }
+}

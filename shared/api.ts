@@ -49,6 +49,8 @@ export interface ResultsResponse {
 export interface Citation { sourceId: string; page: number; label: string }
 
 export interface OfferingDetail {
+  /** UGC 'Sri Lanka University Statistics 2024' facts for the offering's institution (each cites table and page). */
+  facts: import('./statistics.ts').InstitutionFact[];
   uniCode: string;
   course: string;
   institution: string;

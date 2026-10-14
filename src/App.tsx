@@ -35,7 +35,8 @@ import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded,
 import { useInstallPrompt } from './pwa.ts';
 import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
-import { LANGS, setLang as applyLang, t, type Key, type Lang } from './i18n/index.ts';
+import { LANGS, locale, setLang as applyLang, t, type Key, type Lang } from './i18n/index.ts';
+import type { InstitutionFact } from '../shared/statistics.ts';
 import { loadLang, saveLang } from './storage.ts';
 
 const bandLabel = (b: Band) => t(`band.${b}`);
@@ -506,6 +507,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
         </details>
       </section>
       {d.syllabus && <SyllabusCard s={d.syllabus} />}
+      {d.facts.length > 0 && <FactsCard facts={d.facts} />}
       {d.ambiguousWording && <div className="alert warn"><Info size={20} aria-hidden="true" />{t('detail.ambiguous')}</div>}
 
       {d.groups.map(g => (
@@ -755,3 +757,27 @@ function profileLine(p: ProfileInput, meta: Meta | null): string {
   return `${stream} · ${district} · Z ${formatZ(p.zE4)}`;
 }
 export { titleCase } from './format.ts';
+
+// UGC "Sri Lanka University Statistics 2024" for this university: every number links to its table and page.
+const FACT_ORDER = ['ADMITTED', 'STUDENTS', 'HOSTEL', 'WELFARE', 'GRADUATES'] as const;
+function FactsCard({ facts }: { facts: InstitutionFact[] }) {
+  const n = (v: number) => v.toLocaleString(locale());
+  const sorted = [...facts].sort((a, b) => FACT_ORDER.indexOf(a.kind) - FACT_ORDER.indexOf(b.kind));
+  return (
+    <section className="card stack facts-card" aria-labelledby="facts-h">
+      <h2 id="facts-h" className="title-l" style={{ margin: 0 }}>{t('facts.h')}</h2>
+      <p className="helper" style={{ margin: 0 }}>{t('facts.sub')}</p>
+      <dl className="facts">
+        {sorted.map(f => (
+          <div key={f.kind} className="fact">
+            <dt>{t(`facts.${f.kind}` as Key)}</dt>
+            <dd>
+              <span className="fact-value num">{f.kind === 'WELFARE' ? t('facts.welfareValue', { m: n(f.value), b: n(f.value2 ?? 0) }) : n(f.value)}</span>
+              {f.kind === 'HOSTEL' && f.share !== undefined && <span className="helper">{t('facts.hostelShare', { p: f.share })}</span>}
+              {f.flags.map(fl => <span key={fl} className="helper">{t(`facts.flag.${fl}` as Key)}</span>)}
+              <a className="source-link small" href={f.source.url} target="_blank" rel="noopener noreferrer">{t('facts.source', { t: f.source.table, p: f.source.page })}</a>
+            </dd>
+          </div>))}
+      </dl>
+    </section>);
+}
