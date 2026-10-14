@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DEMO_CONTACT, DEMO_PASSWORD, DEMO_PROFILE, DEMO_USERNAME, demoOn } from './demo.ts';
+import { DEMO_CONTACT, DEMO_EXTRAS, DEMO_PASSWORD, DEMO_PROFILE, DEMO_USERNAME, demoOn } from './demo.ts';
+import { specialIntakeHint } from '../shared/account.ts';
 import { parseContact, CONSENT_VERSION } from '../shared/contact.ts';
 import { parseProfile } from '../worker/rulebook.ts';
 import { PASSWORD_MIN, USERNAME_RE } from '../shared/account.ts';
@@ -11,5 +12,8 @@ describe('demo mode', () => {
     expect(DEMO_PASSWORD.length).toBeGreaterThanOrEqual(PASSWORD_MIN);
     expect(parseContact(DEMO_CONTACT, CONSENT_VERSION, '2026-10-11').ok).toBe(true);
     expect(parseProfile(DEMO_PROFILE, true)).toEqual(DEMO_PROFILE);
+  });
+  it('prefills a national sports achievement, which shows the special-intake hint', () => {
+    expect(specialIntakeHint(DEMO_EXTRAS)).toEqual({ applies: true, sport: true });
   });
 });

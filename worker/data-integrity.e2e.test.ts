@@ -59,7 +59,7 @@ const BLOCKED_HOSTS = (() => {
 
 // Known real data problems (2026-10-12). Exact lists: fixing one, or a new one appearing, fails the pinned test.
 const KNOWN = {
-  notHttps: ['R027 official_url'],                       // ITUM link is http://, not https://
+  notHttps: [] as string[],                              // R027 fixed 2026-10-14: https://itum.mrt.ac.lk (checked: ITUM's own site)
   offAllowList: ['syllabus 001A sourceUrls[1]'],         // a file-sharing link, not the university's own domain
 };
 
