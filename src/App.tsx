@@ -269,7 +269,8 @@ export function App() {
         <span className="brand">{title}</span>
         <a className="avatar small plain" href="#/me" aria-label={t('nav.me')}>{me ? <PersonAvatar avatar={me.avatar} name={me.username} size={36} /> : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
-      <main><ErrorBoundary resetKey={route}><Page k={route}>{screen}</Page></ErrorBoundary></main>
+      {/* The three Courses tabs are one screen, so a selection survives switching Safe / Likely / Reach (Praveen 2026-10-14). */}
+      <main><ErrorBoundary resetKey={route}><Page k={path === 'courses' ? 'courses' : route}>{screen}</Page></ErrorBoundary></main>
       <nav className="bottom-nav" aria-label={t('nav.main')}>
         {NAV.map(([key, label, Icon, href]) => (
           <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
@@ -390,7 +391,7 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
         </Stagger>)}
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
-          <span className="grow num">{t('sel.count', { n: picked.length })}</span>
+          <span className="grow"><span className="sel-badge num" role="status" aria-label={t('sel.count', { n: picked.length })}>{picked.length}</span></span>
           <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
           <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setCompare(picked.slice(0, COMPARE_MAX)); go('/compare'); }}>
             <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>

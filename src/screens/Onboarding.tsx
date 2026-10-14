@@ -127,7 +127,7 @@ function SlideArt({ kind }: { kind: Art }) {
     const rows = [{ c: 'Physical Science · Colombo', b: 'REACH' }, { c: 'Software Engineering · Sabaragamuwa', b: 'LIKELY' }, { c: 'Data Science · Sabaragamuwa', b: 'SAFE' }] as const;
     return (
       <div className="scene-inner"><Example />
-        <div className="glass list-card">
+        <div className="glass mini-list">
           {rows.map((r, i) => (
             <motion.div key={r.c} className="mini-row" {...pop(0.1 + i * 0.12)}>
               <span className="mini-n">{i + 1}</span><span className="mini-c">{r.c}</span><span className={`pill band-${r.b}`}>{t(`band.${r.b}`)}</span>

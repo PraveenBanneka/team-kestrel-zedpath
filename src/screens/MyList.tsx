@@ -119,7 +119,7 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
       </Reorder.Group>
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
-          <span className="grow num">{t('sel.count', { n: picked.length })}</span>
+          <span className="grow"><span className="sel-badge num" role="status" aria-label={t('sel.count', { n: picked.length })}>{picked.length}</span></span>
           <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
           <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setList(list.filter(x => !picked.includes(x.uniCode))); setPicked(null); }}>
             <Trash2 size={16} aria-hidden="true" />{t('sel.remove')}</button>
