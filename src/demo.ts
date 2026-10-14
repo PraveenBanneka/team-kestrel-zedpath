@@ -2,7 +2,8 @@
 // About you with the sample student Kasun Perera, so the video shows the flow without minutes of typing. Off unless that
 // link is used (safe default: every real student sees empty forms). Remembered on the phone (localStorage), so the installed app also gets it.
 // The email and mobile are placeholders and are never contacted.
-export { DEMO_USERNAME, DEMO_PASSWORD, DEMO_CONTACT, DEMO_PROFILE, DEMO_EXTRAS } from '../shared/demo-data.ts';
+// Never a password (security audit run-1, lead 1/5): a prefilled password would be public. The student types their own.
+export { DEMO_USERNAME, DEMO_CONTACT, DEMO_PROFILE, DEMO_EXTRAS } from '../shared/demo-data.ts';
 
 const KEY = 'zedpath.demo';
 

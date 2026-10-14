@@ -5,7 +5,6 @@ import type { Extras } from './account.ts';
 import type { Contact } from './contact.ts';
 
 export const DEMO_USERNAME = 'kasun_demo';
-export const DEMO_PASSWORD = 'Kestrel@2026';
 export const DEMO_CONTACT: Contact = { fullName: 'Kasun Perera', email: 'kasun.perera@example.com', mobile: '0771234567', birthDate: '2006-03-14' };
 export const DEMO_PROFILE: ProfileInput = { stream: 'PHYS', district: 'KUR', zE4: 14200, al: { CMATH: 'B', PHY: 'C', CHEM: 'C' } };
 export const DEMO_EXTRAS: Extras = {
