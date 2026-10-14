@@ -2,14 +2,14 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 2.0 (draft)
-date: 11 October 2026
-status: Under revision
+version: 2.0
+date: 14 October 2026
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026 (v1.0)
-signature: v1.0 approved in writing (project channel); this revision awaits approval
+approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Agile user stories (Cohn), INVEST, Gherkin-style acceptance criteria; MoSCoW (DSDM); ZP-DOC-00
@@ -18,6 +18,7 @@ revision: 0.2 | 5 Oct 2026 | Team Kestrel | Story totals verified by script; cor
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Restructured to ZP-DOC-00; numbered acceptance criteria; reminders and senior verification changed to fit the Cloudflare free plan (no outbound email); submitted for approval
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 19 new stories (US-106 to US-111, US-209, US-305, US-407 to US-411, US-605 to US-607, US-706 to US-708); revised US-105, US-207, US-401 to US-404, US-501, US-503, US-604, US-702 to US-704; US-406 superseded and US-507 withdrawn; principle 3 replaced (an account is now required); epic totals and release plan recomputed. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
+revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 ---
 
 # Introduction

@@ -2,20 +2,21 @@
 id: ZP-DOC-01
 title: Vision and Scope
 subtitle: Business requirements, product vision, scope boundaries and business context
-version: 2.0 (draft)
-date: 11 October 2026
-status: Under revision
+version: 2.0
+date: 14 October 2026
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026 (v1.0)
-signature: v1.0 approved in writing (project channel); this revision awaits approval
+approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Vision and scope document template (K. Wiegers and J. Beatty, Software Requirements, 3rd ed.); ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue, derived from the Gate 1 Problem and Proof deck; submitted for approval
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): change-request summary added; features FE-1, FE-4 to FE-7 restated; release scope recomputed from ZP-DOC-02 (R1 57 stories, 189 points; R2 10 stories, 31 points); limitations updated (account required; Android app exists; reminders on the phone); RK-02 and RK-07 mitigations updated; RK-08 added; market figures unchanged. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
+revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 ---
 
 # Introduction

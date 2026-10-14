@@ -2,20 +2,21 @@
 id: ZP-DOC-03
 title: Software Requirements Specification
 subtitle: Functional, non-functional and business-rule requirements for ZedPath Release 1 and 2
-version: 2.0 (draft)
-date: 11 October 2026
-status: Under revision
+version: 2.0
+date: 14 October 2026
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026 (v1.0)
-signature: v1.0 approved in writing (project channel); this revision awaits approval
+approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: ISO/IEC/IEEE 29148:2018, software requirements specification content; ZP-DOC-00
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: functional requirements derived from ZP-DOC-02; NFRs; business rules from the UGC handbook and cut-off table 2025/26; submitted for approval
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): new FR-114 to FR-124, FR-215 to FR-218, FR-309 to FR-311, FR-409 to FR-417, FR-509, FR-510, FR-607 to FR-612, FR-707 to FR-719, UI-4, UI-5, SI-8, SI-9; revised UI-1, CON-4, FR-101, FR-213, FR-401, FR-402, FR-404, FR-501, FR-503, FR-606, FR-703, FR-705, NFR-030; superseded FR-104, FR-405, FR-406, FR-408, FR-704, FR-713 and SI-4; withdrew FR-508; new NFR-036 to NFR-039, NFR-043, NFR-070 to NFR-075, BR-050 to BR-058, BR-060 to BR-063, BR-070 to BR-077, BR-080; traceability extended. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
+revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 ---
 
 # Introduction

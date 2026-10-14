@@ -139,10 +139,10 @@ Each document is available as Markdown (source), Word and PDF.
 | ID | Document | Standard | Status |
 |---|---|---|---|
 | [ZP-DOC-00](docs/00-documentation-standard/) | Documentation Standard | ISO/IEC/IEEE 15289:2019 | v1.0 approved |
-| [ZP-DOC-01](docs/01-vision-and-scope/) | Vision and Scope | Wiegers and Beatty template | v1.0 approved |
-| [ZP-DOC-02](docs/02-user-stories/) | User Stories (50 stories, 74 acceptance criteria) | Cohn, INVEST, MoSCoW | v1.0 approved |
-| [ZP-DOC-03](docs/03-requirements/) | Software Requirements Specification (80 FR, 32 NFR, 38 business rules) | ISO/IEC/IEEE 29148:2018 | v1.0 approved |
-| [ZP-DOC-04](docs/04-use-cases/) | Use Case Model (18 use cases) | UML 2.5.1, Cockburn | v1.0 approved |
+| [ZP-DOC-01](docs/01-vision-and-scope/) | Vision and Scope | Wiegers and Beatty template | v2.0 approved |
+| [ZP-DOC-02](docs/02-user-stories/) | User Stories (69 stories) | Cohn, INVEST, MoSCoW | v2.0 approved |
+| [ZP-DOC-03](docs/03-requirements/) | Software Requirements Specification (128 FR, 43 NFR, 60 business rules) | ISO/IEC/IEEE 29148:2018 | v2.0 approved |
+| [ZP-DOC-04](docs/04-use-cases/) | Use Case Model (33 use cases) | UML 2.5.1, Cockburn | v2.0 approved |
 | [ZP-DOC-05](docs/05-data-design/) | Data Design (EER → relational → normalisation → D1), incl. student accounts | Elmasri and Navathe EER | v0.9 in review |
 | [ZP-DOC-06](docs/06-architecture/) | Software Architecture | ISO/IEC/IEEE 42010, C4, ADRs | v0.9 in review |
 | [ZP-DOC-07](docs/07-ui-ux/) | UI/UX Specification | Material Design 3, WCAG 2.2 AA | v0.9 in review |

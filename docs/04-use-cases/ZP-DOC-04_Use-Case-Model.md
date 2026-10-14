@@ -2,14 +2,14 @@
 id: ZP-DOC-04
 title: Use Case Model
 subtitle: Actors, use case diagrams, fully dressed use cases and activity flows
-version: 2.0 (draft)
-date: 11 October 2026
-status: Under revision
+version: 2.0
+date: 14 October 2026
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 5 Oct 2026 (v1.0)
-signature: v1.0 approved in writing (project channel); this revision awaits approval
+approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel), v2.0 on 14 Oct 2026 and v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: UML 2.5.1 use case and activity diagrams; A. Cockburn fully dressed use case template; ZP-DOC-00
@@ -17,6 +17,7 @@ revision: 0.9 | 5 Oct 2026 | Team Kestrel | First issue: 18 use cases (7 fully d
 revision: 0.9 | 5 Oct 2026 | Team Kestrel | Review update: catalogue extended for FR-113 (O/L requirements) and FR-308 (list limit) added to ZP-DOC-03
 revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 15 new use cases UC-19 to UC-33 (four fully dressed: UC-19, UC-25, UC-29, UC-30); revised UC-01, UC-02, UC-03, UC-05, UC-06, UC-07, UC-13, UC-15, UC-16; UC-14 superseded; new actors (Android notification system, moderation model); catalogue re-checked against the revised ZP-DOC-03. The two use case diagrams still show the v1.0 baseline. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
+revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 ---
 
 # Introduction
@@ -554,7 +555,7 @@ Table: Brief use cases
 
 Every functional requirement in ZP-DOC-03 is realised by at least one use case, as listed in the use case
 catalogue above (column *Requirements*); this was checked by script against all 80 requirements of v1.0, and
-again for this revision against all 128 functional requirement IDs of ZP-DOC-03 v2.0 (draft), including the
+again for this revision against all 128 functional requirement IDs of ZP-DOC-03 v2.0, including the
 superseded and withdrawn ones, which stay listed against the use case they belonged to.
 
 # Glossary {.appendix}
