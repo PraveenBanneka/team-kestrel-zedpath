@@ -47,3 +47,7 @@ data/ask/
 
 # generated at app build time from ZEDPATH_APP_URL (live address kept out of the repo)
 native/www/app-url.js
+
+# Cloudflare security-audit skill (vendored locally, MIT) and its audit output
+.claude/skills/security-audit/
+security-audit/

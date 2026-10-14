@@ -107,8 +107,9 @@ let db: Db;
 beforeEach(() => { db = createTestD1().raw; });
 
 describe('MIG: migrations apply cleanly', () => {
-  it('MIG-001 0001..0010 exist, are numbered without gaps and apply in order on an empty database', () => {
-    expect(FILES.map(f => f.slice(0, 4))).toEqual(['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010']);
+  it('MIG-001 migrations exist from 0001, numbered without gaps, and apply in order on an empty database', () => {
+    expect(FILES.map(f => f.slice(0, 4))).toEqual(FILES.map((_, i) => String(i + 1).padStart(4, '0')));   // 0011 (CR-007) and later included
+    expect(FILES.length).toBeGreaterThanOrEqual(11);
     const fresh = new DatabaseSync(':memory:');
     fresh.exec('PRAGMA foreign_keys = ON;');
     for (const f of FILES) expect(() => fresh.exec(fs.readFileSync(path.join(MIGRATIONS, f), 'utf8')), f).not.toThrow();

@@ -59,5 +59,7 @@ export interface MeResponse { username: string; role: 'STUDENT' | 'SENIOR'; seni
   contact: Contact | null;
   /** CR-006: the chosen preset picture; null = initials. */
   avatar: Avatar | null;
+  /** CR-007: a throwaway demo account (read-only in groups, deleted 24 hours after it was made). */
+  demo: boolean;
   profile: ProfileInput | null; extras: Extras }
 export interface SaveMeRequest { profile: ProfileInput; extras: Extras }

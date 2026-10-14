@@ -17,7 +17,7 @@ import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
 demoOn();                                                        // remember ?demo=kasun on first open (the installed app opens without it)
 import { AuthScreen, CompleteContactScreen, RecoveryCodeScreen } from './screens/Account.tsx';
 import { deleteAccount, fetchJourney, fetchMe, followCourse as apiFollowCourse, followNotice as apiFollowNotice, logOut, logOutEverywhere, markApplied, markStep,
-  saveAvatar, saveMe, SESSION_LOST } from './account.ts';
+  saveAvatar, saveMe, SESSION_LOST, demoLogin } from './account.ts';
 import { AVATAR_CODES, PersonAvatar } from './avatars.tsx';
 import type { JourneyStepId, MyJourney } from '../shared/journey.ts';
 import { AskScreen, type AskTurn } from './screens/Ask.tsx';
@@ -95,7 +95,7 @@ export function App() {
   // Accounts (CR-001): with no account (or no accounts on the server) everything below is skipped and the app behaves
   // exactly as before. With one, every save also goes to the account, and the account's copy is loaded on start,
   // unless a save never reached it (offline): then the phone's newer copy is pushed instead of being overwritten.
-  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact']; avatar: MeResponse['avatar'] } | null>(null);
+  const [me, setMe] = useState<{ username: string; role: MeResponse['role']; senior: MeResponse['senior']; contact: MeResponse['contact']; avatar: MeResponse['avatar']; demo?: boolean } | null>(null);
   const [checked, setChecked] = useState(false);              // CR-003: the account check has finished (no anonymous use)
   const meRef = useRef(me); meRef.current = me;
   // The server dropped this phone's session (e.g. logged out on all devices, account deleted): forget it and go to Log in.
@@ -118,7 +118,7 @@ export function App() {
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
   const adopt = (m: MeResponse) => {
-    setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact, avatar: m.avatar });
+    setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact, avatar: m.avatar, demo: m.demo });
     if (m.role !== 'STUDENT') { setOnboarded(); setOnb(true); return; }       // a senior's results (if any) stay on this phone
     const local = loadProfile();
     if (local && (isPendingSync() || !m.profile)) { void push(local, loadExtras()); return; }
@@ -176,7 +176,7 @@ export function App() {
   const reset = () => { clearEverything(); setListRaw([]); setCompareRaw([]); setMy(null); setMe(null); setProfile(null); setExtras({ achievements: [], interests: [] }); setOnb(false); go('/'); };
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
-    username: me?.username ?? null, avatar: me?.avatar ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
+    username: me?.username ?? null, demo: !!me?.demo, avatar: me?.avatar ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
     logOut: async () => { await logOut().catch(() => {}); setMe(null); },
     logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
     deleteAccount: async () => { await deleteAccount(); reset(); },
@@ -220,7 +220,8 @@ export function App() {
     </div>);
 
   // First run
-  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang} /></main></div>;
+  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang}
+    onDemo={() => demoLogin().then(m => { adopt(m); setOnboarded(); setOnb(true); go('/paths'); })} /></main></div>;
   if (!onboarded && path === 'intro') return <div className="shell"><main><Intro onDone={finishIntro} /></main></div>;
   const SENIOR_OK = ['groups', 'group', 'ask', 'me', 'journey', 'alerts'];
   if (!profile && me?.role === 'SENIOR' && !SENIOR_OK.includes(path)) { go('/groups'); return null; }
@@ -609,7 +610,7 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
 }
 
 // ---------------------------------------------------------------- Me
-interface AccountControls { username: string | null; avatar: string | null; senior: MeResponse['senior']; contact: MeResponse['contact']; syncNote: string | null; logOut: () => Promise<void>;
+interface AccountControls { username: string | null; demo: boolean; avatar: string | null; senior: MeResponse['senior']; contact: MeResponse['contact']; syncNote: string | null; logOut: () => Promise<void>;
   logOutEverywhere: () => Promise<void>; deleteAccount: () => Promise<void> }
 
 function AccountCard({ account, go }: { account: AccountControls; go: (to: string) => void }) {
@@ -630,6 +631,7 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
         <PersonAvatar avatar={account.avatar} name={account.username} size={46} />
         <span className="stack" style={{ gap: 0, minWidth: 0 }}>
           <span className="title-l" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.username}</span>
+          {account.demo && <span className="helper">{t('acc.demo')}</span>}
           <span className="helper"><CloudCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('acc.saved')}</span>
         </span>
       </div>

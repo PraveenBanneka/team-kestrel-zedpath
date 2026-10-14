@@ -18,6 +18,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-003 (compu
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-004 (Ask answer feedback): ANSWER_FEEDBACK, migration 0008
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-005 (group rules, product owner's request): GROUP_MEMBER.rules_version, migration 0009; labelled sample conversations as read-model data
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (product owner's decisions of 11 Oct): rules accepted once per account (GROUP_RULES_ACCEPTANCE, GROUP_MEMBER.rules_version withdrawn), ACCOUNT.avatar, the Journey on the account (JOURNEY_COURSE, JOURNEY_NOTICE, JOURNEY_STEP), OFFERING populated; migration 0010
+revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 ---
 
 # Introduction
@@ -242,6 +243,28 @@ Journey items kept on a phone before CR-006 are copied to the account by the app
 email or mobile in `student_contact`. Every new relation cascades on account deletion. In each group's room, a message
 keeps the author's avatar as it was when posted, a snapshot like the author name (a deliberate departure).
 
+## Demo accounts (CR-007)
+
+The product owner asked for a one-tap demo on the Welcome screen (15 October 2026), choosing a **private copy per
+visitor** over one shared account. Each tap creates a throwaway account holding the sample student; it expires 24 hours
+later and is deleted on a later demo tap (the free plan has no scheduled job).
+
+**Where the fact lives.** "This account is a demo, until T" is a single-valued fact about the account, so it is an
+attribute of ACCOUNT (`demo_expires_at`, NULL for every real account), not a new entity. Reusing ACCOUNT means every row
+a demo creates (profile, contact, list, Journey, sessions, memberships, rules acceptance) is already removed by the
+existing ON DELETE CASCADE foreign keys: no second deletion path to keep in step.
+
+Table: CR-007 changes
+
+| Change | Kind | Rule |
+|---|---|---|
+| `account.demo_expires_at` | Attribute (nullable) | CHECK: NULL or later than `created_at` |
+| `idx_account_demo_expires` | Partial index (`WHERE demo_expires_at IS NOT NULL`) | Serves the clean-up `DELETE ... WHERE demo_expires_at < now` without scanning real accounts |
+
+**Enforced on the server** (tested in `worker/demo-login.test.ts`): a demo account has a random username and an
+unusable random verifier (no password log-in); it reads groups but cannot create a group, report a message or post
+(the group room refuses its posts); visitors never see each other's data. Real accounts are unchanged (safe default).
+
 ## Entity catalogue
 
 Table: Entities, their type, identifier and the requirements that justify them
@@ -423,6 +446,7 @@ Table: Secondary indexes and the query each serves
 
 | Index | Serves |
 |---|---|
+| `idx_account_demo_expires` (partial, CR-007) | Deleting expired demo accounts on each demo tap |
 | `idx_offering_uni_code` (unique) | Look up an offering by Uni-Code |
 | `idx_cutoff_district` | All cut-offs for one district: the core of eligibility and banding |
 | `idx_offering_year_year` | All offerings of an intake year |
@@ -513,6 +537,7 @@ Table: Requirements and the tables that realise them
 | CR-003 (compulsory contact details, consent) | `student_contact` (0007) |
 | CR-004 (Ask answer feedback) | `answer_feedback` (0008) |
 | CR-006 (rules once per account, avatars, Journey on the account) | `group_rules_acceptance`, `account.avatar`, `journey_course` (to `offering`), `journey_notice`, `journey_step` (0010) |
+| CR-007 (one-tap demo, a private copy per visitor) | `account.demo_expires_at`, `idx_account_demo_expires` (0011) |
 
 # Physical schema (migration 0001) {.appendix}
 
@@ -545,6 +570,12 @@ Reproduced verbatim from `migrations/0010_journey_avatars_rules.sql`, generated 
 255 offering rows are the official Uni-Code list).
 
 <!-- include: migrations/0010_journey_avatars_rules.sql -->
+
+# Demo accounts (migration 0011) {.appendix}
+
+Reproduced verbatim from `migrations/0011_demo_accounts.sql`.
+
+<!-- include: migrations/0011_demo_accounts.sql -->
 
 # Group rules (migration 0009) {.appendix}
 

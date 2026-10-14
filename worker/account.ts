@@ -20,6 +20,8 @@ import {
 } from '../shared/account.ts';
 import { parseProfile } from './rulebook.ts';
 import { CONSENT_VERSION, parseContact, type Contact } from '../shared/contact.ts';
+import { DEMO_CONTACT, DEMO_EXTRAS, DEMO_PROFILE } from '../shared/demo-data.ts';
+
 
 export type AppEnv = { Bindings: Env; Variables: { accountId: number; username: string; tokenHash: string } };
 type C = Context<AppEnv>;
@@ -73,7 +75,9 @@ export const ready = async (c: C, next: Next) => {
 export const sameOrigin = async (c: C, next: Next) => {
   if (!['GET', 'HEAD'].includes(c.req.method)) {
     const origin = c.req.header('Origin');
-    if (origin && new URL(origin).host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
+    let host: string | null = null;
+    try { host = origin ? new URL(origin).host : null; } catch { /* "null" or malformed: treated as cross-site (was a 500) */ }
+    if (origin && host !== new URL(c.req.url).host) return err(c, 403, 'Cross-site request refused');
   }
   await next();
 };
@@ -145,7 +149,7 @@ function saveStatements(db: D1Database, id: { sql: string; args: unknown[] }, p:
 
 async function loadMe(db: D1Database, accountId: number, username: string): Promise<MeResponse> {
   const [acc, p, subs, ach, ints, ct] = await db.batch([
-    db.prepare(`SELECT a.role, a.avatar, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
+    db.prepare(`SELECT a.role, a.avatar, a.demo_expires_at, c.name_en AS course, i.name_en AS institution, v.study_year AS year FROM account a
       LEFT JOIN senior_invite v ON v.redeemed_by = a.account_id LEFT JOIN course c ON c.course_code = v.course_code
       LEFT JOIN institution i ON i.letter = v.institution_letter WHERE a.account_id = ?`).bind(accountId),
     db.prepare('SELECT stream_code, district_code, z_e4 FROM student_profile WHERE account_id = ?').bind(accountId),
@@ -158,13 +162,14 @@ async function loadMe(db: D1Database, accountId: number, username: string): Prom
   const prof = (p.results as { stream_code: ProfileInput['stream']; district_code: string; z_e4: number }[])[0];
   const al = Object.fromEntries((subs.results as { subject_code: string; grade: string }[]).map(r => [r.subject_code, r.grade]));
   const order = (t: string) => (INTERESTS as readonly string[]).indexOf(t);
-  const a = (acc.results as { role: string; avatar: string | null; course: string | null; institution: string | null; year: number | null }[])[0];
+  const a = (acc.results as { role: string; avatar: string | null; demo_expires_at: string | null; course: string | null; institution: string | null; year: number | null }[])[0];
   return {
     username,
     role: a?.role === 'SENIOR' ? 'SENIOR' : 'STUDENT',
     senior: a?.role === 'SENIOR' && a.course && a.institution && a.year ? { course: a.course, institution: a.institution, year: a.year } : null,
     contact: c ? { fullName: c.full_name, email: c.email, mobile: c.mobile, birthDate: c.birth_date } : null,
     avatar: isAvatar(a?.avatar) ? a.avatar : null,
+    demo: !!a?.demo_expires_at,
     profile: prof ? { stream: prof.stream_code, district: prof.district_code, zE4: prof.z_e4, al: al as ProfileInput['al'] } : null,
     extras: {
       achievements: (ach.results as (Omit<Achievement, 'id'> & { achievement_id: number })[])
@@ -251,6 +256,34 @@ accountRoutes.post('/auth/signup', async c => {
   }
   setSessionCookie(c, token);
   return c.json({ username, recoveryCode: code } satisfies SignupResponse, 201);
+});
+
+// CR-007: "Try the demo". Each tap makes a private throwaway account with the sample student (shared/demo-data.ts) and
+// logs it in; it expires after DEMO_HOURS and is deleted on a later demo tap (no cron on the free plan). Nobody can log in
+// to it with a password (random verifier). Demo accounts read groups but cannot post, report or create groups.
+const DEMO_HOURS = 24;
+/** The sample contact, normalised exactly as a sign-up would be (+94 mobile etc.). */
+const demoContact = (now: string) => { const r = parseContact(DEMO_CONTACT, CONSENT_VERSION, now.slice(0, 10)); if (!r.ok) throw new Error(`demo contact: ${r.error}`); return r.contact; };
+export const isDemo = async (db: D1Database, accountId: number) =>
+  !!(await db.prepare('SELECT 1 FROM account WHERE account_id = ? AND demo_expires_at IS NOT NULL').bind(accountId).first());
+accountRoutes.post('/auth/demo', async c => {
+  if (await limited(c, 'demo', 'demo')) return err(c, 429, 'Too many tries. Wait a minute and try again');
+  const db = c.env.DB, now = nowIso(), expires = new Date(Date.now() + DEMO_HOURS * 3_600_000).toISOString();
+  await db.prepare('DELETE FROM account WHERE demo_expires_at IS NOT NULL AND demo_expires_at < ?').bind(now).run();   // cascades
+  const subject = `demo:${randomHex(16)}`, username = `demo_${randomHex(4)}`, token = randomHex(32);
+  const id = { sql: '(SELECT account_id FROM account WHERE auth_subject = ?)', args: [subject] };
+  await db.batch([
+    db.prepare(`INSERT INTO account (auth_subject, role, created_at, demo_expires_at) VALUES (?, 'STUDENT', ?, ?)`).bind(subject, now, expires),
+    db.prepare(`INSERT INTO password_login (account_id, username, salt, verifier, kdf, updated_at) VALUES (${id.sql}, ?, ?, ?, ?, ?)`)
+      .bind(subject, username, randomHex(16), await sha256Hex(fromHex(randomHex(32))), KDF, now),
+    db.prepare(`INSERT INTO session (token_hash, account_id, created_at, expires_at) VALUES (?, ${id.sql}, ?, ?)`)
+      .bind(await sha256Hex(fromHex(token)), subject, now, expires),
+    contactStatement(db, id, demoContact(now), now),
+    ...saveStatements(db, id, DEMO_PROFILE, DEMO_EXTRAS, now),
+  ]);
+  setCookie(c, COOKIE, token, { ...COOKIE_OPTS, maxAge: DEMO_HOURS * 3600 });
+  const accountId = (await db.prepare(`SELECT account_id FROM account WHERE auth_subject = ?`).bind(subject).first<{ account_id: number }>())!.account_id;
+  return c.json(await loadMe(db, accountId, username), 201);
 });
 
 accountRoutes.post('/auth/login', async c => {

@@ -16,8 +16,9 @@ import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, 
 import { sampleKey } from '../shared/group-samples.ts';
 import { normaliseUsername, USERNAME_RE } from '../shared/account.ts';
 import { book } from './rulebook.ts';
-import { err, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
+import { err, isDemo, ready, requireSession, sameOrigin, type AppEnv } from './account.ts';
 import { tidyName as titleCaseName } from './ask.ts';
+
 
 type C = Context<AppEnv>;
 const nowIso = () => new Date().toISOString();
@@ -84,6 +85,7 @@ groupRoutes.post('/groups/join', async c => {
   const b = (await c.req.json().catch(() => null)) as { kind?: unknown; courseCode?: unknown; acceptRules?: unknown } | null;
   const accepting = b?.acceptRules === GROUP_RULES_VERSION;
   if (!accepting && !(await rulesAccepted(c, me))) return err(c, 400, 'Read and accept the group rules to join', 'acceptRules');
+  const demo = await isDemo(db, me);                              // CR-007: demo accounts join existing groups only
   let where: string, args: unknown[], insert: D1PreparedStatement;
   if (b?.kind === 'COURSE') {
     const code = String(b.courseCode ?? '');
@@ -97,7 +99,9 @@ groupRoutes.post('/groups/join', async c => {
     where = `kind = 'BATCH' AND stream_code = ? AND district_code = ?`; args = [p.stream_code, p.district_code];
     insert = db.prepare(`INSERT OR IGNORE INTO course_group (kind, stream_code, district_code, created_at) VALUES ('BATCH', ?, ?, ?)`).bind(p.stream_code, p.district_code, now);
   } else return err(c, 400, 'Choose a course group or your batch group', 'kind');
-  await db.batch([insert,
+  if (demo && !(await db.prepare(`SELECT 1 FROM course_group WHERE ${where}`).bind(...args).first()))
+    return err(c, 403, 'The demo can join groups that already exist');
+  await db.batch([...(demo ? [] : [insert]),
     ...(accepting ? [db.prepare('INSERT OR IGNORE INTO group_rules_acceptance (account_id, rules_version, accepted_at) VALUES (?, ?, ?)')
       .bind(me, GROUP_RULES_VERSION, now)] : []),
     db.prepare(`INSERT OR IGNORE INTO group_member (group_id, account_id, joined_at) SELECT group_id, ?, ? FROM course_group WHERE ${where}`).bind(me, now, ...args)]);
@@ -140,7 +144,8 @@ groupRoutes.get('/groups/:id/live', async c => {
   headers.set('X-ZP-Account', String(me));
   headers.set('X-ZP-Author', c.get('username'));                // usernames are [a-z0-9_.] only
   headers.set('X-ZP-Badge', s ? encodeURIComponent(seniorBadge(titleCaseName(s.course), s.year)) : '');   // headers are ASCII-only
-  headers.set('X-ZP-Avatar', m.avatar ?? '');                   // a preset code (CHECK in D1), ASCII
+  headers.set('X-ZP-Avatar', m.avatar ?? '');
+  headers.set('X-ZP-ReadOnly', (await isDemo(c.env.DB, me)) ? '1' : '');   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
   headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code));    // which labelled sample thread the room shows first
   headers.set('X-ZP-Blocked', JSON.stringify((blocked.results as { blocked_id: number }[]).map(r => r.blocked_id)));
   return room(c, id).fetch(new Request('https://room/live', { headers }));
@@ -160,6 +165,7 @@ groupRoutes.get('/groups/:id/members', async c => {
 });
 
 groupRoutes.post('/groups/:id/report', async c => {
+  if (await isDemo(c.env.DB, c.get('accountId'))) return err(c, 403, 'Demo accounts cannot report messages');   // CR-007: no hiding by demo floods
   const id = groupId(c), me = c.get('accountId');
   if (!id || !(await isMember(c, id))) return err(c, 403, 'Join the group first');
   const b = (await c.req.json().catch(() => null)) as { messageId?: unknown; reason?: unknown } | null;

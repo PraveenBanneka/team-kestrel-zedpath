@@ -18,7 +18,9 @@ export function Logo({ size = 72 }: { size?: number }) {
 }
 
 // ---------------------------------------------------------------- Welcome
-export function Welcome({ onStart, onLogin, setLang }: { onStart: () => void; onLogin: () => void; setLang: (l: Lang) => void }) {
+export function Welcome({ onStart, onLogin, onDemo, setLang }: { onStart: () => void; onLogin: () => void; onDemo: () => Promise<void>; setLang: (l: Lang) => void }) {
+  const [demoBusy, setDemoBusy] = useState(false), [demoErr, setDemoErr] = useState<string | null>(null);
+  const demo = () => { setDemoBusy(true); setDemoErr(null); onDemo().catch(e => { setDemoErr((e as Error).message); setDemoBusy(false); }); };
   const reduce = useReducedMotion();
   const rise = (d: number) => ({ initial: reduce ? false : { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: d, ease: [0.2, 0.8, 0.2, 1] as const } });
   return (
@@ -36,6 +38,8 @@ export function Welcome({ onStart, onLogin, setLang }: { onStart: () => void; on
             <button key={l.code} className={`lang-tile ${getLang() === l.code ? 'selected' : ''}`} lang={l.code} aria-pressed={getLang() === l.code}
               onClick={() => { setLang(l.code); onStart(); }}><span className="big">{l.name}</span><span className="soon">{t('welcome.continue')}</span></button>))}
         </div>
+        <button className="btn tonal demo-btn" onClick={demo} disabled={demoBusy}>{demoBusy ? t('welcome.demoBusy') : t('welcome.demo')}</button>
+        {demoErr && <p className="fineprint" role="alert">{demoErr}</p>}
         <button className="btn text on-aurora" onClick={onLogin}>{t('welcome.login')}</button>
         <p className="fineprint">{t('welcome.fine')}</p>
         <p className="team-line">{t('welcome.team')}</p>

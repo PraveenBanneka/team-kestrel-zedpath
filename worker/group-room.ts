@@ -6,7 +6,7 @@ import { DurableObject } from 'cloudflare:workers';
 import { samplesFor } from '../shared/group-samples.ts';
 import { HISTORY_LIMIT, canPost, cleanMessage, moderationSays, visibleTo, type ChatMessage, type ServerFrame } from '../shared/groups.ts';
 
-interface Member { accountId: number; author: string; badge: string | null; avatar: string | null; blocked: number[] }
+interface Member { accountId: number; author: string; badge: string | null; avatar: string | null; blocked: number[]; readOnly?: boolean }
 type Row = { message_id: string; account_id: number; author: string; badge: string | null; avatar: string | null; body: string; created_at: string; hidden: number } & Record<string, SqlStorageValue>;
 
 const MODERATION_MODEL = '@cf/meta/llama-guard-3-8b';
@@ -48,6 +48,7 @@ export class GroupRoom extends DurableObject<Env> {
         accountId: Number(req.headers.get('X-ZP-Account')), author: req.headers.get('X-ZP-Author') ?? '',
         badge: req.headers.get('X-ZP-Badge') ? decodeURIComponent(req.headers.get('X-ZP-Badge')!) : null,
         avatar: AVATAR_RE.test(req.headers.get('X-ZP-Avatar') ?? '') ? req.headers.get('X-ZP-Avatar') : null, blocked: JSON.parse(req.headers.get('X-ZP-Blocked') ?? '[]') as number[],
+        readOnly: req.headers.get('X-ZP-ReadOnly') === '1',
       };
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
@@ -92,6 +93,7 @@ export class GroupRoom extends DurableObject<Env> {
     let frame: { type?: unknown; body?: unknown };
     try { frame = JSON.parse(typeof data === 'string' ? data : new TextDecoder().decode(data)); } catch { return this.send(ws, { type: 'error', error: 'Unreadable message' }); }
     if (frame.type !== 'post') return;
+    if (member.readOnly) return this.send(ws, { type: 'error', error: 'Demo accounts can read groups but not post' });   // CR-007
     const clean = cleanMessage(frame.body);
     if (!clean.ok) return this.send(ws, { type: 'error', error: clean.error });
 

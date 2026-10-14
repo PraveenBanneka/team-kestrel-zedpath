@@ -621,3 +621,4 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
   .scene .hub-icon svg { width: 17px; height: 17px; }
   .scene .hub-label { font-size: 10px; line-height: 12px; }
 }
+.welcome .demo-btn { width: 100%; min-height: 48px; background: #fff; color: var(--brand-800); font-weight: 700; }   /* CR-007 */

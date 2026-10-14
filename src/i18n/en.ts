@@ -30,6 +30,9 @@ export const en = {
   // welcome and intro
   'welcome.lead': 'Everything after A/Ls, in one place.',
   'welcome.body': 'Every path your results can reach: state universities, private degrees, diplomas, job exams and more. With the real deadlines, and a source for every fact.',
+  'welcome.demo': 'Try the demo, no sign-up',
+  'welcome.demoBusy': 'Opening the demo…',
+  'acc.demo': 'Demo account with a sample student. Groups are read-only, and it is deleted 24 hours after you opened it.',
   'welcome.choose': 'Choose your language', 'welcome.continue': 'Continue', 'welcome.login': 'Already have an account? Log in',
   'welcome.fine': 'Free. You create an account to start; we ask only for the details we need and say why. ZedPath is independent and not affiliated with the University Grants Commission.',
   'welcome.team': 'Team Kestrel · Undergraduate bracket · IntelliCon ’26',

@@ -50,6 +50,9 @@ export async function signUp(username: string, password: string, profile: Profil
     ...(inviteCode ? { inviteCode } : {}) });
 }
 
+/** CR-007: a private throwaway demo account with the sample student, logged in at once (no username or password). */
+export const demoLogin = () => call<MeResponse>('POST', '/auth/demo');
+
 export async function logIn(username: string, password: string): Promise<MeResponse> {
   const u = normaliseUsername(username);
   return call<MeResponse>('POST', '/auth/login', { username: u, key: await keyFor(u, password) });
