@@ -374,3 +374,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - On GO: check remote D1 for a kasun_demo account and delete it (its password was public), then deploy and verify live.
 - Tests 515 + 6 expected-fail + 21 opt-in; build green.
 
+
+## 2026-10-15 (later): all audit hardening done (committed, not deployed)
+- Leads 2,3,4,6,7,8,10,11,12,13,14,15,16,17 fixed with tests (session-kick, hardening, groups, owner); lead 9 kept per username on purpose (school labs share an IP), Turnstile planned. D-12 fixed. 532 tests pass, 0 expected-fail.
+- Migration 0012 group_room_seen (designed in ZP-DOC-05) must be applied remotely BEFORE the deploy.
+- On GO: whoami, backup, check+delete kasun_demo (public password), migrations apply --remote (0012), deploy, live checks.
