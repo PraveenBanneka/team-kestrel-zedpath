@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **57b54596** (silhouette avatars in 12 colours). Rollback target 2c1ee555 (code only).
+  Live (workers.dev) = version **f974eb8a** (intro slide 5 sports example). Rollback target 57b54596 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -345,3 +345,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live check: intro shows 7 dots and the hub scene.
 
 ## 2026-10-14: 57b54596 LIVE (Praveen's GO): avatars are now plain silhouettes in 12 colours (own artwork; Multiavatar tried and dropped before deploy, DiceBear removed). Same codes a01..a12, no data change. Live check: all 12 SVGs match the new files (edge took a moment to update).
+
+## 2026-10-14: f974eb8a LIVE (Praveen's GO): intro slide 5 example switched to sports (national athletics medal; special intake within 0.2 of the cut-off, extra Sports Science places, handbook p.166). Live bundle contains the new text.
