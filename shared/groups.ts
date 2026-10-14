@@ -47,6 +47,19 @@ export type ClientFrame = { type: 'post'; body: string };
 
 /** Group rule 3, enforced by the room: no phone numbers (Sri Lankan, any spacing) and no email addresses. */
 const CONTACT_RE = /(?:\+\s?94|\b94|\b0)(?:[\s-]?\d){9}\b|[^\s@]+@[^\s@]+\.[a-z]{2,}/i;
+// Audit lead 16 / GRP-012..016: the same check on a normalised copy, so look-alike and disguised forms are caught too:
+// full-width digits (NFKC), invisible characters, dots/brackets/slashes between digits, a letter stuck to the end,
+// 0094 prefixes, spelled-out digits, "[at]"/"(dot)" emails and WhatsApp invite links. Years, index numbers and
+// Z-scores stay allowed (they are not 0- or 94-led 10-digit runs).
+const DIGIT_WORDS: Record<string, string> = { zero: '0', oh: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9' };
+const LOOSE_PHONE_RE = /(?:\+|00)?(?:94|0)(?:[\s().\-/_]*\d){9}(?!\d)/;
+const LOOSE_EMAIL_RE = /[a-z0-9._%+-]+\s*(?:@|\[\s*at\s*\]|\(\s*at\s*\)|\{\s*at\s*\}|\s+at\s+)\s*[a-z0-9-]+(?:\s*(?:\.|\[\s*dot\s*\]|\(\s*dot\s*\)|\s+dot\s+)\s*[a-z0-9-]+)*\s*(?:\.|\[\s*dot\s*\]|\(\s*dot\s*\)|\s+dot\s+)\s*(?:com|lk|net|org|edu|gov|io|co)\b/i;
+const CHAT_LINK_RE = /chat\.whatsapp\.com\/|wa\.me\/|t\.me\/|whatsapp\.com\/(?:invite|send)/i;
+export function looksLikeContact(text: string): boolean {
+  const n = text.normalize('NFKC').replace(/[\u200B-\u200D\u2060\uFEFF\u00AD]/g, '')
+    .replace(/\b(zero|oh|one|two|three|four|five|six|seven|eight|nine)\b/gi, w => DIGIT_WORDS[w.toLowerCase()]);
+  return CONTACT_RE.test(n) || LOOSE_PHONE_RE.test(n) || LOOSE_EMAIL_RE.test(n) || CHAT_LINK_RE.test(n);
+}
 
 /** Trims and checks a message: text only, 1 to 500 characters, no control characters except new lines. */
 export function cleanMessage(raw: unknown): { ok: true; body: string } | { ok: false; error: string } {
@@ -55,7 +68,7 @@ export function cleanMessage(raw: unknown): { ok: true; body: string } | { ok: f
   if (!body) return { ok: false, error: 'Write a message first' };
   if (body.length > MESSAGE_MAX) return { ok: false, error: `Keep it under ${MESSAGE_MAX} characters` };
   if (/[\u0000-\u0008\u000B-\u001F\u007F]/.test(body)) return { ok: false, error: 'That message has characters ZedPath cannot show' };
-  if (CONTACT_RE.test(body)) return { ok: false, error: 'For your safety, phone numbers and email addresses cannot be shared in groups' };
+  if (looksLikeContact(body)) return { ok: false, error: 'For your safety, phone numbers and email addresses cannot be shared in groups' };
   return { ok: true, body };
 }
 

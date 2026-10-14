@@ -175,6 +175,7 @@ describe('groups API', () => {
   it('hides a message once three different members report it, never on repeats by one member', async () => {
     const cookies = [];
     for (const u of ['m_one', 'm_two', 'm_three']) cookies.push((await signup(u)).cookie);
+    raw.exec(`UPDATE account SET created_at = '2026-01-01T00:00:00Z'`);   // audit lead 4: only accounts older than a day count
     let id = 0;
     for (const ck of cookies) id = (await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, ck)).json() as GroupSummary).id!;
     expect((await call('POST', `/groups/${id}/report`, { messageId: MSG, reason: 'BAD' }, cookies[0])).status).toBe(400);
@@ -185,6 +186,15 @@ describe('groups API', () => {
     expect(roomCalls.filter(c => c.path === '/hide')).toEqual([{ room: `group:${id}`, path: '/hide', body: { messageId: MSG } }]);
     await call('POST', `/groups/${id}/report`, { messageId: MSG2, reason: 'SPAM' }, cookies[2]);
     expect(n('SELECT count(*) AS n FROM message_report')).toBe(4);
+  });
+  it('audit lead 4: reports from accounts younger than a day are kept but do not hide a message', async () => {
+    const cookies = [];
+    for (const u of ['n_one', 'n_two', 'n_three']) cookies.push((await signup(u)).cookie);
+    let id = 0;
+    for (const ck of cookies) id = (await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, ck)).json() as GroupSummary).id!;
+    for (const ck of cookies) expect((await call('POST', `/groups/${id}/report`, { messageId: MSG, reason: 'SPAM' }, ck)).status).toBe(204);
+    expect(roomCalls.filter(c => c.path === '/hide')).toHaveLength(0);
+    expect(n('SELECT count(*) AS n FROM message_report')).toBe(3);
   });
   it('blocks and unblocks by username', async () => {
     const a = (await signup('nimal')).cookie;

@@ -4,7 +4,7 @@
 //  - shared/group-samples.ts: every sample labelled as sample, no contact details, no verified badges.
 //  - worker/groups.ts on the real migrations: members ordering and badges, stale rules version, leave then rejoin,
 //    the identity headers the Worker hands to the room, sample ids not reportable, cross-site writes refused.
-// Known gaps in the contact filter are pinned with it.fails (they pass today only because the filter misses them);
+// Former gaps in the contact filter (GRP-012..016) were pinned with it.fails; closed by audit lead 16 and now plain tests;
 // see tools/e2e/results/groups.md. When the filter is tightened, flip them to plain it().
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -80,16 +80,16 @@ describe('GRP cleanMessage: shape, limits, empties', () => {
   });
 });
 
-describe('GRP cleanMessage: known gaps in the contact filter (pinned, expected to fail until fixed)', () => {
-  it.fails('GRP-012-GAP blocks the 0094 international prefix (0094 77 123 4567)', () => { expect(blocked('0094771234567')).toBe(true); });
-  it.fails('GRP-013-GAP blocks numbers written with brackets or dots: (077) 123 4567, 077.123.4567', () => {
+describe('GRP cleanMessage: former gaps in the contact filter, closed by audit lead 16 (2026-10-15)', () => {
+  it('GRP-012-GAP blocks the 0094 international prefix (0094 77 123 4567)', () => { expect(blocked('0094771234567')).toBe(true); });
+  it('GRP-013-GAP blocks numbers written with brackets or dots: (077) 123 4567, 077.123.4567', () => {
     expect(blocked('(077) 123 4567')).toBe(true); expect(blocked('077.123.4567')).toBe(true);
   });
-  it.fails('GRP-014-GAP blocks WhatsApp group invite links (chat.whatsapp.com/...)', () => { expect(blocked('join https://chat.whatsapp.com/AbCdEf123XyZ')).toBe(true); });
-  it.fails('GRP-015-GAP blocks a number glued to a letter (0771234567x) and full-width digits', () => {
+  it('GRP-014-GAP blocks WhatsApp group invite links (chat.whatsapp.com/...)', () => { expect(blocked('join https://chat.whatsapp.com/AbCdEf123XyZ')).toBe(true); });
+  it('GRP-015-GAP blocks a number glued to a letter (0771234567x) and full-width digits', () => {
     expect(blocked('0771234567x')).toBe(true); expect(blocked('０７７１２３４５６７')).toBe(true);
   });
-  it.fails('GRP-016-GAP blocks obfuscated emails (kasun [at] gmail [dot] com)', () => { expect(blocked('kasun [at] gmail [dot] com')).toBe(true); });
+  it('GRP-016-GAP blocks obfuscated emails (kasun [at] gmail [dot] com)', () => { expect(blocked('kasun [at] gmail [dot] com')).toBe(true); });
 });
 
 // ------------------------------------------------------------------------------------------------ rules version

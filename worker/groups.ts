@@ -134,6 +134,7 @@ groupRoutes.get('/groups/:id/live', async c => {
   if (!id || !m) return err(c, 403, 'Join the group first');
   if (!(await rulesAccepted(c, me))) return err(c, 403, 'Accept the group rules first', 'acceptRules');   // CR-006: once per account
   if (c.req.header('Upgrade') !== 'websocket') return err(c, 400, 'Expected a WebSocket');
+  if (c.env.IP_LIMITER && !(await c.env.IP_LIMITER.limit({ key: `live:${me}` })).success) return err(c, 429, 'Too many reconnects. Wait a minute');   // lead 14
   if (!c.env.GROUP_ROOM) return err(c, 503, 'Groups are not available yet');
   const [senior, blocked] = await c.env.DB.batch([
     c.env.DB.prepare(`SELECT c.name_en AS course, v.study_year AS year FROM senior_invite v JOIN course c USING (course_code)
@@ -180,7 +181,11 @@ groupRoutes.post('/groups/:id/report', async c => {
   }
   await c.env.DB.prepare(`INSERT OR IGNORE INTO message_report (group_id, message_id, reporter_id, reason, created_at) VALUES (?, ?, ?, ?, ?)`)
     .bind(id, messageId, me, reason, nowIso()).run();
-  const n = await c.env.DB.prepare('SELECT count(*) AS n FROM message_report WHERE group_id = ? AND message_id = ?').bind(id, messageId).first<number>('n');
+  // Audit lead 4: reports from accounts younger than a day (and demo accounts) are recorded but do not count toward
+  // hiding, so a few fresh accounts cannot silence a message.
+  const n = await c.env.DB.prepare(`SELECT count(*) AS n FROM message_report r JOIN account a ON a.account_id = r.reporter_id
+    WHERE r.group_id = ? AND r.message_id = ? AND a.created_at < ? AND a.demo_expires_at IS NULL`)
+    .bind(id, messageId, new Date(Date.now() - 86_400_000).toISOString()).first<number>('n');
   if ((n ?? 0) >= REPORTS_TO_HIDE && c.env.GROUP_ROOM)
     await room(c, id).fetch('https://room/hide', { method: 'POST', body: JSON.stringify({ messageId }) });
   return c.body(null, 204);

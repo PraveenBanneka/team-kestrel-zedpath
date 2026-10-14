@@ -10,6 +10,7 @@ interface Member { accountId: number; author: string; badge: string | null; avat
 type Row = { message_id: string; account_id: number; author: string; badge: string | null; avatar: string | null; body: string; created_at: string; hidden: number } & Record<string, SqlStorageValue>;
 
 const MODERATION_MODEL = '@cf/meta/llama-guard-3-8b';
+export const ATTEMPTS_PER_10_MIN = 20;   // post attempts per member per room, accepted or not (audit lead 13)
 const toMessage = (r: Pick<Row, 'message_id' | 'author' | 'badge' | 'avatar' | 'body' | 'created_at'>): ChatMessage =>
   ({ id: r.message_id, author: r.author, badge: r.badge, avatar: r.avatar ?? null, body: r.body, at: r.created_at });
 const AVATAR_RE = /^a(0[1-9]|1[0-2])$/;                 // the preset codes (shared/account.ts AVATARS)
@@ -51,6 +52,9 @@ export class GroupRoom extends DurableObject<Env> {
         readOnly: req.headers.get('X-ZP-ReadOnly') === '1',
         session: req.headers.get('X-ZP-Session') ?? undefined,   // which login opened it: logout closes only that device
       };
+      // Audit lead 14: at most 3 open sockets per account in a room (phone + laptop + one spare); the oldest closes.
+      const mine = this.ctx.getWebSockets().filter(w => (w.deserializeAttachment() as Member).accountId === member.accountId);
+      for (const old of mine.slice(0, Math.max(0, mine.length - 2))) old.close(1008, 'Opened elsewhere');
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
       pair[1].serializeAttachment(member);
@@ -103,6 +107,13 @@ export class GroupRoom extends DurableObject<Env> {
     try { frame = JSON.parse(typeof data === 'string' ? data : new TextDecoder().decode(data)); } catch { return this.send(ws, { type: 'error', error: 'Unreadable message' }); }
     if (frame.type !== 'post') return;
     if (member.readOnly) return this.send(ws, { type: 'error', error: 'Demo accounts can read groups but not post' });   // CR-007
+    // Audit lead 13: every attempt counts (rejected ones too), so one member cannot spend the shared moderation model.
+    const since = new Date(Date.now() - 10 * 60_000).toISOString();
+    this.sql.exec('CREATE TABLE IF NOT EXISTS post_attempt (account_id INTEGER NOT NULL, at TEXT NOT NULL)');
+    this.sql.exec('DELETE FROM post_attempt WHERE at < ?', new Date(Date.now() - 3_600_000).toISOString());
+    const tries = this.sql.exec<{ n: number }>('SELECT count(*) AS n FROM post_attempt WHERE account_id = ? AND at >= ?', member.accountId, since).one().n;
+    if (tries >= ATTEMPTS_PER_10_MIN) return this.send(ws, { type: 'error', error: 'You have tried to send a lot of messages. Take a short break and try again' });
+    this.sql.exec('INSERT INTO post_attempt (account_id, at) VALUES (?, ?)', member.accountId, new Date().toISOString());
     const clean = cleanMessage(frame.body);
     if (!clean.ok) return this.send(ws, { type: 'error', error: clean.error });
 
