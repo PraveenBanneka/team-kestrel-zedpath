@@ -262,7 +262,7 @@ describe('LST storage round-trip (src/storage.ts, on-device only)', () => {
 
   // KNOWN GAP (documented, not fixed: app code is out of scope for this task). `read` only catches JSON parse errors;
   // valid JSON of the wrong shape (e.g. an object or a string) is returned as-is, so loadList() is not an array.
-  it.fails('LST-036 [known gap] valid JSON of the wrong shape should still give an empty list', () => {
+  it('LST-036 valid JSON of the wrong shape gives an empty list (D-12, fixed 2026-10-15)', () => {
     mem.setItem('zedpath.list.v1', '{"a":1}');
     expect(Array.isArray(loadList())).toBe(true);
   });

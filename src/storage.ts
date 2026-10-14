@@ -8,7 +8,7 @@ export { INTERESTS, specialIntakeHint, type Achievement, type Extras, type Level
 
 const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
   pendingSync: 'zedpath.pendingSync.v1', list: 'zedpath.list.v1', compare: 'zedpath.compare.v1',
-  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1', demo: 'zedpath.demo' /* audit lead 5: cleared with the phone */,
+  journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1', demo: 'zedpath.demo' /* audit lead 5: cleared with the phone */, owner: 'zedpath.owner.v1' /* audit lead 7: whose data is on this phone */,
   notify: 'zedpath.notify.v1' };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
@@ -24,10 +24,12 @@ export const clearOnboarded = () => { try { localStorage.removeItem(KEYS.onboard
 export const loadLang = () => read<'si' | 'ta' | 'en'>(KEYS.lang) ?? 'en';
 export const saveLang = (l: 'si' | 'ta' | 'en') => write(KEYS.lang, l);
 /** My list (US-301): kept on this device only (ZP-DOC-05 scope). */
-export const loadList = (): ListEntry[] => read<ListEntry[]>(KEYS.list) ?? [];
+/** D-12: anything that is not a list (old or damaged storage) reads as empty, never as a broken list. */
+const listOf = <T,>(v: unknown): T[] => (Array.isArray(v) ? v as T[] : []);
+export const loadList = (): ListEntry[] => listOf<ListEntry>(read<unknown>(KEYS.list));
 export const saveList = (l: ListEntry[]) => write(KEYS.list, l);
 /** Courses picked for the comparer (Uni-Codes, at most 3). */
-export const loadCompare = (): string[] => read<string[]>(KEYS.compare) ?? [];
+export const loadCompare = (): string[] => listOf<string>(read<unknown>(KEYS.compare)).filter(u => typeof u === 'string');
 export const saveCompare = (c: string[]) => write(KEYS.compare, c);
 /** Journey (CR-002): notices the student added (route ids). On this device only. */
 export const loadJourney = (): string[] => read<string[]>(KEYS.journey) ?? [];
@@ -47,3 +49,12 @@ export const setPendingSync = (v: boolean) => write(KEYS.pendingSync, v);
 export function clearEverything() {                                                      // FR-106
   try { Object.values(KEYS).forEach(k => localStorage.removeItem(k)); } catch { /* nothing stored */ }
 }
+
+/** Audit lead 7: the username whose results, list and Journey are on this phone; null before the first log-in. */
+export const loadOwner = () => read<string>(KEYS.owner);
+export const setOwner = (u: string) => write(KEYS.owner, u);
+/** Removes one student's own data from the phone (language and the onboarded flag stay). */
+export function clearStudentData() {
+  try { for (const k of [KEYS.profile, KEYS.extras, KEYS.list, KEYS.compare, KEYS.journey, KEYS.pendingSync, KEYS.alertsSeen, KEYS.reminders]) localStorage.removeItem(k); } catch { /* nothing stored */ }
+}
+

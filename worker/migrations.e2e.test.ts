@@ -96,6 +96,8 @@ const DOC_FKS: [string, string, string, string][] = [
   ['journey_course.account_id', 'account', 'account_id', 'CASCADE'],
   ['journey_course.course_code', 'offering', 'course_code', 'NO ACTION'], ['journey_course.institution_letter', 'offering', 'institution_letter', 'NO ACTION'],
   ['journey_notice.account_id', 'account', 'account_id', 'CASCADE'], ['journey_step.account_id', 'account', 'account_id', 'CASCADE'],
+  // 0012 (audit lead 3): rooms an account opened, so account deletion purges them all
+  ['group_room_seen.account_id', 'account', 'account_id', 'CASCADE'], ['group_room_seen.group_id', 'course_group', 'group_id', 'CASCADE'],
 ];
 
 // Tables holding a student's rows: the doc says each one cascades when the account is deleted.

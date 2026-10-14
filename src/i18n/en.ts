@@ -41,6 +41,7 @@ export const en = {
   'apt.next': 'Dates for the next intake are announced by the university. Follow the official notice.',
   'apt.notice': 'Official notice: {i}',
   'apt.joint': 'One joint practical test is held for this course: apply and sit it at any one of these universities.',
+  'acc.logoutFail': 'Could not log out: check your connection and try again. You are still logged in.',
   'band.SAFE': 'Very likely', 'band.LIKELY': 'Possible', 'band.REACH': 'Unlikely', 'band.OUT_OF_RANGE': 'Out of range', 'band.NOT_ENOUGH_DATA': 'Not enough data',
   'trend.RISING': 'rising', 'trend.FALLING': 'falling', 'trend.STEADY': 'steady', 'trend.JUMPY': 'jumpy',
   'rg.PRIVATE_DEGREE': 'Private degrees', 'rg.PRIVATE_DEGREE.sub': 'Approved institutes, interest-free loans',

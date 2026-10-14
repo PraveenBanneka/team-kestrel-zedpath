@@ -405,7 +405,10 @@ accountRoutes.put('/me/avatar', async c => {
 
 accountRoutes.delete('/me', async c => {
   const id = c.get('accountId');
-  const groups = (await c.env.DB.prepare('SELECT group_id FROM group_member WHERE account_id = ?').bind(id).all<{ group_id: number }>()).results;
+  // Every room the account is in OR ever opened (audit lead 3), read before the cascade removes these rows. At most 45
+  // rooms per request (free-plan subrequest limit); one account rarely opens more.
+  const groups = (await c.env.DB.prepare(`SELECT group_id FROM group_member WHERE account_id = ?1 UNION SELECT group_id FROM group_room_seen WHERE account_id = ?1 LIMIT 45`)
+    .bind(id).all<{ group_id: number }>()).results;
   await c.env.DB.prepare('DELETE FROM account WHERE account_id = ?').bind(id).run();   // cascades to every row under it
   // Messages live in each group's room, outside D1's cascade: tell every group the account was in to delete them.
   if (c.env.GROUP_ROOM) await Promise.allSettled(groups.map(g => c.env.GROUP_ROOM.get(c.env.GROUP_ROOM.idFromName(`group:${g.group_id}`))

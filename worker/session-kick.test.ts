@@ -66,3 +66,15 @@ describe('Ask Origin checks', () => {
       expect((await call('POST', '/ask/feedback', { rating: 'UP' }, undefined, { Origin: o })).status).toBe(403);
   });
 });
+
+describe('account deletion purges every room the account opened (audit lead 3)', () => {
+  it('purges a room the student opened and then left, as well as current ones', async () => {
+    const ck = await student('purge_one');
+    const left = await join(ck, '013'), stay = await join(ck, '012');
+    await call('GET', `/groups/${left}/live`, undefined, ck, { Upgrade: 'websocket' });   // opened (could have posted)
+    await call('POST', `/groups/${left}/leave`, undefined, ck);
+    calls.length = 0;
+    expect((await call('DELETE', '/me', undefined, ck)).status).toBe(204);
+    expect(calls.filter(c => c.path === '/purge').map(c => c.room).sort()).toEqual([`group:${left}`, `group:${stay}`].sort());
+  });
+});

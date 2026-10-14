@@ -28,7 +28,7 @@ import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
-import { loadNotifyPrefs, saveNotifyPrefs } from './storage.ts';
+import { loadNotifyPrefs, saveNotifyPrefs, loadOwner, setOwner, clearStudentData } from './storage.ts';
 import type { NotifyPrefs } from '../shared/journey.ts';
 import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, clearOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
@@ -120,6 +120,10 @@ export function App() {
     .then(() => { setPendingSync(false); setSyncNote(null); })
     .catch(() => { setPendingSync(true); setSyncNote('Saved on this phone. It will copy to your account next time you are online.'); });
   const adopt = (m: MeResponse) => {
+    // Audit lead 7: a different student logging in on this phone never inherits the previous student's local data.
+    const owner = loadOwner();
+    if (owner && owner !== m.username) { clearStudentData(); setProfile(null); setExtras({ achievements: [], interests: [] }); setListRaw([]); setCompareRaw([]); }
+    setOwner(m.username);
     setMe({ username: m.username, role: m.role, senior: m.senior, contact: m.contact, avatar: m.avatar, demo: m.demo });
     if (m.role !== 'STUDENT') { setOnboarded(); setOnb(true); return; }       // a senior's results (if any) stay on this phone
     const local = loadProfile();
@@ -179,8 +183,8 @@ export function App() {
   const onClear = async () => { if (me) await logOut().catch(() => {}); reset(); };
   const account = {
     username: me?.username ?? null, demo: !!me?.demo, avatar: me?.avatar ?? null, senior: me?.senior ?? null, contact: me?.contact ?? null, syncNote,
-    logOut: async () => { await logOut().catch(() => {}); setMe(null); },
-    logOutEverywhere: async () => { await logOutEverywhere().catch(() => {}); setMe(null); },
+    logOut: async () => { await logOut(); setMe(null); },                       // audit lead 6: a failure is reported to the student
+    logOutEverywhere: async () => { await logOutEverywhere(); setMe(null); },
     deleteAccount: async () => { await deleteAccount(); reset(); },
   };
 
@@ -648,9 +652,10 @@ function AccountCard({ account, go }: { account: AccountControls; go: (to: strin
       {account.senior && <span className="pill band-SAFE" style={{ alignSelf: 'flex-start' }}><ShieldCheck size={13} aria-hidden="true" />{t('acc.senior', { course: titleCase(account.senior.course), inst: shortInstitution(account.senior.institution), y: account.senior.year })}</span>}
       {account.syncNote && <div className="alert info"><Info size={20} aria-hidden="true" />{account.syncNote}</div>}
       <div className="row">
-        <button className="btn tonal" onClick={account.logOut}><LogOut size={18} aria-hidden="true" />{t('acc.logout')}</button>
-        <button className="btn text" onClick={account.logOutEverywhere}>{t('acc.logoutAll')}</button>
+        <button className="btn tonal" onClick={() => account.logOut().catch(() => setFailed(t('acc.logoutFail')))}><LogOut size={18} aria-hidden="true" />{t('acc.logout')}</button>
+        <button className="btn text" onClick={() => account.logOutEverywhere().catch(() => setFailed(t('acc.logoutFail')))}>{t('acc.logoutAll')}</button>
       </div>
+      {failed && !confirming && <p className="alert error" role="alert">{failed}</p>}
       {!confirming
         ? <button className="btn text" style={{ alignSelf: 'flex-start', color: 'var(--danger)' }} onClick={() => setConfirming(true)}><Trash2 size={18} aria-hidden="true" />{t('acc.delete')}</button>
         : <div className="alert error" role="alertdialog" aria-label={t('acc.confirmAria')}>

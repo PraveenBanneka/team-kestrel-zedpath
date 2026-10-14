@@ -20,6 +20,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-005 (group
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (product owner's decisions of 11 Oct): rules accepted once per account (GROUP_RULES_ACCEPTANCE, GROUP_MEMBER.rules_version withdrawn), ACCOUNT.avatar, the Journey on the account (JOURNEY_COURSE, JOURNEY_NOTICE, JOURNEY_STEP), OFFERING populated; migration 0010
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
+revision: 0.9 | 15 Oct 2026 | Team Kestrel | Security audit run-1 lead 3: GROUP_ROOM_SEEN (rooms an account opened) so account deletion purges every room; migration 0012
 ---
 
 # Introduction
@@ -276,6 +277,19 @@ each number checked twice against the printed table and its totals, and spot-che
 are published, versioned reference data that students only read, so they are not stored in D1. Each fact keeps its
 table, PDF page and URL, and the report's own caveats as flags (2024 provisional; "Information not submitted" shown as
 no number, never as zero; university totals that include campuses).
+
+## Rooms an account opened (security audit, lead 3)
+
+Group messages live in each room's Durable Object, outside D1's ON DELETE CASCADE. Deleting an account therefore has to
+tell each room to purge that account's messages, and before 0012 the Worker only knew the groups the account was *still*
+in, so messages in groups it had left survived the deletion.
+
+**Where the fact lives.** "Account A opened room G" is a fact about the pair, with no other attributes than when it was
+first seen, so it is its own relation GROUP_ROOM_SEEN (account_id, group_id, first_at), primary key (account_id, group_id),
+both foreign keys ON DELETE CASCADE. It is written when the live chat connects (posting is only possible over that
+socket). Account deletion reads it, unioned with current memberships, **before** deleting the account, then purges each
+room (at most 45 rooms per request, the free-plan subrequest limit). Migration 0012 seeds it from current memberships so
+nothing is missed for existing accounts.
 
 ## Entity catalogue
 
@@ -550,6 +564,7 @@ Table: Requirements and the tables that realise them
 | CR-004 (Ask answer feedback) | `answer_feedback` (0008) |
 | CR-006 (rules once per account, avatars, Journey on the account) | `group_rules_acceptance`, `account.avatar`, `journey_course` (to `offering`), `journey_notice`, `journey_step` (0010) |
 | CR-007 (one-tap demo, a private copy per visitor) | `account.demo_expires_at`, `idx_account_demo_expires` (0011) |
+| Security audit run-1, lead 3 (deletion purges every room) | `group_room_seen` (0012) |
 
 # Physical schema (migration 0001) {.appendix}
 
@@ -582,6 +597,12 @@ Reproduced verbatim from `migrations/0010_journey_avatars_rules.sql`, generated 
 255 offering rows are the official Uni-Code list).
 
 <!-- include: migrations/0010_journey_avatars_rules.sql -->
+
+# Rooms an account opened (migration 0012) {.appendix}
+
+Reproduced verbatim from `migrations/0012_group_room_seen.sql`.
+
+<!-- include: migrations/0012_group_room_seen.sql -->
 
 # Demo accounts (migration 0011) {.appendix}
 

@@ -148,7 +148,9 @@ groupRoutes.get('/groups/:id/live', async c => {
   headers.set('X-ZP-Badge', s ? encodeURIComponent(seniorBadge(titleCaseName(s.course), s.year)) : '');   // headers are ASCII-only
   headers.set('X-ZP-Avatar', m.avatar ?? '');
   headers.set('X-ZP-ReadOnly', (await isDemo(c.env.DB, me)) ? '1' : '');
-  headers.set('X-ZP-Session', c.get('tokenHash'));             // lets logout close exactly this device's socket   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
+  headers.set('X-ZP-Session', c.get('tokenHash'));             // lets logout close exactly this device's socket
+  // Audit lead 3: remember every room this account opened, so deleting the account purges it even after leaving.
+  await c.env.DB.prepare('INSERT OR IGNORE INTO group_room_seen (account_id, group_id, first_at) VALUES (?, ?, ?)').bind(me, id, nowIso()).run();   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
   headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code));    // which labelled sample thread the room shows first
   headers.set('X-ZP-Blocked', JSON.stringify((blocked.results as { blocked_id: number }[]).map(r => r.blocked_id)));
   return room(c, id).fetch(new Request('https://room/live', { headers }));
