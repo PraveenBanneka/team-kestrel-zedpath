@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **75e06963** (university facts, aptitude tests, NVQ ladder, all audit hardening; remote D1 at 0012). Rollback target 59ad7760 (code only; 0012 table is harmless to it).
+  Live (workers.dev) = version **97eab403** (Mahapola/Bursary line removed from University facts). Rollback target 75e06963 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -384,3 +384,5 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-15: 75e06963 LIVE (Praveen's GO)
 - Backup C:/Users/prave/zedpath-backups/zedpath-before-0012-20261015.sql (101 KB). Deleted kasun_demo and kasun_demo2 (public password) through DELETE /me so their room messages were purged too. Remote migration 0012 applied.
 - Live checks: course 136L serves 5 university facts (admitted 2655, students 9736, hostel 3104, welfare 3075, graduates 1255); 023G aptitude notice (Moratuwa, 2025/26, past); weak ETag -> 304 (D-05); null Origin on Ask feedback -> 403; demo tap 201 then deleted 204; bundle has the facts card and no demo password.
+
+## 2026-10-15: 97eab403 LIVE (Praveen's GO): University facts without the Mahapola/Bursary line (4 facts); ETag includes the fact count. ZP-DOC-01..04 v2.1 approved and tagged. Live: course facts are ADMITTED/STUDENTS/HOSTEL/GRADUATES only.
