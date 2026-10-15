@@ -39,20 +39,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 6352,
-    "value2": 2055,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
-     "page": 3,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 1700,
     "flags": [
@@ -152,20 +138,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 6067,
-    "value2": 614,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
-     "page": 3,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 2521,
     "flags": [
@@ -211,20 +183,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 9619,
-    "value2": 1315,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=3",
-     "page": 3,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -278,20 +236,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 5259,
-    "value2": 3469,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
-     "page": 4,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 3080,
     "flags": [
@@ -337,20 +281,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 3400,
-    "value2": 838,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
-     "page": 4,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -404,20 +334,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 5259,
-    "value2": 3249,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
-     "page": 4,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 1760,
     "flags": [
@@ -467,20 +383,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 6180,
-    "value2": 3888,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=4",
-     "page": 4,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 1926,
     "flags": [
@@ -526,20 +428,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 1887,
-    "value2": 4011,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
-     "page": 5,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -642,20 +530,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 1672,
-    "value2": 3372,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
-     "page": 5,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 790,
     "flags": [
@@ -701,20 +575,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 2082,
-    "value2": 2376,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
-     "page": 5,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -768,20 +628,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 3075,
-    "value2": 3094,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=5",
-     "page": 5,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 1255,
     "flags": [
@@ -827,20 +673,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 2264,
-    "value2": 1039,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -892,20 +724,6 @@
      "table": "7.1",
      "chapter": "7"
     }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 1356,
-    "value2": 1183,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
-     "chapter": "7"
-    }
    }
   ],
   "Z": [
@@ -940,20 +758,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 407,
-    "value2": 1092,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
      "chapter": "7"
     }
    },
@@ -1007,20 +811,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 638,
-    "value2": 444,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 8,
     "flags": [
@@ -1070,20 +860,6 @@
     }
    },
    {
-    "kind": "WELFARE",
-    "value": 521,
-    "value2": 1317,
-    "flags": [
-     "INCLUDES_CAMPUSES"
-    ],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
-     "chapter": "7"
-    }
-   },
-   {
     "kind": "GRADUATES",
     "value": 464,
     "flags": [
@@ -1118,18 +894,6 @@
      "page": 4,
      "table": "3.1(a)",
      "chapter": "3"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 266,
-    "value2": 42,
-    "flags": [],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
-     "chapter": "7"
     }
    },
    {
@@ -1178,18 +942,6 @@
      "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=2",
      "page": 2,
      "table": "7.1",
-     "chapter": "7"
-    }
-   },
-   {
-    "kind": "WELFARE",
-    "value": 89,
-    "value2": 1082,
-    "flags": [],
-    "source": {
-     "url": "https://www.ugc.ac.lk/downloads/statistics/stat_2024/Chapter%207.pdf#page=6",
-     "page": 6,
-     "table": "7.2",
      "chapter": "7"
     }
    },

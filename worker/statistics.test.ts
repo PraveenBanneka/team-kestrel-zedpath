@@ -18,15 +18,15 @@ describe('UGC statistics 2024 facts', () => {
     expect(fact('A', 'ADMITTED')).toMatchObject({ value: 3728, source: { table: '2.2' } });
     expect(fact('L', 'STUDENTS')).toMatchObject({ value: 9736, source: { table: '3.1(a)' } });
   });
-  it('keep the report caveats: provisional 2024, incomplete counts, campuses included, and no number where none was submitted', () => {
+  it('keep the report caveats: provisional 2024, incomplete counts, and no number where none was submitted', () => {
     expect(fact('A', 'GRADUATES')?.flags).toEqual(['PROVISIONAL', 'INCOMPLETE']);   // Colombo: some faculties "Information not submitted"
     expect(fact('L', 'GRADUATES')?.flags).toEqual(['PROVISIONAL']);
     expect(fact('U', 'GRADUATES')).toBeUndefined();                                 // Uva Wellassa submitted nothing: no zero shown
-    expect(fact('A', 'WELFARE')?.flags).toContain('INCLUDES_CAMPUSES');
+    expect(Object.values(S.institutions).flat().some(f => (f.kind as string) === 'WELFARE')).toBe(false);   // Mahapola/Bursary not shown (2026-10-15)
   });
   it('cites an official https ugc.ac.lk page for every fact', () => {
     const all = Object.values(S.institutions).flat();
-    expect(all.length).toBeGreaterThan(80);
+    expect(all.length).toBeGreaterThan(60);
     for (const f of all) {
       expect(f.source.url).toMatch(/^https:\/\/www\.ugc\.ac\.lk\/downloads\/statistics\/stat_2024\/Chapter%20\d\.pdf#page=\d+$/);
       expect(Number.isInteger(f.value) && f.value >= 0).toBe(true);
@@ -34,7 +34,7 @@ describe('UGC statistics 2024 facts', () => {
   });
   it('serves the facts of the offering institution on the course page', async () => {
     const d = (await (await app.request('/api/offerings/136L', {}, env)).json()) as OfferingDetail;   // 136L = Sabaragamuwa (L)
-    expect(d.facts.map(f => f.kind).sort()).toEqual(['ADMITTED', 'GRADUATES', 'HOSTEL', 'STUDENTS', 'WELFARE']);
+    expect(d.facts.map(f => f.kind).sort()).toEqual(['ADMITTED', 'GRADUATES', 'HOSTEL', 'STUDENTS']);
   });
   it('answers 304 to the weak ETag a browser sends back after compression (D-05)', async () => {
     const first = await app.request('/api/offerings/136L', {}, env);

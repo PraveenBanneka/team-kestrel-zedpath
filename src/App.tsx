@@ -766,7 +766,7 @@ function profileLine(p: ProfileInput, meta: Meta | null): string {
 export { titleCase } from './format.ts';
 
 // UGC "Sri Lanka University Statistics 2024" for this university: every number links to its table and page.
-const FACT_ORDER = ['ADMITTED', 'STUDENTS', 'HOSTEL', 'WELFARE', 'GRADUATES'] as const;
+const FACT_ORDER = ['ADMITTED', 'STUDENTS', 'HOSTEL', 'GRADUATES'] as const;
 function FactsCard({ facts }: { facts: InstitutionFact[] }) {
   const n = (v: number) => v.toLocaleString(locale());
   const sorted = [...facts].sort((a, b) => FACT_ORDER.indexOf(a.kind) - FACT_ORDER.indexOf(b.kind));
@@ -779,7 +779,7 @@ function FactsCard({ facts }: { facts: InstitutionFact[] }) {
           <div key={f.kind} className="fact">
             <dt>{t(`facts.${f.kind}` as Key)}</dt>
             <dd>
-              <span className="fact-value num">{f.kind === 'WELFARE' ? t('facts.welfareValue', { m: n(f.value), b: n(f.value2 ?? 0) }) : n(f.value)}</span>
+              <span className="fact-value num">{n(f.value)}</span>
               {f.kind === 'HOSTEL' && f.share !== undefined && <span className="helper">{t('facts.hostelShare', { p: f.share })}</span>}
               {f.flags.map(fl => <span key={fl} className="helper">{t(`facts.flag.${fl}` as Key)}</span>)}
               <a className="source-link small" href={f.source.url} target="_blank" rel="noopener noreferrer">{t('facts.source', { t: f.source.table, p: f.source.page })}</a>

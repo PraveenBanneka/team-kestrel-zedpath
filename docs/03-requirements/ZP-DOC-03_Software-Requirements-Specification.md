@@ -2,14 +2,14 @@
 id: ZP-DOC-03
 title: Software Requirements Specification
 subtitle: Functional, non-functional and business-rule requirements for ZedPath Release 1 and 2
-version: 2.1 (draft)
+version: 2.1
 date: 15 October 2026
-status: Under revision
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
+approved: 15 Oct 2026 (v2.1); 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel): v2.1 on 15 Oct 2026, v2.0 on 14 Oct 2026, v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: ISO/IEC/IEEE 29148:2018, software requirements specification content; ZP-DOC-00
@@ -18,6 +18,7 @@ revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; base
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): new FR-114 to FR-124, FR-215 to FR-218, FR-309 to FR-311, FR-409 to FR-417, FR-509, FR-510, FR-607 to FR-612, FR-707 to FR-719, UI-4, UI-5, SI-8, SI-9; revised UI-1, CON-4, FR-101, FR-213, FR-401, FR-402, FR-404, FR-501, FR-503, FR-606, FR-703, FR-705, NFR-030; superseded FR-104, FR-405, FR-406, FR-408, FR-704, FR-713 and SI-4; withdrew FR-508; new NFR-036 to NFR-039, NFR-043, NFR-070 to NFR-075, BR-050 to BR-058, BR-060 to BR-063, BR-070 to BR-077, BR-080; traceability extended. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (band names, expired session; 14 October 2026) and CR-007 to CR-010 (15 October 2026): new FR-125 to FR-132, FR-219 to FR-221, FR-511, FR-613 to FR-615, FR-720 to FR-723, FR-914; revised FR-205 (displayed band names only); new NFR-007, NFR-054, NFR-055 and security-hardening NFR-076 to NFR-083; new BR-037, BR-059, BR-064, BR-078, BR-079, BR-081; traceability extended to US-112, US-210, US-211, US-508, US-908. No v2.0 requirement is withdrawn or weakened, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
+revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 ---
 
 # Introduction
@@ -246,7 +247,7 @@ Table: Functional requirements, FE-2 State-university course discovery
 | FR-216 | *New (VR).* Compare shall show each offering as a column that swipes sideways on a narrow screen and, while fewer than three are compared, a "+" column that opens a picker of the student's Safe, Likely and Reach courses (searchable) and of My list. | AC-207.2, AC-207.3 | C | D |
 | FR-217 | *New (VR).* Every *Compare* button in the app shall open the Compare screen with that offering included. | AC-207.4 | C | D |
 | FR-218 | *New (VR).* The cut-off chart on a course page shall print each point's cut-off value beside the point. | AC-204.3 | S | I |
-| FR-219 | *New (CR-008).* The course page shall show *University facts* for the offering's institution from the UGC report *Sri Lanka University Statistics 2024*: students admitted for 2023/24 (Table 2.2), undergraduates in 2024 (Table 3.1(a)), permanent hostel places and the share of undergraduates they can house (Table 7.1), Mahapola and Bursary recipients processed in 2024 (Table 7.2) and graduates of 2024 (Table 4.1), each with its table, page and a link to that page of the official PDF (BR-081, NFR-055). | US-210 | C | T |
+| FR-219 | *New (CR-008).* The course page shall show *University facts* for the offering's institution from the UGC report *Sri Lanka University Statistics 2024*: students admitted for 2023/24 (Table 2.2), undergraduates in 2024 (Table 3.1(a)), permanent hostel places and the share of undergraduates they can house (Table 7.1) and graduates of 2024 (Table 4.1), each with its table, page and a link to that page of the official PDF (BR-081, NFR-055). | US-210 | C | T |
 | FR-220 | *New (CR-009).* For each of the 24 offerings with an aptitude or practical test (BR-025), the course page shall show the test's institution, application opening and closing dates and test date from its official notice, with a link to the notice; dates shall be labelled as the last intake's and past under BR-064. A course whose joint practical test is held at other universities shall link the official notices of those universities. No card shall be shown for a course without a test. | US-211 | S | T |
 | FR-221 | *New (VR2).* The interface shall name the bands *Very likely* (SAFE), *Possible* (LIKELY) and *Unlikely* (REACH) in all three languages, and show the one-line meaning of the selected band under the *Courses* tabs (BR-037). | AC-203.5 | M | I |
 
@@ -696,7 +697,7 @@ Table: Business rules, university facts
 
 | ID | Rule | Source |
 |---|---|---|
-| BR-081 | University facts are matched to an offering by its institution letter (the last character of its Uni-Code). A university's Mahapola and Bursary totals include its campuses. Graduate figures for 2024 are provisional, and are marked incomplete when a faculty did not submit figures. "Information not submitted" means no value, never zero. | UGC, *Sri Lanka University Statistics 2024*, Tables 2.2, 3.1(a), 4.1, 7.1 and 7.2 [9] |
+| BR-081 | University facts are matched to an offering by its institution letter (the last character of its Uni-Code). Graduate figures for 2024 are provisional, and are marked incomplete when a faculty did not submit figures. "Information not submitted" means no value, never zero. | UGC, *Sri Lanka University Statistics 2024*, Tables 2.2, 3.1(a), 4.1, 7.1 and 7.2 [9] |
 
 ## Known gaps in the official sources
 

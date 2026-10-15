@@ -2,14 +2,14 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 2.1 (draft)
+version: 2.1
 date: 15 October 2026
-status: Under revision
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
+approved: 15 Oct 2026 (v2.1); 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel): v2.1 on 15 Oct 2026, v2.0 on 14 Oct 2026, v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Agile user stories (Cohn), INVEST, Gherkin-style acceptance criteria; MoSCoW (DSDM); ZP-DOC-00
@@ -20,6 +20,7 @@ revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; base
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 19 new stories (US-106 to US-111, US-209, US-305, US-407 to US-411, US-605 to US-607, US-706 to US-708); revised US-105, US-207, US-401 to US-404, US-501, US-503, US-604, US-702 to US-704; US-406 superseded and US-507 withdrawn; principle 3 replaced (an account is now required); epic totals and release plan recomputed. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (product owner's decisions of 14 October 2026: band names Very likely / Possible / Unlikely, intro guide, silhouette avatars, expired session) and CR-007 to CR-010 of 15 October 2026: 5 new stories (US-112 Try the demo, US-210 University facts, US-211 Aptitude test on the course page, US-508 NVQ to degree ladder, US-908 Close open chats when a session ends), all R2 and delivered on 15 October 2026; US-203 retitled with new AC-203.5; new AC-102.3, AC-102.4, AC-106.5, AC-106.6, AC-108.3, AC-601.3, AC-706.6 to AC-706.8 and AC-907.3; epic totals and release plan recomputed (72 stories, 231 points; R1 unchanged). No v2.0 commitment is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
+revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 ---
 
 # Introduction
@@ -604,7 +605,7 @@ without scrolling through every band.
 
 **Acceptance criteria**
 
-- **AC-210.1** **Given** a course page, **then** a *University facts* card shows, for the course's university or institute, the students admitted for 2023/24, the undergraduates in 2024, the permanent hostel places and the share of undergraduates they can house, the Mahapola and Bursary recipients, and the graduates of 2024, wherever the UGC report gives them.
+- **AC-210.1** **Given** a course page, **then** a *University facts* card shows, for the course's university or institute, the students admitted for 2023/24, the undergraduates in 2024, the permanent hostel places and the share of undergraduates they can house, and the graduates of 2024, wherever the UGC report gives them.
 - **AC-210.2** **Given** any fact on the card, **then** it names its table and page in the UGC report *Sri Lanka University Statistics 2024* and links to that page of the official PDF on the UGC website.
 - **AC-210.3** **Given** the report's own caveats, **then** they are shown with the number: 2024 figures are provisional; a count is lower where faculties did not submit figures; university totals include their campuses; and where the report says "Information not submitted", no number is shown, never a zero.
 

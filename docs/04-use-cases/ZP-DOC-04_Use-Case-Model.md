@@ -2,14 +2,14 @@
 id: ZP-DOC-04
 title: Use Case Model
 subtitle: Actors, use case diagrams, fully dressed use cases and activity flows
-version: 2.1 (draft)
+version: 2.1
 date: 15 October 2026
-status: Under revision
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
+approved: 15 Oct 2026 (v2.1); 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel): v2.1 on 15 Oct 2026, v2.0 on 14 Oct 2026, v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: UML 2.5.1 use case and activity diagrams; A. Cockburn fully dressed use case template; ZP-DOC-00
@@ -19,6 +19,7 @@ revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; base
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): 15 new use cases UC-19 to UC-33 (four fully dressed: UC-19, UC-25, UC-29, UC-30); revised UC-01, UC-02, UC-03, UC-05, UC-06, UC-07, UC-13, UC-15, UC-16; UC-14 superseded; new actors (Android notification system, moderation model); catalogue re-checked against the revised ZP-DOC-03. The two use case diagrams still show the v1.0 baseline. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (14 October 2026) and CR-007 to CR-010 (15 October 2026): two new brief use cases, UC-34 Try the demo and UC-35 End a session; UC-03 revised (university facts, aptitude test); UC-02, UC-06, UC-07, UC-20, UC-22 and UC-29 revised for the new requirements (including the security hardening of CR-010); catalogue re-checked by script against all 148 functional requirement IDs of ZP-DOC-03 v2.1 (draft). No v2.0 use case is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
+revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 ---
 
 # Introduction
@@ -540,7 +541,7 @@ Table: Brief use cases
 
 | ID | Use case | Brief description |
 |---|---|---|
-| UC-03 | View offering details | The student opens an offering and sees its district cut-off history with their own Z-score, duration, medium, aptitude-test flag and first-year content, each with its source. *Revised (CR-008, CR-009):* the page also shows a *University facts* card (admitted 2023/24, undergraduates 2024, hostel places and share, Mahapola and Bursary recipients, graduates 2024, each with its UGC table and page) and, for the 24 offerings that need one, an *Aptitude test* card with the official notice and the last intake's dates marked as past, or the notices of the joint test. |
+| UC-03 | View offering details | The student opens an offering and sees its district cut-off history with their own Z-score, duration, medium, aptitude-test flag and first-year content, each with its source. *Revised (CR-008, CR-009):* the page also shows a *University facts* card (admitted 2023/24, undergraduates 2024, hostel places and share, graduates 2024, each with its UGC table and page) and, for the 24 offerings that need one, an *Aptitude test* card with the official notice and the last intake's dates marked as past, or the notices of the joint test. |
 | UC-05 | Follow journey and reminders | *Revised (CR-002, CR-006).* The student sees the Journey steps in order, the followed courses and notices, and the next dated item first; a UGC date not yet announced shows *Not announced yet* with the official rule and page; aptitude-test steps are added automatically. The *Open now* tab lists open notices, and the Journey tab shows the count of new ones. Steps are ticked in UC-25 and reminders set in UC-28. (v1.0: dates confirmed or estimated; push reminders.) |
 | UC-06 | Explore other routes | *Revised (VR).* The student sees six groups of non-UGC routes (the retry group was removed), each marked open or not open with the reason, and opens a route's requirements, cost and timing with sources; open notices show whether the student meets their A/L-pass and age rules, checked on the device. *Revised (CR-009):* the University of Vocational Technology route quotes the official NVQ 5/6 to NVQ 7 (degree) ladder and lists its degree programmes. |
 | UC-08 | Share summary | The student generates a card in a chosen language, without name or Z-score unless added, and sends it through the phone's share sheet. |

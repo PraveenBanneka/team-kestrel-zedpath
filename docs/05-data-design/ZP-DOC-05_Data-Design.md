@@ -269,8 +269,8 @@ unusable random verifier (no password log-in); it reads groups but cannot create
 
 ## University facts from UGC statistics (read model)
 
-Five facts per institution (students admitted 2023/24, undergraduates 2024, permanent hostel places, Mahapola and
-Bursary recipients, graduates 2024) come from the UGC report *Sri Lanka University Statistics 2024*, Chapters 2, 3, 4
+Four facts per institution (students admitted 2023/24, undergraduates 2024, permanent hostel places, graduates 2024;
+Mahapola and Bursary recipients are extracted but not shown, product owner 15 Oct) come from the UGC report *Sri Lanka University Statistics 2024*, Chapters 2, 3, 4
 and 7. They follow the read-model decision used for routes and dates: the extracts (`data/ugc/statistics-2024/*.json`,
 each number checked twice against the printed table and its totals, and spot-checked by hand) are compiled by
 `tools/statistics/build-statistics.ts` into `worker/generated/statistics-2024.json`, keyed by institution letter. They

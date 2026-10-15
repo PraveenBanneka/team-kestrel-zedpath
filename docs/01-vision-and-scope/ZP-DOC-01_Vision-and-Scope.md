@@ -2,14 +2,14 @@
 id: ZP-DOC-01
 title: Vision and Scope
 subtitle: Business requirements, product vision, scope boundaries and business context
-version: 2.1 (draft)
+version: 2.1
 date: 15 October 2026
-status: Under revision
+status: Approved
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
-approved: 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
-signature: v2.0 approved in writing (project channel) on 14 Oct 2026 and v1.0 on 5 Oct 2026; this revision awaits approval
+approved: 15 Oct 2026 (v2.1); 14 Oct 2026 (v2.0); 5 Oct 2026 (v1.0)
+signature: Approved in writing (project channel): v2.1 on 15 Oct 2026, v2.0 on 14 Oct 2026, v1.0 on 5 Oct 2026
 approver: B.M.P Banneka, Product Owner
 reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Vision and scope document template (K. Wiegers and J. Beatty, Software Requirements, 3rd ed.); ZP-DOC-00
@@ -18,6 +18,7 @@ revision: 1.0 | 5 Oct 2026 | B.M.P Banneka | Approved by the product owner; base
 revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change requests CR-001 to CR-006 and the video review of 11 October 2026 (all approved by the product owner): change-request summary added; features FE-1, FE-4 to FE-7 restated; release scope recomputed from ZP-DOC-02 (R1 57 stories, 189 points; R2 10 stories, 31 points); limitations updated (account required; Android app exists; reminders on the phone); RK-02 and RK-07 mitigations updated; RK-08 added; market figures unchanged. Scope change, so the next approved version is 2.0. Version 1.0 of 5 October 2026 stays in force until the product owner approves this revision
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for CR-007 (Try the demo), CR-008 (university facts from UGC statistics), CR-009 (aptitude tests on course pages; NVQ 5/6 to NVQ 7 ladder in route R042), CR-010 (security hardening from audit run-1) and VR2 (band names Very likely / Possible / Unlikely and other decisions of 14 October 2026): change-request rows added; FE-1, FE-2, FE-5 and FE-9 restated; release scope recomputed from ZP-DOC-02 v2.1 (R1 unchanged; R2 15 stories, 42 points, of which 5 delivered on 15 October 2026); limitation on the required account qualified for the demo; RK-07 mitigation extended. These add to the approved scope without invalidating any v2.0 commitment, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
+revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 ---
 
 # Introduction
@@ -77,7 +78,7 @@ Table: Change requests since version 2.0
 |---|---|---|
 | VR2 | 14 October 2026 | Product owner's review and decisions: the bands are shown as **Very likely**, **Possible** and **Unlikely** (internal codes SAFE, LIKELY and REACH unchanged) with a one-line meaning under the tabs; the intro guide has seven slides; preset avatars are plain silhouettes in 12 colours; an expired session returns to *Log in* |
 | CR-007 | 15 October 2026 | *Try the demo*: one tap on the Welcome screen opens a private throwaway account holding the sample student, without sign-up; it is deleted 24 hours later; demo accounts read groups but cannot create groups, report or post |
-| CR-008 | 15 October 2026 | University facts on the course page from the UGC report *Sri Lanka University Statistics 2024*: students admitted 2023/24, undergraduates 2024, permanent hostel places, Mahapola and Bursary recipients, graduates 2024 (provisional), each citing its table and page |
+| CR-008 | 15 October 2026 | University facts on the course page from the UGC report *Sri Lanka University Statistics 2024*: students admitted 2023/24, undergraduates 2024, permanent hostel places, graduates 2024 (provisional), each citing its table and page |
 | CR-009 | 15 October 2026 | Aptitude tests on the course page for all 24 offerings that need one, with the last intake's official notice and dates shown as past; the NVQ Level 5/6 to NVQ Level 7 (degree) ladder added to the University of Vocational Technology route |
 | CR-010 | 15 October 2026 | Security hardening from the first security audit (run-1) and the test campaign: open group chats close when the session ends or the member leaves; deleting an account removes its messages from every group it ever opened; a shared Ask link never spends questions; no demo password in the app; the next student on a shared phone never inherits the previous student's data; disguised phone numbers, emails and chat-invite links refused in groups; fresh and demo accounts cannot hide messages by reporting; per-account, per-network and whole-service limits; cross-site and malformed requests refused |
 

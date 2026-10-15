@@ -46,7 +46,7 @@ const app = new Hono<{ Bindings: Env }>().basePath('/api');
 
 // Cached answers must change the moment the data or the API changes: the ETag is the rulebook build, and clients
 // revalidate every time (304 when unchanged), so a deploy can never leave a phone holding an old response shape.
-const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}-jn-${journey.builtAt}-st-${(statistics as StatisticsFile).retrievedOn}"`;   // rulebook, syllabus, journey or statistics data
+const ETAG = `"rb-${book.generatedAt}-sy-${SYLLABI_VERSION}-jn-${journey.builtAt}-st-${(statistics as StatisticsFile).retrievedOn}-${Object.values(FACTS).flat().length}"`;   // rulebook, syllabus, journey or statistics data
 const cacheable = (c: { req: { header: (n: string) => string | undefined }; header: (n: string, v: string) => void }) => {
   c.header('Cache-Control', 'public, no-cache');
   c.header('ETag', ETAG);

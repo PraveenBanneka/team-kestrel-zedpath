@@ -2,7 +2,7 @@
 // number checked against the printed table twice) into worker/generated/statistics-2024.json: one set of facts per
 // institution letter, each with the table, the PDF page and the link, so the course page can cite it (Praveen 2026-10-15).
 // Honest flags are carried, never smoothed over: 2024 graduate figures are provisional; "Information not submitted" means
-// no data, not zero; university welfare totals include their campuses.
+// no data, not zero.
 // Run from the repo root:  node tools/statistics/build-statistics.ts
 import fs from 'node:fs';
 import path from 'node:path';
@@ -35,11 +35,7 @@ const t71 = table(hostels, '7.1');
 for (const r of t71.rows) if (typeof r.total === 'number' && r.letter)
   add(r.letter, { kind: 'HOSTEL', value: r.total, share: typeof r.percent_can_be_accommodated === 'number' ? r.percent_can_be_accommodated : undefined, flags: [], source: cite(hostels, t71) });
 
-// Mahapola and Bursary recipients processed in 2024, all academic years (Table 7.2 totals; university totals include campuses).
-const t72 = table(hostels, '7.2');
-for (const r of t72.rows) if ((r.rowType === 'universityTotal' || r.rowType === 'institutionTotal') && typeof r.total_mahapola === 'number')
-  add(r.letter, { kind: 'WELFARE', value: r.total_mahapola, value2: typeof r.total_bursary === 'number' ? r.total_bursary : undefined,
-    flags: r.rowType === 'universityTotal' ? ['INCLUDES_CAMPUSES'] : [], source: cite(hostels, t72, typeof r.pdfPage === 'number' ? r.pdfPage : t72.page) });
+// Mahapola and Bursary (Table 7.2) are extracted in data/ugc/statistics-2024 but not shown (Praveen 2026-10-15).
 
 // Graduates in 2024 (Table 4.1, provisional). Footnote 7 = "Information not submitted": the total is then not a count.
 const t41 = table(grads, '4.1');
