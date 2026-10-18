@@ -26,6 +26,7 @@ import { JourneyScreen, longDate, today, type JourneyOps } from './screens/Journ
 import { GroupInfoScreen, GroupRoomScreen, GroupsScreen } from './screens/Groups.tsx';
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
+import { Tip } from './Tip.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
 import { loadNotifyPrefs, saveNotifyPrefs, loadOwner, setOwner, clearStudentData } from './storage.ts';
@@ -376,7 +377,7 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
           <button className="btn text" onClick={() => { setNote(null); setPicked(p => p === null ? [] : null); }} aria-pressed={picked !== null}>
             <CheckCircle2 size={18} aria-hidden="true" />{picked === null ? t('sel.select') : t('sel.cancel')}</button>
         </div>
-        {picked === null && results && <p className="helper">{t('sel.tip')}</p>}
+        {picked === null && results && <Tip text={t('sel.tip')} />}
       </div>
       <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('courses.search')} value={query}
         onChange={e => setQuery(e.target.value)} aria-label={t('courses.searchAria')} enterKeyHint="search" /></label>
@@ -399,9 +400,10 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
         </Stagger>)}
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
+          {picked.length > COMPARE_MAX && <p className="sel-max" role="status">{t('sel.cmpMax', { n: COMPARE_MAX })}</p>}
           <span className="grow"><span className="sel-badge num" role="status" aria-label={t('sel.count', { n: picked.length })}>{picked.length}</span></span>
           <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
-          <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setCompare(picked.slice(0, COMPARE_MAX)); go('/compare'); }}>
+          <button className="btn tonal small" disabled={picked.length === 0 || picked.length > COMPARE_MAX} onClick={() => { setCompare(picked); go('/compare'); }}>
             <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>
           <button className="btn filled small" disabled={picked.length === 0} onClick={addPicked}><ListOrdered size={16} aria-hidden="true" />{t('sel.add')}</button>
         </div>)}

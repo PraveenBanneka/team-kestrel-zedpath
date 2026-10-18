@@ -545,6 +545,14 @@ button.wa-head { width: 100%; border: 0; text-align: left; cursor: pointer; colo
 .list-row .pick-ic { margin: 0 4px; }
 
 .select-bar .grow { min-width: 0; }
+.select-bar:has(.sel-max) { flex-wrap: wrap; }
+.sel-max { flex: 1 0 100%; margin: 0; font-size: 13px; line-height: 18px; color: var(--reach); font-weight: 600; }
+/* Tip box (review 2026-10-18): tinted, with an icon, so the multi-select how-to is seen. */
+.tip-box { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 0; padding: 12px 14px; border-radius: var(--r-m);
+  background: color-mix(in srgb, var(--likely) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--likely) 35%, transparent);
+  color: var(--ink); font-size: 14px; line-height: 20px; }
+.tip-box svg { flex: none; color: var(--likely); margin-top: 1px; }
+.tip-box b { font-weight: 700; }
 .sel-badge { display: inline-grid; place-items: center; min-width: 32px; height: 32px; padding: 0 8px; border-radius: 99px; background: var(--brand-500); color: #fff; font: 700 15px/1 var(--font-body); }
 .select-bar .btn { white-space: nowrap; flex: none; padding-inline: 12px; }   /* buttons never wrap; the count gives way first */
 

@@ -9,6 +9,8 @@ import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical,
 import { useHold } from '../hold.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
+import { COMPARE_MAX } from './Compare.tsx';
+import { Tip } from '../Tip.tsx';
 import { LIST_MAX, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
 import { t } from '../i18n/index.ts';
 import { Rich } from '../i18n/Rich.tsx';
@@ -89,7 +91,7 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
         <p className="subtitle">{t('list.count', { n: list.length, max: LIST_MAX })}</p>
         <button className="btn text" style={{ alignSelf: 'flex-start', paddingLeft: 0 }} onClick={() => setPicked(p => p === null ? [] : null)} aria-pressed={picked !== null}>
           <CheckCircle2 size={18} aria-hidden="true" />{picked === null ? t('sel.select') : t('sel.cancel')}</button>
-        {picked === null && <p className="helper">{t('sel.tipList')}</p>}
+        {picked === null && <Tip text={t('sel.tipList')} />}
       </div>
 
       {warn.safeAbove.length > 0 && !preview && (
@@ -119,11 +121,12 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
       </Reorder.Group>
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
+          {picked.length > COMPARE_MAX && <p className="sel-max" role="status">{t('sel.cmpMax', { n: COMPARE_MAX })}</p>}
           <span className="grow"><span className="sel-badge num" role="status" aria-label={t('sel.count', { n: picked.length })}>{picked.length}</span></span>
           <button className="icon-btn" onClick={() => setPicked(null)} aria-label={t('sel.cancel')}><X size={20} /></button>
           <button className="btn tonal small" disabled={picked.length === 0} onClick={() => { setList(list.filter(x => !picked.includes(x.uniCode))); setPicked(null); }}>
             <Trash2 size={16} aria-hidden="true" />{t('sel.remove')}</button>
-          <button className="btn filled small" disabled={picked.length === 0} onClick={() => { setCompare(picked.slice(0, 3)); go('/compare'); }}>
+          <button className="btn filled small" disabled={picked.length === 0 || picked.length > COMPARE_MAX} onClick={() => { setCompare(picked); go('/compare'); }}>
             <Scale size={16} aria-hidden="true" />{t('sel.compare')}</button>
         </div>)}
 

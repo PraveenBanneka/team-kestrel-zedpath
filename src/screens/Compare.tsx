@@ -3,6 +3,8 @@
 // API as the course page (UGC data with citations); nothing is estimated here.
 // Video 2 (Praveen 2026-10-11): every Compare button opens this screen; the columns swipe sideways, and a "+" column
 // to the right of the last course adds another (search your courses, or pick from My list).
+// Review 2026-10-18: the picker opens ABOVE the table and scrolls into view (below a tall table it was off-screen, so "+"
+// looked dead), and a new column is scrolled to sit just right of the sticky labels instead of under them.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ListOrdered, Plus, Scale, Search, X } from 'lucide-react';
 import type { OfferingDetail, ProfileInput, ResultsResponse } from '../../shared/api.ts';
@@ -28,6 +30,8 @@ function Spark({ history }: { history: OfferingDetail['groups'][number]['history
 /** Search the student's own courses (Safe, Likely, Reach) and My list, to add one to the comparison. */
 function Picker({ codes, results, list, onPick }: { codes: string[]; results: ResultsResponse | null; list: ListEntry[]; onPick: (u: string) => void }) {
   const [q, setQ] = useState('');
+  const box = useRef<HTMLElement>(null);
+  useEffect(() => { box.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, []);
   const fromList = list.filter(e => !codes.includes(e.uniCode)).slice(0, 6);
   const found = useMemo(() => {
     const seen = new Set<string>();
@@ -36,7 +40,7 @@ function Picker({ codes, results, list, onPick }: { codes: string[]; results: Re
       .filter(o => { if (seen.has(o.uniCode)) return false; seen.add(o.uniCode); return true; }).slice(0, 8);
   }, [results, codes, q]);
   return (
-    <section className="card stack" aria-labelledby="cmp-pick-h">
+    <section ref={box} className="card stack" aria-labelledby="cmp-pick-h" style={{ scrollMarginTop: 72 }}>
       <h2 id="cmp-pick-h" className="title-m">{t('cmp.pickH')}</h2>
       <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('cmp.search')} value={q} onChange={e => setQ(e.target.value)}
         aria-label={t('cmp.search')} enterKeyHint="search" /></label>
@@ -69,10 +73,17 @@ export function CompareScreen({ codes, setCodes, profile, results, list, go }: {
   }, [codes, profile.district]);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (codes.length === 0) setPicking(true); }, [codes.length]);
 
-  const pick = (u: string) => {
-    setCodes([...codes, u]); setPicking(false);
-    requestAnimationFrame(() => wrap.current?.scrollTo({ left: wrap.current.scrollWidth, behavior: 'smooth' }));   // show the new column
-  };
+  const pick = (u: string) => { setCodes([...codes, u]); setPicking(false); };
+  // Show a newly added column with its left edge just right of the sticky label column (never hidden under it).
+  const shown = useRef(codes.length);
+  useEffect(() => {
+    const grew = codes.length > shown.current; shown.current = codes.length;
+    const el = wrap.current; if (!grew || !el) return;
+    const heads = el.querySelectorAll<HTMLElement>('thead th');
+    const col = heads[codes.length], label = heads[0];
+    if (col && label) el.scrollTo({ left: Math.max(0, col.offsetLeft - label.offsetWidth), behavior: 'smooth' });
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [codes.length]);
   const canAdd = codes.length < COMPARE_MAX;
   const cols = codes.map(u => ({ u, d: details[u], mine: results?.offerings.filter(o => o.uniCode === u) ?? [] }));
 
@@ -88,8 +99,9 @@ export function CompareScreen({ codes, setCodes, profile, results, list, go }: {
           <p className="subtitle">{t('cmp.sub', { n: COMPARE_MAX })}</p></div>
       </div>
 
+      {canAdd && picking && <Picker codes={codes} results={results} list={list} onPick={pick} />}
       {codes.length > 0 && (<>
-        <div ref={wrap} className="compare-wrap swipe" role="region" aria-label={t('cmp.region')} tabIndex={0}>
+        <div ref={wrap} style={{ scrollMarginTop: 72 }} className="compare-wrap swipe" role="region" aria-label={t('cmp.region')} tabIndex={0}>
           <table className="compare-table">
             <thead><tr><th scope="col"><span className="sr-only">{t('cmp.detail')}</span></th>{cols.map(c => {
               const d = c.d && c.d !== 'error' ? c.d : null;
@@ -129,7 +141,6 @@ export function CompareScreen({ codes, setCodes, profile, results, list, go }: {
         {codes.length > 1 && <p className="helper" style={{ textAlign: 'center' }}>{t('cmp.swipe')}</p>}
       </>)}
 
-      {canAdd && picking && <Picker codes={codes} results={results} list={list} onPick={pick} />}
       <p className="footer-note">{t('cmp.footer')}</p>
     </>
   );
