@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **97eab403** (Mahapola/Bursary line removed from University facts). Rollback target 75e06963 (code only).
+  Live (workers.dev) = version **2b11af0d** (Compare + and multi-select fixes). Rollback target 97eab403 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -386,3 +386,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live checks: course 136L serves 5 university facts (admitted 2655, students 9736, hostel 3104, welfare 3075, graduates 1255); 023G aptitude notice (Moratuwa, 2025/26, past); weak ETag -> 304 (D-05); null Origin on Ask feedback -> 403; demo tap 201 then deleted 204; bundle has the facts card and no demo password.
 
 ## 2026-10-15: 97eab403 LIVE (Praveen's GO): University facts without the Mahapola/Bursary line (4 facts); ETag includes the fact count. ZP-DOC-01..04 v2.1 approved and tagged. Live: course facts are ADMITTED/STUDENTS/HOSTEL/GRADUATES only.
+
+## 2026-10-18: 2a917c59 then 2b11af0d LIVE (Praveen's GO): Compare and multi-select fixes from Praveen's phone review
+- Compare "+" looked dead: the picker opened below a tall table, off-screen. Now it opens above the table and scrolls into view; a new column scrolls to sit beside the sticky labels; the table has end room so no column is half-hidden under them.
+- Multi-select tip is now a tinted box with an icon and steps (en/si/ta). Compare takes up to 3: with more ticked the button is off and a line above the bar says so (it used to drop the rest silently). Selecting to add to My list stays unlimited.
+- Wrangler was found logged in to the salon account before the deploy: stopped; Praveen switched it back by hand; whoami showed e6474e41 before both deploys.
+- Live checks (demo login, 390x844): tip box shown; 4 ticked -> Compare disabled + message, buttons on one row; 2 ticked -> Compare -> "+" opens the picker -> Design added, column fully visible. 532 tests pass.
