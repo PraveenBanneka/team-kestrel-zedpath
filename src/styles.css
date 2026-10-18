@@ -437,6 +437,8 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .compare-wrap.swipe { scroll-snap-type: x mandatory; scroll-padding-left: 96px; overscroll-behavior-x: contain; }
 .compare-wrap.swipe thead th:first-child, .compare-wrap.swipe tbody th { width: 96px; min-width: 96px; }
 .compare-wrap.swipe thead th:not(:first-child), .compare-wrap.swipe td { min-width: 158px; width: 158px; scroll-snap-align: start; }
+/* Room at the end so even the last column can scroll to sit beside the sticky labels (none half-hidden under them). */
+.compare-wrap.swipe .compare-table { padding-right: calc(100% - 254px); }
 .compare-table .add-col { min-width: 132px; width: 132px; background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
 .add-slot { width: 100%; min-height: 72px; border: 2px dashed color-mix(in srgb, var(--brand-500) 45%, transparent); border-radius: var(--r-m); background: none;
   color: var(--brand-500); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font: 600 13px/16px var(--font-body); cursor: pointer; }
@@ -545,8 +547,8 @@ button.wa-head { width: 100%; border: 0; text-align: left; cursor: pointer; colo
 .list-row .pick-ic { margin: 0 4px; }
 
 .select-bar .grow { min-width: 0; }
-.select-bar:has(.sel-max) { flex-wrap: wrap; }
-.sel-max { flex: 1 0 100%; margin: 0; font-size: 13px; line-height: 18px; color: var(--reach); font-weight: 600; }
+.sel-max { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); margin: 0; padding: 8px 12px; border-radius: var(--r-m);
+  background: var(--reach-bg); color: var(--reach); font-size: 13px; line-height: 18px; font-weight: 600; box-shadow: var(--shadow-1); }   /* floats above the bar; the buttons keep one row */
 /* Tip box (review 2026-10-18): tinted, with an icon, so the multi-select how-to is seen. */
 .tip-box { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 0; padding: 12px 14px; border-radius: var(--r-m);
   background: color-mix(in srgb, var(--likely) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--likely) 35%, transparent);
