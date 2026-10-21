@@ -1,9 +1,9 @@
 ---
 id: ZP-DOC-08
 title: Test Summary Report
-subtitle: Executed results of the automated suites and the agent test harnesses, 11 to 12 October 2026, with the security audit run-1 and the update of 15 October 2026
+subtitle: Executed results of the automated suites and the agent test harnesses, 11 to 12 October 2026, with the security audit run-1 and the updates of 15 and 21 October 2026
 version: 0.9
-date: 15 October 2026
+date: 21 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -13,6 +13,7 @@ reviewer: Claude (AI coding partner), consistency and traceability review
 standard: IEEE 829 / ISO/IEC/IEEE 29119-3 test summary report; ZP-DOC-00
 revision: 0.9 | 12 Oct 2026 | Team Kestrel | First issue: results of the 20-agent test campaign (1,053 executed cases), defects found, open risks; companion to the ZP-DOC-08 Test Plan; submitted for approval
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review: status of the findings updated (D-03, D-04, D-05, D-10 and D-12 fixed; D-08 http link fixed, Google Drive mirror still open); new section on security audit run-1 (method; 0 confirmed, 17 needs-validation, 1 rejected; each lead with its fix and test; lead 9 accepted); automated suite re-run on 15 October 2026 (532 passed, 0 expected-fail, 21 opt-in)
+revision: 0.9 | 21 Oct 2026 | Team Kestrel | Update of 21 October 2026: 536 passed after VR3 (Compare fixes, desktop layout); new test file `src/nav-pref.test.ts` (4)
 ---
 
 # Introduction
@@ -84,6 +85,15 @@ Table: Automated suite on 15 October 2026 (commit f704d0b)
 |---|---|
 | `npx vitest run` | 34 files (33 passed, 1 opt-in skipped); 553 tests: **532 passed, 0 failed, 0 expected-fail, 21 skipped** (the opt-in CPU budget, run with `PERF=1`) |
 | New test files since 12 October | `worker/demo-login.test.ts` (9), `worker/demo-data.test.ts` (1), `worker/statistics.test.ts` (5), `worker/aptitude.test.ts` (5), `worker/session-kick.test.ts` (5), `worker/hardening.test.ts` (7), `src/owner.test.ts` (2); grown: `src/demo.test.ts` (2 to 4), `worker/groups.test.ts` (16 to 17), `worker/data-integrity.e2e.test.ts` (DAT-054 added) |
+| `npx tsc -b` | Exit code 0 |
+| `bash .claude/hooks/test-guard.sh` | 40 passed, 0 failed |
+
+Table: Automated suite on 21 October 2026 (after VR3)
+
+| Check | Result |
+|---|---|
+| `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
+| New test file | `src/nav-pref.test.ts` (4): the desktop side menu is open by default, remembered per device, safe when storage is blocked, forgotten by "Clear this phone" (TC-139) |
 | `npx tsc -b` | Exit code 0 |
 | `bash .claude/hooks/test-guard.sh` | 40 passed, 0 failed |
 

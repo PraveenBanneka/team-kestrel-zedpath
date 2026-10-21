@@ -3,7 +3,7 @@ id: ZP-DOC-07
 title: UI/UX Design
 subtitle: Design principles, information architecture, design system, screen specifications and accessibility for the ZedPath app
 version: 0.9
-date: 15 October 2026
+date: 21 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -13,6 +13,7 @@ reviewer: Claude (AI coding partner), consistency and traceability review
 standard: Material Design 3; WCAG 2.2 level AA; ZP-DOC-00
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue, written from the built app (CR-001 to CR-006 and the video-review fixes included); contrast measured from the colour tokens; submitted for approval
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 (14 October 2026: band names Very likely / Possible / Unlikely with a one-line meaning under the tabs, intro guide of seven slides, silhouette avatars, expired session returns to Log in) and CR-007 to CR-010 (15 October 2026: Try the demo button and demo note in Me, University facts card, Aptitude test card, NVQ ladder on route R042, Ask links only fill the box, failed log-out message, phone data cleared for the next student); journeys, routes, components, screens, patterns, usability evidence and traceability updated
+revision: 0.9 | 21 Oct 2026 | Team Kestrel | Revised for VR3 (18 to 21 October 2026, product owner's review on a phone and a desktop): Compare "+" opens the picker above the table and new columns line up beside the row labels; multi-select tip shown as a highlighted box with steps; Compare takes up to three and says so; desktop layout from 1024 px (collapsible side menu with a glass menu button, logo in the corner, Paths dashboard, course page in two columns); install button says "this device"
 ---
 
 # Introduction
@@ -108,7 +109,8 @@ Table: Key journeys
 The app has a **focused account flow** without the navigation bar (Welcome, Intro, Sign up, Log in, Recover,
 Recovery code, Complete your account, About you) and a **main app** with a top app bar and a five-tab bottom
 navigation bar. Me opens from the avatar in the top app bar. Routing uses the URL hash so the phone's Back button
-and deep links work.
+and deep links work. From 1024 px wide (laptops, desktops, projectors) the same five destinations move into a
+**collapsible side menu** (see Desktop layout).
 
 Table: Bottom navigation tabs
 
@@ -119,6 +121,25 @@ Table: Bottom navigation tabs
 | Journey | Calendar | `#/journey` | count of open notices the student has not seen and is not ruled out for (can be turned off in Notification settings) |
 | Groups | People | `#/groups` | none |
 | Ask | Sparkles | `#/ask` | none |
+
+## Desktop layout (1024 px and wider)
+
+Added in VR3 (21 October 2026). The layout follows the width of the browser window, never the type of device: the
+CSS rule `min-width: 1024px` switches it on, and a window made narrower gets the phone layout again. Below 1024 px
+nothing changes: the desktop wrappers are `display: contents`, so phones keep the same order and look.
+
+Table: Desktop layout: specification
+
+| Aspect | Specification |
+|---|---|
+| Top app bar | Full width and white, with the menu button and the ZedPath logo in the top-left corner |
+| Side menu | **Open** (232 px): icon and name side by side, badges at the end of the row. **Collapsed** (84 px): icons only; each name stays for screen readers and shows as a tooltip. Width changes animate (off under reduced motion) |
+| Menu button | Glass style: frosted white over a light brand tint, a top highlight and a soft shadow; 44 × 44 px; a dark-mode version. `aria-expanded`, `aria-controls="main-nav"`, label "Collapse menu" or "Expand menu" in Sinhala, Tamil and English |
+| Menu choice kept | Stored on the device (`zedpath.nav.v1`), open by default and when storage is blocked; a layout preference like the language: kept when student data is cleared, removed by "Clear this phone" (TC-139) |
+| Content width | 1040 px; Paths 1240 px; course page and Compare 1440 px |
+| Paths | Dashboard (the product owner's choice of three options): results banner across the top with the band ring on the right, a row of cards (special intake, hidden courses, My list), other paths three across |
+| Course detail | Two columns: the band card and the actions stay on the left under the app bar while the details scroll on the right |
+| Sticky bars | Selection bar, composer and Ask box sit 16 px from the bottom (there is no bottom bar) |
 
 ## Route table
 
@@ -234,7 +255,9 @@ Table: Component catalogue
 | Chips | 40 px pill, outline; selected = `aria-pressed`/`aria-checked` filled brand; small chips 34 px | Subjects, interests, Ask suggestions, source chips |
 | Text fields | Label above (`.field`), helper below, error text after interaction | Account, About you |
 | Lists | `list-card` with rows; My list rows have position number, main text, drag grip (44 × 52) and remove | Courses, My list, routes |
-| Selection bar | Sticky above the navigation bar: count, Add to my list / Compare / Remove, Cancel | Courses, My list |
+| Selection bar | Sticky above the navigation bar: count, Add to my list / Compare / Remove, Cancel; with more than 3 ticked, Compare is off and a note floats above the bar | Courses, My list |
+| Tip box | Tinted box with a lightbulb icon, a bold lead and the steps | Courses, My list |
+| Menu button | Glass 44 px button with the menu icon: opens and collapses the side menu | Top app bar, 1024 px and wider |
 | Composer | Sticky above the navigation bar: rounded input (48 px) and round 48 px send button | Ask, Group room |
 | Chat bubbles | Question right (brand gradient), answer left; group messages with avatar, name, senior badge | Ask, Groups |
 | Avatars | 12 preset plain head-and-shoulders silhouettes, each in its own colour family (own artwork, no licence or credit; VR2), or initials on a steady colour; decorative (`aria-hidden`) | Top bar, Me, Groups |
@@ -278,6 +301,7 @@ Table: Paths (home): specification
 | Purpose | One view of every path the results reach (US-201, US-203, US-501) |
 | Content | Aurora summary card with the band ring and "See courses"; hidden-courses bar with count and "See why"; My list entry; other-route tiles (private, job exams, vocational, abroad) with counts and "Open now" pills |
 | States | Loading: ring and tiles disabled; Error: message from the API; Empty route group: tile disabled |
+| Desktop | Dashboard (see Desktop layout); the install button reads "Install ZedPath on this device" |
 
 ## Courses
 
@@ -288,7 +312,7 @@ Table: Courses: specification
 | Purpose | Browse courses by band (US-203, US-209, US-305) |
 | Content | Tabs **Very likely / Possible / Unlikely** (`role="tab"`; codes SAFE / LIKELY / REACH) with the selected band's one-line meaning under them (VR2); the tabs wrap instead of widening the page in Sinhala and Tamil; search across all bands (names, short forms, Uni-Codes); rows with course, institution and band pill; Compare link |
 | States | Loading skeleton; empty search result message |
-| Interactions | Tap opens the course; **press and hold** starts selection; one selection spans all three tabs; selection bar with the count as a badge: Add to my list, Compare (first 3) |
+| Interactions | Tap opens the course; **press and hold** starts selection; one selection spans all three tabs; selection bar with the count as a badge: Add to my list, Compare (up to 3: with more ticked, Compare is off and a line above the bar says why, VR3); a highlighted tip box (lightbulb icon, bold lead, steps) explains selecting several |
 
 ## Course detail
 
@@ -300,6 +324,7 @@ Table: Course detail: specification
 | Content | Band pill and explanation; **needs vs you have** (each entry rule against the student's subjects); cut-off chart for the student's district with the value on every point; intake, duration, aptitude test; "What you'll study" syllabus by year with its source page; source lines. **University facts** card (CR-008): heading, the line "From the UGC report *Sri Lanka University Statistics 2024*", then up to five facts for the course's institution: students admitted (2023/24, whole university), undergraduates studying here (2024), permanent hostel places (end of 2024) with "Enough for *p*% of undergraduates", graduates in 2024; each fact shows its caveats ("2024 figures are provisional", "Some faculties did not submit figures, so this is a lower count") and its source link to the table and page. **Aptitude test** card (CR-009), only for the 24 offerings with a test: what the test is; "Last intake (2025/2026)" or "This intake" with applications opened or closed, and the test held or due, each with its date; for a past intake, "Dates for the next intake are announced by the university"; a link "Official notice: *university*"; for a joint practical test, the line that it can be sat at any one of the listed universities, with each notice |
 | States | Facts card hidden when the report has no figure for the institution; a value the report did not receive is never shown as zero; aptitude card hidden for a course without a test |
 | Interactions | Add to My list or "On your list (#n)"; Compare; Follow (adds the course to the Journey) |
+| Desktop | Two columns (see Desktop layout) |
 
 ## Compare
 
@@ -308,7 +333,7 @@ Table: Compare: specification
 | Aspect | Specification |
 |---|---|
 | Purpose | Up to three courses side by side (US-207) |
-| Content | Columns per course: chance, cut-off history, entry rules, duration, places, selection basis, aptitude test; "+" column to add another |
+| Content | Columns per course: chance, cut-off history, entry rules, duration, places, selection basis, aptitude test; "+" column to add another: it opens the course picker above the table and scrolls to it, and the new column lines up beside the row labels; the table leaves room at its end so no column is half-hidden under the labels (VR3) |
 | States | Loading skeleton per column; nothing estimated here, every value comes from the course API |
 | Interactions | Columns swipe sideways (scroll snap per course); "+" opens a picker (search your courses or pick from My list) |
 
@@ -454,6 +479,7 @@ Table: Changes driven by usability evidence
 | CR-007 | Product owner's decision (15 Oct): a demo without sign-up, a private copy per visitor | *Try the demo, no sign-up* on Welcome; demo note in Me |
 | CR-008, CR-009 | Product owner's decisions (15 Oct) | University facts card and Aptitude test card on the course page; NVQ ladder text on the University of Vocational Technology route |
 | CR-010 | Security audit run-1 (15 Oct) | Ask links only fill the box; no prefilled demo password; failed log-out reported; the next student on a phone starts clean |
+| VR3 | Product owner's review, 18 to 21 Oct, on a phone and a 1870 px desktop: "the plus button not working", "the note should be more obvious", "can we only select up to 3?", "ZedPath should be on the corner", "looks emptier than it should be", "the left menu should be collapsible with a glassmorphic hamburger", "on your phone is not relevant on desktop" | Compare picker and columns fixed; tip box; Compare limit message; desktop layout with the logo in the corner, Paths dashboard, two-column course page and a collapsible side menu; install button says "this device" |
 
 # Traceability
 
