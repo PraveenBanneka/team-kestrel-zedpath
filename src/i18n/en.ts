@@ -2,7 +2,7 @@
 export const en = {
   // shell and navigation
   'nav.paths': 'Paths', 'nav.list': 'My list', 'nav.journey': 'Journey', 'nav.groups': 'Groups', 'nav.ask': 'Ask',
-  'nav.main': 'Main', 'nav.back': 'Back', 'nav.alerts': 'Alerts', 'nav.alertsNew': 'Alerts, {n} new', 'nav.me': 'Me: your details and account',
+  'nav.main': 'Main', 'nav.collapse': 'Collapse menu', 'nav.expand': 'Expand menu', 'nav.back': 'Back', 'nav.alerts': 'Alerts', 'nav.alertsNew': 'Alerts, {n} new', 'nav.me': 'Me: your details and account',
   'nav.listCount': '{n} courses',
   'title.courses': 'Courses', 'title.compare': 'Compare', 'title.list': 'My list', 'title.journey': 'Journey', 'title.alerts': 'Alerts',
   'title.groups': 'Groups', 'title.group': 'Group', 'title.course': 'Degree details', 'title.ask': 'Ask ZedPath', 'title.hidden': 'Hidden courses',

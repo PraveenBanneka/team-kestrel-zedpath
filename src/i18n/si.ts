@@ -3,7 +3,7 @@ import type { Key } from './en.ts';
 export const si: Record<Key, string> = {
   // shell and navigation
   'nav.paths': 'මාර්ග', 'nav.list': 'මගේ ලැයිස්තුව', 'nav.journey': 'ගමන් මඟ', 'nav.groups': 'කණ්ඩායම්', 'nav.ask': 'අසන්න',
-  'nav.main': 'ප්‍රධාන', 'nav.back': 'ආපසු', 'nav.alerts': 'දැනුම්දීම්', 'nav.alertsNew': 'දැනුම්දීම්, අලුත් {n}ක්', 'nav.me': 'මම: ඔබේ විස්තර සහ ගිණුම',
+  'nav.main': 'ප්‍රධාන', 'nav.collapse': 'මෙනුව හකුළන්න', 'nav.expand': 'මෙනුව විහිදන්න', 'nav.back': 'ආපසු', 'nav.alerts': 'දැනුම්දීම්', 'nav.alertsNew': 'දැනුම්දීම්, අලුත් {n}ක්', 'nav.me': 'මම: ඔබේ විස්තර සහ ගිණුම',
   'nav.listCount': 'පාඨමාලා {n}ක්',
   'title.courses': 'පාඨමාලා', 'title.compare': 'සසඳන්න', 'title.list': 'මගේ ලැයිස්තුව', 'title.journey': 'ගමන් මඟ', 'title.alerts': 'දැනුම්දීම්',
   'title.groups': 'කණ්ඩායම්', 'title.group': 'කණ්ඩායම', 'title.course': 'උපාධියේ විස්තර', 'title.ask': 'ZedPath ගෙන් අසන්න', 'title.hidden': 'සඟවා ඇති පාඨමාලා',

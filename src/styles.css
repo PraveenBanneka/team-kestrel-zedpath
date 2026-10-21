@@ -642,12 +642,26 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
 /* ---------- desktop (Praveen 2026-10-21): from 1024 px the bottom bar becomes a side rail, content widens, and Paths and the
    course page split into a summary column (sticky) and a detail column; Paths is a dashboard (chosen by Praveen). Phones are unchanged: the split wrappers are display:contents. */
 .split, .split-side, .split-main, .dash, .dash-cards, .dash-paths { display: contents; }
+.nav-toggle { display: none; }   /* the desktop menu button; phones use the bottom bar */
 @media (min-width: 1024px) {
-  .shell.has-nav { padding-left: 104px; }
-  .bottom-nav { top: 0; bottom: 0; left: 0; right: auto; width: 104px; max-width: none; margin: 0; border-radius: 0; grid-template-columns: 1fr;
-    grid-auto-rows: min-content; align-content: start; gap: 8px; padding: 76px 10px 16px; box-shadow: 1px 0 0 var(--line); }
-  .shell.has-nav > .app-bar { margin-left: -104px; padding-left: 28px; z-index: 7; background: var(--surface); box-shadow: 0 1px 0 var(--line); }   /* full width: the logo sits in the corner (Praveen 2026-10-21) */
-  .bottom-nav a { min-height: 64px; font-size: 12px; border-radius: 16px; }
+  /* Side menu, collapsible (Praveen 2026-10-21): open = icon and name side by side; collapsed = icons only (the name is the tooltip). */
+  .shell.has-nav { --rail: 232px; padding-left: var(--rail); transition: padding-left .22s ease; }
+  .shell.has-nav.nav-closed { --rail: 84px; }
+  .bottom-nav { top: 0; bottom: 0; left: 0; right: auto; width: var(--rail); max-width: none; margin: 0; border-radius: 0; grid-template-columns: 1fr;
+    grid-auto-rows: min-content; align-content: start; gap: 6px; padding: 76px 12px 16px; box-shadow: 1px 0 0 var(--line); overflow: hidden; transition: width .22s ease; }
+  .nav-open .bottom-nav a { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 0 16px; font-size: 15px; line-height: 20px; white-space: nowrap; }
+  .nav-open .bottom-nav a .nav-count { position: static; margin-left: auto; }
+  .nav-closed .bottom-nav a .nav-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .nav-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 14px; cursor: pointer; color: var(--brand);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .88), color-mix(in srgb, var(--likely-bg) 75%, transparent));
+    -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6); border: 1px solid rgba(255, 255, 255, .9);
+    box-shadow: 0 6px 18px -8px rgba(36, 71, 140, .45), inset 0 1px 0 rgba(255, 255, 255, .95), 0 0 0 1px color-mix(in srgb, var(--brand) 10%, transparent);
+    transition: transform .15s, box-shadow .2s; }   /* glass: frosted white over a brand tint, a top highlight and a soft shadow */
+  .nav-toggle:hover { box-shadow: 0 10px 24px -8px rgba(36, 71, 140, .55), inset 0 1px 0 #fff, 0 0 0 1px color-mix(in srgb, var(--brand) 20%, transparent); }
+  .nav-toggle:active { transform: scale(.95); }
+  .nav-toggle:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; }
+  .shell.has-nav > .app-bar { margin-left: calc(-1 * var(--rail)); padding-left: 20px; z-index: 7; background: var(--surface); box-shadow: 0 1px 0 var(--line); transition: margin-left .22s ease; }   /* full width: the logo sits in the corner (Praveen 2026-10-21) */
+  .bottom-nav a { min-height: 56px; border-radius: 16px; }
   .bottom-nav a .nav-pill { border-radius: 16px; }
   .shell.has-nav main { max-width: 1040px; padding: 28px 40px 48px; }
   .shell.has-nav main[data-screen="course"], .shell.has-nav main[data-screen="compare"] { max-width: 1440px; }
@@ -670,4 +684,8 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
   .dash-paths .bento-tile .t { font-size: 17px; line-height: 22px; }
   .has-nav .flow-nav, .select-bar, .composer { bottom: 16px; }
   .ask-bottom, .wa-composer { bottom: 0; }
+}
+@media (min-width: 1024px) and (prefers-color-scheme: dark) {
+  .nav-toggle { color: var(--ink); background: linear-gradient(135deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .04)); border-color: rgba(255, 255, 255, .18);
+    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .16); }
 }

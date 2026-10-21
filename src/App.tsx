@@ -3,7 +3,7 @@
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Pencil, Plane,
+import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Menu, Pencil, Plane,
   ListOrdered, Scale, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -29,7 +29,7 @@ import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { Tip } from './Tip.tsx';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
-import { loadNotifyPrefs, saveNotifyPrefs, loadOwner, setOwner, clearStudentData } from './storage.ts';
+import { loadNotifyPrefs, saveNotifyPrefs, loadOwner, setOwner, clearStudentData, loadNavOpen, saveNavOpen } from './storage.ts';
 import type { NotifyPrefs } from '../shared/journey.ts';
 import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, clearOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
@@ -73,6 +73,8 @@ export function App() {
   const [route, go] = useHashRoute();
   const [lang, setLangState] = useState<Lang>(() => { const l = loadLang(); applyLang(l); return l; });
   const changeLang = (l: Lang) => { applyLang(l); saveLang(l); setLangState(l); };
+  const [navOpen, setNavOpen] = useState(loadNavOpen);                   // desktop side menu (from 1024 px); phones use the bottom bar
+  const toggleNav = () => setNavOpen(o => { saveNavOpen(!o); return !o; });
   const [meta, setMeta] = useState<Meta | null>(null);
   const [profile, setProfile] = useState<ProfileInput | null>(() => loadProfile());
   const [extras, setExtras] = useState<Extras>(() => loadExtras());
@@ -271,19 +273,21 @@ export function App() {
   const NAV: [NonNullable<typeof tab>, string, LucideIcon, string][] = [['paths', t('nav.paths'), MapIcon, '#/paths'], ['list', t('nav.list'), ListOrdered, '#/list'],
     ['journey', t('nav.journey'), CalendarDays, '#/journey'], ['groups', t('nav.groups'), Users, '#/groups'], ['ask', t('nav.ask'), Sparkles, '#/ask']];
   return (
-    <div className="shell has-nav">
+    <div className={`shell has-nav ${navOpen ? 'nav-open' : 'nav-closed'}`}>
       <header className="app-bar">
+        <button className="nav-toggle glass" onClick={toggleNav} aria-expanded={navOpen} aria-controls="main-nav"
+          aria-label={navOpen ? t('nav.collapse') : t('nav.expand')} title={navOpen ? t('nav.collapse') : t('nav.expand')}><Menu size={20} aria-hidden="true" /></button>
         {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
         <a className="avatar small plain" href="#/me" aria-label={t('nav.me')}>{me ? <PersonAvatar avatar={me.avatar} name={me.username} size={36} /> : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       {/* The three Courses tabs are one screen, so a selection survives switching Safe / Likely / Reach (Praveen 2026-10-14). */}
       <main data-screen={path || 'paths'}><ErrorBoundary resetKey={route}><Page k={path === 'courses' ? 'courses' : route}>{screen}</Page></ErrorBoundary></main>
-      <nav className="bottom-nav" aria-label={t('nav.main')}>
+      <nav id="main-nav" className="bottom-nav" aria-label={t('nav.main')}>
         {NAV.map(([key, label, Icon, href]) => (
-          <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
+          <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined} title={label}>
             {tab === key && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
-            <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span>{label}</span>
+            <Icon size={22} strokeWidth={tab === key ? 2.4 : 2} aria-hidden="true" /><span className="nav-label">{label}</span>
             {key === 'list' && list.length > 0 && <span className="nav-count num" aria-label={t('nav.listCount', { n: list.length })}>{list.length}</span>}
             {key === 'journey' && unread > 0 && <span className="nav-count num" aria-label={t('nav.alertsNew', { n: unread })}>{unread}</span>}
           </a>))}

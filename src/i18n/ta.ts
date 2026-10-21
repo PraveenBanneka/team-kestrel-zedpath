@@ -3,7 +3,7 @@ import type { Key } from './en.ts';
 export const ta: Record<Key, string> = {
   // shell and navigation
   'nav.paths': 'வழிகள்', 'nav.list': 'எனது பட்டியல்', 'nav.journey': 'பயணம்', 'nav.groups': 'குழுக்கள்', 'nav.ask': 'கேளுங்கள்',
-  'nav.main': 'முதன்மை', 'nav.back': 'பின்செல்', 'nav.alerts': 'அறிவிப்புகள்', 'nav.alertsNew': 'அறிவிப்புகள், {n} புதியவை', 'nav.me': 'நான்: உங்கள் விவரங்களும் கணக்கும்',
+  'nav.main': 'முதன்மை', 'nav.collapse': 'மெனுவைச் சுருக்கு', 'nav.expand': 'மெனுவை விரிவாக்கு', 'nav.back': 'பின்செல்', 'nav.alerts': 'அறிவிப்புகள்', 'nav.alertsNew': 'அறிவிப்புகள், {n} புதியவை', 'nav.me': 'நான்: உங்கள் விவரங்களும் கணக்கும்',
   'nav.listCount': '{n} கற்கைநெறிகள்',
   'title.courses': 'கற்கைநெறிகள்', 'title.compare': 'ஒப்பிடுக', 'title.list': 'எனது பட்டியல்', 'title.journey': 'பயணம்', 'title.alerts': 'அறிவிப்புகள்',
   'title.groups': 'குழுக்கள்', 'title.group': 'குழு', 'title.course': 'பட்டப்படிப்பு விவரங்கள்', 'title.ask': 'ZedPath இடம் கேளுங்கள்', 'title.hidden': 'மறைக்கப்பட்ட கற்கைநெறிகள்',

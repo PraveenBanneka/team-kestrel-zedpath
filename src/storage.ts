@@ -9,7 +9,7 @@ export { INTERESTS, specialIntakeHint, type Achievement, type Extras, type Level
 const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
   pendingSync: 'zedpath.pendingSync.v1', list: 'zedpath.list.v1', compare: 'zedpath.compare.v1',
   journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1', demo: 'zedpath.demo' /* audit lead 5: cleared with the phone */, owner: 'zedpath.owner.v1' /* audit lead 7: whose data is on this phone */,
-  notify: 'zedpath.notify.v1' };
+  notify: 'zedpath.notify.v1', nav: 'zedpath.nav.v1' /* desktop side menu open or collapsed: a layout preference, like the language */ };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
@@ -20,6 +20,9 @@ export const saveExtras = (e: Extras) => write(KEYS.extras, e);
 export const isOnboarded = () => read<boolean>(KEYS.onboarded) === true;
 export const setOnboarded = () => write(KEYS.onboarded, true);
 /** Back to the Welcome screen while logged out (keeps results, list and language on the phone). */
+/** Desktop side menu: open (names shown) unless this viewer collapsed it (Praveen 2026-10-21). Safe default: open. */
+export const loadNavOpen = (): boolean => read<string>(KEYS.nav) !== 'collapsed';
+export const saveNavOpen = (open: boolean) => write(KEYS.nav, open ? 'open' : 'collapsed');
 export const clearOnboarded = () => { try { localStorage.removeItem(KEYS.onboarded); } catch { /* private mode */ } };
 export const loadLang = () => read<'si' | 'ta' | 'en'>(KEYS.lang) ?? 'en';
 export const saveLang = (l: 'si' | 'ta' | 'en') => write(KEYS.lang, l);
