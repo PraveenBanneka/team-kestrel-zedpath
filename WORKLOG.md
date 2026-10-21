@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **709586ee** (desktop polish). Rollback target dd209eea (code only).
+  Live (workers.dev) = version **209a0c04** (Paths dashboard on desktop). Rollback target 709586ee (code only). Committed, not deployed: collapsible side menu (f3fe978).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -402,3 +402,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-21: 709586ee LIVE (Praveen's GO): desktop polish
 - Full-width top bar: the ZedPath logo sits in the corner above the rail. Wider content (1040 px; Paths, course and Compare 1440 px); other-path tiles 2 across and larger so the Paths columns end level (Praveen: "looks emptier than it should be" on a 1870 px screen).
 - whoami e6474e41 before the deploy; verified live at 1871x900 (Paths) and 390x844 (phone unchanged).
+
+## 2026-10-21: 209a0c04 LIVE (Praveen's GO): Paths dashboard on desktop
+- Praveen chose option A of three (dashboard): results banner across the top with the ring on the right, a row of cards (special intake, hidden courses, My list), other paths 3 across. Install button says "this device" (en/si/ta). Verified live at 1871x900; phone 390x844 unchanged.
+- Then (committed f3fe978, not deployed): collapsible side menu with a glass menu button, remembered per device (zedpath.nav.v1), TC-139 (536 tests pass). Not yet seen in a browser: check live right after the deploy; rollback target 209a0c04.
+- Docs (9a46b08): ZP-DOC-07 desktop layout section and VR3 row; ZP-DOC-08 TC-139 and results of 21 October; Test Summary Report; README counts. Rebuilt.
