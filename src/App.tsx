@@ -299,7 +299,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
   const install = useInstallPrompt();
   const c = results?.counts;
   return (
-    <div className="split"><div className="split-side">
+    <div className="dash">
       <section className="hero aurora" aria-label="State universities">
         <div>
           <span className="eyebrow">{t('paths.eyebrow')}</span>
@@ -318,6 +318,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
         <button className="btn white" onClick={() => go('/courses/safe')} disabled={!results}>{t('paths.see')}<ChevronRight size={18} aria-hidden="true" /></button>
       </section>
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
+      <div className="dash-cards">
       {hint.applies && <div className="alert gold"><Trophy size={20} aria-hidden="true" /><span>{t('paths.special', { sport: hint.sport ? t('paths.sport') : '' })}
         <span className="source" style={{ display: 'block', marginTop: 4, color: 'inherit', opacity: .75 }}>UGC handbook 2025/26, Section 6, p.166</span></span></div>}
       {results && results.hidden.length > 0 && (
@@ -327,7 +328,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
         <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
       </button>
-      </div><div className="split-main">
+      </div><div className="dash-paths">
       <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
         {ROUTE_GROUPS.map(g => {

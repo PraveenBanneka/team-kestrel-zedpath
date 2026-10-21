@@ -640,8 +640,8 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
 .plain-list { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
 
 /* ---------- desktop (Praveen 2026-10-21): from 1024 px the bottom bar becomes a side rail, content widens, and Paths and the
-   course page split into a summary column (sticky) and a detail column. Phones are unchanged: the split wrappers are display:contents. */
-.split, .split-side, .split-main { display: contents; }
+   course page split into a summary column (sticky) and a detail column; Paths is a dashboard (chosen by Praveen). Phones are unchanged: the split wrappers are display:contents. */
+.split, .split-side, .split-main, .dash, .dash-cards, .dash-paths { display: contents; }
 @media (min-width: 1024px) {
   .shell.has-nav { padding-left: 104px; }
   .bottom-nav { top: 0; bottom: 0; left: 0; right: auto; width: 104px; max-width: none; margin: 0; border-radius: 0; grid-template-columns: 1fr;
@@ -650,14 +650,24 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
   .bottom-nav a { min-height: 64px; font-size: 12px; border-radius: 16px; }
   .bottom-nav a .nav-pill { border-radius: 16px; }
   .shell.has-nav main { max-width: 1040px; padding: 28px 40px 48px; }
-  .shell.has-nav main[data-screen="paths"], .shell.has-nav main[data-screen="course"], .shell.has-nav main[data-screen="compare"] { max-width: 1440px; }
+  .shell.has-nav main[data-screen="course"], .shell.has-nav main[data-screen="compare"] { max-width: 1440px; }
+  .shell.has-nav main[data-screen="paths"] { max-width: 1240px; }
   .split { display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); gap: 32px; align-items: start; }
   .split-side { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 76px; }
   .split-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-  .split-main .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }   /* 2 larger tiles: the columns end level */
-  .split-main .bento-tile { min-height: 168px; padding: 20px; }
-  .split-main .bento-tile .t { font-size: 18px; line-height: 23px; }
-  .split-main .bento-tile .s { font-size: 14px; line-height: 19px; }
+  /* Paths dashboard: the results banner across the top, a row of cards, then other paths 3 across */
+  .dash { display: flex; flex-direction: column; gap: 20px; }
+  .dash .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 48px; row-gap: 20px; align-items: center; padding: 32px 40px; }
+  .dash .hero > :first-child { grid-column: 1; grid-row: 1; }
+  .dash .hero .hero-body { grid-column: 2; grid-row: 1 / span 2; }
+  .dash .hero .btn.white { grid-column: 1; grid-row: 2; justify-self: start; }
+  .dash .hero h1 { font-size: 34px; line-height: 40px; }
+  .dash-cards { display: flex; gap: 16px; align-items: stretch; }
+  .dash-cards > * { flex: 1 1 0; min-width: 0; }
+  .dash-paths { display: flex; flex-direction: column; gap: 16px; }
+  .dash-paths .bento { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .dash-paths .bento-tile { min-height: 150px; padding: 18px; }
+  .dash-paths .bento-tile .t { font-size: 17px; line-height: 22px; }
   .has-nav .flow-nav, .select-bar, .composer { bottom: 16px; }
   .ask-bottom, .wa-composer { bottom: 0; }
 }

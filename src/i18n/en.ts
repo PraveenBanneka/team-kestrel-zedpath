@@ -138,7 +138,7 @@ export const en = {
   'paths.see': 'See the courses', 'paths.special': 'Your {sport}achievements may qualify you for a special intake: up to 0.5% of places per course for national or international achievements (2023 to 2025), if you are within 0.2000 of the cut-off.',
   'paths.sport': 'sports ', 'paths.hidden': '{n} courses hidden: subject rules not met', 'paths.seeWhy': 'See why',
   'paths.list': 'My list', 'paths.listSome': '{n} courses in your order, checked for mistakes', 'paths.listOne': '1 course in your order, checked for mistakes',
-  'paths.listNone': 'Build your UGC preference list', 'paths.other': 'Other paths', 'paths.open': '{n} open', 'paths.install': 'Install ZedPath on this phone',
+  'paths.listNone': 'Build your UGC preference list', 'paths.other': 'Other paths', 'paths.open': '{n} open', 'paths.install': 'Install ZedPath on this device',
   'paths.footer': 'Bands compare your Z-score with five years of cut-offs for your district. Past cut-offs describe the past: no band is a promise of admission. ZedPath is independent and not affiliated with the University Grants Commission.',
 
   // courses
