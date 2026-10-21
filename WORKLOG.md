@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **209a0c04** (Paths dashboard on desktop). Rollback target 709586ee (code only). Committed, not deployed: collapsible side menu (f3fe978).
+  Live (workers.dev) = version **4eb47d89** (collapsible desktop side menu). Rollback target 209a0c04 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -407,3 +407,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Praveen chose option A of three (dashboard): results banner across the top with the ring on the right, a row of cards (special intake, hidden courses, My list), other paths 3 across. Install button says "this device" (en/si/ta). Verified live at 1871x900; phone 390x844 unchanged.
 - Then (committed f3fe978, not deployed): collapsible side menu with a glass menu button, remembered per device (zedpath.nav.v1), TC-139 (536 tests pass). Not yet seen in a browser: check live right after the deploy; rollback target 209a0c04.
 - Docs (9a46b08): ZP-DOC-07 desktop layout section and VR3 row; ZP-DOC-08 TC-139 and results of 21 October; Test Summary Report; README counts. Rebuilt.
+
+## 2026-10-21: 4eb47d89 LIVE (Praveen's GO): collapsible desktop side menu
+- whoami e6474e41 before the deploy (a mid-turn GO was correctly blocked by the guard; deployed on the next GO).
+- Verified live at 1440x900: open by default (icon and name), the glass menu button collapses it to icons only (aria-expanded false, label "Expand menu", saved as collapsed), still collapsed after a reload; phone 390x844 unchanged.
+- Pitch numbers (Shark Tank deck): .lk domain is LKR 8,000 a year (Praveen), so the year-one running cost is LKR 82,500 (was 78,100 with a 3,600 domain): break-even 169 Plus students (1.7%), about LKR 6,900 a month, margin about 58%; ask buffer 17,500.
