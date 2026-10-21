@@ -278,7 +278,7 @@ export function App() {
         <a className="avatar small plain" href="#/me" aria-label={t('nav.me')}>{me ? <PersonAvatar avatar={me.avatar} name={me.username} size={36} /> : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       {/* The three Courses tabs are one screen, so a selection survives switching Safe / Likely / Reach (Praveen 2026-10-14). */}
-      <main><ErrorBoundary resetKey={route}><Page k={path === 'courses' ? 'courses' : route}>{screen}</Page></ErrorBoundary></main>
+      <main data-screen={path || 'paths'}><ErrorBoundary resetKey={route}><Page k={path === 'courses' ? 'courses' : route}>{screen}</Page></ErrorBoundary></main>
       <nav className="bottom-nav" aria-label={t('nav.main')}>
         {NAV.map(([key, label, Icon, href]) => (
           <a key={key} href={href} className={tab === key ? 'sel' : ''} aria-current={tab === key ? 'page' : undefined}>
@@ -299,7 +299,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
   const install = useInstallPrompt();
   const c = results?.counts;
   return (
-    <>
+    <div className="split"><div className="split-side">
       <section className="hero aurora" aria-label="State universities">
         <div>
           <span className="eyebrow">{t('paths.eyebrow')}</span>
@@ -327,6 +327,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
         <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
       </button>
+      </div><div className="split-main">
       <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
         {ROUTE_GROUPS.map(g => {
@@ -343,7 +344,7 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
       </Stagger>
       {install.canInstall && <button className="btn tonal" onClick={install.prompt}><Download size={18} aria-hidden="true" />{t('paths.install')}</button>}
       <p className="footer-note">{t('paths.footer')}</p>
-    </>
+    </div></div>
   );
 }
 
@@ -478,7 +479,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
   if (!d) return <><div className="skeleton" style={{ height: 220 }} /><div className="skeleton" /></>;
   const latest = d.groups[0]?.history.find(h => h.zE4 !== null) ?? d.groups[0]?.history[0];
   return (
-    <>
+    <div className="split"><div className="split-side">
       <section className="detail-hero aurora">
         <div className="row">
           {mine.map(o => <span key={o.group} className={`pill band-${o.band}`}>{bandLabel(o.band)}{mine.length > 1 ? ` (${o.group})` : ''}</span>)}
@@ -502,6 +503,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
             <Scale size={18} aria-hidden="true" />{compare.length ? (compare.length === 1 ? t('detail.compareOther') : t('detail.compareOthers', { n: compare.length })) : t('detail.compare')}</button>}
       {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
         {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.followingCourse')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.followCourse')}</>}</button>}
+      </div><div className="split-main">
       <section className="card stack" aria-labelledby="needs-h">
         <h2 id="needs-h" className="title-l">{t('detail.needs')}</h2>
         <div className="needs">{[...d.needs, ...d.olNeeds].map((line, i) => (
@@ -537,7 +539,7 @@ function DegreeDetails({ uniCode, profile, results, go, list, setList, compare, 
       ))}
       {d.otherRequirements && <div className="alert info"><Info size={20} aria-hidden="true" />{d.otherRequirements}</div>}
       <p className="footer-note">{t('detail.footer')}</p>
-    </>
+    </div></div>
   );
 }
 
