@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **dd209eea** (desktop layout). Rollback target 2b11af0d (code only).
+  Live (workers.dev) = version **709586ee** (desktop polish). Rollback target dd209eea (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -398,3 +398,7 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Wrangler was found on the salon account again before the deploy: stopped; Praveen logged out and in by hand (first attempt failed the OAuth state check because of an old login tab); whoami showed e6474e41 before the deploy.
 - Local demo login still fails (local rate limiter); the desktop look was checked by injecting the new CSS on live, then verified on live after the deploy (1440x900 Paths and course 081E; 390x844 Paths unchanged). 532 tests pass.
 - Also today: Kestrel #1 of the 15 Shark Tank finalists (buildathon 4.50); Shark Tank deck drafted (claude.ai artifact); judges' feedback summarised. Goal: top 3, grant not equity.
+
+## 2026-10-21: 709586ee LIVE (Praveen's GO): desktop polish
+- Full-width top bar: the ZedPath logo sits in the corner above the rail. Wider content (1040 px; Paths, course and Compare 1440 px); other-path tiles 2 across and larger so the Paths columns end level (Praveen: "looks emptier than it should be" on a 1870 px screen).
+- whoami e6474e41 before the deploy; verified live at 1871x900 (Paths) and 390x844 (phone unchanged).
