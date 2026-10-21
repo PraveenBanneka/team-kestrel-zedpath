@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **2b11af0d** (Compare + and multi-select fixes). Rollback target 97eab403 (code only).
+  Live (workers.dev) = version **dd209eea** (desktop layout). Rollback target 2b11af0d (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -392,3 +392,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Multi-select tip is now a tinted box with an icon and steps (en/si/ta). Compare takes up to 3: with more ticked the button is off and a line above the bar says so (it used to drop the rest silently). Selecting to add to My list stays unlimited.
 - Wrangler was found logged in to the salon account before the deploy: stopped; Praveen switched it back by hand; whoami showed e6474e41 before both deploys.
 - Live checks (demo login, 390x844): tip box shown; 4 ticked -> Compare disabled + message, buttons on one row; 2 ticked -> Compare -> "+" opens the picker -> Design added, column fully visible. 532 tests pass.
+
+## 2026-10-21: dd209eea LIVE (Praveen's GO): desktop layout
+- From 1024 px wide: the bottom bar becomes a side navigation rail; content 880 px (Paths, course page and Compare 1160 px); Paths and the course page split into a sticky summary column and a detail column. Below 1024 px nothing changes (split wrappers are display:contents; phone screenshots compared pixel by pixel).
+- Wrangler was found on the salon account again before the deploy: stopped; Praveen logged out and in by hand (first attempt failed the OAuth state check because of an old login tab); whoami showed e6474e41 before the deploy.
+- Local demo login still fails (local rate limiter); the desktop look was checked by injecting the new CSS on live, then verified on live after the deploy (1440x900 Paths and course 081E; 390x844 Paths unchanged). 532 tests pass.
+- Also today: Kestrel #1 of the 15 Shark Tank finalists (buildathon 4.50); Shark Tank deck drafted (claude.ai artifact); judges' feedback summarised. Goal: top 3, grant not equity.
