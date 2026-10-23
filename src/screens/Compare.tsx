@@ -27,8 +27,10 @@ function Spark({ history }: { history: OfferingDetail['groups'][number]['history
     <path d={d} fill="none" stroke="var(--brand-500)" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" /></svg>;
 }
 
-/** Search the student's own courses (Safe, Likely, Reach) and My list, to add one to the comparison. */
-function Picker({ codes, results, list, onPick }: { codes: string[]; results: ResultsResponse | null; list: ListEntry[]; onPick: (u: string) => void }) {
+/** Search the student's own courses (Safe, Likely, Reach) and My list, to add one to the comparison (also used by My list's
+ *  "+ Add a course", with no My list chips and its own heading). */
+export function Picker({ codes, results, list, onPick, title }: { codes: string[]; results: ResultsResponse | null; list: ListEntry[];
+  onPick: (u: string) => void; title?: string }) {
   const [q, setQ] = useState('');
   const box = useRef<HTMLElement>(null);
   useEffect(() => { box.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, []);
@@ -41,7 +43,7 @@ function Picker({ codes, results, list, onPick }: { codes: string[]; results: Re
   }, [results, codes, q]);
   return (
     <section ref={box} className="card stack" aria-labelledby="cmp-pick-h" style={{ scrollMarginTop: 72 }}>
-      <h2 id="cmp-pick-h" className="title-m">{t('cmp.pickH')}</h2>
+      <h2 id="cmp-pick-h" className="title-m">{title ?? t('cmp.pickH')}</h2>
       <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('cmp.search')} value={q} onChange={e => setQ(e.target.value)}
         aria-label={t('cmp.search')} enterKeyHint="search" /></label>
       {fromList.length > 0 && !q.trim() && (<>

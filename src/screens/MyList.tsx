@@ -5,13 +5,16 @@
 // Remove takes them off the list.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
+import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Plus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
 import { useHold } from '../hold.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
-import { COMPARE_MAX } from './Compare.tsx';
+import { COMPARE_MAX, Picker } from './Compare.tsx';
+import { useToast } from '../Toast.tsx';
+import { addedMessage } from '../list-feedback.ts';
+import { shortInstitution, titleCase } from '../format.ts';
 import { Tip } from '../Tip.tsx';
-import { LIST_MAX, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
+import { LIST_MAX, addManyToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
 import { t } from '../i18n/index.ts';
 import { Rich } from '../i18n/Rich.tsx';
 
@@ -59,6 +62,14 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
   const [picked, setPicked] = useState<string[] | null>(null);              // null = not choosing; else Uni-Codes in the order chosen
   const toggle = (u: string) => setPicked(p => p === null ? [u] : p.includes(u) ? p.filter(x => x !== u) : [...p, u]);
   const [copied, setCopied] = useState(false);
+  const [adding, setAdding] = useState(false);                              // the "+ Add a course" picker below the list
+  const [toast, showToast] = useToast();
+  const addOne = (u: string) => {                                           // same rules as Courses: eligible only, never twice, max 125
+    const o = results?.offerings.find(x => x.uniCode === u);
+    if (!o) return;
+    const r = addManyToList(list, [{ uniCode: o.uniCode, group: o.group, course: titleCase(o.course), institution: shortInstitution(o.institution), band: o.band }]);
+    setList(r.list); showToast(addedMessage(r));
+  };
   const shown = withCurrentBands(list, results);
   const warn = listWarnings(shown);
   const missing = results ? missingEligible(list, results.offerings) : null;
@@ -119,6 +130,11 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
           onMove={to => setList(move(list, i, to))} onRemove={() => setList(list.filter(x => x.uniCode !== e.uniCode))}
           selecting={picked !== null} selected={!!picked?.includes(e.uniCode)} onPick={() => toggle(e.uniCode)} />)}
       </Reorder.Group>
+      {list.length < LIST_MAX && picked === null && (
+        <button type="button" className={`add-slot list-add ${adding ? 'on' : ''}`} onClick={() => setAdding(a => !a)} aria-expanded={adding}>
+          <Plus size={22} aria-hidden="true" /><span>{t('list.add')}</span></button>)}
+      {adding && picked === null && <Picker codes={list.map(e => e.uniCode)} results={results} list={[]} title={t('list.pickH')} onPick={addOne} />}
+      {toast}
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
           {picked.length > COMPARE_MAX && <p className="sel-max" role="status">{t('sel.cmpMax', { n: COMPARE_MAX })}</p>}

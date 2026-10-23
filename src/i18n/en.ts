@@ -196,6 +196,7 @@ export const en = {
   'list.suggested': 'Suggested order', 'list.suggestedSub': 'Your Possible and Unlikely courses first, in your order; then your Very likely courses, in your order.',
   'list.use': 'Use this order', 'list.keep': 'Keep mine', 'list.stale': 'No longer eligible with your results',
   'list.removeAria': 'Remove {c}', 'list.reorderAria': 'Reorder {c}: drag, or use the arrow keys',
+  'list.add': 'Add a course', 'list.pickH': 'Add a course to your list',
   'list.more': '{n} more courses you can reach', 'list.moreOne': '1 more course you can reach',
   'list.moreSub': '{s} Very likely · {l} Possible · {r} Unlikely, not on your list yet. Adding more raises your chance of a place.',
   'list.compare': 'Compare courses', 'list.copy': 'Copy Uni-Codes in this order', 'list.copied': 'Copied {n} Uni-Codes',

@@ -27,6 +27,8 @@ import { GroupInfoScreen, GroupRoomScreen, GroupsScreen } from './screens/Groups
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { Tip } from './Tip.tsx';
+import { useToast } from './Toast.tsx';
+import { addedMessage } from './list-feedback.ts';
 import { SyllabusCard } from './screens/Syllabus.tsx';
 import { addManyToList, addToList, type ListEntry } from '../shared/list.ts';
 import { loadNotifyPrefs, saveNotifyPrefs, loadOwner, setOwner, clearStudentData, loadNavOpen, saveNavOpen } from './storage.ts';
@@ -359,14 +361,14 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
   const tabs: Band[] = ['SAFE', 'LIKELY', 'REACH'];
   const [query, setQuery] = useState('');
   const [picked, setPicked] = useState<string[] | null>(null);          // null = not selecting; else the Uni-Codes picked
-  const [note, setNote] = useState<string | null>(null);
+  const [toast, showToast] = useToast();
   const onList = (u: string) => list.some(e => e.uniCode === u);
   const toggle = (u: string) => setPicked(p => p === null ? [u] : p.includes(u) ? p.filter(x => x !== u) : [...p, u]);
   const addPicked = () => {
     const chosen = (picked ?? []).map(u => results?.offerings.find(o => o.uniCode === u)).filter(Boolean) as OfferingSummary[];
     const r = addManyToList(list, chosen.map(o => ({ uniCode: o.uniCode, group: o.group, course: titleCase(o.course), institution: shortInstitution(o.institution), band: o.band })));
     setList(r.list); setPicked(null);
-    setNote([r.added === 1 ? t('sel.addedOne') : t('sel.added', { n: r.added }), r.already ? t('sel.already', { n: r.already }) : '', r.full ? t('detail.err.FULL') : ''].filter(Boolean).join(' '));
+    showToast(addedMessage(r));
   };
   const searching = query.trim() !== '';
   // While searching, all three bands are searched at once (the band shows on each row's colour strip).
@@ -380,7 +382,7 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
         <p className="subtitle">{t('courses.sorted')}</p>
         <div className="row" style={{ gap: 4 }}>
           <button className="btn text" style={{ paddingLeft: 0 }} onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('courses.compare')}</button>
-          <button className="btn text" onClick={() => { setNote(null); setPicked(p => p === null ? [] : null); }} aria-pressed={picked !== null}>
+          <button className="btn text" onClick={() => setPicked(p => p === null ? [] : null)} aria-pressed={picked !== null}>
             <CheckCircle2 size={18} aria-hidden="true" />{picked === null ? t('sel.select') : t('sel.cancel')}</button>
         </div>
         {picked === null && results && <Tip text={t('sel.tip')} />}
@@ -396,13 +398,13 @@ function Courses({ results, band, go, list, setList, setCompare }: { results: Re
       </div>}
       {!searching && <p className="helper band-hint">{t(`bandHint.${band}` as Key)}</p>}
       {searching && results && <p className="helper" role="status">{t('courses.matches', { n: shown.length, q: query.trim() })}</p>}
-      {note && <p className="helper" role="status">{note} <button className="btn text small" onClick={() => go('/list')}>{t('sel.openList')}</button></p>}
+      {toast}
       {!results && <div className="stack">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
       {results && shown.length === 0 && <div className="card"><p className="subtitle">{searching ? t('courses.noSearch') : t('courses.noBand')}</p></div>}
       {shown.length > 0 && (
         <Stagger key={searching ? 'search' : band} className="list-card" role="tabpanel">
           {shown.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 14} onOpen={() => go(`/course/${o.uniCode}`)}
-            selecting={picked !== null} selected={!!picked?.includes(o.uniCode)} listed={onList(o.uniCode)} onPick={() => { setNote(null); toggle(o.uniCode); }} />)}
+            selecting={picked !== null} selected={!!picked?.includes(o.uniCode)} listed={onList(o.uniCode)} onPick={() => toggle(o.uniCode)} />)}
         </Stagger>)}
       {picked !== null && (
         <div className="select-bar" role="region" aria-label={t('sel.bar')}>
@@ -454,16 +456,18 @@ function CourseRow({ o, animate, onOpen, selecting = false, selected = false, li
 function AddToList({ d, mine, list, setList, go }: { d: OfferingDetail; mine: OfferingSummary[]; list: ListEntry[];
   setList: (l: ListEntry[]) => void; go: (to: string) => void }) {
   const [note, setNote] = useState<string | null>(null);
+  const [toast, showToast] = useToast();
   const onList = list.some(e => e.uniCode === d.uniCode);
   if (onList) return (
     <div className="row" style={{ flexWrap: 'nowrap' }}>
       <button className="btn tonal" style={{ flex: 1 }} onClick={() => go('/list')}><ListOrdered size={18} aria-hidden="true" />{t('detail.onList', { n: list.findIndex(e => e.uniCode === d.uniCode) + 1 })}</button>
       <button className="btn text" onClick={() => setList(list.filter(e => e.uniCode !== d.uniCode))}>{t('detail.remove')}</button>
+      {toast}
     </div>);
   const best = mine[0];                                     // FR-302: only offerings the results screen lists as eligible
   const add = () => {
     const r = addToList(list, { uniCode: d.uniCode, group: best?.group ?? 'ALL', course: titleCase(d.course), institution: shortInstitution(d.institution), band: best?.band ?? 'NOT_ENOUGH_DATA' }, !!best);
-    if (r.ok) { setList(r.list); setNote(null); }
+    if (r.ok) { setList(r.list); setNote(null); showToast(t('sel.addedOne')); }
     else setNote(t(`detail.err.${r.reason}`));
   };
   return (
