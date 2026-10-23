@@ -8,8 +8,8 @@ type Raw = { uniCode: string; degree: string; status: string; duration: string |
   years?: { label: string; modules: string[] }[]; sourceUrls?: string[]; notes?: string | null };
 
 /** Hosts that returned unsafe content during research (web research safety protocol, rule 5). Never linked anywhere:
- *  syllabi here, Ask citations (worker/ask.ts), and every data file (DAT-021/022). 23 Oct 2026: four more hosts. */
-export const BLOCKED_HOSTS = new Set(['dental.pdn.ac.lk', 'www.sliate.ac.lk', 'www.bit.lk', 'www.cma-srilanka.org', 'www.cipmlk.org']);
+ *  syllabi here, Ask citations (worker/ask.ts), and every data file (DAT-021/022). 23 Oct 2026: six more hosts. */
+export const BLOCKED_HOSTS = new Set(['dental.pdn.ac.lk', 'www.sliate.ac.lk', 'www.bit.lk', 'www.cma-srilanka.org', 'www.cipmlk.org', 'esoft.lk', 'www.esoft.lk']);
 const raw = data as { retrievedOn: string; programmes: Raw[] };
 
 export const SYLLABI = new Map<string, Syllabus>(raw.programmes

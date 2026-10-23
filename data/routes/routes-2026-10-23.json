@@ -131,12 +131,12 @@
    "intake_timing": "Via IFSLS: 11th intake applications closed 27.09.2026; interviews 15.10-19.11.2026; registration Jan-Feb 2027",
    "entry_requirements_text": "Three (3)‘S’ passes in any subject stream in one and the same sitting at the G.C.E.A/L Examination.",
    "districts_locations": null,
-   "official_url": "https://www.esoft.lk",
+   "official_url": null,
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.43, course code LICT14",
    "retrieved_on": "2026-10-23",
    "confidence": 0.9,
-   "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
+   "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations. The institute's own site is not linked (unsafe content found on 23 Oct 2026).",
    "id": "R007"
   },
   {

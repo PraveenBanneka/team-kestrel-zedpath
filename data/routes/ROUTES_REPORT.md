@@ -26,7 +26,7 @@ confirmed carry `retrieved_on` 2026-10-23; the app's "Checked against official s
 | R026 UCSC BIT | Facts kept as checked on 5 Oct 2026 (Praveen: keep what we had); programme site not linked; the button links UCSC's own BIT page | ucsc.cmb.ac.lk (5 Oct copy for the facts) |
 | R029 CMA Sri Lanka | Kept as checked on 5 Oct 2026, with no link (the only official site is not linked); pinned in DAT-030 | 5 Oct copy |
 
-Four hosts returned unsafe content and are now in `BLOCKED_HOSTS` (unsafe content, not linked). Ask ZedPath also refuses to
+Six hosts returned unsafe content and are now in `BLOCKED_HOSTS` (unsafe content, not linked). Ask ZedPath also refuses to
 link them (`safeUrl`, ASK-047). Not reachable as text and unchanged: R030 CIMA, R045 NCOE, R052 retry. To check next:
 the DTET academic-year-2027 Gazette (expected around November), the October Gazette (IIA) issues, IFSLS selection results after
 19.11.2026, and a NAITA AETI 2027 apprentice notice seen only in a search snippet.
@@ -44,7 +44,7 @@ were read by the main session from the Ministry's Section 25A register (exact wo
 | Professional bodies | 7 (ACCA, ACCA FIA, SLIM PGDip and PCM, IBSL DBF and CBF, CIMA Cert BA) | CA's BSc in Applied Accounting is under private degrees (it is on the register) |
 
 Left out, with reasons: AOD (its site failed a secure connection), ANC (only a .com site that could not be confirmed as its own),
-ESOFT's foreign degrees (its course page carried a file-upload form; held for Praveen's decision), CIPM (unsafe content).
+ESOFT's foreign degrees and CIPM (unsafe content, not linked; the ESOFT loan course keeps its handbook source without a site link).
 Most institutes publish no total fees or dated intakes; those fields are null and the screen says so.
 
 The sections below describe the original research of 5 October 2026.
