@@ -8,6 +8,31 @@ Files in this folder:
 - `sources_manifest.csv`: URL, retrieval date, SHA-256, bytes and the route groups that use each file.
 - `build.py`, `verify.py`, `manifest.py`: scripts to rebuild the outputs and check them again.
 
+## Refresh of 23 October 2026 (current file: `routes-2026-10-23.json`, 51 records)
+
+Every record was re-checked against its official source on 23 October 2026 by four research agents under the web research
+safety protocol, and every change below was spot-checked by the main session on the official page. Records re-checked and
+confirmed carry `retrieved_on` 2026-10-23; the app's "Checked against official sources on ..." line shows the latest date in each group.
+
+| Record | Change | Official source |
+|---|---|---|
+| R002 Section 25A register | Now 34 institutes and 308 programmes (was read as 22 and 307); footer "Last Update: 23 October 2026." BMS, Lyceum, SLITA and Gateway are on the register | mohe.gov.lk register page |
+| R023 OUSL Software Engineering | Closes 7 November 2026 (was 15 November); open now; awareness sessions 1 Nov 10:00 AM and 7 Nov 7:00 PM. New Alert | ou.ac.lk programme page (last updated 18 Oct 2026) |
+| R027 ITUM NDT | Closed 19.10.2026, no extension; Gazette No. 2507 of 18.09.2026 | itum.mrt.ac.lk |
+| R040, R041 NAITA IETI | Closing date 15.10.2026 has passed (no extension found; NAITA pages are JavaScript-only) | Gazette 18.09.2026 |
+| R043 Customs Inspector | Closing date 12.10.2026 has passed; exam date in December not yet published | Gazette 11.09.2026; doenets October calendar |
+| R047 India | Programme is ICCR; from 2027/2028 a valid IELTS (6.0+) or TOEFL (B2+) certificate is mandatory | mohe.gov.lk Ministry notice (PDF, read as text) |
+| R018 to R022 SLIATE | Same facts; links moved to apply.sliate.ac.lk | apply.sliate.ac.lk |
+| R026 UCSC BIT | Linked to UCSC's own page; requirements, fees and dates withdrawn until they can be re-checked on a safe official page | ucsc.cmb.ac.lk |
+| R029 CMA Sri Lanka | Withdrawn until a safe official source can be checked | none |
+
+Four hosts returned unsafe content and are now in `BLOCKED_HOSTS` (unsafe content, not linked). Ask ZedPath also refuses to
+link them (`safeUrl`, ASK-047). Not reachable as text and unchanged: R030 CIMA, R045 NCOE, R052 retry. To check next:
+the DTET academic-year-2027 Gazette (expected around November), the October Gazette (IIA) issues, IFSLS selection results after
+19.11.2026, and a NAITA AETI 2027 apprentice notice seen only in a search snippet.
+
+The sections below describe the original research of 5 October 2026.
+
 Every fact comes from a government or institution site. No blogs, tuition sites, news sites or competitor apps were used.
 
 `verify.py` checks every `entry_requirements_text` against the saved source text, ignoring whitespace and quote style. Fifty-one of the 52 records match word for word.

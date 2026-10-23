@@ -6,6 +6,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } 
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
 import { DEVICE_PER_DAY, IP_PER_DAY, MODELS, finish, safeUrl, usableReply } from './ask.ts';
+import { BLOCKED_HOSTS } from './syllabi.ts';
 import { HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import { layoutAnswer } from '../shared/answer.ts';
 import { askSuggestions } from '../src/ask-suggest.ts';
@@ -171,6 +172,15 @@ describe('citations and source links', () => {
   });
   it('ASK-028 safeUrl does NOT enforce official domains (pinned current behaviour; domain trust comes from the verified route data)', () => {
     expect(safeUrl('https://example.com/x')).toBe('https://example.com/x');
+  });
+  it('ASK-047 safeUrl never links a host that returned unsafe content, even from an older index entry (23 Oct 2026)', () => {
+    expect(BLOCKED_HOSTS.size).toBeGreaterThanOrEqual(4);
+    for (const h of BLOCKED_HOSTS) {
+      expect(safeUrl(`https://${h}/any/page.pdf`)).toBeNull();
+      expect(safeUrl(`https://${h.toUpperCase()}/`)).toBeNull();
+      const old: CorpusPassage = { id: 'route-NOPE', kind: 'ROUTE', source: 'notes', page: null, url: `https://${h}/x`, text: 'x' };
+      expect(finish('A [1].', [old]).citations[0].url).toBeNull();
+    }
   });
   it('ASK-029 provider names in the answer are replaced by Ask ZedPath', () => {
     expect(finish('I am GEMINI, developed by Google. Yes [1].', ps).answer).toBe('I am Ask ZedPath, part of ZedPath. Yes [1].');

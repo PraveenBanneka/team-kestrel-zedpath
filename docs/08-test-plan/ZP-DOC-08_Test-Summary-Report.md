@@ -96,6 +96,7 @@ Table: Automated suite on 21 October 2026 (after VR3)
 | Check | Result |
 |---|---|
 | `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
+| Other paths refreshed, 23 October | 39 files; 574 tests: **553 passed, 0 failed**; TC-143 (`worker/routes-free.test.ts`, 2), OUSL alert (TC-106), blocked hosts never linked by Ask (ASK-047) |
 | CR-012 revised, 23 October | 38 files; 570 tests: **549 passed, 0 failed**; `src/apply.test.ts` now 6 |
 | CR-012, 23 October | 38 files (37 passed, 1 opt-in skipped); 568 tests: **547 passed, 0 failed**; new `src/apply.test.ts` (4), TC-142 |
 | CR-011, 23 October | 37 files (36 passed, 1 opt-in skipped); 564 tests: **543 passed, 0 failed**; new `src/list-guide.test.ts` (4), TC-141 |

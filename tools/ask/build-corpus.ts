@@ -58,7 +58,7 @@ for (let p = 1; p <= doc.numPages; p++) {
   split(text).forEach((t, n) => passages.push({ id: `hb-${printed}-${n}`, kind: 'HANDBOOK', source: 'UGC handbook 2025/26', page: printed, url: null, text: t }));
 }
 
-const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-05.json'), 'utf8')) as {
+const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json'), 'utf8')) as {
   routes: { id: string; route_group: string; name: string; provider: string; duration: string | null; intake_timing: string | null;
     entry_requirements_text: string; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
 };

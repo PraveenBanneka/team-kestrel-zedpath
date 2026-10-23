@@ -33,10 +33,10 @@ type Step = { id: string; kind: string; title: string; detail: string; when: str
 type Programme = { uniCode: string; degree: string; university: string; status: string; duration: string | null;
   years?: { label: string; modules: string[] }[]; sourceUrls?: string[]; notes?: string | null };
 
-const routesFile = json('data/routes/routes-2026-10-05.json') as { retrievedOn: string; routes: Route[] };
+const routesFile = json('data/routes/routes-2026-10-23.json') as { retrievedOn: string; routes: Route[] };
 const ROUTES = routesFile.routes;
 const stepsFile = json('data/journey/ugc-steps-2025-2026.json') as { academicYear: string; steps: Step[] };
-const noticesFile = json('data/alerts/notices-2026-10-11.json') as { retrievedOn: string; notices: Notice[] };
+const noticesFile = json('data/alerts/notices-2026-10-23.json') as { retrievedOn: string; notices: Notice[] };
 const syllabiFile = json('data/degrees/syllabi-2026-10-05.json') as { retrievedOn: string; programmes: Programme[] };
 const JOURNEY = json('worker/generated/journey-2025-2026.json') as { academicYear: string; steps: Step[]; notices: Notice[]; builtAt: string };
 const RB = json('worker/generated/rulebook-2025-2026.json') as {

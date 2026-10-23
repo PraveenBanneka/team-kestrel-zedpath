@@ -9,6 +9,7 @@ import { formatZ } from '../shared/banding.ts';
 import { EMBED_MODEL, HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskAction, type AskCitation, type AskFeedback, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import journey from './generated/journey-2025-2026.json' with { type: 'json' };
 import { assessOffering, book, districtIndex, parseProfile } from './rulebook.ts';
+import { BLOCKED_HOSTS } from './syllabi.ts';
 import { crossSite, ipBucket, parseExtras } from './account.ts';
 import { specialIntakeHint, type Extras } from '../shared/account.ts';
 
@@ -163,10 +164,14 @@ export function finish(raw: string, passages: CorpusPassage[]): { answer: string
   return { answer, citations: cited.map(toCitation) };
 }
 
-/** An https link with spaces and brackets escaped (some Gazette file names have them), or null. */
+/** An https link with spaces and brackets escaped (some Gazette file names have them), or null. Never a host that
+ *  returned unsafe content during research: the search index may still hold an older link to one (23 Oct 2026). */
 export function safeUrl(u: string | null | undefined): string | null {
   if (!u) return null;
-  try { const url = new URL(u.trim()); return url.protocol === 'https:' ? encodeURI(decodeURI(url.href)) : null; } catch { return null; }
+  try {
+    const url = new URL(u.trim());
+    return url.protocol === 'https:' && !BLOCKED_HOSTS.has(url.hostname.toLowerCase()) ? encodeURI(decodeURI(url.href)) : null;
+  } catch { return null; }
 }
 
 /** Video 2 (Praveen 2026-10-11): achievements and interests ("beyond grades") make answers personal. Plain facts for

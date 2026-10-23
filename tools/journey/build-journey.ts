@@ -13,8 +13,8 @@ import type { JourneyResponse, JourneyStep, Notice } from '../../shared/journey.
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const read = (p: string) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const stepsFile = read('data/journey/ugc-steps-2025-2026.json') as { academicYear: string; steps: JourneyStep[] };
-const noticesFile = read('data/alerts/notices-2026-10-11.json') as { retrievedOn: string; notices: Omit<Notice, 'provider' | 'sourceLocator' | 'sourceUrl' | 'officialUrl' | 'retrievedOn'>[] };
-const routes = (read('data/routes/routes-2026-10-05.json') as { routes: Record<string, string | null>[] }).routes;
+const noticesFile = read('data/alerts/notices-2026-10-23.json') as { retrievedOn: string; notices: Omit<Notice, 'provider' | 'sourceLocator' | 'sourceUrl' | 'officialUrl' | 'retrievedOn'>[] };
+const routes = (read('data/routes/routes-2026-10-23.json') as { routes: Record<string, string | null>[] }).routes;
 const CORPUS = path.join(ROOT, 'data', 'ask', 'corpus.json');
 
 const problems: string[] = [];

@@ -50,7 +50,14 @@ describe('checkNotice (eligibility, on the phone)', () => {
   });
   it('sorts open ones by closing date first, closed ones last', () => {
     const xs = J.notices.map(n => ({ n, c: checkNotice(n, PHYS, null, '2026-10-11') }));
-    expect(sortNotices(xs).map(x => x.n.routeId)).toEqual(['R043', 'R040', 'R041', 'R027', 'R044']);
+    expect(sortNotices(xs).map(x => x.n.routeId)).toEqual(['R043', 'R040', 'R041', 'R027', 'R023', 'R044']);
+  });
+  it('OUSL Software Engineering (refresh of 23 Oct): upcoming before 15 Oct, open to 7 Nov, needs 3 A/L passes and no age rule', () => {
+    const ousl = J.notices.find(n => n.routeId === 'R023')!;
+    expect([ousl.opensOn, ousl.closesOn, ousl.age]).toEqual(['2026-10-15', '2026-11-07', null]);
+    expect(checkNotice(ousl, PHYS, null, '2026-10-11').status).toBe('UPCOMING');
+    expect(checkNotice(ousl, PHYS, null, '2026-10-23')).toMatchObject({ status: 'OPEN', al: 'MEETS', age: 'NOT_NEEDED', forYou: true });
+    expect(checkNotice(ousl, PHYS, null, '2026-11-08').status).toBe('CLOSED');
   });
 });
 

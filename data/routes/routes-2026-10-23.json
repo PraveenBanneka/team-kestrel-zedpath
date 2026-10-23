@@ -1,5 +1,5 @@
 {
- "retrievedOn": "2026-10-05",
+ "retrievedOn": "2026-10-23",
  "routes": [
   {
    "route_group": "PRIVATE_DEGREE",
@@ -15,7 +15,7 @@
    "official_url": "https://studentloans.mohe.gov.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Student Handbook IFSLS, Section 1.2 (p.5), 1.3-1.7 (pp.6-13); timing from sources/ifsl_faq.html and sources/ifsl_home.html; handbook link page sources/ifsl_guidebook.html; division functions sources/mohe_student_loan_division.html; conflicting older page sources/mohe_loan_overview.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.95,
    "notes": "Approved institutes for 11th intake: Handbook section 1.4 lists 17 (SLIIT [Malabe, Matara, Kandy, Jaffna], NSBM, CINEC, SIBA, ICASL, HORIZON, KIU, SLTC, SAEGIS, ESOFT, ICHEM, ICBT [Colombo, Kandy], BCI, NIIBS, BMS, LYC, SLITA). CONFLICT: the FAQ page says 'sixteen approved' NSHEIs (its table omits SLITA); the MOHE 'Overview of Student Loan' page says 16 but lists 18 (adds Gateway College) and still cites A/L 2022-2024 (outdated). Students pay only the scheme course fee stated in the handbook, plus their own repeat-exam and bridging-course costs. Must get at least C for every compulsory subject and 80% attendance. No household-income eligibility condition was found in the official handbook or FAQ. Next intake (12th) dates not published as of retrieval.",
    "id": "R001"
@@ -33,10 +33,10 @@
    "districts_locations": null,
    "official_url": "https://www.mohe.gov.lk/index.php?option=com_content&view=article&id=352&Itemid=336&lang=en",
    "source_url": "https://www.mohe.gov.lk/index.php?option=com_content&view=article&id=352&Itemid=336&lang=en",
-   "source_locator": "Table 'Recognized Degree Awarding Institutes & Degree Programs (Under the Section 25A of Universities Act No. 16, 1978)'; page footer 'Last Update: 25 September 2026'",
-   "retrieved_on": "2026-10-05",
+   "source_locator": "Table 'Recognized Degree Awarding Institutes & Degree Programs (Under the Section 25A of Universities Act No. 16, 1978)'; page footer 'Last Update: 23 October 2026.'",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
-   "notes": "22 institutes listed (total 307 degree programmes): 1 Institute of Surveying and Mapping; 2 SLIIT (64); 3 Sri Lanka Institute of Development Administration; 4 National Institute of Social Development; 5 Aquinas College of Higher Studies; 6 SAITM (legacy listing); 7 NSBM (42); 8 CINEC Campus (39); 9 Sri Lanka International Buddhist Academy; 10 The Institute of Chartered Accountants of Sri Lanka; 11 SANASA Campus; 12 Horizon College of Business & Technology; 13 KIU Campus; 14 Nagananda International Institute for Buddhist Studies; 15 Sri Lanka Technology Campus; 16 Sri Lanka Institute of Nanotechnology; 17 Saegis Campus; 18 Esoft Uni; 19 Institute of Chemistry Ceylon; 20 International College of Business Technology; 21 Benedict XVI Catholic International Institute of Higher Education; 22 Royal Institute Campus. Also lists approved branches (ICBT Kandy; SLIIT Kandy, Jaffna, Matara) and lateral-entry-only programmes. Use this as the whitelist: a private degree should only be shown as 'Ministry-recognised' if the exact programme appears here. Foreign-affiliated degrees are NOT on this list. BMS, Lyceum, SLITA and Gateway appear in IFSLS lists but not in this Section 25A table as parsed - verify before labelling them.",
+   "notes": "34 institutes listed (total 308 degree programmes): 1 Institute of Surveying and Mapping; 2 SLIIT (64); 3 Sri Lanka Institute of Development Administration; 4 National Institute of Social Development; 5 Aquinas College of Higher Studies; 6 SAITM (legacy listing); 7 NSBM (42); 8 CINEC Campus (39); 9 Sri Lanka International Buddhist Academy; 10 The Institute of Chartered Accountants of Sri Lanka; 11 SANASA Campus; 12 Horizon College of Business & Technology; 13 KIU Campus; 14 Nagananda International Institute for Buddhist Studies; 15 Sri Lanka Technology Campus; 16 Sri Lanka Institute of Nanotechnology; 17 Saegis Campus; 18 Esoft Uni; 19 Institute of Chemistry Ceylon; 20 International College of Business Technology; 21 Benedict XVI Catholic International Institute of Higher Education; 22 Royal Institute Campus; 23 Business Management School; 24 International Institute of Health Science; 25 Lanka Nippon BizTech Institute; 26 Gateway College; 27 The Lyceum Campus; 28 British School of Commerce; 29 Sri Lanka Institute of Tourism and Hotel Management; 30 Sri Lanka Institute of Textile and Apparel; 31 The American College of Higher Education; 32 Asia Pacific Institute of Information Technology Lanka; 33 Informatics Institute of Technology (IIT); 34 Institute for Science, Technology, Engineering and Management. Also lists approved branches (ICBT Kandy; SLIIT Kandy, Jaffna, Matara) and lateral-entry-only programmes. Use this as the whitelist: a private degree should only be shown as 'Ministry-recognised' if the exact programme appears here. Foreign-affiliated degrees are NOT on this list.",
    "id": "R002"
   },
   {
@@ -58,7 +58,7 @@
    "official_url": "https://www.sliit.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.37-38, course code AICT01",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Requirement text in the source table spans a page break and is shared (merged cell) with the Kandy/Matara/Jaffna rows. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R003"
@@ -77,7 +77,7 @@
    "official_url": "https://www.nsbm.ac.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.38, course code BICT10",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R004"
@@ -96,7 +96,7 @@
    "official_url": "https://www.horizoncampus.edu.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.40, course code GICT05",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R005"
@@ -115,7 +115,7 @@
    "official_url": "https://www.saegis.ac.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.41, course code JICT07",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R006"
@@ -134,7 +134,7 @@
    "official_url": "https://www.esoft.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Information and Communication Technology) table, p.43, course code LICT14",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R007"
@@ -158,7 +158,7 @@
    "official_url": "https://www.sliit.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Management and Commerce) table, p.20, course code ACOM01",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Requirement text in the source table spans a page break and is shared (merged cell) with the Kandy/Matara/Jaffna rows. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R008"
@@ -177,7 +177,7 @@
    "official_url": "https://www.casrilanka.com",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Management and Commerce) table, p.22, course code CCOM03",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R009"
@@ -196,7 +196,7 @@
    "official_url": "https://www.nsbm.ac.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Management and Commerce) table, p.21, course code BCOM17",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R010"
@@ -215,7 +215,7 @@
    "official_url": "https://kiu.ac.lk/",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Management and Commerce) table, p.26, course code HCOM15",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R011"
@@ -234,7 +234,7 @@
    "official_url": "https://www.sliit.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Engineering & Technology) table, p.33, course code AENG22",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Engineering programmes: requirement cell is shared with adjacent engineering rows of the same institute. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R012"
@@ -253,7 +253,7 @@
    "official_url": "https://www.cinec.edu",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Engineering & Technology) table, p.35, course code DENG16",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Engineering programmes: requirement cell is shared with adjacent engineering rows of the same institute. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R013"
@@ -272,7 +272,7 @@
    "official_url": "https://www.sltc.ac.lk",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Engineering & Technology) table, p.35, course code IENG08",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Engineering programmes: requirement cell is shared with adjacent engineering rows of the same institute. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R014"
@@ -291,7 +291,7 @@
    "official_url": "https://kiu.ac.lk/",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Science) table, p.32, course code HBIO02",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R015"
@@ -310,7 +310,7 @@
    "official_url": "https://www.cinec.edu",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Science) table, p.32, course code DBIO06",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R016"
@@ -329,7 +329,7 @@
    "official_url": "https://www.cinec.edu",
    "source_url": "https://studentloans.mohe.gov.lk/loan_application/asset/documents/student_guide_book_english.pdf",
    "source_locator": "Handbook Section 2.3 (Science) table, p.31, course code DBIO14",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Entry text is the minimum for selection under IFSLS 2026/27; general scheme conditions also apply. Location of delivery is not stated in the handbook unless shown in districts_locations.",
    "id": "R017"
@@ -364,10 +364,10 @@
     "Trincomalee",
     "Vavuniya"
    ],
-   "official_url": "https://www.sliate.ac.lk/",
-   "source_url": "https://www.sliate.ac.lk/attachments/article/466/Guideline%20to%20apply%20for%20SLIATE%20programmes%202026%20(1).pdf",
-   "source_locator": "SLIATE Admission guideline Academic Year 2026, p.4-6 (ATI table), p.6-7 (duration), p.9-10 (HNDIT criteria); call notice sources/sliate_notice_new_admissions.html; deadline extensions: sources/sliate_deadline_extended.html, sources/sliate_closing_extended.html",
-   "retrieved_on": "2026-10-05",
+   "official_url": "https://apply.sliate.ac.lk/",
+   "source_url": "https://apply.sliate.ac.lk/",
+   "source_locator": "SLIATE admission notice on apply.sliate.ac.lk ('Applications received after the closing date 23rd August 2026 will not be entertained'); Admission guideline Academic Year 2026, p.4-6 (ATI table), p.6-7 (duration), p.9-10 (HNDIT criteria)",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Cost 0 = full-time programme fee (application fee Rs.1000 separate). Medium of instruction English. Minimum 50 registrations needed to start a programme at an ATI. ",
    "id": "R018"
@@ -400,10 +400,10 @@
     "Trincomalee",
     "Vavuniya"
    ],
-   "official_url": "https://www.sliate.ac.lk/",
-   "source_url": "https://www.sliate.ac.lk/attachments/article/466/Guideline%20to%20apply%20for%20SLIATE%20programmes%202026%20(1).pdf",
-   "source_locator": "SLIATE Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.16 (HNDA criteria), p.21 (Category I = Z-score); call notice sources/sliate_notice_new_admissions.html; deadline extensions: sources/sliate_deadline_extended.html, sources/sliate_closing_extended.html",
-   "retrieved_on": "2026-10-05",
+   "official_url": "https://apply.sliate.ac.lk/",
+   "source_url": "https://apply.sliate.ac.lk/",
+   "source_locator": "SLIATE admission notice on apply.sliate.ac.lk ('Applications received after the closing date 23rd August 2026 will not be entertained'); Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.16 (HNDA criteria), p.21 (Category I = Z-score)",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Cost 0 = full-time programme fee (application fee Rs.1000 separate). Medium of instruction English. Minimum 50 registrations needed to start a programme at an ATI. Full-time HND of 3 years or more: registered students become ineligible for state university admission under the Universities Act (guideline p.17-18) and for IFSLS.",
    "id": "R019"
@@ -423,10 +423,10 @@
     "Galle",
     "Jaffna"
    ],
-   "official_url": "https://www.sliate.ac.lk/",
-   "source_url": "https://www.sliate.ac.lk/attachments/article/466/Guideline%20to%20apply%20for%20SLIATE%20programmes%202026%20(1).pdf",
-   "source_locator": "SLIATE Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.15 (HND Engineering criteria); call notice sources/sliate_notice_new_admissions.html; deadline extensions: sources/sliate_deadline_extended.html, sources/sliate_closing_extended.html",
-   "retrieved_on": "2026-10-05",
+   "official_url": "https://apply.sliate.ac.lk/",
+   "source_url": "https://apply.sliate.ac.lk/",
+   "source_locator": "SLIATE admission notice on apply.sliate.ac.lk ('Applications received after the closing date 23rd August 2026 will not be entertained'); Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.15 (HND Engineering criteria)",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Cost 0 = full-time programme fee (application fee Rs.1000 separate). Medium of instruction English. Minimum 50 registrations needed to start a programme at an ATI. Full-time HND of 3 years or more: registered students become ineligible for state university admission under the Universities Act (guideline p.17-18) and for IFSLS.",
    "id": "R020"
@@ -451,10 +451,10 @@
     "Kurunegala",
     "Nawalapitiya"
    ],
-   "official_url": "https://www.sliate.ac.lk/",
-   "source_url": "https://www.sliate.ac.lk/attachments/article/466/Guideline%20to%20apply%20for%20SLIATE%20programmes%202026%20(1).pdf",
-   "source_locator": "SLIATE Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.12 (HNDM criteria); call notice sources/sliate_notice_new_admissions.html; deadline extensions: sources/sliate_deadline_extended.html, sources/sliate_closing_extended.html",
-   "retrieved_on": "2026-10-05",
+   "official_url": "https://apply.sliate.ac.lk/",
+   "source_url": "https://apply.sliate.ac.lk/",
+   "source_locator": "SLIATE admission notice on apply.sliate.ac.lk ('Applications received after the closing date 23rd August 2026 will not be entertained'); Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.12 (HNDM criteria)",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Cost 0 = full-time programme fee (application fee Rs.1000 separate). Medium of instruction English. Minimum 50 registrations needed to start a programme at an ATI. Full-time HND of 3 years or more: registered students become ineligible for state university admission under the Universities Act (guideline p.17-18) and for IFSLS.",
    "id": "R021"
@@ -474,10 +474,10 @@
     "Galle",
     "Kandy"
    ],
-   "official_url": "https://www.sliate.ac.lk/",
-   "source_url": "https://www.sliate.ac.lk/attachments/article/466/Guideline%20to%20apply%20for%20SLIATE%20programmes%202026%20(1).pdf",
-   "source_locator": "SLIATE Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.15-16 (HNDBA/HNDBF criteria); call notice sources/sliate_notice_new_admissions.html; deadline extensions: sources/sliate_deadline_extended.html, sources/sliate_closing_extended.html",
-   "retrieved_on": "2026-10-05",
+   "official_url": "https://apply.sliate.ac.lk/",
+   "source_url": "https://apply.sliate.ac.lk/",
+   "source_locator": "SLIATE admission notice on apply.sliate.ac.lk ('Applications received after the closing date 23rd August 2026 will not be entertained'); Admission guideline Academic Year 2026, p.4-6, p.6 (duration), p.15-16 (HNDBA/HNDBF criteria)",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Cost 0 = full-time programme fee (application fee Rs.1000 separate). Medium of instruction English. Minimum 50 registrations needed to start a programme at an ATI. ",
    "id": "R022"
@@ -490,15 +490,15 @@
    "duration": "Minimum 4 years (maximum 12 years)",
    "cost_min_lkr": null,
    "cost_max_lkr": 660000,
-   "intake_timing": "Academic year 2026/2027: application issuance 15 October to 15 November 2026 (online). Awareness sessions 1 Nov and 15 Nov 2026.",
+   "intake_timing": "Academic year 2026/2027: applications issued online from 15 October 2026 to 7 November 2026 (OPEN at retrieval). Online awareness sessions: 1 November 2026 10:00 AM and 7 November 2026 7:00 PM.",
    "entry_requirements_text": "The lowest level of entry to the programme is at SLQF L3. Thus, the entry qualification will be as follows: Passes in any three subjects at the General Certificate of Education (Advanced Level) excluding General English and General Information Technology subjects, OR Minimum “D” passes in any 3 subjects in Cambridge/Edexcel Advanced Level examination, OR Pass the Advanced Certificate programme in Science or Apparel Technology or Entrepreneurship and Small Business Management offered from OUSL, OR Any other equivalent or higher qualification acceptable to the Senate. AND Passing the Selection Test",
    "districts_locations": [
     "Delivered mostly online; final examinations and some activities at OUSL regional centres"
    ],
    "official_url": "https://ou.ac.lk",
    "source_url": "https://ou.ac.lk/programme/bachelor-of-software-engineering-honours/",
-   "source_locator": "Programme page: header (Duration/Course Fee/Issuing of Applications), 'Admission', 'Application', 'Finance', FAQ",
-   "retrieved_on": "2026-10-05",
+   "source_locator": "Programme page (last updated October 18, 2026): header 'Issuing of Applications : October 15, 2026' / 'Closing Date for Applications : November 7, 2026', awareness-session times, 'Admission', 'Application', 'Finance', FAQ",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.8,
    "notes": "CONFLICT (internal to page): header says course fee 'LKR 660,000 (Approx.)'; Finance says LKR 4190 per credit and 'to graduate a student must pass 125 credits'; FAQ says the programme 'consists of 90 SLQF credits'. Show the fee as approximate only. OUSL admission is independent of UGC; registering at OUSL does not block UGC/ITUM admission (ITUM NDT notice explicitly exempts OUSL).",
    "id": "R023"
@@ -517,7 +517,7 @@
    "official_url": "https://ou.ac.lk",
    "source_url": "https://ou.ac.lk/programme/bscit/",
    "source_locator": "Programme page header, 'Admission', 'Finance' sections",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "CONFLICT: header says LKR 3010 per credit; the Finance section (written for academic year 2023/24) computes with LKR 2870 per credit. Page 'Last updated: September 17, 2026'. Because A/L passes may be in any number of sittings, this is open to students who did not pass all three subjects in one sitting.",
    "id": "R024"
@@ -536,7 +536,7 @@
    "official_url": "https://ou.ac.lk",
    "source_url": "https://ou.ac.lk/programme/bachelor-of-management-studies-honours-2/",
    "source_locator": "Programme page header, 'Admission', 'Application', 'Finance'",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "Fee shown is the page's approximate figure; foreign-student rates also listed in USD.",
    "id": "R025"
@@ -546,18 +546,18 @@
    "name": "Bachelor of Information Technology (BIT) external degree - University of Colombo School of Computing",
    "provider": "University of Colombo School of Computing (UCSC), External Degrees Centre",
    "provider_type": "state university external degree",
-   "duration": "Three academic levels (Level I-III); each level must be completed within three (3) years from initial registration for that level",
-   "cost_min_lkr": 50000,
+   "duration": null,
+   "cost_min_lkr": null,
    "cost_max_lkr": null,
-   "intake_timing": "'Calling of applications for the BIT degree programme will be published in the BIT website and social media annually.' Specific 2027 dates not found.",
-   "entry_requirements_text": "The following admission requirements will be effective for Academic Year 2025. No person may be registered as a candidate for the Examinations leading to the Degree unless he/she satisfies (A) and (B) below: (A) he/she has obtained three passes in the Local G.C.E. Advanced Level Examination (New Syllabus) in one sitting or four passes in the Local G.C.E. Advanced Level Examination (Old Syllabus) in one sitting; OR has obtained a minimum of three passes in the Cambridge/Pearson Edexcel International Advanced Level Examination in one sitting; OR has passed all the theoretical components of the Foundation in Information Technology (FIT) Programme conducted by the UCSC; OR has obtained the Higher National Diploma in Information Technology (HNDIT) where the certificate must be issued and verified by the Sri Lanka Institute of Advanced Technological Education (SLIATE); OR has obtained the NVQ-Level 5 or above qualification in IT where the certificate must be issued and verified by the Tertiary and Vocational Education Commission (TVEC); OR has obtained any other educational qualification deemed equivalent to the qualification referred to in paragraphs A (i) to (v) above by the Senate on the recommendation of the Academic Syndicate of the UCSC. AND (B) he/she has obtained at least six passes in G.C.E. Ordinary Level Examination with three Credits including for Mathematics and English; OR has obtained at least six passes in Cambridge/Pearson Edexcel International O Level Examination with three Credits including for Mathematics and English; OR has obtained any other educational qualification deemed equivalent to the qualification referred to in paragraphs (B) (i) and (ii) above by the Senate on the recommendation of the Academic Syndicate of the UCSC.",
+   "intake_timing": null,
+   "entry_requirements_text": "BIT is the Bachelor of Information Technology degree programme introduced by the University of Colombo School of Computing, offered in the external mode and awarded by the University of Colombo. Admission requirements, fees and application dates were not published on UCSC's own page when checked; ask UCSC before applying.",
    "districts_locations": null,
-   "official_url": "https://www.bit.lk",
-   "source_url": "https://www.bit.lk/registration/admission-requirements/",
-   "source_locator": "Admission Requirements page; fees from sources/ucsc_bit_fees.html; process from sources/ucsc_bit_how_to_apply.html; duration rule from sources/ucsc_bit_duration.html",
-   "retrieved_on": "2026-10-05",
-   "confidence": 0.85,
-   "notes": "Requirement text says 'effective for Academic Year 2025'; confirm for the 2027 call. Placed in DIPLOMA group as a non-UGC-selection state alternative (external degree), not a professional body.",
+   "official_url": "https://ucsc.cmb.ac.lk/external-degree/",
+   "source_url": "https://ucsc.cmb.ac.lk/external-degree/",
+   "source_locator": "UCSC 'External Degree (BIT)' page",
+   "retrieved_on": "2026-10-23",
+   "confidence": 0.5,
+   "notes": "The programme's separate website returned unsafe content on 23 Oct 2026 and is not linked. Requirements, fees and dates are withheld until they can be checked on a safe official page. Placed in DIPLOMA group as a non-UGC-selection state alternative (external degree), not a professional body.",
    "id": "R026"
   },
   {
@@ -568,15 +568,15 @@
    "duration": "3 years full time (two years academic study + one year industrial training), English medium",
    "cost_min_lkr": null,
    "cost_max_lkr": null,
-   "intake_timing": "Gazette Part I Sec IIA of 18.09.2026: online application + hard copy by registered post; CLOSING DATE 19.10.2026 (OPEN at retrieval). Shortlisted applicants sit an aptitude test.",
+   "intake_timing": "Gazette Part I Sec IIA of 18.09.2026: online application + hard copy by registered post; CLOSING DATE 19.10.2026 (CLOSED; ITUM: applications received from 18.09.2026 to 19.10.2026 will only be considered). Shortlisted applicants sit an aptitude test.",
    "entry_requirements_text": "2.1.1. Applicants should be below 24 years of age on 31.12.2025. 2.1.2. Applicants below 20 years of age on 31.12.2025 will be given preference for admission to the Marine Engineering Technology and Nautical Studies Courses. ... 2.1.3. Those who are registered as full time students of any University under the UGC (except the Open University of Sri Lanka) or Higher Educational Institute under the Ministry of Higher Education are not eligible to apply for this course. ... 2.2.1. Applicants should have obtained passes for following three (03) subjects: (i) Physics (ii) Chemistry (iii) Combined Mathematics or Higher Mathematics at one and the same sitting of a G.C.E. (A/L) Examination conducted by the Commissioner General of Examinations, Sri Lanka in 2023 or 2024 or 2025. 2.2.2. Applicants who are applying for “Marine Engineering Technology” and “Nautical Studies” (Set I) Courses should have obtained a Credit Pass (C) for English Language at G.C.E. (O/L) Examination.",
    "districts_locations": [
     "Diyagama, Homagama"
    ],
    "official_url": "https://itum.mrt.ac.lk",
    "source_url": "https://documents.gov.lk/api/content-file-proxy?file=/gazette-content/I-II(A) -(E) (18.09.2026) - Press_1790593994.pdf",
-   "source_locator": "Gazette No. of 18.09.2026, Part I Sec (IIA), pp.3253-3256, notice 'Admission to the National Diploma in Technology Course - 2026/2027'",
-   "retrieved_on": "2026-10-05",
+   "source_locator": "Gazette No. 2507 of 18.09.2026, Part I Sec (IIA), pp.3253-3256, notice 'Admission to the National Diploma in Technology Course - 2026/2027'; closing confirmed on itum.mrt.ac.lk/ndt-26_27-intake",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.9,
    "notes": "Fields: Set 1 Marine Engineering Technology, Nautical Studies; Set 2 Chemical, Civil, Electrical, Electronic & Telecommunication Engineering Technology, Information Technology, Mechanical Engineering Technology, Polymer Technology, Textile & Clothing Technology. Once registered, ineligible for other universities (except OUSL) during the course.",
    "id": "R027"
@@ -598,31 +598,10 @@
    "official_url": "https://www.casrilanka.com",
    "source_url": "https://www.casrilanka.com/casl/index.php?option=com_content&view=article&id=67&Itemid=78&lang=en",
    "source_locator": "Student Registration page FAQs: eligibility, cost, duration, locations",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "CA Sri Lanka's degree (BSc Applied Accounting, CCOM03/CCOM04) is separately available through IFSLS (see PRIVATE_DEGREE). Full qualification cost not published on this page - do not show a total.",
    "id": "R028"
-  },
-  {
-   "route_group": "PROFESSIONAL",
-   "name": "CMA Sri Lanka - Student registration (Certified Management Accountant)",
-   "provider": "Institute of Certified Management Accountants of Sri Lanka",
-   "provider_type": "professional body",
-   "duration": null,
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
-   "intake_timing": "Registration online via self-registration portal; no fixed intake date found.",
-   "entry_requirements_text": "Three passes at the G. C. E. Advanced Level Examination together with a Pass in English Language and Mathematics at the G.C.E. O/L Examination ... Mature Entry Those in employment and over 18 years of age with a minimum of 2 years' experience in an Accounting environment, together with a recommendation from the employer will be considered for registration under Mature Entry.",
-   "districts_locations": [
-    "29/24, Visakha Road, Colombo 04"
-   ],
-   "official_url": "https://www.cma-srilanka.org",
-   "source_url": "https://www.cma-srilanka.org/entry-requirements.html",
-   "source_locator": "Entry Requirements page; fees from sources/cma_fees.html; levels from sources/cma_examination_structure.html; online registration process from sources/cma_how_to_register.html",
-   "retrieved_on": "2026-10-05",
-   "confidence": 0.8,
-   "notes": "Exam structure starts with Level 1 (Foundation Level) then Level 2 (Operational Level) etc. Page note: 'Candidates who do not have credit passes in English and Mathematics at the G. C. E. O/L but have secured subject passes in Business Communication and Business Mathematics ...' (wording mixes 'Pass' and 'credit'); treat O/L requirement cautiously.",
-   "id": "R029"
   },
   {
    "route_group": "PROFESSIONAL",
@@ -660,7 +639,7 @@
    "official_url": "https://www.aatsl.lk",
    "source_url": "https://www.aatsl.lk/new-to-aat/registration-faq",
    "source_locator": "Registration FAQ Q4 (minimum qualification), Q8 (duration), Q11 (age), Q13 (deadlines), Q18 (fees); exam fees from sources/aat_student_guide.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.7,
    "notes": "Fee tables are dated (registration fees effective 1 May 2023; exam fees 'January 2023'); FAQ says 'Fees may be subject to revision' - show with date caveat or omit.",
    "id": "R031"
@@ -681,7 +660,7 @@
    "official_url": "https://www.vtasl.gov.lk/application",
    "source_url": "https://www.vtasl.gov.lk/api/chatbot/centers/140",
    "source_locator": "JSON from the official VTA course-finder API used by the 'Apply for Courses' page sources/vta_application.html (fields course_fee, duration [months], nvq_level, entry_qualification, seats); course lists by trade sources/vta_api_courses_trade10_ict.json, sources/vta_api_courses_trade2.json, sources/vta_api_courses_trade3.json, sources/vta_api_courses_trade4.json; NVQ overview sources/vta_nvq.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "NOT FREE: VTA lists a course fee for these courses. Data comes from the site's live API (no publication date); re-check before display. NVQ 5 is a UoVT entry qualification (see UoVT record).",
    "id": "R032"
@@ -702,7 +681,7 @@
    "official_url": "https://www.vtasl.gov.lk/application",
    "source_url": "https://www.vtasl.gov.lk/api/chatbot/centers/133",
    "source_locator": "JSON from the official VTA course-finder API used by the 'Apply for Courses' page sources/vta_application.html (fields course_fee, duration [months], nvq_level, entry_qualification, seats); course lists by trade sources/vta_api_courses_trade10_ict.json, sources/vta_api_courses_trade2.json, sources/vta_api_courses_trade3.json, sources/vta_api_courses_trade4.json; NVQ overview sources/vta_nvq.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "NOT FREE: VTA lists a course fee for these courses. Data comes from the site's live API (no publication date); re-check before display. NVQ 5 is a UoVT entry qualification (see UoVT record).",
    "id": "R033"
@@ -723,7 +702,7 @@
    "official_url": "https://www.vtasl.gov.lk/application",
    "source_url": "https://www.vtasl.gov.lk/api/chatbot/centers/130",
    "source_locator": "JSON from the official VTA course-finder API used by the 'Apply for Courses' page sources/vta_application.html (fields course_fee, duration [months], nvq_level, entry_qualification, seats); course lists by trade sources/vta_api_courses_trade10_ict.json, sources/vta_api_courses_trade2.json, sources/vta_api_courses_trade3.json, sources/vta_api_courses_trade4.json; NVQ overview sources/vta_nvq.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "NOT FREE: VTA lists a course fee for these courses. Data comes from the site's live API (no publication date); re-check before display. NVQ 5 is a UoVT entry qualification (see UoVT record).",
    "id": "R034"
@@ -746,7 +725,7 @@
    "official_url": "https://www.vtasl.gov.lk/application",
    "source_url": "https://www.vtasl.gov.lk/api/chatbot/centers/137",
    "source_locator": "JSON from the official VTA course-finder API used by the 'Apply for Courses' page sources/vta_application.html (fields course_fee, duration [months], nvq_level, entry_qualification, seats); course lists by trade sources/vta_api_courses_trade10_ict.json, sources/vta_api_courses_trade2.json, sources/vta_api_courses_trade3.json, sources/vta_api_courses_trade4.json; NVQ overview sources/vta_nvq.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "NOT FREE: VTA lists a course fee for these courses. Data comes from the site's live API (no publication date); re-check before display. NVQ 5 is a UoVT entry qualification (see UoVT record).",
    "id": "R035"
@@ -768,7 +747,7 @@
    "official_url": "https://www.vtasl.gov.lk/application",
    "source_url": "https://www.vtasl.gov.lk/api/chatbot/centers/108",
    "source_locator": "JSON from the official VTA course-finder API used by the 'Apply for Courses' page sources/vta_application.html (fields course_fee, duration [months], nvq_level, entry_qualification, seats); course lists by trade sources/vta_api_courses_trade10_ict.json, sources/vta_api_courses_trade2.json, sources/vta_api_courses_trade3.json, sources/vta_api_courses_trade4.json; NVQ overview sources/vta_nvq.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.75,
    "notes": "NOT FREE: VTA lists a course fee for these courses. Data comes from the site's live API (no publication date); re-check before display. O/L-based entry; included because A/L students can join it and it leads to NVQ 4 (step towards NVQ 5/6 and UoVT).",
    "id": "R036"
@@ -802,7 +781,7 @@
    "official_url": "https://dtet.gov.lk/en/",
    "source_url": "https://dtet.gov.lk/wp-content/uploads/2026/02/2025-10-31I-IIAE.pdf",
    "source_locator": "Gazette No. 2,461 of 31.10.2025 Part I Sec (IIA), DTET notice 'Admission of Students to Courses Conducted at Colleges of Technology/Technical Colleges - 2026' (paras 01-24, p.2265-2266) and diploma schedule pp.2290-2291 (PDF pp.70-71), serial 178; DTET news sources/dtet_gazette_intake2026_news.html; fee policy sources/dtet_enrollment_procedure.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "Diploma (NVQ 5/6) courses are English medium. Cost 0 = full-time course fee; Rs.2,500 registration fee applies. Selection: interview, plus written exam if oversubscribed.",
    "id": "R037"
@@ -835,7 +814,7 @@
    "official_url": "https://dtet.gov.lk/en/",
    "source_url": "https://dtet.gov.lk/wp-content/uploads/2026/02/2025-10-31I-IIAE.pdf",
    "source_locator": "Gazette No. 2,461 of 31.10.2025 Part I Sec (IIA), DTET notice 'Admission of Students to Courses Conducted at Colleges of Technology/Technical Colleges - 2026' (paras 01-24, p.2265-2266) and diploma schedule PDF p.58, serial 146; DTET news sources/dtet_gazette_intake2026_news.html; fee policy sources/dtet_enrollment_procedure.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "Diploma (NVQ 5/6) courses are English medium. Cost 0 = full-time course fee; Rs.2,500 registration fee applies. Selection: interview, plus written exam if oversubscribed.",
    "id": "R038"
@@ -858,7 +837,7 @@
    "official_url": "https://dtet.gov.lk/en/",
    "source_url": "https://dtet.gov.lk/wp-content/uploads/2026/02/2025-10-31I-IIAE.pdf",
    "source_locator": "Gazette No. 2,461 of 31.10.2025 Part I Sec (IIA), DTET notice 'Admission of Students to Courses Conducted at Colleges of Technology/Technical Colleges - 2026' (paras 01-24, p.2265-2266) and diploma schedule PDF p.55, serial 136; DTET news sources/dtet_gazette_intake2026_news.html; fee policy sources/dtet_enrollment_procedure.html",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "Diploma (NVQ 5/6) courses are English medium. Cost 0 = full-time course fee; Rs.2,500 registration fee applies. Selection: interview, plus written exam if oversubscribed.",
    "id": "R039"
@@ -871,7 +850,7 @@
    "duration": "3 years (dual training: institutional then on-the-job)",
    "cost_min_lkr": 0,
    "cost_max_lkr": 150000,
-   "intake_timing": "January 2027 batch: applications by registered post must be received before 15.10.2026 (OPEN at retrieval). Selection by written test and interview.",
+   "intake_timing": "January 2027 batch: applications by registered post had to be received before 15.10.2026 (CLOSED; no extension found at the last check). Selection by written test and interview.",
    "entry_requirements_text": "Entry Requirements for Courses 01, 02, 03, 04, and 05 Applicants must: • Have passed six subjects including Sinhala Language, Science, and Mathematics at the G.C.E. (O/L) Examination, with a Credit pass in Mathematics or Science, OR • Obtained a pass in any two subjects, including Science, Technology, or Engineering Technology, at the G.C.E. (A/L) examination, and successfully completed six subjects at the G.C.E. (O/L) examination, including Sinhala Language, Science, and Mathematics. || General: Age Limit : Candidates must be between 16 and 35 years of age as of 31.12.2026. ... Applicants from low-income families may follow the courses free of charge, without having to pay the course fees.",
    "districts_locations": [
     "IETI, No. 581, Galle Road, Katubedda, Moratuwa"
@@ -892,7 +871,7 @@
    "duration": "1 year",
    "cost_min_lkr": 0,
    "cost_max_lkr": 40000,
-   "intake_timing": "January 2027 batch: applications by registered post must be received before 15.10.2026 (OPEN at retrieval). Selection by written test and interview.",
+   "intake_timing": "January 2027 batch: applications by registered post had to be received before 15.10.2026 (CLOSED; no extension found at the last check). Selection by written test and interview.",
    "entry_requirements_text": "Entry Requirements for Courses 08 and 09 Applicants must: • Have passed six subjects including Sinhala Language and Mathematics at G.C.E. (O/L) • Have passed English Language at G.C.E. (O/L) or G.C.E. (A/L) • Have completed a basic computer course || General: Age Limit : Candidates must be between 16 and 35 years of age as of 31.12.2026. ... Applicants from low-income families may follow the courses free of charge, without having to pay the course fees.",
    "districts_locations": [
     "IETI, No. 581, Galle Road, Katubedda, Moratuwa"
@@ -921,7 +900,7 @@
    "official_url": "https://uovt.ac.lk/en",
    "source_url": "https://uovt.ac.lk/en/academics/admission_page",
    "source_locator": "Admission page 'How to Apply'; prospectus PDF p.13 'Qualifications Upgrading Pathway' (sources/uovt_prospectus_2026_2027.pdf, image-only, transcribed visually); selection formula from sources/uovt_selection_criteria_11_5_26.pdf",
-   "retrieved_on": "2026-10-15",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.65,
    "notes": "This is the NVQ 5/6 -> degree link. Prospectus is image-only PDF; text was read from the page image, not extracted. Fees and programme-level entry requirements not found. Registering for a 3-year UoVT university-college diploma makes a student ineligible for IFSLS. 17 degree programmes listed by UoVT for 2026 (faculty pages read 2026-10-15): Bachelor of Engineering Technology - Building Services Technology; Bachelor of Engineering Technology in Construction Technology & Resource Management; Bachelor of Engineering Technology in Manufacturing Technology; Bachelor of Engineering Technology in Mechatronics Technology; B.Tech in Computer Networks and Cloud Security; Bachelor of Technology - Software and Intelligent Systems; Bachelor of Technology - Web and Creative Media; B.Tech in Food Process Technology; Bachelor of Technology in Film and Television Production Technology; B.Tech in Media Arts Production Technology; B.Tech in Quantity Surveying; Bachelor of Technology - Hotel Management; B.Tech in Industrial Management Technology; Bachelor of Education in English Language Teaching; Bachelor of Education in Engineering Technology; Bachelor of Education in Bio Systems Technology; Bachelor of Education in Information and Communication Technology. Selection 2025/26 (UoVT selection criteria PDF): A/L applicants 40% stream-weighted Z-score and 60% aptitude test; NVQ applicants ranked on the aptitude test. 2026/27 application dates not published (checked 2026-10-15).",
    "id": "R042"
@@ -934,7 +913,7 @@
    "duration": null,
    "cost_min_lkr": 600,
    "cost_max_lkr": 600,
-   "intake_timing": "Online applications (doenets.lk > Online Applications (Recruitment/E.B. Exams)) from 14 September 2026 9.00 am to 12 October 2026 9.00 pm (OPEN at retrieval). Exam in December 2026.",
+   "intake_timing": "Online applications (doenets.lk > Online Applications (Recruitment/E.B. Exams)) from 14 September 2026 9.00 am to 12 October 2026 9.00 pm (CLOSED; no extension found at the last check). Exam in December 2026; exact date not yet published.",
    "entry_requirements_text": "(c) is not less than 18 years and not more than 24 years of age to the closing date of applications. [page break] (Accordingly, only those who were born on or before 12.10.2008 or born on or after 12.10.2002 are eligible to apply for this post) ... II. Physical fitness: The height of the male applicants should not be less than 5 feet and 5 inches and the chest should not be less than 33 inches when expanded. The height of female applicants should not be less than 5 feet and 3 inches. III. Educational qualifications :- Every applicant should have fulfilled the following educational qualifications. (a) Should have passed three main subjects at the GCE (A/L) examination in one sitting; and (b) Should have passed 06 subjects at the GCE (O/L) examination with five credit passes including credit passes for Sinhala/ Tamil Language, and Mathematics as main subjects and at least with a simple pass for the English language in not more than two sittings.",
    "districts_locations": [
     "Exam centres in 25 district towns (Colombo ... Kegalle)"
@@ -963,7 +942,7 @@
    "official_url": "https://www.doenets.lk",
    "source_url": "https://documents.gov.lk/api/content-file-proxy?file=/gazette-content/I-II(A) - (28.08.2026) - (E) Press_1788868169.pdf",
    "source_locator": "Gazette 28.08.2026 Part I Sec (IIA), pp.2993-2994+, 'Open Competitive Examination for Recruitment to Grade III of Management Service Officers Service - 2026'",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.95,
    "notes": "Closed for 2026; included as a concrete, typical A/L-level OCE. Watch the weekly Gazette Part I Section (IIA) and doenets.lk for the next call.",
    "id": "R044"
@@ -1001,14 +980,14 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines on Foreign Scholarships 2024, sections 02 (timing table), 04 (basic conditions), 05-08 (process); calendar sources/mohe_ug_scholarship_calendar.pdf via sources/mohe_scholarship_calendar.html; guidelines page sources/mohe_scholarship_guidelines.html; current nomination lists linked from sources/mohe_home.html; 2024 A/L high-achiever programme evidence sources/mohe_nomination_highranking_2024AL.pdf",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.85,
    "notes": "Notices appear on www.mohe.gov.lk, national newspapers and the Ministry Facebook page; pre-registration Google form on the Ministry site for email alerts. Rejecting an awarded scholarship bars applying again that year. On return, graduates must get UGC recognition of the awarding university.",
    "id": "R046"
   },
   {
    "route_group": "SCHOLARSHIP_ABROAD",
-   "name": "India - government undergraduate scholarship via Ministry nomination",
+   "name": "India (ICCR) - government undergraduate scholarship via Ministry nomination",
    "provider": "Ministry of Education (Higher Education Division) nominating to the donor government",
    "provider_type": "state (government-to-government)",
    "duration": null,
@@ -1020,9 +999,9 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines 2024 section 02 timing table + section 04 basic conditions",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.6,
-   "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. Programme name (e.g., ICCR) is not stated in the Ministry documents retrieved - show as 'Government of India scholarships via MOHE'.",
+   "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. The programme is the Indian Council for Cultural Relations (ICCR). Ministry notice 'Mandatory English language proficiency requirement for ICCR scholarships from the 2027/2028 academic year' (https://www.mohe.gov.lk/images/pdf/ICCR_Webnotice1.pdf): 'from the 2027/2028 academic year, submission of a valid IELTS (An overall band score of 6.0 or above) or TOEFL (CEFR B2/ Higher Intermediate or above) certificate demonstrating English language proficiency is mandatory for all scholarship applicants.' Plan the test before the next India call.",
    "id": "R047"
   },
   {
@@ -1039,7 +1018,7 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines 2024 section 02 timing table + section 04 basic conditions",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.6,
    "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. Ministry home page currently lists only MEXT research-student nominations (2026, 2027); undergraduate-specific eligibility (age limits etc.) not found in an official Sri Lankan source retrieved.",
    "id": "R048"
@@ -1058,7 +1037,7 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines 2024 section 02 timing table + section 04 basic conditions",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.6,
    "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. Nomination list PDF evidences the 2026/27 cycle; it contains personal names - do not republish.",
    "id": "R049"
@@ -1077,7 +1056,7 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines 2024 section 02 timing table + section 04 basic conditions",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.6,
    "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. Ministry home links a 'Stipendium Hungaricum Scholarship 2026/27 Sri Lanka Nominated List' (not downloaded).",
    "id": "R050"
@@ -1096,7 +1075,7 @@
    "official_url": "https://www.mohe.gov.lk",
    "source_url": "https://www.mohe.gov.lk/images/pdf/newEng_Guidelines_for__Foreign_Scholarships_-2024.pdf",
    "source_locator": "Guidelines 2024 section 02 timing table + section 04 basic conditions",
-   "retrieved_on": "2026-10-05",
+   "retrieved_on": "2026-10-23",
    "confidence": 0.6,
    "notes": "Generic Ministry conditions only; the specific call notice (with age limit, fields, closing date) must be read when published. Nomination list contains personal names - do not republish.",
    "id": "R051"

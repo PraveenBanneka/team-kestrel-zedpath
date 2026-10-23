@@ -20,9 +20,9 @@ or one of these is fixed (then remove it from `KNOWN`).
 
 | Source | Content |
 |---|---|
-| `data/routes/routes-2026-10-05.json` | 52 routes R001-R052 (private degrees, diplomas, professional, vocational, job exams, scholarships abroad, retry) |
+| `data/routes/routes-2026-10-05.json` (since 23 Oct: `routes-2026-10-23.json`, 51 routes, R029 withdrawn) | 52 routes R001-R052 (private degrees, diplomas, professional, vocational, job exams, scholarships abroad, retry) |
 | `data/journey/ugc-steps-2025-2026.json` | 5 UGC Journey steps |
-| `data/alerts/notices-2026-10-11.json` | 5 notices (R043, R027, R040, R041, R044) |
+| `data/alerts/notices-2026-10-11.json` (since 23 Oct: `notices-2026-10-23.json`, adds R023) | 5 notices (R043, R027, R040, R041, R044) |
 | `data/degrees/syllabi-2026-10-05.json` | 13 syllabi (12 FOUND, 1 UNREADABLE, withheld) |
 | `worker/generated/journey-2025-2026.json`, `rulebook-2025-2026.json` | the compiled bundles (routes, 121 course rules, 255 offerings with cut-offs, 5 hashed UGC sources) |
 | `data/ugc/2025-2026/unicodes.csv` | 255 Uni-Codes |

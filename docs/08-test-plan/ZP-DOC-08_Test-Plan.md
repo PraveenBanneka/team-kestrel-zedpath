@@ -18,6 +18,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | VR4: TC-140 added (added-to-list me
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: TC-141 (list guide), TC-105 and TC-125 updated (no proposed order); 543 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: TC-142 (application co-pilot); 547 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012 revised (guides instead of inputs): TC-142 extended; 549 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths refreshed (routes 23 Oct, OUSL alert, three hosts blocked): TC-143 added, TC-106 and TC-127 extended; 553 passed
 ---
 
 # Introduction
@@ -176,7 +177,7 @@ Table: Automated test cases
 | TC-103 | Results API | `worker/results.test.ts` (1) | `POST /api/results` answer unchanged by the Ask refactor (pinned contract) | FR-201, FR-203, FR-205 |
 | TC-104 | Search | `shared/search.test.ts` (4) | Word-start matching in any order, Uni-Codes and short forms | FR-123, FR-215 |
 | TC-105 | My list | `shared/list.test.ts` (7) | Only eligible, no duplicates, 125 cap; order notes (never a re-order, CR-011); copy Uni-Codes; multi-add | FR-302 to FR-306, FR-308, FR-310, BR-041 to BR-043 |
-| TC-106 | Journey rules | `shared/journey.test.ts` (16) | Official notices with sources; age and subject eligibility; UNKNOWN never a guess; ordering; reminders 7 and 1 days at 08:00; calendar file; pinned default settings | FR-401, FR-403, FR-404, FR-412, FR-413, FR-509, FR-510, NFR-072 |
+| TC-106 | Journey rules | `shared/journey.test.ts` (17) | Official notices with sources; age and subject eligibility; UNKNOWN never a guess; ordering; reminders 7 and 1 days at 08:00; calendar file; pinned default settings | FR-401, FR-403, FR-404, FR-412, FR-413, FR-509, FR-510, NFR-072 |
 | TC-107 | Journey on account | `worker/my-journey.test.ts` (11) | Migration 0010 fills 255 offerings; CHECK and shared step list agree; 0009 rules carried over; session required; starts empty; follow real items only; tick only when open (409); deleted with account; Sri Lanka date; avatar values | FR-409, FR-410, FR-411, FR-414 to FR-416, FR-122, BR-061, NFR-038 |
 | TC-108 | Accounts | `worker/account.test.ts` (26) | Migration 0003 and 0007 rules; sign-up, log-in, one failure message; own rows only; atomic save; log out everywhere; expiry; recovery code; delete cascade; cross-site refusal; rate limits; safe default without database; compulsory contact details | FR-114 to FR-121, NFR-030, NFR-035 to NFR-037, NFR-070 |
 | TC-109 | Contact parsing | `shared/contact.test.ts` (5) | Sri Lankan mobile formats; refusals; first wrong field named; age with birthday | FR-120, NFR-070 |
@@ -197,7 +198,7 @@ Table: Automated test cases
 | TC-124 | Journey logic (campaign) | `shared/journey.e2e.test.ts` (39) | Step windows, notice ticks, step ids against the D1 CHECK, reminder settings and times, calendar file, Sri Lanka date | FR-401, FR-404, FR-409, FR-410, FR-412, FR-413, FR-415, BR-061 to BR-063 |
 | TC-125 | My list and Compare (campaign) | `shared/list.e2e.test.ts` (36) | Eligibility, duplicates, 125 cap, multi-add, reorder, order warnings, Compare selection of 3 in order, storage round trip; *(CR-010)* wrong-shaped storage reads as empty (LST-036, D-12) | FR-301 to FR-311, BR-041 to BR-043 |
 | TC-126 | Data accuracy (campaign) | `worker/accuracy.e2e.test.ts` (75) | Every Uni-Code, district and cut-off equals the official UGC tables, read independently of the engine; band boundaries; subject rules by stream; a higher Z-score never gives a worse band | BR-001 to BR-036, FR-201, FR-205, NFR-050, NFR-052 |
-| TC-127 | Ask (campaign) | `worker/ask.e2e.test.ts` (46) | Verdict line, leaked-reasoning filter, layout, citations and https links, validation, model fallback order, daily allowance, suggestions; no network | FR-601 to FR-612, NFR-034 |
+| TC-127 | Ask (campaign) | `worker/ask.e2e.test.ts` (47) | Verdict line, leaked-reasoning filter, layout, citations and https links, validation, model fallback order, daily allowance, suggestions; no network | FR-601 to FR-612, NFR-034 |
 | TC-128 | Data integrity (campaign) | `worker/data-integrity.e2e.test.ts` (54) | Route ids, compiled Journey, ISO dates on the Sri Lanka day (DAT-011), no invented UGC dates, official https links never blocked, a source for every number, three languages; *(CR-010)* DAT-054: no URL is a page blocked during research | NFR-050, NFR-054, FR-402, FR-502 |
 | TC-129 | Groups (campaign) | `worker/groups.e2e.test.ts` (30) | Contact filter, message limits, rules version against the D1 CHECKs, labelled samples, members and badges, cross-site writes refused; *(CR-010)* GRP-012 to GRP-016 (disguised contact details) now plain passing tests | FR-708, FR-712, FR-716, FR-723, NFR-071, NFR-076 |
 | TC-130 | Migrations (campaign) | `worker/migrations.e2e.test.ts` (30) | Migrations apply cleanly; STRICT tables, keys, CHECKs, indexes; reference counts; the deletion cascade; expand-then-contract | ZP-DOC-05; NFR-075 |
@@ -213,6 +214,7 @@ Table: Automated test cases
 | TC-140 | Added confirmation | `src/list-feedback.test.ts` (3) | Counts one and several; mentions courses already on the list and a full list; never says "Added 0" | ZP-DOC-07 Added confirmation |
 | TC-141 | List guide (CR-011) | `src/list-guide.test.ts` (4) | Six UGC rules, each with a handbook page or section, in all three languages; order by preference; the old proposed order is gone | FR-312; AC-302.4 |
 | TC-142 | Application co-pilot (CR-012) | `src/apply.test.ts` (6) | UGC formats (BANDARA DPS, 07… mobile); checklist fits school or private, O/L, affidavit, aptitude (singular for one course); every step cites the handbook in three languages; six guides instead of inputs; first-version typed details deleted on load; only two answers and ticks kept, cleared with the student's data | FR-313 to FR-316 |
+| TC-143 | Other paths: cost and checked date | `worker/routes-free.test.ts` (2) | A zero cost is "Free", never "Rs 0"; every route keeps its ISO checked-on date, shown in place of a fixed date |
 
 # Security tests
 
@@ -267,7 +269,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143).
 
 Table: Results of 21 October 2026 (developer machine)
 

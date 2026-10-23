@@ -53,7 +53,7 @@ for (const h of history) {
 }
 
 // Other routes: verbatim official requirements, timing and costs (data/routes/, researched 2026-10-05).
-const ROUTES_FILE = path.join(ROOT, 'data', 'routes', 'routes-2026-10-05.json');
+const ROUTES_FILE = path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json');
 const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 function latestDate(text: string): string | null {                       // "12 October 2026" or "12.10.2026" -> ISO
   const ds: string[] = [];
