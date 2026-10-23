@@ -6,7 +6,7 @@
 // Remove takes them off the list.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, Info, ListOrdered, ListPlus, Plus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
+import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, FileCheck2, GripVertical, Info, ListOrdered, ListPlus, Plus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
 import { useHold } from '../hold.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
@@ -134,6 +134,7 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
 
       {more}
       <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('list.compare')}</button>
+      <button className="btn filled" onClick={() => go('/apply')}><FileCheck2 size={18} aria-hidden="true" />{t('apply.entry')}</button>
       <button className="btn tonal" onClick={copy}>{copied ? <><Check size={18} aria-hidden="true" />{t('list.copied', { n: list.length })}</> : <><ClipboardCopy size={18} aria-hidden="true" />{t('list.copy')}</>}</button>
       <p className="helper">{t('list.paste')}</p>
       <section className="card stack list-guide" aria-labelledby="list-guide-h">

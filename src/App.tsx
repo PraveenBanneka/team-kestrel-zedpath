@@ -27,6 +27,7 @@ import { GroupInfoScreen, GroupRoomScreen, GroupsScreen } from './screens/Groups
 import { checkNotice, type JourneyResponse } from '../shared/journey.ts';
 import { COMPARE_MAX, CompareScreen } from './screens/Compare.tsx';
 import { Tip } from './Tip.tsx';
+import { ApplyScreen } from './screens/Apply.tsx';
 import { useToast } from './Toast.tsx';
 import { addedMessage } from './list-feedback.ts';
 import { SyllabusCard } from './screens/Syllabus.tsx';
@@ -252,6 +253,7 @@ export function App() {
   let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
   if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} list={list} setList={setList} setCompare={setCompare} />; }
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
+  else if (path === 'apply' && profile) { tab = 'list'; back = true; title = t('title.apply'); screen = <ApplyScreen profile={profile} meta={meta} contact={me?.contact ?? null} list={list} results={results} go={go} />; }
   else if (path === 'list') { tab = 'list'; title = t('title.list'); screen = <MyListScreen list={list} setList={setList} results={results} go={go} setCompare={setCompare} />; }
   else if (path === 'journey' || path === 'alerts') { tab = 'journey'; title = t('title.journey');
     screen = <JourneyScreen tab={path === 'alerts' || arg === 'open' ? 'open' : 'steps'} data={journey} ops={ops} list={list} compare={compare} profile={profile}

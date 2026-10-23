@@ -10,7 +10,8 @@ const keys = Object.keys(en) as Key[];
 const holes = (s: string) => [...s.matchAll(/\{(\w+)\}/g)].map(m => m[1]).sort();
 const bolds = (s: string) => (s.match(/<\/?b>/g) ?? []).length;
 // Words that are the same in every language (names, codes) may legitimately match the English.
-const SAME_OK = new Set<Key>(['intro.count', 'about.stepOf', 'rg.DIPLOMA.sub', 'rg.PROFESSIONAL.sub', 'rg.VOCATIONAL.sub']);
+const SAME_OK = new Set<Key>(['intro.count', 'about.stepOf', 'rg.DIPLOMA.sub', 'rg.PROFESSIONAL.sub', 'rg.VOCATIONAL.sub',
+  'apply.ph.address' /* CR-012: an example address; the UGC form is filled in English */]);
 
 for (const [name, dict] of [['Sinhala', si], ['Tamil', ta]] as const) {
   describe(`${name} dictionary`, () => {

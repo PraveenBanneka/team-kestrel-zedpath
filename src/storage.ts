@@ -1,5 +1,6 @@
 // The student's details on this device (FR-104, NFR-030). Without an account nothing here is stored on a server;
 // with an account (CR-001) the same details are also kept in the account so they follow the student between devices.
+import { EMPTY_APPLY, type ApplyState } from './apply.ts';
 import type { ProfileInput } from '../shared/api.ts';
 import type { Extras } from '../shared/account.ts';
 import type { ListEntry } from '../shared/list.ts';
@@ -9,7 +10,7 @@ export { INTERESTS, specialIntakeHint, type Achievement, type Extras, type Level
 const KEYS = { profile: 'zedpath.profile.v1', extras: 'zedpath.extras.v1', onboarded: 'zedpath.onboarded.v1', lang: 'zedpath.lang.v1',
   pendingSync: 'zedpath.pendingSync.v1', list: 'zedpath.list.v1', compare: 'zedpath.compare.v1',
   journey: 'zedpath.journey.v1', dob: 'zedpath.dob.v1' /* pre-CR-003 phone-only birthday: kept so clearEverything removes it */, alertsSeen: 'zedpath.alertsSeen.v1', reminders: 'zedpath.reminders.v1', demo: 'zedpath.demo' /* audit lead 5: cleared with the phone */, owner: 'zedpath.owner.v1' /* audit lead 7: whose data is on this phone */,
-  notify: 'zedpath.notify.v1', nav: 'zedpath.nav.v1' /* desktop side menu open or collapsed: a layout preference, like the language */ };
+  notify: 'zedpath.notify.v1', apply: 'zedpath.apply.v1' /* CR-012: the UGC application co-pilot answers; on this phone only, never sent */, nav: 'zedpath.nav.v1' /* desktop side menu open or collapsed: a layout preference, like the language */ };
 const read = <T,>(k: string): T | null => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) as T : null; } catch { return null; } };
 const write = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
@@ -44,6 +45,9 @@ export const saveAlertsSeen = (ids: string[]) => write(KEYS.alertsSeen, ids);
 export const loadReminderIds = (): number[] => read<number[]>(KEYS.reminders) ?? [];
 export const saveReminderIds = (ids: number[]) => write(KEYS.reminders, ids);
 /** Notification settings (video 2): on this phone only, like the reminders they control. */
+/** CR-012: the co-pilot's answers and ticks (address, parents' names, school...). Stored only on this phone. */
+export const loadApply = (): ApplyState => { const v = read<ApplyState>(KEYS.apply); return v && v.answers ? { answers: { ...EMPTY_APPLY.answers, ...v.answers }, done: v.done ?? {} } : EMPTY_APPLY; };
+export const saveApply = (s: ApplyState) => write(KEYS.apply, s);
 export const loadNotifyPrefs = (): NotifyPrefs => readPrefs(read<unknown>(KEYS.notify));
 export const saveNotifyPrefs = (p: NotifyPrefs) => write(KEYS.notify, p);
 /** Set when a save could not reach the account (offline); the phone's copy is then newer and is pushed, not replaced. */
@@ -58,6 +62,6 @@ export const loadOwner = () => read<string>(KEYS.owner);
 export const setOwner = (u: string) => write(KEYS.owner, u);
 /** Removes one student's own data from the phone (language and the onboarded flag stay). */
 export function clearStudentData() {
-  try { for (const k of [KEYS.profile, KEYS.extras, KEYS.list, KEYS.compare, KEYS.journey, KEYS.pendingSync, KEYS.alertsSeen, KEYS.reminders]) localStorage.removeItem(k); } catch { /* nothing stored */ }
+  try { for (const k of [KEYS.profile, KEYS.extras, KEYS.list, KEYS.compare, KEYS.journey, KEYS.pendingSync, KEYS.alertsSeen, KEYS.reminders, KEYS.apply]) localStorage.removeItem(k); } catch { /* nothing stored */ }
 }
 
