@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **6fcb35a9** (CR-011 preference-list guidance). Rollback target a07ba610 (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval.
+  Live (workers.dev) = version **0391423d** (CR-012 UGC application co-pilot). Rollback target 6fcb35a9 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -423,3 +423,7 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Verified live 390x844: a Safe-Likely-Reach list shows the blue note (no Fix button) and the six rules with p.112, p.112-113, p.112, p.114, p.116, Section 2.2.
 - Docs: ZP-DOC-01..04 2.2 (draft, awaiting approval), 07, 08 rebuilt. New deck slide 8 reworded and its screenshot retaken.
 - Next: CR-012 UGC application co-pilot (on-phone only).
+
+## 2026-10-23: 4450bed1 then 0391423d LIVE (Praveen's GO): CR-012 UGC application co-pilot
+- Apply to the UGC, step by step (from My list, #/apply): personal checklist, every UGC form field ready to copy (pre-filled from account and results), print-and-post tracker; every item cites the UGC handbook 2025/26 Section 5; answers only on the phone (zedpath.apply.v1). TC-142; 547 tests. 0391423d = singular wording fix ("1 course needs").
+- Verified live 390x844 (demo): checklist personalised (O/L copy for 1 course, principal, aptitude for Landscape Architecture); PERERA K / KASUN PERERA; typed address saved in localStorage and in zero network requests; the My list button opens #/apply when not under the tab bar (an earlier scripted tap hit the Journey tab over it).
