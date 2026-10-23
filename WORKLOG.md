@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **a07ba610** (My list + Add a course, added confirmation). Rollback target 4eb47d89 (code only).
+  Live (workers.dev) = version **6fcb35a9** (CR-011 preference-list guidance). Rollback target a07ba610 (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -417,3 +417,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - My list: + Add a course box below the last course opens the course picker; green added confirmation with a tick (Courses, course page, My list). TC-140; 539 tests.
 - Verified live 390x844 (demo): 2 ticked on Courses then Add: "Added 2 courses to My list."; My list + box opened the picker; picking Design: "Added 1 course to My list.", badge 2, Design gone from the picker.
 - New Shark Tank deck (YC order, 18 slides, one screen per feature) as a separate artifact; Marketing Playbook answers PDF in Downloads.
+
+## 2026-10-23: 6fcb35a9 LIVE (Praveen's GO): CR-011 preference-list guidance
+- Praveen found (ThuSh LK videos) that our "Fix the order" advice was wrong; the UGC handbook 2025/26 p.112 confirms the order must follow the student's own preference. Removed Fix the order / proposeOrder (FR-305 withdrawn); Safe-above note is now information; no-Safe note advises listing as many eligible courses as possible; "What you need to know" card with six UGC rules and handbook pages (FR-312). TC-141; 543 tests.
+- Verified live 390x844: a Safe-Likely-Reach list shows the blue note (no Fix button) and the six rules with p.112, p.112-113, p.112, p.114, p.116, Section 2.2.
+- Docs: ZP-DOC-01..04 2.2 (draft, awaiting approval), 07, 08 rebuilt. New deck slide 8 reworded and its screenshot retaken.
+- Next: CR-012 UGC application co-pilot (on-phone only).
