@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **4eb47d89** (collapsible desktop side menu). Rollback target 209a0c04 (code only).
+  Live (workers.dev) = version **a07ba610** (My list + Add a course, added confirmation). Rollback target 4eb47d89 (code only).
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -412,3 +412,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - whoami e6474e41 before the deploy (a mid-turn GO was correctly blocked by the guard; deployed on the next GO).
 - Verified live at 1440x900: open by default (icon and name), the glass menu button collapses it to icons only (aria-expanded false, label "Expand menu", saved as collapsed), still collapsed after a reload; phone 390x844 unchanged.
 - Pitch numbers (Shark Tank deck): .lk domain is LKR 8,000 a year (Praveen), so the year-one running cost is LKR 82,500 (was 78,100 with a 3,600 domain): break-even 169 Plus students (1.7%), about LKR 6,900 a month, margin about 58%; ask buffer 17,500.
+
+## 2026-10-23: a07ba610 LIVE (Praveen's GO): VR4 from his screen recording
+- My list: + Add a course box below the last course opens the course picker; green added confirmation with a tick (Courses, course page, My list). TC-140; 539 tests.
+- Verified live 390x844 (demo): 2 ticked on Courses then Add: "Added 2 courses to My list."; My list + box opened the picker; picking Design: "Added 1 course to My list.", badge 2, Design gone from the picker.
+- New Shark Tank deck (YC order, 18 slides, one screen per feature) as a separate artifact; Marketing Playbook answers PDF in Downloads.
