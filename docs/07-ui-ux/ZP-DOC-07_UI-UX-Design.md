@@ -19,6 +19,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: My list order notes become 
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: Apply to the UGC screen (route #/apply, from My list)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: route page lists its programmes (collapsible, open when six or fewer); unpublished entry rules say so; "Up to Rs ..." costs; group subtitles updated
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: every cost shown with what it covers ("Cost per semester", "Rs 6,100 to register"), en/si/ta
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013: Career-first mode (#/goal, card below My list)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: search inside each group from a search icon in the top bar, left of the profile picture (name, institute and its short name, group, programmes)
 ---
 
@@ -165,6 +166,7 @@ Table: Hash routes, screens and purpose
 | `#/course/<Uni-Code>` | Course detail | Paths | Needs vs you have, cut-off chart, syllabus, university facts, aptitude test, actions |
 | `#/compare` | Compare | My list | Up to 3 courses side by side |
 | `#/list` | My list | My list | Ordered preference list for the UGC application |
+| `#/goal`, `#/goal/<career>` | Career-first mode | Paths | CR-013: Who do you want to become? Career chips and search; for a career, the student's banded courses, courses closed by subjects, other ways in, the licence step |
 | `#/apply` | Guide to applying to the UGC | My list | CR-012: checklist, every UGC form field ready to copy, print-and-post tracker |
 | `#/journey`, `#/journey/open`, `#/alerts` | Journey | Journey | My steps / Open now tabs |
 | `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees (Ministry-recognised institutes, foreign degrees, KDU, loan courses), professional bodies, job exams, vocational, abroad. The route page shows cost with what it covers ("Free" only for a published 0; "Up to Rs ..." when only a maximum is published; "Cost per semester", "Cost per year", "Fee per subject", "Cost to register"; in the list "Rs 345,000 to Rs 460,000 a semester"), intake, entry rules (or "Not published on a page ZedPath could check"), a collapsible "Programmes (n)" list and the source. Each group list has a search icon in the top bar, left of the profile picture: it opens a search field (focused; Escape closes) that matches every typed word against the path's name, institute (and its short name, e.g. SLIIT), group and programmes; rows found through programmes show which ones (up to three, "+n more"), with a live count |
@@ -356,6 +358,18 @@ Table: My list: specification
 | States | Empty: invitation to add courses from Paths; warnings use `role="status"` |
 | Interactions | Drag by the grip, or focus the grip and use Arrow Up / Down; Fix the order previews and applies only after confirmation; press and hold or "Select" for selection, then **Compare in the order chosen** (max 3) or Remove |
 
+## Career-first mode (CR-013)
+
+Table: Career-first mode: specification
+
+| Aspect | Specification |
+|---|---|
+| Purpose | Let a student plan from the outcome: pick who they want to become and see every path to it from their results (US-509) |
+| Entry | *Who do you want to become?* card on the Paths home, directly below the My list card (product owner's placement) |
+| Content | Career chips (12) with a search box; a career page: *State universities, from your results* (course rows with the band strip, best chance first), "*n* more you cannot apply for with your subjects" (opens the hidden-courses reasons), *Other ways in* (rows with cost and matched programmes), *To practise* (licence step with quote and dated source link, only where checked), and the note that this is ZedPath's guide and bands are not a promise |
+| States | Results not loaded: skeleton; no course within reach: "None of these courses is within your results."; unmapped search: matching courses and paths instead |
+| Interactions | Tap a chip opens the career; *Change goal* returns to the chips; rows open the course or route page |
+
 ## Guide to applying to the UGC (CR-012)
 
 Table: Apply to the UGC: specification
@@ -501,6 +515,7 @@ Table: Changes driven by usability evidence
 | CR-010 | Security audit run-1 (15 Oct) | Ask links only fill the box; no prefilled demo password; failed log-out reported; the next student on a phone starts clean |
 | CR-012 | Product owner's request after reviewing the UGC form (23 Oct): "in the Plus version we can aid students fill this"; then "why do we let them fill it there, what's the use" and "change the name to guide to apply to UGC" | Guide to applying to the UGC; input boxes replaced by guides; no browser extension (the UGC asks applicants to turn autofill off) |
 | CR-011 | Product owner's check of how selection works (23 Oct): "students fill it using their preference only … we can't tell that it's wrong order" | Order notes reworded as information; "Fix the order" removed; What you need to know |
+| CR-013 | Product owner's request (23 Oct): "Can we have an outcome driven mode? Like student can enter who he wants to become and we show his paths with access located in homepage below mylist pill" | Career-first mode below My list; twelve curated careers; licence steps only with a checked official source |
 | VR4 | Product owner's screen recording, 23 Oct: "we need a rectangle with a plus below the last one", "a green thing with a tick mark that they have been added" | + Add a course box on My list; added confirmation |
 | VR3 | Product owner's review, 18 to 21 Oct, on a phone and a 1870 px desktop: "the plus button not working", "the note should be more obvious", "can we only select up to 3?", "ZedPath should be on the corner", "looks emptier than it should be", "the left menu should be collapsible with a glassmorphic hamburger", "on your phone is not relevant on desktop" | Compare picker and columns fixed; tip box; Compare limit message; desktop layout with the logo in the corner, Paths dashboard, two-column course page and a collapsible side menu; install button says "this device" |
 

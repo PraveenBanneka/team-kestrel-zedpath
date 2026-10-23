@@ -717,3 +717,7 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
 /* ---------- search inside other paths (23 Oct 2026): the top-bar icon shows when the search is open; matched programmes */
 .app-bar .icon-btn.on { background: var(--brand-50, rgba(37, 99, 235, .12)); color: var(--brand-500); }
 .route-hit { color: var(--brand-500); }
+
+/* ---------- CR-013 career-first mode */
+.goal-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.goal-chips .chip { min-height: 44px; }

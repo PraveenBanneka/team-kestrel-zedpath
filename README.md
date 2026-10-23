@@ -61,6 +61,7 @@ preference order or deadlines, and none covers routes outside the UGC.**
 | 10 | **Alerts (Journey › Open now)** | Gazette job exams and other intakes with closing dates, checked against the student's results and age; follow one to track it. | ✅ Live |
 | 11 | **Groups** | A live group per target course and per A/L batch; rules accepted once; group info with members; preset avatars; verified seniors (invite codes); automatic moderation, report and block. | ✅ Live |
 | 12 | **Three languages** | The whole interface in Sinhala, Tamil and English (AI translation, native-speaker review pending); official names and quotes as published. | ✅ Live |
+| 12a | **Who do you want to become?** | Pick a career (doctor, engineer, lawyer, software engineer and eight more) and see every path to it from your results: your banded courses, the ones your subjects close, the other ways in with costs, and the licence step where its official source was checked. | ✅ Built (CR-013) |
 | 13 | **Gazette watch** | Weekly automatic scan of Government Gazette notices (today the notices are added by hand from the Gazette). | Planned |
 
 Concept screens (33 screens, one student's whole journey):
@@ -115,7 +116,7 @@ In short:
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (570 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
+| Tests | Vitest (577 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.
@@ -165,7 +166,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 npm install
 npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
 npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
-npm test                                            # 570 tests (21 perf tests opt-in with PERF=1)
+npm test                                            # 577 tests (21 perf tests opt-in with PERF=1)
 ```
 
 Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs

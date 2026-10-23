@@ -21,6 +21,7 @@ revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (ban
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: FR-303 and FR-304 reworded, FR-305 withdrawn, FR-312 added, BR-041 and BR-042 reworded; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): FR-307 built; FR-313 to FR-316 added; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): FR-317 to FR-319 added; awaiting approval
 ---
 
 # Introduction
@@ -95,6 +96,7 @@ Table: Change requests since version 2.0 and the requirements they affect
 | CR-010 | 15 October 2026 | Security hardening from audit run-1 (leads 1 to 8 and 10 to 17) and the test campaign (D-03, D-04, D-05, D-12) | FR-126, FR-128, FR-130 to FR-132, FR-613 to FR-615, FR-720 to FR-723, FR-914, NFR-054, NFR-076 to NFR-083, BR-059, BR-078, BR-079 |
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | FR-303, FR-304, FR-305 (withdrawn), FR-312, BR-041, BR-042 |
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | FR-307, FR-313 to FR-316 |
+| CR-013 | 23 October 2026 | Career-first mode: *Who do you want to become?* below My list; curated careers mapped to UGC courses, other paths and checked licence steps | FR-317 to FR-319 |
 
 # Overall description
 
@@ -277,6 +279,9 @@ Table: Functional requirements, FE-3 Preference list
 | FR-314 | *New (CR-012).* The system shall show every field of the UGC registration and application steps 1 to 4 in the UGC's order and format: known values pre-filled with a Copy action, the others as guides (what to write, format, common mistake) rather than inputs; it shall never log in to the UGC or fill its form. | AC-304.3 | S | T |
 | FR-315 | *New (CR-012).* The system shall offer a print-and-post tracker with the UGC address and the order-change rule. | AC-304.4 | S | T |
 | FR-316 | *New (CR-012).* The co-pilot shall store only the two answers and the ticks, only on the student's phone, cleared with the student's data (NFR-030); details typed under its first version are deleted on the next load. | AC-304.5 | M | T |
+| FR-317 | *New (CR-013).* The Paths home shall offer *Who do you want to become?* below My list, listing the curated careers by name (English, Sinhala, Tamil) with a search over names and the words students use. | AC-509.1 | S | T |
+| FR-318 | *New (CR-013).* For a career, the system shall show the student's state-university courses mapped to it (by UGC course code) with their bands, best chance first; the number of mapped courses closed by their subjects; and the other paths mapped to it (by id or by words in names and programme titles), with cost and matched programmes. A licence step shall be shown only with a checked official source (quoted, linked, dated). | AC-509.2, AC-509.3 | S | T |
+| FR-319 | *New (CR-013).* A search for an unmapped career shall show the courses and paths whose names or programmes match. | AC-509.4 | C | T |
 
 ## FE-4 Journey and deadlines
 
@@ -319,6 +324,7 @@ Table: Functional requirements, FE-5 Other routes
 | FR-509 | *New (CR-002, CR-003).* For each notice, the device shall check the A/L-pass rule against the student's results and the age rule against the date of birth given at registration, showing each as met, not met or unknown (data missing); O/L rules shall be shown for the student to check and not evaluated. The check shall run on the device (NFR-072). | AC-503.3 | M | T |
 | FR-510 | *New (CR-002).* Notices shall be ordered with open and upcoming ones first, soonest closing date first, then closed ones, most recently closed first. | AC-503.4 | S | T |
 | FR-511 | *New (CR-009).* The University of Vocational Technology route (R042) shall quote the TVEC statement of the NVQ Level 5/6 to NVQ Level 7 (degree) progression, with the manual and page, and list the degree programmes the university lists for 2026 with the date they were read. | US-508 | C | I |
+| US-509 | Start from the career I want | FR-317 to FR-319 |
 
 ## FE-6 Ask
 

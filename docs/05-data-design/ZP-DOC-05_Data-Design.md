@@ -21,6 +21,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (produ
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Security audit run-1 lead 3: GROUP_ROOM_SEEN (rooms an account opened) so account deletion purges every room; migration 0012
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013: curated career map in `shared/careers.ts` (reference data, no D1 change)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Route catalogue: `cost_basis` (what a published fee covers); no D1 change
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Route catalogue 23 Oct: 102 routes; optional `programmes`; `entry_requirements_text` and `source_url` may be null (rules below); no D1 change
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: the UGC application co-pilot's answers (address, parents' names, school, ticks) are phone-only (local key zedpath.apply.v1), cleared with the student's data; no new tables
@@ -241,6 +242,12 @@ returned unsafe content: their facts keep the date they were checked on and the 
 published fee covers: TOTAL (the default, the whole programme), PER_SEMESTER, PER_YEAR, PER_SUBJECT or TO_REGISTER (the enum
 `COST_BASES` in `shared/api.ts`); the screen and Ask always show the amount with its basis, so a semester or registration fee is
 never read as the cost of a degree; a basis other than TOTAL requires a published amount (TC-145).
+
+**Career map (CR-013).** `shared/careers.ts` holds twelve curated careers as reference data bundled with the app, like the
+route catalogue: each refers to UGC courses by the handbook's course code (with the rulebook's name, pinned by a test),
+to routes by id or by words in their programme titles, and to a licence step only with a checked official source. It reuses
+the rulebook's courses, the student's computed bands and the route catalogue instead of a new table, and stores nothing
+about the student (TC-147).
 
 **Business rules on the server.** The step list (three preparation steps, open at any time, and the five UGC steps) is
 fixed in `shared/journey.ts` and mirrored by the CHECK on `journey_step.step_id`; a test inserts every step id the code

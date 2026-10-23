@@ -23,6 +23,7 @@ revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (pro
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: US-302 rewritten (understand what the order means; AC-302.3 withdrawn; AC-302.4 added); awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): US-304 built and extended (AC-304.2 to AC-304.5); awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): US-509 added; awaiting approval
 ---
 
 # Introduction
@@ -118,6 +119,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-010 | 15 October 2026 | Security hardening from audit run-1 and the test campaign: open group chats closed when a session ends or the member leaves; account deletion purges every group the account ever opened; Ask links only fill the box; no demo password; demo flag cleared with the phone; local data tagged with its owner and cleared when another student logs in; a failed log-out is reported; disguised contact details and chat-invite links refused; reports from accounts under a day old or demo accounts do not count toward hiding; post attempts, open connections, account writes, demo accounts, answer feedback and Ask questions capped; cross-site, "null" and malformed Origins refused | US-908, US-102, US-106, US-108, US-112, US-601, US-706, US-907 |
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | US-302 |
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | US-304 |
+| CR-013 | 23 October 2026 | Career-first mode (the product owner's request: "Can we have an outcome driven mode? Like student can enter who he wants to become and we show his paths with access located in homepage below mylist pill"): *Who do you want to become?* below My list; twelve curated careers, each showing the student's banded state-university courses, the courses closed by their subjects, the other paths that lead there, and the licence step where its official source was checked | US-509 |
 
 ## Sources of evidence
 
@@ -219,14 +221,14 @@ Table: Epic summary (verified by script against the stories in this document; su
 | EP2 | State university course discovery | 11 | 36 | 4 | P1 |
 | EP3 | Preference list | 5 | 15 | 3 | P1 |
 | EP4 | Journey and deadlines | 10 | 28 | 5 | P1 |
-| EP5 | Other routes | 7 | 25 | 3 | P1, P2 |
+| EP5 | Other routes | 8 | 30 | 3 | P1, P2 |
 | EP6 | Ask, with sources | 7 | 23 | 2 | P1, P2 |
 | EP7 | People around the student | 8 | 31 | 3 | P1, P3, P4, P5 |
 | EP8 | After selection | 4 | 10 | 0 | P1 |
 | EP9 | Data and trust | 8 | 33 | 5 | P6, P1 |
-| | **Total** | **72** | **231** | **31** | |
+| | **Total** | **73** | **236** | **31** | |
 
-The backlog holds 74 story IDs: the 72 above, plus US-406 (superseded) and US-507 (withdrawn). At v2.0 it held 67
+The backlog holds 75 story IDs: the 73 above, plus US-406 (superseded) and US-507 (withdrawn). At v2.0 it held 67
 stories, 220 points and 31 Must stories; at v1.0, 50 stories, 176 points and 24 Must stories.
 
 # Epic EP1: Profile and results
@@ -1038,6 +1040,24 @@ diploma to a degree, **so that** I know a vocational path does not close the doo
 - **AC-508.2** **Given** the same route, **then** it lists the degree programmes the university lists for 2026, with the date they were read.
 
 
+## US-509 Start from the career I want
+
+*New (CR-013).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 5 pts | R2 (23 Oct 2026) | EP5 | P1 | CR-013 |
+
+> **As a** student who knows what I want to become but not which course leads there, **I want** to pick a career and see
+every path to it from my results, **so that** I can plan from the outcome instead of searching course by course.
+
+**Acceptance criteria**
+
+- **AC-509.1** **Given** the Paths home, **then** *Who do you want to become?* sits below My list and opens a list of careers I can tap or search.
+- **AC-509.2** **Given** I pick a career, **then** I see my state-university courses for it with my band (best chance first), how many more I cannot apply for with my subjects (with the handbook's reasons one tap away), and the other paths that lead there (private, foreign-awarded, fee-paying, professional, diploma, scholarships), each with its cost and its programmes that matched.
+- **AC-509.3** **Given** a career that needs a licence to practise, **then** the step is shown only when its official source was checked, quoted and linked; the screen says the map is ZedPath's guide and that bands describe past cut-offs, not a promise.
+- **AC-509.4** **Given** a career ZedPath has not mapped, **when** I search for it, **then** I see the courses and paths whose names or programmes match instead.
+
 # Epic EP6: Ask, with sources
 
 | | |
@@ -1570,6 +1590,7 @@ Table: Evidence-to-story traceability matrix
 | CR-010 (security hardening, audit run-1) | US-908; AC-102.3, AC-102.4, AC-106.6, AC-108.3, AC-112.6, AC-112.7, AC-601.3, AC-706.6 to AC-706.8, AC-907.3 |
 | CR-011 (preference-list guidance) | US-302; AC-302.1, AC-302.2, AC-302.4 (AC-302.3 withdrawn) |
 | CR-012 (UGC application co-pilot) | US-304; AC-304.2 to AC-304.5 |
+| CR-013 (career-first mode) | US-509; AC-509.1 to AC-509.4 |
 
 # Glossary {.appendix}
 

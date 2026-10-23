@@ -4,7 +4,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Menu, Pencil, Plane,
-  ListOrdered, Scale, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
+  ListOrdered, Scale, Target, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
 import type { Band } from '../shared/banding.ts';
@@ -12,6 +12,7 @@ import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
 import { matches } from '../shared/search.ts';
 import { searchRoutes } from '../shared/route-search.ts';
+import { CAREERS, careerPaths, findCareers, type Career } from '../shared/careers.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
@@ -272,6 +273,7 @@ export function App() {
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')}
     ctx={{ results, list, setList, compare, setCompare, saved, setSaved, go }} />; }
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
+  else if (path === 'goal' && profile) { tab = 'paths'; back = true; title = t('title.goal'); screen = <GoalScreen id={arg ?? null} results={results} routes={routes} go={go} />; }
   else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} query={routeQuery} setQuery={setRouteQuery} />; }
   else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} following={saved.includes(arg)} onFollow={me ? on => ops.followNotice(arg, on) : null} />; }
   else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs}
@@ -341,6 +343,11 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
       <button className="card list-entry" onClick={() => go('/list')}>
         <span className="ic" style={{ background: 'var(--likely-bg)', color: 'var(--likely)' }}><ListOrdered size={22} aria-hidden="true" /></span>
         <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
+        <ChevronRight size={20} className="chev" aria-hidden="true" />
+      </button>
+      <button className="card list-entry" onClick={() => go('/goal')}>
+        <span className="ic" style={{ background: 'var(--violet-bg, color-mix(in srgb, var(--violet) 14%, transparent))', color: 'var(--violet)' }}><Target size={22} aria-hidden="true" /></span>
+        <span className="grow"><span className="t">{t('goal.card')}</span><span className="s">{t('goal.cardSub')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
       </button>
       </div><div className="dash-paths">
@@ -614,6 +621,76 @@ function RouteList({ group, routes, go, query, setQuery }: { group: RouteSummary
             </motion.button>))}
         </Stagger>)}
     </>
+  );
+}
+
+// ---------------------------------------------------------------- CR-013 Career-first mode
+const careerName = (c: Career) => t(`career.${c.id}` as Key);
+
+function GoalScreen({ id, results, routes, go }: { id: string | null; results: ResultsResponse | null; routes: RouteSummary[] | null; go: (to: string) => void }) {
+  const [query, setQuery] = useState('');
+  const career = id ? CAREERS.find(c => c.id === id) ?? null : null;
+  if (!career) {
+    const shown = findCareers(query, careerName);
+    const q = query.trim();
+    const courses = q && shown.length === 0 ? (results?.offerings ?? []).filter(o => matches(q, o.course, o.institution)).slice(0, 30) : [];
+    const paths = q && shown.length === 0 ? searchRoutes(q, routes ?? []).slice(0, 30) : [];
+    return (
+      <>
+        <h1 className="screen-title">{t('goal.h')}</h1>
+        <label className="search"><Search size={20} aria-hidden="true" /><input placeholder={t('goal.search')} value={query} onChange={e => setQuery(e.target.value)}
+          aria-label={t('goal.searchAria')} enterKeyHint="search" /></label>
+        {shown.length > 0 && <div className="chips goal-chips">{shown.map(c => (
+          <button key={c.id} className="chip" onClick={() => go(`/goal/${c.id}`)}>{careerName(c)}</button>))}</div>}
+        {q && shown.length === 0 && <>
+          <p className="helper" role="status">{t('goal.none', { q })}</p>
+          {courses.length > 0 && <Stagger className="list-card">{courses.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 10} onOpen={() => go(`/course/${o.uniCode}`)} />)}</Stagger>}
+          {paths.length > 0 && <RouteHits hits={paths} go={go} />}
+        </>}
+        <p className="footer-note">{t('goal.note')}</p>
+      </>
+    );
+  }
+  const found = results && routes ? careerPaths(career, results.offerings, results.hidden, routes) : null;
+  return (
+    <>
+      <div className="stack" style={{ gap: 6 }}>
+        <p className="section-label" style={{ margin: 0 }}>{t('goal.h')}</p>
+        <h1 className="screen-title">{careerName(career)}</h1>
+        <button className="btn text small" style={{ alignSelf: 'flex-start' }} onClick={() => go('/goal')}>{t('goal.change')}</button>
+      </div>
+      {!found ? <div className="skeleton" /> : <>
+        <p className="section-label">{t('goal.uni')}</p>
+        {found.courses.length > 0
+          ? <Stagger className="list-card">{found.courses.map((o, i) => <CourseRow key={`${o.uniCode}-${o.group}`} o={o} animate={i < 10} onOpen={() => go(`/course/${o.uniCode}`)} />)}</Stagger>
+          : <div className="card"><p className="subtitle">{t('goal.uniNone')}</p></div>}
+        {found.closed.length > 0 && <button className="hidden-bar" onClick={() => go('/hidden')}><span>{t('goal.closed', { n: found.closed.length })}</span><span className="row see-why">{t('paths.seeWhy')}<ChevronRight size={16} aria-hidden="true" /></span></button>}
+        {found.routes.length > 0 && <><p className="section-label">{t('goal.other')}</p><RouteHits hits={found.routes} go={go} /></>}
+        {career.licence && <section className="card stack">
+          <h2 className="title-l">{t('goal.licence')}</h2>
+          <p className="body-m" style={{ margin: 0 }} lang="en">{career.licence.step}</p>
+          <p className="source" lang="en">"{career.licence.quote}"</p>
+          <a className="source-link" href={career.licence.url} target="_blank" rel="noopener">{t('goal.source', { s: career.licence.body, d: career.licence.checkedOn })}<ExternalLink size={12} aria-hidden="true" /></a>
+        </section>}
+      </>}
+      <p className="footer-note">{t('goal.note')}</p>
+    </>
+  );
+}
+
+/** Other paths as rows: name, institute, the programmes that matched, cost with its basis. */
+function RouteHits({ hits, go }: { hits: { route: RouteSummary; programmes: string[] }[]; go: (to: string) => void }) {
+  return (
+    <Stagger className="list-card">
+      {hits.map(({ route: r, programmes }) => (
+        <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
+          <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
+            {programmes.length > 0 && <span className="s route-hit" lang="en">{programmes.slice(0, 3).join(' · ')}{programmes.length > 3 ? ` ${t('routes.moreProgs', { n: programmes.length - 3 })}` : ''}</span>}
+            {(r.costText || r.free) && <span className="m">{costLine(r)}</span>}</span>
+          {r.openNow && <span className="pill open">{t('routes.open')}</span>}
+          <ChevronRight size={20} className="chev" aria-hidden="true" />
+        </motion.button>))}
+    </Stagger>
   );
 }
 
