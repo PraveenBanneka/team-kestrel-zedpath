@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **62c9f84f** (other paths refreshed to 23 Oct 2026; four more hosts blocked). Rollback target 87a8eb99 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval. Pending Praveen: expansion decisions (official-domain rule for private institutes; foreign-awarded degrees). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval.
+  Live (workers.dev) = version **86bac10c** (other paths: 102 routes; unknown cost never "Free"; CMA and BIT kept). Rollback target 62c9f84f (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval. Pending Praveen: esoft.lk (upload form) block or not. Running: fee research for paths without a cost.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -441,3 +441,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Deployed 62c9f84f (whoami e6474e41). Ask index zedpath-ask: 51 route vectors upserted (changeset 37e40344), route-R029 deleted (c06d1da5); Ask itself not exercised (Gemini quota rule).
 - Verified live: /api/health rulebook generated 23 Oct; /api/routes 51 routes, no R029, R018 -> apply.sliate.ac.lk, R023 closes 7 November 2026, R026 -> UCSC, R047 India (ICCR), no blocked host anywhere in the payload; /api/journey alerts include R023 2026-11-07. Demo at 390x844: Diplomas list "Checked against official sources on 23 Oct 2026.", OUSL BSE first with "Open", SLIATE "Free".
 - Expansion research all landed (Section 25A institutes 1-34: register solid, fees published for only 4 institutes; professional bodies ACCA/FIA, CA BSc, SLIM, IBSL, CIMA Cert BA). Waiting on Praveen's two decisions before adding to the data.
+
+## 2026-10-23: 86bac10c LIVE (Praveen's GO): "Free" fix, CMA/BIT kept, other paths expanded to 102
+- Praveen: "why are all prof bodies free" (Number(null) is 0: 19 routes showed Free) -> Free only for a published 0; "Up to Rs ..." for a maximum or free places. "U have reduced the stuff we had" -> CMA and BIT facts back as checked 5 Oct, sites not linked (sourceUrl null, DAT-030 pinned). "put all" -> R053-R102: all 31 Section 25A institutes with programmes (titles read from the register by the main session), 11 foreign degrees (labelled), KDU fee-paying, ACCA/FIA, SLIM PGDip/PCM, IBSL DBF/CBF, CIMA Cert BA. Every field spot-checked on its official page. Commits 7fa71f3, 28f1bee; 560 tests.
+- Deployed 86bac10c (whoami e6474e41); Ask index: 102 route vectors upserted. Verified live: /api/routes 102 (PRIVATE_DEGREE 60, PROFESSIONAL 11), Free only R018-R022 + R037-R039, R029 present, no blocked host in the payload. Local demo at 390x844: SLIIT page (Programmes (35), "Not published on a page ZedPath could check"), KDU page.
+- Praveen next: "With real costs for each" -> fee research running (25A institutes; foreign degrees and professional bodies).
