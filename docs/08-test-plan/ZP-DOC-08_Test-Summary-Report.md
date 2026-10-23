@@ -15,6 +15,7 @@ revision: 0.9 | 12 Oct 2026 | Team Kestrel | First issue: results of the 20-agen
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review: status of the findings updated (D-03, D-04, D-05, D-10 and D-12 fixed; D-08 http link fixed, Google Drive mirror still open); new section on security audit run-1 (method; 0 confirmed, 17 needs-validation, 1 rejected; each lead with its fix and test; lead 9 accepted); automated suite re-run on 15 October 2026 (532 passed, 0 expected-fail, 21 opt-in)
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | Update of 21 October 2026: 536 passed after VR3 (Compare fixes, desktop layout); new test file `src/nav-pref.test.ts` (4)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | 539 passed after VR4; new test file `src/list-feedback.test.ts` (3)
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: 543 passed; new `src/list-guide.test.ts` (4)
 ---
 
 # Introduction
@@ -94,6 +95,7 @@ Table: Automated suite on 21 October 2026 (after VR3)
 | Check | Result |
 |---|---|
 | `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
+| CR-011, 23 October | 37 files (36 passed, 1 opt-in skipped); 564 tests: **543 passed, 0 failed**; new `src/list-guide.test.ts` (4), TC-141 |
 | Update of 23 October | 36 files (35 passed, 1 opt-in skipped); 560 tests: **539 passed, 0 failed**; new `src/list-feedback.test.ts` (3), TC-140 |
 | New test file | `src/nav-pref.test.ts` (4): the desktop side menu is open by default, remembered per device, safe when storage is blocked, forgotten by "Clear this phone" (TC-139) |
 | `npx tsc -b` | Exit code 0 |

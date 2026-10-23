@@ -15,6 +15,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue: strategy, environments
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 and CR-007 to CR-010: catalogue extended to all 34 test files (TC-124 to TC-138: the eight suites of the 12 October campaign and the new demo, statistics, aptitude, session-kick, hardening and owner tests); counts recounted (532 passed, 0 expected-fail, 21 opt-in); migrations 0001 to 0012; security tests for the demo, Origin, socket kick, abuse limits, contact filter and research block list; security audit run-1 summarised (detail in the Test Summary Report); results of 15 October 2026; guard tests 40 of 40; gaps and traceability updated
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | VR3: TC-139 added (desktop side menu preference, `src/nav-pref.test.ts`); results of 21 October 2026 (536 passed) and live checks of the Compare fixes and the desktop layout
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | VR4: TC-140 added (added-to-list message, `src/list-feedback.test.ts`); 539 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: TC-141 (list guide), TC-105 and TC-125 updated (no proposed order); 543 passed
 ---
 
 # Introduction
@@ -172,7 +173,7 @@ Table: Automated test cases
 | TC-102 | Banding | `shared/banding.test.ts` (14) | Pinned thresholds; exact four-decimal Z-scores; Safe/Likely/Reach/Out of range; limited history; NQC years; trend | BR-030 to BR-036, FR-102, FR-205, FR-206, NFR-051 |
 | TC-103 | Results API | `worker/results.test.ts` (1) | `POST /api/results` answer unchanged by the Ask refactor (pinned contract) | FR-201, FR-203, FR-205 |
 | TC-104 | Search | `shared/search.test.ts` (4) | Word-start matching in any order, Uni-Codes and short forms | FR-123, FR-215 |
-| TC-105 | My list | `shared/list.test.ts` (7) | Only eligible, no duplicates, 125 cap; order warnings; proposed order; copy Uni-Codes; multi-add | FR-302 to FR-306, FR-308, FR-310, BR-041 to BR-043 |
+| TC-105 | My list | `shared/list.test.ts` (7) | Only eligible, no duplicates, 125 cap; order notes (never a re-order, CR-011); copy Uni-Codes; multi-add | FR-302 to FR-306, FR-308, FR-310, BR-041 to BR-043 |
 | TC-106 | Journey rules | `shared/journey.test.ts` (16) | Official notices with sources; age and subject eligibility; UNKNOWN never a guess; ordering; reminders 7 and 1 days at 08:00; calendar file; pinned default settings | FR-401, FR-403, FR-404, FR-412, FR-413, FR-509, FR-510, NFR-072 |
 | TC-107 | Journey on account | `worker/my-journey.test.ts` (11) | Migration 0010 fills 255 offerings; CHECK and shared step list agree; 0009 rules carried over; session required; starts empty; follow real items only; tick only when open (409); deleted with account; Sri Lanka date; avatar values | FR-409, FR-410, FR-411, FR-414 to FR-416, FR-122, BR-061, NFR-038 |
 | TC-108 | Accounts | `worker/account.test.ts` (26) | Migration 0003 and 0007 rules; sign-up, log-in, one failure message; own rows only; atomic save; log out everywhere; expiry; recovery code; delete cascade; cross-site refusal; rate limits; safe default without database; compulsory contact details | FR-114 to FR-121, NFR-030, NFR-035 to NFR-037, NFR-070 |
@@ -208,6 +209,7 @@ Table: Automated test cases
 | TC-138 | Phone owner | `src/owner.test.ts` (2) | Local data remembers its owner and only that student's data is cleared for the next one (language stays); clearing the phone forgets the owner | FR-130 |
 | TC-139 | Desktop side menu | `src/nav-pref.test.ts` (4) | Open by default (pinned); collapsed and open remembered; open and no error when storage is blocked; "Clear this phone" forgets it, clearing student data keeps it | ZP-DOC-07 Desktop layout |
 | TC-140 | Added confirmation | `src/list-feedback.test.ts` (3) | Counts one and several; mentions courses already on the list and a full list; never says "Added 0" | ZP-DOC-07 Added confirmation |
+| TC-141 | List guide (CR-011) | `src/list-guide.test.ts` (4) | Six UGC rules, each with a handbook page or section, in all three languages; order by preference; the old proposed order is gone | FR-312; AC-302.4 |
 
 # Security tests
 
@@ -262,7 +264,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141).
 
 Table: Results of 21 October 2026 (developer machine)
 

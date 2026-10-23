@@ -2,9 +2,9 @@
 id: ZP-DOC-02
 title: User Stories
 subtitle: Personas, epics and prioritised product backlog with acceptance criteria
-version: 2.1
-date: 15 October 2026
-status: Approved
+version: 2.2
+date: 23 October 2026
+status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
@@ -21,6 +21,7 @@ revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change r
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (product owner's decisions of 14 October 2026: band names Very likely / Possible / Unlikely, intro guide, silhouette avatars, expired session) and CR-007 to CR-010 of 15 October 2026: 5 new stories (US-112 Try the demo, US-210 University facts, US-211 Aptitude test on the course page, US-508 NVQ to degree ladder, US-908 Close open chats when a session ends), all R2 and delivered on 15 October 2026; US-203 retitled with new AC-203.5; new AC-102.3, AC-102.4, AC-106.5, AC-106.6, AC-108.3, AC-601.3, AC-706.6 to AC-706.8 and AC-907.3; epic totals and release plan recomputed (72 stories, 231 points; R1 unchanged). No v2.0 commitment is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: US-302 rewritten (understand what the order means; AC-302.3 withdrawn; AC-302.4 added); awaiting approval
 ---
 
 # Introduction
@@ -114,6 +115,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-008 | 15 October 2026 | University facts on the course page from the UGC report *Sri Lanka University Statistics 2024*, each citing table and page | US-210 |
 | CR-009 | 15 October 2026 | Aptitude tests on the course page for the 24 offerings that need one; the NVQ 5/6 to NVQ 7 ladder on the University of Vocational Technology route (R042) | US-211, US-508 |
 | CR-010 | 15 October 2026 | Security hardening from audit run-1 and the test campaign: open group chats closed when a session ends or the member leaves; account deletion purges every group the account ever opened; Ask links only fill the box; no demo password; demo flag cleared with the phone; local data tagged with its owner and cleared when another student logs in; a failed log-out is reported; disguised contact details and chat-invite links refused; reports from accounts under a day old or demo accounts do not count toward hiding; post attempts, open connections, account writes, demo accounts, answer feedback and Ask questions capped; cross-site, "null" and malformed Origins refused | US-908, US-102, US-106, US-108, US-112, US-601, US-706, US-907 |
+| CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | US-302 |
 
 ## Sources of evidence
 
@@ -652,19 +654,20 @@ the architecture aptitude test").
 - **AC-301.3** **Given** an offering I'm not eligible for, **then** it cannot be added.
 
 
-## US-302 Get warned about a bad order
+## US-302 Understand what my list order means
 
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
 | Must | 5 pts | R1 | EP3 | P1 | E4, T1 |
 
-> **As a** student, **I want** to be warned when a Safe choice sits above a course I want more, **so that** I am not placed in it and locked out of my preferred course.
+> **As a** student, **I want** to understand what my list order means and the UGC's rules for it, **so that** I list courses in the order I really want them and do not lose a place by mistake. *(Rewritten by CR-011: the UGC follows my own order, handbook p.112.)*
 
 **Acceptance criteria**
 
-- **AC-302.1** **Given** a Safe offering ranked above a Likely or Reach offering, **then** a warning explains, in plain words, that I'd be placed in the Safe one if I qualify for both.
-- **AC-302.2** **Given** my list has no Safe choice at all, **then** I am warned that I may not be placed anywhere.
-- **AC-302.3** **Given** I tap *Fix order for me*, **then** a suggested order is shown that keeps my most-wanted choices first and Safe choices last, and I must confirm it.
+- **AC-302.1** **Given** a Safe offering ranked above a Likely or Reach offering, **then** a note (information, not a warning) explains that if I am selected for the Safe one, the courses below it are not considered, and that this is fine if I want it more. The system never changes my order.
+- **AC-302.2** **Given** my list has no Safe choice at all, **then** I am told that the handbook advises listing as many eligible courses as I can (up to 125).
+- **AC-302.3** *Withdrawn by CR-011.* (Was: a *Fix order for me* button proposing Safe choices last; it contradicted the handbook.)
+- **AC-302.4** **Given** I open My list, **then** a *What you need to know* section lists the UGC's rules (order by preference; the highest listed course I qualify for; never a course I did not list; do not rely only on last year's cut-offs; register before waiting for a vacancy; change the order once within two weeks; separate aptitude-test applications), each with its handbook page.
 
 
 ## US-303 Copy uni-codes in order
@@ -1559,6 +1562,7 @@ Table: Evidence-to-story traceability matrix
 | CR-008 (university facts) | US-210 |
 | CR-009 (aptitude tests, NVQ ladder) | US-211, US-508 |
 | CR-010 (security hardening, audit run-1) | US-908; AC-102.3, AC-102.4, AC-106.6, AC-108.3, AC-112.6, AC-112.7, AC-601.3, AC-706.6 to AC-706.8, AC-907.3 |
+| CR-011 (preference-list guidance) | US-302; AC-302.1, AC-302.2, AC-302.4 (AC-302.3 withdrawn) |
 
 # Glossary {.appendix}
 

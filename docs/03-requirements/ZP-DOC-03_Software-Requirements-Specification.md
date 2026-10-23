@@ -2,9 +2,9 @@
 id: ZP-DOC-03
 title: Software Requirements Specification
 subtitle: Functional, non-functional and business-rule requirements for ZedPath Release 1 and 2
-version: 2.1
-date: 15 October 2026
-status: Approved
+version: 2.2
+date: 23 October 2026
+status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
 author: Team Kestrel (drafted with Claude, AI coding partner)
@@ -19,6 +19,7 @@ revision: 2.0 (draft) | 11 Oct 2026 | Team Kestrel | Under revision for change r
 revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 1.0
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (band names, expired session; 14 October 2026) and CR-007 to CR-010 (15 October 2026): new FR-125 to FR-132, FR-219 to FR-221, FR-511, FR-613 to FR-615, FR-720 to FR-723, FR-914; revised FR-205 (displayed band names only); new NFR-007, NFR-054, NFR-055 and security-hardening NFR-076 to NFR-083; new BR-037, BR-059, BR-064, BR-078, BR-079, BR-081; traceability extended to US-112, US-210, US-211, US-508, US-908. No v2.0 requirement is withdrawn or weakened, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: FR-303 and FR-304 reworded, FR-305 withdrawn, FR-312 added, BR-041 and BR-042 reworded; awaiting approval
 ---
 
 # Introduction
@@ -91,6 +92,7 @@ Table: Change requests since version 2.0 and the requirements they affect
 | CR-008 | 15 October 2026 | University facts from the UGC report *Sri Lanka University Statistics 2024* on the course page | FR-219, NFR-007, NFR-055, BR-081 |
 | CR-009 | 15 October 2026 | Aptitude tests on the course page; NVQ 5/6 to NVQ 7 ladder on route R042 | FR-220, FR-511, BR-064 |
 | CR-010 | 15 October 2026 | Security hardening from audit run-1 (leads 1 to 8 and 10 to 17) and the test campaign (D-03, D-04, D-05, D-12) | FR-126, FR-128, FR-130 to FR-132, FR-613 to FR-615, FR-720 to FR-723, FR-914, NFR-054, NFR-076 to NFR-083, BR-059, BR-078, BR-079 |
+| CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | FR-303, FR-304, FR-305 (withdrawn), FR-312, BR-041, BR-042 |
 
 # Overall description
 
@@ -259,15 +261,16 @@ Table: Functional requirements, FE-3 Preference list
 |---|---|---|---|---|
 | FR-301 | The system shall let the student add eligible offerings to an ordered list and reorder them by drag and drop and by keyboard. | US-301 | M | T |
 | FR-302 | The system shall refuse to add an offering for which the student is not eligible. | AC-301.3 | M | T |
-| FR-303 | The system shall warn when a Safe offering is listed above a Likely or Reach offering (BR-040, BR-041). | US-302 | M | T |
-| FR-304 | The system shall warn when the list contains no Safe offering (BR-042). | AC-302.2 | M | T |
+| FR-303 | *Changed (CR-011).* The system shall explain, as information, when a Safe offering is listed above a Likely or Reach offering, and shall never change the student's order (BR-040, BR-041). | US-302 | M | T |
+| FR-304 | *Changed (CR-011).* The system shall advise, when the list contains no Safe offering, that the handbook recommends listing as many eligible courses as possible (BR-042). | AC-302.2 | M | T |
 | FR-308 | The system shall limit the list to 125 Uni-Codes with no duplicates (BR-043). | US-301; BR-017 | M | T |
-| FR-305 | The system shall propose a corrected order that keeps the student's most-wanted offerings first and Safe ones last, applied only after the student confirms. | AC-302.3 | M | T |
+| FR-305 | *Withdrawn (CR-011).* (Was: propose an order with Safe offerings last.) The UGC follows the student's own order (handbook p.112), so the system does not propose orders. | AC-302.3 (withdrawn) | – | – |
 | FR-306 | The system shall copy the list's uni-codes to the clipboard, one per line, in list order. | US-303 | M | T |
 | FR-307 | The system shall present the official application steps with the most common mistake for each, linked to the official instructions. | US-304 | S | I |
 | FR-309 | *New (VR, CR-006).* Pressing and holding a course in *Courses* or *My list*, or tapping *Select*, shall start selection with that course ticked; while selecting, a tap shall tick or untick a course instead of opening it. | US-305, AC-305.1 | C | T |
 | FR-310 | *New (VR).* The selection bar in *Courses* shall offer *Add to my list*, which adds every selected course under FR-302 and FR-308 and reports how many were added, how many were already listed, and whether the list was full. | AC-305.2 | C | T |
 | FR-311 | *New (CR-006).* The selection bar in *Courses* and *My list* shall offer *Compare*, which opens Compare with the selected courses in the order selected, at most three. | AC-305.3 | C | T |
+| FR-312 | *New (CR-011).* My list shall show *What you need to know*: the UGC's rules for the preference list, each citing its page or section of the UGC handbook. | AC-302.4 | M | T |
 
 ## FE-4 Journey and deadlines
 
@@ -622,8 +625,8 @@ Table: Business rules, preference-list checks
 | ID | Rule |
 |---|---|
 | BR-040 | Because selection takes the highest-listed Uni-Code the student clears (BR-016), an offering listed below one the student is very likely to clear is very unlikely to be reached. |
-| BR-041 | **Ordering warning:** when a Safe offering is listed above any Likely or Reach offering, the student is warned that the offerings below it are unlikely to be reached. |
-| BR-042 | **Coverage warning:** when the list contains no Safe offering, the student is warned that they may not be placed anywhere. |
+| BR-041 | **Ordering note** *(changed by CR-011)*: when a Safe offering is listed above any Likely or Reach offering, the student is told that if selected for it, the offerings below it are not considered, and that this is fine if they want it more. The order is the student's own preference (handbook p.112); the system never re-orders it. |
+| BR-042 | **Coverage advice** *(changed by CR-011)*: when the list contains no Safe offering, the student is advised that the handbook recommends listing as many eligible courses as possible, up to 125 (p.112). |
 | BR-043 | The list enforces BR-017: at most 125 entries and no duplicates. |
 
 ## Accounts and contact details (ZedPath policy, CR-001 and CR-003)
@@ -744,7 +747,7 @@ Table: Story-to-requirement traceability (every story in ZP-DOC-02 is covered)
 | US-210 | See official facts about the university | FR-219; NFR-007, NFR-055; BR-081 |
 | US-211 | See a course's aptitude test on its page | FR-220; BR-064 |
 | US-301 | Build my preference list | FR-301, FR-302, FR-308 |
-| US-302 | Get warned about a bad order | FR-303, FR-304, FR-305 |
+| US-302 | Understand what my list order means | FR-303, FR-304, FR-312 (FR-305 withdrawn) |
 | US-303 | Copy uni-codes in order | FR-306 |
 | US-304 | Learn the UGC form step by step | FR-307 |
 | US-305 | Select several courses at once | FR-309, FR-310, FR-311 |
