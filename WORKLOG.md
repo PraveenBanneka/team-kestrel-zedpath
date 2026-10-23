@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **18ab1527** (CR-014 groups for other paths, rules window, demo; career card hidden). D1 at migration 0013. Rollback target 32b72884 (code only; works on the 0013 schema). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014), awaiting approval.
+  Live (workers.dev) = version **b8c8ae8c** (VR5 welcome: demo first, languages select only, desktop layout; logo home). D1 at migration 0013. Rollback target 18ab1527 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -462,3 +462,8 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - From Praveen's 6 pm screen recording: career card hidden for now; five standing path groups (accounting; marketing and banking; OUSL; Customs; MSO) with labelled sample chats; demo shown only joinable groups (no more "The demo can join groups that already exist"); rules in a small centred window (Cancel / Agree and join) that joins and opens the group. Commit 89bc001; TC-148, MIG-030; 582 tests.
 - Migration 0013 rebuilds course_group with kind PATH (referencing tables copied out, dropped first, recreated, refilled; ids kept) and contracts group_member.rules_version (local DB had never had it: early 0009). Local apply OK before remote.
 - Sequence (GO): whoami e6474e41 -> remote backup (wrangler d1 export, 112 KB, 713 rows; kept in the session scratchpad, NOT in the repo: personal data) -> migrations apply --remote 0013 OK; counts unchanged (9 groups, 8 members, 0 reports, 8 seen) -> build-gated deploy 18ab1527 -> live demo: home shows only My list; Groups shows "Groups for other paths", no error; tapping Customs opens the rules window; Agree and join opens #/group/13 with its sample chat. D1 after: 5 path groups + 12 others (9 old + 3 popular created), 9 members, 9 seen.
+
+## 2026-10-23: b8c8ae8c LIVE (Praveen's GO): VR5 welcome screen and logo
+- From Praveen's 18:37 desktop recording: Try the demo first (gold, pulsing unless reduced motion) above the languages; language tiles only select (demo or the new "Create an account" opens in that language); full-screen two-column welcome on desktop; top-bar logo links home. Commit fa4d6c7; 582 tests.
+- A mid-turn GO was refused by the guard (only a GO that is the latest message counts); deployed after the next GO, build-gated. Verified live at 1440x900: welcome is a two-column grid with the demo button; choosing Tamil keeps the page and switches it; Try the demo opened #/paths in Tamil; logo from My list returns to #/paths.
+- Deck (Shark Tank, artifact v26): problem slide rebuilt (281,810 / 176,527 / 42,937 + three points), insight moved before the solution and made definitive (age of AI), solution slide with a large QR, insight 2 removed, six screenshots enlarged to 960 px without cropping.
