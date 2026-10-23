@@ -23,7 +23,7 @@ const read = (p: string) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const json = (p: string) => JSON.parse(read(p));
 
 type Route = Record<string, string | number | null> & { id: string; route_group: string; name: string; provider: string;
-  official_url: string | null; source_url: string; source_locator: string; retrieved_on: string; intake_timing: string | null;
+  official_url: string | null; source_url: string | null; source_locator: string; retrieved_on: string; intake_timing: string | null;
   entry_requirements_text: string; cost_min_lkr: number | null; cost_max_lkr: number | null; confidence: number };
 type Notice = { routeId: string; kind: string; title: string; opensOn: string | null; closesOn: string;
   age: { min: number | null; max: number | null; asOf: string; quote: string } | null;
@@ -40,7 +40,7 @@ const noticesFile = json('data/alerts/notices-2026-10-23.json') as { retrievedOn
 const syllabiFile = json('data/degrees/syllabi-2026-10-05.json') as { retrievedOn: string; programmes: Programme[] };
 const JOURNEY = json('worker/generated/journey-2025-2026.json') as { academicYear: string; steps: Step[]; notices: Notice[]; builtAt: string };
 const RB = json('worker/generated/rulebook-2025-2026.json') as {
-  routes: { id: string; group: string; name: string; provider: string; officialUrl: string | null; sourceUrl: string;
+  routes: { id: string; group: string; name: string; provider: string; officialUrl: string | null; sourceUrl: string | null;
     sourceLocator: string; retrievedOn: string; intakeTiming: string | null; requirements: string; closesOn: string | null; openAtRetrieval: boolean }[];
   academicYear: string; generatedAt: string; districts: { code: string; name: string }[]; streams: { code: string; name: string }[];
   subjects: { code: string; name: string }[]; sources: { id: string; title: string; edition: string; sha256: string }[];
@@ -62,6 +62,7 @@ const BLOCKED_HOSTS = (() => {
 const KNOWN = {
   notHttps: [] as string[],                              // R027 fixed 2026-10-14: https://itum.mrt.ac.lk (checked: ITUM's own site)
   offAllowList: ['syllabus 001A sourceUrls[1]'],         // a file-sharing link, not the university's own domain
+  sourceNotLinked: ['R026', 'R029'],                   // 23 Oct 2026: the only official site returned unsafe content; facts dated 5 Oct
 };
 
 // ---------------------------------------------------------------- helpers
@@ -88,13 +89,13 @@ const officialHost = (h: string) => h === 'ugc.ac.lk' || h.endsWith('.ac.lk') ||
 const ALL_URLS: { where: string; url: string }[] = [
   ...ROUTES.flatMap(r => [
     ...(r.official_url ? [{ where: `${r.id} official_url`, url: r.official_url }] : []),
-    { where: `${r.id} source_url`, url: r.source_url }]),
+    ...(r.source_url ? [{ where: `${r.id} source_url`, url: r.source_url }] : [])]),
   ...JOURNEY.notices.flatMap(n => [
     { where: `notice ${n.routeId} sourceUrl`, url: n.sourceUrl! },
     ...(n.officialUrl ? [{ where: `notice ${n.routeId} officialUrl`, url: n.officialUrl }] : [])]),
   ...RB.routes.flatMap(r => [
     ...(r.officialUrl ? [{ where: `rulebook ${r.id} officialUrl`, url: r.officialUrl }] : []),
-    { where: `rulebook ${r.id} sourceUrl`, url: r.sourceUrl }]),
+    ...(r.sourceUrl ? [{ where: `rulebook ${r.id} sourceUrl`, url: r.sourceUrl }] : [])]),
   ...syllabiFile.programmes.flatMap(p => (p.sourceUrls ?? []).map((url, i) => ({ where: `syllabus ${p.uniCode} sourceUrls[${i}]`, url }))),
   { where: 'HANDBOOK_URL', url: HANDBOOK_URL },
 ];
@@ -262,8 +263,8 @@ describe('DAT links: https, official, never blocked', () => {
     expect(TEXT_URLS.filter(u => !officialHost(host(u.url))).map(u => u.where)).toEqual([]);
   });
   it('DAT-027 a route\'s source is a government/university page or the provider\'s own site, never a third party', () => {
-    for (const r of ROUTES) {
-      const h = host(r.source_url);
+    for (const r of ROUTES.filter(x => x.source_url !== null)) {
+      const h = host(r.source_url!);
       const gov = h.endsWith('.gov.lk') || h.endsWith('.ac.lk');
       expect(gov || (r.official_url !== null && host(r.official_url) === h), `${r.id} source ${h}`).toBe(true);
     }
@@ -282,9 +283,10 @@ describe('DAT links: https, official, never blocked', () => {
 
 // ---------------------------------------------------------------- every number has a source
 describe('DAT every number has a source', () => {
-  it('DAT-030 every route carries a source link, a locator and a retrieval date', () => {
+  it('DAT-030 every route carries a source link (pinned exceptions: KNOWN.sourceNotLinked), a locator and a retrieval date', () => {
+    expect(ROUTES.filter(r => r.source_url === null).map(r => r.id)).toEqual(KNOWN.sourceNotLinked);
     for (const r of ROUTES) {
-      expect(r.source_url, r.id).toMatch(/^https?:\/\//);
+      if (r.source_url !== null) expect(r.source_url, r.id).toMatch(/^https?:\/\//);
       expect(String(r.source_locator).trim().length, `${r.id} source_locator`).toBeGreaterThan(3);
       expect(isIso(r.retrieved_on), r.id).toBe(true);
     }

@@ -627,7 +627,7 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
       {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
         {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.following1')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.follow')}</>}</button>}
       {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">{t('routes.site')}<ExternalLink size={18} aria-hidden="true" /></a>}
-      <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>{t('routes.doc')}</a>
+      {r.sourceUrl && <a className="btn text" href={r.sourceUrl} target="_blank" rel="noopener" style={{ alignSelf: 'center' }}>{t('routes.doc')}</a>}
     </>
   );
 }

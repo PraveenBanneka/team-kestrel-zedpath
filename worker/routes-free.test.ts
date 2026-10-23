@@ -8,9 +8,17 @@ const routes = (book as unknown as Rulebook).routes;
 
 describe('other paths: cost and checked date', () => {
   it('never shows "Rs 0": zero-cost routes are marked free with no cost text', () => {
-    expect(routes.some(r => r.costText === 'Rs 0')).toBe(false);
+    expect(routes.some(r => /Rs 0/.test(r.costText ?? ''))).toBe(false);                 // not even "Rs 0 to ..."
+    expect(routes.find(r => r.id === 'R040')!.costText).toBe('Up to Rs 150,000');           // free places for low-income families
+    expect(routes.find(r => r.id === 'R023')!.costText).toBe('Up to Rs 660,000');           // only a maximum is published
     for (const r of routes.filter(x => x.free)) expect(r.costText).toBeNull();
     expect(routes.filter(r => r.free).length).toBeGreaterThan(0);          // SLIATE and DTET full-time courses are free
+  });
+  it('an unknown cost is never "Free" (Praveen 23 Oct: professional bodies were all shown as free)', () => {
+    const unknown = routes.filter(r => r.costText === null && !r.free);
+    expect(unknown.length).toBeGreaterThan(10);
+    for (const id of ['R028', 'R029', 'R030', 'R031', 'R001', 'R046']) expect(routes.find(r => r.id === id)!.free, id).toBe(false);
+    expect(routes.filter(r => r.free).map(r => r.group).every(g => g === 'DIPLOMA' || g === 'VOCATIONAL')).toBe(true);
   });
   it('keeps an ISO checked-on date for every route', () => {
     for (const r of routes) expect(r.retrievedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);

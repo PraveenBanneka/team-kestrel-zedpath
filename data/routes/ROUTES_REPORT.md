@@ -8,7 +8,7 @@ Files in this folder:
 - `sources_manifest.csv`: URL, retrieval date, SHA-256, bytes and the route groups that use each file.
 - `build.py`, `verify.py`, `manifest.py`: scripts to rebuild the outputs and check them again.
 
-## Refresh of 23 October 2026 (current file: `routes-2026-10-23.json`, 51 records)
+## Refresh of 23 October 2026 (current file: `routes-2026-10-23.json`, 52 records)
 
 Every record was re-checked against its official source on 23 October 2026 by four research agents under the web research
 safety protocol, and every change below was spot-checked by the main session on the official page. Records re-checked and
@@ -23,8 +23,8 @@ confirmed carry `retrieved_on` 2026-10-23; the app's "Checked against official s
 | R043 Customs Inspector | Closing date 12.10.2026 has passed; exam date in December not yet published | Gazette 11.09.2026; doenets October calendar |
 | R047 India | Programme is ICCR; from 2027/2028 a valid IELTS (6.0+) or TOEFL (B2+) certificate is mandatory | mohe.gov.lk Ministry notice (PDF, read as text) |
 | R018 to R022 SLIATE | Same facts; links moved to apply.sliate.ac.lk | apply.sliate.ac.lk |
-| R026 UCSC BIT | Linked to UCSC's own page; requirements, fees and dates withdrawn until they can be re-checked on a safe official page | ucsc.cmb.ac.lk |
-| R029 CMA Sri Lanka | Withdrawn until a safe official source can be checked | none |
+| R026 UCSC BIT | Facts kept as checked on 5 Oct 2026 (Praveen: keep what we had); programme site not linked; the button links UCSC's own BIT page | ucsc.cmb.ac.lk (5 Oct copy for the facts) |
+| R029 CMA Sri Lanka | Kept as checked on 5 Oct 2026, with no link (the only official site is not linked); pinned in DAT-030 | 5 Oct copy |
 
 Four hosts returned unsafe content and are now in `BLOCKED_HOSTS` (unsafe content, not linked). Ask ZedPath also refuses to
 link them (`safeUrl`, ASK-047). Not reachable as text and unchanged: R030 CIMA, R045 NCOE, R052 retry. To check next:

@@ -90,7 +90,10 @@ export interface RouteSummary {
   name: string; provider: string; duration: string | null; costText: string | null; intakeTiming: string | null;
   /** The published cost is zero (e.g. SLIATE and DTET full-time courses): shown as "Free", never "Rs 0". */
   free: boolean;
-  requirements: string; officialUrl: string | null; sourceUrl: string; sourceLocator: string; retrievedOn: string;
+  requirements: string; officialUrl: string | null;
+  /** null only when the official site returned unsafe content during research: the facts keep the date they were
+   *  checked on, and the site is never linked (pinned in DAT-030). */
+  sourceUrl: string | null; sourceLocator: string; retrievedOn: string;
   openNow: boolean; warning: string | null;
 }
 

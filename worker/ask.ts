@@ -159,7 +159,7 @@ export function finish(raw: string, passages: CorpusPassage[]): { answer: string
     if (p.kind === 'HANDBOOK') return { n, source: 'UGC handbook 2025/26', page: p.page, url: HANDBOOK_URL, routeId: null, quote };
     // Routes: the index stores the researcher's source notes; students see the route's name and its official document.
     const routeId = p.id.replace(/^route-/, ''), r = book.routes.find(x => x.id === routeId);
-    return { n, source: r ? r.name : 'Official source', page: null, url: safeUrl(r?.sourceUrl ?? p.url), routeId: r ? r.id : null, quote };
+    return { n, source: r ? r.name : 'Official source', page: null, url: safeUrl(r ? r.sourceUrl : p.url), routeId: r ? r.id : null, quote };
   };
   return { answer, citations: cited.map(toCitation) };
 }
