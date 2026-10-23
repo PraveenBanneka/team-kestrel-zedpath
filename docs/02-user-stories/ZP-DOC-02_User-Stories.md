@@ -22,6 +22,7 @@ revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; bas
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (product owner's decisions of 14 October 2026: band names Very likely / Possible / Unlikely, intro guide, silhouette avatars, expired session) and CR-007 to CR-010 of 15 October 2026: 5 new stories (US-112 Try the demo, US-210 University facts, US-211 Aptitude test on the course page, US-508 NVQ to degree ladder, US-908 Close open chats when a session ends), all R2 and delivered on 15 October 2026; US-203 retitled with new AC-203.5; new AC-102.3, AC-102.4, AC-106.5, AC-106.6, AC-108.3, AC-601.3, AC-706.6 to AC-706.8 and AC-907.3; epic totals and release plan recomputed (72 stories, 231 points; R1 unchanged). No v2.0 commitment is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: US-302 rewritten (understand what the order means; AC-302.3 withdrawn; AC-302.4 added); awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): US-304 built and extended (AC-304.2 to AC-304.5); awaiting approval
 ---
 
 # Introduction
@@ -116,6 +117,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-009 | 15 October 2026 | Aptitude tests on the course page for the 24 offerings that need one; the NVQ 5/6 to NVQ 7 ladder on the University of Vocational Technology route (R042) | US-211, US-508 |
 | CR-010 | 15 October 2026 | Security hardening from audit run-1 and the test campaign: open group chats closed when a session ends or the member leaves; account deletion purges every group the account ever opened; Ask links only fill the box; no demo password; demo flag cleared with the phone; local data tagged with its owner and cleared when another student logs in; a failed log-out is reported; disguised contact details and chat-invite links refused; reports from accounts under a day old or demo accounts do not count toward hiding; post attempts, open connections, account writes, demo accounts, answer feedback and Ask questions capped; cross-site, "null" and malformed Origins refused | US-908, US-102, US-106, US-108, US-112, US-601, US-706, US-907 |
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | US-302 |
+| CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | US-304 |
 
 ## Sources of evidence
 
@@ -694,6 +696,10 @@ the architecture aptitude test").
 **Acceptance criteria**
 
 - **AC-304.1** **Given** I open the guide, **then** I see each step of the official process with the most common mistake for that step, linked to the official instructions.
+- **AC-304.2** *(CR-012)* **Given** I answer two questions (school or private candidate; is my name different from my A/L name), **then** I get my own list of documents to get ready, including an O/L copy when a course on my list needs O/L passes and the separate aptitude-test applications for my list, each with its handbook page.
+- **AC-304.3** *(CR-012)* **Given** I open *Fill the form*, **then** every field of the UGC registration and steps 1 to 4 is shown in the UGC's order and format (BLOCK CAPITALS, name with initials, address with commas, mobile as 07…), pre-filled from my account and results where ZedPath knows it, each with a *Copy* button, and my Uni-Codes in my order.
+- **AC-304.4** *(CR-012)* **Given** I submitted online, **then** I can tick off print, sign, certify, barcodes, pack and registered post to the UGC address, and the one chance to change the order.
+- **AC-304.5** *(CR-012)* **Given** I type my address, parents' names or school, **then** they stay on my phone only, are cleared with my data, and ZedPath never logs in to the UGC or fills its form for me.
 
 
 ## US-305 Select several courses at once
@@ -1563,6 +1569,7 @@ Table: Evidence-to-story traceability matrix
 | CR-009 (aptitude tests, NVQ ladder) | US-211, US-508 |
 | CR-010 (security hardening, audit run-1) | US-908; AC-102.3, AC-102.4, AC-106.6, AC-108.3, AC-112.6, AC-112.7, AC-601.3, AC-706.6 to AC-706.8, AC-907.3 |
 | CR-011 (preference-list guidance) | US-302; AC-302.1, AC-302.2, AC-302.4 (AC-302.3 withdrawn) |
+| CR-012 (UGC application co-pilot) | US-304; AC-304.2 to AC-304.5 |
 
 # Glossary {.appendix}
 

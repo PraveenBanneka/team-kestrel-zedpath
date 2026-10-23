@@ -16,6 +16,7 @@ revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review: status of the fi
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | Update of 21 October 2026: 536 passed after VR3 (Compare fixes, desktop layout); new test file `src/nav-pref.test.ts` (4)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | 539 passed after VR4; new test file `src/list-feedback.test.ts` (3)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: 543 passed; new `src/list-guide.test.ts` (4)
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: 547 passed; new `src/apply.test.ts` (4)
 ---
 
 # Introduction
@@ -95,6 +96,7 @@ Table: Automated suite on 21 October 2026 (after VR3)
 | Check | Result |
 |---|---|
 | `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
+| CR-012, 23 October | 38 files (37 passed, 1 opt-in skipped); 568 tests: **547 passed, 0 failed**; new `src/apply.test.ts` (4), TC-142 |
 | CR-011, 23 October | 37 files (36 passed, 1 opt-in skipped); 564 tests: **543 passed, 0 failed**; new `src/list-guide.test.ts` (4), TC-141 |
 | Update of 23 October | 36 files (35 passed, 1 opt-in skipped); 560 tests: **539 passed, 0 failed**; new `src/list-feedback.test.ts` (3), TC-140 |
 | New test file | `src/nav-pref.test.ts` (4): the desktop side menu is open by default, remembered per device, safe when storage is blocked, forgotten by "Clear this phone" (TC-139) |

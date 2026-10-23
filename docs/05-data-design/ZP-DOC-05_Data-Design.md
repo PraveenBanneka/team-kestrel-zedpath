@@ -3,7 +3,7 @@ id: ZP-DOC-05
 title: Data Design
 subtitle: Conceptual EER model, relational mapping, normalisation and the Cloudflare D1 physical schema
 version: 0.9
-date: 11 October 2026
+date: 23 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -21,6 +21,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (produ
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Security audit run-1 lead 3: GROUP_ROOM_SEEN (rooms an account opened) so account deletion purges every room; migration 0012
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: the UGC application co-pilot's answers (address, parents' names, school, ticks) are phone-only (local key zedpath.apply.v1), cleared with the student's data; no new tables
 ---
 
 # Introduction
@@ -117,7 +118,7 @@ puts that kind of data, rather than adding a new store:
 | Data | Where | Why |
 |---|---|---|
 | UGC admission steps (order, rule, handbook page) and dated notices (Gazette job exams, intakes) | Bundled read model `worker/generated/journey-2025-2026.json`, built by `tools/journey/build-journey.ts` from `data/journey/` and `data/alerts/` | Reference facts, like cut-offs and routes (ADR-002): no database reads per request. The build refuses to write unless every quote is found verbatim in its source |
-| A student's saved dates, date of birth, seen alerts, scheduled reminder ids | The student's phone only | Personal and only needed on that phone; nothing stored without asking (NFR-030). Eligibility is checked on the phone |
+| A student's saved dates, date of birth, seen alerts, scheduled reminder ids; *(CR-012)* the UGC application co-pilot's answers and ticks (address, parents' names, school, `zedpath.apply.v1`) | The student's phone only | Personal and only needed on that phone; nothing stored without asking (NFR-030). Eligibility is checked on the phone |
 | Course groups, members, senior invites, reports, blocks | D1, migration 0006 | Shared between accounts, so it must be on the server, enforced by keys and CHECKs |
 | Group messages | Each group's GroupRoom Durable Object (its own SQLite storage) | High write rate per group, never joined with other data; keeps chat traffic off D1 |
 

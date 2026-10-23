@@ -16,6 +16,7 @@ revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 (14 Octob
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | Revised for VR3 (18 to 21 October 2026, product owner's review on a phone and a desktop): Compare "+" opens the picker above the table and new columns line up beside the row labels; multi-select tip shown as a highlighted box with steps; Compare takes up to three and says so; desktop layout from 1024 px (collapsible side menu with a glass menu button, logo in the corner, Paths dashboard, course page in two columns); install button says "this device"
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | My list: "+ Add a course" box below the last course opens the course picker; a green confirmation with a tick whenever courses are added (Courses, course page, My list)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: My list order notes become information (no "Fix the order"); "What you need to know" section with the UGC rules and handbook pages
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: Apply to the UGC screen (route #/apply, from My list)
 ---
 
 # Introduction
@@ -161,6 +162,7 @@ Table: Hash routes, screens and purpose
 | `#/course/<Uni-Code>` | Course detail | Paths | Needs vs you have, cut-off chart, syllabus, university facts, aptitude test, actions |
 | `#/compare` | Compare | My list | Up to 3 courses side by side |
 | `#/list` | My list | My list | Ordered preference list for the UGC application |
+| `#/apply` | Apply to the UGC | My list | CR-012: checklist, every UGC form field ready to copy, print-and-post tracker |
 | `#/journey`, `#/journey/open`, `#/alerts` | Journey | Journey | My steps / Open now tabs |
 | `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees, job exams, vocational, abroad |
 | `#/groups` | Groups | Groups | Chat list: my groups, popular groups |
@@ -351,6 +353,18 @@ Table: My list: specification
 | States | Empty: invitation to add courses from Paths; warnings use `role="status"` |
 | Interactions | Drag by the grip, or focus the grip and use Arrow Up / Down; Fix the order previews and applies only after confirmation; press and hold or "Select" for selection, then **Compare in the order chosen** (max 3) or Remove |
 
+## Apply to the UGC (CR-012)
+
+Table: Apply to the UGC: specification
+
+| Aspect | Specification |
+|---|---|
+| Purpose | Help a first-generation applicant fill the UGC online application and post the printout without mistakes (US-304) |
+| Entry | *Apply to the UGC, step by step* button on My list |
+| Content | Privacy note (stays on this phone; ZedPath never logs in to the UGC). **1. Get these ready**: two questions (school or private candidate; name different from the A/L name) and a personal checklist (NIC both sides; own email and mobile; laser printer, A4 envelope, registered post; certified O/L copy when the list needs it; principal or JP certification; affidavit on a Rs. 50 stamp; separate aptitude applications). **2. Fill the form**: the autofill warning, then Register, Step 1 to Step 4, each field with a Copy button, pre-filled from the account and results (name in BLOCK CAPITALS, name with initials, date of birth, email, mobile as 07…, district, A/L results), and the Uni-Codes in the student's order with *Copy all*. **3. Print and post**: seven ticks ending with the UGC address and the one-time order change. Every item cites its page of the UGC handbook 2025/26 Section 5 |
+| States | Progress "n of m steps done"; Step 4 without a list shows *Build your list first* |
+| Interactions | Copy shows the green confirmation; ticks and answers saved on the phone at once |
+
 ## Journey
 
 Table: Journey: specification
@@ -482,6 +496,7 @@ Table: Changes driven by usability evidence
 | CR-007 | Product owner's decision (15 Oct): a demo without sign-up, a private copy per visitor | *Try the demo, no sign-up* on Welcome; demo note in Me |
 | CR-008, CR-009 | Product owner's decisions (15 Oct) | University facts card and Aptitude test card on the course page; NVQ ladder text on the University of Vocational Technology route |
 | CR-010 | Security audit run-1 (15 Oct) | Ask links only fill the box; no prefilled demo password; failed log-out reported; the next student on a phone starts clean |
+| CR-012 | Product owner's request after reviewing the UGC form (23 Oct): "in the Plus version we can aid students fill this" | Apply to the UGC co-pilot; no browser extension (the UGC asks applicants to turn autofill off) |
 | CR-011 | Product owner's check of how selection works (23 Oct): "students fill it using their preference only … we can't tell that it's wrong order" | Order notes reworded as information; "Fix the order" removed; What you need to know |
 | VR4 | Product owner's screen recording, 23 Oct: "we need a rectangle with a plus below the last one", "a green thing with a tick mark that they have been added" | + Add a course box on My list; added confirmation |
 | VR3 | Product owner's review, 18 to 21 Oct, on a phone and a 1870 px desktop: "the plus button not working", "the note should be more obvious", "can we only select up to 3?", "ZedPath should be on the corner", "looks emptier than it should be", "the left menu should be collapsible with a glassmorphic hamburger", "on your phone is not relevant on desktop" | Compare picker and columns fixed; tip box; Compare limit message; desktop layout with the logo in the corner, Paths dashboard, two-column course page and a collapsible side menu; install button says "this device" |

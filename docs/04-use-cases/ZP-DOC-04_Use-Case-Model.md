@@ -21,6 +21,7 @@ revision: 2.0 | 14 Oct 2026 | B.M.P Banneka | Approved by the product owner; bas
 revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for VR2 (14 October 2026) and CR-007 to CR-010 (15 October 2026): two new brief use cases, UC-34 Try the demo and UC-35 End a session; UC-03 revised (university facts, aptitude test); UC-02, UC-06, UC-07, UC-20, UC-22 and UC-29 revised for the new requirements (including the security hardening of CR-010); catalogue re-checked by script against all 148 functional requirement IDs of ZP-DOC-03 v2.1 (draft). No v2.0 use case is withdrawn, so the next approved version is 2.1. Version 2.0 of 14 October 2026 stays in force until the product owner approves this revision
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: the preference-list use case explains the order and the UGC rules instead of proposing an order; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): the list use case gains the application co-pilot extension; awaiting approval
 ---
 
 # Introduction
@@ -249,6 +250,7 @@ Table: Use case catalogue with level, release and realised requirements
 **Extensions**
 
 - *1a. The offering is not eligible:* the system refuses and shows the failed rule (FR-302).
+- *5a. (CR-012) The student opens* Apply to the UGC, step by step*:* the system shows their document checklist, every form field ready to copy and the print-and-post tracker (FR-313 to FR-316); it never logs in to the UGC.
 - *3a. (Withdrawn by CR-011.)* There is no "Fix order for me": the UGC follows the student's own order (handbook p.112).
 - *3b. The list exceeds the maximum number of preferences allowed (BR-043):* the system prevents further
   additions and explains the limit.
