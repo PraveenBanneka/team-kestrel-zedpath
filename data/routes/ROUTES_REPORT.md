@@ -157,3 +157,20 @@ Timing matters for the app. A/L 2026 was held from 10 Aug to 5 Sep 2026, so 2025
   - 0.9-0.95: Gazette or handbook text, current cycle.
   - 0.75-0.85: an official web page, or a single source with a minor inconsistency.
   - 0.6-0.7: dated fees, transcription from an image, or generic scheme conditions applied to a specific country.
+
+## 7. Scholarships and loans (CR-015, added 23 October 2026)
+
+Six entries, researched under the web research safety protocol and spot-checked word for word by the main session
+against each source (amounts, dates, eligibility text):
+
+| id | Entry | Group | Source |
+|---|---|---|---|
+| R103 | Mahapola Higher Education Scholarship | SCHOLARSHIP_LOAN | mahapola.lk (eligibility); UGC Handbook 2025/26, PDF page 8 (Rs. 10,000 a month from 2026) |
+| R104 | University bursary | SCHOLARSHIP_LOAN | UGC Commission Circular 04/2026 (image PDF, transcribed); UGC Handbook 2025/26 (Rs. 9,000 a month) |
+| R105 | Interest Free Student Loan Scheme (IFSLS) | SCHOLARSHIP_LOAN | IFSLS Student Handbook, 11th intake (studentloans.mohe.gov.lk): cap Rs. 1,500,000, caps by stream (1.6), stipend loan, dates 17.08.2026 to 27.09.2026 |
+| R106 | SLIIT merit scholarships | SCHOLARSHIP_LOAN | sliit.lk/scholarships (value of the 3-As award not published) |
+| R107 | IIT Achievers Scholarships | SCHOLARSHIP_LOAN | iit.ac.lk/scholarships (partial-award threshold not published) |
+| R108 | Government scholarship to a top-500 university abroad | SCHOLARSHIP_ABROAD | Ministry notice (mohe.gov.lk): ceiling Rs. 20,000,000 a year, deadline 15 September 2025 (A/L 2024 call; next call not found) |
+
+Not included: the President's Fund A/L award (site unreadable), other institutes' merit scholarships (no clear official
+page), Mahapola selection rules (published only as an image). Nothing unsafe was found on any page used.

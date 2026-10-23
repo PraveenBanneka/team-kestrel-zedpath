@@ -25,6 +25,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | Real costs with their basis: TC-145
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Search inside each group of other paths: TC-146 added; 570 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013 career-first mode: TC-147 added; 577 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-014 groups for other paths: TC-148 and MIG-030 added, MIG-017/027/028 updated; 582 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-015 scholarships and loans (R103 to R108, checked against their sources): TC-149 to TC-154 added, TC-144 count updated; 604 passed
 ---
 
 # Introduction
@@ -226,6 +227,12 @@ Table: Automated test cases
 | TC-146 | Search inside other paths | `shared/route-search.test.ts` (6) | Empty query keeps the list; institutes by name or short name (SLIIT, NSBM, ACCA); subjects found inside programme lists with the matching programmes named; name matches listed first; group words and short forms; nonsense finds nothing |
 | TC-147 | Career-first mode (CR-013) | `worker/careers.test.ts` (7) | Twelve careers named in three languages; every course a real UGC course with the rulebook's name; every path id exists; licence steps only from checked gov.lk pages, never a blocked host (doctor, dentist); the student's courses best chance first with closed courses and other paths; career search by name and student words; law degrees found inside programme lists |
 | TC-148 | Groups for other paths (CR-014) | `worker/groups.test.ts` (4), `worker/migrations.e2e.test.ts` (MIG-030) | Five path groups listed for everyone and already created, popular groups standing, listing twice creates nothing; joining a path group with the rules, unknown key refused; the demo sees only joinable groups and can join a path group but still cannot create one; every path group opens with its own labelled sample chat; 0013 keeps every group id, member, report and room-seen row, enforces the PATH CHECKs and cascades |
+| TC-149 | Scholarships and loans group (CR-015) | `worker/scholarships.test.ts` | The SCHOLARSHIP_LOAN group exists in three languages; its screen lists its own five entries (R103 to R107) and cross-lists the study-abroad scholarships (R046 to R051, R108) as the same records, not copies |
+| TC-150 | for_routes checked in the build (CR-015) | `worker/scholarships.test.ts` | Unknown group, unknown or repeated id, a route paying for itself or another scheme, for_routes outside the group, and any cost on a scheme all stop the rulebook build |
+| TC-151 | Ways to pay on the route page (CR-015) | `worker/scholarships.test.ts` | The reverse link is computed in the build: a paid route lists the schemes that pay for it, a scheme lists what it pays for |
+| TC-152 | No cost or "Free" on a scheme (CR-015) | `worker/scholarships.test.ts` | A scholarship or loan never shows a cost line or "Free"; its amount is shown from its cited notes |
+| TC-153 | Search finds scholarships and loans (CR-015) | `worker/scholarships.test.ts`, `shared/search.test.ts` | Scholarship, Mahapola, bursary, loan, IFSLS, interest free and the Sinhala and Tamil words find the schemes; Sinhala and Tamil vowel signs stay inside a word |
+| TC-154 | Ask corpus includes schemes (CR-015) | `worker/scholarships.test.ts` | A scheme passage carries its notes and what it pays for; a paid route passage carries its ways to pay |
 
 # Security tests
 
@@ -280,7 +287,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145), 570 (23 October, search inside other paths, TC-146), 577 (23 October, CR-013 career-first mode, TC-147), 582 (23 October, CR-014 groups for other paths, TC-148, MIG-030).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145), 570 (23 October, search inside other paths, TC-146), 577 (23 October, CR-013 career-first mode, TC-147), 582 (23 October, CR-014 groups for other paths, TC-148, MIG-030), 604 (23 October, CR-015 scholarships and loans, TC-149 to TC-154).
 
 Table: Results of 21 October 2026 (developer machine)
 

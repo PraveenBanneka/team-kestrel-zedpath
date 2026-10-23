@@ -15,8 +15,9 @@ const recognised = routes.filter(r => r.name.endsWith('(Ministry-recognised)'));
 const foreign = routes.filter(r => /foreign degree, not on the Ministry list/.test(r.name));
 
 describe('other paths: expansion (TC-144)', () => {
-  it('holds 102 routes: 43 more private-degree paths after the loan courses and 7 more professional ones', () => {
-    expect(routes.filter(r => r.group !== 'SCHOLARSHIP_LOAN').length).toBe(102);   // CR-015 scholarships and loans are counted in TC-149
+  it('holds 102 routes (plus CR-015): 43 more private-degree paths after the loan courses and 7 more professional ones', () => {
+    // CR-015 added R103 to R108: scholarships and loans are counted in TC-149; R108 (top-500 abroad scholarship) is the +1 here.
+    expect(routes.filter(r => r.group !== 'SCHOLARSHIP_LOAN').length).toBe(102 + 1);
     expect(routes.filter(r => r.group === 'PRIVATE_DEGREE').length).toBe(17 + 43);
     expect(routes.filter(r => r.group === 'PROFESSIONAL').length).toBe(4 + 7);
   });

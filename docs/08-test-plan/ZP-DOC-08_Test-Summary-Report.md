@@ -97,6 +97,7 @@ Table: Automated suite on 21 October 2026 (after VR3)
 |---|---|
 | `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
 | CR-014 groups for other paths, 23 October | 42 files; 603 tests: **582 passed, 0 failed**; TC-148 (4) and MIG-030 |
+| CR-015 scholarships and loans, 23 October | 43 files; 625 tests: **604 passed, 0 failed**; TC-149 to TC-154 (21) |
 | CR-013 career-first mode, 23 October | 42 files; 598 tests: **577 passed, 0 failed**; new `worker/careers.test.ts` (7), TC-147 |
 | Search inside other paths, 23 October | 41 files; 591 tests: **570 passed, 0 failed**; new `shared/route-search.test.ts` (6), TC-146 |
 | Real costs, 23 October | 40 files; 585 tests: **564 passed, 0 failed**; TC-145 (4) in `worker/routes-expansion.test.ts` |

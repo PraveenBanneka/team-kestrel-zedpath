@@ -58,13 +58,14 @@ describe('CR-015 scholarships and loans: the group (TC-149)', () => {
     expect([en['rg.SCHOLARSHIP_LOAN'], en['rg.SCHOLARSHIP_LOAN.sub']]).toEqual(['Scholarships and loans', 'Ways to pay for your next step']);
     expect(en['routes.also.SCHOLARSHIP_ABROAD']).toBe('Study abroad scholarships');
   });
-  it('cross-lists the study-abroad scholarships (R046 to R051) on its screen without copying them, even with no entries of its own', () => {
+  it('cross-lists the study-abroad scholarships (R046 to R051, R108) on its screen without copying them, even with no entries of its own', () => {
     const sec = groupSections('SCHOLARSHIP_LOAN', real);
     expect(sec.also?.group).toBe('SCHOLARSHIP_ABROAD');
-    expect(sec.also!.routes.map(r => r.id)).toEqual(['R046', 'R047', 'R048', 'R049', 'R050', 'R051']);
+    expect(sec.also!.routes.map(r => r.id)).toEqual(['R046', 'R047', 'R048', 'R049', 'R050', 'R051', 'R108']);
     expect(sec.also!.routes.every(r => real.includes(r))).toBe(true);                      // the same objects, not copies
     expect(sec.own.every(r => r.group === 'SCHOLARSHIP_LOAN')).toBe(true);
-    expect(real.filter(r => r.group === 'SCHOLARSHIP_ABROAD').length).toBe(6);            // still listed once in the data
+    expect(sec.own.map(r => r.id)).toEqual(['R103', 'R104', 'R105', 'R106', 'R107']);      // the verified entries, 23 Oct 2026
+    expect(real.filter(r => r.group === 'SCHOLARSHIP_ABROAD').length).toBe(7);            // still listed once in the data
     expect(groupSections('SCHOLARSHIP_LOAN', compiled).own.map(r => r.id)).toEqual(['R904', 'R905']);
     for (const g of ROUTE_GROUP_CODES.filter(x => x !== 'SCHOLARSHIP_LOAN')) expect(groupSections(g, real).also, g).toBeNull();
   });
