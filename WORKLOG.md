@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **b8c8ae8c** (VR5 welcome: demo first, languages select only, desktop layout; logo home). D1 at migration 0013. Rollback target 18ab1527 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
+  Live (workers.dev) = version **2249404d** (CR-015 scholarships and loans; 108 routes). D1 at migration 0013. Rollback target b8c8ae8c (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -468,10 +468,13 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - A mid-turn GO was refused by the guard (only a GO that is the latest message counts); deployed after the next GO, build-gated. Verified live at 1440x900: welcome is a two-column grid with the demo button; choosing Tamil keeps the page and switches it; Try the demo opened #/paths in Tamil; logo from My list returns to #/paths.
 - Deck (Shark Tank, artifact v26): problem slide rebuilt (281,810 / 176,527 / 42,937 + three points), insight moved before the solution and made definitive (age of AI), solution slide with a large QR, insight 2 removed, six screenshots enlarged to 960 px without cropping.
 
-## 2026-10-23: CR-015 scholarships and loans (built, NOT yet deployed)
+## 2026-10-23: 2249404d LIVE (Praveen's GO): CR-015 scholarships and loans
 - Praveen: "in our app we dont have scholarships. Why?" Answer: only the 6 foreign government scholarships existed (R046-R051); Mahapola/Bursary hidden on 15 Oct; loan scheme and scholarships deferred to R2 in ZP-DOC-01.
 - Built with two background agents (Praveen: "use separate agents"): code agent (commits 1261b8f, d458b14: SCHOLARSHIP_LOAN group, for_routes + Ways to pay computed in the build, no cost or Free on a scheme, si/ta search fix) and research agent (scratchpad only, rules 1-8 restated).
 - Main session spot-checked every fact word for word (UGC handbook p.8, IFSLS handbook 1.1-1.7 and 3.3, Ministry notice, mahapola.lk, sliit.lk, iit.ac.lk). Appended R103-R107 (SCHOLARSHIP_LOAN) and R108 (moved to SCHOLARSHIP_ABROAD); dropped the 17-institute name list from R105 notes (contains a blocked host name). No D1 change.
 - Tests: tsc clean, 604 passed / 21 skipped; build green. TC-149..154 added to ZP-DOC-08.
-- Local click-through blocked: POST /api/auth/demo 500 on wrangler dev (rate-limit binding runs remotely). Verify on live after the GO.
+- Local click-through blocked: POST /api/auth/demo 500 on wrangler dev (rate-limit binding runs remotely), so verified on live instead.
+- Deploy: whoami = Stacklineops (e6474e41...); build + bundle grep ("Scholarships and loans", Mahapola) + deploy chained. Version 2249404d-a57d-4776-aa23-7525b35f154f. Rollback target b8c8ae8c-0dc1-4e43-a840-00b7d890c070. No D1 change.
+- Live checks: /api/routes 108 routes, SCHOLARSHIP_LOAN = R103-R107; R054 waysToPay [R105, R106]; no cost or Free on R103. Headless demo: home shows the 7th tile (12 = 5 own + 7 abroad), the group lists the 5 schemes then "Study abroad scholarships".
+- Not done: Vectorize re-embedding of the 6 new route passages (Ask cannot cite them yet; remote step).
 - Deck (artifact FRG3sFD9LjUqruwqavpkBT) v31-37: new Other paths slide, Journey with My steps + notifications line, AAT group chat, Compare slide (099L vs 136L, from the live demo), market slide as TAM/SAM/SOM (Gate 1 numbers), link under the QR, ask = LKR 200,000 for 5%.
