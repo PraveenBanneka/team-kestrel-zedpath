@@ -3,7 +3,7 @@
 // Errors appear only after Next (ui-ux-pro-max: validate after interaction; one task per screen).
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { Atom, Building2, Calculator, ChevronRight, ClipboardList, Cpu, GraduationCap, Microscope, Palette, Plane, Search, Sprout, Trophy, Wrench } from 'lucide-react';
+import { Atom, Building2, Calculator, Check, ChevronRight, ClipboardList, Cpu, GraduationCap, Microscope, Palette, Plane, Search, Sparkles, Sprout, Trophy, Wrench } from 'lucide-react';
 import type { Meta, ProfileInput } from '../../shared/api.ts';
 import { formatZ, parseZ } from '../../shared/banding.ts';
 import type { Grade, StreamCode } from '../../shared/rules.ts';
@@ -31,15 +31,23 @@ export function Welcome({ onStart, onLogin, onDemo, setLang }: { onStart: () => 
         <motion.p className="lead" {...rise(0.16)}>{t('welcome.lead')}</motion.p>
         <motion.p className="subtitle" {...rise(0.24)}>{t('welcome.body')}</motion.p>
       </div>
-      <motion.div className="stack" style={{ gap: 12 }} {...rise(0.34)}>
-        <p className="section-label">{t('welcome.choose')}</p>
-        <div className="lang-grid">
-          {LANGS.map(l => (
-            <button key={l.code} className={`lang-tile ${getLang() === l.code ? 'selected' : ''}`} lang={l.code} aria-pressed={getLang() === l.code}
-              onClick={() => { setLang(l.code); onStart(); }}><span className="big">{l.name}</span><span className="soon">{t('welcome.continue')}</span></button>))}
-        </div>
-        <button className="btn tonal demo-btn" onClick={demo} disabled={demoBusy}>{demoBusy ? t('welcome.demoBusy') : t('welcome.demo')}</button>
+      {/* Praveen 2026-10-23 (screen recording): Try the demo comes first and stands out, because a judge clicks the first
+          thing they see; choosing a language only selects it, and the demo (or a new account) opens in that language. */}
+      <motion.div className="stack welcome-actions" style={{ gap: 12 }} {...rise(0.34)}>
+        <button className={`demo-cta ${reduce ? '' : 'pulse'}`} onClick={demo} disabled={demoBusy}>
+          <Sparkles size={24} aria-hidden="true" />
+          <span className="grow"><b>{demoBusy ? t('welcome.demoBusy') : t('welcome.demo')}</b><small>{t('welcome.demoSub')}</small></span>
+          <ChevronRight size={22} aria-hidden="true" />
+        </button>
         {demoErr && <p className="fineprint" role="alert">{demoErr}</p>}
+        <p className="section-label" id="lang-h">{t('welcome.choose')}</p>
+        <div className="lang-grid" role="radiogroup" aria-labelledby="lang-h">
+          {LANGS.map(l => (
+            <button key={l.code} className={`lang-tile ${getLang() === l.code ? 'selected' : ''}`} lang={l.code} role="radio" aria-checked={getLang() === l.code}
+              onClick={() => setLang(l.code)}><span className="big">{l.name}</span>
+              <span className="soon">{getLang() === l.code ? <><Check size={12} aria-hidden="true" /> {t('welcome.picked')}</> : '\u00a0'}</span></button>))}
+        </div>
+        <button className="btn outline-white" onClick={onStart}>{t('welcome.create')}</button>
         <button className="btn text on-aurora" onClick={onLogin}>{t('welcome.login')}</button>
         <p className="fineprint">{t('welcome.fine')}</p>
         <p className="team-line">{t('welcome.team')}</p>

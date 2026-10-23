@@ -54,7 +54,7 @@ export const en = {
   // welcome and intro
   'welcome.lead': 'Everything after A/Ls, in one place.',
   'welcome.body': 'Every path your results can reach: state universities, private degrees, diplomas, job exams and more. With the real deadlines, and a source for every fact.',
-  'welcome.demo': 'Try the demo, no sign-up',
+  'welcome.demo': 'Try the demo, no sign-up', 'welcome.demoSub': 'See a real student’s paths in seconds', 'welcome.create': 'New here? Create an account', 'welcome.picked': 'Selected',
   'welcome.demoBusy': 'Opening the demo…',
   'acc.demo': 'Demo account with a sample student. Groups are read-only, and it is deleted 24 hours after you opened it.',
   'welcome.choose': 'Choose your language', 'welcome.continue': 'Continue', 'welcome.login': 'Already have an account? Log in',

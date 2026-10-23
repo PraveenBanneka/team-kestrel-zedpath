@@ -23,6 +23,7 @@ revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: 
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): FR-307 built; FR-313 to FR-316 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): FR-317 to FR-319 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014: FR-724 to FR-726 added; FR-317 entry hidden; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also VR5: FR-131 added; awaiting approval
 ---
 
 # Introduction
@@ -228,6 +229,7 @@ Table: Functional requirements, FE-1 Profile and results
 | FR-128 | *New (CR-010).* Demo mode shall prefill no password, and no password shall be shipped in the app or its scripts. Clearing the phone (*Delete everything on this phone* or *Log out and clear this phone*) shall also switch demo mode off. | AC-102.3, AC-112.6 | S | T |
 | FR-129 | *New (VR2).* When the server answers 401 to any request outside the sign-in routes (sign-up, log-in, recovery, demo, log-out), the app shall end the local session and open *Log in*. | AC-106.5 | S | D |
 | FR-130 | *New (CR-010).* The app shall record on the phone which username its stored results, list, Journey and settings belong to; when a different student logs in, it shall clear that data from the phone first (the language choice stays). Clearing the phone shall also forget the owner. | AC-102.4 | M | T |
+| FR-131 | *New (VR5).* The Welcome screen shall offer *Try the demo* first; choosing a language shall only select it (no navigation), and the demo or a new account shall open in the chosen language; on screens 1024 px and wider it shall fill the screen; the logo in the app's top bar shall link home. | AC-112.8, AC-112.9 | S | T |
 | FR-131 | *New (CR-010).* When *Log out* or *Log out everywhere* fails, the app shall say that the student is still logged in and should try again, and shall not show the student as logged out. | AC-106.6 | S | D |
 | FR-132 | *New (CR-010).* The server shall record each group room an account opens (GROUP_ROOM_SEEN, migration 0012, ZP-DOC-05); deleting the account shall purge the account's messages from every room it is in or ever opened, read before the rows are deleted. | AC-108.3 | M | T |
 

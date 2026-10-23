@@ -25,6 +25,7 @@ revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: 
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): US-304 built and extended (AC-304.2 to AC-304.5); awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): US-509 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014 (groups for other paths; rules window; demo): US-704 extended (AC-704.9 to AC-704.11), US-707 AC-707.4; CR-013 card hidden from the home; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also VR5 (welcome screen): US-112 AC-112.8 and AC-112.9; awaiting approval
 ---
 
 # Introduction
@@ -122,6 +123,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | US-304 |
 | CR-013 | 23 October 2026 | Career-first mode (the product owner's request: "Can we have an outcome driven mode? Like student can enter who he wants to become and we show his paths with access located in homepage below mylist pill"): *Who do you want to become?* below My list; twelve curated careers, each showing the student's banded state-university courses, the courses closed by their subjects, the other paths that lead there, and the licence step where its official source was checked | US-509 |
 | CR-014 | 23 October 2026 | Product owner's screen recording: "remove this latest one, who do you want to become thing, remove that for now"; groups: "two for these professional body interested people and one open university ... two government ones"; "the group rules should appear in a smaller window and we can either cancel it or join and when we tap join we should be taken inside a group and you should fill those groups with sample chats". Five standing groups for other paths (accounting qualifications; marketing and banking; Open University; Inspector of Customs exam; Management Service Officers exam) with labelled sample chats; the rules in a small window with Cancel or Agree and join, which opens the group; the demo is shown only groups it can join; the career card (CR-013) is hidden from the home for now | US-704, US-707, US-509 |
+| VR5 | 23 October 2026 | Product owner's screen recording of the desktop app: "if we click this icon we should be taken to home"; "can we make it more windows friendly"; "try this demo ... we should put this above choose your language and it should be really attention capturing"; "clicking a language should not take them anywhere"; "if they put Sinhala and try this then they will be taken into the Sinhala version". Try the demo first and prominent on the Welcome screen; choosing a language only selects it; a separate *Create an account*; the Welcome screen fills a desktop screen; the logo in the top bar goes home | US-112, US-105 |
 
 ## Sources of evidence
 
@@ -451,6 +453,8 @@ tap, **so that** I can judge whether it helps me before I create an account.
 - **AC-112.5** **Given** a demo account in *Groups*, **then** it can join a group that already exists and read it, but it cannot create a group, post a message or report one, and the server refuses each attempt.
 - **AC-112.6** *(CR-010)* **Given** demo mode or the demo account, **then** no password is prefilled on any screen or shipped in the app.
 - **AC-112.7** *(CR-010)* **Given** 500 demo accounts already exist, **when** someone taps *Try the demo*, **then** they are told the demo is busy and invited to create an account; each tap deletes at most 50 expired demo accounts, and a failed clean-up never blocks the demo.
+- **AC-112.8** *New (VR5).* **Given** the Welcome screen on a phone or a computer, **then** *Try the demo* is the first action, above the languages, and stands out; choosing a language only selects it, and the demo (or a new account, through *New here? Create an account*) opens in that language.
+- **AC-112.9** *New (VR5).* **Given** a computer screen, **then** the Welcome screen fills the screen (intro on the left, actions on the right) instead of a phone-width column, and the logo in the app's top bar returns home.
 
 
 # Epic EP2: State university course discovery
@@ -1597,6 +1601,7 @@ Table: Evidence-to-story traceability matrix
 | CR-011 (preference-list guidance) | US-302; AC-302.1, AC-302.2, AC-302.4 (AC-302.3 withdrawn) |
 | CR-012 (UGC application co-pilot) | US-304; AC-304.2 to AC-304.5 |
 | CR-013 (career-first mode) | US-509; AC-509.1 to AC-509.4 |
+| VR5 (welcome screen and logo) | US-112 (AC-112.8, AC-112.9) |
 | CR-014 (groups for other paths, rules window, demo) | US-704 (AC-704.9 to AC-704.11), US-707 (AC-707.4); US-509 entry hidden |
 
 # Glossary {.appendix}

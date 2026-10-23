@@ -238,7 +238,7 @@ export function App() {
     </div>);
 
   // First run
-  if (!onboarded && path !== 'intro') return <div className="shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang}
+  if (!onboarded && path !== 'intro') return <div className="shell welcome-shell"><main><Welcome onStart={() => go('/intro')} onLogin={() => go('/login')} setLang={changeLang}
     onDemo={() => demoLogin().then(m => { adopt(m); setOnboarded(); setOnb(true); go('/paths'); })} /></main></div>;
   if (!onboarded && path === 'intro') return <div className="shell"><main><Intro onDone={finishIntro} /></main></div>;
   const SENIOR_OK = ['groups', 'group', 'ask', 'me', 'journey', 'alerts'];
@@ -288,7 +288,8 @@ export function App() {
       <header className="app-bar">
         <button className="nav-toggle glass" onClick={toggleNav} aria-expanded={navOpen} aria-controls="main-nav"
           aria-label={navOpen ? t('nav.collapse') : t('nav.expand')} title={navOpen ? t('nav.collapse') : t('nav.expand')}><Menu size={20} aria-hidden="true" /></button>
-        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
+        {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button>
+          : <a className="logo-home" href="#/paths" aria-label={t('nav.paths')}><Logo size={32} /></a>}
         <span className="brand">{title}</span>
         {path === 'routes' && arg && <button className={`icon-btn${routeQuery !== null ? ' on' : ''}`} onClick={() => setRouteQuery(q => q === null ? '' : null)}
           aria-expanded={routeQuery !== null} aria-controls="route-search" aria-label={t('routes.searchOpen')} title={t('routes.searchOpen')}><Search size={22} aria-hidden="true" /></button>}

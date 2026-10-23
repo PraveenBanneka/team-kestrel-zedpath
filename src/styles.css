@@ -727,3 +727,32 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
   background: rgba(15, 23, 42, .45); }
 .modal { width: 100%; max-width: 440px; max-height: calc(100dvh - 48px); overflow: auto; box-shadow: 0 24px 64px rgba(15, 23, 42, .3); }
 .modal .wa-rule-list { margin: 0; font-size: 14px; line-height: 20px; }
+
+/* ---------- Welcome (Praveen's screen recording, 23 Oct): Try the demo first and attention-grabbing; desktop fills the screen */
+.welcome .demo-cta { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 72px; padding: 12px 18px; border: 0; border-radius: 20px; cursor: pointer;
+  background: linear-gradient(135deg, #FFD66B, #FFB020); color: #14213D; text-align: left; box-shadow: 0 14px 34px -10px rgba(255, 176, 32, .65), 0 0 0 1px rgba(255, 255, 255, .5) inset;
+  transition: transform .15s; }
+.welcome .demo-cta:active { transform: scale(.98); }
+.welcome .demo-cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.welcome .demo-cta .grow { display: flex; flex-direction: column; gap: 2px; }
+.welcome .demo-cta b { font: 700 19px/24px var(--font-head); }
+.welcome .demo-cta small { font-size: 13px; line-height: 17px; opacity: .8; }
+.welcome .demo-cta.pulse { animation: demo-pulse 2.4s ease-in-out infinite; }
+@keyframes demo-pulse { 0%, 100% { box-shadow: 0 14px 34px -10px rgba(255, 176, 32, .65), 0 0 0 0 rgba(255, 214, 107, .55); }
+  50% { box-shadow: 0 14px 34px -10px rgba(255, 176, 32, .65), 0 0 0 10px rgba(255, 214, 107, 0); } }
+@media (prefers-reduced-motion: reduce) { .welcome .demo-cta.pulse { animation: none; } }
+.welcome .lang-tile .soon { display: inline-flex; align-items: center; gap: 4px; min-height: 14px; }
+.btn.outline-white { width: 100%; min-height: 48px; background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, .7); font-weight: 600; }
+.logo-home { display: grid; place-items: center; border-radius: 10px; }
+.logo-home:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; }
+@media (min-width: 1024px) {
+  .welcome-shell main { max-width: none; padding: 0; }
+  .welcome { margin: 0; min-height: 100dvh; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(380px, 460px); align-items: center; gap: 72px;
+    padding: 56px max(56px, calc((100vw - 1180px) / 2)); }
+  .welcome .logo-wrap { padding-top: 0; gap: 18px; }
+  .welcome .display { font-size: 72px; line-height: 1; }
+  .welcome .lead { font-size: 26px; line-height: 34px; }
+  .welcome .subtitle { font-size: 18px; line-height: 28px; max-width: 560px; }
+  .welcome .welcome-actions { padding: 28px; border-radius: 28px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+}
