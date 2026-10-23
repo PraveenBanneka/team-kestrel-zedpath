@@ -11,6 +11,7 @@ import type { Band } from '../shared/banding.ts';
 import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
 import { matches } from '../shared/search.ts';
+import { searchRoutes } from '../shared/route-search.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
 import { DEMO_EXTRAS, DEMO_PROFILE, demoOn } from './demo.ts';
@@ -84,6 +85,10 @@ export function App() {
   const [onboarded, setOnb] = useState(() => isOnboarded());
   const [results, setResults] = useState<ResultsResponse | null>(null);
   const [routes, setRoutes] = useState<RouteSummary[] | null>(null);
+  /** Search inside the open group of other paths: null = closed (Praveen 23 Oct: a search icon left of the profile icon). */
+  const [routeQuery, setRouteQuery] = useState<string | null>(null);
+  const routeGroup = useRef<string | null>(null);   // kept when a path is opened and the student comes back; reset for another group
+  useEffect(() => { if (route.startsWith('/routes/') && route !== routeGroup.current) { routeGroup.current = route; setRouteQuery(null); } }, [route]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => { api<Meta>('/meta').then(setMeta).catch(e => setError(String(e.message))); }, []);
@@ -267,7 +272,7 @@ export function App() {
     initialQuestion={arg ? decodeURIComponent(arg) : null} onConsumedInitial={() => history.replaceState(null, '', '#/ask')}
     ctx={{ results, list, setList, compare, setCompare, saved, setSaved, go }} />; }
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
-  else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} />; }
+  else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} query={routeQuery} setQuery={setRouteQuery} />; }
   else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} following={saved.includes(arg)} onFollow={me ? on => ops.followNotice(arg, on) : null} />; }
   else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs}
     avatar={me?.avatar ?? null} setAvatar={me ? a => saveAvatar(a).then(adopt) : null} />; }
@@ -283,6 +288,8 @@ export function App() {
           aria-label={navOpen ? t('nav.collapse') : t('nav.expand')} title={navOpen ? t('nav.collapse') : t('nav.expand')}><Menu size={20} aria-hidden="true" /></button>
         {back ? <button className="icon-btn" onClick={() => history.back()} aria-label={t('nav.back')}><ArrowLeft size={22} /></button> : <Logo size={32} />}
         <span className="brand">{title}</span>
+        {path === 'routes' && arg && <button className={`icon-btn${routeQuery !== null ? ' on' : ''}`} onClick={() => setRouteQuery(q => q === null ? '' : null)}
+          aria-expanded={routeQuery !== null} aria-controls="route-search" aria-label={t('routes.searchOpen')} title={t('routes.searchOpen')}><Search size={22} aria-hidden="true" /></button>}
         <a className="avatar small plain" href="#/me" aria-label={t('nav.me')}>{me ? <PersonAvatar avatar={me.avatar} name={me.username} size={36} /> : <UserRound size={20} aria-hidden="true" />}</a>
       </header>
       {/* The three Courses tabs are one screen, so a selection survives switching Safe / Likely / Reach (Praveen 2026-10-14). */}
@@ -576,9 +583,13 @@ function Hidden({ results }: { results: ResultsResponse | null }) {
 }
 
 // ---------------------------------------------------------------- Other routes
-function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes: RouteSummary[] | null; go: (to: string) => void }) {
+function RouteList({ group, routes, go, query, setQuery }: { group: RouteSummary['group']; routes: RouteSummary[] | null; go: (to: string) => void;
+  query: string | null; setQuery: (q: string | null) => void }) {
   const g = ROUTE_GROUPS.find(x => x.code === group);
   const list = (routes ?? []).filter(r => r.group === group).sort((a, b) => Number(b.openNow) - Number(a.openNow));
+  const q = query ?? '';
+  const hits = useMemo(() => searchRoutes(q, list), [q, list]);
+  const searching = q.trim() !== '';
   const Icon = g?.icon ?? MapIcon;
   return (
     <>
@@ -587,11 +598,16 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
         <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{t(`rg.${group}` as Key)}</h1><p className="subtitle">{t(`rg.${group}.sub` as Key)}</p></div>
       </div>
       {list.length > 0 && <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked', { date: shortDate(list.map(r => r.retrievedOn).sort().at(-1)!) })}</p>}
+      {query !== null && <label className="search" id="route-search"><Search size={20} aria-hidden="true" /><input autoFocus placeholder={t('routes.search')} value={query}
+        onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') setQuery(null); }} aria-label={t('routes.searchAria')} enterKeyHint="search" /></label>}
+      {searching && <p className="helper" role="status">{t('routes.matches', { n: hits.length, total: list.length, q: q.trim() })}</p>}
+      {routes && searching && hits.length === 0 && <div className="card"><p className="subtitle">{t('routes.noSearch')}</p></div>}
       {!routes ? <div className="skeleton" /> : (
-        <Stagger className="list-card">
-          {list.map(r => (
+        <Stagger key={searching ? 'search' : 'all'} className="list-card">
+          {hits.map(({ route: r, programmes }) => (
             <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
               <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
+                {programmes.length > 0 && <span className="s route-hit" lang="en">{programmes.slice(0, 3).join(' · ')}{programmes.length > 3 ? ` ${t('routes.moreProgs', { n: programmes.length - 3 })}` : ''}</span>}
                 {(r.costText || r.free) && <span className="m">{costLine(r)}</span>}</span>
               {r.openNow && <span className="pill open">{t('routes.open')}</span>}
               <ChevronRight size={20} className="chev" aria-hidden="true" />
