@@ -169,7 +169,7 @@ export const si: Record<Key, string> = {
   'hidden.h': 'පාඨමාලා {n}ක් සඟවා ඇත්තේ ඇයි', 'hidden.sub': 'ඒ සෑම එකකටම, ඔබේ ප්‍රතිඵල සපුරාලන්නේ නැති විෂයයන් හෝ සාමාර්ථ අවශ්‍යයි. නීතිය UGC අත්පොතෙන් උපුටා දක්වා ඇත.',
 
   // other routes
-  'routes.checked': '2026 ඔක්තෝබර් 5 දින නිල මූලාශ්‍ර සමඟ පරීක්ෂා කර ඇත.', 'routes.open': 'විවෘතයි', 'routes.openNow': 'දැන් විවෘතයි', 'routes.notFound': 'මාර්ගය හමු නොවීය.',
+  'routes.checked': '{date} දින නිල මූලාශ්‍ර සමඟ පරීක්ෂා කර ඇත.', 'routes.free': 'නොමිලේ', 'routes.open': 'විවෘතයි', 'routes.openNow': 'දැන් විවෘතයි', 'routes.notFound': 'මාර්ගය හමු නොවීය.',
   'routes.duration': 'කාලය', 'routes.cost': 'වියදම', 'routes.when': 'කවදාද', 'routes.req': 'ඇතුළත් වීමේ සුදුසුකම්',
   'routes.official': 'නිල වචන. මූලාශ්‍රය: {s} · පරීක්ෂා කළේ {d}', 'routes.site': 'නිල වෙබ් අඩවියට යන්න', 'routes.doc': 'මූලාශ්‍ර ලේඛනය විවෘත කරන්න',
 

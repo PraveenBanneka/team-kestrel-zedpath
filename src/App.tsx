@@ -37,7 +37,7 @@ import type { NotifyPrefs } from '../shared/journey.ts';
 import { clearEverything, loadAlertsSeen, loadJourney, saveJourney, isOnboarded, clearOnboarded, isPendingSync, loadCompare, loadList, saveCompare, saveList, loadExtras, loadProfile, saveExtras, saveProfile, setOnboarded, setPendingSync,
   specialIntakeHint, type Extras } from './storage.ts';
 import { useInstallPrompt } from './pwa.ts';
-import { shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
+import { shortDate, shortDuration, shortInstitution, shortYear, titleCase } from './format.ts';
 import { BandRing, CutoffChart, Page, Stagger, rise } from './ui.tsx';
 import { LANGS, locale, setLang as applyLang, t, type Key, type Lang } from './i18n/index.ts';
 import type { InstitutionFact } from '../shared/statistics.ts';
@@ -586,13 +586,13 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
         <span className="ic-lg" style={{ background: `color-mix(in srgb, ${g?.tone ?? 'var(--brand)'} 14%, transparent)`, color: g?.tone }}><Icon size={26} aria-hidden="true" /></span>
         <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{t(`rg.${group}` as Key)}</h1><p className="subtitle">{t(`rg.${group}.sub` as Key)}</p></div>
       </div>
-      <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked')}</p>
+      {list.length > 0 && <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked', { date: shortDate(list.map(r => r.retrievedOn).sort().at(-1)!) })}</p>}
       {!routes ? <div className="skeleton" /> : (
         <Stagger className="list-card">
           {list.map(r => (
             <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
               <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
-                {r.costText && <span className="m">{r.costText}</span>}</span>
+                {(r.costText || r.free) && <span className="m">{r.free ? t('routes.free') : r.costText}</span>}</span>
               {r.openNow && <span className="pill open">{t('routes.open')}</span>}
               <ChevronRight size={20} className="chev" aria-hidden="true" />
             </motion.button>))}
@@ -612,10 +612,10 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
         <div className="row">{r.openNow && <span className="pill open">{t('routes.openNow')}</span>}<span className="pill band-LIKELY">{g ? t(`rg.${g.code}` as Key) : ''}</span></div>
         <h1 className="screen-title">{r.name}</h1><p className="subtitle">{r.provider}</p>
       </div>
-      {(r.duration || r.costText) && (
+      {(r.duration || r.costText || r.free) && (
         <div className="compare plain num">
           {r.duration && <div><b>{r.duration}</b><span>{t('routes.duration')}</span></div>}
-          {r.costText && <div><b>{r.costText}</b><span>{t('routes.cost')}</span></div>}
+          {(r.costText || r.free) && <div><b>{r.free ? t('routes.free') : r.costText}</b><span>{t('routes.cost')}</span></div>}
         </div>)}
       {r.intakeTiming && <section className="card stack"><h2 className="title-l">{t('routes.when')}</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
       <section className="card stack">

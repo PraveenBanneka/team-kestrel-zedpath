@@ -1,6 +1,8 @@
 // Display helpers shared by the app's screens: the UGC tables are in capitals and use compact codes.
 
 /** "2024/2025" -> "24/25" */
+import { locale } from './i18n/index.ts';
+
 export function shortYear(y: string): string { return y.replace(/^\d{2}(\d{2})\/\d{2}(\d{2})$/, '$1/$2'); }
 
 /** "UNIVERSITY OF SRI JAYEWARDENEPURA" -> "University of Sri Jayewardenepura"; mixed-case text is left as it is. */
@@ -19,4 +21,10 @@ export function shortInstitution(s: string): string {
 export function shortDuration(s: string): string {
   const first = s.replace(/\s*\(p\d+\)/g, '').split(/[;(]/)[0].trim().replace(/^0(\d)/, '$1').replace(/Years?/i, 'years');
   return /honours/i.test(s) && !/honours/i.test(first) ? `${first} (honours option)` : first;
+}
+
+/** "2026-10-23" -> "23 Oct 2026" in the interface language (the date data was last checked against official sources). */
+export function shortDate(iso: string): string {
+  const d = new Date(`${iso}T00:00:00`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString(locale(), { day: 'numeric', month: 'short', year: 'numeric' });
 }

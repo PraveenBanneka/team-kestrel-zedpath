@@ -67,7 +67,9 @@ const lkr = (n: unknown) => `Rs ${Number(n).toLocaleString('en-LK')}`;
 const routes: Rulebook['routes'] = rawRoutes.map(r => ({
   id: r.id, group: r.route_group, name: r.name, provider: r.provider,
   duration: r.duration && r.duration !== 'None' ? String(r.duration) : null,
-  costText: r.cost_min_lkr != null ? (r.cost_max_lkr != null && r.cost_max_lkr !== r.cost_min_lkr ? `${lkr(r.cost_min_lkr)} to ${lkr(r.cost_max_lkr)}` : lkr(r.cost_min_lkr)) : null,
+  free: Number(r.cost_min_lkr) === 0 && (r.cost_max_lkr == null || Number(r.cost_max_lkr) === 0),
+  costText: r.cost_min_lkr != null && !(Number(r.cost_min_lkr) === 0 && (r.cost_max_lkr == null || Number(r.cost_max_lkr) === 0))
+    ? (r.cost_max_lkr != null && r.cost_max_lkr !== r.cost_min_lkr ? `${lkr(r.cost_min_lkr)} to ${lkr(r.cost_max_lkr)}` : lkr(r.cost_min_lkr)) : null,
   intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text, officialUrl: r.official_url ?? null,
   sourceUrl: r.source_url, sourceLocator: r.source_locator, retrievedOn: r.retrieved_on, warning: r.notes ?? null,
   closesOn: r.intake_timing ? latestDate(String(r.intake_timing)) : null, openAtRetrieval: /\bOPEN\b/.test(String(r.intake_timing ?? '')),

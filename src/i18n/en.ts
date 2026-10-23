@@ -168,7 +168,7 @@ export const en = {
   'hidden.h': 'Why {n} courses are hidden', 'hidden.sub': 'Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.',
 
   // other routes
-  'routes.checked': 'Checked against official sources on 5 Oct 2026.', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
+  'routes.checked': 'Checked against official sources on {date}.', 'routes.free': 'Free', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
   'routes.duration': 'Duration', 'routes.cost': 'Cost', 'routes.when': 'When', 'routes.req': 'Entry requirements',
   'routes.official': 'Official wording. Source: {s} · checked {d}', 'routes.site': 'Go to the official website', 'routes.doc': 'Open the source document',
 
