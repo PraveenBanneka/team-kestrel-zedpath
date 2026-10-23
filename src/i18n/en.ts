@@ -168,7 +168,7 @@ export const en = {
   'hidden.h': 'Why {n} courses are hidden', 'hidden.sub': 'Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.',
 
   // other routes
-  'routes.checked': 'Checked against official sources on {date}.', 'routes.free': 'Free', 'routes.progs': 'Programmes ({n})', 'routes.reqNone': 'Not published on a page ZedPath could check. Ask the institute before applying.', 'routes.source': 'Source: {s} · checked {d}', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
+  'routes.checked': 'Checked against official sources on {date}.', 'routes.free': 'Free', 'routes.cost.PER_SEMESTER': 'Cost per semester', 'routes.cost.PER_YEAR': 'Cost per year', 'routes.cost.PER_SUBJECT': 'Fee per subject', 'routes.cost.TO_REGISTER': 'Cost to register', 'routes.per.PER_SEMESTER': '{c} a semester', 'routes.per.PER_YEAR': '{c} a year', 'routes.per.PER_SUBJECT': '{c} a subject', 'routes.per.TO_REGISTER': '{c} to register', 'routes.progs': 'Programmes ({n})', 'routes.reqNone': 'Not published on a page ZedPath could check. Ask the institute before applying.', 'routes.source': 'Source: {s} · checked {d}', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
   'routes.duration': 'Duration', 'routes.cost': 'Cost', 'routes.when': 'When', 'routes.req': 'Entry requirements',
   'routes.official': 'Official wording. Source: {s} · checked {d}', 'routes.site': 'Go to the official website', 'routes.doc': 'Open the source document',
 

@@ -592,7 +592,7 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
           {list.map(r => (
             <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
               <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
-                {(r.costText || r.free) && <span className="m">{r.free ? t('routes.free') : r.costText}</span>}</span>
+                {(r.costText || r.free) && <span className="m">{costLine(r)}</span>}</span>
               {r.openNow && <span className="pill open">{t('routes.open')}</span>}
               <ChevronRight size={20} className="chev" aria-hidden="true" />
             </motion.button>))}
@@ -600,6 +600,9 @@ function RouteList({ group, routes, go }: { group: RouteSummary['group']; routes
     </>
   );
 }
+
+/** The cost as the list shows it: "Free", "Rs 2,800,000", or "Rs 345,000 to Rs 460,000 a semester". */
+const costLine = (r: RouteSummary) => r.free ? t('routes.free') : r.costBasis === 'TOTAL' ? r.costText : t(`routes.per.${r.costBasis}` as Key, { c: r.costText ?? '' });
 
 function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: RouteSummary[] | null; following: boolean; onFollow: ((on: boolean) => void) | null }) {
   const r = routes?.find(x => x.id === id);
@@ -615,7 +618,7 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
       {(r.duration || r.costText || r.free) && (
         <div className="compare plain num">
           {r.duration && <div><b>{r.duration}</b><span>{t('routes.duration')}</span></div>}
-          {(r.costText || r.free) && <div><b>{r.free ? t('routes.free') : r.costText}</b><span>{t('routes.cost')}</span></div>}
+          {(r.costText || r.free) && <div><b>{r.free ? t('routes.free') : r.costText}</b><span>{r.costBasis === 'TOTAL' ? t('routes.cost') : t(`routes.cost.${r.costBasis}` as Key)}</span></div>}
         </div>)}
       {r.intakeTiming && <section className="card stack"><h2 className="title-l">{t('routes.when')}</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
       <section className="card stack">

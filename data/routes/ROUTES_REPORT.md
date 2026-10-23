@@ -47,6 +47,28 @@ Left out, with reasons: AOD (its site failed a secure connection), ANC (only a .
 ESOFT's foreign degrees and CIPM (unsafe content, not linked; the ESOFT loan course keeps its handbook source without a site link).
 Most institutes publish no total fees or dated intakes; those fields are null and the screen says so.
 
+### Real costs, 23 October 2026 (Praveen: "With real costs for each")
+
+Two fee research agents (rules 1-8); every number below spot-checked by the main session on the official page. A fee is stored
+with what it covers (`cost_basis`), so a semester or registration fee is never shown as the cost of a degree. 51 of 102 routes
+now show a cost.
+
+| Route | Cost shown | Basis |
+|---|---|---|
+| SLIIT (Ministry-recognised) | Rs 345,000 to Rs 460,000 | per semester (4-year degrees, two semesters a year) |
+| NSBM (Ministry-recognised) | Rs 2,800,000 to Rs 3,200,000 | total, 4 years (plus registration and library fees) |
+| Horizon | from Rs 1,640,000 | total, as published for 2024 and 2025 intakes |
+| Lyceum | Rs 1,100,000 | total (B.Ed Primary Education) |
+| SLIIT with LJMU | Rs 310,000 to Rs 430,000 | per semester, plus GBP 1,100 |
+| NIBM with Coventry | Rs 300,000 to Rs 1,000,000 | per year |
+| CA Sri Lanka | Rs 6,100 | to register (2026); exam fees per level in the note |
+| AAT | Rs 4,000 to Rs 4,500 | to register; exam fees per subject in the note |
+| IBSL DBF, CBF | Rs 5,000 | to register; per-subject fees in the note |
+| ACCA, FIA | GBP figures in the note | not converted |
+
+Not published on a page that could be read: twelve Ministry-recognised institutes, the IIT, APIIT, RIC, BCAS and ACBT foreign degrees,
+SLIM courses and CIMA in LKR (CIMA links its GBP fee page). ICBT's only prices are hidden placeholders and are not used.
+
 The sections below describe the original research of 5 October 2026.
 
 Every fact comes from a government or institution site. No blogs, tuition sites, news sites or competitor apps were used.

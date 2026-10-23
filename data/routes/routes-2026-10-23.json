@@ -361,8 +361,8 @@
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": null,
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 345000,
+   "cost_max_lkr": 460000,
    "intake_timing": "'Undergraduate Degree Programmes - 2026/2027 Intake' (no dates on the admissions page). Applicants sit SLIIT's aptitude test (Rs. 2,000 application fee).",
    "entry_requirements_text": null,
    "districts_locations": null,
@@ -411,8 +411,9 @@
     "Bachelor of Business Administration Honours in Business Analytics",
     "Bachelor of Business Administration Honours in Human Capital Management"
    ],
-   "notes": "Entry requirements differ by programme and are on each programme page. Fees not published on the admissions page. SLIIT also teaches foreign university degrees (see the Liverpool John Moores entry).",
-   "id": "R054"
+   "notes": "Published fees per semester (SLIIT programme pages, 23 Oct 2026; 'Course fees are subject to change'): LLB (Hons) LKR 345,000 (https://www.sliit.lk/study/find-a-program/llb-hons-law); BSc (Hons) in Information Technology LKR 375,000 (https://www.sliit.lk/study/find-a-program/bsc-hons-in-information-technology-specializing-in-information-technology); BSc (Hons) in Biomedical Science LKR 435,000 (https://www.sliit.lk/study/find-a-program/bsc-hons-in-biomedical-science); BSc Engineering (Hons) in Materials Engineering LKR 460,000 (https://www.sliit.lk/study/find-a-program/bsc-engineering-hons-in-materials-engineering). These are 4-year degrees with two semesters in each year. 'The course fee is all-inclusive, covering lectures, tutorials, examinations, and access to library and computer laboratory facilities.' Entry requirements differ by programme and are on each programme page. SLIIT also teaches foreign university degrees (see the Liverpool John Moores entry).",
+   "id": "R054",
+   "cost_basis": "PER_SEMESTER"
   },
   {
    "route_group": "PRIVATE_DEGREE",
@@ -466,8 +467,8 @@
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": "Most undergraduate degree programmes are completed within 3 to 4 years",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 2800000,
+   "cost_max_lkr": 3200000,
    "intake_timing": null,
    "entry_requirements_text": "Most undergraduate programmes require G.C.E. Advanced Level qualifications or an equivalent qualification",
    "districts_locations": [
@@ -513,7 +514,7 @@
     "Bachelor of Science of Engineering Honours in Civil Engineering",
     "Bachelor of Science Honours in Biotechnology"
    ],
-   "notes": "Entry requirements vary by programme. Fees not published on the FAQ page. NSBM also teaches foreign university degrees (see the Plymouth and Victoria University entries).",
+   "notes": "Published totals for 4 years full time (NSBM course pages, 23 Oct 2026): BSc Honours in Computer Science LKR 2,800,000 (LKR 700,000 a year; https://www.nsbm.ac.lk/course/bachelor-of-science-honours-in-computer-science-bsc-honours-in-computer-science-ugc/); BSc Engineering Honours in Computer Systems Engineering LKR 3,200,000 (https://www.nsbm.ac.lk/course/bsc-honours-engineering-in-computer-systems-engineering/); BSc Honours in Biomedical Science LKR 3,200,000 (https://www.nsbm.ac.lk/course/bsc-hons-in-biomedical-science/). Plus a registration fee of LKR 10,000 and a library fee of LKR 5,000. The pages also show a semester-based plan (LKR 400,000 or 450,000 a semester). Entry requirements vary by programme. NSBM also teaches foreign university degrees (see the Plymouth and Victoria University entries).",
    "id": "R057"
   },
   {
@@ -656,7 +657,7 @@
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": "4 years",
-   "cost_min_lkr": 1840000,
+   "cost_min_lkr": 1640000,
    "cost_max_lkr": 2000000,
    "intake_timing": null,
    "entry_requirements_text": "Bachelor of Biosystems Technology Honours: Minimum of three passes at the GCE A/L in one sitting in science stream or technology stream",
@@ -686,7 +687,7 @@
     "Bachelor of Biosystems Technology Honours",
     "Bachelor of Science Honours in Data Science"
    ],
-   "notes": "Fees as published for past intakes: BSc Honours in IT LKR 1,840,000 (2025 Jan - June intakes) and Biosystems Technology LKR 2,000,000 (2024 Oct intake), plus a registration fee of LKR 55,000 to 60,000. Check current fees with Horizon. Entry requirements differ by programme.",
+   "notes": "Course fees as published for past intakes (Horizon programme pages, 23 Oct 2026): Bachelor of Management Honours in Accounting & Finance LKR 1,640,000 (2024 Oct intake; https://horizoncampus.edu.lk/bm_hons_af); BSc Honours in IT LKR 1,840,000 (2025 Jan - June intakes); Biosystems Technology LKR 2,000,000 (2024 Oct intake); plus a registration fee of LKR 55,000 to 60,000. No current-intake fees are published; check with Horizon. Entry requirements differ by programme.",
    "id": "R062"
   },
   {
@@ -1070,8 +1071,8 @@
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": "04 Years (Bachelor of Business Administration Honours)",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 1100000,
+   "cost_max_lkr": 1100000,
    "intake_timing": "Intakes : March / September (Bachelor of Business Administration Honours)",
    "entry_requirements_text": "Bachelor of Business Administration Honours: Three (3) simple passes (S) in Commerce subject stream in the same sitting at G.C.E. (Advanced Level) Examination. Cambridge/Edexcel: 'D' passes in commerce stream in one sitting with a 'C' pass for O/L English",
    "districts_locations": [
@@ -1090,7 +1091,7 @@
     "Bachelor of Business Administration Honours",
     "Bachelor of Science Honours in Biomedical Science"
    ],
-   "notes": "The page also lists other routes into the BBA. Fees not published on the page.",
+   "notes": "Published course fee: 'The course fee for the Bachelor of Education (Hons) in Primary Education at Lyceum Campus is LKR 1,100,000.' (4 years, 8 semesters; https://lyceumcampus.lk/bachelor-of-education-in-primary-education). The BBA and Biomedical Science fees are not published. The page also lists other routes into the BBA.",
    "id": "R076"
   },
   {
@@ -1382,7 +1383,7 @@
     "BSc (Hons) Computer Security",
     "BSc (Hons) Software Engineering"
    ],
-   "notes": "Fee is for BSc (Hons) Computer Science: Year 1 LKR 1,200,000, Year 2 LKR 700,000, Year 3 LKR 700,000 (total LKR 2,600,000), plus registration LKR 10,000 and library LKR 5,000. Other programmes may differ. Intake dates not on the page.",
+   "notes": "Fee is for BSc (Hons) Computer Science: Year 1 LKR 1,200,000, Year 2 LKR 700,000, Year 3 LKR 700,000 (total LKR 2,600,000), plus registration LKR 10,000 and library LKR 5,000. BSc (Hons) Accounting and Finance publishes the same total, LKR 2,600,000 (https://www.nsbm.ac.lk/course/bsc-hons-accounting-and-finance/). Intake dates not on the page.",
    "id": "R088"
   },
   {
@@ -1414,8 +1415,8 @@
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": "3 Years",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 310000,
+   "cost_max_lkr": 430000,
    "intake_timing": "February / September (Bachelor of Business Administration (Hons))",
    "entry_requirements_text": "Bachelor of Business Administration (Hons): Minimum of 3 \"S\" passes in any stream in one and the same sitting for A/L. (Cambridge/Edexcel: Minimum of 3 \"D\" passes in any stream in one and the same sitting for A/L.) Advanced Level results need to be obtained in one and the same sitting. Applicants should also pass the Aptitude Test conducted by SLIIT. The programme will be available upon meeting the minimum student enrolment.",
    "districts_locations": [
@@ -1439,14 +1440,15 @@
     "LLB (Hons) Law",
     "BA (Hons) Interior Design"
    ],
-   "notes": "BBA fee: LKR 340,000 per semester (2 semesters a year) plus £1,100 in the final year; course fees are subject to change. SLIIT: 'Students can complete all three years of their LJMU degree at SLIIT'. Not all courses are at all locations.",
-   "id": "R090"
+   "notes": "Fees per semester for these 3-year degrees ('Each year consists of 2 semesters'; 'Course fees are subject to change'): LLB (Hons) Law LKR 310,000 plus £1,100 at the beginning of each year (https://www.sliit.lk/llb-hons-law/); Bachelor of Business Administration (Hons) LKR 340,000 plus £1,100 in the final year; BSc (Hons) Architecture LKR 430,000 plus £1,100 in the final year (https://www.sliit.lk/study/find-a-program/bachelor-of-science-hons-in-architecture). SLIIT: 'Students can complete all three years of their LJMU degree at SLIIT'. Not all courses are at all locations.",
+   "id": "R090",
+   "cost_basis": "PER_SEMESTER"
   },
   {
    "route_group": "PRIVATE_DEGREE",
    "duration": "03 Years, part time (Computer Science with AI: Diploma, then Higher National Diploma, then BSc (Hons))",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 300000,
+   "cost_max_lkr": 1000000,
    "intake_timing": "KIC Peradeniya – 10th September 2026 (Year 01); Matara - November 2026 (Computer Science with AI)",
    "entry_requirements_text": "Year 01 (Diploma): Minimum 3 passes at G.C.E A/L in any stream, or Successfully completed a Degree Foundation in Computer Science with Artificial Intelligence",
    "districts_locations": [
@@ -1468,8 +1470,9 @@
     "BSc (Hons) Data Science",
     "BSc (Hons) Manufacturing Management"
    ],
-   "notes": "Fees for Computer Science with AI: Year 1 LKR 350,000, Year 2 LKR 450,000, Year 3 LKR 1,000,000, plus registration (LKR 5,000 to 10,000 a year); subject to change. Other programmes differ.",
-   "id": "R091"
+   "notes": "Fees per year (subject to change): Computer Science with AI LKR 350,000, 450,000 and 1,000,000 (Years 1-3); Data Science LKR 300,000, 400,000 and 1,000,000 (Years 1-3; https://nibm.ac.lk/course/bsc-hons-data-science); plus a registration fee each year (LKR 5,000 to 10,000). Other programmes differ.",
+   "id": "R091",
+   "cost_basis": "PER_YEAR"
   },
   {
    "route_group": "PRIVATE_DEGREE",
@@ -1826,8 +1829,8 @@
    "provider": "The Institute of Chartered Accountants of Sri Lanka",
    "provider_type": "professional body (statutory)",
    "duration": "Approximately three years",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 6100,
+   "cost_max_lkr": 6100,
    "intake_timing": "Applications for registration may be made at any time of the year.",
    "entry_requirements_text": "To enroll as a Registered Student, a person needs one of the following qualifications: Three Simple Passes at G.C.E. Advanced Level in any Stream at one sitting (London/Cambridge/Indian A/L). A Degree of a University in Sri Lanka or of any other University as approved by the Council of the Institute. ... The qualifications equivalent to NVQ Level 4 which is equivalent to Advanced Level Certificate (GCE A/L or equivalent) ... Final Examination of the Association of Accounting Technicians of Sri Lanka. (A.A.T., Sri Lanka) ... Final Examination of the Association of Certified Management Accountants (CMA) of Sri Lanka ... Any other qualification approved by the Council",
    "districts_locations": [
@@ -1839,8 +1842,9 @@
    "source_locator": "Student Registration page FAQs: eligibility, cost, duration, locations",
    "retrieved_on": "2026-10-23",
    "confidence": 0.85,
-   "notes": "CA Sri Lanka's degree (BSc Applied Accounting, CCOM03/CCOM04) is separately available through IFSLS (see PRIVATE_DEGREE). Full qualification cost not published on this page - do not show a total.",
-   "id": "R028"
+   "notes": "2026 student registration: Registration Fee Rs. 3,100 + Annual Subscription Rs. 3,000 = Total Registration Fee Rs. 6,100. Examination fees for 2026 (physical): Business Level I & II 5,200; Corporate Level 6,200; Strategic Level 8,200; capstones B-CAP 5,200, C-CAP 7,200, S-CAP 15,400; virtual 11,300 to 25,500 (https://www.casrilanka.com/casl/index.php?option=com_content&id=68). The full cost to qualify is not published. CA Sri Lanka's BSc in Applied Accounting is listed under private degrees.",
+   "id": "R028",
+   "cost_basis": "TO_REGISTER"
   },
   {
    "route_group": "PROFESSIONAL",
@@ -1879,7 +1883,7 @@
    "source_locator": "'CIMA - Join' FAQ accordion 'What are the requirements to register?' (page rendered with headless browser; content is JavaScript-loaded)",
    "retrieved_on": "2026-10-05",
    "confidence": 0.75,
-   "notes": "No Sri Lanka-specific fee or duration page could be retrieved (old cimaglobal.com URLs redirect; Sri Lanka pages are JS-rendered). Do not show LKR fees.",
+   "notes": "CIMA fees are charged in GBP and depend on the country price tier: see https://www.aicpa-cima.com/resources/landing/fees. No LKR fees are published.",
    "id": "R030"
   },
   {
@@ -1888,8 +1892,8 @@
    "provider": "Association of Accounting Technicians of Sri Lanka",
    "provider_type": "professional body",
    "duration": "Level by level about 1 1/2 years; Level I and II can be sat together, so possible within one year (per AAT FAQ)",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 4000,
+   "cost_max_lkr": 4500,
    "intake_timing": "Registration open all year; for January exam register before 31 July, for July exam register before 31 January.",
    "entry_requirements_text": "Yes. In order to register as students of AAT Sri Lanka, you will need to satisfy one of the following minimum qualifications; 06 passes at the G.C.E. (O/L) (SL) OR 05 passes at the G.C.E. (O/L) (UK) OR 02 passes at the G.C.E. (A/L) (SL / UK) OR 05 years of working experience as an Accounts Clerk / Audit Clerk / Book-keeper / Accounts Trainee in a recognized establishment OR Any other equivalent qualification that is acceptable to the Governing Council of AAT Sri Lanka",
    "districts_locations": [
@@ -1901,8 +1905,9 @@
    "source_locator": "Registration FAQ Q4 (minimum qualification), Q8 (duration), Q11 (age), Q13 (deadlines), Q18 (fees); exam fees from sources/aat_student_guide.html",
    "retrieved_on": "2026-10-23",
    "confidence": 0.7,
-   "notes": "Fee tables are dated (registration fees effective 1 May 2023; exam fees 'January 2023'); FAQ says 'Fees may be subject to revision' - show with date caveat or omit.",
-   "id": "R031"
+   "notes": "'The normal AAT registration fee is Rs. 4,500/-'; 'The Special Fee (for school students) is Rs. 4,000/-' (under 19 and in school). Exam fees per subject: Level I Rs. 2,600, Level II Rs. 3,100, Level III Rs. 3,300, Business Communication Rs. 3,100 (https://www.aatsl.lk/index.php/en/examination/faqs). Fees may be subject to revision.",
+   "id": "R031",
+   "cost_basis": "TO_REGISTER"
   },
   {
    "route_group": "PROFESSIONAL",
@@ -1920,7 +1925,7 @@
    "provider": "Association of Chartered Certified Accountants (ACCA)",
    "source_url": "https://www.accaglobal.com/lk/en/qualifications/glance/acca/minimum-entrance.html",
    "source_locator": "ACCA minimum entrance requirements table (Sri Lanka rows) and registration help page",
-   "notes": "Fees are charged in GBP (see accaglobal.com). Students without enough A/L passes can start with ACCA FIA (next entry).",
+   "notes": "Fees in GBP on ACCA's Sri Lanka fees page (https://www.accaglobal.com/gb/en/qualifications/accountancy-career/fees/fees-charges-sri-lanka.html): initial registration shown as £89 and £45; standard annual subscription 2026 shown as £140 and £126 (reduced first-year subscription £58 for new students); Applied Skills exams £151 each (December 2026 standard entry); Strategic Business Leader £268; Strategic Business Reporting and options £191. Students without enough A/L passes can start with ACCA FIA (next entry).",
    "id": "R096"
   },
   {
@@ -1939,7 +1944,7 @@
    "provider": "Association of Chartered Certified Accountants (ACCA)",
    "source_url": "https://www.accaglobal.com/lk/en/qualifications/glance/fia.html",
    "source_locator": "ACCA FIA page; registration help page",
-   "notes": "Awards: ACCA Diploma in Financial and Management Accounting (RQF Level 2 and 3), ACCA Diploma in Accounting and Business (RQF Level 4), Certified Accounting Technician (CAT). ACCA: 'we strongly recommend you start at the ACCA Diploma in Financial and Management Accounting (RQF Level 2)' if you have no formal qualifications. Fees in GBP.",
+   "notes": "Awards: ACCA Diploma in Financial and Management Accounting (RQF Level 2 and 3), ACCA Diploma in Accounting and Business (RQF Level 4), Certified Accounting Technician (CAT). ACCA: 'we strongly recommend you start at the ACCA Diploma in Financial and Management Accounting (RQF Level 2)' if you have no formal qualifications. Fees in GBP. CAT exams £114 each (December 2026 standard entry) and a CAT certification fee of £80 (Sri Lanka fees page).",
    "id": "R097"
   },
   {
@@ -1983,8 +1988,8 @@
   {
    "route_group": "PROFESSIONAL",
    "duration": null,
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 5000,
+   "cost_max_lkr": 5000,
    "intake_timing": "Intake 01-25th April 2026; Intake 02-17th October 2026",
    "entry_requirements_text": "GCE (A/L) in Sri Lanka in any stream having three (03) simple passes in one sitting; or equivalent foreign examination; OR, Degree from a recognized university in Sri Lanka / Foreign Degree approved by the University Grants Commission (UGC); OR, Professional qualification from a recognized professional institute in Sri Lanka or abroad; OR, Part qualification of a professional/academic institute in Sri Lanka or abroad (SLQF Level 2 / NVQ 4), subject to the approval of the Institute; OR, Mature Entry; OR, Any other qualification approved by the Institute.",
    "districts_locations": null,
@@ -1996,14 +2001,15 @@
    "provider": "The Institute of Bankers of Sri Lanka (IBSL)",
    "source_url": "https://www.ibsl.lk/courses/diploma-in-banking-and-finance-dbf/",
    "source_locator": "IBSL DBF course page: Requirements, intakes, price",
-   "notes": "IBSL's first professional stage. The page shows Rs 8,000.00 but says 'As per the subjects, course fees will be charged', so the full cost is not published. English, Sinhala or Tamil.",
-   "id": "R100"
+   "notes": "IBSL's first professional stage. Enrolment fee for student members Rs 5,000 (late Rs 5,500; https://www.ibsl.lk/new-enrolment-fees/). Examination fee LKR 6,500 per subject (late LKR 7,150; https://www.ibsl.lk/examination-fees/). The course page shows Rs 8,000 and says 'As per the subjects, course fees will be charged'. English, Sinhala or Tamil.",
+   "id": "R100",
+   "cost_basis": "TO_REGISTER"
   },
   {
    "route_group": "PROFESSIONAL",
    "duration": "minimum six (06) months",
-   "cost_min_lkr": null,
-   "cost_max_lkr": null,
+   "cost_min_lkr": 5000,
+   "cost_max_lkr": 5000,
    "intake_timing": "Intake 01-25th April 2026",
    "entry_requirements_text": "Six (06) 'S' passes in compulsory subjects in GCE O/L (local) with a credit pass for Mathematics. Pearson Edexcel International GCSE with a credit pass for Mathematics. Cambridge IGCSE with a credit pass for Mathematics. NVQ Level 03 qualification in the fields of banking & finance / Management Disciplines (subject to approval by IBSL). Any other qualification acceptable to IBSL.",
    "districts_locations": null,
@@ -2015,8 +2021,9 @@
    "provider": "The Institute of Bankers of Sri Lanka (IBSL)",
    "source_url": "https://www.ibsl.lk/courses/certificate-in-banking-finance-cbf/",
    "source_locator": "IBSL CBF course page: Requirements, intake, price",
-   "notes": "For those who lack the minimum entry qualifications for the DBF. The page shows Rs 24,000.00 but says course fees are charged per subject, so the full cost is not published.",
-   "id": "R101"
+   "notes": "For those who lack the minimum entry qualifications for the DBF. CBF Handbook 2025 (https://www.ibsl.lk/wp-content/uploads/2026/01/Certificate-in-Banking-Finance-CBF-Handbook-2025.pdf): registration Rs 5,000; annual subscription Rs 2,400; course fee Rs 6,000 per module; examination fee Rs 3,500 per module; four compulsory modules; fees subject to change.",
+   "id": "R101",
+   "cost_basis": "TO_REGISTER"
   },
   {
    "route_group": "PROFESSIONAL",
@@ -2034,7 +2041,7 @@
    "provider": "AICPA & CIMA",
    "source_url": "https://www.aicpa-cima.com/resources/landing/certificate-in-business-accounting",
    "source_locator": "AICPA & CIMA Certificate in Business Accounting page",
-   "notes": "4 subjects, 4 objective tests. 'It's a formal entry route into the CGMA Professional Qualification.' No fees on the page.",
+   "notes": "4 subjects, 4 objective tests. 'It's a formal entry route into the CGMA Professional Qualification.' Fees are charged in GBP by country price tier: see https://www.aicpa-cima.com/resources/landing/fees.",
    "id": "R102"
   },
   {

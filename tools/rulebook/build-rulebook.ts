@@ -79,6 +79,7 @@ const routes: Rulebook['routes'] = rawRoutes.map(r => ({
   id: r.id, group: r.route_group, name: r.name, provider: r.provider,
   duration: r.duration && r.duration !== 'None' ? String(r.duration) : null,
   free: isFree(r),
+  costBasis: r.cost_basis ?? 'TOTAL',
   costText: costText(r),
   intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text ?? null, programmes: r.programmes ?? [], officialUrl: r.official_url ?? null,
   sourceUrl: r.source_url ?? null, sourceLocator: r.source_locator, retrievedOn: r.retrieved_on, warning: r.notes ?? null,

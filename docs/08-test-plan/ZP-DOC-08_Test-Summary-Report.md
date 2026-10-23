@@ -96,6 +96,7 @@ Table: Automated suite on 21 October 2026 (after VR3)
 | Check | Result |
 |---|---|
 | `npx vitest run` | 35 files (34 passed, 1 opt-in skipped); 557 tests: **536 passed, 0 failed, 0 expected-fail, 21 skipped** |
+| Real costs, 23 October | 40 files; 585 tests: **564 passed, 0 failed**; TC-145 (4) in `worker/routes-expansion.test.ts` |
 | Other paths expanded, 23 October | 40 files; 581 tests: **560 passed, 0 failed**; new `worker/routes-expansion.test.ts` (6), TC-144 |
 | Unknown cost fix, 23 October | 39 files; 575 tests: **554 passed, 0 failed**; `worker/routes-free.test.ts` now 3 (Praveen: "why are all prof bodies free") |
 | Other paths refreshed, 23 October | 39 files; 574 tests: **553 passed, 0 failed**; TC-143 (`worker/routes-free.test.ts`, 2), OUSL alert (TC-106), blocked hosts never linked by Ask (ASK-047) |

@@ -60,10 +60,12 @@ for (let p = 1; p <= doc.numPages; p++) {
 
 const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json'), 'utf8')) as {
   routes: { id: string; route_group: string; name: string; provider: string; duration: string | null; intake_timing: string | null;
-    entry_requirements_text: string | null; programmes?: string[]; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
+    entry_requirements_text: string | null; programmes?: string[]; cost_basis?: string; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
 };
 for (const r of routes.routes) {
-  const cost = r.cost_min_lkr === null ? '' : `Cost: Rs ${r.cost_min_lkr.toLocaleString('en')}${r.cost_max_lkr && r.cost_max_lkr !== r.cost_min_lkr ? ` to Rs ${r.cost_max_lkr.toLocaleString('en')}` : ''}.`;
+  // The basis says what the amount covers (Praveen 23 Oct: a semester fee must never read as the cost of a degree).
+  const per = ({ PER_SEMESTER: ' per semester', PER_YEAR: ' per year', PER_SUBJECT: ' per subject', TO_REGISTER: ' to register' } as Record<string, string>)[r.cost_basis ?? ''] ?? '';
+  const cost = r.cost_min_lkr === null ? '' : `Cost: Rs ${r.cost_min_lkr.toLocaleString('en')}${r.cost_max_lkr && r.cost_max_lkr !== r.cost_min_lkr ? ` to Rs ${r.cost_max_lkr.toLocaleString('en')}` : ''}${per}.`;
   const text = [`${r.name} (${r.route_group.replace(/_/g, ' ').toLowerCase()}), offered by ${r.provider}.`,
     r.duration ? `Duration: ${r.duration}.` : '', cost, r.intake_timing ? `When: ${r.intake_timing}` : '',
     r.entry_requirements_text ? `Entry requirements: ${r.entry_requirements_text}` : 'Entry requirements: not published on a page ZedPath could check.',
