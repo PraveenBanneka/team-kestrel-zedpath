@@ -1,11 +1,11 @@
 // TC-147: CR-013 Career-first mode. The curated map must point at real courses and paths, keep official names, and
 // cite only checked, unblocked sources.
 import { describe, expect, it } from 'vitest';
-import book from '../worker/generated/rulebook-2025-2026.json' with { type: 'json' };
-import type { Rulebook } from './rulebook.ts';
-import type { OfferingSummary } from './api.ts';
-import { CAREERS, careerPaths, findCareers } from './careers.ts';
-import { BLOCKED_HOSTS } from '../worker/syllabi.ts';
+import book from './generated/rulebook-2025-2026.json' with { type: 'json' };
+import type { Rulebook } from '../shared/rulebook.ts';
+import type { OfferingSummary } from '../shared/api.ts';
+import { CAREERS, careerPaths, findCareers } from '../shared/careers.ts';
+import { BLOCKED_HOSTS } from './syllabi.ts';
 import { en } from '../src/i18n/en.ts';
 import { si } from '../src/i18n/si.ts';
 import { ta } from '../src/i18n/ta.ts';
@@ -32,6 +32,7 @@ describe('career-first mode (TC-147)', () => {
     for (const c of CAREERS) expect(careerPaths(c, [], [], rb.routes).routes.length + c.courses.length, c.id).toBeGreaterThan(0);
   });
   it('licence steps cite a checked official page, never a blocked host, and only where verified', () => {
+    expect(BLOCKED_HOSTS.size).toBeGreaterThan(5);
     for (const c of CAREERS.filter(x => x.licence)) {
       const u = new URL(c.licence!.url);
       expect(u.protocol, c.id).toBe('https:');
