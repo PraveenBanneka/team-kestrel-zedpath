@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **bcf3a1f8** (two more hosts blocked; 102 routes; unknown cost never "Free"). Rollback target 86bac10c (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval. Running: fee research for paths without a cost.
+  Live (workers.dev) = version **91fedbf0** (other paths: 102 routes, 51 with real costs and their basis). Rollback target bcf3a1f8 (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -447,3 +447,7 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Deployed 86bac10c (whoami e6474e41); Ask index: 102 route vectors upserted. Verified live: /api/routes 102 (PRIVATE_DEGREE 60, PROFESSIONAL 11), Free only R018-R022 + R037-R039, R029 present, no blocked host in the payload. Local demo at 390x844: SLIIT page (Programmes (35), "Not published on a page ZedPath could check"), KDU page.
 - Praveen next: "With real costs for each" -> fee research running (25A institutes; foreign degrees and professional bodies).
 - Praveen: "Block" (23 Oct): two more hosts in BLOCKED_HOSTS (unsafe content, not linked); R007 keeps its handbook source, no site link. 560 tests. Deployed bcf3a1f8 (Praveen's GO, whoami e6474e41); live: 102 routes, R007 officialUrl null, blocked host absent from the payload.
+
+## 2026-10-23: 91fedbf0 LIVE (Praveen's GO): real costs with what they cover
+- Praveen: "With real costs for each". Two fee agents + main-session spot-checks of every number on the official page. 51 of 102 routes show a cost (was 42). New `cost_basis` (TOTAL, PER_SEMESTER, PER_YEAR, PER_SUBJECT, TO_REGISTER) shown with every amount (page, list, Ask corpus; en/si/ta). ICBT placeholder prices rejected; CIMA GBP tier unconfirmed so linked, not shown. TC-145; 564 tests. Commit f50c5aa.
+- Deployed 91fedbf0 (whoami e6474e41); Ask index 102 route vectors upserted. Verified live: /api/routes SLIIT "Rs 345,000 to Rs 460,000" PER_SEMESTER, CA "Rs 6,100" TO_REGISTER, AAT TO_REGISTER, SLIIT-LJMU per semester; demo list at 390x844 shows "... a semester". Note: /api/routes has max-age=300, so phones may show the old list for up to 5 minutes after a deploy (by design).
