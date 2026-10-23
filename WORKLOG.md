@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **87a8eb99** (CR-012 revised to guides; other paths "Free" + data-driven checked date). Rollback target 0391423d (code only). Committed, NOT yet deployed: other-paths data refresh of 23 Oct (needs GO + Ask index upsert). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval.
+  Live (workers.dev) = version **62c9f84f** (other paths refreshed to 23 Oct 2026; four more hosts blocked). Rollback target 87a8eb99 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval. Pending Praveen: expansion decisions (official-domain rule for private institutes; foreign-awarded degrees). ZP-DOC-01..04 at 2.2 draft (CR-011 + CR-012), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -432,9 +432,12 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - CR-012 revised: the UGC form fields ZedPath does not know are guides (no input boxes), button and screen "Guide to applying to the UGC" (en/si/ta); only two answers + ticks on the phone, older typed details deleted on load. Other paths: zero cost shows "Free", never "Rs 0"; the "Checked against official sources on ..." date is the latest retrieved date in the group. 551 tests.
 - Verified live 390x844 (demo): heading and guides shown; planted legacy apply data reduced to the two answers; DIPLOMA routes show "Free"; checked date 5 Oct 2026 (data not yet refreshed).
 
-## 2026-10-23: other-paths refresh (committed; deploy pending GO)
+## 2026-10-23: 62c9f84f LIVE (Praveen's GO): other-paths refresh to 23 Oct 2026
 - Four research agents re-checked all 52 routes on official sources (rules 1-8); every change spot-checked by the main session. New files data/routes/routes-2026-10-23.json (51 routes) and data/alerts/notices-2026-10-23.json (adds the OUSL BSE alert). Changes: R002 register 34 institutes / 308 programmes; R023 OUSL BSE closes 7 Nov 2026 (was 15 Nov), awareness sessions; R027 ITUM closed 19.10.2026, Gazette No. 2507; R040/R041/R043 deadlines passed; R047 ICCR IELTS 6.0 / TOEFL B2 from 2027/28; SLIATE links moved to apply.sliate.ac.lk; R026 BIT linked to UCSC, unverifiable facts withdrawn; R029 CMA withdrawn. Details: data/routes/ROUTES_REPORT.md.
 - Four hosts returned unsafe content (hidden spam, script banner, server error output, casino spam) and joined BLOCKED_HOSTS (now exported; Ask's safeUrl refuses them too, ASK-047). Praveen told privately.
 - Ask corpus rebuilt and re-embedded (data/ask, gitignored). Route vectors for the live index: data/ask/vectors-routes.ndjson (51); route-R029 must be deleted from zedpath-ask. Both GO-gated.
 - Tests 553 passed; ZP-DOC-08 rebuilt (TC-143 routes-free added; TC-106, TC-127 extended).
 - Expansion research (Praveen: more private degrees and professional bodies) running/landed: Section 25A institutes 18-34 and ACCA/CA BSc/SLIM/IBSL/CIMA Cert BA reported; 1-17 pending. Not in the data yet.
+- Deployed 62c9f84f (whoami e6474e41). Ask index zedpath-ask: 51 route vectors upserted (changeset 37e40344), route-R029 deleted (c06d1da5); Ask itself not exercised (Gemini quota rule).
+- Verified live: /api/health rulebook generated 23 Oct; /api/routes 51 routes, no R029, R018 -> apply.sliate.ac.lk, R023 closes 7 November 2026, R026 -> UCSC, R047 India (ICCR), no blocked host anywhere in the payload; /api/journey alerts include R023 2026-11-07. Demo at 390x844: Diplomas list "Checked against official sources on 23 Oct 2026.", OUSL BSE first with "Open", SLIATE "Free".
+- Expansion research all landed (Section 25A institutes 1-34: register solid, fees published for only 4 institutes; professional bodies ACCA/FIA, CA BSc, SLIM, IBSL, CIMA Cert BA). Waiting on Praveen's two decisions before adding to the data.
