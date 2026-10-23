@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **86bac10c** (other paths: 102 routes; unknown cost never "Free"; CMA and BIT kept). Rollback target 62c9f84f (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval. Running: fee research for paths without a cost.
+  Live (workers.dev) = version **bcf3a1f8** (two more hosts blocked; 102 routes; unknown cost never "Free"). Rollback target 86bac10c (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval. Running: fee research for paths without a cost.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -446,4 +446,4 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Praveen: "why are all prof bodies free" (Number(null) is 0: 19 routes showed Free) -> Free only for a published 0; "Up to Rs ..." for a maximum or free places. "U have reduced the stuff we had" -> CMA and BIT facts back as checked 5 Oct, sites not linked (sourceUrl null, DAT-030 pinned). "put all" -> R053-R102: all 31 Section 25A institutes with programmes (titles read from the register by the main session), 11 foreign degrees (labelled), KDU fee-paying, ACCA/FIA, SLIM PGDip/PCM, IBSL DBF/CBF, CIMA Cert BA. Every field spot-checked on its official page. Commits 7fa71f3, 28f1bee; 560 tests.
 - Deployed 86bac10c (whoami e6474e41); Ask index: 102 route vectors upserted. Verified live: /api/routes 102 (PRIVATE_DEGREE 60, PROFESSIONAL 11), Free only R018-R022 + R037-R039, R029 present, no blocked host in the payload. Local demo at 390x844: SLIIT page (Programmes (35), "Not published on a page ZedPath could check"), KDU page.
 - Praveen next: "With real costs for each" -> fee research running (25A institutes; foreign degrees and professional bodies).
-- Praveen: "Block" (23 Oct): two more hosts in BLOCKED_HOSTS (unsafe content, not linked); R007 keeps its handbook source, no site link. 560 tests. Deploy pending GO.
+- Praveen: "Block" (23 Oct): two more hosts in BLOCKED_HOSTS (unsafe content, not linked); R007 keeps its handbook source, no site link. 560 tests. Deployed bcf3a1f8 (Praveen's GO, whoami e6474e41); live: 102 routes, R007 officialUrl null, blocked host absent from the payload.
