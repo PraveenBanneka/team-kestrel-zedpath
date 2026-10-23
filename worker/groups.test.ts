@@ -6,7 +6,8 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
 import type { MeResponse } from '../shared/account.ts';
-import { GROUP_RULES_VERSION, POPULAR_COURSES, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
+import { GROUP_RULES_VERSION, PATH_GROUPS, POPULAR_COURSES, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
+import { sampleKey, samplesFor } from '../shared/group-samples.ts';
 import type { ProfileInput } from '../shared/api.ts';
 import { CONSENT_VERSION } from '../shared/contact.ts';
 const CONTACT = { fullName: 'Test Student', email: 'student@example.com', mobile: '0712345678', birthDate: '2006-05-01' };
@@ -113,12 +114,12 @@ describe('groups API', () => {
   });
   it('suggests the asked-for course groups and the batch, creates a group on first join, shares it on the second', async () => {
     const a = (await signup('nimal')).cookie, b = (await signup('kamal')).cookie;
-    const list = await (await call('GET', '/groups?courses=012,999,abc', undefined, a)).json() as GroupsResponse;
-    expect(list.groups.map(g => [g.kind, g.courseCode, g.id, g.joined])).toEqual([['BATCH', null, null, false], ['COURSE', '012', null, false]]);
-    const g1 = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, a)).json() as GroupSummary;
-    const g2 = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, b)).json() as GroupSummary;
+    const list = await (await call('GET', '/groups?courses=013,999,abc', undefined, a)).json() as GroupsResponse;
+    expect(list.groups.map(g => [g.kind, g.courseCode, g.id, g.joined])).toEqual([['BATCH', null, null, false], ['COURSE', '013', null, false]]);
+    const g1 = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '013' }, a)).json() as GroupSummary;
+    const g2 = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '013' }, b)).json() as GroupSummary;
     expect([g2.id, g2.members, g2.joined]).toEqual([g1.id, 2, true]);
-    expect((await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '012' }, b)).status).toBe(200);   // joining twice is harmless
+    expect((await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '013' }, b)).status).toBe(200);   // joining twice is harmless
     expect(n('SELECT count(*) AS n FROM group_member')).toBe(2);
     const batch = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'BATCH' }, a)).json() as GroupSummary;
     expect(batch.title).toMatch(/Physical Science · Kurunegala/i);
@@ -220,5 +221,47 @@ describe('deleting an account (wipe check)', () => {
     expect((await call('DELETE', '/me', undefined, a)).status).toBe(204);
     expect([n('SELECT count(*) AS n FROM group_member'), n('SELECT count(*) AS n FROM message_report'), n('SELECT count(*) AS n FROM account_block')]).toEqual([1, 0, 0]);
     expect(roomCalls.filter(c => c.path === '/purge').map(c => c.room).sort()).toEqual([`group:${g.id}`, `group:${g.id! + 1}`]);
+  });
+});
+
+describe('CR-014 groups for other paths (TC-148)', () => {
+  it('lists the five path groups for everyone, already created, and keeps the popular course groups standing', async () => {
+    const a = (await signup('nimal')).cookie;
+    const list = await (await call('GET', '/groups', undefined, a)).json() as GroupsResponse;
+    expect(list.paths.map(g => [g.kind, g.pathKey, g.joined])).toEqual(PATH_GROUPS.map(p => ['PATH', p.key, false]));
+    expect(list.paths.every(g => typeof g.id === 'number')).toBe(true);
+    expect(list.popular.every(g => typeof g.id === 'number')).toBe(true);
+    expect(n("SELECT count(*) AS n FROM course_group WHERE kind = 'PATH'")).toBe(5);
+    await call('GET', '/groups', undefined, a);                                   // listing again creates nothing new
+    expect(n('SELECT count(*) AS n FROM course_group')).toBe(5 + POPULAR_COURSES.length);
+  });
+  it('joins a path group with the rules once; an unknown key is refused', async () => {
+    const a = (await signup('nimal')).cookie;
+    const g = await (await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'PATH', pathKey: 'GOV_CUSTOMS' }, a)).json() as GroupSummary;
+    expect([g.kind, g.pathKey, g.joined, g.members]).toEqual(['PATH', 'GOV_CUSTOMS', true, 1]);
+    expect(g.title).toBe('Inspector of Customs exam');
+    expect((await call('POST', '/groups/join', { kind: 'PATH', pathKey: 'NOT_A_GROUP' }, a)).status).toBe(400);
+    const list = await (await call('GET', '/groups', undefined, a)).json() as GroupsResponse;
+    expect(list.groups.some(x => x.kind === 'PATH' && x.joined)).toBe(true);           // joined: in "your groups", not twice
+    expect(list.paths.some(x => x.pathKey === 'GOV_CUSTOMS')).toBe(false);
+  });
+  it('the demo is shown only groups it can join, and can join a path group (Praveen: "the demo can join groups that already exist")', async () => {
+    const d = (await signup('demo_try')).cookie;
+    raw.prepare("UPDATE account SET demo_expires_at = '2099-01-01T00:00:00Z' WHERE account_id = (SELECT max(account_id) FROM account)").run();
+    const list = await (await call('GET', '/groups?courses=013,034', undefined, d)).json() as GroupsResponse;
+    expect([...list.groups, ...list.popular, ...list.paths].every(g => g.id !== null)).toBe(true);
+    expect(list.paths.length).toBe(5);
+    const r = await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'PATH', pathKey: 'OUSL' }, d);
+    expect(r.status).toBe(200);
+    expect((await call('POST', '/groups/join', { acceptRules: GROUP_RULES_VERSION, kind: 'COURSE', courseCode: '034' }, d)).status).toBe(403);   // still cannot create
+  });
+  it('each path group opens with its own labelled sample chat', () => {
+    for (const p of PATH_GROUPS) {
+      expect(sampleKey('PATH', null, p.key)).toBe(`PATH:${p.key}`);
+      const msgs = samplesFor(`PATH:${p.key}`);
+      expect(msgs.length, p.key).toBeGreaterThanOrEqual(4);
+      expect(msgs.every(m => m.sample && m.author.startsWith('Sample'))).toBe(true);
+      expect(msgs.some(m => /verified/i.test(m.badge ?? ''))).toBe(false);
+    }
   });
 });

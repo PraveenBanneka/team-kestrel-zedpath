@@ -22,6 +22,7 @@ revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; bas
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: FR-303 and FR-304 reworded, FR-305 withdrawn, FR-312 added, BR-041 and BR-042 reworded; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): FR-307 built; FR-313 to FR-316 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): FR-317 to FR-319 added; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014: FR-724 to FR-726 added; FR-317 entry hidden; awaiting approval
 ---
 
 # Introduction
@@ -97,6 +98,7 @@ Table: Change requests since version 2.0 and the requirements they affect
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | FR-303, FR-304, FR-305 (withdrawn), FR-312, BR-041, BR-042 |
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | FR-307, FR-313 to FR-316 |
 | CR-013 | 23 October 2026 | Career-first mode: *Who do you want to become?* below My list; curated careers mapped to UGC courses, other paths and checked licence steps | FR-317 to FR-319 |
+| CR-014 | 23 October 2026 | Groups for other paths (five standing groups with sample chats); rules in a small window, Agree and join opens the group; the demo sees only joinable groups; career card hidden | FR-724 to FR-726 |
 
 # Overall description
 
@@ -377,6 +379,9 @@ Table: Functional requirements, FE-7 People around the student
 | FR-721 | *New (CR-010).* The room shall count every post attempt, refused or not, before moderation, and refuse further attempts after 20 in any 10 minutes per member (BR-079). | AC-706.7 | M | I |
 | FR-722 | *New (CR-010).* A room shall keep at most three live connections per account, closing the oldest; opening the live room shall be rate-limited per account (BR-079). | AC-706.7 | M | I |
 | FR-723 | *New (CR-010; test-campaign finding D-04).* The contact check of FR-712 shall also run on a normalised copy of the message (Unicode NFKC, invisible characters removed, spelled-out digits turned into digits) and shall refuse 0094 and other loose phone forms, "[at]" and "(dot)" email forms, and WhatsApp or Telegram invite links, while allowing years, index numbers and Z-scores. | AC-706.8 | M | T |
+| FR-724 | *New (CR-014).* The system shall provide five standing groups for other paths (keys PROF_ACCOUNTING, PROF_BUSINESS, OUSL, GOV_CUSTOMS, GOV_MSO, mirrored by a database CHECK), listed for everyone under *Groups for other paths*, each with its own labelled sample chat; they and the popular course groups shall exist before anyone joins. | AC-704.9 | S | T |
+| FR-725 | *New (CR-014).* For the demo, *Groups* shall list only groups that exist (server-enforced), so every listed group can be joined; the demo still cannot create a group. | AC-704.10 | S | T |
+| FR-726 | *New (CR-014).* Tapping a group not yet joined shall show the rules, the first time, in a small window with Cancel and Agree and join; joining shall open the group. | AC-704.11, AC-707.4 | S | T |
 
 ## FE-8 After selection
 
@@ -792,7 +797,7 @@ Table: Story-to-requirement traceability (every story in ZP-DOC-02 is covered)
 | US-701 | Share a summary with my family | FR-701, FR-702 |
 | US-702 | Ask a verified senior | FR-703 |
 | US-703 | Become a verified senior | FR-707 (FR-704 superseded) |
-| US-704 | Join a group for my batch and target course | FR-705, FR-715, FR-716, FR-719; UI-4; NFR-043 |
+| US-704 | Join a group for my batch and target course | FR-705, FR-715, FR-716, FR-719, FR-724, FR-725, FR-726; UI-4; NFR-043 |
 | US-705 | See my class's progress as a teacher | FR-706 |
 | US-706 | Stay safe in groups | FR-708, FR-709, FR-710, FR-711, FR-712, FR-720 to FR-723; NFR-039; BR-078, BR-079 |
 | US-707 | Accept the group rules once | FR-714 (FR-713 superseded); NFR-038 |

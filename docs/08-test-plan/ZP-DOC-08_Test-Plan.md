@@ -24,6 +24,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths expanded to 102 routes:
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Real costs with their basis: TC-145 added; 564 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Search inside each group of other paths: TC-146 added; 570 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013 career-first mode: TC-147 added; 577 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-014 groups for other paths: TC-148 and MIG-030 added, MIG-017/027/028 updated; 582 passed
 ---
 
 # Introduction
@@ -224,6 +225,7 @@ Table: Automated test cases
 | TC-145 | Other paths: what each cost covers | `worker/routes-expansion.test.ts` (4) | Every route has a known cost basis; a basis other than TOTAL only with a published amount; every basis labelled in en/si/ta on the page and in the list; SLIIT per semester, NIBM per year, CA and AAT to register, NSBM totals; no ICBT placeholder price |
 | TC-146 | Search inside other paths | `shared/route-search.test.ts` (6) | Empty query keeps the list; institutes by name or short name (SLIIT, NSBM, ACCA); subjects found inside programme lists with the matching programmes named; name matches listed first; group words and short forms; nonsense finds nothing |
 | TC-147 | Career-first mode (CR-013) | `worker/careers.test.ts` (7) | Twelve careers named in three languages; every course a real UGC course with the rulebook's name; every path id exists; licence steps only from checked gov.lk pages, never a blocked host (doctor, dentist); the student's courses best chance first with closed courses and other paths; career search by name and student words; law degrees found inside programme lists |
+| TC-148 | Groups for other paths (CR-014) | `worker/groups.test.ts` (4), `worker/migrations.e2e.test.ts` (MIG-030) | Five path groups listed for everyone and already created, popular groups standing, listing twice creates nothing; joining a path group with the rules, unknown key refused; the demo sees only joinable groups and can join a path group but still cannot create one; every path group opens with its own labelled sample chat; 0013 keeps every group id, member, report and room-seen row, enforces the PATH CHECKs and cascades |
 
 # Security tests
 
@@ -278,7 +280,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145), 570 (23 October, search inside other paths, TC-146), 577 (23 October, CR-013 career-first mode, TC-147).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145), 570 (23 October, search inside other paths, TC-146), 577 (23 October, CR-013 career-first mode, TC-147), 582 (23 October, CR-014 groups for other paths, TC-148, MIG-030).
 
 Table: Results of 21 October 2026 (developer machine)
 

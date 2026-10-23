@@ -12,7 +12,7 @@
 //   POST /groups/:id/report {messageId, reason} -> 204; REPORTS_TO_HIDE distinct reports hide the message
 //   GET  /blocks | POST /blocks {username} | DELETE /blocks/:username
 import { Hono, type Context } from 'hono';
-import { GROUP_RULES_VERSION, POPULAR_COURSES, REPORT_REASONS, REPORTS_TO_HIDE, seniorBadge, type GroupMemberInfo, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
+import { GROUP_RULES_VERSION, PATH_GROUPS, POPULAR_COURSES, REPORT_REASONS, isPathKey, type PathKey, REPORTS_TO_HIDE, seniorBadge, type GroupMemberInfo, type GroupSummary, type GroupsResponse } from '../shared/groups.ts';
 import { sampleKey } from '../shared/group-samples.ts';
 import { normaliseUsername, USERNAME_RE } from '../shared/account.ts';
 import { book } from './rulebook.ts';
@@ -31,21 +31,29 @@ const room = (c: C, groupId: number) => c.env.GROUP_ROOM.get(c.env.GROUP_ROOM.id
 const streamName = (code: string) => book.streams.find(s => s.code === code)?.name ?? code;
 const districtName = (code: string) => titleCaseName(book.districts.find(d => d.code === code)?.name ?? code);
 
-interface GroupRow { group_id: number; kind: 'COURSE' | 'BATCH'; course_code: string | null; stream_code: string | null; district_code: string | null; members: number; joined: number; rules_ok: number }
-function summary(r: Pick<GroupRow, 'kind' | 'course_code' | 'stream_code' | 'district_code'> & { group_id: number | null; members: number; joined: number; rules_ok?: number }): GroupSummary {
+interface GroupRow { group_id: number; kind: 'COURSE' | 'BATCH' | 'PATH'; course_code: string | null; stream_code: string | null; district_code: string | null; path_key: PathKey | null; members: number; joined: number; rules_ok: number }
+/** CR-014: the path groups' English names, for logs and tests (the phone uses gp.<key> in its own language). */
+const PATH_NAMES: Record<PathKey, string> = { PROF_ACCOUNTING: 'Accounting qualifications: CA, CMA, CIMA, ACCA, AAT', PROF_BUSINESS: 'Marketing and banking: SLIM, IBSL',
+  OUSL: 'Open University of Sri Lanka', GOV_CUSTOMS: 'Inspector of Customs exam', GOV_MSO: 'Management Service Officers exam' };
+function summary(r: Pick<GroupRow, 'kind' | 'course_code' | 'stream_code' | 'district_code'> & { path_key?: PathKey | null; group_id: number | null; members: number; joined: number; rules_ok?: number }): GroupSummary {
   const rulesAccepted = r.rules_ok === 1;
+  if (r.kind === 'PATH') {
+    const name = PATH_NAMES[r.path_key!];
+    return { id: r.group_id, kind: 'PATH', courseCode: null, pathKey: r.path_key!, title: name, name, universities: 0, subtitle: 'Other paths',
+      members: r.members, joined: r.joined === 1, rulesAccepted };
+  }
   if (r.kind === 'COURSE') {
     const n = book.offerings.filter(o => o.courseCode === r.course_code).length;
     const name = titleCaseName(book.courses[r.course_code!]?.name ?? r.course_code!);
-    return { id: r.group_id, kind: 'COURSE', courseCode: r.course_code, title: `Waiting for ${name}`, name, universities: n,
+    return { id: r.group_id, kind: 'COURSE', courseCode: r.course_code, pathKey: null, title: `Waiting for ${name}`, name, universities: n,
       subtitle: `Course ${r.course_code} · ${n} universit${n === 1 ? 'y' : 'ies'}`, members: r.members, joined: r.joined === 1, rulesAccepted };
   }
   const name = `${streamName(r.stream_code!)} · ${districtName(r.district_code!)}`;
-  return { id: r.group_id, kind: 'BATCH', courseCode: null, title: name, name, universities: 0,
+  return { id: r.group_id, kind: 'BATCH', courseCode: null, pathKey: null, title: name, name, universities: 0,
     subtitle: 'Your A/L batch: same stream, same district', members: r.members, joined: r.joined === 1, rulesAccepted };
 }
 
-const GROUP_SELECT = `SELECT g.group_id, g.kind, g.course_code, g.stream_code, g.district_code,
+const GROUP_SELECT = `SELECT g.group_id, g.kind, g.course_code, g.stream_code, g.district_code, g.path_key,
     (SELECT count(*) FROM group_member m WHERE m.group_id = g.group_id) AS members,
     mine.account_id IS NOT NULL AS joined,
     EXISTS (SELECT 1 FROM group_rules_acceptance r WHERE r.account_id = ?1 AND r.rules_version = '${GROUP_RULES_VERSION}') AS rules_ok
@@ -54,8 +62,26 @@ const GROUP_SELECT = `SELECT g.group_id, g.kind, g.course_code, g.stream_code, g
 const rulesAccepted = async (c: C, accountId: number) => !!(await c.env.DB.prepare(
   'SELECT 1 FROM group_rules_acceptance WHERE account_id = ? AND rules_version = ?').bind(accountId, GROUP_RULES_VERSION).first());
 
+/** CR-014: the standing groups (the five path groups and the popular course groups) exist from the first listing, so
+ *  anyone, the demo included, can join them; one read when they all exist, a write only for the ones missing. */
+async function ensureStandingGroups(db: D1Database) {
+  const have = (await db.prepare(`SELECT kind, path_key, course_code FROM course_group WHERE kind = 'PATH'
+      OR (kind = 'COURSE' AND course_code IN (SELECT value FROM json_each(?)))`).bind(JSON.stringify(POPULAR_COURSES))
+    .all<{ kind: string; path_key: string | null; course_code: string | null }>()).results;
+  const now = nowIso();
+  const missing = [
+    ...PATH_GROUPS.filter(p => !have.some(h => h.kind === 'PATH' && h.path_key === p.key))
+      .map(p => db.prepare(`INSERT OR IGNORE INTO course_group (kind, path_key, created_at) VALUES ('PATH', ?, ?)`).bind(p.key, now)),
+    ...POPULAR_COURSES.filter(code => book.courses[code] && !have.some(h => h.kind === 'COURSE' && h.course_code === code))
+      .map(code => db.prepare(`INSERT OR IGNORE INTO course_group (kind, course_code, created_at) VALUES ('COURSE', ?, ?)`).bind(code, now)),
+  ];
+  if (missing.length) await db.batch(missing);
+}
+
 groupRoutes.get('/groups', async c => {
   const me = c.get('accountId'), db = c.env.DB;
+  await ensureStandingGroups(db);
+  const demo = await isDemo(db, me);                              // CR-014: the demo is shown only groups it can join
   const courses = [...new Set((c.req.query('courses') ?? '').split(',').map(s => s.trim()).filter(s => COURSE_RE.test(s) && book.courses[s]))].slice(0, 30);
   const acc = await db.prepare(`SELECT a.role, p.stream_code, p.district_code FROM account a LEFT JOIN student_profile p USING (account_id)
     WHERE a.account_id = ?`).bind(me).first<{ role: string; stream_code: string | null; district_code: string | null }>();
@@ -70,6 +96,7 @@ groupRoutes.get('/groups', async c => {
   if (acc?.stream_code && !existing.some(g => g.kind === 'BATCH' && g.stream_code === acc.stream_code && g.district_code === acc.district_code))
     out.push(summary({ group_id: null, kind: 'BATCH', course_code: null, stream_code: acc.stream_code, district_code: acc.district_code, members: 0, joined: 0, rules_ok: rok }));
   out.sort((a, b) => Number(b.joined) - Number(a.joined) || Number(a.kind === 'COURSE') - Number(b.kind === 'COURSE') || b.members - a.members);
+  const listedPaths = new Set(out.filter(g => g.kind === 'PATH').map(g => g.pathKey));
   // Popular course groups for everyone (video 2), except those already listed above.
   const listed = new Set(out.filter(g => g.kind === 'COURSE').map(g => g.courseCode));
   const popCodes = POPULAR_COURSES.filter(code => !listed.has(code));
@@ -77,12 +104,15 @@ groupRoutes.get('/groups', async c => {
     .bind(me, JSON.stringify(popCodes)).all<GroupRow>()).results : [];
   const popular = popCodes.map(code => { const r = popRows.find(x => x.course_code === code);
     return r ? summary(r) : summary({ group_id: null, kind: 'COURSE', course_code: code, stream_code: null, district_code: null, members: 0, joined: 0, rules_ok: rok }); });
-  return c.json({ groups: out, popular, rulesAccepted: ok, role: acc?.role === 'SENIOR' ? 'SENIOR' : acc?.role === 'STUDENT' ? 'STUDENT' : 'OTHER' } satisfies GroupsResponse);
+  const pathRows = (await db.prepare(`${GROUP_SELECT} WHERE g.kind = 'PATH'`).bind(me).all<GroupRow>()).results;
+  const paths = PATH_GROUPS.map(p => pathRows.find(r => r.path_key === p.key)).filter((r): r is GroupRow => !!r && !listedPaths.has(r.path_key)).map(summary);
+  const joinable = (g: GroupSummary) => !demo || g.id !== null;
+  return c.json({ groups: out.filter(joinable), popular: popular.filter(joinable), paths, rulesAccepted: ok, role: acc?.role === 'SENIOR' ? 'SENIOR' : acc?.role === 'STUDENT' ? 'STUDENT' : 'OTHER' } satisfies GroupsResponse);
 });
 
 groupRoutes.post('/groups/join', async c => {
   const me = c.get('accountId'), db = c.env.DB, now = nowIso();
-  const b = (await c.req.json().catch(() => null)) as { kind?: unknown; courseCode?: unknown; acceptRules?: unknown } | null;
+  const b = (await c.req.json().catch(() => null)) as { kind?: unknown; courseCode?: unknown; pathKey?: unknown; acceptRules?: unknown } | null;
   const accepting = b?.acceptRules === GROUP_RULES_VERSION;
   if (!accepting && !(await rulesAccepted(c, me))) return err(c, 400, 'Read and accept the group rules to join', 'acceptRules');
   const demo = await isDemo(db, me);                              // CR-007: demo accounts join existing groups only
@@ -98,6 +128,10 @@ groupRoutes.post('/groups/join', async c => {
     if (!p) return err(c, 403, 'Batch groups are for students who saved their results to their account');
     where = `kind = 'BATCH' AND stream_code = ? AND district_code = ?`; args = [p.stream_code, p.district_code];
     insert = db.prepare(`INSERT OR IGNORE INTO course_group (kind, stream_code, district_code, created_at) VALUES ('BATCH', ?, ?, ?)`).bind(p.stream_code, p.district_code, now);
+  } else if (b?.kind === 'PATH') {
+    if (!isPathKey(b.pathKey)) return err(c, 400, 'Unknown group', 'pathKey');
+    where = `kind = 'PATH' AND path_key = ?`; args = [b.pathKey];
+    insert = db.prepare(`INSERT OR IGNORE INTO course_group (kind, path_key, created_at) VALUES ('PATH', ?, ?)`).bind(b.pathKey, now);
   } else return err(c, 400, 'Choose a course group or your batch group', 'kind');
   if (demo && !(await db.prepare(`SELECT 1 FROM course_group WHERE ${where}`).bind(...args).first()))
     return err(c, 403, 'The demo can join groups that already exist');
@@ -105,7 +139,7 @@ groupRoutes.post('/groups/join', async c => {
     ...(accepting ? [db.prepare('INSERT OR IGNORE INTO group_rules_acceptance (account_id, rules_version, accepted_at) VALUES (?, ?, ?)')
       .bind(me, GROUP_RULES_VERSION, now)] : []),
     db.prepare(`INSERT OR IGNORE INTO group_member (group_id, account_id, joined_at) SELECT group_id, ?, ? FROM course_group WHERE ${where}`).bind(me, now, ...args)]);
-  const row = await db.prepare(`${GROUP_SELECT} WHERE ${where.replace(/\b(kind|course_code|stream_code|district_code)\b/g, 'g.$1')}`).bind(me, ...args).first<GroupRow>();
+  const row = await db.prepare(`${GROUP_SELECT} WHERE ${where.replace(/\b(kind|course_code|stream_code|district_code|path_key)\b/g, 'g.$1')}`).bind(me, ...args).first<GroupRow>();
   return c.json(summary(row!));
 });
 
@@ -128,9 +162,9 @@ groupRoutes.post('/groups/:id/leave', async c => {
 
 groupRoutes.get('/groups/:id/live', async c => {
   const id = groupId(c), me = c.get('accountId');
-  const m = id ? await c.env.DB.prepare(`SELECT g.kind, g.course_code, a.avatar FROM group_member mb JOIN course_group g USING (group_id)
+  const m = id ? await c.env.DB.prepare(`SELECT g.kind, g.course_code, g.path_key, a.avatar FROM group_member mb JOIN course_group g USING (group_id)
     JOIN account a ON a.account_id = mb.account_id WHERE mb.group_id = ? AND mb.account_id = ?`)
-    .bind(id, me).first<{ kind: 'COURSE' | 'BATCH'; course_code: string | null; avatar: string | null }>() : null;
+    .bind(id, me).first<{ kind: 'COURSE' | 'BATCH' | 'PATH'; course_code: string | null; path_key: string | null; avatar: string | null }>() : null;
   if (!id || !m) return err(c, 403, 'Join the group first');
   if (!(await rulesAccepted(c, me))) return err(c, 403, 'Accept the group rules first', 'acceptRules');   // CR-006: once per account
   if (c.req.header('Upgrade') !== 'websocket') return err(c, 400, 'Expected a WebSocket');
@@ -151,7 +185,7 @@ groupRoutes.get('/groups/:id/live', async c => {
   headers.set('X-ZP-Session', c.get('tokenHash'));             // lets logout close exactly this device's socket
   // Audit lead 3: remember every room this account opened, so deleting the account purges it even after leaving.
   await c.env.DB.prepare('INSERT OR IGNORE INTO group_room_seen (account_id, group_id, first_at) VALUES (?, ?, ?)').bind(me, id, nowIso()).run();   // CR-007: demo accounts read only                   // a preset code (CHECK in D1), ASCII
-  headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code));    // which labelled sample thread the room shows first
+  headers.set('X-ZP-Sample', sampleKey(m.kind, m.course_code, m.path_key));    // which labelled sample thread the room shows first
   headers.set('X-ZP-Blocked', JSON.stringify((blocked.results as { blocked_id: number }[]).map(r => r.blocked_id)));
   return room(c, id).fetch(new Request('https://room/live', { headers }));
 });

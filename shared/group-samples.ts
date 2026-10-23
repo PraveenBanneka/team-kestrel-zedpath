@@ -61,6 +61,39 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Yasas'), null, 'Law has an aptitude test right? When do they announce it?'],
     [STUDENT('Thilini'), SENIOR('Law', 2), 'Each university announces its own in a press notice. Add the date to your Journey when it is out so you get a reminder.'],
   ],
+  // CR-014: the five path groups (general advice, pointing to the official sources and ZedPath's cited pages).
+  'PATH:PROF_ACCOUNTING': [
+    [STUDENT('Sajith'), null, 'Commerce stream. Should I start CA or CIMA right after A/L, or wait for university?'],
+    [STUDENT('Hansika'), SENIOR('Accounting', 2), 'Many start one alongside a degree. Compare the entry rules and the cost to register in Other paths first: they differ a lot.'],
+    [STUDENT('Sajith'), null, 'Is AAT worth it if my results are not great?'],
+    [STUDENT('Hansika'), SENIOR('Accounting', 2), 'AAT takes O/L students too, and it can give exemptions later. Check the exact exemptions on the official site of the body before you pay.'],
+    [STUDENT('Ruwani'), null, 'ACCA fees are in pounds right? That scared me.'],
+    [STUDENT('Hansika'), SENIOR('Accounting', 2), 'Yes, ZedPath shows them in GBP as published. Ask about payment plans and which exams you can skip first.'],
+  ],
+  'PATH:PROF_BUSINESS': [
+    [STUDENT('Kavindu'), null, 'Anyone doing SLIM marketing straight after A/L?'],
+    [STUDENT('Nimesha'), SENIOR('Business', 2), 'I started with the short certificate, then moved up. ZedPath lists both with their entry rules.'],
+    [STUDENT('Kavindu'), null, 'And banking? The IBSL diploma looked interesting.'],
+    [STUDENT('Nimesha'), SENIOR('Business', 2), 'It is taken by people who want to work in banks. Fees are charged per subject, so ask how many subjects you will take.'],
+  ],
+  'PATH:OUSL': [
+    [STUDENT('Dilini'), null, 'Can I study at the Open University while working?'],
+    [STUDENT('Supun'), SENIOR('Open University', 3), 'Yes, most of us do. Classes are mostly online with day schools at the regional centres.'],
+    [STUDENT('Dilini'), null, 'Does registering at OUSL stop me from getting a UGC university later?'],
+    [STUDENT('Supun'), SENIOR('Open University', 3), 'Check the official notices for that rule. The OUSL pages in ZedPath say when applications open and close: follow them in Alerts so you do not miss the date.'],
+  ],
+  'PATH:GOV_CUSTOMS': [
+    [STUDENT('Ashen'), null, 'Is anyone preparing for the Customs Inspector exam?'],
+    [STUDENT('Madhavi'), null, 'Yes! The Gazette notice has the age limit, the height rule and the subjects, all in Alerts with the source.'],
+    [STUDENT('Ashen'), null, 'How are you preparing?'],
+    [STUDENT('Madhavi'), null, 'Past papers and a timer. Follow the exam in Alerts so the next call reaches you.'],
+  ],
+  'PATH:GOV_MSO': [
+    [STUDENT('Lahiru'), null, 'Management Service Officers exam: anyone here?'],
+    [STUDENT('Pavithra'), null, 'Me. The rules need all A/L subjects at one sitting, so read the Gazette notice carefully.'],
+    [STUDENT('Lahiru'), null, 'Can we apply while waiting for university?'],
+    [STUDENT('Pavithra'), null, 'Check the notice for that. Follow it in Alerts and the closing date shows up in your Journey.'],
+  ],
   COURSE: [
     [STUDENT('Nethmi'), null, 'Hi everyone! Anyone else aiming for this course?'],
     [STUDENT('Chamod'), null, 'Yes! Still deciding the order of my UGC list.'],
@@ -68,9 +101,9 @@ const THREADS: Record<string, Line[]> = {
   ],
 };
 
-/** The room's key for its samples: 'BATCH', 'COURSE:<code>' when that course has its own thread, else 'COURSE'. */
-export const sampleKey = (kind: 'COURSE' | 'BATCH', courseCode: string | null) =>
-  kind === 'BATCH' ? 'BATCH' : THREADS[`COURSE:${courseCode}`] ? `COURSE:${courseCode}` : 'COURSE';
+/** The room's key for its samples: 'BATCH', 'PATH:<key>', 'COURSE:<code>' when that course has its own thread, else 'COURSE'. */
+export const sampleKey = (kind: 'COURSE' | 'BATCH' | 'PATH', courseCode: string | null, pathKey: string | null = null) =>
+  kind === 'BATCH' ? 'BATCH' : kind === 'PATH' ? `PATH:${pathKey}` : THREADS[`COURSE:${courseCode}`] ? `COURSE:${courseCode}` : 'COURSE';
 
 /** The sample messages for a room, oldest first, dated the day before the group feature went live. */
 export function samplesFor(key: string): ChatMessage[] {

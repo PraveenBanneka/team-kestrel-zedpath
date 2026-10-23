@@ -21,6 +21,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (produ
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Security audit run-1 lead 3: GROUP_ROOM_SEEN (rooms an account opened) so account deletion purges every room; migration 0012
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-014: migration 0013, course_group gains kind PATH (path_key, CHECK + partial UNIQUE); group_member.rules_version contracted
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013: curated career map in `shared/careers.ts` (reference data, no D1 change)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Route catalogue: `cost_basis` (what a published fee covers); no D1 change
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Route catalogue 23 Oct: 102 routes; optional `programmes`; `entry_requirements_text` and `source_url` may be null (rules below); no D1 change
@@ -141,7 +142,7 @@ by `tools/seed/courses-sql.ts` from the official Uni-Code list), so SENIOR_INVIT
 | Table (0006) | Key | Constraints and indexes | Deleting an account |
 |---|---|---|---|
 | senior_invite | invite_id; code_hash UNIQUE; redeemed_by UNIQUE | FK course, institution; CHECK study_year 1 to 6, expires after created, redeemed_by and redeemed_at both set or both null; trigger on redemption | Its redeemed invite is deleted (CASCADE) |
-| course_group | group_id | kind COURSE (course_code) or BATCH (stream_code + district_code), enforced by three CHECKs; one group per course and per batch by two partial UNIQUE indexes (SQLite treats NULLs as distinct in a plain UNIQUE) | Unaffected |
+| course_group | group_id | kind COURSE (course_code), BATCH (stream_code + district_code) or, since 0013 (CR-014), PATH (path_key, one of five keys), enforced by four CHECKs; one group per course, per batch and per path key by three partial UNIQUE indexes (SQLite treats NULLs as distinct in a plain UNIQUE) | Unaffected |
 | group_member | (group_id, account_id) | FK both, CASCADE; index on account_id | Memberships deleted |
 | message_report | (group_id, message_id, reporter_id) | one report per member per message; reason CHECK in four values; message_id CHECK 32 hex | Reports deleted |
 | account_block | (blocker_id, blocked_id) | CHECK not self; index on blocked_id | Blocks both ways deleted |
@@ -248,6 +249,15 @@ route catalogue: each refers to UGC courses by the handbook's course code (with 
 to routes by id or by words in their programme titles, and to a licence step only with a checked official source. It reuses
 the rulebook's courses, the student's computed bands and the route catalogue instead of a new table, and stores nothing
 about the student (TC-147).
+
+**Groups for other paths (CR-014, migration 0013).** `course_group` gains a third kind, PATH, with `path_key` (CHECK on the five
+keys of `shared/groups.ts` PATH_GROUPS; `(kind = 'PATH') = (path_key IS NOT NULL)`; partial UNIQUE per key). This reuses the
+group, membership, report and room tables instead of a parallel structure. SQLite cannot change a CHECK in place, so 0013
+rebuilds `course_group`: the three tables that reference it are copied out and dropped first (so no ON DELETE CASCADE
+runs), then recreated as before and filled back; group ids are kept, so each Durable Object room keeps its messages. It also
+completes 0010's expand-then-contract by leaving out `group_member.rules_version` (unused since 0010; absent where an early
+0009 ran). The five path groups and the popular course groups are created by the Worker on the first listing (INSERT OR
+IGNORE), not by the migration. Pinned by MIG-030 (data kept through 0013), MIG-017, MIG-027 and TC-148.
 
 **Business rules on the server.** The step list (three preparation steps, open at any time, and the five UGC steps) is
 fixed in `shared/journey.ts` and mirrored by the CHECK on `journey_step.step_id`; a test inserts every step id the code

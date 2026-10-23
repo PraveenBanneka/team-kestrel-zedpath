@@ -345,11 +345,11 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
         <span className="grow"><span className="t">{t('paths.list')}</span><span className="s">{listCount ? (listCount === 1 ? t('paths.listOne') : t('paths.listSome', { n: listCount })) : t('paths.listNone')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
       </button>
-      <button className="card list-entry" onClick={() => go('/goal')}>
+      {SHOW_GOAL_CARD && <button className="card list-entry" onClick={() => go('/goal')}>
         <span className="ic" style={{ background: 'var(--violet-bg, color-mix(in srgb, var(--violet) 14%, transparent))', color: 'var(--violet)' }}><Target size={22} aria-hidden="true" /></span>
         <span className="grow"><span className="t">{t('goal.card')}</span><span className="s">{t('goal.cardSub')}</span></span>
         <ChevronRight size={20} className="chev" aria-hidden="true" />
-      </button>
+      </button>}
       </div><div className="dash-paths">
       <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
@@ -625,6 +625,8 @@ function RouteList({ group, routes, go, query, setQuery }: { group: RouteSummary
 }
 
 // ---------------------------------------------------------------- CR-013 Career-first mode
+/** Praveen 2026-10-23: the home card is hidden "for now"; #/goal still works. */
+const SHOW_GOAL_CARD = false;
 const careerName = (c: Career) => t(`career.${c.id}` as Key);
 
 function GoalScreen({ id, results, routes, go }: { id: string | null; results: ResultsResponse | null; routes: RouteSummary[] | null; go: (to: string) => void }) {

@@ -18,11 +18,25 @@ export const GROUP_RULES_VERSION = '2026-10-11';
 export const GROUP_RULE_COUNT = 6;
 /** Course groups everyone sees under "Popular" (Medicine, Engineering, Computer Science, Management, Commerce, Law). */
 export const POPULAR_COURSES = ['001', '008', '012', '016', '018', '025'];
+/** CR-014 (Praveen 2026-10-23): standing groups for students heading to other paths, two for professional bodies, one
+ *  for the Open University, two for government job exams. Keys mirrored by the CHECK in migration 0013; each names the
+ *  route group it belongs to and the routes it is about (the group page links them). Their names are in the i18n files
+ *  (gp.<key>); the Worker creates them on the first listing, so everyone, the demo included, can join. */
+export const PATH_GROUPS = [
+  { key: 'PROF_ACCOUNTING', routeGroup: 'PROFESSIONAL', routeIds: ['R028', 'R029', 'R030', 'R031', 'R096', 'R097', 'R102'] },
+  { key: 'PROF_BUSINESS', routeGroup: 'PROFESSIONAL', routeIds: ['R098', 'R099', 'R100', 'R101'] },
+  { key: 'OUSL', routeGroup: 'DIPLOMA', routeIds: ['R023', 'R024', 'R025'] },
+  { key: 'GOV_CUSTOMS', routeGroup: 'JOB_EXAM', routeIds: ['R043'] },
+  { key: 'GOV_MSO', routeGroup: 'JOB_EXAM', routeIds: ['R044'] },
+] as const;
+export type PathKey = typeof PATH_GROUPS[number]['key'];
+export const isPathKey = (x: unknown): x is PathKey => PATH_GROUPS.some(p => p.key === x);
 
 export interface GroupSummary {
   id: number | null;                             // null until someone joins (groups are created on first join)
-  kind: 'COURSE' | 'BATCH';
+  kind: 'COURSE' | 'BATCH' | 'PATH';
   courseCode: string | null;
+  pathKey: PathKey | null;                       // CR-014: the path group's key
   title: string;                                 // English, for logs and tests; the phone words its own from name
   subtitle: string;
   name: string;                                  // the course name, or "stream · district" for a batch
@@ -31,7 +45,7 @@ export interface GroupSummary {
   joined: boolean;
   rulesAccepted: boolean;                        // CR-006: this account accepted the current group rules (once, for every group)
 }
-export interface GroupsResponse { groups: GroupSummary[]; popular: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER'; rulesAccepted: boolean }
+export interface GroupsResponse { groups: GroupSummary[]; popular: GroupSummary[]; paths: GroupSummary[]; role: 'STUDENT' | 'SENIOR' | 'OTHER'; rulesAccepted: boolean }
 /** CR-006: a member as shown on the group's info page: the username (never the name), the preset avatar, the badge. */
 export interface GroupMemberInfo { username: string; avatar: string | null; badge: string | null }
 /** sample: a labelled sample message (shared/group-samples.ts), never a real member's. */

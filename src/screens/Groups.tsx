@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUp, BadgeCheck, Ban, ChevronRight, Flag, Info, LogOut, ShieldCheck, TriangleAlert, Users, X } from 'lucide-react';
-import { GROUP_RULES_VERSION, GROUP_RULE_COUNT, MESSAGE_MAX, REPORT_REASONS, type ChatMessage, type GroupMemberInfo, type GroupSummary, type GroupsResponse,
+import { GROUP_RULES_VERSION, GROUP_RULE_COUNT, MESSAGE_MAX, PATH_GROUPS, REPORT_REASONS, type ChatMessage, type GroupMemberInfo, type GroupSummary, type GroupsResponse,
   type ReportReason, type ServerFrame } from '../../shared/groups.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { ListEntry } from '../../shared/list.ts';
@@ -28,15 +28,43 @@ async function call<T>(method: string, path: string, body?: unknown): Promise<T>
   return data as T;
 }
 /** Join a group. The current rules version is sent only when the student has just accepted them (the first time). */
-const joinGroup = (g: Pick<GroupSummary, 'kind' | 'courseCode'>, accepting: boolean) =>
-  call<GroupSummary>('POST', '/groups/join', { kind: g.kind, courseCode: g.courseCode ?? undefined, ...(accepting ? { acceptRules: GROUP_RULES_VERSION } : {}) });
+const joinGroup = (g: Pick<GroupSummary, 'kind' | 'courseCode' | 'pathKey'>, accepting: boolean) =>
+  call<GroupSummary>('POST', '/groups/join', { kind: g.kind, courseCode: g.courseCode ?? undefined, pathKey: g.pathKey ?? undefined, ...(accepting ? { acceptRules: GROUP_RULES_VERSION } : {}) });
 
 const reasonLabel = (r: ReportReason) => t(`reason.${r}`);
-const title = (g: GroupSummary) => g.kind === 'COURSE' ? t('gr.waiting', { course: g.name }) : g.name;
-const subtitle = (g: GroupSummary) => g.kind === 'BATCH' ? t('gr.batchSub')
+/** CR-014: a path group's name and its route group's label, in the app's language. */
+const pathName = (g: GroupSummary) => t(`gp.${g.pathKey}` as Key);
+const pathGroupLabel = (g: GroupSummary) => t(`rg.${PATH_GROUPS.find(p => p.key === g.pathKey)?.routeGroup ?? 'PROFESSIONAL'}` as Key);
+const title = (g: GroupSummary) => g.kind === 'PATH' ? pathName(g) : g.kind === 'COURSE' ? t('gr.waiting', { course: g.name }) : g.name;
+const subtitle = (g: GroupSummary) => g.kind === 'PATH' ? pathGroupLabel(g) : g.kind === 'BATCH' ? t('gr.batchSub')
   : g.universities === 1 ? t('gr.courseSubOne', { code: g.courseCode ?? '' }) : t('gr.courseSub', { code: g.courseCode ?? '', n: g.universities });
 const members = (n: number) => n === 1 ? t('gr.member') : t('gr.members', { n });
-const groupKey = (g: GroupSummary) => `${g.kind}:${g.courseCode ?? ''}`;
+const groupKey = (g: GroupSummary) => `${g.kind}:${g.courseCode ?? g.pathKey ?? ''}`;
+
+/** CR-014: the one-time group rules in a small centred window: Cancel, or Agree and join (which joins and opens the group). */
+function RulesDialog({ group, busy, onCancel, onJoin }: { group: GroupSummary; busy: boolean; onCancel: () => void; onJoin: () => void }) {
+  useEffect(() => {
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') onCancel(); };
+    window.addEventListener('keydown', esc); return () => window.removeEventListener('keydown', esc);
+  }, [onCancel]);
+  return (
+    <div className="modal-back" onClick={e => { if (e.target === e.currentTarget) onCancel(); }}>
+      <motion.section className="card stack modal wa-rules" role="dialog" aria-modal="true" aria-labelledby="rules-dialog-h"
+        initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }}>
+        <div className="row" style={{ flexWrap: 'nowrap' }}>
+          <ShieldCheck size={22} aria-hidden="true" style={{ color: 'var(--wa-green)', flex: 'none' }} />
+          <h2 id="rules-dialog-h" className="title-l" style={{ margin: 0, flex: 1 }}>{title(group)}</h2>
+        </div>
+        <p className="body-m" style={{ margin: 0 }}>{t('gr.rulesH')}</p>
+        <ol className="wa-rule-list">{Array.from({ length: GROUP_RULE_COUNT }, (_, i) => <li key={i}>{t(`gr.rule.${i + 1}` as Key)}</li>)}</ol>
+        <p className="helper">{t('gi.once')}</p>
+        <div className="row" style={{ flexWrap: 'nowrap', gap: 8 }}>
+          <button className="btn text" style={{ flex: 1 }} onClick={onCancel}>{t('gr.cancel')}</button>
+          <button className="btn filled wa-btn" style={{ flex: 2 }} disabled={busy} autoFocus onClick={onJoin}>{busy ? t('gr.joining') : t('gr.rulesJoin')}</button>
+        </div>
+      </motion.section>
+    </div>);
+}
 
 /** The group rules. With onAccept: the student ticks "I agree" and joins (asked once per account); without: read-only. */
 export function RulesCard({ onAccept, onClose, busy, extra }: { onAccept?: () => void; onClose?: () => void; busy?: boolean; extra?: string }) {
@@ -102,6 +130,7 @@ export function GroupsScreen({ loggedIn, list, results, go }: { loggedIn: boolea
   const joined = data?.groups.filter(g => g.joined) ?? [];
   const suggested = data?.groups.filter(g => !g.joined) ?? [];
   const popular = data?.popular.filter(g => !g.joined) ?? [];
+  const paths = data?.paths.filter(g => !g.joined) ?? [];
   const Row = ({ g }: { g: GroupSummary }) => (
     <motion.button variants={rise} className="item wa-row" onClick={() => open(g)} disabled={busy}>
       <PersonAvatar avatar={null} name={g.name} size={48} />
@@ -116,12 +145,13 @@ export function GroupsScreen({ loggedIn, list, results, go }: { loggedIn: boolea
   return (
     <>
       <Intro />
-      {asking && <RulesCard busy={busy} onClose={() => setAsking(null)} onAccept={() => void join(asking, true)} />}
+      {asking && <RulesDialog group={asking} busy={busy} onCancel={() => setAsking(null)} onJoin={() => void join(asking, true)} />}
       {error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{error}</div>}
       {!data && !error && <><div className="skeleton" /><div className="skeleton" /></>}
       {section(t('gr.yours'), joined)}
       {data && section(joined.length ? t('gr.more') : t('gr.for'), suggested)}
       {data && suggested.length === 0 && joined.length === 0 && <div className="card"><p className="subtitle">{t('gr.addCourses')}</p></div>}
+      {section(t('gr.paths'), paths)}
       {section(t('gr.popular'), popular)}
       {data?.role === 'STUDENT' && !data.groups.some(g => g.kind === 'BATCH') && <p className="helper">{t('gr.batchLater')}</p>}
       {reading && <RulesCard onClose={() => setReading(false)} />}
@@ -147,8 +177,8 @@ const dayLabel = (iso: string) => {
   if (d.toDateString() === y.toDateString()) return t('gr.yesterday');
   return d.toLocaleDateString(locale(), { day: 'numeric', month: 'long', year: 'numeric' });
 };
-const description = (g: GroupSummary) => g.kind === 'COURSE' ? t('gi.descCourse', { course: g.name, n: g.universities }) : t('gi.descBatch', { name: g.name });
-const groupRule = (g: GroupSummary) => g.kind === 'COURSE' ? t('gi.ruleCourse') : t('gi.ruleBatch');
+const description = (g: GroupSummary) => g.kind === 'PATH' ? t('gi.descPath', { name: pathName(g) }) : g.kind === 'COURSE' ? t('gi.descCourse', { course: g.name, n: g.universities }) : t('gi.descBatch', { name: g.name });
+const groupRule = (g: GroupSummary) => g.kind === 'PATH' ? t('gi.rulePath') : g.kind === 'COURSE' ? t('gi.ruleCourse') : t('gi.ruleBatch');
 
 /** Not a member yet (or never accepted the rules): join here, with the rules the first time. */
 function JoinGate({ group, onJoined }: { group: GroupSummary; onJoined: () => void }) {

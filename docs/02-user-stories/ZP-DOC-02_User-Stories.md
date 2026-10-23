@@ -24,6 +24,7 @@ revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; bas
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011: US-302 rewritten (understand what the order means; AC-302.3 withdrawn; AC-302.4 added); awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot): US-304 built and extended (AC-304.2 to AC-304.5); awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): US-509 added; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014 (groups for other paths; rules window; demo): US-704 extended (AC-704.9 to AC-704.11), US-707 AC-707.4; CR-013 card hidden from the home; awaiting approval
 ---
 
 # Introduction
@@ -120,6 +121,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page | US-302 |
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | US-304 |
 | CR-013 | 23 October 2026 | Career-first mode (the product owner's request: "Can we have an outcome driven mode? Like student can enter who he wants to become and we show his paths with access located in homepage below mylist pill"): *Who do you want to become?* below My list; twelve curated careers, each showing the student's banded state-university courses, the courses closed by their subjects, the other paths that lead there, and the licence step where its official source was checked | US-509 |
+| CR-014 | 23 October 2026 | Product owner's screen recording: "remove this latest one, who do you want to become thing, remove that for now"; groups: "two for these professional body interested people and one open university ... two government ones"; "the group rules should appear in a smaller window and we can either cancel it or join and when we tap join we should be taken inside a group and you should fill those groups with sample chats". Five standing groups for other paths (accounting qualifications; marketing and banking; Open University; Inspector of Customs exam; Management Service Officers exam) with labelled sample chats; the rules in a small window with Cancel or Agree and join, which opens the group; the demo is shown only groups it can join; the career card (CR-013) is hidden from the home for now | US-704, US-707, US-509 |
 
 ## Sources of evidence
 
@@ -1042,7 +1044,7 @@ diploma to a degree, **so that** I know a vocational path does not close the doo
 
 ## US-509 Start from the career I want
 
-*New (CR-013).*
+*New (CR-013). The entry card is hidden from the Paths home for now (CR-014, product owner, 23 October 2026); the screen and its tests remain.*
 
 | Priority | Size | Release | Epic | Persona | Evidence |
 |---|---|---|---|---|---|
@@ -1255,6 +1257,9 @@ uploads.*
 - **AC-704.6** *New (CR-005).* **Given** a group, **then** labelled sample conversations are shown before the real messages, each marked *Sample* with an author name starting "Sample" and no verified badge; they cannot be reported or blocked and are not stored.
 - **AC-704.7** *New (CR-005).* **Given** *Groups*, **then** the list and the rooms follow a chat-app layout: a list of groups, message bubbles and a message box at the bottom.
 - **AC-704.8** *New (CR-006).* **Given** I am in a group room, **then** the connection stays open while I am idle and reconnects by itself after a short drop, without showing "Disconnected".
+- **AC-704.9** *New (CR-014).* **Given** *Groups*, **then** *Groups for other paths* lists five standing groups for everyone (accounting qualifications; marketing and banking; Open University of Sri Lanka; Inspector of Customs exam; Management Service Officers exam), each opening with its own labelled sample chat.
+- **AC-704.10** *New (CR-014).* **Given** the demo, **then** *Groups* lists only groups that already exist, so every group it shows can be joined; the five path groups and the popular course groups always exist.
+- **AC-704.11** *New (CR-014).* **Given** I tap a group I have not joined, **then** joining starts from anywhere on its row, and after joining I am taken inside the group.
 
 
 ## US-705 See my class's progress as a teacher
@@ -1311,6 +1316,7 @@ everyone in every group has agreed to the same rules.
 - **AC-707.3** *New (CR-006).* **Given** I join my first group, **then** I accept the rules once for my account; later joins of other groups do not ask again; the server refuses a first join without acceptance and keeps every live room closed until the account has accepted.
 - **AC-707.4** *New (CR-006).* **Given** a new version of the group rules is published, **then** I am asked to accept the new version before I take part again, and my earlier acceptance stays recorded.
 - **AC-707.5** *New (CR-006).* **Given** I accept, **then** the rules version and the time are recorded on my account and deleted with it.
+- **AC-707.4** *New (CR-014).* **Given** I have not accepted the rules, **when** I tap a group, **then** the rules appear in a small window over the list with *Cancel* and *Agree and join*; *Agree and join* records the acceptance, joins and opens the group.
 
 
 ## US-708 See a group's details and members, and leave it
@@ -1591,6 +1597,7 @@ Table: Evidence-to-story traceability matrix
 | CR-011 (preference-list guidance) | US-302; AC-302.1, AC-302.2, AC-302.4 (AC-302.3 withdrawn) |
 | CR-012 (UGC application co-pilot) | US-304; AC-304.2 to AC-304.5 |
 | CR-013 (career-first mode) | US-509; AC-509.1 to AC-509.4 |
+| CR-014 (groups for other paths, rules window, demo) | US-704 (AC-704.9 to AC-704.11), US-707 (AC-707.4); US-509 entry hidden |
 
 # Glossary {.appendix}
 

@@ -58,7 +58,7 @@ export class GroupRoom extends DurableObject<Env> {
       const pair = new WebSocketPair();
       this.ctx.acceptWebSocket(pair[1]);
       pair[1].serializeAttachment(member);
-      const samples = /^(BATCH|COURSE(:\d{3})?)$/.test(req.headers.get('X-ZP-Sample') ?? '') ? samplesFor(req.headers.get('X-ZP-Sample')!) : [];
+      const samples = /^(BATCH|COURSE(:\d{3})?|PATH:[A-Z_]{2,20})$/.test(req.headers.get('X-ZP-Sample') ?? '') ? samplesFor(req.headers.get('X-ZP-Sample')!) : [];
       this.send(pair[1], { type: 'history', messages: [...samples, ...this.history(member.blocked)] });
       return new Response(null, { status: 101, webSocket: pair[0] });
     }

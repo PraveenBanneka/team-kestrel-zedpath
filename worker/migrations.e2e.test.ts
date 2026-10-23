@@ -239,12 +239,12 @@ describe('MIG: CHECK constraints reject bad values', () => {
     run(db, "INSERT INTO journey_notice VALUES (1, 'R002', '2026-10-11T08:00:00Z', '2026-10-12T08:00:00Z')");
   });
 
-  it('MIG-017 rules_version other than 2026-10-11 rejected (group_rules_acceptance and group_member)', () => {
+  it('MIG-017 rules_version other than 2026-10-11 rejected (group_rules_acceptance); group_member.rules_version contracted by 0013', () => {
     courseGroup(db, 1);
     expect(() => run(db, "INSERT INTO group_rules_acceptance VALUES (1, '2026-01-01', ?)", T)).toThrow(/CHECK/);
-    expect(() => run(db, "INSERT INTO group_member VALUES (1, 1, ?, '2025-01-01')", T)).toThrow(/CHECK/);
     run(db, 'INSERT INTO group_rules_acceptance VALUES (1, ?, ?)', RULES, T);
-    run(db, 'INSERT INTO group_member VALUES (1, 1, ?, NULL)', T);
+    run(db, 'INSERT INTO group_member VALUES (1, 1, ?)', T);
+    expect(all(db, "SELECT name FROM pragma_table_info('group_member') WHERE name = 'rules_version'")).toEqual([]);
   });
 
   it('MIG-018 composite FK journey_course -> offering rejects a non-existent offering (real course, wrong institution too)', () => {
@@ -289,7 +289,7 @@ describe('MIG: deleting an account', () => {
   it('MIG-023 foreign_key_check is clean after seeding a full student, groups, reports and blocks', () => {
     fullStudent(db, 1); fullStudent(db, 2);
     courseGroup(db, 1);
-    run(db, 'INSERT INTO group_member VALUES (1, 1, ?, NULL), (1, 2, ?, NULL)', T, T);
+    run(db, 'INSERT INTO group_member VALUES (1, 1, ?), (1, 2, ?)', T, T);
     run(db, "INSERT INTO message_report VALUES (1, ?, 1, 'SPAM', ?)", 'a'.repeat(32), T);
     run(db, 'INSERT INTO account_block VALUES (1, 2, ?), (2, 1, ?)', T, T);
     expect(all(db, 'PRAGMA foreign_key_check')).toEqual([]);
@@ -298,7 +298,7 @@ describe('MIG: deleting an account', () => {
   it('MIG-024 DELETE FROM account cascades to every child table (listed), and leaves the other account intact', () => {
     fullStudent(db, 1); fullStudent(db, 2);
     courseGroup(db, 1);
-    run(db, 'INSERT INTO group_member VALUES (1, 1, ?, NULL), (1, 2, ?, NULL)', T, T);
+    run(db, 'INSERT INTO group_member VALUES (1, 1, ?), (1, 2, ?)', T, T);
     run(db, "INSERT INTO message_report VALUES (1, ?, 1, 'SPAM', ?), (1, ?, 2, 'SPAM', ?)", 'a'.repeat(32), T, 'b'.repeat(32), T);
     run(db, 'INSERT INTO account_block VALUES (1, 2, ?), (2, 1, ?)', T, T);
     const byAccount: Record<string, string> = { message_report: 'reporter_id', account_block: 'blocker_id = 1 OR blocked_id' };
@@ -335,12 +335,14 @@ describe('MIG: deleting an account', () => {
 });
 
 describe('MIG: expand, then contract (CR-005 -> CR-006)', () => {
-  it('MIG-027 group_member.rules_version still exists after 0010 (kept for rollback)', () => {
-    const cols = all(db, 'SELECT name FROM pragma_table_info(?)', 'group_member').map(r => r.name);
-    expect(cols).toContain('rules_version');
+  it('MIG-027 group_member.rules_version existed from 0010 to 0012 (kept for rollback) and 0013 contracts it', () => {
+    const pre = createTestD1(FILES.filter(f => f < '0013')).raw as unknown as Db;
+    expect(all(pre, 'SELECT name FROM pragma_table_info(?)', 'group_member').map(r => r.name)).toContain('rules_version');
+    expect(all(db, 'SELECT name FROM pragma_table_info(?)', 'group_member').map(r => r.name)).not.toContain('rules_version');
   });
 
-  it("MIG-028 the previous release's group SQL (worker/groups.ts before commit 4f3708b) still runs on the 0010 schema", () => {
+  it("MIG-028 the previous release's group SQL (worker/groups.ts before commit 4f3708b) still runs on the 0010 to 0012 schema", () => {
+    const db = createTestD1(FILES.filter(f => f < '0013')).raw as unknown as Db;   // 0013 contracts rules_version
     student(db, 1);
     courseGroup(db, 1, '001');
     // Verbatim from `git show 4f3708b^:worker/groups.ts`, with GROUP_RULES_VERSION = '2026-10-11'.
@@ -382,5 +384,33 @@ describe('MIG: expand, then contract (CR-005 -> CR-006)', () => {
     student(db, 1);
     expect(count(db, 'group_rules_acceptance')).toBe(0);
     expect(one(db, 'SELECT avatar FROM account WHERE account_id = 1').avatar).toBeNull();
+  });
+});
+
+describe('MIG-030 CR-014: 0013 rebuilds course_group with a PATH kind and loses nothing', () => {
+  it('keeps every group id, member, report and room-seen row, and adds the PATH rules', () => {
+    const before = FILES.filter(f => f < '0013');
+    const t = createTestD1(before); const old = t.raw as unknown as Db;
+    student(old, 1); student(old, 2);
+    courseGroup(old, 7, '012');
+    run(old, "INSERT INTO course_group (group_id, kind, stream_code, district_code, created_at) VALUES (9, 'BATCH', 'PHYS', 'KUR', ?)", T);
+    run(old, 'INSERT INTO group_member (group_id, account_id, joined_at, rules_version) VALUES (7, 1, ?, ?), (7, 2, ?, NULL), (9, 1, ?, NULL)', T, RULES, T, T);
+    run(old, "INSERT INTO message_report (group_id, message_id, reporter_id, reason, created_at) VALUES (7, ?, 2, 'SPAM', ?)", 'c'.repeat(32), T);
+    run(old, 'INSERT INTO group_room_seen (account_id, group_id, first_at) VALUES (1, 7, ?), (2, 9, ?)', T, T);
+    (old as unknown as { exec: (s: string) => void }).exec(fs.readFileSync(path.join(MIGRATIONS, FILES.find(f => f.startsWith('0013'))!), 'utf8'));
+    expect(all(old, 'SELECT group_id, kind FROM course_group ORDER BY group_id')).toEqual([{ group_id: 7, kind: 'COURSE' }, { group_id: 9, kind: 'BATCH' }]);
+    expect(all(old, 'SELECT group_id, account_id, joined_at FROM group_member ORDER BY group_id, account_id'))
+      .toEqual([{ group_id: 7, account_id: 1, joined_at: T }, { group_id: 7, account_id: 2, joined_at: T }, { group_id: 9, account_id: 1, joined_at: T }]);
+    expect(count(old, 'message_report')).toBe(1);
+    expect(count(old, 'group_room_seen')).toBe(2);
+    expect(all(old, 'PRAGMA foreign_key_check')).toEqual([]);
+    run(old, "INSERT INTO course_group (kind, path_key, created_at) VALUES ('PATH', 'OUSL', ?)", T);
+    expect(() => run(old, "INSERT INTO course_group (kind, path_key, created_at) VALUES ('PATH', 'OUSL', ?)", T)).toThrow(/UNIQUE/);
+    expect(() => run(old, "INSERT INTO course_group (kind, path_key, created_at) VALUES ('PATH', 'NOPE', ?)", T)).toThrow(/CHECK/);
+    expect(() => run(old, "INSERT INTO course_group (kind, created_at) VALUES ('PATH', ?)", T)).toThrow(/CHECK/);
+    expect(() => run(old, "INSERT INTO course_group (kind, course_code, path_key, created_at) VALUES ('COURSE', '013', 'OUSL', ?)", T)).toThrow(/CHECK/);
+    run(old, 'DELETE FROM account WHERE account_id = 1');                         // cascades still reach the rebuilt tables
+    expect(count(old, 'group_member', 'account_id = 1')).toBe(0);
+    expect(count(old, 'group_room_seen', 'account_id = 1')).toBe(0);
   });
 });
