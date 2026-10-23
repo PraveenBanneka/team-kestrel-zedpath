@@ -26,7 +26,7 @@ describe('UGC application co-pilot (CR-012)', () => {
   it('builds the checklist for this student: school or private, O/L copy, affidavit, aptitude applications', () => {
     const list = [{ needsOl: true, hasAptitudeTest: false, course: 'Medicine' }, { needsOl: false, hasAptitudeTest: true, course: 'Architecture' }];
     const school = A.documentsFor(answers({ candidate: 'SCHOOL', nameDiffers: false }), list).map(d => d.key);
-    expect(school).toEqual(['apply.doc.nic', 'apply.doc.contact', 'apply.doc.print', 'apply.doc.ol', 'apply.doc.principal', 'apply.doc.aptitude']);
+    expect(school).toEqual(['apply.doc.nic', 'apply.doc.contact', 'apply.doc.print', 'apply.doc.olOne', 'apply.doc.principal', 'apply.doc.aptitudeOne']);   // one course each: singular wording
     const priv = A.documentsFor(answers({ candidate: 'PRIVATE', nameDiffers: true }), []).map(d => d.key);
     expect(priv).toContain('apply.doc.private');
     expect(priv).toContain('apply.doc.affidavit');

@@ -270,6 +270,8 @@ export const en = {
   'apply.src': 'UGC handbook 2025/26, p.{p}',
   'apply.srcSec': 'UGC handbook 2025/26, Section {s}',
   'apply.footer': 'From the UGC handbook 2025/26, Section 5. If you get stuck, the government help line is 1919. ZedPath is not part of the UGC.',
+  'apply.doc.olOne': 'A certified copy of your O/L results (by your principal or a JP): 1 course on your list needs O/L passes',
+  'apply.doc.aptitudeOne': '1 course on your list needs a separate aptitude or practical test application to the university: {list}',
   'list.more': '{n} more courses you can reach', 'list.moreOne': '1 more course you can reach',
   'list.moreSub': '{s} Very likely · {l} Possible · {r} Unlikely, not on your list yet. Adding more raises your chance of a place.',
   'list.compare': 'Compare courses', 'list.copy': 'Copy Uni-Codes in this order', 'list.copied': 'Copied {n} Uni-Codes',

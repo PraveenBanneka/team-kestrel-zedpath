@@ -43,11 +43,11 @@ export function documentsFor(a: ApplyAnswers, list: { needsOl: boolean; hasAptit
     { key: 'apply.doc.contact', page: '128' },
     { key: 'apply.doc.print', page: '125, 152' },
   ];
-  if (ol > 0) items.push({ key: 'apply.doc.ol', page: '153', vars: { n: ol } });
+  if (ol > 0) items.push({ key: ol === 1 ? 'apply.doc.olOne' : 'apply.doc.ol', page: '153', vars: { n: ol } });
   if (a.candidate === 'SCHOOL') items.push({ key: 'apply.doc.principal', page: '153' });
   if (a.candidate === 'PRIVATE') items.push({ key: 'apply.doc.private', page: '153-154' });
   if (a.nameDiffers) items.push({ key: 'apply.doc.affidavit', page: '154' });
-  if (apt.length > 0) items.push({ key: 'apply.doc.aptitude', section: '2.2', vars: { n: apt.length, list: apt.slice(0, 3).join(', ') + (apt.length > 3 ? '…' : '') } });
+  if (apt.length > 0) items.push({ key: apt.length === 1 ? 'apply.doc.aptitudeOne' : 'apply.doc.aptitude', section: '2.2', vars: { n: apt.length, list: apt.slice(0, 3).join(', ') + (apt.length > 3 ? '…' : '') } });
   return items;
 }
 
