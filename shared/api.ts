@@ -1,6 +1,7 @@
 // The contract between the React app and the Hono API Worker. Both sides import these types.
 import type { Band, Trend } from './banding.ts';
 import type { Grade, StreamCode } from './rules.ts';
+import type { RouteGroup } from './route-groups.ts';
 
 export interface ProfileInput {
   stream: StreamCode;
@@ -89,7 +90,7 @@ export type CostBasis = typeof COST_BASES[number];
 
 export interface RouteSummary {
   id: string;
-  group: 'PRIVATE_DEGREE' | 'DIPLOMA' | 'PROFESSIONAL' | 'VOCATIONAL' | 'JOB_EXAM' | 'SCHOLARSHIP_ABROAD' | 'RETRY';
+  group: RouteGroup;
   name: string; provider: string; duration: string | null; costText: string | null; intakeTiming: string | null;
   /** The published cost is zero (e.g. SLIATE and DTET full-time courses): shown as "Free", never "Rs 0". */
   free: boolean;
@@ -103,6 +104,12 @@ export interface RouteSummary {
    *  checked on, and the site is never linked (pinned in DAT-030). */
   sourceUrl: string | null; sourceLocator: string; retrievedOn: string;
   openNow: boolean; warning: string | null;
+  /** CR-015, SCHOLARSHIP_LOAN only: the ids of the paths this scholarship or loan pays for (catalogue `for_routes`; every id
+   *  checked to exist when the rulebook is built). Absent when it lists none. */
+  forRoutes?: string[];
+  /** CR-015: the ids of the SCHOLARSHIP_LOAN paths whose `forRoutes` list this path ("Ways to pay"), computed in the build
+   *  from the catalogue, never in the app. Absent when there are none. */
+  waysToPay?: string[];
 }
 
 /** A degree's curriculum as published by the university (data/degrees/, researched 2026-10-05). Module titles are

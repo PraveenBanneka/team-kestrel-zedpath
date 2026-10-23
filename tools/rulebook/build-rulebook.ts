@@ -8,6 +8,7 @@ import { loadDatabase } from '../seed/load.ts';
 import { DISTRICTS, STREAMS } from '../seed/reference.ts';
 import type { Rule } from '../../shared/rules.ts';
 import type { Rulebook } from '../../shared/rulebook.ts';
+import { compileRoutes, type CatalogueRoute } from './compile-routes.ts';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const RULES = path.join(ROOT, 'data', 'rules', 'rules-2025-2026.json');
@@ -52,39 +53,11 @@ for (const h of history) {
   y.zE4[dIndex.get(h.district_code)!] = h.min_z_e4;
 }
 
-// Other routes: verbatim official requirements, timing and costs (data/routes/, researched 2026-10-05).
+// Other routes: verbatim official requirements, timing and costs (data/routes/, researched 2026-10-05). Validated and
+// compiled by compile-routes.ts (CR-015: groups, for_routes, "Ways to pay"); a catalogue problem stops the build.
 const ROUTES_FILE = path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json');
-const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-function latestDate(text: string): string | null {                       // "12 October 2026" or "12.10.2026" -> ISO
-  const ds: string[] = [];
-  for (const m of text.matchAll(/(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/gi))
-    ds.push(`${m[3]}-${String(MONTHS.indexOf(m[2].toLowerCase()) + 1).padStart(2, '0')}-${m[1].padStart(2, '0')}`);
-  for (const m of text.matchAll(/\b(\d{2})\.(\d{2})\.(\d{4})\b/g)) ds.push(`${m[3]}-${m[2]}-${m[1]}`);
-  return ds.sort().at(-1) ?? null;
-}
-const rawRoutes: any[] = fs.existsSync(ROUTES_FILE) ? JSON.parse(fs.readFileSync(ROUTES_FILE, 'utf8')).routes : [];
-/** A published cost of 0 (SLIATE, DTET full-time). An unknown cost (null) is NOT free: Number(null) is 0. */
-const isFree = (r: any) => r.cost_min_lkr != null && Number(r.cost_min_lkr) === 0 && (r.cost_max_lkr == null || Number(r.cost_max_lkr) === 0);
-/** "Rs A to Rs B", "Rs A", or "Up to Rs B" when only a maximum is published or the minimum is a free place
- *  (e.g. NAITA: free for low-income families, the route's note says so). Never "Rs 0" (Praveen 23 Oct). */
-const costText = (r: any): string | null => {
-  if (isFree(r)) return null;
-  const min = r.cost_min_lkr == null || Number(r.cost_min_lkr) === 0 ? null : Number(r.cost_min_lkr);
-  const max = r.cost_max_lkr == null ? null : Number(r.cost_max_lkr);
-  if (min === null) return max === null ? null : `Up to ${lkr(max)}`;
-  return max !== null && max !== min ? `${lkr(min)} to ${lkr(max)}` : lkr(min);
-};
-const lkr = (n: unknown) => `Rs ${Number(n).toLocaleString('en-LK')}`;
-const routes: Rulebook['routes'] = rawRoutes.map(r => ({
-  id: r.id, group: r.route_group, name: r.name, provider: r.provider,
-  duration: r.duration && r.duration !== 'None' ? String(r.duration) : null,
-  free: isFree(r),
-  costBasis: r.cost_basis ?? 'TOTAL',
-  costText: costText(r),
-  intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text ?? null, programmes: r.programmes ?? [], officialUrl: r.official_url ?? null,
-  sourceUrl: r.source_url ?? null, sourceLocator: r.source_locator, retrievedOn: r.retrieved_on, warning: r.notes ?? null,
-  closesOn: r.intake_timing ? latestDate(String(r.intake_timing)) : null, openAtRetrieval: /\bOPEN\b/.test(String(r.intake_timing ?? '')),
-}));
+const rawRoutes: CatalogueRoute[] = fs.existsSync(ROUTES_FILE) ? JSON.parse(fs.readFileSync(ROUTES_FILE, 'utf8')).routes : [];
+const routes: Rulebook['routes'] = compileRoutes(rawRoutes);
 
 const book: Rulebook = {
   routes,

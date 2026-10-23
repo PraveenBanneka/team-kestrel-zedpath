@@ -1,12 +1,13 @@
 // Builds the Ask ZedPath source corpus: passages an answer is allowed to use, each tagged with where it came from.
 //   1. UGC handbook 2025/26 (local PDF, not redistributed in the repo): one or more passages per printed page.
-//   2. The 52 verified "other paths" records (data/routes/), with their official source.
+//   2. Every verified "other paths" record (data/routes/), with its official source (tools/ask/route-passages.ts).
 // Output: data/ask/corpus.json (gitignored: it contains handbook text). Ingested into Vectorize by
 // tools/ask/embed-corpus.ts. Run from the repo root:  node tools/ask/build-corpus.ts
 import fs from 'node:fs';
 import path from 'node:path';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import type { CorpusPassage } from '../../shared/ask.ts';
+import { routePassages, type CorpusRoute } from './route-passages.ts';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const HANDBOOK = path.join(ROOT, 'student_handbook_english.pdf');
@@ -58,20 +59,8 @@ for (let p = 1; p <= doc.numPages; p++) {
   split(text).forEach((t, n) => passages.push({ id: `hb-${printed}-${n}`, kind: 'HANDBOOK', source: 'UGC handbook 2025/26', page: printed, url: null, text: t }));
 }
 
-const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json'), 'utf8')) as {
-  routes: { id: string; route_group: string; name: string; provider: string; duration: string | null; intake_timing: string | null;
-    entry_requirements_text: string | null; programmes?: string[]; cost_basis?: string; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
-};
-for (const r of routes.routes) {
-  // The basis says what the amount covers (Praveen 23 Oct: a semester fee must never read as the cost of a degree).
-  const per = ({ PER_SEMESTER: ' per semester', PER_YEAR: ' per year', PER_SUBJECT: ' per subject', TO_REGISTER: ' to register' } as Record<string, string>)[r.cost_basis ?? ''] ?? '';
-  const cost = r.cost_min_lkr === null ? '' : `Cost: Rs ${r.cost_min_lkr.toLocaleString('en')}${r.cost_max_lkr && r.cost_max_lkr !== r.cost_min_lkr ? ` to Rs ${r.cost_max_lkr.toLocaleString('en')}` : ''}${per}.`;
-  const text = [`${r.name} (${r.route_group.replace(/_/g, ' ').toLowerCase()}), offered by ${r.provider}.`,
-    r.duration ? `Duration: ${r.duration}.` : '', cost, r.intake_timing ? `When: ${r.intake_timing}` : '',
-    r.entry_requirements_text ? `Entry requirements: ${r.entry_requirements_text}` : 'Entry requirements: not published on a page ZedPath could check.',
-    r.programmes?.length ? `Programmes: ${r.programmes.join('; ')}.` : ''].filter(Boolean).join(' ');
-  passages.push({ id: `route-${r.id}`, kind: 'ROUTE', source: `${r.source_locator} (checked ${r.retrieved_on})`, page: null, url: r.source_url, text: text.slice(0, 3000) });
-}
+const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json'), 'utf8')) as { routes: CorpusRoute[] };
+passages.push(...routePassages(routes.routes));   // CR-015: scholarships and loans say what they pay for; paths name their ways to pay
 
 const out = path.join(ROOT, 'data', 'ask', 'corpus.json');
 fs.mkdirSync(path.dirname(out), { recursive: true });

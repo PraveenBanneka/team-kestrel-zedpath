@@ -2,8 +2,10 @@
 // start of a word in the item, so "comb math" finds Combined Mathematics, "ruh comp" finds Computer Science at
 // Ruhuna, and "012f" finds the Uni-Code. Case, accents and punctuation ("&", ".", "-") are ignored. Pure, tested.
 
-const fold = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
-  .replace(/&/g, ' and ').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+// Sinhala and Tamil vowel signs and the virama are combining marks (\p{M}): they stay inside the word, and the zero-width
+// joiners used in conjuncts (ශිෂ්‍යත්ව) are dropped, so a word typed with or without them still matches (CR-015).
+const fold = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[\u200c\u200d]/g, '').toLowerCase()
+  .replace(/&/g, ' and ').replace(/[^\p{L}\p{M}\p{N}]+/gu, ' ').trim();
 
 /** Common short forms students type, mapped to the words they stand for. */
 const ALIASES: Record<string, string> = {

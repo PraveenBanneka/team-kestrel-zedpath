@@ -3,7 +3,7 @@
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, Info, Landmark, LogOut, Map as MapIcon, Menu, Pencil, Plane,
+import { Search, ArrowLeft, Award, BookmarkCheck, BookmarkPlus, Building2, CalendarDays, Users, ChevronRight, CloudCheck, Download, ExternalLink, HandCoins, Info, Landmark, LogOut, Map as MapIcon, Menu, Pencil, Plane,
   ListOrdered, Scale, Target, CheckCircle2, Circle, X, ScrollText, ShieldCheck, Sparkles, Trash2, TriangleAlert, Trophy, UserRound, Wrench, type LucideIcon } from 'lucide-react';
 import type { Meta, OfferingDetail, ProfileInput, ResultsResponse, OfferingSummary, RouteSummary } from '../shared/api.ts';
 import type { MeResponse } from '../shared/account.ts';
@@ -12,6 +12,7 @@ import { formatGap, formatZ } from '../shared/banding.ts';
 import { nameOf } from '../shared/describe.ts';
 import { matches } from '../shared/search.ts';
 import { searchRoutes } from '../shared/route-search.ts';
+import { groupSections } from '../shared/route-groups.ts';
 import { CAREERS, careerPaths, findCareers, type Career } from '../shared/careers.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { AboutFlow, Intro, Logo, Welcome } from './screens/Onboarding.tsx';
@@ -55,6 +56,7 @@ export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: st
   { code: 'VOCATIONAL', title: 'Vocational and NVQ', sub: 'VTA, DTET, NAITA, UoVT', icon: Wrench, tone: 'var(--reach)' },
   { code: 'JOB_EXAM', title: 'Government job exams', sub: 'From the Gazette', icon: Landmark, tone: 'var(--safe)' },
   { code: 'SCHOLARSHIP_ABROAD', title: 'Study abroad', sub: 'Government scholarships', icon: Plane, tone: 'var(--likely)' },
+  { code: 'SCHOLARSHIP_LOAN', title: 'Scholarships and loans', sub: 'Ways to pay for your next step', icon: HandCoins, tone: 'var(--safe)' },
 ];
 
 function useHashRoute(): [string, (to: string) => void] {
@@ -275,7 +277,7 @@ export function App() {
   else if (path === 'hidden') { back = true; title = t('title.hidden'); screen = <Hidden results={results} />; }
   else if (path === 'goal' && profile) { tab = 'paths'; back = true; title = t('title.goal'); screen = <GoalScreen id={arg ?? null} results={results} routes={routes} go={go} />; }
   else if (path === 'routes' && arg) { back = true; title = t('title.routes'); screen = <RouteList group={arg as RouteSummary['group']} routes={routes} go={go} query={routeQuery} setQuery={setRouteQuery} />; }
-  else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} following={saved.includes(arg)} onFollow={me ? on => ops.followNotice(arg, on) : null} />; }
+  else if (path === 'route' && arg) { back = true; title = t('title.route'); screen = <RouteDetail id={arg} routes={routes} following={saved.includes(arg)} onFollow={me ? on => ops.followNotice(arg, on) : null} go={go} />; }
   else if (path === 'me') { tab = null; back = true; title = t('title.me'); screen = <Me profile={profile} meta={meta} extras={extras} go={go} onClear={onClear} account={account} lang={lang} setLang={changeLang} prefs={prefs} setPrefs={setPrefs}
     avatar={me?.avatar ?? null} setAvatar={me ? a => saveAvatar(a).then(adopt) : null} />; }
   else if (!profile) { tab = 'groups'; title = t('title.groups'); screen = <GroupsScreen loggedIn={!!me} list={list} results={results} go={go} />; }
@@ -355,8 +357,9 @@ function YourPaths({ meta, profile, extras, results, routes, error, go, listCoun
       <p className="section-label">{t('paths.other')}</p>
       <Stagger className="bento">
         {ROUTE_GROUPS.map(g => {
-          const n = routes?.filter(r => r.group === g.code).length ?? 0;
-          const open = routes?.filter(r => r.group === g.code && r.openNow).length ?? 0;
+          const sec = groupSections(g.code, routes ?? []);                // CR-015: a group may also list another group's paths
+          const shown = [...sec.own, ...(sec.also?.routes ?? [])];
+          const n = shown.length, open = shown.filter(r => r.openNow).length;
           const Icon = g.icon;
           return (
             <motion.button key={g.code} variants={rise} className="bento-tile" onClick={() => go(`/routes/${g.code}`)} disabled={!routes || n === 0}>
@@ -594,9 +597,16 @@ function Hidden({ results }: { results: ResultsResponse | null }) {
 function RouteList({ group, routes, go, query, setQuery }: { group: RouteSummary['group']; routes: RouteSummary[] | null; go: (to: string) => void;
   query: string | null; setQuery: (q: string | null) => void }) {
   const g = ROUTE_GROUPS.find(x => x.code === group);
-  const list = (routes ?? []).filter(r => r.group === group).sort((a, b) => Number(b.openNow) - Number(a.openNow));
+  // CR-015: Scholarships and loans also lists the scholarships abroad, in a second section (no data is copied).
+  const { list, also } = useMemo(() => {
+    const sec = groupSections(group, routes ?? []);
+    const openFirst = (l: RouteSummary[]) => [...l].sort((a, b) => Number(b.openNow) - Number(a.openNow));
+    return { list: openFirst(sec.own), also: sec.also ? { group: sec.also.group, routes: openFirst(sec.also.routes) } : null };
+  }, [group, routes]);
+  const all = also ? [...list, ...also.routes] : list;
   const q = query ?? '';
   const hits = useMemo(() => searchRoutes(q, list), [q, list]);
+  const alsoHits = useMemo(() => also ? searchRoutes(q, also.routes) : [], [q, also]);
   const searching = q.trim() !== '';
   const Icon = g?.icon ?? MapIcon;
   return (
@@ -605,22 +615,18 @@ function RouteList({ group, routes, go, query, setQuery }: { group: RouteSummary
         <span className="ic-lg" style={{ background: `color-mix(in srgb, ${g?.tone ?? 'var(--brand)'} 14%, transparent)`, color: g?.tone }}><Icon size={26} aria-hidden="true" /></span>
         <div className="stack" style={{ gap: 2 }}><h1 className="screen-title">{t(`rg.${group}` as Key)}</h1><p className="subtitle">{t(`rg.${group}.sub` as Key)}</p></div>
       </div>
-      {list.length > 0 && <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked', { date: shortDate(list.map(r => r.retrievedOn).sort().at(-1)!) })}</p>}
+      {all.length > 0 && <p className="helper"><ShieldCheck size={14} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />{t('routes.checked', { date: shortDate(all.map(r => r.retrievedOn).sort().at(-1)!) })}</p>}
       {query !== null && <label className="search" id="route-search"><Search size={20} aria-hidden="true" /><input autoFocus placeholder={t('routes.search')} value={query}
         onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') setQuery(null); }} aria-label={t('routes.searchAria')} enterKeyHint="search" /></label>}
-      {searching && <p className="helper" role="status">{t('routes.matches', { n: hits.length, total: list.length, q: q.trim() })}</p>}
-      {routes && searching && hits.length === 0 && <div className="card"><p className="subtitle">{t('routes.noSearch')}</p></div>}
-      {!routes ? <div className="skeleton" /> : (
-        <Stagger key={searching ? 'search' : 'all'} className="list-card">
-          {hits.map(({ route: r, programmes }) => (
-            <motion.button variants={rise} key={r.id} className="item" onClick={() => go(`/route/${r.id}`)}>
-              <span className="grow"><span className="t">{r.name}</span><span className="s">{r.provider}</span>
-                {programmes.length > 0 && <span className="s route-hit" lang="en">{programmes.slice(0, 3).join(' · ')}{programmes.length > 3 ? ` ${t('routes.moreProgs', { n: programmes.length - 3 })}` : ''}</span>}
-                {(r.costText || r.free) && <span className="m">{costLine(r)}</span>}</span>
-              {r.openNow && <span className="pill open">{t('routes.open')}</span>}
-              <ChevronRight size={20} className="chev" aria-hidden="true" />
-            </motion.button>))}
-        </Stagger>)}
+      {searching && <p className="helper" role="status">{t('routes.matches', { n: hits.length + alsoHits.length, total: all.length, q: q.trim() })}</p>}
+      {routes && searching && hits.length + alsoHits.length === 0 && <div className="card"><p className="subtitle">{t('routes.noSearch')}</p></div>}
+      {!routes ? <div className="skeleton" /> : <>
+        {hits.length > 0 && <RouteHits key={searching ? 'search' : 'all'} hits={hits} go={go} />}
+        {also && alsoHits.length > 0 && <>
+          <p className="section-label">{t(`routes.also.${also.group}` as Key)}</p>
+          <RouteHits key={searching ? 'also-search' : 'also-all'} hits={alsoHits} go={go} />
+        </>}
+      </>}
     </>
   );
 }
@@ -700,11 +706,17 @@ function RouteHits({ hits, go }: { hits: { route: RouteSummary; programmes: stri
 /** The cost as the list shows it: "Free", "Rs 2,800,000", or "Rs 345,000 to Rs 460,000 a semester". */
 const costLine = (r: RouteSummary) => r.free ? t('routes.free') : r.costBasis === 'TOTAL' ? r.costText : t(`routes.per.${r.costBasis}` as Key, { c: r.costText ?? '' });
 
-function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: RouteSummary[] | null; following: boolean; onFollow: ((on: boolean) => void) | null }) {
+function RouteDetail({ id, routes, following, onFollow, go }: { id: string; routes: RouteSummary[] | null; following: boolean; onFollow: ((on: boolean) => void) | null;
+  go: (to: string) => void }) {
   const r = routes?.find(x => x.id === id);
   if (!routes) return <div className="skeleton" />;
   if (!r) return <div className="alert error"><TriangleAlert size={20} aria-hidden="true" />{t('routes.notFound')}</div>;
   const g = ROUTE_GROUPS.find(x => x.code === r.group);
+  // CR-015: both directions come from the catalogue, linked in the build (forRoutes and its reverse, waysToPay).
+  const linked = (ids: string[] | undefined) => (ids ?? []).map(x => routes.find(y => y.id === x)).filter((x): x is RouteSummary => !!x)
+    .map(route => ({ route, programmes: [] }));
+  const paysFor = linked(r.forRoutes), waysToPay = linked(r.waysToPay);
+  const scholarship = r.group === 'SCHOLARSHIP_LOAN';
   return (
     <>
       <div className="stack" style={{ gap: 8 }}>
@@ -728,7 +740,10 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
           <ul lang="en">{r.programmes.map(p => <li key={p} className="body-m">{p}</li>)}</ul>
         </details>
       </section>}
-      {r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
+      {scholarship && r.warning && <section className="card stack"><h2 className="title-l">{t('routes.award')}</h2><p className="body-m" style={{ margin: 0 }}>{r.warning}</p></section>}
+      {paysFor.length > 0 && <section className="stack"><h2 className="title-l">{t('routes.paysFor')}</h2><RouteHits hits={paysFor} go={go} /></section>}
+      {waysToPay.length > 0 && <section className="stack"><h2 className="title-l">{t('routes.waysToPay')}</h2><RouteHits hits={waysToPay} go={go} /></section>}
+      {!scholarship && r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
       {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
         {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.following1')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.follow')}</>}</button>}
       {r.officialUrl && <a className="btn filled block" href={r.officialUrl} target="_blank" rel="noopener">{t('routes.site')}<ExternalLink size={18} aria-hidden="true" /></a>}

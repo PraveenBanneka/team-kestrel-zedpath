@@ -55,6 +55,7 @@ preference order or deadlines, and none covers routes outside the UGC.**
 | 6 | **Every other route** | 102 official routes: all 31 Ministry-recognised private institutes (with their programmes), foreign degrees taught in Sri Lanka, KDU fee-paying, interest-free loan courses, HNDs, professional bodies (CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL), searchable inside each group (institute, short name or subject, e.g. "law"), vocational (with the NVQ 5/6 → B.Tech ladder at UoVT), job exams, scholarships abroad, with "open now". | ✅ Live |
 | 6a | **University facts** | On every course page: students admitted, undergraduates, hostel places and graduates, from the UGC's *Sri Lanka University Statistics 2024*, each with its table and page. | ✅ Live |
 | 6b | **Aptitude tests** | The 24 courses that need one: the official notice and last intake's dates (shown as past), or the joint test to apply for. | ✅ Live |
+| 6c | **Scholarships and loans** | A seventh group of other paths, *Ways to pay for your next step*: scholarship and loan schemes, each linked to the paths it pays for (those paths show "Ways to pay"), with the government scholarships abroad listed alongside. Never shown as a cost or "Free"; the amount is in its notes. Searchable in English, Sinhala and Tamil (scholarship, Mahapola, bursary, loan). | Built (CR-015); entries being fact-checked |
 | 7 | **Ask ZedPath, with sources** | Questions in English, Sinhala or Tamil, answered only from the UGC handbook and official routes, citing the page, using *your* results. | ✅ Live |
 | 8 | **Accounts and demo** | **Try the demo**: one tap opens a private throwaway account with a sample student (read-only in groups, deleted after 24 hours). Accounts: required at the start: username + password, full name, email, Sri Lankan mobile and date of birth, each with its purpose shown and consent recorded; recovery code; same details on any device. Email and mobile are not verified yet. | ✅ Live |
 | 9 | **Journey and reminders** | The student's own checklist, saved to their account: steps unlock when their window opens (never on an invented date); followed courses and notices with phone reminders (Android) or a calendar file. | ✅ Live |
@@ -116,7 +117,7 @@ In short:
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (582 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
+| Tests | Vitest (604 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.
@@ -166,7 +167,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 npm install
 npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
 npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
-npm test                                            # 582 tests (21 perf tests opt-in with PERF=1)
+npm test                                            # 604 tests (21 perf tests opt-in with PERF=1)
 ```
 
 Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs

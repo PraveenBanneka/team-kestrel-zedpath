@@ -178,6 +178,8 @@ main { width: 100%; max-width: 640px; margin: 0 auto; padding: 12px 16px 40px; d
 .ring-legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
 .hero .btn.white { align-self: flex-start; min-height: 44px; }
 .bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+/* CR-015: seven groups; a tile left alone on the last row spans it instead of leaving a gap. */
+.bento > :last-child:nth-child(odd) { grid-column: 1 / -1; }
 .bento-tile { position: relative; border-radius: var(--r-l); background: var(--surface); box-shadow: var(--shadow-1); padding: 14px; min-height: 136px; border: 0; text-align: left;
   display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: transform .18s var(--ease), box-shadow .2s; color: var(--ink); text-decoration: none; }
 .bento-tile:active { transform: scale(.97); }
@@ -681,6 +683,8 @@ img.person-avatar { object-fit: cover; background: var(--surface-2); }
   .dash-cards > * { flex: 1 1 0; min-width: 0; }
   .dash-paths { display: flex; flex-direction: column; gap: 16px; }
   .dash-paths .bento { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .dash-paths .bento > :last-child:nth-child(odd) { grid-column: auto; }
+  .dash-paths .bento > :last-child:nth-child(3n+1) { grid-column: 1 / -1; }
   .dash-paths .bento-tile { min-height: 150px; padding: 18px; }
   .dash-paths .bento-tile .t { font-size: 17px; line-height: 22px; }
   .has-nav .flow-nav, .select-bar, .composer { bottom: 16px; }

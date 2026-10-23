@@ -19,5 +19,11 @@ describe('matches', () => {
     expect(matches('ology', 'Biology')).toBe(false);
     expect(matches('physics chem', 'Physics')).toBe(false);
   });
+  it('keeps Sinhala and Tamil vowel signs inside the word and ignores zero-width joiners (CR-015)', () => {
+    expect(matches('\u0dc1\u0dd2', '\u0dc1\u0dcf')).toBe(false);                     // different vowel signs are different words
+    expect(matches('\u0dc1\u0dd2\u0dc2\u0dca\u200d\u0dba\u0dad\u0dca\u0dc0', '\u0dc1\u0dd2\u0dc2\u0dca\u200d\u0dba\u0dad\u0dca\u0dc0')).toBe(true);
+    expect(matches('\u0dc1\u0dd2\u0dc2\u0dca\u200d\u0dba\u0dad\u0dca\u0dc0'.replace('\u200d', ''), '\u0dc1\u0dd2\u0dc2\u0dca\u200d\u0dba\u0dad\u0dca\u0dc0')).toBe(true);  // typed without the joiner
+    expect(matches('கடன்', 'கடன்கள்')).toBe(true);
+  });
   it('matches everything for an empty query', () => expect(matches('  ', 'Anything')).toBe(true));
 });

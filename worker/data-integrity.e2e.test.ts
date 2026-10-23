@@ -17,6 +17,7 @@ import { si } from '../src/i18n/si.ts';
 import { ta } from '../src/i18n/ta.ts';
 import { DEMO_CONTACT, DEMO_USERNAME } from '../src/demo.ts';
 import { HANDBOOK_URL } from '../shared/ask.ts';
+import { ROUTE_GROUP_CODES } from '../shared/route-groups.ts';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const read = (p: string) => fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -134,9 +135,10 @@ describe('DAT route ids and references', () => {
     const text = JSON.stringify([stepsFile, noticesFile, syllabiFile, JOURNEY.steps]);
     expect([...new Set(text.match(/\bR\d{3}\b/g) ?? [])].filter(id => !ids.has(id))).toEqual([]);
   });
-  it('DAT-006 route groups are the known seven, and each has an interface label', () => {
+  it('DAT-006 route groups are known codes (the first seven always present), and each has an interface label', () => {
     const groups = [...new Set(ROUTES.map(r => r.route_group))].sort();
-    expect(groups).toEqual(['DIPLOMA', 'JOB_EXAM', 'PRIVATE_DEGREE', 'PROFESSIONAL', 'RETRY', 'SCHOLARSHIP_ABROAD', 'VOCATIONAL']);
+    expect(groups).toEqual(expect.arrayContaining(['DIPLOMA', 'JOB_EXAM', 'PRIVATE_DEGREE', 'PROFESSIONAL', 'RETRY', 'SCHOLARSHIP_ABROAD', 'VOCATIONAL']));
+    expect(groups.filter(g => !(ROUTE_GROUP_CODES as readonly string[]).includes(g))).toEqual([]);   // CR-015 adds SCHOLARSHIP_LOAN
     for (const g of groups) expect(Object.keys(en), g).toContain(`rg.${g}`);
   });
 });
