@@ -21,6 +21,7 @@ revision: 2.1 (draft) | 15 Oct 2026 | Team Kestrel | Under revision for CR-007 (
 revision: 2.1 | 15 Oct 2026 | B.M.P Banneka | Approved by the product owner; baselined. Supersedes 2.0. Mahapola/Bursary line removed from University facts before approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Under revision for CR-011 (preference-list guidance follows the UGC handbook); awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC application co-pilot); awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-015 (scholarships and loans): change-request row; FE-5 restated; scholarships and loan schemes delivered 23 October 2026; awaiting approval
 ---
 
 # Introduction
@@ -85,6 +86,7 @@ Table: Change requests since version 2.0
 | CR-010 | 15 October 2026 | Security hardening from the first security audit (run-1) and the test campaign: open group chats close when the session ends or the member leaves; deleting an account removes its messages from every group it ever opened; a shared Ask link never spends questions; no demo password in the app; the next student on a shared phone never inherits the previous student's data; disguised phone numbers, emails and chat-invite links refused in groups; fresh and demo accounts cannot hide messages by reporting; per-account, per-network and whole-service limits; cross-site and malformed requests refused |
 | CR-011 | 23 October 2026 | Preference-list guidance corrected after the product owner checked how selection really works: the order follows the student's own preference (UGC handbook 2025/26, p.112), so ZedPath no longer calls a Safe-first order a mistake or proposes moving Safe courses last; it explains what the order means and lists the UGC's rules, each with its handbook page |
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone |
+| CR-015 | 23 October 2026 | Scholarships and loans (the product owner's request, 23 October 2026): a seventh group of other paths, *Scholarships and loans* ("Ways to pay for your next step"), that also lists the government scholarships abroad; each scholarship or loan names the paths it pays for, and those paths show it under *Ways to pay*; it never shows a cost or "Free" (what it gives is in its notes); searchable in English, Sinhala and Tamil; included in Ask. The entries themselves are added only after a fact-check against their official sources |
 
 # Business requirements
 
@@ -204,7 +206,7 @@ Table: Major features
 | FE-2 | *Revised (VR2, CR-008, CR-009).* Eligible state-university courses with likelihood bands (shown as Very likely, Possible and Unlikely, each with its meaning), reasons for hidden courses, and sourced course pages with university facts from UGC statistics and the course's aptitude test; *(VR)* course search and Compare of up to three courses | EP2 |
 | FE-3 | Preference-list builder that detects ordering mistakes and copies uni-codes; *(VR, CR-006)* select several courses at once | EP3 |
 | FE-4 | *Revised (CR-002, CR-006).* Journey the student ticks within each step's window, with followed courses and notices, confirmed dates only (never estimated), aptitude tests, reminders on the phone or in a calendar file, saved on the account | EP4 |
-| FE-5 | *Revised (CR-002, VR, CR-009).* Every other route matched to the student's results, in six groups (the retry path was removed), with Gazette job-exam and intake notices checked on the phone under the Journey's *Open now* tab; the official NVQ 5/6 to degree ladder | EP5 |
+| FE-5 | *Revised (CR-002, VR, CR-009, CR-015).* Every other route matched to the student's results, in six groups (the retry path was removed) and, *(CR-015)* a seventh, *Scholarships and loans*, each scheme linked to the paths it pays for (*Ways to pay*); Gazette job-exam and intake notices checked on the phone under the Journey's *Open now* tab; the official NVQ 5/6 to degree ladder | EP5 |
 | FE-6 | *Revised (CR-004).* Ask: cited answers in Sinhala, Tamil and English that refuse to guess, shown as a card with a verdict, sources, next steps and feedback | EP6 |
 | FE-7 | *Revised (CR-002, CR-005, CR-006).* Family share card; moderated groups per target course and per A/L batch with verified seniors, rules accepted once, and a member list; a teacher view | EP7 |
 | FE-8 | After selection: registration, Mahapola, gap-year plan, documents | EP8 |
@@ -220,7 +222,7 @@ Table: Release scope by feature (story counts and points from ZP-DOC-02 v2.1 dra
 | FE-2 | 8 stories: eligibility, hidden courses, bands, course page, filters, dream course, compare, course search | Cost of living; *delivered 15 October 2026 (CR-008, CR-009):* university facts, aptitude test on the course page |
 | FE-3 | All 5 stories, including selecting several courses | None |
 | FE-4 | 9 stories: Journey, confirmed dates, aptitude tests, reminders, ticking steps, reminder settings, following courses and notices, Journey on the account | Special intake |
-| FE-5 | Route matcher, route details, Gazette and intake notices | Recognition check, loan scheme, scholarships; *delivered 15 October 2026 (CR-009):* NVQ ladder to a degree |
+| FE-5 | Route matcher, route details, Gazette and intake notices | Recognition check, loan-scheme eligibility check; *delivered 15 October 2026 (CR-009):* NVQ ladder to a degree; *delivered 23 October 2026 (CR-015):* scholarships and loan schemes, as the *Scholarships and loans* group with *Ways to pay* (entries added after their fact-check) |
 | FE-6 | All 7 stories: Ask in three languages, citations, no predictions, actions, answer card, feedback, achievements in answers | None |
 | FE-7 | 7 stories: family share card, verified seniors, groups, safety, group rules, group info | Teacher view |
 | FE-8 | None | All 4 stories |

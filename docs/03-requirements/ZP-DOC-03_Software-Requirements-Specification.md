@@ -24,6 +24,7 @@ revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC applicatio
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): FR-317 to FR-319 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014: FR-724 to FR-726 added; FR-317 entry hidden; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also VR5: FR-131 added; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-015 (scholarships and loans): FR-512 to FR-516 added; US-509 trace row moved to the traceability appendix; awaiting approval
 ---
 
 # Introduction
@@ -100,6 +101,7 @@ Table: Change requests since version 2.0 and the requirements they affect
 | CR-012 | 23 October 2026 | UGC application co-pilot (the product owner's request after reviewing the UGC's form): a personal document checklist, every field of the UGC registration and steps 1 to 4 ready to copy (pre-filled where ZedPath already knows it, in the UGC's formats), and a print-and-post tracker, each citing the UGC handbook 2025/26 Section 5. ZedPath never logs in to the UGC or fills its form; the answers stay on the student's phone | FR-307, FR-313 to FR-316 |
 | CR-013 | 23 October 2026 | Career-first mode: *Who do you want to become?* below My list; curated careers mapped to UGC courses, other paths and checked licence steps | FR-317 to FR-319 |
 | CR-014 | 23 October 2026 | Groups for other paths (five standing groups with sample chats); rules in a small window, Agree and join opens the group; the demo sees only joinable groups; career card hidden | FR-724 to FR-726 |
+| CR-015 | 23 October 2026 | Scholarships and loans: a seventh group of other paths that also lists the scholarships abroad; `for_routes` checked in the build; *Ways to pay* on the paths a scheme pays for; never a cost or "Free"; search in three languages; in Ask | FR-512 to FR-516 |
 
 # Overall description
 
@@ -328,7 +330,11 @@ Table: Functional requirements, FE-5 Other routes
 | FR-509 | *New (CR-002, CR-003).* For each notice, the device shall check the A/L-pass rule against the student's results and the age rule against the date of birth given at registration, showing each as met, not met or unknown (data missing); O/L rules shall be shown for the student to check and not evaluated. The check shall run on the device (NFR-072). | AC-503.3 | M | T |
 | FR-510 | *New (CR-002).* Notices shall be ordered with open and upcoming ones first, soonest closing date first, then closed ones, most recently closed first. | AC-503.4 | S | T |
 | FR-511 | *New (CR-009).* The University of Vocational Technology route (R042) shall quote the TVEC statement of the NVQ Level 5/6 to NVQ Level 7 (degree) progression, with the manual and page, and list the degree programmes the university lists for 2026 with the date they were read. | US-508 | C | I |
-| US-509 | Start from the career I want | FR-317 to FR-319 |
+| FR-512 | *New (CR-015).* The system shall offer a seventh group of other paths, *Scholarships and loans* (code SCHOLARSHIP_LOAN, "Ways to pay for your next step"), whose screen also lists the SCHOLARSHIP_ABROAD routes in a second section, *Study abroad scholarships*, from the same records (no copies); with no SCHOLARSHIP_LOAN route it shows that section alone. The group codes are one list (`ROUTE_GROUP_CODES`); a catalogue route with any other code shall stop the rulebook build. | AC-510.1 | S | T |
+| FR-513 | *New (CR-015).* A route may carry `for_routes`, the ids of the routes it pays for. The rulebook build shall refuse the catalogue when `for_routes` appears on a route outside SCHOLARSHIP_LOAN, names a route that does not exist, names the route itself or another scholarship or loan, or repeats an id. The catalogue, not a new D1 table, holds the link (ZP-DOC-05). | AC-510.3 | S | T |
+| FR-514 | *New (CR-015).* The build shall compute, for each route, the SCHOLARSHIP_LOAN routes that list it (`waysToPay`); a route's page shall show them under *Ways to pay*, and a scholarship's or loan's page shall show the routes it pays for, each opening that route. | AC-510.2, AC-510.3 | S | T |
+| FR-515 | *New (CR-015).* A SCHOLARSHIP_LOAN route shall carry no cost (the build refuses one), so it never shows a cost line or "Free"; what it gives and its conditions shall be shown from its notes, as information, not as a warning. | AC-510.2 | S | T |
+| FR-516 | *New (CR-015).* Search inside the group shall find scholarships and loans by the words students type (scholarship, Mahapola, bursary, loan, interest free; the Sinhala and Tamil words for scholarship and loan), by short names formed from a route's own name (e.g. IFSLS), with Sinhala and Tamil vowel signs kept inside a word and zero-width joiners ignored; Ask's corpus shall include each scheme's notes, the routes it pays for and, on each paid route, its ways to pay. | AC-510.4 | S | T |
 
 ## FE-6 Ask
 
@@ -789,6 +795,8 @@ Table: Story-to-requirement traceability (every story in ZP-DOC-02 is covered)
 | US-506 | See scholarships abroad | FR-507 |
 | US-507 | Understand what retrying would take (withdrawn) | FR-508 (withdrawn) |
 | US-508 | See how a vocational qualification leads to a degree | FR-511 |
+| US-509 | Start from the career I want | FR-317 to FR-319 |
+| US-510 | Find scholarships and loans that pay for my next step | FR-512 to FR-516 |
 | US-601 | Ask a question in my language | FR-601, FR-602, FR-613; NFR-079 |
 | US-602 | Every answer cites its source | FR-603, FR-604 |
 | US-603 | The assistant won't predict the future | FR-605 |

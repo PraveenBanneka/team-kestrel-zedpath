@@ -21,6 +21,7 @@ revision: 0.9 | 11 Oct 2026 | Team Kestrel | Revised in review for CR-006 (produ
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 (product owner's decision of 15 Oct): demo accounts as ACCOUNT.demo_expires_at with a partial index; migration 0011
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | University facts from the UGC 'Sri Lanka University Statistics 2024' added as read-model data (no D1 change)
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Security audit run-1 lead 3: GROUP_ROOM_SEEN (rooms an account opened) so account deletion purges every room; migration 0012
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-015: route catalogue gains group SCHOLARSHIP_LOAN and optional `for_routes` (validated in the build; reverse link computed there); no D1 change
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-014: migration 0013, course_group gains kind PATH (path_key, CHECK + partial UNIQUE); group_member.rules_version contracted
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-013: curated career map in `shared/careers.ts` (reference data, no D1 change)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Route catalogue: `cost_basis` (what a published fee covers); no D1 change
@@ -258,6 +259,20 @@ runs), then recreated as before and filled back; group ids are kept, so each Dur
 completes 0010's expand-then-contract by leaving out `group_member.rules_version` (unused since 0010; absent where an early
 0009 ran). The five path groups and the popular course groups are created by the Worker on the first listing (INSERT OR
 IGNORE), not by the migration. Pinned by MIG-030 (data kept through 0013), MIG-017, MIG-027 and TC-148.
+
+**Scholarships and loans (CR-015).** The route catalogue gains a group code, SCHOLARSHIP_LOAN, and one optional field,
+`for_routes`: the ids of the routes a scholarship or loan pays for. A scholarship is a route (provider, timing, entry
+rules, official source, date checked), so it reuses the catalogue instead of a new table. Like RETRY, the group lives only in
+the catalogue and the rulebook compiled from it: the D1 `route` table of 0001 is not loaded from the catalogue, so its CHECK
+is not widened and there is no migration (if the catalogue is ever loaded into D1, that CHECK gains SCHOLARSHIP_LOAN and a
+junction table `route_pays_for(route_id, for_route_id)`, both foreign keys to `route`, replaces the list). The rulebook build
+(`tools/rulebook/compile-routes.ts`) enforces the rules a foreign key and CHECKs would: every id in `for_routes` exists; the
+field appears only on SCHOLARSHIP_LOAN routes; it never names the route itself or another scholarship or loan; no id repeats;
+and a SCHOLARSHIP_LOAN route has no cost (`cost_min_lkr` and `cost_max_lkr` null), because what it gives is not a price: the
+amount and conditions are in `notes`, so it can never be shown as a cost or as "Free". Any breach stops the build. The
+build also computes the reverse link, `waysToPay` (the SCHOLARSHIP_LOAN routes that list a route), so the route page reads
+it from the server's data. The group list is one constant, `ROUTE_GROUP_CODES` in `shared/route-groups.ts`; the scholarships
+abroad (SCHOLARSHIP_ABROAD) are cross-listed on the new group's screen, not copied. Pinned by TC-149 to TC-154 and DAT-006.
 
 **Business rules on the server.** The step list (three preparation steps, open at any time, and the five UGC steps) is
 fixed in `shared/journey.ts` and mirrored by the CHECK on `journey_step.step_id`; a test inserts every step id the code

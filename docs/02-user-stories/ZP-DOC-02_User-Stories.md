@@ -26,6 +26,7 @@ revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-012 (UGC applicatio
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-013 (career-first mode): US-509 added; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-014 (groups for other paths; rules window; demo): US-704 extended (AC-704.9 to AC-704.11), US-707 AC-707.4; CR-013 card hidden from the home; awaiting approval
 revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also VR5 (welcome screen): US-112 AC-112.8 and AC-112.9; awaiting approval
+revision: 2.2 (draft) | 23 Oct 2026 | Team Kestrel | Also CR-015 (scholarships and loans): US-510 added; EP5 and totals recomputed (74 stories, 239 points); awaiting approval
 ---
 
 # Introduction
@@ -124,6 +125,7 @@ Table: Change requests since version 2.0 and the stories they affect
 | CR-013 | 23 October 2026 | Career-first mode (the product owner's request: "Can we have an outcome driven mode? Like student can enter who he wants to become and we show his paths with access located in homepage below mylist pill"): *Who do you want to become?* below My list; twelve curated careers, each showing the student's banded state-university courses, the courses closed by their subjects, the other paths that lead there, and the licence step where its official source was checked | US-509 |
 | CR-014 | 23 October 2026 | Product owner's screen recording: "remove this latest one, who do you want to become thing, remove that for now"; groups: "two for these professional body interested people and one open university ... two government ones"; "the group rules should appear in a smaller window and we can either cancel it or join and when we tap join we should be taken inside a group and you should fill those groups with sample chats". Five standing groups for other paths (accounting qualifications; marketing and banking; Open University; Inspector of Customs exam; Management Service Officers exam) with labelled sample chats; the rules in a small window with Cancel or Agree and join, which opens the group; the demo is shown only groups it can join; the career card (CR-013) is hidden from the home for now | US-704, US-707, US-509 |
 | VR5 | 23 October 2026 | Product owner's screen recording of the desktop app: "if we click this icon we should be taken to home"; "can we make it more windows friendly"; "try this demo ... we should put this above choose your language and it should be really attention capturing"; "clicking a language should not take them anywhere"; "if they put Sinhala and try this then they will be taken into the Sinhala version". Try the demo first and prominent on the Welcome screen; choosing a language only selects it; a separate *Create an account*; the Welcome screen fills a desktop screen; the logo in the top bar goes home | US-112, US-105 |
+| CR-015 | 23 October 2026 | Scholarships and loans (the product owner's request, 23 October 2026): a seventh group of other paths, *Scholarships and loans* ("Ways to pay for your next step"), that also lists the government scholarships abroad; each scholarship or loan names the paths it pays for, and those paths show it under *Ways to pay*; it never shows a cost or "Free" (what it gives is in its notes); searchable in English, Sinhala and Tamil; included in Ask. The entries themselves are added only after a fact-check against their official sources | US-510 |
 
 ## Sources of evidence
 
@@ -225,14 +227,14 @@ Table: Epic summary (verified by script against the stories in this document; su
 | EP2 | State university course discovery | 11 | 36 | 4 | P1 |
 | EP3 | Preference list | 5 | 15 | 3 | P1 |
 | EP4 | Journey and deadlines | 10 | 28 | 5 | P1 |
-| EP5 | Other routes | 8 | 30 | 3 | P1, P2 |
+| EP5 | Other routes | 9 | 33 | 3 | P1, P2 |
 | EP6 | Ask, with sources | 7 | 23 | 2 | P1, P2 |
 | EP7 | People around the student | 8 | 31 | 3 | P1, P3, P4, P5 |
 | EP8 | After selection | 4 | 10 | 0 | P1 |
 | EP9 | Data and trust | 8 | 33 | 5 | P6, P1 |
-| | **Total** | **73** | **236** | **31** | |
+| | **Total** | **74** | **239** | **31** | |
 
-The backlog holds 75 story IDs: the 73 above, plus US-406 (superseded) and US-507 (withdrawn). At v2.0 it held 67
+The backlog holds 76 story IDs: the 74 above, plus US-406 (superseded) and US-507 (withdrawn). At v2.0 it held 67
 stories, 220 points and 31 Must stories; at v1.0, 50 stories, 176 points and 24 Must stories.
 
 # Epic EP1: Profile and results
@@ -1064,6 +1066,24 @@ every path to it from my results, **so that** I can plan from the outcome instea
 - **AC-509.3** **Given** a career that needs a licence to practise, **then** the step is shown only when its official source was checked, quoted and linked; the screen says the map is ZedPath's guide and that bands describe past cut-offs, not a promise.
 - **AC-509.4** **Given** a career ZedPath has not mapped, **when** I search for it, **then** I see the courses and paths whose names or programmes match instead.
 
+## US-510 Find scholarships and loans that pay for my next step
+
+*New (CR-015).*
+
+| Priority | Size | Release | Epic | Persona | Evidence |
+|---|---|---|---|---|---|
+| Should | 3 pts | R2 (23 Oct 2026) | EP5 | P1, P3 | E5, CR-015 |
+
+> **As a** student from a family that cannot pay much, **I want** the scholarships and loans I could use in one place, each
+linked to the paths it pays for, **so that** cost does not rule out a path before I have seen how to pay for it.
+
+**Acceptance criteria**
+
+- **AC-510.1** **Given** the Paths home, **then** a seventh group, *Scholarships and loans* ("Ways to pay for your next step"), lists the scholarship and loan schemes ZedPath has checked against their official sources, and, in a second section *Study abroad scholarships*, the government scholarships abroad (the same entries as *Study abroad*, not copies); with no scheme checked yet, it still shows the scholarships abroad.
+- **AC-510.2** **Given** a scholarship or loan, **then** its page shows what it gives and its conditions, its official source and the date checked, and the paths it pays for, each opening that path; it never shows a cost or "Free".
+- **AC-510.3** **Given** a path that a scholarship or loan pays for, **then** its page shows *Ways to pay*, listing those schemes; the link is computed from the catalogue on the server, and a catalogue that names a path that does not exist is refused when the data is built.
+- **AC-510.4** **Given** I search the group with words such as scholarship, Mahapola, bursary, loan, IFSLS or interest free, or the Sinhala or Tamil word for scholarship, **then** the matching schemes are found.
+
 # Epic EP6: Ask, with sources
 
 | | |
@@ -1603,6 +1623,7 @@ Table: Evidence-to-story traceability matrix
 | CR-013 (career-first mode) | US-509; AC-509.1 to AC-509.4 |
 | VR5 (welcome screen and logo) | US-112 (AC-112.8, AC-112.9) |
 | CR-014 (groups for other paths, rules window, demo) | US-704 (AC-704.9 to AC-704.11), US-707 (AC-707.4); US-509 entry hidden |
+| CR-015 (scholarships and loans) | US-510; AC-510.1 to AC-510.4 |
 
 # Glossary {.appendix}
 
