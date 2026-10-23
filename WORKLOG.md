@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **91fedbf0** (other paths: 102 routes, 51 with real costs and their basis). Rollback target bcf3a1f8 (code only). ZP-DOC-01..04 at 2.2 draft, awaiting approval.
+  Live (workers.dev) = version **32b72884** (search inside other paths; CR-013 "Who do you want to become?"). Rollback target 91fedbf0 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-013), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -451,3 +451,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-23: 91fedbf0 LIVE (Praveen's GO): real costs with what they cover
 - Praveen: "With real costs for each". Two fee agents + main-session spot-checks of every number on the official page. 51 of 102 routes show a cost (was 42). New `cost_basis` (TOTAL, PER_SEMESTER, PER_YEAR, PER_SUBJECT, TO_REGISTER) shown with every amount (page, list, Ask corpus; en/si/ta). ICBT placeholder prices rejected; CIMA GBP tier unconfirmed so linked, not shown. TC-145; 564 tests. Commit f50c5aa.
 - Deployed 91fedbf0 (whoami e6474e41); Ask index 102 route vectors upserted. Verified live: /api/routes SLIIT "Rs 345,000 to Rs 460,000" PER_SEMESTER, CA "Rs 6,100" TO_REGISTER, AAT TO_REGISTER, SLIIT-LJMU per semester; demo list at 390x844 shows "... a semester". Note: /api/routes has max-age=300, so phones may show the old list for up to 5 minutes after a deploy (by design).
+
+## 2026-10-23: 32b72884 LIVE (Praveen's GO): search inside other paths + CR-013 career-first mode
+- Search (Praveen: "searchable", "Inside each path", "search icon left to profile icon"): top-bar icon on group lists; name, institute and its initials (SLIIT, NSBM, OUSL), group words, programme titles; matched programmes shown. TC-146. Commits 5441d59, f38840a.
+- CR-013 (Praveen: "outcome driven mode ... who he wants to become ... below mylist pill"; chose curated careers, core version tonight): 12 careers (en/si/ta) -> banded UGC courses, courses closed by subjects, other paths, licence steps only with a checked source (SLMC: doctor, dentist). Law College site had injected spam: blocked, Praveen told privately; no lawyer licence step. TC-147; US-509, FR-317 to FR-319 (2.2 draft). Commit adcb0d8.
+- DEPLOY LESSON: the first deploy after GO (14efe16d) shipped the PREVIOUS bundle: `npm run build` failed at tsc (a shared test imported a Worker file; vitest does not type-check, so 577 tests passed) and `wrangler deploy` ran anyway as a separate command. Live content was unchanged (= 91fedbf0). Fixed by moving the test to worker/ (af484e1, 312d783); redeployed as 32b72884 with the deploy chained after a green build and a bundle grep. Always: `npm run build && <bundle check> && npx wrangler deploy` (or `npm run deploy`), never separate commands.
+- Verified live (demo, 390x844): Paths home "My list | Who do you want to become?"; #/goal/engineer lists the demo student's engineering courses with bands; Private degrees search "law" -> "6 of 60 match".
