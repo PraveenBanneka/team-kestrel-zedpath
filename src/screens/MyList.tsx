@@ -1,11 +1,12 @@
 // My list (US-301..303): the student's ordered preference list for the UGC application. Drag (handle) or the arrow
-// buttons reorder it; warnings follow BR-041/BR-042; "Fix the order" previews FR-305's order and applies it only
-// after the student confirms; "Copy Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
+// buttons reorder it; BR-041/BR-042 notes explain what the order means (CR-011: the UGC follows the student's own order,
+// so ZedPath never re-orders it); "What you need to know" lists the UGC's rules with their handbook pages; "Copy
+// Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
 // CR-006: press and hold a course (or "Select") to choose several; Compare opens them in the order chosen (at most 3),
 // Remove takes them off the list.
 import { useState } from 'react';
 import { Reorder, useDragControls } from 'motion/react';
-import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, ListOrdered, ListPlus, Plus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
+import { Check, CheckCircle2, ChevronRight, Circle, ClipboardCopy, GripVertical, Info, ListOrdered, ListPlus, Plus, Scale, Trash2, TriangleAlert, X } from 'lucide-react';
 import { useHold } from '../hold.ts';
 import type { ResultsResponse } from '../../shared/api.ts';
 import type { Band } from '../../shared/banding.ts';
@@ -13,8 +14,9 @@ import { COMPARE_MAX, Picker } from './Compare.tsx';
 import { useToast } from '../Toast.tsx';
 import { addedMessage } from '../list-feedback.ts';
 import { shortInstitution, titleCase } from '../format.ts';
+import { LIST_GUIDE } from '../list-guide.ts';
 import { Tip } from '../Tip.tsx';
-import { LIST_MAX, addManyToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from '../../shared/list.ts';
+import { LIST_MAX, addManyToList, listWarnings, missingEligible, move, uniCodesText, type ListEntry } from '../../shared/list.ts';
 import { t } from '../i18n/index.ts';
 import { Rich } from '../i18n/Rich.tsx';
 
@@ -58,7 +60,6 @@ function Row({ e, i, n, onMove, onRemove, open, selecting, selected, onPick }: {
 
 export function MyListScreen({ list, setList, results, go, setCompare }: { list: ListEntry[]; setList: (l: ListEntry[]) => void;
   results: ResultsResponse | null; go: (to: string) => void; setCompare: (c: string[]) => void }) {
-  const [preview, setPreview] = useState<ListEntry[] | null>(null);
   const [picked, setPicked] = useState<string[] | null>(null);              // null = not choosing; else Uni-Codes in the order chosen
   const toggle = (u: string) => setPicked(p => p === null ? [u] : p.includes(u) ? p.filter(x => x !== u) : [...p, u]);
   const [copied, setCopied] = useState(false);
@@ -105,25 +106,10 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
         {picked === null && <Tip text={t('sel.tipList')} />}
       </div>
 
-      {warn.safeAbove.length > 0 && !preview && (
-        <div className="alert warn" role="status"><TriangleAlert size={20} aria-hidden="true" />
-          <span className="stack" style={{ gap: 8 }}>
-            <span>{warn.safeAbove.length > 1 ? t('list.safeAboveMany', { course: warn.safeAbove[0].course, n: warn.safeAbove.length - 1 }) : t('list.safeAbove', { course: warn.safeAbove[0].course })}</span>
-            <button className="btn tonal" style={{ alignSelf: 'flex-start' }} onClick={() => setPreview(proposeOrder(shown))}>{t('list.fix')}</button>
-          </span>
-        </div>)}
-      {warn.noSafe && <div className="alert error" role="status"><TriangleAlert size={20} aria-hidden="true" />{t('list.noSafe')}</div>}
+      {warn.safeAbove.length > 0 && (
+        <div className="alert info" role="status"><Info size={20} aria-hidden="true" /><span>{warn.safeAbove.length > 1 ? t('list.safeAboveMany', { course: warn.safeAbove[0].course, n: warn.safeAbove.length - 1 }) : t('list.safeAbove', { course: warn.safeAbove[0].course })}</span></div>)}
+      {warn.noSafe && <div className="alert warn" role="status"><TriangleAlert size={20} aria-hidden="true" />{t('list.noSafe')}</div>}
 
-      {preview && (
-        <div className="card stack">
-          <h2 className="title-l">{t('list.suggested')}</h2>
-          <p className="subtitle">{t('list.suggestedSub')}</p>
-          <ol className="preview-list">{preview.map(e => <li key={e.uniCode}>{e.course} <span className="helper">· {e.uniCode} · {bandLabel(e.band)}</span></li>)}</ol>
-          <div className="row">
-            <button className="btn filled" onClick={() => { setList(preview.map(({ ...e }) => e)); setPreview(null); }}><Check size={18} aria-hidden="true" />{t('list.use')}</button>
-            <button className="btn text" onClick={() => setPreview(null)}>{t('list.keep')}</button>
-          </div>
-        </div>)}
 
       <Reorder.Group axis="y" values={shown} onReorder={next => setList(next.map(({ stale: _s, ...e }) => e))} className="list-card" as="div">
         {shown.map((e, i) => <Row key={e.uniCode} e={e} i={i} n={shown.length} open={() => go(`/course/${e.uniCode}`)}
@@ -150,6 +136,11 @@ export function MyListScreen({ list, setList, results, go, setCompare }: { list:
       <button className="btn tonal" onClick={() => go('/compare')}><Scale size={18} aria-hidden="true" />{t('list.compare')}</button>
       <button className="btn tonal" onClick={copy}>{copied ? <><Check size={18} aria-hidden="true" />{t('list.copied', { n: list.length })}</> : <><ClipboardCopy size={18} aria-hidden="true" />{t('list.copy')}</>}</button>
       <p className="helper">{t('list.paste')}</p>
+      <section className="card stack list-guide" aria-labelledby="list-guide-h">
+        <h2 id="list-guide-h" className="title-l">{t('list.guide.h')}</h2>
+        <ul className="plain-list stack" style={{ gap: 10 }}>{LIST_GUIDE.map(g => (
+          <li key={g.key}><span className="body-m">{t(g.key)}</span> <span className="source">{g.page ? t('list.guide.src', { p: g.page }) : t('list.guide.srcSec', { s: g.section ?? '' })}</span></li>))}</ul>
+      </section>
     </>
   );
 }

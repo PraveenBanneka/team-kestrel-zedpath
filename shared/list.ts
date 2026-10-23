@@ -29,9 +29,10 @@ export function addManyToList(list: ListEntry[], entries: ListEntry[]): { list: 
 }
 
 export interface ListWarnings {
-  /** BR-041: Safe entries listed above at least one Likely or Reach entry (those below are unlikely to be reached). */
+  /** BR-041 (CR-011): Safe entries listed above at least one Likely or Reach entry. Information only: the UGC follows the
+   *  student's own order (handbook p.112), so ZedPath explains what it means and never re-orders the list. */
   safeAbove: ListEntry[];
-  /** BR-042: no Safe entry at all, so the student may not be placed anywhere. */
+  /** BR-042 (CR-011): no Safe entry yet; the handbook advises listing as many eligible courses as possible (p.112). */
   noSafe: boolean;
 }
 
@@ -41,12 +42,6 @@ export function listWarnings(list: ListEntry[]): ListWarnings {
     safeAbove: list.filter((e, i) => e.band === 'SAFE' && i < lastRisky),
     noSafe: list.length > 0 && !list.some(e => e.band === 'SAFE'),
   };
-}
-
-/** FR-305: keep the student's own order among the courses they are reaching for, and move Safe ones to the end
- *  (still in the student's order). Bands other than Safe/Likely/Reach keep their place relative to the risky ones. */
-export function proposeOrder(list: ListEntry[]): ListEntry[] {
-  return [...list.filter(e => e.band !== 'SAFE'), ...list.filter(e => e.band === 'SAFE')];
 }
 
 /** Courses the student can reach (Safe, Likely or Reach) that are not on the list yet, counted per band. The handbook

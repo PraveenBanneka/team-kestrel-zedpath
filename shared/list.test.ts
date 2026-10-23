@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LIST_MAX, addManyToList, addToList, listWarnings, missingEligible, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
+import { LIST_MAX, addManyToList, addToList, listWarnings, missingEligible, move, uniCodesText, type ListEntry } from './list.ts';
 import type { Band } from './banding.ts';
 
 const e = (uniCode: string, band: Band): ListEntry => ({ uniCode, group: 'ALL', course: `Course ${uniCode}`, institution: 'Uni', band });
@@ -27,10 +27,11 @@ describe('My list (US-301..303)', () => {
     expect(listWarnings([]).noSafe).toBe(false);
   });
 
-  it('proposes an order that keeps the student\'s wishes first and Safe ones last (FR-305)', () => {
-    const fixed = proposeOrder([e('S1', 'SAFE'), e('R1', 'REACH'), e('S2', 'SAFE'), e('L1', 'LIKELY')]);
-    expect(fixed.map(x => x.uniCode)).toEqual(['R1', 'L1', 'S1', 'S2']);
-    expect(listWarnings(fixed).safeAbove).toEqual([]);
+  it('notes a Safe course above others but never changes the order (CR-011: the UGC follows the student\'s order)', () => {
+    const l = [e('S1', 'SAFE'), e('R1', 'REACH'), e('L1', 'LIKELY')];
+    const before = l.map(x => x.uniCode);
+    expect(listWarnings(l).safeAbove.map(x => x.uniCode)).toEqual(['S1']);
+    expect(l.map(x => x.uniCode)).toEqual(before);
   });
 
   it('copies Uni-Codes one per line in list order (FR-306) and moves entries', () => {

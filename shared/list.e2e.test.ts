@@ -6,7 +6,7 @@
 // `picked.slice(0, COMPARE_MAX)`; DegreeDetails / Ask: append only when not already picked and fewer than 3), so the
 // helpers below mirror those expressions exactly; if the UI changes, update these mirrors.
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { LIST_MAX, addManyToList, addToList, listWarnings, move, proposeOrder, uniCodesText, type ListEntry } from './list.ts';
+import { LIST_MAX, addManyToList, addToList, listWarnings, move, uniCodesText, type ListEntry } from './list.ts';
 import type { Band } from './banding.ts';
 import { COMPARE_MAX } from '../src/screens/Compare.tsx';
 import { clearEverything, loadCompare, loadList, saveCompare, saveList } from '../src/storage.ts';
@@ -181,14 +181,10 @@ describe('LST order warnings (BR-041, BR-042)', () => {
     expect(w.safeAbove).toEqual([]);
   });
 
-  it('LST-024 moving the Safe entry to the bottom clears the warning; proposeOrder fixes a 125-entry list', () => {
+  it('LST-024 moving the Safe entry to the bottom clears the note (the student moves it; ZedPath never does, CR-011)', () => {
     const l = [e('S', 'SAFE'), e('R', 'REACH'), e('L', 'LIKELY')];
     expect(listWarnings(l).safeAbove).toHaveLength(1);
     expect(listWarnings(move(l, 0, 2)).safeAbove).toEqual([]);
-    const big = Array.from({ length: LIST_MAX }, (_, i) => e(`U${i}`, (['SAFE', 'LIKELY', 'REACH'] as Band[])[i % 3]));
-    const fixed = proposeOrder(big);
-    expect(fixed).toHaveLength(LIST_MAX);
-    expect(listWarnings(fixed).safeAbove).toEqual([]);
   });
 
   it('LST-025 only Likely/Reach entries: no ordering warning, but the coverage warning (no Safe)', () => {
