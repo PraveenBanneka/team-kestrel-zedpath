@@ -19,6 +19,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: My list order notes become 
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: Apply to the UGC screen (route #/apply, from My list)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: route page lists its programmes (collapsible, open when six or fewer); unpublished entry rules say so; "Up to Rs ..." costs; group subtitles updated
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: every cost shown with what it covers ("Cost per semester", "Rs 6,100 to register"), en/si/ta
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: search inside each group from a search icon in the top bar, left of the profile picture (name, institute and its short name, group, programmes)
 ---
 
 # Introduction
@@ -166,7 +167,7 @@ Table: Hash routes, screens and purpose
 | `#/list` | My list | My list | Ordered preference list for the UGC application |
 | `#/apply` | Guide to applying to the UGC | My list | CR-012: checklist, every UGC form field ready to copy, print-and-post tracker |
 | `#/journey`, `#/journey/open`, `#/alerts` | Journey | Journey | My steps / Open now tabs |
-| `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees (Ministry-recognised institutes, foreign degrees, KDU, loan courses), professional bodies, job exams, vocational, abroad. The route page shows cost with what it covers ("Free" only for a published 0; "Up to Rs ..." when only a maximum is published; "Cost per semester", "Cost per year", "Fee per subject", "Cost to register"; in the list "Rs 345,000 to Rs 460,000 a semester"), intake, entry rules (or "Not published on a page ZedPath could check"), a collapsible "Programmes (n)" list and the source |
+| `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees (Ministry-recognised institutes, foreign degrees, KDU, loan courses), professional bodies, job exams, vocational, abroad. The route page shows cost with what it covers ("Free" only for a published 0; "Up to Rs ..." when only a maximum is published; "Cost per semester", "Cost per year", "Fee per subject", "Cost to register"; in the list "Rs 345,000 to Rs 460,000 a semester"), intake, entry rules (or "Not published on a page ZedPath could check"), a collapsible "Programmes (n)" list and the source. Each group list has a search icon in the top bar, left of the profile picture: it opens a search field (focused; Escape closes) that matches every typed word against the path's name, institute (and its short name, e.g. SLIIT), group and programmes; rows found through programmes show which ones (up to three, "+n more"), with a live count |
 | `#/groups` | Groups | Groups | Chat list: my groups, popular groups |
 | `#/group/<id>`, `#/group/<id>/info` | Group room, Group info | Groups | WhatsApp-style room; description, rules, members, exit |
 | `#/ask`, `#/ask/<question>` | Ask ZedPath | Ask | Cited answers; a deep link only fills the question box, never sends it (CR-010) |

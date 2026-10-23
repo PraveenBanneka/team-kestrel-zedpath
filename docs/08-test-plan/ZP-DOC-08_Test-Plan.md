@@ -22,6 +22,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths refreshed (routes 23 Oc
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Unknown cost never shown as "Free"; "Up to Rs ..."; CMA and BIT kept without links: TC-143 extended; 554 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths expanded to 102 routes: TC-144 added; 560 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Real costs with their basis: TC-145 added; 564 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | Search inside each group of other paths: TC-146 added; 570 passed
 ---
 
 # Introduction
@@ -220,6 +221,7 @@ Table: Automated test cases
 | TC-143 | Other paths: cost and checked date | `worker/routes-free.test.ts` (3) | A published zero cost is "Free", never "Rs 0"; an unknown cost is never "Free"; only a maximum or a free place shows "Up to Rs ..."; every route keeps its ISO checked-on date, shown in place of a fixed date |
 | TC-144 | Other paths expansion | `worker/routes-expansion.test.ts` (6) | 102 routes; all 31 Section 25A institutes with bachelor's degrees cite the register and list programmes; foreign degrees never called Ministry-recognised and name the awarding university; unpublished entry rules are null and labelled in three languages; only published fees shown |
 | TC-145 | Other paths: what each cost covers | `worker/routes-expansion.test.ts` (4) | Every route has a known cost basis; a basis other than TOTAL only with a published amount; every basis labelled in en/si/ta on the page and in the list; SLIIT per semester, NIBM per year, CA and AAT to register, NSBM totals; no ICBT placeholder price |
+| TC-146 | Search inside other paths | `shared/route-search.test.ts` (6) | Empty query keeps the list; institutes by name or short name (SLIIT, NSBM, ACCA); subjects found inside programme lists with the matching programmes named; name matches listed first; group words and short forms; nonsense finds nothing |
 
 # Security tests
 
@@ -274,7 +276,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144), 564 (23 October, real costs with their basis, TC-145), 570 (23 October, search inside other paths, TC-146).
 
 Table: Results of 21 October 2026 (developer machine)
 

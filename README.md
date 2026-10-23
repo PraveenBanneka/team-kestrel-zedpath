@@ -52,7 +52,7 @@ preference order or deadlines, and none covers routes outside the UGC.**
 | 3 | **Fine-print check** | Subject and minimum-grade rules for all 121 courses from the handbook. Hidden courses always say *why*, with the page. | ✅ Live |
 | 4 | **My list (preference checker)** | Your own order (the UGC gives you the highest course you qualify for, in your order), "+ Add a course", copy all Uni-Codes, "What you need to know" with handbook pages, and the Guide to applying to the UGC. | ✅ Live |
 | 5 | **Compare and syllabi** | Up to 3 courses side by side; "What you'll study" from the university's own curriculum (12 programmes so far). | ✅ Live |
-| 6 | **Every other route** | 102 official routes: all 31 Ministry-recognised private institutes (with their programmes), foreign degrees taught in Sri Lanka, KDU fee-paying, interest-free loan courses, HNDs, professional bodies (CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL), vocational (with the NVQ 5/6 → B.Tech ladder at UoVT), job exams, scholarships abroad, with "open now". | ✅ Live |
+| 6 | **Every other route** | 102 official routes: all 31 Ministry-recognised private institutes (with their programmes), foreign degrees taught in Sri Lanka, KDU fee-paying, interest-free loan courses, HNDs, professional bodies (CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL), searchable inside each group (institute, short name or subject, e.g. "law"), vocational (with the NVQ 5/6 → B.Tech ladder at UoVT), job exams, scholarships abroad, with "open now". | ✅ Live |
 | 6a | **University facts** | On every course page: students admitted, undergraduates, hostel places and graduates, from the UGC's *Sri Lanka University Statistics 2024*, each with its table and page. | ✅ Live |
 | 6b | **Aptitude tests** | The 24 courses that need one: the official notice and last intake's dates (shown as past), or the joint test to apply for. | ✅ Live |
 | 7 | **Ask ZedPath, with sources** | Questions in English, Sinhala or Tamil, answered only from the UGC handbook and official routes, citing the page, using *your* results. | ✅ Live |
@@ -115,7 +115,7 @@ In short:
 | Ask | Workers AI (bge-m3), Vectorize, AI Gateway, Google Flash models | Multilingual retrieval, caching and analytics, cited answers |
 | Protection | Workers Rate Limiting, PBKDF2 on the device, hashed sessions | Brute-force and privacy protection within the free plan |
 | Android | Capacitor 8 (`native/`) | Native window and notifications; web deploys update the app |
-| Tests | Vitest (564 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
+| Tests | Vitest (570 tests) plus agent-run end-to-end harnesses (API, browser, security, accessibility, offline, layout, live read-only); results in tools/e2e/results | Rules and accounts proven, not assumed |
 
 Everything runs on Cloudflare's free plan, so a student on mobile data gets answers quickly and the project
 costs nothing until it grows.
@@ -165,7 +165,7 @@ The documents are built from Markdown by a small TypeScript tool ([docs/_build](
 npm install
 npx wrangler d1 migrations apply zedpath --local   # local copy of the database (accounts, allowance)
 npm run dev                                         # Vite + the Workers runtime at http://localhost:5173
-npm test                                            # 564 tests (21 perf tests opt-in with PERF=1)
+npm test                                            # 570 tests (21 perf tests opt-in with PERF=1)
 ```
 
 Accounts need a local `PEPPER=<random hex>` line in `.dev.vars` (gitignored). Ask ZedPath also needs
