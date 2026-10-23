@@ -3,7 +3,7 @@ id: ZP-DOC-07
 title: UI/UX Design
 subtitle: Design principles, information architecture, design system, screen specifications and accessibility for the ZedPath app
 version: 0.9
-date: 21 October 2026
+date: 23 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -14,6 +14,7 @@ standard: Material Design 3; WCAG 2.2 level AA; ZP-DOC-00
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue, written from the built app (CR-001 to CR-006 and the video-review fixes included); contrast measured from the colour tokens; submitted for approval
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 (14 October 2026: band names Very likely / Possible / Unlikely with a one-line meaning under the tabs, intro guide of seven slides, silhouette avatars, expired session returns to Log in) and CR-007 to CR-010 (15 October 2026: Try the demo button and demo note in Me, University facts card, Aptitude test card, NVQ ladder on route R042, Ask links only fill the box, failed log-out message, phone data cleared for the next student); journeys, routes, components, screens, patterns, usability evidence and traceability updated
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | Revised for VR3 (18 to 21 October 2026, product owner's review on a phone and a desktop): Compare "+" opens the picker above the table and new columns line up beside the row labels; multi-select tip shown as a highlighted box with steps; Compare takes up to three and says so; desktop layout from 1024 px (collapsible side menu with a glass menu button, logo in the corner, Paths dashboard, course page in two columns); install button says "this device"
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | My list: "+ Add a course" box below the last course opens the course picker; a green confirmation with a tick whenever courses are added (Courses, course page, My list)
 ---
 
 # Introduction
@@ -257,6 +258,7 @@ Table: Component catalogue
 | Lists | `list-card` with rows; My list rows have position number, main text, drag grip (44 × 52) and remove | Courses, My list, routes |
 | Selection bar | Sticky above the navigation bar: count, Add to my list / Compare / Remove, Cancel; with more than 3 ticked, Compare is off and a note floats above the bar | Courses, My list |
 | Tip box | Tinted box with a lightbulb icon, a bold lead and the steps | Courses, My list |
+| Added confirmation | Green pop-up with a tick near the bottom of the screen (white on #0B7A4B, about 5.2:1), announced by a live region, gone after about 2.5 s: "Added 3 courses to My list.", plus how many were already there or a full list | Courses, course page, My list |
 | Menu button | Glass 44 px button with the menu icon: opens and collapses the side menu | Top app bar, 1024 px and wider |
 | Composer | Sticky above the navigation bar: rounded input (48 px) and round 48 px send button | Ask, Group room |
 | Chat bubbles | Question right (brand gradient), answer left; group messages with avatar, name, senior badge | Ask, Groups |
@@ -344,7 +346,7 @@ Table: My list: specification
 | Aspect | Specification |
 |---|---|
 | Purpose | The ordered preference list for the UGC form (US-301 to US-303, US-305) |
-| Content | Numbered rows with band pills; how many eligible courses are still left out; order warnings (BR-041, BR-042); Fix the order; Copy Uni-Codes |
+| Content | Numbered rows with band pills; how many eligible courses are still left out; order warnings (BR-041, BR-042); Fix the order; Copy Uni-Codes; a dashed **+ Add a course** box below the last course opens the same course picker as Compare (your own courses, searchable), so courses can be added without leaving My list (23 October) |
 | States | Empty: invitation to add courses from Paths; warnings use `role="status"` |
 | Interactions | Drag by the grip, or focus the grip and use Arrow Up / Down; Fix the order previews and applies only after confirmation; press and hold or "Select" for selection, then **Compare in the order chosen** (max 3) or Remove |
 
@@ -479,6 +481,7 @@ Table: Changes driven by usability evidence
 | CR-007 | Product owner's decision (15 Oct): a demo without sign-up, a private copy per visitor | *Try the demo, no sign-up* on Welcome; demo note in Me |
 | CR-008, CR-009 | Product owner's decisions (15 Oct) | University facts card and Aptitude test card on the course page; NVQ ladder text on the University of Vocational Technology route |
 | CR-010 | Security audit run-1 (15 Oct) | Ask links only fill the box; no prefilled demo password; failed log-out reported; the next student on a phone starts clean |
+| VR4 | Product owner's screen recording, 23 Oct: "we need a rectangle with a plus below the last one", "a green thing with a tick mark that they have been added" | + Add a course box on My list; added confirmation |
 | VR3 | Product owner's review, 18 to 21 Oct, on a phone and a 1870 px desktop: "the plus button not working", "the note should be more obvious", "can we only select up to 3?", "ZedPath should be on the corner", "looks emptier than it should be", "the left menu should be collapsible with a glassmorphic hamburger", "on your phone is not relevant on desktop" | Compare picker and columns fixed; tip box; Compare limit message; desktop layout with the logo in the corner, Paths dashboard, two-column course page and a collapsible side menu; install button says "this device" |
 
 # Traceability

@@ -3,7 +3,7 @@ id: ZP-DOC-08
 title: Test Plan
 subtitle: Test strategy, environments, test case catalogue, results and requirement traceability for Releases R1 and R2
 version: 0.9
-date: 21 October 2026
+date: 23 October 2026
 status: In review
 classification: Public
 owner: B.M.P Banneka, Product Owner
@@ -14,6 +14,7 @@ standard: IEEE 829 / ISO/IEC/IEEE 29119-3 structure; ZP-DOC-00
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue: strategy, environments, Definition of Done, catalogue of the 19 automated test files (185 cases), security tests, results of 11 October 2026, defects found and fixed, gaps, traceability; submitted for approval
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for VR2 and CR-007 to CR-010: catalogue extended to all 34 test files (TC-124 to TC-138: the eight suites of the 12 October campaign and the new demo, statistics, aptitude, session-kick, hardening and owner tests); counts recounted (532 passed, 0 expected-fail, 21 opt-in); migrations 0001 to 0012; security tests for the demo, Origin, socket kick, abuse limits, contact filter and research block list; security audit run-1 summarised (detail in the Test Summary Report); results of 15 October 2026; guard tests 40 of 40; gaps and traceability updated
 revision: 0.9 | 21 Oct 2026 | Team Kestrel | VR3: TC-139 added (desktop side menu preference, `src/nav-pref.test.ts`); results of 21 October 2026 (536 passed) and live checks of the Compare fixes and the desktop layout
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | VR4: TC-140 added (added-to-list message, `src/list-feedback.test.ts`); 539 passed
 ---
 
 # Introduction
@@ -206,6 +207,7 @@ Table: Automated test cases
 | TC-137 | Abuse limits | `worker/hardening.test.ts` (7) | IPv6 limited per /64; 100 writes a minute per account; whole-service Ask cap; feedback daily cap and one-year retention; at most 500 demo accounts and clean-up of 50 per tap; developer tools refuse cross-site; email length checked before the pattern | FR-126, FR-614, FR-615, NFR-081 to NFR-083 |
 | TC-138 | Phone owner | `src/owner.test.ts` (2) | Local data remembers its owner and only that student's data is cleared for the next one (language stays); clearing the phone forgets the owner | FR-130 |
 | TC-139 | Desktop side menu | `src/nav-pref.test.ts` (4) | Open by default (pinned); collapsed and open remembered; open and no error when storage is blocked; "Clear this phone" forgets it, clearing student data keeps it | ZP-DOC-07 Desktop layout |
+| TC-140 | Added confirmation | `src/list-feedback.test.ts` (3) | Counts one and several; mentions courses already on the list and a full list; never says "Added 0" | ZP-DOC-07 Added confirmation |
 
 # Security tests
 
@@ -260,7 +262,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140).
 
 Table: Results of 21 October 2026 (developer machine)
 
