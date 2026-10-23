@@ -46,7 +46,13 @@ export const loadReminderIds = (): number[] => read<number[]>(KEYS.reminders) ??
 export const saveReminderIds = (ids: number[]) => write(KEYS.reminders, ids);
 /** Notification settings (video 2): on this phone only, like the reminders they control. */
 /** CR-012: the co-pilot's answers and ticks (address, parents' names, school...). Stored only on this phone. */
-export const loadApply = (): ApplyState => { const v = read<ApplyState>(KEYS.apply); return v && v.answers ? { answers: { ...EMPTY_APPLY.answers, ...v.answers }, done: v.done ?? {} } : EMPTY_APPLY; };
+export const loadApply = (): ApplyState => {
+  const v = read<ApplyState>(KEYS.apply);
+  if (!v || !v.answers) return EMPTY_APPLY;
+  const clean: ApplyState = { answers: { candidate: v.answers.candidate ?? null, nameDiffers: v.answers.nameDiffers ?? null }, done: v.done ?? {} };
+  if (Object.keys(v.answers).some(k => k !== 'candidate' && k !== 'nameDiffers')) write(KEYS.apply, clean);   // the first version kept typed details: drop them
+  return clean;
+};
 export const saveApply = (s: ApplyState) => write(KEYS.apply, s);
 export const loadNotifyPrefs = (): NotifyPrefs => readPrefs(read<unknown>(KEYS.notify));
 export const saveNotifyPrefs = (p: NotifyPrefs) => write(KEYS.notify, p);

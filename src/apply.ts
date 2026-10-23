@@ -1,27 +1,20 @@
 // UGC application co-pilot (CR-012, 23 October 2026): helps a student fill the UGC's online application and post the
 // signed printout, following the UGC handbook 2025/26, Section 5 (pages 126 to 154). ZedPath never logs in to the UGC and
-// never fills its form: the student copies each value across. Everything typed here stays on this phone (storage.ts,
-// zedpath.apply.v1, cleared with the student's data); nothing is sent to ZedPath's server.
+// never fills its form: the student copies across what ZedPath already knows, and for the rest the co-pilot explains what
+// to write (Praveen 23 Oct: no typing the form twice). It keeps only two answers and the ticks, on this phone
+// (storage.ts, zedpath.apply.v1, cleared with the student's data); nothing is sent to ZedPath's server.
 import type { Key } from './i18n/en.ts';
 
 export type Candidate = 'SCHOOL' | 'PRIVATE';
-export interface ApplyAnswers {
-  candidate: Candidate | null; nameDiffers: boolean | null;
-  nic: string; alIndex: string; olIndex: string; olYear: string;
-  address: string; addressSince: string; father: string; mother: string; guardian: string; guardianPhone: string;
-  school: string; schoolDistrict: string; schoolSince: string;
-}
+export interface ApplyAnswers { candidate: Candidate | null; nameDiffers: boolean | null }
 export interface ApplyState { answers: ApplyAnswers; done: Record<string, boolean> }
 export const EMPTY_APPLY: ApplyState = {
-  answers: { candidate: null, nameDiffers: null, nic: '', alIndex: '', olIndex: '', olYear: '', address: '', addressSince: '',
-    father: '', mother: '', guardian: '', guardianPhone: '', school: '', schoolDistrict: '', schoolSince: '' },
+  answers: { candidate: null, nameDiffers: null },
   done: {},
 };
 
 /** The UGC wants names and addresses in English BLOCK CAPITALS (handbook p.130, p.135). */
 export const blockCaps = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
-/** Address parts separated by commas, in capitals (p.135: "use a comma(,) to separate each section of the address"). */
-export const addressCaps = (s: string) => blockCaps(s.split(/[\n,]+/).map(x => x.trim()).filter(Boolean).join(', '));
 /** "Dayawansha Patabendige Shalini Bandara" -> "BANDARA DPS", the UGC's own example on p.130. */
 export function nameWithInitials(full: string): string {
   const parts = blockCaps(full).split(' ').filter(Boolean);
@@ -60,6 +53,16 @@ export const POST_STEPS: Item[] = [
   { key: 'apply.post.pack', page: '154' },
   { key: 'apply.post.send', page: '154' },
   { key: 'apply.post.order', page: '116' },
+];
+
+/** The fields the student types on the UGC site: what to write and the common mistake (handbook pages). */
+export const FORM_GUIDES: { title: Key; key: Key; page: string }[] = [
+  { title: 'apply.f.nic', key: 'apply.gd.nic', page: '126-127' },
+  { title: 'apply.f.alIndex', key: 'apply.gd.alIndex', page: '127' },
+  { title: 'apply.f.address', key: 'apply.gd.address', page: '135' },
+  { title: 'apply.f.parents', key: 'apply.gd.parents', page: '135' },
+  { title: 'apply.f.prev', key: 'apply.gd.prev', page: '136' },
+  { title: 'apply.f.school', key: 'apply.gd.school', page: '137' },
 ];
 
 export const UGC_ADDRESS = 'Deputy Secretary/ University Admissions, University Grants Commission, No. 20, Ward Place, Colombo 07';

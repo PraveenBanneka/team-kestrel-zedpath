@@ -1,6 +1,7 @@
 // Apply to the UGC, step by step (CR-012): the student's own checklist, their details ready to copy into each screen of
 // the UGC online application, and the print-and-post steps, each with its page in the UGC handbook 2025/26 (Section 5).
-// ZedPath never logs in to the UGC: the student copies each value across. All answers stay on this phone (storage.ts).
+// ZedPath never logs in to the UGC: the student copies what ZedPath knows; for the rest a guide says what to write and
+// the common mistake (no typing the form twice). Only two answers and the ticks are kept, on this phone (storage.ts).
 import { useEffect, useState, type ReactNode } from 'react';
 import { CheckCircle2, Circle, Copy, Info, ShieldCheck } from 'lucide-react';
 import type { Meta, ProfileInput, ResultsResponse } from '../../shared/api.ts';
@@ -8,7 +9,7 @@ import type { Contact } from '../../shared/contact.ts';
 import { nameOf } from '../../shared/describe.ts';
 import { formatZ } from '../../shared/banding.ts';
 import { uniCodesText, type ListEntry } from '../../shared/list.ts';
-import { POST_STEPS, UGC_ADDRESS, addressCaps, blockCaps, documentsFor, localMobile, nameWithInitials, type ApplyAnswers, type Item } from '../apply.ts';
+import { FORM_GUIDES, POST_STEPS, UGC_ADDRESS, blockCaps, documentsFor, localMobile, nameWithInitials, type ApplyAnswers, type Item } from '../apply.ts';
 import { loadApply, saveApply } from '../storage.ts';
 import { useToast } from '../Toast.tsx';
 import { t } from '../i18n/index.ts';
@@ -50,13 +51,12 @@ export function ApplyScreen({ profile, meta, contact, list, results, go }: { pro
         {(copyText ?? value) ? <button type="button" className="icon-btn" onClick={() => copy(copyText ?? value ?? '')} aria-label={t('apply.copyX', { x: t(label) })}><Copy size={18} aria-hidden="true" /></button> : null}
       </div>
     </div>);
-  const Text = ({ k, caps, type = 'text', placeholder }: { k: keyof ApplyAnswers; caps?: 'name' | 'address'; type?: string; placeholder?: string }) => {
-    const v = (a[k] as string) ?? '';
-    const shown = caps === 'address' ? addressCaps(v) : caps === 'name' ? blockCaps(v) : v.trim();
-    return { copyText: shown, input: k === 'address'
-      ? <textarea className="input" rows={2} value={v} placeholder={placeholder} onChange={e => set(k, e.target.value)} />
-      : <input className="input" type={type} value={v} placeholder={placeholder} onChange={e => set(k, e.target.value)} autoComplete="off" /> };
-  };
+  const guide = (g: (typeof FORM_GUIDES)[number]) => (
+    <div key={g.key} className="apply-field">
+      <span className="apply-label">{t(g.title)}</span>
+      <span className="body-m">{t(g.key)} <span className="source">{t('apply.src', { p: g.page })}</span></span>
+    </div>);
+  const G = (key: string) => guide(FORM_GUIDES.find(g => g.key === key)!);
 
   return (
     <>
@@ -85,8 +85,8 @@ export function ApplyScreen({ profile, meta, contact, list, results, go }: { pro
         <div className="alert info"><Info size={20} aria-hidden="true" /><span>{t('apply.autofill')}</span></div>
 
         <h3 className="title-m">{t('apply.g.register')} <span className="source">{t('apply.src', { p: '127-130' })}</span></h3>
-        {field({ label: 'apply.f.nic', ...Text({ k: 'nic' }) })}
-        {field({ label: 'apply.f.alIndex', ...Text({ k: 'alIndex', type: 'text' }) })}
+        {G('apply.gd.nic')}
+        {G('apply.gd.alIndex')}
         {field({ label: 'apply.f.initials', value: contact ? nameWithInitials(contact.fullName) : '' })}
         {field({ label: 'apply.f.fullName', value: contact ? blockCaps(contact.fullName) : '' })}
         {field({ label: 'apply.f.dob', value: contact?.birthDate ?? '' })}
@@ -94,24 +94,16 @@ export function ApplyScreen({ profile, meta, contact, list, results, go }: { pro
         {field({ label: 'apply.f.mobile', value: contact ? localMobile(contact.mobile) : '' })}
 
         <h3 className="title-m">{t('apply.g.step1')} <span className="source">{t('apply.src', { p: '135' })}</span></h3>
-        {field({ label: 'apply.f.address', ...Text({ k: 'address', caps: 'address', placeholder: t('apply.ph.address') }) })}
+        {G('apply.gd.address')}
         {field({ label: 'apply.f.district', value: district })}
-        {field({ label: 'apply.f.since', ...Text({ k: 'addressSince', type: 'date' }) })}
-        {field({ label: 'apply.f.father', ...Text({ k: 'father', caps: 'name' }) })}
-        {field({ label: 'apply.f.mother', ...Text({ k: 'mother', caps: 'name' }) })}
-        {field({ label: 'apply.f.guardian', ...Text({ k: 'guardian', caps: 'name' }) })}
-        {field({ label: 'apply.f.phone', ...Text({ k: 'guardianPhone', type: 'tel' }) })}
+        {G('apply.gd.parents')}
 
         <h3 className="title-m">{t('apply.g.step2')} <span className="source">{t('apply.src', { p: '136' })}</span></h3>
-        <p className="helper">{t('apply.step2note')}</p>
         {field({ label: 'apply.f.results', value: `${Object.entries(profile.al).map(([s, g]) => `${nameOf(s)} ${g}`).join(' · ')} · Z ${formatZ(profile.zE4)}`, copyText: '' })}
-        {field({ label: 'apply.f.olIndex', ...Text({ k: 'olIndex' }) })}
-        {field({ label: 'apply.f.olYear', ...Text({ k: 'olYear', type: 'number' }) })}
+        {G('apply.gd.prev')}
 
         <h3 className="title-m">{t('apply.g.step3')} <span className="source">{t('apply.src', { p: '137' })}</span></h3>
-        {field({ label: 'apply.f.school', ...Text({ k: 'school', caps: 'name' }) })}
-        {field({ label: 'apply.f.schoolDistrict', ...Text({ k: 'schoolDistrict' }) })}
-        {field({ label: 'apply.f.schoolSince', ...Text({ k: 'schoolSince', type: 'date' }) })}
+        {G('apply.gd.school')}
 
         <h3 className="title-m">{t('apply.g.step4')} <span className="source">{t('apply.src', { p: '140' })}</span></h3>
         {list.length > 0

@@ -118,7 +118,7 @@ puts that kind of data, rather than adding a new store:
 | Data | Where | Why |
 |---|---|---|
 | UGC admission steps (order, rule, handbook page) and dated notices (Gazette job exams, intakes) | Bundled read model `worker/generated/journey-2025-2026.json`, built by `tools/journey/build-journey.ts` from `data/journey/` and `data/alerts/` | Reference facts, like cut-offs and routes (ADR-002): no database reads per request. The build refuses to write unless every quote is found verbatim in its source |
-| A student's saved dates, date of birth, seen alerts, scheduled reminder ids; *(CR-012)* the UGC application co-pilot's answers and ticks (address, parents' names, school, `zedpath.apply.v1`) | The student's phone only | Personal and only needed on that phone; nothing stored without asking (NFR-030). Eligibility is checked on the phone |
+| A student's saved dates, date of birth, seen alerts, scheduled reminder ids; *(CR-012)* the UGC application guide's two answers (school or private candidate; name changed) and ticks (`zedpath.apply.v1`; no address, NIC or names: those fields are guides, and anything typed under the first version is deleted on the next load) | The student's phone only | Personal and only needed on that phone; nothing stored without asking (NFR-030). Eligibility is checked on the phone |
 | Course groups, members, senior invites, reports, blocks | D1, migration 0006 | Shared between accounts, so it must be on the server, enforced by keys and CHECKs |
 | Group messages | Each group's GroupRoom Durable Object (its own SQLite storage) | High write rate per group, never joined with other data; keeps chat traffic off D1 |
 

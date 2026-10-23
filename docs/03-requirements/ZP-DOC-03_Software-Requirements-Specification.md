@@ -274,9 +274,9 @@ Table: Functional requirements, FE-3 Preference list
 | FR-311 | *New (CR-006).* The selection bar in *Courses* and *My list* shall offer *Compare*, which opens Compare with the selected courses in the order selected, at most three. | AC-305.3 | C | T |
 | FR-312 | *New (CR-011).* My list shall show *What you need to know*: the UGC's rules for the preference list, each citing its page or section of the UGC handbook. | AC-302.4 | M | T |
 | FR-313 | *New (CR-012).* The system shall build the student's document checklist from their answers (school or private candidate; name change) and their list (O/L passes needed; aptitude tests), each item citing the UGC handbook. | AC-304.2 | S | T |
-| FR-314 | *New (CR-012).* The system shall show every field of the UGC registration and application steps 1 to 4 in the UGC's order and format, pre-filled where known, each with a Copy action; it shall never log in to the UGC or fill its form. | AC-304.3 | S | T |
+| FR-314 | *New (CR-012).* The system shall show every field of the UGC registration and application steps 1 to 4 in the UGC's order and format: known values pre-filled with a Copy action, the others as guides (what to write, format, common mistake) rather than inputs; it shall never log in to the UGC or fill its form. | AC-304.3 | S | T |
 | FR-315 | *New (CR-012).* The system shall offer a print-and-post tracker with the UGC address and the order-change rule. | AC-304.4 | S | T |
-| FR-316 | *New (CR-012).* The co-pilot's answers shall be stored only on the student's phone and cleared with the student's data (NFR-030). | AC-304.5 | M | T |
+| FR-316 | *New (CR-012).* The co-pilot shall store only the two answers and the ticks, only on the student's phone, cleared with the student's data (NFR-030); details typed under its first version are deleted on the next load. | AC-304.5 | M | T |
 
 ## FE-4 Journey and deadlines
 

@@ -697,9 +697,9 @@ the architecture aptitude test").
 
 - **AC-304.1** **Given** I open the guide, **then** I see each step of the official process with the most common mistake for that step, linked to the official instructions.
 - **AC-304.2** *(CR-012)* **Given** I answer two questions (school or private candidate; is my name different from my A/L name), **then** I get my own list of documents to get ready, including an O/L copy when a course on my list needs O/L passes and the separate aptitude-test applications for my list, each with its handbook page.
-- **AC-304.3** *(CR-012)* **Given** I open *Fill the form*, **then** every field of the UGC registration and steps 1 to 4 is shown in the UGC's order and format (BLOCK CAPITALS, name with initials, address with commas, mobile as 07…), pre-filled from my account and results where ZedPath knows it, each with a *Copy* button, and my Uni-Codes in my order.
+- **AC-304.3** *(CR-012)* **Given** I open *Fill the form*, **then** every field of the UGC registration and steps 1 to 4 is shown in the UGC's order and format (BLOCK CAPITALS, name with initials, address with commas, mobile as 07…), pre-filled from my account and results where ZedPath knows it, each with a *Copy* button, and my Uni-Codes in my order; for the fields ZedPath does not know (NIC, index numbers, address, parents, earlier attempts, school), a short guide says what to write, in what format, and the common mistake, so I never type them twice.
 - **AC-304.4** *(CR-012)* **Given** I submitted online, **then** I can tick off print, sign, certify, barcodes, pack and registered post to the UGC address, and the one chance to change the order.
-- **AC-304.5** *(CR-012)* **Given** I type my address, parents' names or school, **then** they stay on my phone only, are cleared with my data, and ZedPath never logs in to the UGC or fills its form for me.
+- **AC-304.5** *(CR-012)* **Given** I use the guide, **then** ZedPath keeps only my two answers and my ticks, on my phone only, cleared with my data; it never asks me to type my address, NIC or parents' names, and never logs in to the UGC or fills its form for me.
 
 
 ## US-305 Select several courses at once

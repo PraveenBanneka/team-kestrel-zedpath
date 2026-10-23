@@ -17,10 +17,9 @@ const answers = (over: Partial<import('./apply.ts').ApplyAnswers> = {}) => ({ ..
 
 describe('UGC application co-pilot (CR-012)', () => {
   beforeEach(() => store.clear());
-  it('writes names and addresses the UGC way (the handbook\'s own example, p.130 and p.135)', () => {
+  it('writes the known details the UGC way (the handbook\'s own example, p.130)', () => {
     expect(A.nameWithInitials('Dayawansha Patabendige Shalini Bandara')).toBe('BANDARA DPS');
     expect(A.blockCaps('  dayawansha  patabendige ')).toBe('DAYAWANSHA PATABENDIGE');
-    expect(A.addressCaps('No 68\nSchool Road,  Mathugama')).toBe('NO 68, SCHOOL ROAD, MATHUGAMA');
     expect(A.localMobile('+94791597530')).toBe('0791597530');
   });
   it('builds the checklist for this student: school or private, O/L copy, affidavit, aptitude applications', () => {
@@ -41,9 +40,19 @@ describe('UGC application co-pilot (CR-012)', () => {
     }
     expect(A.UGC_ADDRESS).toBe('Deputy Secretary/ University Admissions, University Grants Commission, No. 20, Ward Place, Colombo 07');
   });
-  it('keeps answers on this phone, and clearing the student\'s data removes them', () => {
-    S.saveApply({ answers: answers({ address: 'No 68, School Road' }), done: { 'post:apply.post.print': true } });
-    expect(S.loadApply().answers.address).toBe('No 68, School Road');
+  it('guides the fields it does not know instead of asking the student to type them twice', () => {
+    expect(A.FORM_GUIDES.map(g => g.key)).toEqual(['apply.gd.nic', 'apply.gd.alIndex', 'apply.gd.address', 'apply.gd.parents', 'apply.gd.prev', 'apply.gd.school']);
+    for (const g of A.FORM_GUIDES) { expect(g.page).toBeTruthy(); for (const lang of [en, si, ta]) expect((lang as Record<string, string>)[g.key]?.length).toBeGreaterThan(40); }
+    expect(en['apply.gd.address']).toMatch(/BLOCK CAPITALS, with commas/);
+  });
+  it('drops details typed under the first version (address, names) the next time it loads', () => {
+    store.set('zedpath.apply.v1', JSON.stringify({ answers: { candidate: 'SCHOOL', nameDiffers: false, address: 'No 68', father: 'X' }, done: {} }));
+    expect(S.loadApply().answers).toEqual({ candidate: 'SCHOOL', nameDiffers: false });
+    expect(store.get('zedpath.apply.v1')).not.toMatch(/No 68|father/);
+  });
+  it('keeps only two answers and the ticks on this phone, and clearing the student\'s data removes them', () => {
+    S.saveApply({ answers: answers({ candidate: 'PRIVATE' }), done: { 'post:apply.post.print': true } });
+    expect(S.loadApply().answers.candidate).toBe('PRIVATE');
     expect(S.loadApply().done['post:apply.post.print']).toBe(true);
     S.clearStudentData();
     expect(S.loadApply()).toEqual(A.EMPTY_APPLY);

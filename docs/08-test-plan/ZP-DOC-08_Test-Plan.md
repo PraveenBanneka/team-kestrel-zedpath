@@ -17,6 +17,7 @@ revision: 0.9 | 21 Oct 2026 | Team Kestrel | VR3: TC-139 added (desktop side men
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | VR4: TC-140 added (added-to-list message, `src/list-feedback.test.ts`); 539 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: TC-141 (list guide), TC-105 and TC-125 updated (no proposed order); 543 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: TC-142 (application co-pilot); 547 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012 revised (guides instead of inputs): TC-142 extended; 549 passed
 ---
 
 # Introduction
@@ -211,7 +212,7 @@ Table: Automated test cases
 | TC-139 | Desktop side menu | `src/nav-pref.test.ts` (4) | Open by default (pinned); collapsed and open remembered; open and no error when storage is blocked; "Clear this phone" forgets it, clearing student data keeps it | ZP-DOC-07 Desktop layout |
 | TC-140 | Added confirmation | `src/list-feedback.test.ts` (3) | Counts one and several; mentions courses already on the list and a full list; never says "Added 0" | ZP-DOC-07 Added confirmation |
 | TC-141 | List guide (CR-011) | `src/list-guide.test.ts` (4) | Six UGC rules, each with a handbook page or section, in all three languages; order by preference; the old proposed order is gone | FR-312; AC-302.4 |
-| TC-142 | Application co-pilot (CR-012) | `src/apply.test.ts` (4) | UGC formats (BANDARA DPS, address with commas, 07… mobile); checklist fits school or private, O/L, affidavit, aptitude; every step cites the handbook in three languages; answers stay on the phone and are cleared with the student's data | FR-313 to FR-316 |
+| TC-142 | Application co-pilot (CR-012) | `src/apply.test.ts` (6) | UGC formats (BANDARA DPS, 07… mobile); checklist fits school or private, O/L, affidavit, aptitude (singular for one course); every step cites the handbook in three languages; six guides instead of inputs; first-version typed details deleted on load; only two answers and ticks kept, cleared with the student's data | FR-313 to FR-316 |
 
 # Security tests
 
@@ -266,7 +267,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142).
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides).
 
 Table: Results of 21 October 2026 (developer machine)
 
