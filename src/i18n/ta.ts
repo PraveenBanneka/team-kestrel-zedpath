@@ -42,9 +42,9 @@ export const ta: Record<Key, string> = {
   'acc.logoutFail': 'வெளியேற முடியவில்லை: இணைப்பைச் சரிபார்த்து மீண்டும் முயலுங்கள். நீங்கள் இன்னும் உள்நுழைந்துள்ளீர்கள்.',
   'band.SAFE': 'வாய்ப்பு அதிகம்', 'band.LIKELY': 'வாய்ப்பு உண்டு', 'band.REACH': 'வாய்ப்பு குறைவு', 'band.OUT_OF_RANGE': 'எட்டாதது', 'band.NOT_ENOUGH_DATA': 'போதிய தரவு இல்லை',
   'trend.RISING': 'அதிகரிக்கிறது', 'trend.FALLING': 'குறைகிறது', 'trend.STEADY': 'நிலையானது', 'trend.JUMPY': 'ஏற்ற இறக்கம்',
-  'rg.PRIVATE_DEGREE': 'தனியார் பட்டப்படிப்புகள்', 'rg.PRIVATE_DEGREE.sub': 'அங்கீகரிக்கப்பட்ட நிறுவனங்கள், வட்டியில்லாக் கடன்கள்',
+  'rg.PRIVATE_DEGREE': 'தனியார் பட்டப்படிப்புகள்', 'rg.PRIVATE_DEGREE.sub': 'அமைச்சு அங்கீகரித்தவை, வெளிநாட்டுப் பட்டங்கள், KDU, கடன்கள்',
   'rg.DIPLOMA': 'டிப்ளோமாக்களும் திறந்த பல்கலைக்கழகமும்', 'rg.DIPLOMA.sub': 'SLIATE HNDs, OUSL',
-  'rg.PROFESSIONAL': 'தொழில்சார் நிறுவனங்கள்', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT',
+  'rg.PROFESSIONAL': 'தொழில்சார் நிறுவனங்கள்', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL',
   'rg.VOCATIONAL': 'தொழிற்கல்வியும் NVQ உம்', 'rg.VOCATIONAL.sub': 'VTA, DTET, NAITA, UoVT',
   'rg.JOB_EXAM': 'அரச தொழில் பரீட்சைகள்', 'rg.JOB_EXAM.sub': 'வர்த்தமானியிலிருந்து',
   'rg.SCHOLARSHIP_ABROAD': 'வெளிநாட்டில் கல்வி', 'rg.SCHOLARSHIP_ABROAD.sub': 'அரச புலமைப்பரிசில்கள்',
@@ -169,7 +169,7 @@ export const ta: Record<Key, string> = {
   'hidden.h': '{n} கற்கைநெறிகள் ஏன் மறைக்கப்பட்டுள்ளன', 'hidden.sub': 'ஒவ்வொன்றுக்கும், உங்கள் பெறுபேறுகள் பூர்த்தி செய்யாத பாடங்கள் அல்லது சித்திகள் தேவை. விதி UGC கையேட்டிலிருந்து மேற்கோள் காட்டப்பட்டுள்ளது.',
 
   // other routes
-  'routes.checked': 'உத்தியோகபூர்வ மூலங்களுடன் {date} அன்று சரிபார்க்கப்பட்டது.', 'routes.free': 'இலவசம்', 'routes.open': 'திறந்துள்ளது', 'routes.openNow': 'இப்போது திறந்துள்ளது', 'routes.notFound': 'வழி கிடைக்கவில்லை.',
+  'routes.checked': 'உத்தியோகபூர்வ மூலங்களுடன் {date} அன்று சரிபார்க்கப்பட்டது.', 'routes.free': 'இலவசம்', 'routes.progs': 'பாடநெறிகள் ({n})', 'routes.reqNone': 'ZedPath சரிபார்க்கக்கூடிய பக்கத்தில் இது வெளியிடப்படவில்லை. விண்ணப்பிக்கும் முன் நிறுவனத்திடம் கேளுங்கள்.', 'routes.source': 'மூலம்: {s} · {d} அன்று சரிபார்க்கப்பட்டது', 'routes.open': 'திறந்துள்ளது', 'routes.openNow': 'இப்போது திறந்துள்ளது', 'routes.notFound': 'வழி கிடைக்கவில்லை.',
   'routes.duration': 'காலம்', 'routes.cost': 'செலவு', 'routes.when': 'எப்போது', 'routes.req': 'நுழைவுத் தகைமைகள்',
   'routes.official': 'உத்தியோகபூர்வ வாசகம். மூலம்: {s} · சரிபார்த்தது {d}', 'routes.site': 'உத்தியோகபூர்வ இணையத்தளத்திற்குச் செல்க', 'routes.doc': 'மூல ஆவணத்தைத் திறக்க',
 

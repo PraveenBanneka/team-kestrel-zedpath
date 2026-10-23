@@ -20,6 +20,7 @@ revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: TC-142 (application co-pilo
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012 revised (guides instead of inputs): TC-142 extended; 549 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths refreshed (routes 23 Oct, OUSL alert, three hosts blocked): TC-143 added, TC-106 and TC-127 extended; 553 passed
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | Unknown cost never shown as "Free"; "Up to Rs ..."; CMA and BIT kept without links: TC-143 extended; 554 passed
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths expanded to 102 routes: TC-144 added; 560 passed
 ---
 
 # Introduction
@@ -216,6 +217,7 @@ Table: Automated test cases
 | TC-141 | List guide (CR-011) | `src/list-guide.test.ts` (4) | Six UGC rules, each with a handbook page or section, in all three languages; order by preference; the old proposed order is gone | FR-312; AC-302.4 |
 | TC-142 | Application co-pilot (CR-012) | `src/apply.test.ts` (6) | UGC formats (BANDARA DPS, 07… mobile); checklist fits school or private, O/L, affidavit, aptitude (singular for one course); every step cites the handbook in three languages; six guides instead of inputs; first-version typed details deleted on load; only two answers and ticks kept, cleared with the student's data | FR-313 to FR-316 |
 | TC-143 | Other paths: cost and checked date | `worker/routes-free.test.ts` (3) | A published zero cost is "Free", never "Rs 0"; an unknown cost is never "Free"; only a maximum or a free place shows "Up to Rs ..."; every route keeps its ISO checked-on date, shown in place of a fixed date |
+| TC-144 | Other paths expansion | `worker/routes-expansion.test.ts` (6) | 102 routes; all 31 Section 25A institutes with bachelor's degrees cite the register and list programmes; foreign degrees never called Ministry-recognised and name the awarding university; unpublished entry rules are null and labelled in three languages; only published fees shown |
 
 # Security tests
 
@@ -270,7 +272,7 @@ Table: Results
 
 Automated test count over the build: 79 (5 October), 126, 152, 164, 179, 185 (11 October), 515 with 6 expected-fail
 and 21 opt-in (12 to 15 October, after the test campaign and CR-007 to CR-009), 532 with 0 expected-fail and 21 opt-in
-(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free").
+(15 October, after the hardening of CR-010), 536 (21 October, after VR3 and the desktop side menu, TC-139), 539 (23 October, after VR4, TC-140), 543 (23 October, after CR-011, TC-141), 547 (23 October, after CR-012, TC-142), 549 (23 October, CR-012 revised to guides), 553 (23 October, other paths refreshed, TC-143), 554 (23 October, unknown cost never "Free"), 560 (23 October, other paths expanded, TC-144).
 
 Table: Results of 21 October 2026 (developer machine)
 

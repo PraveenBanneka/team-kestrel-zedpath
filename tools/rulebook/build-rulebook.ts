@@ -80,7 +80,7 @@ const routes: Rulebook['routes'] = rawRoutes.map(r => ({
   duration: r.duration && r.duration !== 'None' ? String(r.duration) : null,
   free: isFree(r),
   costText: costText(r),
-  intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text, officialUrl: r.official_url ?? null,
+  intakeTiming: r.intake_timing ?? null, requirements: r.entry_requirements_text ?? null, programmes: r.programmes ?? [], officialUrl: r.official_url ?? null,
   sourceUrl: r.source_url ?? null, sourceLocator: r.source_locator, retrievedOn: r.retrieved_on, warning: r.notes ?? null,
   closesOn: r.intake_timing ? latestDate(String(r.intake_timing)) : null, openAtRetrieval: /\bOPEN\b/.test(String(r.intake_timing ?? '')),
 }));

@@ -60,13 +60,14 @@ for (let p = 1; p <= doc.numPages; p++) {
 
 const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes', 'routes-2026-10-23.json'), 'utf8')) as {
   routes: { id: string; route_group: string; name: string; provider: string; duration: string | null; intake_timing: string | null;
-    entry_requirements_text: string; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
+    entry_requirements_text: string | null; programmes?: string[]; cost_min_lkr: number | null; cost_max_lkr: number | null; source_url: string; source_locator: string; retrieved_on: string }[];
 };
 for (const r of routes.routes) {
   const cost = r.cost_min_lkr === null ? '' : `Cost: Rs ${r.cost_min_lkr.toLocaleString('en')}${r.cost_max_lkr && r.cost_max_lkr !== r.cost_min_lkr ? ` to Rs ${r.cost_max_lkr.toLocaleString('en')}` : ''}.`;
   const text = [`${r.name} (${r.route_group.replace(/_/g, ' ').toLowerCase()}), offered by ${r.provider}.`,
     r.duration ? `Duration: ${r.duration}.` : '', cost, r.intake_timing ? `When: ${r.intake_timing}` : '',
-    `Entry requirements: ${r.entry_requirements_text}`].filter(Boolean).join(' ');
+    r.entry_requirements_text ? `Entry requirements: ${r.entry_requirements_text}` : 'Entry requirements: not published on a page ZedPath could check.',
+    r.programmes?.length ? `Programmes: ${r.programmes.join('; ')}.` : ''].filter(Boolean).join(' ');
   passages.push({ id: `route-${r.id}`, kind: 'ROUTE', source: `${r.source_locator} (checked ${r.retrieved_on})`, page: null, url: r.source_url, text: text.slice(0, 3000) });
 }
 

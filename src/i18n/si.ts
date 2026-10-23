@@ -42,9 +42,9 @@ export const si: Record<Key, string> = {
   'acc.logoutFail': 'ඉවත් විය නොහැකි විය: සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න. ඔබ තවමත් පිවිසී ඇත.',
   'band.SAFE': 'ඉඩ වැඩියි', 'band.LIKELY': 'ඉඩ තිබේ', 'band.REACH': 'ඉඩ අඩුයි', 'band.OUT_OF_RANGE': 'පරාසයෙන් පිට', 'band.NOT_ENOUGH_DATA': 'දත්ත මදි',
   'trend.RISING': 'ඉහළ යයි', 'trend.FALLING': 'පහළ යයි', 'trend.STEADY': 'ස්ථාවරයි', 'trend.JUMPY': 'නිතර වෙනස් වේ',
-  'rg.PRIVATE_DEGREE': 'පෞද්ගලික උපාධි', 'rg.PRIVATE_DEGREE.sub': 'අනුමත ආයතන, පොලී රහිත ණය',
+  'rg.PRIVATE_DEGREE': 'පෞද්ගලික උපාධි', 'rg.PRIVATE_DEGREE.sub': 'අමාත්‍යාංශය පිළිගත්, විදේශ උපාධි, KDU, ණය',
   'rg.DIPLOMA': 'ඩිප්ලෝමා සහ විවෘත විශ්වවිද්‍යාලය', 'rg.DIPLOMA.sub': 'SLIATE HNDs, OUSL',
-  'rg.PROFESSIONAL': 'වෘත්තීය ආයතන', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT',
+  'rg.PROFESSIONAL': 'වෘත්තීය ආයතන', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL',
   'rg.VOCATIONAL': 'වෘත්තීය පුහුණුව සහ NVQ', 'rg.VOCATIONAL.sub': 'VTA, DTET, NAITA, UoVT',
   'rg.JOB_EXAM': 'රජයේ රැකියා විභාග', 'rg.JOB_EXAM.sub': 'ගැසට් පත්‍රයෙන්',
   'rg.SCHOLARSHIP_ABROAD': 'විදේශ අධ්‍යාපනය', 'rg.SCHOLARSHIP_ABROAD.sub': 'රජයේ ශිෂ්‍යත්ව',
@@ -169,7 +169,7 @@ export const si: Record<Key, string> = {
   'hidden.h': 'පාඨමාලා {n}ක් සඟවා ඇත්තේ ඇයි', 'hidden.sub': 'ඒ සෑම එකකටම, ඔබේ ප්‍රතිඵල සපුරාලන්නේ නැති විෂයයන් හෝ සාමාර්ථ අවශ්‍යයි. නීතිය UGC අත්පොතෙන් උපුටා දක්වා ඇත.',
 
   // other routes
-  'routes.checked': '{date} දින නිල මූලාශ්‍ර සමඟ පරීක්ෂා කර ඇත.', 'routes.free': 'නොමිලේ', 'routes.open': 'විවෘතයි', 'routes.openNow': 'දැන් විවෘතයි', 'routes.notFound': 'මාර්ගය හමු නොවීය.',
+  'routes.checked': '{date} දින නිල මූලාශ්‍ර සමඟ පරීක්ෂා කර ඇත.', 'routes.free': 'නොමිලේ', 'routes.progs': 'පාඨමාලා ({n})', 'routes.reqNone': 'ZedPath හට පරීක්ෂා කළ හැකි පිටුවක මෙය පළ කර නැත. අයදුම් කිරීමට පෙර ආයතනයෙන් විමසන්න.', 'routes.source': 'මූලාශ්‍රය: {s} · {d} දින පරීක්ෂා කළා', 'routes.open': 'විවෘතයි', 'routes.openNow': 'දැන් විවෘතයි', 'routes.notFound': 'මාර්ගය හමු නොවීය.',
   'routes.duration': 'කාලය', 'routes.cost': 'වියදම', 'routes.when': 'කවදාද', 'routes.req': 'ඇතුළත් වීමේ සුදුසුකම්',
   'routes.official': 'නිල වචන. මූලාශ්‍රය: {s} · පරීක්ෂා කළේ {d}', 'routes.site': 'නිල වෙබ් අඩවියට යන්න', 'routes.doc': 'මූලාශ්‍ර ලේඛනය විවෘත කරන්න',
 

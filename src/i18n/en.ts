@@ -41,9 +41,9 @@ export const en = {
   'acc.logoutFail': 'Could not log out: check your connection and try again. You are still logged in.',
   'band.SAFE': 'Very likely', 'band.LIKELY': 'Possible', 'band.REACH': 'Unlikely', 'band.OUT_OF_RANGE': 'Out of range', 'band.NOT_ENOUGH_DATA': 'Not enough data',
   'trend.RISING': 'rising', 'trend.FALLING': 'falling', 'trend.STEADY': 'steady', 'trend.JUMPY': 'jumpy',
-  'rg.PRIVATE_DEGREE': 'Private degrees', 'rg.PRIVATE_DEGREE.sub': 'Approved institutes, interest-free loans',
+  'rg.PRIVATE_DEGREE': 'Private degrees', 'rg.PRIVATE_DEGREE.sub': 'Ministry-recognised, foreign degrees, KDU, loans',
   'rg.DIPLOMA': 'Diplomas and Open University', 'rg.DIPLOMA.sub': 'SLIATE HNDs, OUSL',
-  'rg.PROFESSIONAL': 'Professional bodies', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT',
+  'rg.PROFESSIONAL': 'Professional bodies', 'rg.PROFESSIONAL.sub': 'CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL',
   'rg.VOCATIONAL': 'Vocational and NVQ', 'rg.VOCATIONAL.sub': 'VTA, DTET, NAITA, UoVT',
   'rg.JOB_EXAM': 'Government job exams', 'rg.JOB_EXAM.sub': 'From the Gazette',
   'rg.SCHOLARSHIP_ABROAD': 'Study abroad', 'rg.SCHOLARSHIP_ABROAD.sub': 'Government scholarships',
@@ -168,7 +168,7 @@ export const en = {
   'hidden.h': 'Why {n} courses are hidden', 'hidden.sub': 'Each needs subjects or grades your results do not meet. The rule is quoted from the UGC handbook.',
 
   // other routes
-  'routes.checked': 'Checked against official sources on {date}.', 'routes.free': 'Free', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
+  'routes.checked': 'Checked against official sources on {date}.', 'routes.free': 'Free', 'routes.progs': 'Programmes ({n})', 'routes.reqNone': 'Not published on a page ZedPath could check. Ask the institute before applying.', 'routes.source': 'Source: {s} · checked {d}', 'routes.open': 'Open', 'routes.openNow': 'Open now', 'routes.notFound': 'Route not found.',
   'routes.duration': 'Duration', 'routes.cost': 'Cost', 'routes.when': 'When', 'routes.req': 'Entry requirements',
   'routes.official': 'Official wording. Source: {s} · checked {d}', 'routes.site': 'Go to the official website', 'routes.doc': 'Open the source document',
 

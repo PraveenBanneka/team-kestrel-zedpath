@@ -17,6 +17,7 @@ revision: 0.9 | 21 Oct 2026 | Team Kestrel | Revised for VR3 (18 to 21 October 2
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | My list: "+ Add a course" box below the last course opens the course picker; a green confirmation with a tick whenever courses are added (Courses, course page, My list)
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-011: My list order notes become information (no "Fix the order"); "What you need to know" section with the UGC rules and handbook pages
 revision: 0.9 | 23 Oct 2026 | Team Kestrel | CR-012: Apply to the UGC screen (route #/apply, from My list)
+revision: 0.9 | 23 Oct 2026 | Team Kestrel | Other paths: route page lists its programmes (collapsible, open when six or fewer); unpublished entry rules say so; "Up to Rs ..." costs; group subtitles updated
 ---
 
 # Introduction
@@ -164,7 +165,7 @@ Table: Hash routes, screens and purpose
 | `#/list` | My list | My list | Ordered preference list for the UGC application |
 | `#/apply` | Guide to applying to the UGC | My list | CR-012: checklist, every UGC form field ready to copy, print-and-post tracker |
 | `#/journey`, `#/journey/open`, `#/alerts` | Journey | Journey | My steps / Open now tabs |
-| `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees, job exams, vocational, abroad |
+| `#/routes/<group>`, `#/route/<id>` | Other routes | Paths | Private degrees (Ministry-recognised institutes, foreign degrees, KDU, loan courses), professional bodies, job exams, vocational, abroad. The route page shows cost ("Free" only for a published 0; "Up to Rs ..." when only a maximum is published), intake, entry rules (or "Not published on a page ZedPath could check"), a collapsible "Programmes (n)" list and the source |
 | `#/groups` | Groups | Groups | Chat list: my groups, popular groups |
 | `#/group/<id>`, `#/group/<id>/info` | Group room, Group info | Groups | WhatsApp-style room; description, rules, members, exit |
 | `#/ask`, `#/ask/<question>` | Ask ZedPath | Ask | Cited answers; a deep link only fills the question box, never sends it (CR-010) |

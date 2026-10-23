@@ -31,6 +31,22 @@ link them (`safeUrl`, ASK-047). Not reachable as text and unchanged: R030 CIMA, 
 the DTET academic-year-2027 Gazette (expected around November), the October Gazette (IIA) issues, IFSLS selection results after
 19.11.2026, and a NAITA AETI 2027 apprentice notice seen only in a search snippet.
 
+### Expansion of 23 October 2026 (Praveen: "more private degrees and professional bodies", "put all"): R053 to R102
+
+Six research agents (rules 1-8) and the main session's own spot-checks of every field on its official page. Programme titles
+were read by the main session from the Ministry's Section 25A register (exact wording; the register's typos are kept).
+
+| Added | Records | Notes |
+|---|---|---|
+| Ministry-recognised private institutes | 31 (every Section 25A institute with bachelor's degrees; SAITM closed, SLIDA and the Nanotechnology institute postgraduate only) | Each lists its programmes. Where the institute's own site failed a security check or was offline (Aquinas, Saegis, SANASA, Institute of Chemistry), only the register is used |
+| Foreign degrees taught in Sri Lanka | 11 (IIT with Westminster and RGU, ICBT with Cardiff Met, APIIT with Staffordshire, NSBM with Plymouth and Victoria, SLIIT with LJMU, NIBM with Coventry, RIC with London, BCAS with LSBU, ACBT with ECU) | Always labelled "foreign degree, not on the Ministry list" |
+| KDU fee-paying (day scholar) | 1 | Intake 44 rules; fees LKR 1.5M to 17.5M |
+| Professional bodies | 7 (ACCA, ACCA FIA, SLIM PGDip and PCM, IBSL DBF and CBF, CIMA Cert BA) | CA's BSc in Applied Accounting is under private degrees (it is on the register) |
+
+Left out, with reasons: AOD (its site failed a secure connection), ANC (only a .com site that could not be confirmed as its own),
+ESOFT's foreign degrees (its course page carried a file-upload form; held for Praveen's decision), CIPM (unsafe content).
+Most institutes publish no total fees or dated intakes; those fields are null and the screen says so.
+
 The sections below describe the original research of 5 October 2026.
 
 Every fact comes from a government or institution site. No blogs, tuition sites, news sites or competitor apps were used.

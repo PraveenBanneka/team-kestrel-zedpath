@@ -47,9 +47,9 @@ import { loadLang, saveLang } from './storage.ts';
 const bandLabel = (b: Band) => t(`band.${b}`);
 const trendLabel = (tr: OfferingSummary['trend']) => tr === 'NO_TREND' ? '' : t(`trend.${tr}`);
 export const ROUTE_GROUPS: { code: RouteSummary['group']; title: string; sub: string; icon: LucideIcon; tone: string }[] = [
-  { code: 'PRIVATE_DEGREE', title: 'Private degrees', sub: 'Approved institutes, interest-free loans', icon: Building2, tone: 'var(--violet)' },
+  { code: 'PRIVATE_DEGREE', title: 'Private degrees', sub: 'Ministry-recognised, foreign degrees, KDU, loans', icon: Building2, tone: 'var(--violet)' },
   { code: 'DIPLOMA', title: 'Diplomas and Open University', sub: 'SLIATE HNDs, OUSL', icon: ScrollText, tone: 'var(--brand-500)' },
-  { code: 'PROFESSIONAL', title: 'Professional bodies', sub: 'CA, CMA, CIMA, AAT', icon: Award, tone: 'var(--teal)' },
+  { code: 'PROFESSIONAL', title: 'Professional bodies', sub: 'CA, CMA, CIMA, AAT, ACCA, SLIM, IBSL', icon: Award, tone: 'var(--teal)' },
   { code: 'VOCATIONAL', title: 'Vocational and NVQ', sub: 'VTA, DTET, NAITA, UoVT', icon: Wrench, tone: 'var(--reach)' },
   { code: 'JOB_EXAM', title: 'Government job exams', sub: 'From the Gazette', icon: Landmark, tone: 'var(--safe)' },
   { code: 'SCHOLARSHIP_ABROAD', title: 'Study abroad', sub: 'Government scholarships', icon: Plane, tone: 'var(--likely)' },
@@ -620,9 +620,15 @@ function RouteDetail({ id, routes, following, onFollow }: { id: string; routes: 
       {r.intakeTiming && <section className="card stack"><h2 className="title-l">{t('routes.when')}</h2><p className="body-m" style={{ margin: 0 }}>{r.intakeTiming}</p></section>}
       <section className="card stack">
         <h2 className="title-l">{t('routes.req')}</h2>
-        <p className="body-m" style={{ margin: 0 }}>{r.requirements}</p>
-        <p className="source">{t('routes.official', { s: r.sourceLocator, d: r.retrievedOn })}</p>
+        <p className="body-m" style={{ margin: 0 }}>{r.requirements ?? t('routes.reqNone')}</p>
+        <p className="source">{t(r.requirements ? 'routes.official' : 'routes.source', { s: r.sourceLocator, d: r.retrievedOn })}</p>
       </section>
+      {r.programmes.length > 0 && <section className="card stack">
+        <details className="route-progs" open={r.programmes.length <= 6}>
+          <summary className="title-l">{t('routes.progs', { n: r.programmes.length })}</summary>
+          <ul lang="en">{r.programmes.map(p => <li key={p} className="body-m">{p}</li>)}</ul>
+        </details>
+      </section>}
       {r.warning && <div className="alert warn"><TriangleAlert size={20} aria-hidden="true" />{r.warning}</div>}
       {onFollow && <button className="btn tonal" aria-pressed={following} onClick={() => onFollow(!following)}>
         {following ? <><BookmarkCheck size={18} aria-hidden="true" />{t('jt.following1')}</> : <><BookmarkPlus size={18} aria-hidden="true" />{t('jt.follow')}</>}</button>}
