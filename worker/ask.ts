@@ -20,6 +20,8 @@ const GATEWAY_ID = 'zedpath';
 /** Tried in order. A model that is missing (404), busy (5xx, e.g. "high demand") or out of free quota (429: quotas are
  *  per model on the free tier) hands over to the next. `-latest` follows Google's newest model of that size. */
 export const MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-flash-lite-latest', 'gemini-2.5-flash-lite'];
+/** Praveen 2026-10-24: Claude Haiku 5.5 answers first when ANTHROPIC_API_KEY is set; any failure hands over to MODELS. */
+export const CLAUDE_MODEL = 'claude-haiku-5-5';
 const TOP_K = 6;
 export const MIN_SCORE = 0.50;  // calibrated 2026-10-05 (tools/ask/calibrate.ts): weakest right page 0.551 (Sinhala), strongest off-topic 0.474
 export const FEEDBACK_PER_DAY = 2000;
@@ -120,13 +122,31 @@ export function usableReply(raw: string): boolean {
   return !/VERDICT\s*:|\brule\s*\d\b|the very first line|system instruction|my instructions/i.test(rest);
 }
 
+/** Claude through the same AI Gateway (Anthropic Messages API). null = no usable answer, so Gemini is asked instead. */
+async function generateClaude(env: Env, gw: ReturnType<Env['AI']['gateway']>, userText: string): Promise<string | null> {
+  const r = await gw.run({ provider: 'anthropic', endpoint: 'v1/messages',
+    headers: { 'x-api-key': env.ANTHROPIC_API_KEY!, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    query: { model: CLAUDE_MODEL, max_tokens: 1024, temperature: 0.2, system: SYSTEM, messages: [{ role: 'user', content: userText }] } });
+  if (!r.ok) { console.error(`ask: model ${CLAUDE_MODEL} -> ${r.status} ${(await r.text()).slice(0, 300)}`); return null; }   // no key in this text
+  const j = await r.json() as { content?: { type?: string; text?: string }[] };
+  const text = (j.content ?? []).filter(p => p.type === 'text').map(p => p.text ?? '').join('').trim();
+  if (text && usableReply(text)) return text;
+  console.error(`ask: model ${CLAUDE_MODEL} gave an empty or unusable reply; trying Gemini`);
+  return null;
+}
+
 async function generate(env: Env, userText: string): Promise<{ text: string } | { status: number }> {
+  const gw = env.AI.gateway(GATEWAY_ID);
+  if (env.ANTHROPIC_API_KEY) {
+    const text = await generateClaude(env, gw, userText).catch(e => { console.error(`ask: ${CLAUDE_MODEL} failed: ${e}`); return null; });
+    if (text) return { text };
+  }
+  if (!env.GEMINI_API_KEY) return { status: 503 };
   const body = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
     contents: [{ role: 'user', parts: [{ text: userText }] }],
     generationConfig: { temperature: 0.2, maxOutputTokens: 4096 },      // newer models spend part of this on thinking
   };
-  const gw = env.AI.gateway(GATEWAY_ID);
   let last = 404;
   for (const model of MODELS) {
     const r = await gw.run({ provider: 'google-ai-studio', endpoint: `v1beta/models/${model}:generateContent`,
@@ -149,7 +169,7 @@ async function generate(env: Env, userText: string): Promise<{ text: string } | 
 
 /** Keeps the assistant's identity and the citations honest. */
 export function finish(raw: string, passages: CorpusPassage[]): { answer: string; citations: AskCitation[] } {
-  const answer = raw.replace(/\bGemini\b/gi, 'Ask ZedPath').replace(/\b(trained|developed|made) by Google\b/gi, 'part of ZedPath');
+  const answer = raw.replace(/\b(Gemini|Claude)\b/gi, 'Ask ZedPath').replace(/\b(trained|developed|made) by (Google|Anthropic)\b/gi, 'part of ZedPath');
   const cited: number[] = [];
   for (const m of answer.matchAll(/\[(\d+(?:\s*,\s*\d+)*)\]/g))
     for (const n of m[1].split(',').map(Number)) if (n >= 1 && n <= passages.length && !cited.includes(n)) cited.push(n);
@@ -196,7 +216,7 @@ const SPECIAL_INTAKE_Q = 'special intake outstanding achievements sports nationa
 const NOT_FOUND = 'I could not find this in the UGC handbook or the official sources ZedPath checks. Please look at ugc.ac.lk or ask the institution directly.';
 
 askRoutes.post('/ask', async c => {
-  if (!c.env.AI || !c.env.ASK_INDEX || !c.env.GEMINI_API_KEY || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
+  if (!c.env.AI || !c.env.ASK_INDEX || !(c.env.ANTHROPIC_API_KEY || c.env.GEMINI_API_KEY) || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
   if (crossSite(c)) return err(c, 403, 'Cross-site request refused');   // a null/malformed Origin is a 403, not a 500
   const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown; extras?: unknown } | null;
   const question = typeof b?.question === 'string' ? b.question.trim() : '';

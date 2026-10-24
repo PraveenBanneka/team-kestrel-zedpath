@@ -5,6 +5,8 @@ declare global {
   interface Env {
     /** Google AI Studio key, set by Praveen with `wrangler secret put GEMINI_API_KEY`. Never sent to the browser. */
     GEMINI_API_KEY?: string;
+    /** Anthropic key (Claude Haiku 5.5, first choice for Ask), set by Praveen with `wrangler secret put ANTHROPIC_API_KEY`. Never sent to the browser. */
+    ANTHROPIC_API_KEY?: string;
     /** Local-only switch for developer tools (corpus embedding). Set in .dev.vars; never set in production. */
     DEV_TOOLS?: string;
   }

@@ -13,6 +13,7 @@ reviewer: Claude (AI coding partner), consistency and traceability review
 standard: C4 model (levels 1 to 3) for structure; UML 2.5.1 sequence diagrams for behaviour; Architecture Decision Records (Nygard format); ZP-DOC-00
 revision: 0.9 | 11 Oct 2026 | Team Kestrel | First issue: architecture as deployed, verified against wrangler.jsonc, worker/, src/, shared/ and migrations 0001 to 0010; six ADRs; free-plan budget; submitted for approval
 revision: 0.9 | 15 Oct 2026 | Team Kestrel | Revised in review for CR-007 to CR-010: demo route `POST /api/auth/demo` and migration 0011; university-facts and aptitude read models on the course page; weak-ETag revalidation (D-05); `crossSite()` shared by every write route (D-03); group-socket kick path on log out, log out everywhere, recovery and leaving; research block list by page fingerprint; the hardening of security audit run-1 (account write budget, IPv6 /64 network limits, whole-service Ask cap, feedback cap and retention, demo cap, report weighting, post-attempt and socket limits, normalised contact filter, rooms an account opened purged on deletion via migration 0012, owner-tagged local data); security controls and the summary of audit run-1; ADR-07 and ADR-08; ADR-02 updated; risks R-08 to R-10; verified against the code at commit f704d0b
+revision: 0.9 | 24 Oct 2026 | Team Kestrel | Ask: Claude Haiku 5.5 answers first through AI Gateway when ANTHROPIC_API_KEY is set; Gemini chain kept as fallback (ASK-048 to ASK-051)
 ---
 
 # Introduction
@@ -124,7 +125,7 @@ Table: Containers and bindings (from wrangler.jsonc)
 | Group rooms | Durable Objects, SQLite storage | `GROUP_ROOM` (class `GroupRoom`) | One object per group: messages and live WebSockets, with hibernation |
 | Embeddings and moderation | Workers AI | `AI` | `@cf/baai/bge-m3` (multilingual, 1024 dimensions); `@cf/meta/llama-guard-3-8b` for messages |
 | Retrieval index | Vectorize `zedpath-ask` | `ASK_INDEX` | Page-tagged passages from the UGC handbook and official routes; cosine |
-| Model gateway | AI Gateway | via `AI.gateway()` | Proxies Gemini; cache on; payload logs off |
+| Model gateway | AI Gateway | via `AI.gateway()` | Proxies Claude Haiku 5.5 (first) and Gemini (fallback); cache on; payload logs off |
 | Rate limiting | Workers Rate Limiting | `AUTH_LIMITER`, `IP_LIMITER` | 10 a minute per IP and username; 100 a minute per IP |
 
 **Scheduled jobs.** ZP-DOC-03 provides for a weekly Cron job to check the Gazette and official notices. In this
@@ -191,7 +192,9 @@ fetched (ADR-08).
 
 Two guards matter. Passages below a similarity of 0.50 (calibrated on Sinhala and Tamil questions) are dropped, and
 when nothing relevant remains the Worker answers "not found" without calling a model. Each model reply passes
-`usableReply()`, which rejects a reply that talks about its own instructions; the next model in the chain
+`usableReply()`, which rejects a reply that talks about its own instructions. Since 24 October 2026, when
+`ANTHROPIC_API_KEY` is set, **Claude Haiku 5.5** (`claude-haiku-5-5`, Anthropic Messages API through the same AI Gateway)
+answers first; any error or unusable reply falls back to the Gemini chain. In that chain the next model
 (`gemini-flash-latest`, `gemini-2.5-flash`, `gemini-flash-lite-latest`, `gemini-2.5-flash-lite`) is then asked.
 A model that is missing, busy or out of quota (404, 429, 5xx) also falls through to the next.
 
@@ -263,7 +266,7 @@ Table: Security controls
 | Abuse | Rate limiting on sign-up, log-in and Ask; daily Ask allowance keyed by salted, day-scoped hashes (no raw IP stored) |
 | Server-side enforcement | Validation, membership, rules acceptance, Journey windows, moderation: all in the Worker or Durable Object; the UI only mirrors them |
 | Privacy | Contact details in their own table, never shown to others; groups show username and preset avatar only; account deletion removes every row and the member's room data (NFR-070, NFR-071, NFR-075) |
-| Secrets | `GEMINI_API_KEY` and `PEPPER` as Wrangler secrets; `.dev.vars` locally, gitignored |
+| Secrets | `ANTHROPIC_API_KEY`, `GEMINI_API_KEY` and `PEPPER` as Wrangler secrets; `.dev.vars` locally, gitignored |
 | Repository | Public repo; `.githooks/pre-push` runs a leak scan of every new commit (API keys, private keys, env files, forbidden account identifiers) |
 | Deployment | A PreToolUse guard hook blocks deploys, secrets, remote migrations and resource changes unless the Worker config pins the project's own Cloudflare account and the product owner's message starts with **GO** |
 | External content | Research reads only official domains; page text is data, never instructions; a blocked-hosts list is kept in the code. *Added 15 October 2026:* single pages can be blocked without blocking their host; they are kept only as SHA-256 fingerprints of the normalised address (`tools/research/blocked-pages.ts`), checked before fetching (`tools/research/check-url.ts`) and kept out of all data by test DAT-054 (ADR-08) |
@@ -402,7 +405,7 @@ Table: Architectural risks
 |---|---|---|
 | R-01 | Results-day spike exhausts the 100,000 daily requests | Pages are static; ETag revalidation; IP rate limit; budget monitored in Cloudflare observability |
 | R-02 | Workers AI neuron quota exhausted by Ask and moderation | Per-device and per-IP daily allowance; "not found" answers skip the model; core browsing does not depend on AI (NFR-040) |
-| R-03 | Gemini model retired or rate limited | Four-model fallback chain through AI Gateway; clear 503 message |
+| R-03 | Model retired, out of credit or rate limited | Claude Haiku 5.5 first, then a four-model Gemini fallback chain through AI Gateway; clear 503 message |
 | R-04 | Model returns reasoning instead of an answer | `usableReply()` guard and thought-part filtering, with tests |
 | R-05 | Gazette and notice changes missed between deploys | Planned weekly Cron job; until then notices are curated and redeployed; each shows its retrieval date |
 | R-06 | Deploy to a wrong Cloudflare account | Account pinned in config; guard hook checks the pin and requires GO |

@@ -5,7 +5,7 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { DEVICE_PER_DAY, IP_PER_DAY, MODELS, finish, safeUrl, usableReply } from './ask.ts';
+import { CLAUDE_MODEL, DEVICE_PER_DAY, IP_PER_DAY, MODELS, finish, safeUrl, usableReply } from './ask.ts';
 import { BLOCKED_HOSTS } from './syllabi.ts';
 import { HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import { layoutAnswer } from '../shared/answer.ts';
@@ -251,6 +251,52 @@ describe('model fallback order (mocked gateway, no network)', () => {
     replies = [[{ text: 'VERDICT: NONE\nAnswer [1].' }]];
     const body = await (await ask({ question: 'Medicine?' })).text();
     expect(body).not.toContain('test-key');
+  });
+});
+
+describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network)', () => {
+  type Sent = { provider: string; endpoint: string; headers: Record<string, string>; query: Record<string, unknown> };
+  let sent: Sent[];
+  let claude: (number | string)[];          // per Claude call: reply text, or an HTTP status
+  beforeEach(() => {
+    sent = []; claude = [];
+    env = { ...env, ANTHROPIC_API_KEY: 'test-anthropic-key' } as Env;
+    env.AI.gateway = (() => ({ run: async (req: Sent) => {
+      sent.push(req);
+      if (req.provider === 'anthropic') {
+        const r = claude.shift() ?? 'VERDICT: NONE\nClaude answer [1].';
+        if (typeof r === 'number') return new Response('{}', { status: r });
+        return Response.json({ content: [{ type: 'text', text: r }] });
+      }
+      return Response.json({ candidates: [{ content: { parts: [{ text: 'VERDICT: NONE\nBackup answer [1].' }] } }] });
+    } })) as never;
+  });
+  it('ASK-048 with an Anthropic key, Haiku 5.5 answers first through the gateway and Gemini is not called', async () => {
+    const b = await (await ask({ question: 'What is the student loan?' })).json() as AskResponse;
+    expect(b.answer).toBe('Ask ZedPath answer [1].');                     // "Claude" is never shown to students
+    expect(sent.map(s => s.provider)).toEqual(['anthropic']);
+    expect(sent[0]).toMatchObject({ endpoint: 'v1/messages', query: { model: CLAUDE_MODEL, temperature: 0.2 } });
+    expect(sent[0].headers['x-api-key']).toBe('test-anthropic-key');
+  });
+  it('ASK-049 a Claude error or unusable reply hands over to Gemini', async () => {
+    claude = [529];
+    expect(((await (await ask({ question: 'Medicine?' })).json()) as AskResponse).answer).toBe('Backup answer [1].');
+    expect(sent.map(s => s.provider)).toEqual(['anthropic', 'google-ai-studio']);
+    sent = []; claude = ['VERDICT: NO\nMy instructions say...'];
+    expect(((await (await ask({ question: 'Medicine?' })).json()) as AskResponse).answer).toBe('Backup answer [1].');
+    expect(sent.map(s => s.provider)).toEqual(['anthropic', 'google-ai-studio']);
+  });
+  it('ASK-050 Ask works with only the Anthropic key; neither key leaks into the answer', async () => {
+    env = { ...env, GEMINI_API_KEY: undefined } as Env;
+    const r = await ask({ question: 'Medicine?' });
+    expect(r.status).toBe(200);
+    expect(await r.text()).not.toMatch(/test-anthropic-key|test-key/);
+    claude = [500];
+    expect((await ask({ question: 'Medicine?' })).status).toBe(503);   // no Gemini key: nothing to fall back to
+  });
+  it('ASK-051 finish() hides Claude/Anthropic like Gemini/Google', () => {
+    const p = [{ id: 'a', ...P50 }];
+    expect(finish('I am Claude, made by Anthropic. Yes [1].', p).answer).toBe('I am Ask ZedPath, part of ZedPath. Yes [1].');
   });
 });
 
