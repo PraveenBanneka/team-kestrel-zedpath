@@ -80,6 +80,18 @@ describe('Ask ZedPath', () => {
     expect(sentToModel).toHaveLength(0);
   });
 
+  it('ASK-055 greetings and questions about the assistant still reach the model (live 24 Oct: replies felt robotic)', async () => {
+    matches = [];
+    for (const q of ['Can you speak Sinhala?', 'hi', 'Thank you!', 'Who are you?', 'What can you do?', 'Can you answer in Tamil?']) {
+      sentToModel = [];
+      await ask({ question: q });
+      expect(sentToModel, q).toHaveLength(1);
+    }
+    sentToModel = [];
+    await ask({ question: 'What is the best cricket bat to buy?' });
+    expect(sentToModel).toHaveLength(0);                                   // off-topic still costs nothing
+  });
+
   it('still asks the model for Sinhala or Tamil questions, so the reply is in that language', async () => {
     matches = [];
     await ask({ question: 'වෛද්‍ය විද්‍යාව ගැන කියන්න' });

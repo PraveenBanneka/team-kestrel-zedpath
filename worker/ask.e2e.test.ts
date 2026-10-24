@@ -5,7 +5,7 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import app from './index.ts';
 import { createTestD1 } from './testing/d1-sqlite.ts';
-import { CLAUDE_MODEL, DEVICE_PER_DAY, IP_PER_DAY, MODELS, finish, safeUrl, usableReply } from './ask.ts';
+import { CLAUDE_MODEL, DEVICE_PER_DAY, IP_PER_DAY, MODELS, SYSTEM, finish, replyLanguage, safeUrl, usableReply } from './ask.ts';
 import { BLOCKED_HOSTS } from './syllabi.ts';
 import { HANDBOOK_URL, QUESTION_MAX, takeVerdict, type AskResponse, type CorpusPassage } from '../shared/ask.ts';
 import { layoutAnswer } from '../shared/answer.ts';
@@ -300,6 +300,19 @@ describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network
     claude = ['VERDICT: NON'];
     expect(((await (await ask({ question: 'Law degree cost?' })).json()) as AskResponse).answer).toBe('Backup answer [1].');
     expect(sent.map(s => s.provider)).toEqual(['anthropic', 'google-ai-studio']);
+  });
+  it('ASK-053 the question\'s script sets the reply language, even when the app is in English (live: Sinhala got English)', async () => {
+    await ask({ question: 'සිංහල බැරිද?', lang: 'en' });
+    await ask({ question: 'தமிழில் பதில் சொல்ல முடியுமா?', lang: 'en' });
+    await ask({ question: 'Can you speak Sinhala?', lang: 'si' });
+    const texts = sent.filter(s => s.provider === 'anthropic').map(s => (s.query.messages as { content: string }[])[0].content);
+    expect(texts.map(x => x.match(/^Reply language: (\w+)$/m)?.[1])).toEqual(['Sinhala', 'Tamil', 'Sinhala']);
+    expect(replyLanguage('What is Mahapola?', 'English')).toBe('English');
+  });
+  it('ASK-054 the rules let the assistant answer questions about itself briefly, without sources', () => {
+    expect(SYSTEM).toMatch(/Reply language/);
+    expect(SYSTEM).toMatch(/can you speak Sinhala\?/);
+    expect(SYSTEM).toMatch(/one or two short sentences/);
   });
   it('ASK-051 finish() hides Claude/Anthropic like Gemini/Google', () => {
     const p = [{ id: 'a', ...P50 }];

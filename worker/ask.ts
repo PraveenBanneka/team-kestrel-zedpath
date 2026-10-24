@@ -27,8 +27,18 @@ export const MIN_SCORE = 0.50;  // calibrated 2026-10-05 (tools/ask/calibrate.ts
 export const FEEDBACK_PER_DAY = 2000;
 export const DEVICE_PER_DAY = 30, IP_PER_DAY = 300, ALL_PER_DAY = 3000;   // ALL: whole service per day (audit lead 12; free-plan AI budget)
 const SINHALA = /[඀-෿]/, TAMIL = /[஀-௿]/;
+/** The language the answer must be in: the question's own script decides (live 24 Oct: a Sinhala question got an
+ *  English reply when only "App language: English" was given); otherwise the app language. */
+/** Greetings, thanks and questions about Ask itself: they find no handbook passage, but the model should still answer
+ *  them warmly (rule 8) instead of the canned "not found". Anything else off-topic still costs no model call. */
+export const aboutAssistant = (question: string): boolean =>
+  /^\s*(hi|hello|hey|good (morning|afternoon|evening)|thanks?( you)?|thank u|ty)\b/i.test(question) ||
+  /\b(who are you|what can you do|what do you do|can you (speak|answer|reply|talk|help)|do you (speak|know|understand)|in (sinhala|tamil|english))\b/i.test(question);
 
-const SYSTEM = `You are Ask ZedPath, a friendly guide for Sri Lankan students choosing what to do after their A-Level (A/L) results.
+export const replyLanguage = (question: string, appLang: string): string =>
+  SINHALA.test(question) ? 'Sinhala' : TAMIL.test(question) ? 'Tamil' : appLang;
+
+export const SYSTEM = `You are Ask ZedPath, a friendly guide for Sri Lankan students choosing what to do after their A-Level (A/L) results.
 Rules you must always follow:
 1. Use ONLY the numbered sources and the ZedPath engine facts in the message. Do not use outside knowledge, even if you think you know.
 2. Cite every factual claim with the source number in square brackets, like [2]. Engine facts need no citation.
@@ -43,7 +53,12 @@ Rules you must always follow:
    "how do I" question, cover in order whatever the sources give of: what it is, who can apply, key dates, how to apply;
    if a detail students usually want (for example an amount or a fee) is not in the sources, say in one bullet to check the official page, and never guess it;
    **bold** only course names, dates and key numbers. No headings, no paragraphs after the bullets, under 160 words.
-6. You are Ask ZedPath. Never say which company or AI model you are.`;
+6. You are Ask ZedPath. Never say which company or AI model you are.
+7. Always write the whole reply in the "Reply language" given in the message, even if the sources are in English.
+8. If the message is about Ask ZedPath itself, a greeting or thanks (for example "can you speak Sinhala?", "who are you?",
+   "thank you"), do not search the sources: start with "VERDICT: NONE", then answer warmly in one or two short sentences
+   with no bullets and no citations. You can answer in Sinhala, Tamil and English, and you help with A/L results, university
+   courses and chances, private degrees, professional and vocational paths, scholarships and loans, job exams and deadlines.`;
 
 const sha256Hex = async (s: string) => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))]
   .map(b => b.toString(16).padStart(2, '0')).join('');
@@ -259,14 +274,14 @@ askRoutes.post('/ask', async c => {
   const actions = askActions(question, codes, profile);
 
   const localScript = SINHALA.test(question) || TAMIL.test(question);
-  if (passages.length === 0 && facts.length === 0 && !localScript) {
+  if (passages.length === 0 && facts.length === 0 && !localScript && !aboutAssistant(question)) {
     return c.json({ answer: NOT_FOUND, citations: [], engineFacts: [], verdict: 'NOT_FOUND', actions: [], answeredAt: new Date().toISOString() } satisfies AskResponse);
   }
 
   // 3. The language model writes the answer from those passages and facts only.
   const sources = passages.map((p, i) => `[${i + 1}] ${p.kind === 'HANDBOOK' ? `UGC handbook 2025/26, page ${p.page}` : p.source}\n${p.text}`).join('\n\n');
   const lang = ({ si: 'Sinhala', ta: 'Tamil' } as Record<string, string>)[String(b?.lang)] ?? 'English';
-  const userText = `App language: ${lang}\nStudent's question: ${question}\n\nZedPath engine facts (computed from this student's own results; trust them over general statements):\n` +
+  const userText = `App language: ${lang}\nReply language: ${replyLanguage(question, lang)}\nStudent's question: ${question}\n\nZedPath engine facts (computed from this student's own results; trust them over general statements):\n` +
     `${facts.length ? facts.map(f => `- ${f}`).join('\n') : '- none (the student has not entered results, or no course is involved)'}\n\n` +
     `Sources:\n${sources || '(no relevant sources found)'}`;
   const out = await generate(c.env, userText);
