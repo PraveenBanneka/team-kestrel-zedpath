@@ -19,6 +19,7 @@ import { layoutAnswer } from '../../shared/answer.ts';
 import { getLang, t, type Key } from '../i18n/index.ts';
 import { longDate } from './Journey.tsx';
 import { askSuggestions } from '../ask-suggest.ts';
+import { currentStep, THINKING_LONG_MS, thinkingSteps } from '../ask-thinking.ts';
 
 export interface AskTurn { question: string; reply: AskResponse | null; error: string | null }
 export interface AskContext {
@@ -156,6 +157,33 @@ function Reply({ question, reply, ctx, onAsk }: { question: string; reply: AskRe
   );
 }
 
+/** The waiting state: the real steps of the pipeline, ticked off in order (src/ask-thinking.ts). */
+function Thinking({ hasResults }: { hasResults: boolean }) {
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    const start = Date.now();
+    const id = setInterval(() => setElapsed(Date.now() - start), 250);
+    return () => clearInterval(id);
+  }, []);
+  const steps = thinkingSteps(hasResults);
+  const cur = currentStep(steps, elapsed);
+  return (
+    <div className="thinking-steps" role="status" aria-live="polite">
+      <span className="sr-only">{t(steps[cur].key)}</span>
+      <ol aria-hidden="true">
+        {steps.map((s, i) => (
+          <motion.li key={s.key} className={i < cur ? 'done' : i === cur ? 'now' : 'next'}
+            initial={i === 0 ? false : { opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .25, delay: i * .05 }}>
+            <span className="mark">{i < cur ? <Check size={14} strokeWidth={3} /> : i === cur ? <span className="spinner" /> : <span className="dot" />}</span>
+            {t(s.key)}
+          </motion.li>))}
+      </ol>
+      {elapsed >= THINKING_LONG_MS && <motion.p className="thinking-long" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <Sparkles size={14} aria-hidden="true" />{t('ask.step.long')}</motion.p>}
+    </div>
+  );
+}
+
 export function AskScreen({ profile, extras, turns, setTurns, initialQuestion, onConsumedInitial, ctx }: {
   profile: ProfileInput | null; extras: Extras; turns: AskTurn[]; setTurns: (f: (t: AskTurn[]) => AskTurn[]) => void;
   initialQuestion: string | null; onConsumedInitial: () => void; ctx: AskContext;
@@ -205,7 +233,7 @@ export function AskScreen({ profile, extras, turns, setTurns, initialQuestion, o
         {turns.map((turn, i) => (
           <div key={i} className="stack" style={{ gap: 10 }}>
             <motion.div className="bubble-q" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>{turn.question}</motion.div>
-            {!turn.reply && !turn.error && <div className="card bubble-a"><div className="thinking"><Sparkles size={16} aria-hidden="true" />{t('ask.thinking')}</div></div>}
+            {!turn.reply && !turn.error && <div className="card bubble-a"><Thinking hasResults={!!profile} /></div>}
             {turn.error && <div className="alert error" role="alert"><TriangleAlert size={20} aria-hidden="true" />{turn.error}</div>}
             {turn.reply && <motion.div className="card bubble-a" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
               <Reply question={turn.question} reply={turn.reply} ctx={ctx} onAsk={q2 => void send(q2)} /></motion.div>}

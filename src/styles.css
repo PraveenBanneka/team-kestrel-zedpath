@@ -338,6 +338,19 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .source-quote { padding: 4px 0 10px 28px; }
 .source-quote p { margin: 0 0 6px; font-size: 13px; line-height: 19px; color: var(--ink-2); font-style: italic; }
 .thinking { display: flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 14px; animation: pulse 1.6s infinite; }
+/* Ask waiting steps (src/ask-thinking.ts): done = tick, now = spinner, next = dimmed. */
+.thinking-steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.thinking-steps li { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.35; transition: color .2s var(--ease), opacity .2s var(--ease); }
+.thinking-steps li.done { color: var(--ink-2); }
+.thinking-steps li.now { color: var(--ink); font-weight: 600; }
+.thinking-steps li.next { color: var(--ink-3); opacity: .55; }
+.thinking-steps .mark { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; }
+.thinking-steps li.done .mark { background: color-mix(in srgb, var(--brand) 14%, transparent); color: var(--brand); }
+.thinking-steps .spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--brand) 25%, transparent);
+  border-top-color: var(--brand); animation: spin .8s linear infinite; }
+.thinking-steps .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .6; }
+.thinking-long { display: flex; align-items: center; gap: 6px; margin: 10px 0 0; font-size: 13px; color: var(--ink-3); animation: pulse 1.6s infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 .composer { position: sticky; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 3; display: flex; gap: 8px; align-items: center; padding: 8px;
   border-radius: 999px; background: color-mix(in srgb, var(--surface) 92%, transparent); box-shadow: var(--shadow-2); backdrop-filter: blur(14px); }
 .composer .input { border: 0; border-radius: 999px; background: var(--surface-2); min-height: 48px; }

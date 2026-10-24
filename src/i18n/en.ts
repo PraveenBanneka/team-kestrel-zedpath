@@ -349,6 +349,7 @@ export const en = {
   'ask.q.medicine': 'What do I need for Medicine?', 'ask.q.cs': 'Can I do Computer Science?', 'ask.q.ugc': 'When do UGC applications usually open?',
   'ask.q.loan': 'What is the interest-free student loan?', 'ask.q.jobs': 'Which government job exams accept A/L results?', 'ask.q.z': 'What does Z-score mean for university entry?',
   'ask.thinking': 'Reading the handbook…', 'ask.checked': 'Checked against your results by ZedPath', 'ask.openSource': 'Open the official source',
+  'ask.step.understand': 'Understanding your question', 'ask.step.search': 'Searching the UGC handbook and official pages', 'ask.step.results': 'Checking it against your results', 'ask.step.write': 'Writing your answer, with sources', 'ask.step.long': 'Almost there…',
   'ask.placeholder': 'Ask about courses, rules or dates', 'ask.aria': 'Your question', 'ask.send': 'Send', 'ask.source': 'Source {n}',
   'ask.fine': 'Ask ZedPath can make mistakes. Tap a number to check the page it used.',
 

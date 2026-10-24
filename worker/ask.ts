@@ -126,7 +126,8 @@ export function usableReply(raw: string): boolean {
 async function generateClaude(env: Env, gw: ReturnType<Env['AI']['gateway']>, userText: string): Promise<string | null> {
   const r = await gw.run({ provider: 'anthropic', endpoint: 'v1/messages',
     headers: { 'x-api-key': env.ANTHROPIC_API_KEY!, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    query: { model: CLAUDE_MODEL, max_tokens: 1024, system: SYSTEM,   // no temperature: Haiku 5.5 rejects it (400, seen live 24 Oct)
+    query: { model: CLAUDE_MODEL, max_tokens: 1024, system: SYSTEM, thinking: { type: 'disabled' },   // thinking used the whole budget live (stop=max_tokens, no text)
+        // no temperature: Haiku 5.5 rejects it (400, seen live 24 Oct)
       messages: [{ role: 'user', content: userText }] } });
   if (!r.ok) { console.error(`ask: model ${CLAUDE_MODEL} -> ${r.status} ${(await r.text()).slice(0, 300)}`); return null; }   // no key in this text
   const j = await r.json() as { content?: { type?: string; text?: string }[]; stop_reason?: string; usage?: { input_tokens?: number; output_tokens?: number } };
