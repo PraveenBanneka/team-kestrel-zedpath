@@ -129,10 +129,13 @@ async function generateClaude(env: Env, gw: ReturnType<Env['AI']['gateway']>, us
     query: { model: CLAUDE_MODEL, max_tokens: 1024, system: SYSTEM,   // no temperature: Haiku 5.5 rejects it (400, seen live 24 Oct)
       messages: [{ role: 'user', content: userText }] } });
   if (!r.ok) { console.error(`ask: model ${CLAUDE_MODEL} -> ${r.status} ${(await r.text()).slice(0, 300)}`); return null; }   // no key in this text
-  const j = await r.json() as { content?: { type?: string; text?: string }[] };
+  const j = await r.json() as { content?: { type?: string; text?: string }[]; stop_reason?: string; usage?: { input_tokens?: number; output_tokens?: number } };
   const text = (j.content ?? []).filter(p => p.type === 'text').map(p => p.text ?? '').join('').trim();
-  if (text && usableReply(text)) return text;
-  console.error(`ask: model ${CLAUDE_MODEL} gave an empty or unusable reply; trying Gemini`);
+  // Diagnostics (24 Oct, Haiku rollout): token use for the cost check, and the reply's shape when it is not used.
+  // The reply is the model's answer to a guidance question; it holds no name, contact or account id.
+  console.log(`ask: ${CLAUDE_MODEL} in=${j.usage?.input_tokens} out=${j.usage?.output_tokens} stop=${j.stop_reason} blocks=${(j.content ?? []).map(p => p.type).join(',')}`);
+  if (text && usableReply(text) && !/^\W*VERDICT\b/i.test(takeVerdict(text).text)) return text;   // "VERDICT: NON" = malformed, never shown
+  console.error(`ask: model ${CLAUDE_MODEL} gave an empty or unusable reply; trying Gemini. Start: ${JSON.stringify(text.slice(0, 240))}`);
   return null;
 }
 

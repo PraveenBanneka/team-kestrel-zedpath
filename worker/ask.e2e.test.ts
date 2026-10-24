@@ -295,6 +295,11 @@ describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network
     claude = [500];
     expect((await ask({ question: 'Medicine?' })).status).toBe(503);   // no Gemini key: nothing to fall back to
   });
+  it('ASK-052 a malformed verdict line from Haiku ("VERDICT: NON", seen live) is never shown: Gemini answers', async () => {
+    claude = ['VERDICT: NON'];
+    expect(((await (await ask({ question: 'Law degree cost?' })).json()) as AskResponse).answer).toBe('Backup answer [1].');
+    expect(sent.map(s => s.provider)).toEqual(['anthropic', 'google-ai-studio']);
+  });
   it('ASK-051 finish() hides Claude/Anthropic like Gemini/Google', () => {
     const p = [{ id: 'a', ...P50 }];
     expect(finish('I am Claude, made by Anthropic. Yes [1].', p).answer).toBe('I am Ask ZedPath, part of ZedPath. Yes [1].');
