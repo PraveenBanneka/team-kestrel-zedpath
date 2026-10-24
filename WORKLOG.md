@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **2249404d** (CR-015 scholarships and loans; 108 routes). D1 at migration 0013. Rollback target b8c8ae8c (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
+  Live (workers.dev) = version **5df3fc04** (Ask on Claude Haiku 5.5 via AI Gateway, Gemini fallback; targeted placement near api.anthropic.com; waiting steps). D1 at migration 0013. Rollback target 179ba155 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -478,3 +478,10 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live checks: /api/routes 108 routes, SCHOLARSHIP_LOAN = R103-R107; R054 waysToPay [R105, R106]; no cost or Free on R103. Headless demo: home shows the 7th tile (12 = 5 own + 7 abroad), the group lists the 5 schemes then "Study abroad scholarships".
 - Not done: Vectorize re-embedding of the 6 new route passages (Ask cannot cite them yet; remote step).
 - Deck (artifact FRG3sFD9LjUqruwqavpkBT) v31-37: new Other paths slide, Journey with My steps + notifications line, AAT group chat, Compare slide (099L vs 136L, from the live demo), market slide as TAM/SAM/SOM (Gate 1 numbers), link under the QR, ask = LKR 200,000 for 5%.
+
+## 2026-10-24: 5df3fc04 LIVE (Praveen's GO): Ask on Claude Haiku 5.5; waiting steps
+- Shark Tank pitch done (deck v76, cue cards). Sharks asked to meet after.
+- Ask now calls claude-haiku-5-5 first through AI Gateway (secret ANTHROPIC_API_KEY set by Praveen), Gemini chain as fallback. Deploys: 774b6d73 (Haiku added) -> 5b9b76d4 (no temperature: Haiku 5.5 rejects it, 400) -> 7a7dda16 (targeted placement near api.anthropic.com: LK requests ran in HKG, where Anthropic 403s and Google says "User location is not supported") -> 179ba155 (token/unusable-reply logging; malformed VERDICT falls back, ASK-052) -> 5df3fc04 (thinking disabled: it used the whole 1024-token budget; waiting steps in en/si/ta, TC-155).
+- Live check on 5df3fc04: 12/12 answered by Haiku, stop=end_turn, in 1,156-4,302 tokens, out 65-389, 3.5-6 s. Cost ~$0.00044 (~LKR 0.13) per answer; whole test ~$0.005.
+- Gemini fallback is weak: gemini-2.5-flash retired for new users (use a 3.x model), flash-latest overloaded/quota. To fix later.
+- Rollback target 179ba155. 612 tests.
