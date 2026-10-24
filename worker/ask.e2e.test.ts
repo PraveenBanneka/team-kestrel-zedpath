@@ -275,7 +275,8 @@ describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network
     const b = await (await ask({ question: 'What is the student loan?' })).json() as AskResponse;
     expect(b.answer).toBe('Ask ZedPath answer [1].');                     // "Claude" is never shown to students
     expect(sent.map(s => s.provider)).toEqual(['anthropic']);
-    expect(sent[0]).toMatchObject({ endpoint: 'v1/messages', query: { model: CLAUDE_MODEL, temperature: 0.2 } });
+    expect(sent[0]).toMatchObject({ endpoint: 'v1/messages', query: { model: CLAUDE_MODEL } });
+    expect(sent[0].query).not.toHaveProperty('temperature');           // Haiku 5.5 rejects temperature (400)
     expect(sent[0].headers['x-api-key']).toBe('test-anthropic-key');
   });
   it('ASK-049 a Claude error or unusable reply hands over to Gemini', async () => {
