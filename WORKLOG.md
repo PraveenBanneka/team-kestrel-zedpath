@@ -491,3 +491,7 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live check: Sinhala/Tamil questions answered in Sinhala/Tamil by Haiku; "Who are you?" answered warmly; CS chances correct. All Haiku, 2-4 s.
 - Open: Ask still says Safe/Likely/Reach while the app says Very likely/Possible/Unlikely (engineFacts labels + rule 4). Fix offered.
 - Open: business monetisation research (3 agents, sources: official sites, filings, established news; Praveen approved) -> investor PDF to Downloads.
+
+## 2026-10-24: RESULT: 2nd Runner-Up, IntelliCon '26 Shark Tank (LKR 10,000)
+- Team Kestrel (Praveen, solo) placed 2nd Runner-Up; certificate from AIESEC in SLIIT. Goal (top 3) met.
+- Sharks asked to meet after the pitch. Investor brief: Downloads/ZedPath_Monetisation_Brief.pdf (sourced: Sri Lanka official data, Info Edge/IDP/UCAS filings, Studyportals contract notice).
