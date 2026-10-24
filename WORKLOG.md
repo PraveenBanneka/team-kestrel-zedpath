@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **5df3fc04** (Ask on Claude Haiku 5.5 via AI Gateway, Gemini fallback; targeted placement near api.anthropic.com; waiting steps). D1 at migration 0013. Rollback target 179ba155 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
+  Live (workers.dev) = version **7a94ddd7** (Ask on Claude Haiku 5.5, reply language from the question, Gemini fallback; targeted placement; waiting steps).5 via AI Gateway, Gemini fallback; targeted placement near api.anthropic.com; waiting steps). D1 at migration 0013. Rollback target 5df3fc04 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -485,3 +485,9 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 - Live check on 5df3fc04: 12/12 answered by Haiku, stop=end_turn, in 1,156-4,302 tokens, out 65-389, 3.5-6 s. Cost ~$0.00044 (~LKR 0.13) per answer; whole test ~$0.005.
 - Gemini fallback is weak: gemini-2.5-flash retired for new users (use a 3.x model), flash-latest overloaded/quota. To fix later.
 - Rollback target 179ba155. 612 tests.
+
+## 2026-10-24: 7a94ddd7 LIVE (Praveen's GO): Ask replies in the question's language; friendly about itself
+- "Reply language" set from the question script (ASK-053); rule 8 for greetings/meta questions (ASK-054); those skip the no-model not-found shortcut (ASK-055). 615 tests.
+- Live check: Sinhala/Tamil questions answered in Sinhala/Tamil by Haiku; "Who are you?" answered warmly; CS chances correct. All Haiku, 2-4 s.
+- Open: Ask still says Safe/Likely/Reach while the app says Very likely/Possible/Unlikely (engineFacts labels + rule 4). Fix offered.
+- Open: business monetisation research (3 agents, sources: official sites, filings, established news; Praveen approved) -> investor PDF to Downloads.
