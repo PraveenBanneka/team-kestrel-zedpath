@@ -6,6 +6,10 @@
   // Any tool that regenerates this file (e.g. a scaffold) MUST keep this line. The guard also checks it.
   "account_id": "e6474e41044c5722ad57c3372ab7492e",
   "compatibility_date": "2026-09-01",
+  // 24 Oct 2026: Sri Lankan requests were run in Cloudflare's Hong Kong colo (HKG), where Anthropic (403 "Request not
+  // allowed") and Google ("User location is not supported") refuse API calls. Run the Worker near Anthropic's API
+  // instead. Static assets are still served from the nearest edge; only /api/* moves.
+  "placement": { "mode": "targeted", "hostname": "api.anthropic.com" },
   // Hono API Worker. Only /api/* runs the Worker; every other path is a static asset (free, unlimited)
   // and unknown paths fall back to the React SPA's index.html (ZP-DOC-06, ADR-001; NFR-012).
   "main": "./worker/index.ts",
