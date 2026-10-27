@@ -2,7 +2,7 @@
 // seniors in them, so a student sees how a group works). Trust rule: sample data is labelled as sample. Every author
 // here starts with "Sample", every message carries `sample: true` (the phone shows a "Sample" tag), no badge says
 // "verified", and the ids are not message ids, so nobody can report, block or reply to a made-up person.
-// The advice is general and points to the official sources and ZedPath's cited pages; it states no cut-off or date.
+// The advice is general and points to the official sources and FindMyWay's cited pages; it states no cut-off or date.
 // These are NOT stored: the group's room adds them to the history it sends, before the real messages.
 import type { ChatMessage } from './groups.ts';
 
@@ -16,7 +16,7 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Kasun'), null, 'Same here. I added 8 courses to My list and ordered them by what I actually want, not only the Safe ones.'],
     [STUDENT('Ishara'), SENIOR('Management', 2), 'Good way to do it. Put the course you want most first, even if it is a Reach: you are offered the highest choice on your list that you qualify for.'],
     [STUDENT('Dinithi'), null, 'Is the interest-free loan only for private degrees?'],
-    [STUDENT('Ishara'), SENIOR('Management', 2), 'It is for approved private institutes. Ask ZedPath shows the official rules with the page they come from, read them before you apply.'],
+    [STUDENT('Ishara'), SENIOR('Management', 2), 'It is for approved private institutes. Ask FindMyWay shows the official rules with the page they come from, read them before you apply.'],
   ],
   'COURSE:001': [
     [STUDENT('Tharindu'), null, 'Bio stream, Colombo district. Is Medicine realistic if my Z is just under last year\'s cut-off?'],
@@ -30,7 +30,7 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Hasitha'), null, 'Maths stream here. How do they decide which engineering field you get?'],
     [STUDENT('Nadun'), SENIOR('Engineering', 2), 'You choose your field after the first year, based on your first-year results. So the first year matters a lot.'],
     [STUDENT('Hasitha'), null, 'Should I list every university that offers Engineering?'],
-    [STUDENT('Nadun'), SENIOR('Engineering', 2), 'List the ones you would really go to, in the order you prefer. Compare them side by side in ZedPath first.'],
+    [STUDENT('Nadun'), SENIOR('Engineering', 2), 'List the ones you would really go to, in the order you prefer. Compare them side by side in FindMyWay first.'],
   ],
   'COURSE:012': [
     [STUDENT('Sanduni'), null, 'Do I need to know programming before starting Computer Science?'],
@@ -53,7 +53,7 @@ const THREADS: Record<string, Line[]> = {
   ],
   'COURSE:018': [
     [STUDENT('Hiruni'), null, 'Which universities offer Commerce?'],
-    [STUDENT('Malith'), SENIOR('Commerce', 3), 'Open the Commerce course in ZedPath: every university offering it is listed with your chance for each.'],
+    [STUDENT('Malith'), SENIOR('Commerce', 3), 'Open the Commerce course in FindMyWay: every university offering it is listed with your chance for each.'],
     [STUDENT('Hiruni'), null, 'Thanks! And internships?'],
     [STUDENT('Malith'), SENIOR('Commerce', 3), 'Most of us do one in the final year. Start building your CV from the first year.'],
   ],
@@ -61,18 +61,18 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Yasas'), null, 'Law has an aptitude test right? When do they announce it?'],
     [STUDENT('Thilini'), SENIOR('Law', 2), 'Each university announces its own in a press notice. Add the date to your Journey when it is out so you get a reminder.'],
   ],
-  // CR-014: the five path groups (general advice, pointing to the official sources and ZedPath's cited pages).
+  // CR-014: the five path groups (general advice, pointing to the official sources and FindMyWay's cited pages).
   'PATH:PROF_ACCOUNTING': [
     [STUDENT('Sajith'), null, 'Commerce stream. Should I start CA or CIMA right after A/L, or wait for university?'],
     [STUDENT('Hansika'), SENIOR('Accounting', 2), 'Many start one alongside a degree. Compare the entry rules and the cost to register in Other paths first: they differ a lot.'],
     [STUDENT('Sajith'), null, 'Is AAT worth it if my results are not great?'],
     [STUDENT('Hansika'), SENIOR('Accounting', 2), 'AAT takes O/L students too, and it can give exemptions later. Check the exact exemptions on the official site of the body before you pay.'],
     [STUDENT('Ruwani'), null, 'ACCA fees are in pounds right? That scared me.'],
-    [STUDENT('Hansika'), SENIOR('Accounting', 2), 'Yes, ZedPath shows them in GBP as published. Ask about payment plans and which exams you can skip first.'],
+    [STUDENT('Hansika'), SENIOR('Accounting', 2), 'Yes, FindMyWay shows them in GBP as published. Ask about payment plans and which exams you can skip first.'],
   ],
   'PATH:PROF_BUSINESS': [
     [STUDENT('Kavindu'), null, 'Anyone doing SLIM marketing straight after A/L?'],
-    [STUDENT('Nimesha'), SENIOR('Business', 2), 'I started with the short certificate, then moved up. ZedPath lists both with their entry rules.'],
+    [STUDENT('Nimesha'), SENIOR('Business', 2), 'I started with the short certificate, then moved up. FindMyWay lists both with their entry rules.'],
     [STUDENT('Kavindu'), null, 'And banking? The IBSL diploma looked interesting.'],
     [STUDENT('Nimesha'), SENIOR('Business', 2), 'It is taken by people who want to work in banks. Fees are charged per subject, so ask how many subjects you will take.'],
   ],
@@ -80,7 +80,7 @@ const THREADS: Record<string, Line[]> = {
     [STUDENT('Dilini'), null, 'Can I study at the Open University while working?'],
     [STUDENT('Supun'), SENIOR('Open University', 3), 'Yes, most of us do. Classes are mostly online with day schools at the regional centres.'],
     [STUDENT('Dilini'), null, 'Does registering at OUSL stop me from getting a UGC university later?'],
-    [STUDENT('Supun'), SENIOR('Open University', 3), 'Check the official notices for that rule. The OUSL pages in ZedPath say when applications open and close: follow them in Alerts so you do not miss the date.'],
+    [STUDENT('Supun'), SENIOR('Open University', 3), 'Check the official notices for that rule. The OUSL pages in FindMyWay say when applications open and close: follow them in Alerts so you do not miss the date.'],
   ],
   'PATH:GOV_CUSTOMS': [
     [STUDENT('Ashen'), null, 'Is anyone preparing for the Customs Inspector exam?'],
@@ -97,7 +97,7 @@ const THREADS: Record<string, Line[]> = {
   COURSE: [
     [STUDENT('Nethmi'), null, 'Hi everyone! Anyone else aiming for this course?'],
     [STUDENT('Chamod'), null, 'Yes! Still deciding the order of my UGC list.'],
-    [STUDENT('Ishara'), SENIOR('this course', 2), 'Ask here if you want to know what studying it is really like. For rules and dates, check the cited pages in ZedPath.'],
+    [STUDENT('Ishara'), SENIOR('this course', 2), 'Ask here if you want to know what studying it is really like. For rules and dates, check the cited pages in FindMyWay.'],
   ],
 };
 

@@ -30,7 +30,7 @@ export function addManyToList(list: ListEntry[], entries: ListEntry[]): { list: 
 
 export interface ListWarnings {
   /** BR-041 (CR-011): Safe entries listed above at least one Likely or Reach entry. Information only: the UGC follows the
-   *  student's own order (handbook p.112), so ZedPath explains what it means and never re-orders the list. */
+   *  student's own order (handbook p.112), so FindMyWay explains what it means and never re-orders the list. */
   safeAbove: ListEntry[];
   /** BR-042 (CR-011): no Safe entry yet; the handbook advises listing as many eligible courses as possible (p.112). */
   noSafe: boolean;

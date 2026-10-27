@@ -1861,8 +1861,8 @@
         "course": "Academic Programme as printed (a programme offered at several universities is ONE row, summed over all of them)",
         "institutionAbbreviation": "University abbreviation printed in the course name, if any",
         "institution": "Expansion of that abbreviation as given in the table's note (2); null if the note does not define it",
-        "letter": "ZedPath institution letter, only when the abbreviation names exactly one institution",
-        "districts": "Admissions by district of the student (ZedPath district keys); a district absent from the object is printed blank",
+        "letter": "FindMyWay institution letter, only when the abbreviation names exactly one institution",
+        "districts": "Admissions by district of the student (FindMyWay district keys); a district absent from the object is printed blank",
         "specialAndAdditionalIntakes": "Special & Additional Intakes (1); null where printed blank",
         "total": "Total"
       },
@@ -6634,7 +6634,7 @@
       "fields": {
         "faculty": "Faculty/Academic Programme as printed",
         "admissionCategory": "'Merit' or 'Other' (note 2: 'Other' = District quota and Underprivileged District quota); null for the Grand Total row",
-        "districts": "Admissions by district (ZedPath district keys); 0 is printed as 0 in this table",
+        "districts": "Admissions by district (FindMyWay district keys); 0 is printed as 0 in this table",
         "specialAndAdditionalIntakes": "Special & Additional Intakes (1); null where printed blank (all Merit rows)",
         "total": "Total"
       },
@@ -7839,11 +7839,11 @@
     "Table 2.1's printed title reads 'Academic Years 2010/2021 - 2023/2024'; its columns actually cover 2020/2021 to 2023/2024 (G.C.E. A/L 2020-2023). Title kept exactly as printed.",
     "Table 2.1 stream 'Other (6)': odd subject combinations introduced from G.C.E. (A/L) 2011 (note 6).",
     "Table 2.2 notes: (1) Architecture/Quantity Surveying includes Design, Town & Country Planning, Landscape Architecture and Facilities Management. (2) Computer Science/IT includes Management & IT, IT, ICT, IT and Management, Artificial Intelligence, Business Information Systems, Information Systems, Computer Science and Technology, Electronics and Computer Science, Accounting Information Systems etc. (3) Allied Health Sciences includes Nursing, Pharmacy, Medical Laboratory Sciences, Radiography, Physiotherapy, Speech & Hearing Sciences, Occupational Therapy, Optometry, Indigenous Pharmaceutical Technology and Yoga and Parapsychology. (4) Agriculture includes Urban Bioresources, Aquatic Bioresources & Multidisciplinary Studies (Faculty of Urban & Aquatic Bioresources, University of Sri Jayewardenepura). (5) The Institute of Indigenous Medicine became a Faculty of the University of Colombo in 2023, so Colombo(5) includes Indigenous Medicine.",
-    "Table 2.2 institution letters: all 20 printed institution columns map to ZedPath letters (from data/ugc/2025-2026/unicodes.csv): Colombo(5)=A, Sri Palee Campus=S, Peradeniya=B, Sri Jayewardenepura=C, Kelaniya=D, Moratuwa=G, Jaffna=E, Ruhuna=F, Eastern=H, Trincomalee Campus=W, South Eastern=J, Rajarata=K, Sabaragamuwa=L, Wayamba=M, Uva=U (Uva Wellassa), Visual and Performing Arts=Z, Gampaha Wickramarachchi=P, Vavuniya=R, University of Colombo School of Computing=T, Swami Vipulananda Institute=Y. The 'Total' column has letter null.",
+    "Table 2.2 institution letters: all 20 printed institution columns map to FindMyWay letters (from data/ugc/2025-2026/unicodes.csv): Colombo(5)=A, Sri Palee Campus=S, Peradeniya=B, Sri Jayewardenepura=C, Kelaniya=D, Moratuwa=G, Jaffna=E, Ruhuna=F, Eastern=H, Trincomalee Campus=W, South Eastern=J, Rajarata=K, Sabaragamuwa=L, Wayamba=M, Uva=U (Uva Wellassa), Visual and Performing Arts=Z, Gampaha Wickramarachchi=P, Vavuniya=R, University of Colombo School of Computing=T, Swami Vipulananda Institute=Y. The 'Total' column has letter null.",
     "Table 2.3 is per programme name, not per university: a programme offered at several universities (e.g. 'Medicine', 'Engineering', 'Management') is one row summed across all of them, so most rows have letter null. Letters are set only where the printed name carries an abbreviation from the table's note (2) that names one institution (SP=S, SAB=L, SEUSL=J, UVPA=Z, SVIAS=Y, UJA=E, KLN=D). Unmapped on purpose: '(TV)' = Trincomalee Campus AND University of Vavuniya (two institutions, W and R); '(SJP)' in 'Music (SJP)' is not defined in the note (very likely University of Sri Jayewardenepura = C, not asserted); '(Ramanathan)' is not defined in the note (Ramanathan Academy of Fine Arts, University of Jaffna, not asserted); '(TM)' Textile & Clothing Technology and '(EM)' Earth Resources Engineering name programmes, not institutions.",
     "Table 2.3: the programme 'Computing & Information Systems' (PDF page 10) is printed with no numbers at all; it is left out of rows.",
     "Table 2.3 keeps printed spelling, including typos: 'Data Sciene', 'Management & Information Technoogy-KLN', 'Management & Information Technoogy-KLN-Bio', 'Drama & Theatre ( UVPA)(2)'. Names printed over two lines are joined with one space.",
-    "District keys use ZedPath's spelling (as in data/ugc/2025-2026/cutoffs_2025_2026.csv). The printed headers differ ('Kilinochi', 'Kurunegla', 'Vauniya', 'Rathnapura'); see districtColumnsAsPrinted per table.",
+    "District keys use FindMyWay's spelling (as in data/ugc/2025-2026/cutoffs_2025_2026.csv). The printed headers differ ('Kilinochi', 'Kurunegla', 'Vauniya', 'Rathnapura'); see districtColumnsAsPrinted per table.",
     "Special & Additional Intakes (note 1 of Tables 2.3/2.4): students admitted under special categories (blind and differently abled, excelled in fields other than studies, armed forces, foreign, teachers, etc.) on the recommendation of the Appeals Committee, plus the additional intake for special subjects such as Japanese, English, History.",
     "Table 2.4 note (3): admission to Arts is purely on merit, but policy ensures the number admitted from a district is not less than the number admitted from that district in 1993/94 or 2002/2003, whichever is greater; this adjustment is shown under 'Other'.",
     "Not extracted (not useful for choosing a course): Table 02 - 05 (admissions by programme, institution and ETHNICITY, PDF pages 20-22) and Charts 01-06 (graphics only).",

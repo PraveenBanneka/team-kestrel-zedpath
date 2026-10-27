@@ -96,7 +96,7 @@ export interface RouteSummary {
   free: boolean;
   /** What the cost covers: the whole programme (TOTAL), a semester, a year, one subject, or what it costs to register, as the source publishes it. */
   costBasis: CostBasis;
-  /** Official entry wording; null when no page ZedPath could check publishes it (the screen says so, never a guess). */
+  /** Official entry wording; null when no page FindMyWay could check publishes it (the screen says so, never a guess). */
   requirements: string | null; officialUrl: string | null;
   /** The degree programmes the route covers, exactly as the source lists them (e.g. the Ministry's Section 25A register). */
   programmes: string[];

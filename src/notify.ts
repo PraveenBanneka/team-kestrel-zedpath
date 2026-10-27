@@ -1,6 +1,6 @@
 // Notifications: the test notification and Journey reminders (CR-002, FR-405).
 // - Inside the native Android app (Capacitor), the app posts a real native notification through its
-//   LocalNotifications plugin: ZedPath's own name and icon, no website line.
+//   LocalNotifications plugin: FindMyWay's own name and icon, no website line.
 // - In a browser or the installed PWA, it is shown through the service worker.
 // Either way, exactly one: a fixed id/tag means a second tap replaces the notification instead of adding one.
 
@@ -9,7 +9,7 @@ import { t } from './i18n/index.ts';
 export type TestResult = { ok: true } | { ok: false; reason: string };
 const TEST_TAG = 'zedpath-test';
 const TEST_ID = 1;
-const TITLE = 'ZedPath';
+const TITLE = 'FindMyWay';
 const BODY = 'Test notification: deadline reminders will look like this.';
 const off = () => t('jr.notifOff');
 
@@ -60,7 +60,7 @@ export async function sendTestNotification(): Promise<TestResult> {
     if (display !== 'granted') ({ display } = await native.requestPermissions());
     if (display !== 'granted') return { ok: false, reason: off() };
     // isExactNotification: false - the plugin otherwise treats every notification as an exact alarm and opens Android's
-    // "Alarms and reminders" settings to ask for that access (Praveen hit this on 1.1.0). ZedPath never needs exact alarms.
+    // "Alarms and reminders" settings to ask for that access (Praveen hit this on 1.1.0). FindMyWay never needs exact alarms.
     await native.schedule({ notifications: [{ id: TEST_ID, title: TITLE, body: BODY, smallIcon: 'ic_stat_zedpath', iconColor: '#24478C',
       extra: { url: '/#/me' }, isExactNotification: false }] });
     return { ok: true };

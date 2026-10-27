@@ -1,7 +1,7 @@
 // CR-013 Career-first mode (Praveen 23 Oct: "Can we have an outcome driven mode? ... student can enter who he wants to
 // become and we show his paths with access"). A small curated map from a career to the UGC courses (by course code, the
 // handbook's own) and the other paths (by id, or by words in their programme titles) that commonly lead to it. The map is
-// ZedPath's guide, said so on screen; every course and path keeps its own official source, bands describe past cut-offs,
+// FindMyWay's guide, said so on screen; every course and path keeps its own official source, bands describe past cut-offs,
 // and a licence step is shown only when its official source was checked (SLMC, 23 Oct 2026). Pure, tested.
 import type { HiddenOffering, OfferingSummary, RouteSummary } from './api.ts';
 import type { Band } from './banding.ts';

@@ -1,4 +1,4 @@
-// ZedPath rule engine: the requirement grammar of ZP-DOC-05 (Section "Rule grammar") and its evaluator.
+// FindMyWay rule engine: the requirement grammar of ZP-DOC-05 (Section "Rule grammar") and its evaluator.
 // Pure TypeScript, no I/O, shared by the Worker (authoritative, FR-203) and the browser (instant feedback).
 
 export type Grade = 'A' | 'B' | 'C' | 'S';

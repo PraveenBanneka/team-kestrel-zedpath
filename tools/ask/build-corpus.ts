@@ -1,4 +1,4 @@
-// Builds the Ask ZedPath source corpus: passages an answer is allowed to use, each tagged with where it came from.
+// Builds the Ask FindMyWay source corpus: passages an answer is allowed to use, each tagged with where it came from.
 //   1. UGC handbook 2025/26 (local PDF, not redistributed in the repo): one or more passages per printed page.
 //   2. Every verified "other paths" record (data/routes/), with its official source (tools/ask/route-passages.ts).
 // Output: data/ask/corpus.json (gitignored: it contains handbook text). Ingested into Vectorize by

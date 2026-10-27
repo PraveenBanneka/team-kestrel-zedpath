@@ -1,6 +1,6 @@
 // Degree syllabi researched from official university sources (data/degrees/syllabi-2026-10-05.json, SYLLABI_REPORT.md).
 // Only FOUND entries are served. UNREADABLE/NOT_PUBLISHED entries are withheld, and so are their URLs: on 2026-10-05
-// one source host returned unsafe content on that date (see BLOCKED_HOSTS), so ZedPath must never link students there.
+// one source host returned unsafe content on that date (see BLOCKED_HOSTS), so FindMyWay must never link students there.
 import data from '../data/degrees/syllabi-2026-10-05.json';
 import type { Syllabus } from '../shared/api.ts';
 

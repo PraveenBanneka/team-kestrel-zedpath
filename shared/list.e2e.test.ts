@@ -181,7 +181,7 @@ describe('LST order warnings (BR-041, BR-042)', () => {
     expect(w.safeAbove).toEqual([]);
   });
 
-  it('LST-024 moving the Safe entry to the bottom clears the note (the student moves it; ZedPath never does, CR-011)', () => {
+  it('LST-024 moving the Safe entry to the bottom clears the note (the student moves it; FindMyWay never does, CR-011)', () => {
     const l = [e('S', 'SAFE'), e('R', 'REACH'), e('L', 'LIKELY')];
     expect(listWarnings(l).safeAbove).toHaveLength(1);
     expect(listWarnings(move(l, 0, 2)).safeAbove).toEqual([]);

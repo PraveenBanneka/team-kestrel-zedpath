@@ -3054,6 +3054,6 @@
     "Table 7.2: the header marks 'Mahapola (2)' but the text of note (2) is not printed anywhere in this chapter; only note (1) appears, and its marker sits next to the University of Sri Jayewardenepura 'Applied Science' row.",
     "Spellings kept exactly as printed: 'RECEIPIENTS', 'Physiotheraphy', 'Transalation', 'University of Vavuniya,Sri Lanka'.",
     "Monthly Mahapola scholarship and Bursary amounts are NOT printed in this chapter.",
-    "Not mapped to a ZedPath letter (absent from data/ugc/2025-2026/unicodes.csv): 'Institute for Agro Technology and Rural Sciences' (Table 7.1) and 'Institute of Technology University of Moratuwa' (Tables 7.1 and 7.2). Swamy Vipulananda Institute mapped to Y and University of Colombo School of Computing to T, per unicodes.csv."
+    "Not mapped to a FindMyWay letter (absent from data/ugc/2025-2026/unicodes.csv): 'Institute for Agro Technology and Rural Sciences' (Table 7.1) and 'Institute of Technology University of Moratuwa' (Tables 7.1 and 7.2). Swamy Vipulananda Institute mapped to Y and University of Colombo School of Computing to T, per unicodes.csv."
   ]
 }

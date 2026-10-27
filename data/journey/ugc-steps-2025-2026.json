@@ -16,7 +16,7 @@
       "id": "UGC_ORDER",
       "kind": "PREFERENCE_CHANGE_CLOSE",
       "title": "Change your Uni-Code order (once)",
-      "detail": "You may change, add or remove Uni-Codes online only once, then post the signed new order. Check your list's order in ZedPath before you do.",
+      "detail": "You may change, add or remove Uni-Codes online only once, then post the signed new order. Check your list's order in FindMyWay before you do.",
       "when": "Within 2 weeks of the application closing date",
       "page": 116,
       "quote": "Candidates are permitted to change their order of “Uni Codes” online within two (02) weeks of the closing date of applications"

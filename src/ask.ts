@@ -1,4 +1,4 @@
-// Client for Ask ZedPath. Sends the question and, if entered, the student's results (used for the answer, not stored).
+// Client for Ask FindMyWay. Sends the question and, if entered, the student's results (used for the answer, not stored).
 // The device id is a random UUID kept on this phone; the server only ever stores a daily-salted hash of it, to count
 // the daily allowance fairly when many students share one school network.
 import type { ProfileInput } from '../shared/api.ts';
@@ -18,7 +18,7 @@ function deviceId(): string {
 export async function askZedPath(question: string, profile: ProfileInput | null, extras: Extras | null = null): Promise<AskResponse> {
   let r: Response;
   try {
-    r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-ZedPath-Device': deviceId() },
+    r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-FindMyWay-Device': deviceId() },
       body: JSON.stringify({ question, profile, extras, lang: getLang() }) });   // the app language guides an unclear question
   } catch {
     throw new Error('No connection. Check your internet and try again.');

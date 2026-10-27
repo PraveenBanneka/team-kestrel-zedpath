@@ -1,4 +1,4 @@
-// ZedPath API Worker (Hono). Only /api/* reaches this Worker; all pages are free static assets (NFR-012).
+// FindMyWay API Worker (Hono). Only /api/* reaches this Worker; all pages are free static assets (NFR-012).
 // Student requests are answered from the bundled rulebook: no database reads, a few milliseconds of CPU (NFR-005).
 import { Hono } from 'hono';
 import type { Meta, OfferingDetail, ResultsResponse, OfferingSummary, HiddenOffering, ApiError, RouteSummary } from '../shared/api.ts';
@@ -136,7 +136,7 @@ app.get('/journey', c => {
 // Student accounts (CR-001): /api/auth/* and /api/me.
 app.route('/', accountRoutes);
 app.route('/', myJourneyRoutes);              // after accountRoutes: its '/me/*' middleware guards these (CR-006)
-// Ask ZedPath: /api/ask (cited answers) and the localhost-only /api/dev/embed tool.
+// Ask FindMyWay: /api/ask (cited answers) and the localhost-only /api/dev/embed tool.
 app.route('/', askRoutes);
 // Course groups (CR-002): /api/groups/* and /api/blocks; messages live in the GroupRoom Durable Objects.
 app.route('/', groupRoutes);

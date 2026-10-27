@@ -1,4 +1,4 @@
-// Ask ZedPath answer layout (CR-002, Praveen 2026-10-11: "format AI's answers ... currently it looks like a wall of
+// Ask FindMyWay answer layout (CR-002, Praveen 2026-10-11: "format AI's answers ... currently it looks like a wall of
 // text"). The model is asked for a one-line answer plus short cited bullets; this makes the phone show that layout even
 // when a reply arrives as one long paragraph. Pure and deterministic, so it is tested on fixed answers (no AI calls).
 

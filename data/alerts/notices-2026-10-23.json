@@ -1,6 +1,6 @@
 {
   "retrievedOn": "2026-10-23",
-  "note": "Alerts: official notices a student can act on, each tied to a route in data/routes (which holds the full verbatim requirements and the Gazette source). Eligibility fields restate the quoted rule so the phone can check it; the quote is verbatim from the route's requirements text (checked by tools/rulebook/check-journey.ts). O/L rules are shown, never checked: ZedPath does not hold O/L results.",
+  "note": "Alerts: official notices a student can act on, each tied to a route in data/routes (which holds the full verbatim requirements and the Gazette source). Eligibility fields restate the quoted rule so the phone can check it; the quote is verbatim from the route's requirements text (checked by tools/rulebook/check-journey.ts). O/L rules are shown, never checked: FindMyWay does not hold O/L results.",
   "notices": [
     {
       "routeId": "R043",

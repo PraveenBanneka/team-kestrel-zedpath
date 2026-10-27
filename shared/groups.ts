@@ -81,7 +81,7 @@ export function cleanMessage(raw: unknown): { ok: true; body: string } | { ok: f
   const body = raw.replace(/\r\n?/g, '\n').replace(/[^\S\n]+/g, ' ').replace(/ ?\n ?/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
   if (!body) return { ok: false, error: 'Write a message first' };
   if (body.length > MESSAGE_MAX) return { ok: false, error: `Keep it under ${MESSAGE_MAX} characters` };
-  if (/[\u0000-\u0008\u000B-\u001F\u007F]/.test(body)) return { ok: false, error: 'That message has characters ZedPath cannot show' };
+  if (/[\u0000-\u0008\u000B-\u001F\u007F]/.test(body)) return { ok: false, error: 'That message has characters FindMyWay cannot show' };
   if (looksLikeContact(body)) return { ok: false, error: 'For your safety, phone numbers and email addresses cannot be shared in groups' };
   return { ok: true, body };
 }

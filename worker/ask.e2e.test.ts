@@ -1,4 +1,4 @@
-// Ask ZedPath end-to-end checks (ASK-001..): verdict line, leaked-reasoning filter, answer layout, citations and links,
+// Ask FindMyWay end-to-end checks (ASK-001..): verdict line, leaked-reasoning filter, answer layout, citations and links,
 // question validation, model fallback order, daily allowance, and suggested questions for three more profiles.
 // No network at all: Workers AI, Vectorize and the model gateway are stand-ins, and global fetch throws if anything
 // tries to reach out. Adds only NEW cases; worker/ask.test.ts keeps its own.
@@ -182,8 +182,8 @@ describe('citations and source links', () => {
       expect(finish('A [1].', [old]).citations[0].url).toBeNull();
     }
   });
-  it('ASK-029 provider names in the answer are replaced by Ask ZedPath', () => {
-    expect(finish('I am GEMINI, developed by Google. Yes [1].', ps).answer).toBe('I am Ask ZedPath, part of ZedPath. Yes [1].');
+  it('ASK-029 provider names in the answer are replaced by Ask FindMyWay', () => {
+    expect(finish('I am GEMINI, developed by Google. Yes [1].', ps).answer).toBe('I am Ask FindMyWay, part of FindMyWay. Yes [1].');
   });
 });
 
@@ -273,7 +273,7 @@ describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network
   });
   it('ASK-048 with an Anthropic key, Haiku 5.5 answers first through the gateway and Gemini is not called', async () => {
     const b = await (await ask({ question: 'What is the student loan?' })).json() as AskResponse;
-    expect(b.answer).toBe('Ask ZedPath answer [1].');                     // "Claude" is never shown to students
+    expect(b.answer).toBe('Ask FindMyWay answer [1].');                     // "Claude" is never shown to students
     expect(sent.map(s => s.provider)).toEqual(['anthropic']);
     expect(sent[0]).toMatchObject({ endpoint: 'v1/messages', query: { model: CLAUDE_MODEL } });
     expect(sent[0].query).not.toHaveProperty('temperature');
@@ -316,15 +316,15 @@ describe('Claude Haiku 5.5 first, Gemini as fallback (mocked gateway, no network
   });
   it('ASK-051 finish() hides Claude/Anthropic like Gemini/Google', () => {
     const p = [{ id: 'a', ...P50 }];
-    expect(finish('I am Claude, made by Anthropic. Yes [1].', p).answer).toBe('I am Ask ZedPath, part of ZedPath. Yes [1].');
+    expect(finish('I am Claude, made by Anthropic. Yes [1].', p).answer).toBe('I am Ask FindMyWay, part of FindMyWay. Yes [1].');
   });
 });
 
 describe('daily allowance (test D1)', () => {
   const DEV = '11111111-2222-4333-8444-555555555555';
   it('ASK-040 each question adds one DEVICE row and one IP row, stored only as hashes', async () => {
-    await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': DEV, 'CF-Connecting-IP': '203.0.113.9' });
-    await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': DEV, 'CF-Connecting-IP': '203.0.113.9' });
+    await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': DEV, 'CF-Connecting-IP': '203.0.113.9' });
+    await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': DEV, 'CF-Connecting-IP': '203.0.113.9' });
     const rows = raw.prepare('SELECT scope, client, used FROM ask_quota ORDER BY scope').all() as { scope: string; client: string; used: number }[];
     expect(rows.map(r => [r.scope, r.used])).toEqual([['DEVICE', 2], ['IP', 2]]);
     expect(JSON.stringify(rows)).not.toMatch(/203\.0\.113|11111111/);
@@ -333,19 +333,19 @@ describe('daily allowance (test D1)', () => {
     const day = new Date().toISOString().slice(0, 10);
     raw.prepare('INSERT INTO ask_quota (day, scope, client, used) VALUES (?, ?, ?, ?)')
       .run(day, 'IP', await sha(`test-pepper|${day}|IP|198.51.100.7`), IP_PER_DAY);
-    expect((await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': DEV, 'CF-Connecting-IP': '198.51.100.7' })).status).toBe(429);
-    expect((await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': DEV, 'CF-Connecting-IP': '198.51.100.8' })).status).toBe(200);
+    expect((await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': DEV, 'CF-Connecting-IP': '198.51.100.7' })).status).toBe(429);
+    expect((await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': DEV, 'CF-Connecting-IP': '198.51.100.8' })).status).toBe(200);
   });
   it(`ASK-042 a malformed device id falls back to the IP, so it cannot dodge the ${DEVICE_PER_DAY}/day device limit`, async () => {
     const day = new Date().toISOString().slice(0, 10);
     raw.prepare('INSERT INTO ask_quota (day, scope, client, used) VALUES (?, ?, ?, ?)')
       .run(day, 'DEVICE', await sha(`test-pepper|${day}|DEVICE|ip:198.51.100.20`), DEVICE_PER_DAY);
-    expect((await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': 'not-a-uuid', 'CF-Connecting-IP': '198.51.100.20' })).status).toBe(429);
+    expect((await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': 'not-a-uuid', 'CF-Connecting-IP': '198.51.100.20' })).status).toBe(429);
     expect(endpoints).toHaveLength(0);                                      // refused before any model call
   });
   it('ASK-043 the first question of the day tidies rows older than two days', async () => {
     raw.prepare('INSERT INTO ask_quota (day, scope, client, used) VALUES (?, ?, ?, ?)').run('2000-01-01', 'IP', 'a'.repeat(64), 5);
-    await ask({ question: 'Medicine?' }, { 'X-ZedPath-Device': DEV });
+    await ask({ question: 'Medicine?' }, { 'X-FindMyWay-Device': DEV });
     expect(raw.prepare("SELECT COUNT(*) AS n FROM ask_quota WHERE day = '2000-01-01'").get()).toEqual({ n: 0 });
   });
 });

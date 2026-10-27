@@ -1,6 +1,6 @@
 // Alerts (CR-002): official notices with a closing date: Gazette job exams and other intakes. Each shows whether the
 // student meets the A/L and age rules, checked on this phone (results and date of birth never leave it). O/L rules are
-// shown for the student to check: ZedPath does not hold O/L results. "Add to my Journey" makes it a dated step.
+// shown for the student to check: FindMyWay does not hold O/L results. "Add to my Journey" makes it a dated step.
 // Notice titles, rules and sources stay in English, as published (the screen says so in Sinhala and Tamil).
 import { useEffect } from 'react';
 import { motion } from 'motion/react';

@@ -149,7 +149,7 @@ describe('toIcs', () => {
   const item: DatedItem = { id: 'notice:R043', title: 'Exam; part 1, \\ draft', detail: 'Closing date\nline 2', due: '2026-12-31', source: 'Gazette p.4' };
   it('JRN-020 valid VCALENDAR envelope with CRLF line endings and no bare LF', () => {
     const ics = toIcs([item], now);
-    expect(ics.startsWith('BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Team Kestrel//ZedPath//EN\r\n')).toBe(true);
+    expect(ics.startsWith('BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Team Kestrel//FindMyWay//EN\r\n')).toBe(true);
     expect(ics.endsWith('END:VCALENDAR\r\n')).toBe(true);
     expect(ics.replace(/\r\n/g, '')).not.toMatch(/[\r\n]/);
     const lines = ics.split('\r\n').slice(0, -1);
@@ -179,7 +179,7 @@ describe('toIcs', () => {
     expect(trig({ ...DEFAULT_PREFS, week: false, day: false })).toEqual([]);
   });
   it('JRN-024 empty list = a valid empty calendar; several items = one VEVENT each', () => {
-    expect(toIcs([], now)).toBe('BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Team Kestrel//ZedPath//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n');
+    expect(toIcs([], now)).toBe('BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Team Kestrel//FindMyWay//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n');
     const ics = toIcs([item, { ...item, id: 'x2', due: '2027-01-15' }], now);
     expect(ics.split('\r\n').filter(l => l === 'BEGIN:VEVENT').length).toBe(2);
   });

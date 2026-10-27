@@ -1,4 +1,4 @@
-// Ask ZedPath (POST /api/ask) with stand-ins for Workers AI, Vectorize and the language model (no network).
+// Ask FindMyWay (POST /api/ask) with stand-ins for Workers AI, Vectorize and the language model (no network).
 // Covers: safe default, validation, citations, the "not found" path, engine facts from the real rule engine,
 // what the model is sent, the assistant's name, the daily allowance, upstream errors and privacy of the quota table.
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -39,7 +39,7 @@ beforeEach(() => {
 const ask = (body: unknown, headers: Record<string, string> = {}) => app.request('/api/ask', { method: 'POST',
   headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(body) }, env);
 
-describe('Ask ZedPath', () => {
+describe('Ask FindMyWay', () => {
   it('is switched off (503) until every piece exists, and nothing else breaks', async () => {
     env = { ...env, GEMINI_API_KEY: undefined } as Env;
     expect((await ask({ question: 'What is needed for Medicine?' })).status).toBe(503);
@@ -98,7 +98,7 @@ describe('Ask ZedPath', () => {
     expect(sentToModel).toHaveLength(1);
   });
 
-  it('adds facts from ZedPath\'s own rule engine for the student\'s results', async () => {
+  it('adds facts from FindMyWay\'s own rule engine for the student\'s results', async () => {
     // Same verdicts as the results screen for this student: Computer Science (012) eligible; Physical Science (013)
     // not, because ICT is not an allowed third subject for 013 (handbook p.70); Medicine (001) not.
     const b = await (await ask({ question: 'Can I do Computer Science?', profile: STUDENT })).json() as AskResponse;
@@ -106,7 +106,7 @@ describe('Ask ZedPath', () => {
     expect(cs).toMatch(/Computer science \(course 012\): the student's subjects meet the A\/L entry rules/);
     expect(cs).toMatch(/(Safe|Likely|Reach)/);
     expect(b.engineFacts.find(f => f.includes('course 013'))).toMatch(/do NOT meet the entry rules \(UGC handbook p\.70\)/);
-    expect(sentToModel[0].body.contents[0].parts[0].text).toContain('ZedPath engine facts');
+    expect(sentToModel[0].body.contents[0].parts[0].text).toContain('FindMyWay engine facts');
     const med = await (await ask({ question: 'Can I do Medicine?', profile: STUDENT })).json() as AskResponse;
     expect(med.engineFacts.find(f => f.includes('course 001'))).toMatch(/do NOT meet the entry rules/);
   });
@@ -141,7 +141,7 @@ describe('Ask ZedPath', () => {
     expect(safeUrl(null)).toBeNull();
   });
 
-  it('turns achievements into facts, with ZedPath (not the model) deciding the special intake', () => {
+  it('turns achievements into facts, with FindMyWay (not the model) deciding the special intake', () => {
     const national = { achievements: [{ id: '', activity: 'Cricket', kind: 'SPORT' as const, level: 'NATIONAL' as const, place: 'FIRST' as const, year: 2024 }], interests: [] };
     expect(extrasFacts(national).join(' ')).toMatch(/MAY qualify for the special intake .*p\.166-167.*Sports Science/);
     const school = { achievements: [{ ...national.achievements[0], level: 'SCHOOL' as const }], interests: ['Maths'] };
@@ -163,7 +163,7 @@ describe('Ask ZedPath', () => {
   });
 
   it('allows 30 questions a day per device, while other devices on the same network carry on', async () => {
-    const dev = (n: number) => ({ 'X-ZedPath-Device': `00000000-0000-4000-8000-${String(n).padStart(12, '0')}` });
+    const dev = (n: number) => ({ 'X-FindMyWay-Device': `00000000-0000-4000-8000-${String(n).padStart(12, '0')}` });
     for (let i = 0; i < DEVICE_PER_DAY; i++) expect((await ask({ question: 'Medicine?' }, dev(1))).status).toBe(200);
     expect((await ask({ question: 'Medicine?' }, dev(1))).status).toBe(429);
     expect((await ask({ question: 'Medicine?' }, dev(2))).status).toBe(200);

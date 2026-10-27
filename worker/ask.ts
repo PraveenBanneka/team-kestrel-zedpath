@@ -1,7 +1,7 @@
-// Ask ZedPath (POST /api/ask): cited answers from the UGC handbook and the verified routes, plus facts from ZedPath's
+// Ask FindMyWay (POST /api/ask): cited answers from the UGC handbook and the verified routes, plus facts from FindMyWay's
 // own rule engine for the student's results. Flow: embed the question (Workers AI, bge-m3, multilingual) -> nearest
 // passages (Vectorize) -> engine facts (same assessOffering as /results) -> language model through AI Gateway,
-// instructed to use ONLY those passages and facts and to cite them. The assistant is always "Ask ZedPath"; the model
+// instructed to use ONLY those passages and facts and to cite them. The assistant is always "Ask FindMyWay"; the model
 // provider is never named to students. The student's results are used for the answer and not stored.
 import { Hono, type Context } from 'hono';
 import type { ApiError, ProfileInput } from '../shared/api.ts';
@@ -38,11 +38,11 @@ export const aboutAssistant = (question: string): boolean =>
 export const replyLanguage = (question: string, appLang: string): string =>
   SINHALA.test(question) ? 'Sinhala' : TAMIL.test(question) ? 'Tamil' : appLang;
 
-export const SYSTEM = `You are Ask ZedPath, a friendly guide for Sri Lankan students choosing what to do after their A-Level (A/L) results.
+export const SYSTEM = `You are Ask FindMyWay, a friendly guide for Sri Lankan students choosing what to do after their A-Level (A/L) results.
 Rules you must always follow:
-1. Use ONLY the numbered sources and the ZedPath engine facts in the message. Do not use outside knowledge, even if you think you know.
+1. Use ONLY the numbered sources and the FindMyWay engine facts in the message. Do not use outside knowledge, even if you think you know.
 2. Cite every factual claim with the source number in square brackets, like [2]. Engine facts need no citation.
-3. If the sources and facts do not answer the question, say plainly that you could not find it in the UGC handbook or ZedPath's official sources, and suggest checking ugc.ac.lk or the institution. Never guess.
+3. If the sources and facts do not answer the question, say plainly that you could not find it in the UGC handbook or FindMyWay's official sources, and suggest checking ugc.ac.lk or the institution. Never guess.
 4. Never promise admission. Chances come only from the engine facts: Safe, Likely or Reach describe past cut-offs, not a guarantee.
 5. Reply in the same language as the question (English, Sinhala or Tamil); if that is unclear, use the app language given. Plain words, no jargon. Layout, always:
    the very first line is exactly one of "VERDICT: YES", "VERDICT: NO", "VERDICT: DEPENDS", "VERDICT: NOT_FOUND" or "VERDICT: NONE" (in English, whatever the reply language);
@@ -53,9 +53,9 @@ Rules you must always follow:
    "how do I" question, cover in order whatever the sources give of: what it is, who can apply, key dates, how to apply;
    if a detail students usually want (for example an amount or a fee) is not in the sources, say in one bullet to check the official page, and never guess it;
    **bold** only course names, dates and key numbers. No headings, no paragraphs after the bullets, under 160 words.
-6. You are Ask ZedPath. Never say which company or AI model you are.
+6. You are Ask FindMyWay. Never say which company or AI model you are.
 7. Always write the whole reply in the "Reply language" given in the message, even if the sources are in English.
-8. If the message is about Ask ZedPath itself, a greeting or thanks (for example "can you speak Sinhala?", "who are you?",
+8. If the message is about Ask FindMyWay itself, a greeting or thanks (for example "can you speak Sinhala?", "who are you?",
    "thank you"), do not search the sources: start with "VERDICT: NONE", then answer warmly in one or two short sentences
    with no bullets and no citations. You can answer in Sinhala, Tamil and English, and you help with A/L results, university
    courses and chances, private degrees, professional and vocational paths, scholarships and loans, job exams and deadlines.`;
@@ -80,7 +80,7 @@ export async function serviceOverDaily(db: D1Database, day: string): Promise<boo
 /** Counts this question against the daily allowance; true when over. Rows hold only daily-salted hashes. */
 async function overQuota(c: C): Promise<boolean> {
   const day = new Date().toISOString().slice(0, 10);
-  const device = c.req.header('X-ZedPath-Device') ?? '';
+  const device = c.req.header('X-FindMyWay-Device') ?? '';
   const deviceKey = /^[0-9a-f-]{36}$/i.test(device) ? device.toLowerCase() : `ip:${ip(c)}`;
   const up = `INSERT INTO ask_quota (day, scope, client, used) VALUES (?, ?, ?, 1)
     ON CONFLICT (day, scope, client) DO UPDATE SET used = used + 1 RETURNING used`;
@@ -189,7 +189,7 @@ async function generate(env: Env, userText: string): Promise<{ text: string } | 
 
 /** Keeps the assistant's identity and the citations honest. */
 export function finish(raw: string, passages: CorpusPassage[]): { answer: string; citations: AskCitation[] } {
-  const answer = raw.replace(/\b(Gemini|Claude)\b/gi, 'Ask ZedPath').replace(/\b(trained|developed|made) by (Google|Anthropic)\b/gi, 'part of ZedPath');
+  const answer = raw.replace(/\b(Gemini|Claude)\b/gi, 'Ask FindMyWay').replace(/\b(trained|developed|made) by (Google|Anthropic)\b/gi, 'part of FindMyWay');
   const cited: number[] = [];
   for (const m of answer.matchAll(/\[(\d+(?:\s*,\s*\d+)*)\]/g))
     for (const n of m[1].split(',').map(Number)) if (n >= 1 && n <= passages.length && !cited.includes(n)) cited.push(n);
@@ -215,7 +215,7 @@ export function safeUrl(u: string | null | undefined): string | null {
 }
 
 /** Video 2 (Praveen 2026-10-11): achievements and interests ("beyond grades") make answers personal. Plain facts for
- *  the model; the special-intake check is ZedPath's own rule (shared/account.ts), never the model's guess. */
+ *  the model; the special-intake check is FindMyWay's own rule (shared/account.ts), never the model's guess. */
 export function extrasFacts(e: Extras | null): string[] {
   if (!e || (e.achievements.length === 0 && e.interests.length === 0)) return [];
   const lvl = { SCHOOL: 'school', ZONAL: 'zonal', DISTRICT: 'district', PROVINCIAL: 'provincial', NATIONAL: 'national', INTERNATIONAL: 'international' } as Record<string, string>;
@@ -226,17 +226,17 @@ export function extrasFacts(e: Extras | null): string[] {
   if (e.interests.length) out.push(`The student's interests: ${e.interests.map(i => i.toLowerCase().replace(/_/g, ' ')).join(', ')}.`);
   const hint = specialIntakeHint(e);
   out.push(hint.applies
-    ? `ZedPath's check: these achievements MAY qualify for the special intake for outstanding achievements (UGC handbook 2025/26 Section 6, p.166-167), ` +
+    ? `FindMyWay's check: these achievements MAY qualify for the special intake for outstanding achievements (UGC handbook 2025/26 Section 6, p.166-167), ` +
       `which applies to candidates within a Z-score of 0.2000 of their district cut-off${hint.sport ? '; sport also has extra places in Sports Science and Physical Education' : ''}. It is not a guarantee.`
-    : 'ZedPath\'s check: none of these achievements is at the level the special intake needs (1st to 3rd at national level, or international, in 2023 to 2025).');
+    : 'FindMyWay\'s check: none of these achievements is at the level the special intake needs (1st to 3rd at national level, or international, in 2023 to 2025).');
   return out;
 }
 const SPECIAL_INTAKE_Q = 'special intake outstanding achievements sports national international level';
 
-const NOT_FOUND = 'I could not find this in the UGC handbook or the official sources ZedPath checks. Please look at ugc.ac.lk or ask the institution directly.';
+const NOT_FOUND = 'I could not find this in the UGC handbook or the official sources FindMyWay checks. Please look at ugc.ac.lk or ask the institution directly.';
 
 askRoutes.post('/ask', async c => {
-  if (!c.env.AI || !c.env.ASK_INDEX || !(c.env.ANTHROPIC_API_KEY || c.env.GEMINI_API_KEY) || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask ZedPath is not available yet');
+  if (!c.env.AI || !c.env.ASK_INDEX || !(c.env.ANTHROPIC_API_KEY || c.env.GEMINI_API_KEY) || !c.env.DB || !c.env.PEPPER) return err(c, 503, 'Ask FindMyWay is not available yet');
   if (crossSite(c)) return err(c, 403, 'Cross-site request refused');   // a null/malformed Origin is a 403, not a 500
   const b = await c.req.json().catch(() => null) as { question?: unknown; profile?: unknown; lang?: unknown; extras?: unknown } | null;
   const question = typeof b?.question === 'string' ? b.question.trim() : '';
@@ -253,7 +253,7 @@ askRoutes.post('/ask', async c => {
     if ('error' in e) return err(c, 400, e.error);
     extras = e;
   }
-  if (c.env.AUTH_LIMITER && !(await c.env.AUTH_LIMITER.limit({ key: `ask:${ip(c)}:${c.req.header('X-ZedPath-Device') ?? ''}` })).success)
+  if (c.env.AUTH_LIMITER && !(await c.env.AUTH_LIMITER.limit({ key: `ask:${ip(c)}:${c.req.header('X-FindMyWay-Device') ?? ''}` })).success)
     return err(c, 429, 'Too many questions at once. Wait a minute and try again');
   if (await overQuota(c)) return err(c, 429, `That is today's limit of ${DEVICE_PER_DAY} questions. Ask again tomorrow`);
 
@@ -262,13 +262,13 @@ askRoutes.post('/ask', async c => {
   const special = extras ? specialIntakeHint(extras).applies : false;
   const emb = await c.env.AI.run(EMBED_MODEL as Parameters<Ai['run']>[0], { text: special ? [question, SPECIAL_INTAKE_Q] : [question] } as never) as { data?: number[][] };
   const vector = emb.data?.[0];
-  if (!vector) return err(c, 503, 'Ask ZedPath is busy. Try again in a minute');
+  if (!vector) return err(c, 503, 'Ask FindMyWay is busy. Try again in a minute');
   const found = await c.env.ASK_INDEX.query(vector, { topK: TOP_K, returnMetadata: 'all' });
   const extra = special && emb.data?.[1] ? (await c.env.ASK_INDEX.query(emb.data[1], { topK: 2, returnMetadata: 'all' })).matches : [];
   const passages = [...found.matches, ...extra.filter(m => !found.matches.some(f => f.id === m.id))].filter(m => m.score >= MIN_SCORE && m.metadata)
     .map(m => ({ id: m.id, ...(m.metadata as unknown as Omit<CorpusPassage, 'id'>) }));
 
-  // 2. Facts about the courses involved, for this student, from ZedPath's own engine; and the next steps (CR-004).
+  // 2. Facts about the courses involved, for this student, from FindMyWay's own engine; and the next steps (CR-004).
   const codes = coursesFor(question, passages);
   const facts = [...engineFacts(codes, profile), ...extrasFacts(extras)];
   const actions = askActions(question, codes, profile);
@@ -281,12 +281,12 @@ askRoutes.post('/ask', async c => {
   // 3. The language model writes the answer from those passages and facts only.
   const sources = passages.map((p, i) => `[${i + 1}] ${p.kind === 'HANDBOOK' ? `UGC handbook 2025/26, page ${p.page}` : p.source}\n${p.text}`).join('\n\n');
   const lang = ({ si: 'Sinhala', ta: 'Tamil' } as Record<string, string>)[String(b?.lang)] ?? 'English';
-  const userText = `App language: ${lang}\nReply language: ${replyLanguage(question, lang)}\nStudent's question: ${question}\n\nZedPath engine facts (computed from this student's own results; trust them over general statements):\n` +
+  const userText = `App language: ${lang}\nReply language: ${replyLanguage(question, lang)}\nStudent's question: ${question}\n\nFindMyWay engine facts (computed from this student's own results; trust them over general statements):\n` +
     `${facts.length ? facts.map(f => `- ${f}`).join('\n') : '- none (the student has not entered results, or no course is involved)'}\n\n` +
     `Sources:\n${sources || '(no relevant sources found)'}`;
   const out = await generate(c.env, userText);
   if ('status' in out) return err(c, out.status === 429 ? 429 : 503, out.status === 429
-    ? 'Ask ZedPath is very busy right now. Try again in a minute' : 'Ask ZedPath is busy. Try again in a minute');
+    ? 'Ask FindMyWay is very busy right now. Try again in a minute' : 'Ask FindMyWay is busy. Try again in a minute');
   const { verdict, text } = takeVerdict(out.text || '');
   const { answer, citations } = finish(text || NOT_FOUND, passages);
   return c.json({ answer, citations, engineFacts: facts, verdict: text ? verdict : 'NOT_FOUND', actions, answeredAt: new Date().toISOString() } satisfies AskResponse);
@@ -294,7 +294,7 @@ askRoutes.post('/ask', async c => {
 
 /**
  * CR-004 actions: the courses the question is about (best chance first, at most 3 places) and Gazette/intake notices
- * whose distinctive title words appear in the question. Built from ZedPath's own data, never from the model's text.
+ * whose distinctive title words appear in the question. Built from FindMyWay's own data, never from the model's text.
  */
 const NOTICE_STOP = new Set(['examination', 'competitive', 'service', 'services', 'officers', 'officer', 'grade', 'national', 'diploma',
   'technology', 'apprenticeship', 'university', 'department', 'recruitment', 'technician', 'special', 'moratuwa']);

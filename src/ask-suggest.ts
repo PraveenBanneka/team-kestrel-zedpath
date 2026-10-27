@@ -1,4 +1,4 @@
-// Suggested questions on Ask ZedPath (Praveen 2026-10-11): built from the student's own details, so each chip shows
+// Suggested questions on Ask FindMyWay (Praveen 2026-10-11): built from the student's own details, so each chip shows
 // what Ask can do with them: their chances, their best achievement against the course they are reaching for, their
 // interests, then questions every student has. Asked in the interface language (Ask answers in that language).
 import type { Extras } from '../shared/account.ts';

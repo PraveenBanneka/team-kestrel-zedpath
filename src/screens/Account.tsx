@@ -185,7 +185,7 @@ export function RecoveryCodeScreen({ username, code, onDone }: { username: strin
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    try { await navigator.clipboard.writeText(`ZedPath recovery code for ${username}: ${code}`); setCopied(true); } catch { /* clipboard blocked */ }
+    try { await navigator.clipboard.writeText(`FindMyWay recovery code for ${username}: ${code}`); setCopied(true); } catch { /* clipboard blocked */ }
   };
   return (
     <div className="stack" style={{ gap: 14 }}>

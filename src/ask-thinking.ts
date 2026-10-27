@@ -1,4 +1,4 @@
-// What Ask ZedPath shows while it works (Praveen 2026-10-24: "always shows reading handbook... make the waiting more
+// What Ask FindMyWay shows while it works (Praveen 2026-10-24: "always shows reading handbook... make the waiting more
 // dynamic and engaging"). The steps are the real pipeline in its real order (worker/ask.ts): understand the question
 // (embedding), search the handbook and official pages (Vectorize), check the student's results (rule engine, only when
 // results were sent), write the cited answer (the model). The timer only paces them; it never claims a step is done

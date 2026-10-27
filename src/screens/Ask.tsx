@@ -1,9 +1,9 @@
-// Ask ZedPath screen: a short conversation with cited answers. CR-004 (Praveen 2026-10-11, "AI replies are not
+// Ask FindMyWay screen: a short conversation with cited answers. CR-004 (Praveen 2026-10-11, "AI replies are not
 // formatted well"): every answer is a card with
 //   1. a verdict chip (Yes / No / It depends / Not in official sources) when the model gave one;
 //   2. the lead line and short bullets, long answers folded behind "Show more";
 //   3. the student's own chances as band pills ("checked against your results");
-//   4. next-step actions built by ZedPath from its own matches (open, add to list, compare, add to Journey);
+//   4. next-step actions built by FindMyWay from its own matches (open, add to list, compare, add to Journey);
 //   5. source chips (page numbers) that open the exact quote;
 //   6. two follow-up questions; and "Helpful" / "Report a wrong answer".
 // Questions are sent with the app language, so an unclear question is answered in the language of the interface.
@@ -29,7 +29,7 @@ export interface AskContext {
 
 const SHOW = 4;                                   // bullets shown before "Show more"
 const VERDICT_TONE: Record<Verdict, string> = { YES: 'band-SAFE', NO: 'band-OUT_OF_RANGE', DEPENDS: 'band-LIKELY', NOT_FOUND: 'band-NOT_ENOUGH_DATA' };
-// Suggestions are asked in the interface language: Ask ZedPath answers in the language of the question.
+// Suggestions are asked in the interface language: Ask FindMyWay answers in the language of the question.
 const general = () => [t('ask.q.ugc'), t('ask.q.loan'), t('ask.q.jobs'), t('ask.q.z')];
 
 /** **bold** and [n] citation markers inside one line of the answer. */

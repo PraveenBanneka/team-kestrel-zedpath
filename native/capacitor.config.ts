@@ -9,7 +9,7 @@ if (!appUrl || !/^https:\/\/[^/\s]+\/?$/.test(appUrl)) throw new Error('Set ZEDP
 
 const config: CapacitorConfig = {
   appId: 'com.teamkestrel.zedpath',
-  appName: 'ZedPath',
+  appName: 'FindMyWay',
   webDir: 'www',                                   // only the offline page and a fallback start page live in the APK
   server: {
     url: `${appUrl.replace(/\/$/, '')}/?source=android-app`,

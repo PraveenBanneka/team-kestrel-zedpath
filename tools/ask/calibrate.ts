@@ -1,4 +1,4 @@
-// Retrieval check for Ask ZedPath: for questions whose answer page is known (verified in the handbook by hand),
+// Retrieval check for Ask FindMyWay: for questions whose answer page is known (verified in the handbook by hand),
 // shows the rank and score of the right page, plus the best score for off-topic questions. Used to set MIN_SCORE
 // on evidence. Needs the dev server with DEV_TOOLS=1. Run:  node tools/ask/calibrate.ts
 const DEV = process.env.ZEDPATH_DEV_URL ?? 'http://localhost:5173';

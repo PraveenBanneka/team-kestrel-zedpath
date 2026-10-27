@@ -1,6 +1,6 @@
 // Apply to the UGC, step by step (CR-012): the student's own checklist, their details ready to copy into each screen of
 // the UGC online application, and the print-and-post steps, each with its page in the UGC handbook 2025/26 (Section 5).
-// ZedPath never logs in to the UGC: the student copies what ZedPath knows; for the rest a guide says what to write and
+// FindMyWay never logs in to the UGC: the student copies what FindMyWay knows; for the rest a guide says what to write and
 // the common mistake (no typing the form twice). Only two answers and the ticks are kept, on this phone (storage.ts).
 import { useEffect, useState, type ReactNode } from 'react';
 import { CheckCircle2, Circle, Copy, Info, ShieldCheck } from 'lucide-react';

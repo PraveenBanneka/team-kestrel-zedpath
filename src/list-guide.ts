@@ -1,5 +1,5 @@
 // "What you need to know" under My list (CR-011, 23 October 2026): the UGC's own rules for the preference list, each with
-// its place in the UGC handbook 2025/26. Praveen found that ZedPath's old advice (put Very likely courses last, "Fix the
+// its place in the UGC handbook 2025/26. Praveen found that FindMyWay's old advice (put Very likely courses last, "Fix the
 // order") contradicted the handbook, which says the order must follow the student's own preference (p.112).
 import type { Key } from './i18n/en.ts';
 

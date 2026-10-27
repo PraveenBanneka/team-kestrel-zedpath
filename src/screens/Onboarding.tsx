@@ -27,7 +27,7 @@ export function Welcome({ onStart, onLogin, onDemo, setLang }: { onStart: () => 
     <div className="welcome aurora">
       <div className="logo-wrap">
         <motion.div {...rise(0)}><Logo size={84} /></motion.div>
-        <motion.h1 className="display" {...rise(0.08)}>ZedPath</motion.h1>
+        <motion.h1 className="display" {...rise(0.08)}>FindMyWay</motion.h1>
         <motion.p className="lead" {...rise(0.16)}>{t('welcome.lead')}</motion.p>
         <motion.p className="subtitle" {...rise(0.24)}>{t('welcome.body')}</motion.p>
       </div>

@@ -1,5 +1,5 @@
 // Characterisation test for POST /api/results: pins today's exact output for a fixed student, so refactoring the
-// eligibility code (shared with Ask ZedPath) cannot silently change anyone's results.
+// eligibility code (shared with Ask FindMyWay) cannot silently change anyone's results.
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import app from './index.ts';

@@ -3788,6 +3788,6 @@
   "Reconciliation, all exact: in Table 4.1 every institution's fields sum to its printed Total (F and T, both years) and every field column sums to the printed Total row; Tables 4.3 and 4.4 rows and columns sum to their printed totals; page-2 summary total 33,290 = 4.1 (23,790) + 4.3 Bachelor (3,028) + 4.4 (6,472). Per field, summary Science 4,129 = 4.1 Science 3,561 + 4.4 Science 116 + 4.3 Science/IT 452, and summary Computer Science 1,510 = 4.1 Computer Science/IT 1,194 + 4.4 Computer Sc./IT 316.",
   "Not extracted (this file covers undergraduate output): Table 04 - 02 postgraduate output by HEI (PDF pages 7-13), the postgraduate half of page 2, Chart - 12 (page 6) and Chart - 13 (page 14). Table 4.3 is included whole (all levels) because it is one small table; filter on level = 'Bachelor Degree' for undergraduates.",
   "Institution names are kept exactly as printed, including the report's spellings 'Insitute of Human Resource Advancement' and 'Swamy Vipulananda Institue of Aesthetic Studies'.",
-  "No ZedPath letter (not in data/ugc/2025-2026/unicodes.csv): Insitute of Human Resource Advancement; Institute for Agro Technology and Rural Sciences; The Open University. Their 'letter' is null."
+  "No FindMyWay letter (not in data/ugc/2025-2026/unicodes.csv): Insitute of Human Resource Advancement; Institute for Agro Technology and Rural Sciences; The Open University. Their 'letter' is null."
  ]
 }

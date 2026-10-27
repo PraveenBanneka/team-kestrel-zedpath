@@ -36,6 +36,6 @@ export function parseContact(x: unknown, consent: unknown, today: string): { ok:
   if (!realDate(birthDate)) return { ok: false, field: 'birthDate', error: 'Enter your date of birth' };
   const age = ageOn(birthDate, today);
   if (age < 13 || age > 70) return { ok: false, field: 'birthDate', error: 'Check your date of birth' };
-  if (consent !== CONSENT_VERSION) return { ok: false, field: 'consent', error: 'Please read and agree to how ZedPath uses your details' };
+  if (consent !== CONSENT_VERSION) return { ok: false, field: 'consent', error: 'Please read and agree to how FindMyWay uses your details' };
   return { ok: true, contact: { fullName, email, mobile, birthDate } };
 }

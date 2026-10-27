@@ -1,4 +1,4 @@
-// Ask ZedPath corpus: one passage per "other path" of the catalogue (data/routes/), with its official source. Pure and
+// Ask FindMyWay corpus: one passage per "other path" of the catalogue (data/routes/), with its official source. Pure and
 // tested (worker/scholarships.test.ts); tools/ask/build-corpus.ts calls it. CR-015: a scholarship or loan says what it
 // pays for and what it gives (its notes), and a path it pays for names it under "Ways to pay". Those lines appear only
 // when the catalogue has them, so the passages of the other paths stay exactly as they were.
@@ -21,7 +21,7 @@ export function routePassages(routes: CorpusRoute[]): CorpusPassage[] {
     const scholarship = r.route_group === 'SCHOLARSHIP_LOAN';
     const text = [`${r.name} (${r.route_group.replace(/_/g, ' ').toLowerCase()}), offered by ${r.provider}.`,
       r.duration ? `Duration: ${r.duration}.` : '', cost, r.intake_timing ? `When: ${r.intake_timing}` : '',
-      r.entry_requirements_text ? `Entry requirements: ${r.entry_requirements_text}` : 'Entry requirements: not published on a page ZedPath could check.',
+      r.entry_requirements_text ? `Entry requirements: ${r.entry_requirements_text}` : 'Entry requirements: not published on a page FindMyWay could check.',
       r.programmes?.length ? `Programmes: ${r.programmes.join('; ')}.` : '',
       scholarship && r.notes ? `What it gives and its conditions: ${r.notes}` : '',
       scholarship && r.for_routes?.length ? `Pays for: ${named(r.for_routes)}.` : '',

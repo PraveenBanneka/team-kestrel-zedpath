@@ -1,4 +1,4 @@
-// ZedPath app shell, design v2. First run: Welcome -> Intro -> About you (5 steps). Then a floating bottom-navigation app:
+// FindMyWay app shell, design v2. First run: Welcome -> Intro -> About you (5 steps). Then a floating bottom-navigation app:
 // Paths (home) | My list | Journey | Groups | Ask, with Alerts (bell) and Me (avatar) in the top bar (CR-002).
 // Routing via the URL hash so Back and deep links work.
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -258,7 +258,7 @@ export function App() {
   // The Journey tab counts open notices the student has not seen yet and is not ruled out for (checked on this phone).
   const seen = loadAlertsSeen(), dob = me?.contact?.birthDate ?? null, day = today();
   const unread = !prefs.badge ? 0 : (journey?.notices ?? []).filter(n => !seen.includes(n.routeId) && checkNotice(n, profile, dob, day).forYou).length;
-  let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'ZedPath', back = false;
+  let screen: React.ReactNode, tab: 'paths' | 'list' | 'journey' | 'groups' | 'ask' | null = 'paths', title = 'FindMyWay', back = false;
   if (path === 'courses' && profile) { back = true; title = t('title.courses'); screen = <Courses results={results} band={(arg?.toUpperCase() as Band) || 'SAFE'} go={go} list={list} setList={setList} setCompare={setCompare} />; }
   else if (path === 'compare' && profile) { tab = 'list'; back = true; title = t('title.compare'); screen = <CompareScreen codes={compare} setCodes={setCompare} profile={profile} results={results} list={list} go={go} />; }
   else if (path === 'apply' && profile) { tab = 'list'; back = true; title = t('title.apply'); screen = <ApplyScreen profile={profile} meta={meta} contact={me?.contact ?? null} list={list} results={results} go={go} />; }

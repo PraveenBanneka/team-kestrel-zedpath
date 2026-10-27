@@ -1,6 +1,6 @@
 // My list (US-301..303): the student's ordered preference list for the UGC application. Drag (handle) or the arrow
 // buttons reorder it; BR-041/BR-042 notes explain what the order means (CR-011: the UGC follows the student's own order,
-// so ZedPath never re-orders it); "What you need to know" lists the UGC's rules with their handbook pages; "Copy
+// so FindMyWay never re-orders it); "What you need to know" lists the UGC's rules with their handbook pages; "Copy
 // Uni-Codes" gives one per line (FR-306). Bands are re-read from the current results.
 // CR-006: press and hold a course (or "Select") to choose several; Compare opens them in the order chosen (at most 3),
 // Remove takes them off the list.

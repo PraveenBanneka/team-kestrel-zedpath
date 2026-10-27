@@ -23,7 +23,7 @@ export interface JourneyResponse { academicYear: string; handbook: string; steps
  * CR-006 (Praveen 2026-10-11): the Journey is the student's own checklist, saved on the account. Every step starts
  * unticked; the student ticks it. A step can be ticked only once its window is open: the three preparation steps are
  * open at any time; the UGC steps open on the date in their press notice, so while the date is not announced they
- * cannot be ticked (ZedPath never invents a date). Mirrored by the CHECK on journey_step.step_id (migration 0010).
+ * cannot be ticked (FindMyWay never invents a date). Mirrored by the CHECK on journey_step.step_id (migration 0010).
  */
 export const PREP_STEPS = ['RESULTS', 'LIST', 'COMPARE'] as const;
 export const JOURNEY_STEP_IDS = ['RESULTS', 'LIST', 'COMPARE', 'UGC_APPLY', 'UGC_ORDER', 'APTITUDE', 'UGC_SELECTION', 'UGC_REGISTER'] as const;
@@ -68,7 +68,7 @@ export function checkNotice(n: Notice, profile: ProfileInput | null, dob: string
   if (n.al) {
     if (!profile) al = 'UNKNOWN';
     else {
-      const passed = Object.keys(profile.al);                  // every grade ZedPath accepts (A, B, C, S) is a pass
+      const passed = Object.keys(profile.al);                  // every grade FindMyWay accepts (A, B, C, S) is a pass
       const subjectsOk = !n.al.subjects || (n.al.subjects.all.every(s => passed.includes(s))
         && (n.al.subjects.oneOf.length === 0 || n.al.subjects.oneOf.some(s => passed.includes(s))));
       al = passed.length >= n.al.passes && subjectsOk ? 'MEETS' : 'NOT_MET';
@@ -149,7 +149,7 @@ const icsText = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').rep
 /** FR-404: an iCalendar file of the dated items, each an all-day event with alarms 7 days and 1 day before. */
 export function toIcs(items: DatedItem[], now: Date, prefs: NotifyPrefs = DEFAULT_PREFS): string {
   const stamp = now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Team Kestrel//ZedPath//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Team Kestrel//FindMyWay//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
   for (const it of items) {
     const start = it.due.replace(/-/g, ''), end = isoDay(new Date(Date.parse(it.due) + DAY)).replace(/-/g, '');
     lines.push('BEGIN:VEVENT', `UID:${it.id.replace(/[^A-Za-z0-9:.-]/g, '-')}@zedpath`, `DTSTAMP:${stamp}`,

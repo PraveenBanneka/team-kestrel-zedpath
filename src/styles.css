@@ -1,4 +1,4 @@
-/* ZedPath design system v2 (2026-10-05). Direction from ui-ux-pro-max: "Soft UI Evolution" surfaces, "Aurora"
+/* FindMyWay design system v2 (2026-10-05). Direction from ui-ux-pro-max: "Soft UI Evolution" surfaces, "Aurora"
    gradients for hero moments only, Outfit headings + Inter text, tactile motion that respects reduced-motion.
    Brand: deck navy + the logo's amber. Components use tokens only, never raw colours (ZP-DOC-07). */
 :root {
@@ -317,7 +317,7 @@ details.exact p { margin: 0; color: var(--ink-2); }
 .btn.danger { background: var(--danger); box-shadow: none; }
 .btn.text.on-aurora { color: #fff; align-self: center; text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- Ask ZedPath */
+/* ---------- Ask FindMyWay */
 .bottom-nav { grid-template-columns: repeat(5, 1fr); }
 .ic-lg.aurora { color: #fff; }
 .bubble-q { align-self: flex-end; max-width: 85%; padding: 12px 16px; border-radius: 20px 20px 6px 20px; background: linear-gradient(135deg, var(--brand-500), var(--brand));

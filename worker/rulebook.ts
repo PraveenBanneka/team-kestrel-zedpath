@@ -38,7 +38,7 @@ export type RulebookOffering = typeof book.offerings[number];
 export interface GroupAssessment { group: RulebookOffering['groups'][number]; verdict: Verdict; result: BandResult | null }
 
 /** One offering judged for one student: subject rules per selection group, then the band where eligible. The single
- *  source for /results and Ask ZedPath's engine facts, so the two can never disagree. */
+ *  source for /results and Ask FindMyWay's engine facts, so the two can never disagree. */
 export function assessOffering(o: RulebookOffering, p: ProfileInput): { groups: GroupAssessment[]; anyEligible: boolean } {
   const course = book.courses[o.courseCode];
   const di = districtIndex.get(p.district)!;

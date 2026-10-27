@@ -21,7 +21,7 @@ describe('test notification', () => {
     const scheduled = fakeNative('prompt');
     expect(notificationsSupported()).toBe(true);
     expect(await sendTestNotification()).toEqual({ ok: true });
-    expect(scheduled).toEqual([expect.objectContaining({ id: 1, title: 'ZedPath', smallIcon: 'ic_stat_zedpath' })]);
+    expect(scheduled).toEqual([expect.objectContaining({ id: 1, title: 'FindMyWay', smallIcon: 'ic_stat_zedpath' })]);
     // never an exact alarm: otherwise the plugin opens Android's "Alarms and reminders" settings
     expect(scheduled).toEqual([expect.objectContaining({ isExactNotification: false })]);
   });

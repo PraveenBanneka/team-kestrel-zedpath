@@ -1,8 +1,8 @@
 // UGC application co-pilot (CR-012, 23 October 2026): helps a student fill the UGC's online application and post the
-// signed printout, following the UGC handbook 2025/26, Section 5 (pages 126 to 154). ZedPath never logs in to the UGC and
-// never fills its form: the student copies across what ZedPath already knows, and for the rest the co-pilot explains what
+// signed printout, following the UGC handbook 2025/26, Section 5 (pages 126 to 154). FindMyWay never logs in to the UGC and
+// never fills its form: the student copies across what FindMyWay already knows, and for the rest the co-pilot explains what
 // to write (Praveen 23 Oct: no typing the form twice). It keeps only two answers and the ticks, on this phone
-// (storage.ts, zedpath.apply.v1, cleared with the student's data); nothing is sent to ZedPath's server.
+// (storage.ts, zedpath.apply.v1, cleared with the student's data); nothing is sent to FindMyWay's server.
 import type { Key } from './i18n/en.ts';
 
 export type Candidate = 'SCHOOL' | 'PRIVATE';

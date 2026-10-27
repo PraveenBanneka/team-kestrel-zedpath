@@ -1,6 +1,6 @@
 {
-  "name": "ZedPath: everything after A/Ls",
-  "short_name": "ZedPath",
+  "name": "FindMyWay: everything after A/Ls",
+  "short_name": "FindMyWay",
   "description": "Every path your A/L results can reach: state universities, private degrees, diplomas, job exams and more, with sources.",
   "id": "/",
   "start_url": "/?source=pwa",
