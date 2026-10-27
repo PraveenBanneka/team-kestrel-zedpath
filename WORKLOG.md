@@ -3,7 +3,7 @@
 ## Current state (update at end of every session)
 - **Date:** 2026-10-11 (Gate 3 final submission day)
 - **Cloudflare:** pinned to **Stacklineops@gmail.com's Account** (`e6474e41...`). LIVE at
-  Live (workers.dev) = version **7a94ddd7** (Ask on Claude Haiku 5.5, reply language from the question, Gemini fallback; targeted placement; waiting steps).5 via AI Gateway, Gemini fallback; targeted placement near api.anthropic.com; waiting steps). D1 at migration 0013. Rollback target 5df3fc04 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
+  Live (workers.dev) = version **8bebe87a** (product renamed **FindMyWay**; Ask on Claude Haiku 5.5 with Gemini fallback; targeted placement; waiting steps).5, reply language from the question, Gemini fallback; targeted placement; waiting steps).5 via AI Gateway, Gemini fallback; targeted placement near api.anthropic.com; waiting steps). D1 at migration 0013. Rollback target 7a94ddd7 (code only). ZP-DOC-01..04 at 2.2 draft (CR-011 to CR-014, VR5), awaiting approval.
   ZedPath's resources on that account (other projects must NEVER reuse these names or touch them):
   Worker `zedpath` · D1 `zedpath` (59e854ed...) · Vectorize `zedpath-ask` · AI Gateway `zedpath` · Rate-limit
   namespaces 1001/1002 · secrets GEMINI_API_KEY, PEPPER · workers.dev subdomain (shared by the account).
@@ -495,3 +495,10 @@ Praveen's walkthrough video (08:50) plus three messages ("remove the resit A/L o
 ## 2026-10-24: RESULT: 2nd Runner-Up, IntelliCon '26 Shark Tank (LKR 10,000)
 - Team Kestrel (Praveen, solo) placed 2nd Runner-Up; certificate from AIESEC in SLIIT. Goal (top 3) met.
 - Sharks asked to meet after the pitch. Investor brief: Downloads/ZedPath_Monetisation_Brief.pdf (sourced: Sri Lanka official data, Info Edge/IDP/UCAS filings, Studyportals contract notice).
+
+## 2026-10-27: 8bebe87a LIVE (Praveen's GO): rebrand ZedPath -> FindMyWay
+- Praveen: an easier name for Sri Lankans; findmyway domain cheap and available (not yet connected).
+- Visible name, Ask identity, sample chats, notifications, title, manifest, data notes renamed (commit 3e5ff9f); new logo (stepping-stone trail to a gold goal) and all PWA icons re-rendered. Internal names unchanged: repo, Worker zedpath, D1, storage keys zedpath.*, identifiers, Android appId com.teamkestrel.zedpath.
+- The Cloudflare CLI session had expired; Praveen signed in again himself (whoami: Stacklineops, e6474e41...).
+- Live check: title FindMyWay, manifest name FindMyWay, new icon.svg, Ask answers "I'm Ask FindMyWay...". Rollback target 7a94ddd7.
+- Still to do: deck rename; Android rebuild (name + launcher icons); point the findmyway domain (DNS, GO-gated).

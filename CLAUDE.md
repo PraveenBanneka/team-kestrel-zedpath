@@ -3,6 +3,8 @@
 Global rules in `~/.claude/CLAUDE.md` apply too. This file adds the project-specific ones.
 
 ## What we're building
+**Product name: FindMyWay** (renamed from ZedPath on 2026-10-27, Praveen). The repo, Worker `zedpath`, D1, storage keys
+`zedpath.*`, code identifiers and the Android appId keep the old internal name; everything students see says FindMyWay.
 ZedPath: one place for a Sri Lankan student between A/L results and their next step.
 Enter results once → see every path you can reach (state uni Safe/Likely/Reach from district
 cut-offs, private degrees, gazetted job exams, vocational, abroad, retry) → deadlines + cited answers.
